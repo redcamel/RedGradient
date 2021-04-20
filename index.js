@@ -81,10 +81,10 @@ const makeRepeatingLinearGradient3 = (len = 10) => {
     `;
   const cvs = makeGradientDom(gradient);
   const txt = makeTextDom(cvs, gradient);
-  cvs[0].style.backgroundSize=`50px 50px`;
-  cvs[0].style.backgroundPosition=`0 0, 25px 25px`;
-  cvs[1].style.backgroundSize=`50px 50px`;
-  cvs[1].style.backgroundPosition=`0 0, 25px 25px`;
+  cvs[0].style.backgroundSize = `50px 50px`;
+  cvs[0].style.backgroundPosition = `0 0, 25px 25px`;
+  cvs[1].style.backgroundSize = `50px 50px`;
+  cvs[1].style.backgroundPosition = `0 0, 25px 25px`;
   txt.style.background = `#000`;
 };
 makeRepeatingLinearGradient3();
@@ -107,9 +107,16 @@ makeRepeatingLinearGradient4();
 
 
 const makeRepeatingLinearGradient5 = (len = 10) => {
-  const t0 = document.createElement('div')
-  t0.className = 'iphone'
-  document.body.appendChild(t0)
+  const list = new Array(len);
+  list.fill(len);
+  list.forEach((v, index) => {
+    const t0 = document.createElement('button');
+    t0.className = 'iphone';
+    t0.style.fontSize = `${index * 0.5}px`
+    t0.style.border = 0;
+    t0.style.margin = '15px 5px'
+    document.body.appendChild(t0);
+  });
 
 
 };
