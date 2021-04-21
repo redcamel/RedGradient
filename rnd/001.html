@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+
+        @keyframes slidein {
+            from {
+                -webkit-mask-position: 0% 0%;
+            }
+
+            to {
+                -webkit-mask-position: 100% 0%;
+            }
+        }
+
+        .iphone {
+            background: radial-gradient(1em 1em at 6.25em 2.5em, #141478 0.2em, #464646 0.21em, #464646 49%, rgba(70, 70, 70, 0) 50%),
+            radial-gradient(200% 100% at 100% 50%, #464646 49%, rgba(70, 70, 70, 0) 50%) calc(50% + 0.125em - 2em - 0.25em) 2em/0.5em 1em,
+            radial-gradient(200% 100% at 0% 50%, #464646 49%, rgba(70, 70, 70, 0) 50%) calc(50% + 0.125em + 2em + 0.25em) 2em/0.5em 1em,
+            linear-gradient(#464646, #464646) calc(50% + 0.125em) 2em/4em 1em,
+            linear-gradient(#191419, #191419) calc(50% + 0.125em) 5em/17.25em 30em,
+            radial-gradient(200% 200% at 100% 100%, rgba(120, 120, 120, 0) 0.3em, #787878 0.35em, #787878 0.48em, rgba(120, 120, 120, 0) 0.5em) calc(50% + 0.125em - 0.5em) 36.5em/0.5em 0.5em,
+            radial-gradient(200% 200% at 0% 100%, rgba(120, 120, 120, 0) 0.3em, #787878 0.35em, #787878 0.48em, rgba(120, 120, 120, 0) 0.5em) calc(50% + 0.125em + 0.5em) 36.5em/0.5em 0.5em, radial-gradient(200% 200% at 100% 0%, rgba(120, 120, 120, 0) 0.3em, #787878 0.35em, #787878 0.48em, rgba(120, 120, 120, 0) 0.5em) calc(50% + 0.125em - 0.5em) 37.5em/0.5em 0.5em, radial-gradient(200% 200% at 0% 0%, rgba(120, 120, 120, 0) 0.3em, #787878 0.35em, #787878 0.48em, rgba(120, 120, 120, 0) 0.5em) calc(50% + 0.125em + 0.5em) 37.5em/0.5em 0.5em, linear-gradient(#787878 0.15em, rgba(120, 120, 120, 0) 0.2em, rgba(120, 120, 120, 0) 1.35em, #787878 1.35em) calc(50% + 0.125em) 36.5em/0.5em 1.5em, linear-gradient(90deg, #787878 0.15em, rgba(120, 120, 120, 0) 0.2em, rgba(120, 120, 120, 0) 1.3em, #787878 1.35em) calc(50% + 0.125em) 37em/1.5em 0.5em, radial-gradient(3em 3em at calc(50% + 0.125em) 37.25em, rgba(10, 10, 10, 0) 1.25em, #0a0a0a 1.3em, #0a0a0a 49%, rgba(10, 10, 10, 0) 50%), linear-gradient(rgba(120, 120, 120, 0) 5em, #787878 5em, #787878 7.5em, rgba(120, 120, 120, 0) 7.5em, rgba(120, 120, 120, 0) 9.5em, #787878 9.5em, #787878 11em, rgba(120, 120, 120, 0) 11em, rgba(120, 120, 120, 0) 13em, #787878 13em, #787878 14.5em, rgba(120, 120, 120, 0) 14.5em) 0 0/0.3em 100%,
+            radial-gradient(200% 200% at 100% 100%, #323232 1.45em, #787878 1.5em, #787878 50%, rgba(120, 120, 120, 0) 51%) 0.25em 0/2em 2em,
+            radial-gradient(200% 200% at 0% 100%, #323232 1.45em, #787878 1.5em, #787878 50%, rgba(120, 120, 120, 0) 51%) 18em 0/2em 2em,
+            radial-gradient(200% 200% at 100% 0%, #323232 1.45em, #787878 1.5em, #787878 50%, rgba(120, 120, 120, 0) 51%) 0.25em 38em/2em 2em,
+            radial-gradient(200% 200% at 0% 0%, #323232 1.45em, #787878 1.5em, #787878 50%, rgba(120, 120, 120, 0) 51%) 18em 38em/2em 2em,
+            linear-gradient(#787878 0.5em, #323232 0.55em, #323232 39.5em, #787878 39.55em) 2.25em 0/15.75em 40em,
+            linear-gradient(90deg, #787878 0.5em, #323232 0.55em, #323232 19.175em, #787878 19.25em) 0.25em 2em/19.75em 36em;
+            background-repeat: no-repeat;
+            font-size: 4px;
+            width: 20em;
+            height: 40em;
+        }
+    </style>
+</head>
+<body>
+<script>
+  const makeGradientDom = (gradient) => {
+    const cvs = document.createElement('button');
+    document.body.appendChild(cvs);
+    cvs.style.cssText = 'padding : 30px;width:100%;border:0';
+    cvs.style.background = gradient;
+
+
+    const cvs2 = document.createElement('button');
+    document.body.appendChild(cvs2);
+    cvs2.style.cssText = 'padding : 30px;width:100%;border:0';
+    cvs2.style.background = gradient;
+    cvs2.style['-webkit-mask-size'] = `200px 200px`;
+    cvs2.style['-webkit-mask-image'] = `url(mask.png)`;
+    cvs2.style.animation = 'slidein 10s linear infinite';
+
+    return [cvs, cvs2];
+  };
+  const makeTextDom = (parent, gradient) => {
+    const txt = document.createElement('div');
+    parent[0].appendChild(txt);
+    txt.style.cssText = 'color:#fff;text-align:center;padding:4px 12px;background:#000;display:inline-block;border-radius:12px;border:2px solid rgba(255,255,255,1)';
+    txt.style.background = gradient;
+    txt.innerHTML = gradient;
+    return txt;
+  };
+  const makeLinearGradient = (list) => {
+    list.forEach(v => {
+      const gradient = `linear-gradient(${v}, blue, pink)`;
+      makeTextDom(makeGradientDom(gradient), gradient);
+    });
+  };
+  makeLinearGradient([
+    '45deg',
+    'to left',
+    'to right',
+    'to top left',
+    'to left top',
+  ]);
+
+  const makePercentLinearGradient = (len = 10) => {
+    const list = new Array(len);
+    list.fill(len);
+    list.forEach((v, index) => {
+      const gradient = `linear-gradient(to right, red ${index * 100 / list.length}% ,blue)`;
+      makeTextDom(makeGradientDom(gradient), gradient);
+    });
+  };
+  makePercentLinearGradient();
+
+  const makePercentLinearGradient2 = (len = 10) => {
+    const list = new Array(len);
+    list.fill(len);
+    list.forEach((v, index) => {
+      const gradient = `linear-gradient(to right, red 0% ${index * 100 / list.length}% ,blue ${index * 100 / list.length}% 100%)`;
+      makeTextDom(makeGradientDom(gradient), gradient);
+    });
+  };
+  makePercentLinearGradient2();
+  const makeRepeatingLinearGradient = (len = 10) => {
+    const list = new Array(len);
+    list.fill(len);
+    list.forEach((v, index) => {
+      const gradient = `repeating-linear-gradient(to right, red ${index * 100 / list.length}% ,blue)`;
+      makeTextDom(makeGradientDom(gradient), gradient);
+    });
+  };
+  makeRepeatingLinearGradient();
+  const makeRepeatingLinearGradient2 = (len = 10) => {
+    const list = new Array(len);
+    list.fill(len);
+    list.forEach((v, index) => {
+      const gradient = `repeating-linear-gradient(to right, red ${index * 100 / list.length}% ,blue ${(index * 100 / list.length) + 10}%, yellow )`;
+      makeTextDom(makeGradientDom(gradient), gradient);
+    });
+  };
+  makeRepeatingLinearGradient2();
+  const makeRepeatingLinearGradient3 = (len = 10) => {
+    const gradient = `
+        linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
+        linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black)
+    `;
+    const cvs = makeGradientDom(gradient);
+    const txt = makeTextDom(cvs, gradient);
+    cvs[0].style.backgroundSize = `50px 50px`;
+    cvs[0].style.backgroundPosition = `0 0, 25px 25px`;
+    cvs[1].style.backgroundSize = `50px 50px`;
+    cvs[1].style.backgroundPosition = `0 0, 25px 25px`;
+    txt.style.background = `#000`;
+  };
+  makeRepeatingLinearGradient3();
+  const makeRepeatingLinearGradient4 = (len = 10) => {
+    const gradient = `
+        linear-gradient(45deg, blue 25%, transparent 25%, transparent),
+        linear-gradient(-45deg, blue 25%, transparent 25%, transparent),
+        linear-gradient(45deg, transparent 75%, blue 75%),
+        linear-gradient(-45deg, transparent 75%, blue 75%)
+    `;
+    const cvs = makeGradientDom(gradient);
+    const txt = makeTextDom(cvs, gradient);
+    cvs[0].style.backgroundSize = `50px 50px`;
+    cvs[1].style.backgroundSize = `50px 50px`;
+    txt.style.background = `#000`;
+
+
+  };
+  makeRepeatingLinearGradient4();
+
+
+  const makeRepeatingLinearGradient5 = (len = 10) => {
+    const list = new Array(len);
+    list.fill(len);
+    list.forEach((v, index) => {
+      const t0 = document.createElement('button');
+      t0.className = 'iphone';
+      t0.style.fontSize = `${index * 0.5}px`
+      t0.style.border = 0;
+      t0.style.margin = '15px 5px'
+      document.body.appendChild(t0);
+    });
+
+
+  };
+  makeRepeatingLinearGradient5();
+
+</script>
+</body>
+</html>
