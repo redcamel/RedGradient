@@ -23,21 +23,29 @@
         inherits: true,
         initialValue: '4px'
       });
+      CSS.registerProperty({
+        name: '--angle',
+        syntax: '<angle>',
+        inherits: true,
+        initialValue: '0deg'
+      });
+      CSS.registerProperty({
+        name: '--yPercent',
+        syntax: '<percentage>',
+        inherits: true,
+        initialValue: '0%'
+      });
     </script>
     <style>
-        @keyframes c0 {
-            90%, 100% {
-                --colorTest: blue
-            }
-        }
+
 
         html, body {
             padding: 0;
             margin: 0;
-            animation: slidein 1s infinite;
+            animation: slidein 1s infinite, angleTest 1s infinite, percentTest 1s infinite ease-in-out;
             transition: all 0.3s;
-            background: radial-gradient(black 3px, transparent 4px),
-            radial-gradient(var(--colorTest) var(--sizeTest), transparent 4px),
+            background: radial-gradient(black var(--sizeTest), transparent calc(var(--sizeTest) + 1px)),
+            radial-gradient(var(--colorTest) var(--sizeTest), transparent calc(var(--sizeTest) + 1px)),
             linear-gradient(#fff 4px, transparent 0),
             linear-gradient(45deg, transparent 74px, transparent 75px, #a4a4a4 75px, #a4a4a4 76px, transparent 77px, transparent 109px),
             linear-gradient(-45deg, transparent 75px, transparent 76px, #a4a4a4 76px, #a4a4a4 77px, transparent 78px, transparent 109px),
@@ -60,6 +68,25 @@
                 --sizeTest: 4px
             }
         }
+        @keyframes angleTest {
+            0% {
+                --angle: 0deg;
+            }
+            100% {
+                --angle: 359deg;
+            }
+        }
+        @keyframes percentTest {
+            0% {
+                --yPercent: 25%;
+            }
+            50% {
+                --yPercent: 50%;
+            }
+            100% {
+                --yPercent: 25%;
+            }
+        }
 
     </style>
 </head>
@@ -80,7 +107,7 @@
             width: ${W}em;
             height: ${H}em;
             background:
-                linear-gradient(red, red) 50% 50% / 50em 50em,
+                linear-gradient(red 25%, red 50%) 50% var(--yPercent) / 50em 50em,
                 rgba(255,255,255,0.5);
             background-repeat: no-repeat;
     `;
@@ -92,7 +119,7 @@
             width: ${W}em;
             height: ${H}em;
             background:
-                linear-gradient(45deg, red 50%, transparent 51%) 50% 50% / 50em 50em,
+                linear-gradient(var(--angle), red 50%, transparent 51%) 50% 50% / 50em 50em,
                 rgba(255,255,255,0.5);
             background-repeat: no-repeat;
     `;
