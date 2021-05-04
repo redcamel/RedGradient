@@ -84,7 +84,7 @@ class Red_PropertyEdit extends React.Component {
       <div style={style.itemContainer}>
         <div>Current Data</div>
         <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
-          {JSON.stringify(data)}
+          {JSON.stringify(data,null, 2)}
         </SyntaxHighlighter>
       </div>
     </div>;
