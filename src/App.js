@@ -108,6 +108,7 @@ class App extends React.Component {
         </div>
       </div>
       <div className={'frame_bottom'}>frame Bottom
+        <div className={'todo'}>Todo - Animation Timeline</div>
         <div style={style.test}>결과 테스트</div>
         <SyntaxHighlighter language="javascript" wrapLongLines ={'pre'}>
           {JSON.stringify(Red_Layer.calcGradients(this.state.layers),null, 2)}
