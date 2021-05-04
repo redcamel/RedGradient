@@ -24,7 +24,7 @@ class Red_PropertyEdit extends React.Component {
             rootComponent.setState({});
           }} />
         </div>
-        <div>TODO - 그라디언트 Edit</div>
+        <div className={'todo'}>TODO - 그라디언트 Edit</div>
         <div style={style.itemContainer}>
           Position
           <div>
@@ -79,7 +79,7 @@ class Red_PropertyEdit extends React.Component {
             }} />
           </div>
         </div>
-        <div>TODO - 반복 Edit</div>
+        <div className={'todo'}>TODO - 반복 Edit</div>
       </div>
       <div style={style.itemContainer}>
         <div>Current Data</div>

@@ -145,8 +145,10 @@ input,select {
     display: none;
 }
 
-/* 스크롤 바 상 하단 버튼 */
 
+.todo {
+    color : red
+}
 
 /* 레이어 */
 .layerItem {
