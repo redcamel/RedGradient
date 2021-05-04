@@ -28,7 +28,13 @@ class Red_PropertyEdit extends React.Component {
             }} />
           </div>
         </div>
-        <div className={'todo'}>TODO - 그라디언트 Edit</div>
+        <div className={'todo'}>
+          TODO - 그라디언트 Edit
+          <div style={{padding:'6px'}}>
+            <div className={'todo'}>TODO - 그라디언트 상태표시 및 스텝 Edit</div>
+            <div className={'todo'}>TODO - 그라디언트 컬러셀렉터</div>
+          </div>
+        </div>
         <div style={style.itemContainer}>
           Position
           <div>
