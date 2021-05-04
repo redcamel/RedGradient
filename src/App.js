@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import Red_Canvas from "./editor/Red_Canvas";
 import Red_Layer from "./editor/Red_Layer";
-import Red_Property from "./editor/Red_Property";
+import Red_PropertyEdit from "./editor/Red_PropertyEdit";
 
 
 class App extends React.Component {
@@ -23,8 +23,10 @@ class App extends React.Component {
               title: 'leftBottom',
               type: 'linear-gradient',
               deg: 45,
-              colors: [
-                {color: 'rgba(255,0,0,0.2)', range: 25, rangeUnit: '%'},
+              position: {x: 30, xUnit: 'px', y: 30, yUnit: 'px'},
+              size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
+              datas: [
+                {color: 'rgba(255,0,0,0.9)', range: 25, rangeUnit: '%'},
                 {color: 'transparent', range: 25, rangeUnit: '%'},
                 {color: 'transparent', range: undefined, rangeUnit: '%'}
               ]
@@ -33,7 +35,9 @@ class App extends React.Component {
               title: 'leftTop sdfsdfsdf',
               type: 'linear-gradient',
               deg: -45,
-              colors: [
+              position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
+              size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
+              datas: [
                 {color: 'rgba(0,255,0,0.2)', range: 25, rangeUnit: '%'},
                 {color: 'transparent', range: 25, rangeUnit: '%'},
                 {color: 'transparent', range: undefined, rangeUnit: '%'}
@@ -43,7 +47,9 @@ class App extends React.Component {
               title: 'rightBottom',
               type: 'linear-gradient',
               deg: -45,
-              colors: [
+              position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
+              size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
+              datas: [
                 {color: 'transparent', range: 75, rangeUnit: '%'},
                 {color: 'rgba(0,0,255,0.2)', range: 75, rangeUnit: '%'}
               ]
@@ -52,7 +58,9 @@ class App extends React.Component {
               title: 'rightTop',
               type: 'linear-gradient',
               deg: 45,
-              colors: [
+              position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
+              size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
+              datas: [
                 {color: 'transparent', range: 75, rangeUnit: '%'},
                 {color: 'rgba(255,0,255,0.2)', range: 75, rangeUnit: '%'}
               ]
@@ -91,7 +99,7 @@ class App extends React.Component {
             {/*frame_right Right*/}
             <div style={{display: "flex", height: '100%'}}>
               <Red_Layer rootComponent={this} />
-              {this.state.activeSubData ? <Red_Property rootComponent={this} /> : ''}
+              {this.state.activeSubData ? <Red_PropertyEdit rootComponent={this} /> : ''}
             </div>
 
           </div>
