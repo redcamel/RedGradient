@@ -66,6 +66,23 @@ class App extends React.Component {
               ]
             }
           ]
+        },
+        {
+          title: 'testLayer ',
+          items: [
+            {
+              title: 'test',
+              type: 'radial-gradient',
+              deg: 45,
+              position: {x: 30, xUnit: 'px', y: 30, yUnit: 'px'},
+              size: {w: 30, wUnit: 'px', h: 30, hUnit: 'px'},
+              datas: [
+                {color: 'rgba(255,255,0,0.9)', range: 25, rangeUnit: '%'},
+                {color: 'transparent', range: 25, rangeUnit: '%'},
+                {color: 'transparent', range: undefined, rangeUnit: '%'}
+              ]
+            }
+          ]
         }
       ]
     };
@@ -91,7 +108,7 @@ class App extends React.Component {
       <div className={'frame_middle'}>
         <div className={'frame_middle_container'}>
           <div className={'frame_left'}>frame Left
-            <div style={style.test}>test</div>
+            <div style={style.test}>이공간이<br/>현재는<br/>쓸모없으나...<br/>예비로...구성함</div>
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}

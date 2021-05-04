@@ -8,10 +8,12 @@ class Red_Canvas extends React.Component {
   }
 
   render() {
+
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     const layers = rootComponentState.layers;
+    console.log(Red_Layer.calcGradients(layers))
     return <div style={style.container}>
       <div style={style.canvasResizer}>
         <UI_Number value={canvasInfo.width} HD_onInput={e => {

@@ -35,7 +35,7 @@ class Red_Layer extends React.Component {
                     <div className={'layerItemSubTitle'}>{item.title}</div>
                     <div
                       className={'transparent_checker'}
-                      style={{height: '25px', marginLeft: '20px', cursor: 'pointer'}}
+                      style={{height: '55px', marginLeft: '20px', cursor: 'pointer'}}
                       onClick={e => rootComponent.setState({
                         activeData: layer,
                         activeSubData: item
@@ -64,14 +64,26 @@ Red_Layer.calcGradients = layers => layers.map(layer => Red_Layer.calcGradientIt
 Red_Layer.calcGradientItems = items => items.map(item => Red_Layer.calcGradientItem(item)).join(',');
 Red_Layer.calcGradientItem = data => {
   if (!data) return '';
-  const gradients = data['datas'].map(v => {
-    let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
-    return `${v['color']} ${colorRangeTxt}`;
-  });
-  let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
-  let sizeTxt = data['size'] ? ` ${data['size']['w']}${data['size']['wUnit']} ${data['size']['h']}${data['size']['hUnit']}` : '';
+  if(data['type']==='linear-gradient'){
+    const gradients = data['datas'].map(v => {
+      let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
+      return `${v['color']} ${colorRangeTxt}`;
+    });
+    let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
+    let sizeTxt = data['size'] ? ` ${data['size']['w']}${data['size']['wUnit']} ${data['size']['h']}${data['size']['hUnit']}` : '';
 
-  return `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt}`;
+    return `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt}`;
+  }else{
+    const gradients = data['datas'].map(v => {
+      let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
+      return `${v['color']} ${colorRangeTxt}`;
+    });
+    let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
+    let sizeTxt = data['size'] ? ` ${data['size']['w']}${data['size']['wUnit']} ${data['size']['h']}${data['size']['hUnit']}` : '';
+
+    return `${data['type']}(${gradients}) ${positionTxt} / ${sizeTxt}`;
+  }
+
 };
 export default Red_Layer;
 const style = {
