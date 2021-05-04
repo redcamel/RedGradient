@@ -50,14 +50,14 @@ input,select {
 
 .frame_main_menu {
     border-bottom: 1px solid #0c0b0b;
-    height: 28px;
+    min-height: 28px;
     display: flex;
     align-items: center;
 }
 
 .frame_toolbar {
     border-bottom: 1px solid #0c0b0b;
-    height: 28px;
+    min-height: 28px;
     display: flex;
     align-items: center;
 }
@@ -106,7 +106,7 @@ input,select {
     display: flex;
     align-items: center;
     border: 1px solid #0c0b0b;
-    height: 28px
+    max-height: 28px
 }
 
 /* 스크롤바 */
