@@ -42,7 +42,7 @@ input,select {
     width: 100%;
     height: 100%;
     flex-direction: column;
-    align-item: stretch;
+    align-items: stretch;
     justify-content: space-between;
     font-size: 12px;
     color: #fff;
@@ -52,14 +52,14 @@ input,select {
     border-bottom: 1px solid #0c0b0b;
     height: 28px;
     display: flex;
-    align-item: center;
+    align-items: center;
 }
 
 .frame_toolbar {
     border-bottom: 1px solid #0c0b0b;
     height: 28px;
     display: flex;
-    align-item: center;
+    align-items: center;
 }
 
 .frame_middle {
@@ -98,13 +98,13 @@ input,select {
 
 .frame_bottom {
     display: flex;
-    align-item: flex-start;
+    align-items: flex-start;
     flex-direction: column;
 }
 
 .frame_status {
     display: flex;
-    align-item: center;
+    align-items: center;
     border: 1px solid #0c0b0b;
     height: 28px
 }

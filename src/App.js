@@ -3,7 +3,7 @@ import React from 'react';
 import Red_Canvas from "./editor/Red_Canvas";
 import Red_Layer from "./editor/Red_Layer";
 import Red_PropertyEdit from "./editor/Red_PropertyEdit";
-
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 class App extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class App extends React.Component {
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               datas: [
-                {color: 'rgba(0,255,0,0.2)', range: 25, rangeUnit: '%'},
+                {color: 'rgba(0,255,0,0.9)', range: 25, rangeUnit: '%'},
                 {color: 'transparent', range: 25, rangeUnit: '%'},
                 {color: 'transparent', range: undefined, rangeUnit: '%'}
               ]
@@ -51,7 +51,7 @@ class App extends React.Component {
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               datas: [
                 {color: 'transparent', range: 75, rangeUnit: '%'},
-                {color: 'rgba(0,0,255,0.2)', range: 75, rangeUnit: '%'}
+                {color: 'rgba(0,0,255,0.9)', range: 75, rangeUnit: '%'}
               ]
             },
             {
@@ -62,13 +62,15 @@ class App extends React.Component {
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               datas: [
                 {color: 'transparent', range: 75, rangeUnit: '%'},
-                {color: 'rgba(255,0,255,0.2)', range: 75, rangeUnit: '%'}
+                {color: 'rgba(255,0,255,0.9)', range: 75, rangeUnit: '%'}
               ]
             }
           ]
         }
       ]
     };
+    this.state.activeData = this.state.layers[0];
+    this.state.activeSubData = this.state.activeData['items'][0];
   }
 
   componentDidMount() {
@@ -107,7 +109,9 @@ class App extends React.Component {
       </div>
       <div className={'frame_bottom'}>frame Bottom
         <div style={style.test}>결과 테스트</div>
-        <div>{JSON.stringify(Red_Layer.calcGradients(this.state.layers))}</div>
+        <SyntaxHighlighter language="javascript" wrapLongLines ={'pre'}>
+          {JSON.stringify(Red_Layer.calcGradients(this.state.layers))}
+        </SyntaxHighlighter>
       </div>
       <div className={'frame_status'}>frame Status
         <div style={style.test}>상태 아이템</div>

@@ -66,10 +66,10 @@ Red_Layer.calcGradientItem = data => {
   if (!data) return '';
   const gradients = data['datas'].map(v => {
     let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
-    return `${v['color']} ${colorRangeTxt}`
+    return `${v['color']} ${colorRangeTxt}`;
   });
-  let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : ''
-  let sizeTxt = data['size'] ? ` ${data['size']['w']}${data['size']['wUnit']} ${data['size']['h']}${data['size']['hUnit']}` : ''
+  let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
+  let sizeTxt = data['size'] ? ` ${data['size']['w']}${data['size']['wUnit']} ${data['size']['h']}${data['size']['hUnit']}` : '';
 
   return `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt}`;
 };
@@ -79,7 +79,7 @@ const style = {
     width: '100px',
     borderRight: '1px solid #000',
     overflowX: 'hidden',
-    overflowY: 'scroll'
+    overflowY: 'auto'
   },
   layerItem: {
     height: '35px',

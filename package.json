@@ -35,5 +35,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "react-syntax-highlighter": "^15.4.3"
+  }
 }

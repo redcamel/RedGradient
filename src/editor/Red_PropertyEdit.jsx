@@ -3,6 +3,7 @@ import UI_Title from "../core/UI_Title";
 import UI_TextField from "../core/UI_TextField";
 import UI_Number from "../core/UI_Number";
 import UI_Select from "../core/UI_Select";
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 
 class Red_PropertyEdit extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class Red_PropertyEdit extends React.Component {
     return <div style={style.container}>
       <UI_Title title={'Red_PropertyEdit'} />
       <div>
-        <div>
+        <div style={style.itemContainer}>
           타이틀
           <UI_TextField value={data['title']} HD_onInput={e => {
             data['title'] = e.target.value;
@@ -24,7 +25,7 @@ class Red_PropertyEdit extends React.Component {
           }} />
         </div>
         <div>TODO - 그라디언트 Edit</div>
-        <div>
+        <div style={style.itemContainer}>
           Position
           <div>
             <UI_Number
@@ -51,7 +52,7 @@ class Red_PropertyEdit extends React.Component {
             }} />
           </div>
         </div>
-        <div>
+        <div style={style.itemContainer}>
           Size
           <div>
             <UI_Number
@@ -80,9 +81,11 @@ class Red_PropertyEdit extends React.Component {
         </div>
         <div>TODO - 반복 Edit</div>
       </div>
-      <div style={{padding: '4px', background: 'rgba(0,0,0,0.1)'}}>
+      <div style={style.itemContainer}>
         <div>Current Data</div>
-        {JSON.stringify(data)}
+        <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
+          {JSON.stringify(data)}
+        </SyntaxHighlighter>
       </div>
     </div>;
   }
@@ -96,5 +99,10 @@ const style = {
   },
   layer: {
     height: '30px'
+  },
+  itemContainer: {
+    padding: '4px',
+    background: 'rgba(0,0,0,0.1)',
+    borderBottom: '1px solid rgba(0,0,0,0.5)'
   }
 };
