@@ -66,7 +66,6 @@ Red_Layer.calcGradientItem = data => {
   if (!data) return '';
   const gradients = data['datas'].map(v => {
     let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
-
     return `${v['color']} ${colorRangeTxt}`
   });
   let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : ''

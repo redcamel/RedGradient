@@ -2,6 +2,7 @@ import React from "react";
 import UI_Title from "../core/UI_Title";
 import UI_TextField from "../core/UI_TextField";
 import UI_Number from "../core/UI_Number";
+import UI_Select from "../core/UI_Select";
 
 class Red_PropertyEdit extends React.Component {
   constructor(props) {
@@ -33,6 +34,10 @@ class Red_PropertyEdit extends React.Component {
                 data['position']['x'] = e.target.value;
                 rootComponent.setState({});
               }} />
+            <UI_Select value={data['position']['xUnit']} options={['px', '%']} HD_change={e => {
+              data['position']['xUnit'] = e.target.value;
+              rootComponent.setState({});
+            }} />
             <UI_Number
               width={80}
               value={data['position']['y'] || 0}
@@ -40,6 +45,10 @@ class Red_PropertyEdit extends React.Component {
                 data['position']['y'] = e.target.value;
                 rootComponent.setState({});
               }} />
+            <UI_Select value={data['position']['yUnit']} options={['px', '%']} HD_change={e => {
+              data['position']['yUnit'] = e.target.value;
+              rootComponent.setState({});
+            }} />
           </div>
         </div>
         <div>
@@ -52,6 +61,10 @@ class Red_PropertyEdit extends React.Component {
                 data['size']['w'] = e.target.value;
                 rootComponent.setState({});
               }} />
+            <UI_Select value={data['size']['wUnit']} options={['px', '%']} HD_change={e => {
+              data['size']['wUnit'] = e.target.value;
+              rootComponent.setState({});
+            }} />
             <UI_Number
               width={80}
               value={data['size']['h'] || 0}
@@ -59,11 +72,15 @@ class Red_PropertyEdit extends React.Component {
                 data['size']['h'] = e.target.value;
                 rootComponent.setState({});
               }} />
+            <UI_Select value={data['size']['hUnit']} options={['px', '%']} HD_change={e => {
+              data['size']['hUnit'] = e.target.value;
+              rootComponent.setState({});
+            }} />
           </div>
         </div>
         <div>TODO - 반복 Edit</div>
       </div>
-      <div>
+      <div style={{padding: '4px', background: 'rgba(0,0,0,0.1)'}}>
         <div>Current Data</div>
         {JSON.stringify(data)}
       </div>
