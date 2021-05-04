@@ -74,11 +74,11 @@ class App extends React.Component {
               title: 'test',
               type: 'radial-gradient',
               deg: 45,
-              position: {x: 30, xUnit: 'px', y: 30, yUnit: 'px'},
-              size: {w: 30, wUnit: 'px', h: 30, hUnit: 'px'},
+              position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
+              size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               datas: [
                 {color: 'rgba(255,255,0,0.9)', range: 25, rangeUnit: '%'},
-                {color: 'transparent', range: 25, rangeUnit: '%'},
+                {color: 'transparent', range: 50, rangeUnit: '%'},
                 {color: 'transparent', range: undefined, rangeUnit: '%'}
               ]
             }
