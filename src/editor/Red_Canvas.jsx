@@ -8,7 +8,6 @@ class Red_Canvas extends React.Component {
   }
 
   render() {
-
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
@@ -24,6 +23,8 @@ class Red_Canvas extends React.Component {
           canvasInfo.height = e.target.value;
           rootComponent.setState({});
         }} />
+        <div className={'todo'}>Todo - 레이어를 display item화 시켜서... 객체 에디팅으로도 값 변경할수있도록</div>
+        <div className={'todo'}>Todo - 패스기반 레이어도 추가해야하는데 아직 오묘...</div>
       </div>
       <div style={style.canvas} className={'transparent_checker'}>
         <div

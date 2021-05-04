@@ -30,12 +30,24 @@ class Red_PropertyEdit extends React.Component {
         </div>
         <div className={'todo'}>
           TODO - 그라디언트 Edit
-          <div style={{padding:'6px'}}>
+          <div style={{padding: '6px'}}>
             <div className={'todo'}>TODO - 그라디언트 상태표시 및 스텝 Edit</div>
             <div className={'todo'}>TODO - 그라디언트 컬러셀렉터</div>
             <div className={'todo'}>TODO - 그라디언트 타입선택</div>
           </div>
         </div>
+        {
+
+          data['type'] === 'linear-gradient' ? <div style={style.itemContainer}>
+            Deg <UI_Number
+            width={'80px'}
+            value={data['deg'] || 0}
+            HD_onInput={e => {
+              data['deg'] = e.target.value;
+              rootComponent.setState({});
+            }} />
+          </div> : ''
+        }
         <div style={style.itemContainer}>
           Position
           <div>
@@ -95,7 +107,7 @@ class Red_PropertyEdit extends React.Component {
       <div style={style.itemContainer}>
         <div>Current Data</div>
         <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
-          {JSON.stringify(data,null, 2)}
+          {JSON.stringify(data, null, 2)}
         </SyntaxHighlighter>
       </div>
     </div>;

@@ -3,7 +3,7 @@ import React from 'react';
 import Red_Canvas from "./editor/Red_Canvas";
 import Red_Layer from "./editor/Red_Layer";
 import Red_PropertyEdit from "./editor/Red_PropertyEdit";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 
 class App extends React.Component {
   constructor(props) {
@@ -108,7 +108,7 @@ class App extends React.Component {
       <div className={'frame_middle'}>
         <div className={'frame_middle_container'}>
           <div className={'frame_left'}>frame Left
-            <div style={style.test}>이공간이<br/>현재는<br/>쓸모없으나...<br/>예비로...구성함</div>
+            <div style={style.test}>이공간이<br />현재는<br />쓸모없으나...<br />예비로...구성함</div>
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
@@ -127,8 +127,8 @@ class App extends React.Component {
       <div className={'frame_bottom'}>frame Bottom
         <div className={'todo'}>Todo - Animation Timeline</div>
         <div style={style.test}>결과 테스트</div>
-        <SyntaxHighlighter language="javascript" wrapLongLines ={'pre'}>
-          {JSON.stringify(Red_Layer.calcGradients(this.state.layers),null, 2)}
+        <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
+          {JSON.stringify(Red_Layer.calcGradients(this.state.layers), null, 2)}
         </SyntaxHighlighter>
       </div>
       <div className={'frame_status'}>frame Status
