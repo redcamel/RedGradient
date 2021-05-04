@@ -4,19 +4,12 @@ class UI_Number extends React.Component{
     super(props);
   }
   render(){
-    return <div style={style.container}>
-      <input
-        style={{width : `${this.props.width || ''}px`  }}
-        type={'number'}
-        value={this.props.value}
-        onInput={this.props.HD_onInput}
-      />
-    </div>
+    return  <input
+      style={{width : `${this.props.width || ''}`  }}
+      type={'number'}
+      value={this.props.value}
+      onInput={this.props.HD_onInput}
+    />
   }
 }
 export default UI_Number
-const style = {
-  container : {
-    display : 'inline-block'
-  }
-}

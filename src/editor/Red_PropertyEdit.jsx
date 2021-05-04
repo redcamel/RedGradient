@@ -19,17 +19,21 @@ class Red_PropertyEdit extends React.Component {
       <div>
         <div style={style.itemContainer}>
           타이틀
-          <UI_TextField value={data['title']} HD_onInput={e => {
-            data['title'] = e.target.value;
-            rootComponent.setState({});
-          }} />
+          <div>
+            <UI_TextField
+              width={'calc(100% - 4px)'}
+              value={data['title']} HD_onInput={e => {
+              data['title'] = e.target.value;
+              rootComponent.setState({});
+            }} />
+          </div>
         </div>
         <div className={'todo'}>TODO - 그라디언트 Edit</div>
         <div style={style.itemContainer}>
           Position
           <div>
             <UI_Number
-              width={80}
+              width={'80px'}
               value={data['position']['x'] || 0}
               HD_onInput={e => {
                 data['position']['x'] = e.target.value;
@@ -40,7 +44,7 @@ class Red_PropertyEdit extends React.Component {
               rootComponent.setState({});
             }} />
             <UI_Number
-              width={80}
+              width={'80px'}
               value={data['position']['y'] || 0}
               HD_onInput={e => {
                 data['position']['y'] = e.target.value;
@@ -56,7 +60,7 @@ class Red_PropertyEdit extends React.Component {
           Size
           <div>
             <UI_Number
-              width={80}
+              width={'80px'}
               value={data['size']['w'] || 0}
               HD_onInput={e => {
                 data['size']['w'] = e.target.value;
@@ -67,7 +71,7 @@ class Red_PropertyEdit extends React.Component {
               rootComponent.setState({});
             }} />
             <UI_Number
-              width={80}
+              width={'80px'}
               value={data['size']['h'] || 0}
               HD_onInput={e => {
                 data['size']['h'] = e.target.value;
