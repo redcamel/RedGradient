@@ -2,11 +2,23 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: blue;
+    background: rgb(49, 43, 43);
 }
 
 * {
     box-sizing: border-box;
+}
+
+div {
+    position: relative;
+}
+
+input {
+    margin: 2px;
+    border-radius: 4px;
+    outline: none;
+    border: 0;
+    padding: 3px
 }
 
 #root {
@@ -17,6 +29,14 @@ html, body {
     bottom: 0;
 }
 
+/* 배경 체크박스 */
+.transparent_checker {
+    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* 프레임 */
 .frame {
     display: flex;
     width: 100%;
@@ -26,29 +46,28 @@ html, body {
     justify-content: space-between;
     font-size: 12px;
     color: #fff;
-    background: #404040aa;
 }
 
 .frame_main_menu {
-    border: 1px solid #333333;
+    border-bottom: 1px solid #0c0b0b;
     height: 28px;
     display: flex;
     align-items: center;
 }
 
 .frame_toolbar {
-    border: 1px solid #333333;
+    border-bottom: 1px solid #0c0b0b;
     height: 28px;
     display: flex;
     align-items: center;
 }
 
 .frame_middle {
-    background: #ff0000aa;
-    border: 1px solid #333333;
+    border-bottom: 1px solid #0c0b0b;
     display: flex;
     flex-grow: 100;
     flex-direction: row;
+    overflow: hidden;
 }
 
 .frame_middle_container {
@@ -59,36 +78,81 @@ html, body {
 }
 
 .frame_left {
-    background: #ff0000aa;
-    border: 1px solid #333333;
+    border-right: 1px solid #0c0b0b;
     display: flex;
     flex-direction: column;
 }
 
 .frame_center {
-    background: #00ff00aa;
-    border: 1px solid #333333;
+    border-right: 1px solid #0c0b0b;
     display: flex;
     flex-grow: 100;
 }
 
 .frame_right {
-    background: #0000ffaa;
-    border: 1px solid #333333;
+    border-right: 1px solid #0c0b0b;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .frame_bottom {
     display: flex;
     align-items: flex-start;
-    border: 1px solid #333333;
     flex-direction: column;
 }
 
 .frame_status {
     display: flex;
     align-items: center;
-    border: 1px solid #333333;
+    border: 1px solid #0c0b0b;
     height: 28px
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+    width: 5.2px;
+}
+
+/* 스크롤 바 */
+
+::-webkit-scrollbar-track {
+    background-color: #5e7ade22;
+}
+
+/* 스크롤 바 밑의 배경 */
+
+::-webkit-scrollbar-thumb {
+    background: #5e7ade;
+    border-radius: 10px;
+}
+
+/* 실질적 스크롤 바 */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5e7ade;
+}
+
+/* 실질적 스크롤 바 위에 마우스를 올려다 둘 때 */
+
+::-webkit-scrollbar-thumb:active {
+    background: #5e7ade;
+}
+
+/* 실질적 스크롤 바를 클릭할 때 */
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* 스크롤 바 상 하단 버튼 */
+
+
+/* 레이어 */
+.layerItem {
+    height: 100%;
+    cursor: pointer;
+    margin-bottom: 1px;
+    border-bottom: 1px solid #000;
+    transition: border 0.2s;
 }
