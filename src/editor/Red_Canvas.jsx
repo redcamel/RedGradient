@@ -1,7 +1,7 @@
 import React from "react"
-import UI_Number from "./UI_Number";
-import Layer from "./Layer";
-class Canvas extends React.Component{
+import UI_Number from "../core/UI_Number";
+import Red_Layer from "./Red_Layer";
+class Red_Canvas extends React.Component{
   constructor(props) {
     super(props);
   }
@@ -21,12 +21,12 @@ class Canvas extends React.Component{
           rootComponent.setState({})
         }}/>
       </div>
-      <div style={style.canvas}>
+      <div style={style.canvas} className={'transparent_checker'}>
 
         <div className={'transparent_checker'} style={{
           width : `${canvasInfo.width}px`,
           height : `${canvasInfo.height}px`,
-          background : Layer.calcGradients(layers)
+          background : Red_Layer.calcGradients(layers)
         }}>
         </div>
       </div>
@@ -34,7 +34,7 @@ class Canvas extends React.Component{
     </div>
   }
 }
-export default Canvas
+export default Red_Canvas
 const style = {
   container : {
     position : 'absolute',

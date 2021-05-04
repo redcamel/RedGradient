@@ -42,7 +42,7 @@ input {
     width: 100%;
     height: 100%;
     flex-direction: column;
-    align-items: stretch;
+    align-item: stretch;
     justify-content: space-between;
     font-size: 12px;
     color: #fff;
@@ -52,14 +52,14 @@ input {
     border-bottom: 1px solid #0c0b0b;
     height: 28px;
     display: flex;
-    align-items: center;
+    align-item: center;
 }
 
 .frame_toolbar {
     border-bottom: 1px solid #0c0b0b;
     height: 28px;
     display: flex;
-    align-items: center;
+    align-item: center;
 }
 
 .frame_middle {
@@ -98,13 +98,13 @@ input {
 
 .frame_bottom {
     display: flex;
-    align-items: flex-start;
+    align-item: flex-start;
     flex-direction: column;
 }
 
 .frame_status {
     display: flex;
-    align-items: center;
+    align-item: center;
     border: 1px solid #0c0b0b;
     height: 28px
 }
@@ -151,8 +151,34 @@ input {
 /* 레이어 */
 .layerItem {
     height: 100%;
-    cursor: pointer;
     margin-bottom: 1px;
     border-bottom: 1px solid #000;
     transition: border 0.2s;
+}
+
+.layerItemTitle {
+    margin: 2px;
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 0px 0px rgba(0, 0, 0, 1);
+}
+
+.layerItemSubTitle {
+    margin: 2px;
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 0px 0px rgba(0, 0, 0, 1);
+    margin-left: 20px;
+}
+
+/* UI */
+.ui_title {
+    background: linear-gradient(rgb(60, 60, 60), rgb(55, 55, 55));
+    height: 26px;
+    display: flex;
+    padding-left: 4px;
+    font-size: 12px;
+    align-items: center;
+    border-top: 1px solid rgb(71, 71, 71);
+    border-bottom: 1px solid rgb(26, 26, 26);
 }
