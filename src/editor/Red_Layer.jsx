@@ -18,6 +18,7 @@ class Red_Layer extends React.Component {
       <div className={'todo'}>Todo - 레이어 추가 삭제</div>
       <div className={'todo'}>Todo - 레이어 그룹 열고닫기</div>
       <div className={'todo'}>Todo - 레이어 배경 색상 설정</div>
+      <div className={'todo'}>Todo - 각도(L), range(R)<br/>개별 레이어위에서 Edit</div>
       {
         layers.map((layer, index) => {
           return <div style={{

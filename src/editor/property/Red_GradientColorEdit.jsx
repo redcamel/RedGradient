@@ -14,7 +14,8 @@ class Red_GradientColorEdit extends React.Component {
     const gradients = data['colorList'].map((v, index) => {
       console.log('this.state.activeIDX === index', this.state.activeIDX === index);
       const activeYn = this.state.activeIDX === index;
-      let colorRangeTxt = `${v['range']}${v['rangeUnit']}`;
+      let colorRangeTxt
+      colorRangeTxt = `${v['range']}${v['rangeUnit']}`;
       itemList.push(this.renderColorStep(v, index, activeYn));
       return `${v['color']} ${colorRangeTxt}`;
     });
@@ -28,12 +29,21 @@ class Red_GradientColorEdit extends React.Component {
   };
 
   renderColorStep(v, index, activeYn) {
+
+    const rootComponent = this.props.rootComponent;
+    const rootComponentState = rootComponent.state;
+    const canvasInfo = rootComponentState.canvasInfo;
+    let tLeft
+    if(v['rangeUnit']==='%') tLeft = `${v['range'] || 0}${v['rangeUnit']}`
+    else {
+      tLeft = `${v['range']/canvasInfo['width']*100}%`
+    }
     return <div
       style={{
         position: 'absolute',
         top: '-3px',
         bottom: '-3px',
-        left: `${v['range'] || 0}${v['rangeUnit']}`,
+        left: tLeft,
         borderRadius: '5px',
         width: '10px',
         background: activeYn ? '#5e7ade' : '#fff',
@@ -82,7 +92,7 @@ class Red_GradientColorEdit extends React.Component {
             }}>
               <div style={{
                 display: 'inline-block'
-              }}>{v['color']}</div>
+              }}>{v['range']} {v['rangeUnit']} {v['color']}</div>
             </div>;
           })
         }
