@@ -1,4 +1,5 @@
 import React from "react";
+import GRADIENT_TYPE from "./GRADIENT_TYPE";
 
 class Red_Layer extends React.Component {
   constructor(props) {
@@ -64,7 +65,8 @@ Red_Layer.calcGradients = layers => layers.map(layer => Red_Layer.calcGradientIt
 Red_Layer.calcGradientItems = items => items.map(item => Red_Layer.calcGradientItem(item)).join(',');
 Red_Layer.calcGradientItem = data => {
   if (!data) return '';
-  if(data['type']==='linear-gradient'){
+  //TODO - 여기정리
+  if (data['type'] === GRADIENT_TYPE.LINEAR) {
     const gradients = data['datas'].map(v => {
       let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
       return `${v['color']} ${colorRangeTxt}`;
@@ -73,7 +75,7 @@ Red_Layer.calcGradientItem = data => {
     let sizeTxt = data['size'] ? ` ${data['size']['w']}${data['size']['wUnit']} ${data['size']['h']}${data['size']['hUnit']}` : '';
 
     return `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt}`;
-  }else{
+  } else {
     const gradients = data['datas'].map(v => {
       let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
       return `${v['color']} ${colorRangeTxt}`;

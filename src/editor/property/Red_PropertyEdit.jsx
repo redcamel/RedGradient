@@ -1,9 +1,10 @@
 import React from "react";
-import UI_Title from "../core/UI_Title";
-import UI_TextField from "../core/UI_TextField";
-import UI_Number from "../core/UI_Number";
-import UI_Select from "../core/UI_Select";
+import UI_Title from "../../core/UI_Title";
+import UI_TextField from "../../core/UI_TextField";
+import UI_Number from "../../core/UI_Number";
+import UI_Select from "../../core/UI_Select";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import GRADIENT_TYPE from "../GRADIENT_TYPE";
 
 class Red_PropertyEdit extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class Red_PropertyEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const data = rootComponentState.activeSubData;
+
     return <div style={style.container}>
       <UI_Title title={'Red_PropertyEdit'} />
       <div>
@@ -33,12 +35,17 @@ class Red_PropertyEdit extends React.Component {
           <div style={{padding: '6px'}}>
             <div className={'todo'}>TODO - 그라디언트 상태표시 및 스텝 Edit</div>
             <div className={'todo'}>TODO - 그라디언트 컬러셀렉터</div>
-            <div className={'todo'}>TODO - 그라디언트 타입선택</div>
+            <div className={'todo'}>
+              <UI_Select value={data['type']} options={Object.keys(GRADIENT_TYPE)} HD_change={e => {
+                data['type']= GRADIENT_TYPE[e.target.value];
+                rootComponent.setState({});
+              }} />
+
+            </div>
           </div>
         </div>
         {
-
-          data['type'] === 'linear-gradient' ? <div style={style.itemContainer}>
+          data['type'] === GRADIENT_TYPE.LINEAR ? <div style={style.itemContainer}>
             Deg <UI_Number
             width={'80px'}
             value={data['deg'] || 0}
