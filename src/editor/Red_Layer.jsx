@@ -10,6 +10,7 @@ class Red_Layer extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const layers = rootComponentState.layers;
+    const canvasInfo = rootComponentState.canvasInfo;
     return <div style={style.container}>
       {
         layers.map((layer, index) => {
@@ -17,7 +18,7 @@ class Red_Layer extends React.Component {
             <div className={'layerItemTitle'}>{layer.title}</div>
             <div
               className={'transparent_checker'}
-              style={{height: '35px', cursor: 'pointer'}}
+              style={{height: canvasInfo.height/canvasInfo.width * 100, cursor: 'pointer'}}
               onClick={e => rootComponent.setState({
                 activeData: layer,
                 activeSubData: layer.items[0]
@@ -36,7 +37,7 @@ class Red_Layer extends React.Component {
                     <div className={'layerItemSubTitle'}>{item.title}</div>
                     <div
                       className={'transparent_checker'}
-                      style={{height: '55px', marginLeft: '20px', cursor: 'pointer'}}
+                      style={{height: canvasInfo.height/canvasInfo.width * 80, marginLeft: '20px', cursor: 'pointer'}}
                       onClick={e => rootComponent.setState({
                         activeData: layer,
                         activeSubData: item
