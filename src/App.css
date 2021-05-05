@@ -147,7 +147,8 @@ input,select {
 
 
 .todo {
-    color : red
+    color : red;
+    font-size: 9px;
 }
 
 /* 레이어 */

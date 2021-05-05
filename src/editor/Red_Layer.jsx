@@ -1,6 +1,9 @@
 import React from "react";
 import GRADIENT_TYPE from "./GRADIENT_TYPE";
 
+const SIZE = 150;
+const SIZE_MARGIN = 20;
+
 class Red_Layer extends React.Component {
   constructor(props) {
     super(props);
@@ -12,22 +15,19 @@ class Red_Layer extends React.Component {
     const layers = rootComponentState.layers;
     const canvasInfo = rootComponentState.canvasInfo;
     return <div style={style.container}>
+      <div className={'todo'}>Todo - 레이어 추가 삭제</div>
+      <div className={'todo'}>Todo - 레이어 그룹 열고닫기</div>
+      <div className={'todo'}>Todo - 레이어 배경 색상 설정</div>
       {
         layers.map((layer, index) => {
           return <div>
             <div className={'layerItemTitle'}>{layer.title}</div>
             <div
               className={'transparent_checker'}
-              style={{height: canvasInfo.height/canvasInfo.width * 100, cursor: 'pointer'}}
-              onClick={e => rootComponent.setState({
-                activeData: layer,
-                activeSubData: layer.items[0]
-              })}
+              style={{height: canvasInfo.height / canvasInfo.width * SIZE, cursor: 'pointer'}}
+              onClick={e => rootComponent.setState({activeData: layer, activeSubData: layer.items[0]})}
             >
-              <div
-                className={'layerItem'}
-                style={{background: Red_Layer.calcGradientItems(layer['items'])}}
-              />
+              <div className={'layerItem'} style={{background: Red_Layer.calcGradientItems(layer['items'])}} />
             </div>
             <div>
               {
@@ -37,16 +37,14 @@ class Red_Layer extends React.Component {
                     <div className={'layerItemSubTitle'}>{item.title}</div>
                     <div
                       className={'transparent_checker'}
-                      style={{height: canvasInfo.height/canvasInfo.width * 80, marginLeft: '20px', cursor: 'pointer'}}
-                      onClick={e => rootComponent.setState({
-                        activeData: layer,
-                        activeSubData: item
-                      })}
+                      style={{
+                        height: canvasInfo.height / canvasInfo.width * (SIZE - SIZE_MARGIN),
+                        marginLeft: `${SIZE_MARGIN}px`,
+                        cursor: 'pointer'
+                      }}
+                      onClick={e => rootComponent.setState({activeData: layer, activeSubData: item})}
                     >
-                      <div
-                        className={'layerItem'}
-                        style={{background: Red_Layer.calcGradientItem(item)}}
-                      />
+                      <div className={'layerItem'} style={{background: Red_Layer.calcGradientItem(item)}} />
                       <button className={'layerType'}>{item.type.charAt(0).toUpperCase()}</button>
                       <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
                     </div>
@@ -69,7 +67,7 @@ Red_Layer.calcGradientItem = data => {
   if (!data) return '';
   //TODO - 여기정리
   if (data['type'] === GRADIENT_TYPE.LINEAR) {
-    const gradients = data['datas'].map(v => {
+    const gradients = data['colorList'].map(v => {
       let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
       return `${v['color']} ${colorRangeTxt}`;
     });
@@ -78,7 +76,7 @@ Red_Layer.calcGradientItem = data => {
 
     return `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt}`;
   } else {
-    const gradients = data['datas'].map(v => {
+    const gradients = data['colorList'].map(v => {
       let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
       return `${v['color']} ${colorRangeTxt}`;
     });
@@ -92,7 +90,7 @@ Red_Layer.calcGradientItem = data => {
 export default Red_Layer;
 const style = {
   container: {
-    width: '100px',
+    width: `${SIZE}px`,
     borderRight: '1px solid #000',
     overflowX: 'hidden',
     overflowY: 'auto'
