@@ -157,7 +157,18 @@ input,select {
     border-bottom: 1px solid #000;
     transition: border 0.2s;
 }
-
+.layerType{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width : 20px;
+    height: 20px;
+    background: red;
+    font-size: 11px;
+    color: #fff;
+    outline: none;
+    border : 0
+}
 .layerItemTitle {
     margin: 2px;
     font-size: 11px;

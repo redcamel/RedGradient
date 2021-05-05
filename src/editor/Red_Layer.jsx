@@ -47,6 +47,7 @@ class Red_Layer extends React.Component {
                         className={'layerItem'}
                         style={{background: Red_Layer.calcGradientItem(item)}}
                       />
+                      <button className={'layerType'}>{item.type.charAt(0).toUpperCase()}</button>
                       <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
                     </div>
 
