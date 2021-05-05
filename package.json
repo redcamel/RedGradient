@@ -37,5 +37,6 @@
   },
   "devDependencies": {
     "react-syntax-highlighter": "^15.4.3"
-  }
+  },
+  "homepage": "./"
 }

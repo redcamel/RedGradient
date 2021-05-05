@@ -1,7 +1,33 @@
 import React from "react";
 import UI_Number from "../core/UI_Number";
 import Red_Layer from "./Red_Layer";
-
+const presetSize = [
+  {
+    title : '512 x 512',
+    width : 512,
+    height : 512
+  },
+  {
+    title : 'Google Pixel 4, 4XL',
+    width : 412,
+    height : 870
+  },
+  {
+    title : 'iPhone 12 Pro Max',
+    width : 428,
+    height : 926
+  },
+  {
+    title : 'web 1366',
+    width : 1366,
+    height : 768
+  },
+  {
+    title : 'web 1920',
+    width : 1920,
+    height : 1080
+  }
+]
 class Red_Canvas extends React.Component {
   constructor(props) {
     super(props);
@@ -23,8 +49,24 @@ class Red_Canvas extends React.Component {
           canvasInfo.height = e.target.value;
           rootComponent.setState({});
         }} />
+        <div>
+          {
+            presetSize.map(v=>{
+              return <button
+                onClick={e=>{
+                  canvasInfo.width = v.width;
+                  canvasInfo.height = v.height;
+                  rootComponent.setState({});
+                }}
+              >
+                <div>{v['title']}({v['width']}x{v['height']})</div>
+              </button>
+            })
+          }
+        </div>
         <div className={'todo'}>Todo - 레이어를 display item화 시켜서... 객체 에디팅으로도 값 변경할수있도록</div>
         <div className={'todo'}>Todo - 패스기반 레이어도 추가해야하는데 아직 오묘...</div>
+
       </div>
       <div style={style.canvas} className={'transparent_checker'}>
         <div
