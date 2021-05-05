@@ -2,8 +2,8 @@ import React from "react";
 
 class UI_Select extends React.Component {
 
-
   render() {
+    console.log(this.props.options)
     return <select
       style={{width: `${this.props.width || ''}px`}}
       onChange={this.props.HD_change}

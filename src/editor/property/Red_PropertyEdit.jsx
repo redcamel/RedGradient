@@ -32,14 +32,14 @@ class Red_PropertyEdit extends React.Component {
           </div>
           <div style={style.itemContainer}>
             Gradient ColorRange
-            <Red_GradientColorEdit rootComponent={rootComponent} key={Math.random()} />
+            <Red_GradientColorEdit rootComponent={rootComponent} />
             <div className={'todo'}>Todo - 스텝추가/삭제, 이동</div>
             <div className={'todo'}>Todo - 컬러분해신공도 필요함</div>
             <div className={'todo'}>TODO - 그라디언트 컬러셀렉터</div>
           </div>
           <div style={style.itemContainer}>
             <div className={'todo'}>
-              <UI_Select value={data['type']} options={Object.keys(GRADIENT_TYPE)} HD_change={e => {
+              <UI_Select value={data['type'].split('-')[0].toUpperCase()} options={Object.keys(GRADIENT_TYPE)} HD_change={e => {
                 data['type'] = GRADIENT_TYPE[e.target.value];
                 rootComponent.setState({});
               }} />
