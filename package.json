@@ -36,6 +36,7 @@
     ]
   },
   "devDependencies": {
+    "react-color": "^2.19.3",
     "react-syntax-highlighter": "^15.4.3"
   },
   "homepage": "./"

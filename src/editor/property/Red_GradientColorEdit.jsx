@@ -1,12 +1,14 @@
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
+import {SketchPicker} from 'react-color';
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
 class Red_GradientColorEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIDX: 0
+      activeIDX: 0,
+      colorPicker: null
     };
   }
 
@@ -84,6 +86,7 @@ class Red_GradientColorEdit extends React.Component {
         {this.renderGradientColorList(data)}
       </div>
       <div style={{marginTop: '20px'}}>
+
         {
           data['colorList'].map((v, index) => {
             const activeYn = this.state.activeIDX === index;
@@ -101,22 +104,23 @@ class Red_GradientColorEdit extends React.Component {
               }}
               onClick={e => {
                 this.setState({
-                  activeIDX: index
+                  activeIDX: index,
+                  colorPicker: v
                 });
               }}
             >
               <div style={{
-                display : 'flex'
+                display: 'flex'
               }}>
                 <div
-                  className={colorInfo==='transparent' ? 'transparent_checker' : ''}
+                  className={colorInfo === 'transparent' ? 'transparent_checker' : ''}
                   style={{
-                    width : '50px',
-                    height : '50px',
-                    background : colorInfo==='transparent' ? '' : colorInfo,
-                    borderRadius : '4px',
-                    marginRight : '10px',
-                    border : '1px solid #000'
+                    width: '50px',
+                    height: '50px',
+                    background: colorInfo === 'transparent' ? '' : colorInfo,
+                    borderRadius: '4px',
+                    marginRight: '10px',
+                    border: '1px solid #000'
                   }}
                 />
                 <div>
@@ -130,7 +134,37 @@ class Red_GradientColorEdit extends React.Component {
           })
         }
       </div>
+      {
+        this.state.colorPicker ?
+          <div style={{
+            zIndex: 1,position : 'absolute',top : 0,left: '50%' ,transform : 'translate(-50% , 0px)',
+            boxShadow : '0px 0px 16px rgba(0,0,0,0.16)',
+            background : '#fff',
+            borderRadius : '8px',
+            overflow : 'hidden'
+          }}>
 
+            <SketchPicker
+              color={this.state.colorPicker.color}
+              onChange={color => {
+                // console.log(color);
+                this.state.colorPicker.color = color.hex;
+                rootComponent.setState({});
+              }}
+              handleChangeComplete ={color => {
+                // console.log(color);
+                this.state.colorPicker.color = color.hex;
+                rootComponent.setState({});
+              }}
+            />
+            <div
+              style={{padding : '4px',background : '#5e7ade',cursor : 'pointer',textAlign:'center'}}
+              onClick={e=>{
+                this.setState({colorPicker : null})
+              }}
+            >완료</div>
+          </div> : ''
+      }
     </div>;
   }
 }
