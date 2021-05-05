@@ -100,7 +100,7 @@ class Red_GradientColorEdit extends React.Component {
                 margin: '3px',
                 border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
                 padding: '4px',
-
+                cursor : 'pointer'
               }}
               onClick={e => {
                 this.setState({
