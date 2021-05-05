@@ -163,6 +163,7 @@ input,select {
     font-size: 11px;
     color: #fff;
     text-shadow: 0px 0px rgba(0, 0, 0, 1);
+    word-break: break-all;
 }
 
 .layerItemSubTitle {
@@ -171,6 +172,7 @@ input,select {
     color: #fff;
     text-shadow: 0px 0px rgba(0, 0, 0, 1);
     margin-left: 20px;
+    word-break: break-all;
 }
 
 /* UI */
