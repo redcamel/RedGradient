@@ -50,7 +50,8 @@ class Red_GradientColorEdit extends React.Component {
         border: '1px solid #000',
         transform: 'translate(-50%,0)',
         textAlign: 'center',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        transition : 'left 0.2s'
       }}
       onClick={e => {
         this.setState({

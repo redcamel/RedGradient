@@ -33,7 +33,8 @@ class Red_Layer extends React.Component {
                 height: `${canvasInfo.height / canvasInfo.width * SIZE}px`,
                 cursor: 'pointer',
                 borderRadius: '4px',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                transition : 'height 0.2s'
               }}
               onClick={e => rootComponent.setState({activeData: layer, activeSubData: layer.items[0]})}
             >
@@ -63,7 +64,8 @@ class Red_Layer extends React.Component {
                         marginLeft: `${SIZE_MARGIN}px`,
                         cursor: 'pointer',
                         borderRadius: '4px',
-                        overflow: 'hidden'
+                        overflow: 'hidden',
+                        transition : 'height 0.2s'
                       }}
                       onClick={e => rootComponent.setState({activeData: layer, activeSubData: item})}
                     >
