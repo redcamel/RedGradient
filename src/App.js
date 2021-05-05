@@ -18,12 +18,13 @@ class App extends React.Component {
       layers: [
         {
           title: 'testLayer sdfsdfsdfsdf',
+          visible : true,
           items: [
-
             {
               title: 'leftBottom',
               type: 'linear-gradient',
               deg: 45,
+              visible : true,
               position: {x: 30, xUnit: 'px', y: 30, yUnit: 'px'},
               size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
@@ -36,6 +37,7 @@ class App extends React.Component {
               title: 'leftTop sdfsdfsdf',
               type: 'linear-gradient',
               deg: -45,
+              visible : true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               colorList: [
@@ -48,6 +50,7 @@ class App extends React.Component {
               title: 'test',
               type: 'linear-gradient',
               deg: 90,
+              visible : true,
               position: {x: 30, xUnit: 'px', y: 30, yUnit: 'px'},
               size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
@@ -60,6 +63,7 @@ class App extends React.Component {
               title: 'rightBottom',
               type: 'linear-gradient',
               deg: -45,
+              visible : true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               colorList: [
@@ -71,6 +75,7 @@ class App extends React.Component {
               title: 'rightTop',
               type: 'linear-gradient',
               deg: 45,
+              visible : true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               colorList: [
@@ -82,11 +87,13 @@ class App extends React.Component {
         },
         {
           title: 'testLayer ',
+          visible : true,
           items: [
             {
               title: 'test',
               type: 'radial-gradient',
               deg: 45,
+              visible : true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               colorList: [
@@ -155,7 +162,7 @@ class App extends React.Component {
 export default App;
 const style = {
   test: {
-    background: 'red',
+    background: '#5e7ade',
     margin: '1px'
   }
 };

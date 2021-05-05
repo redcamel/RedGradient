@@ -1,8 +1,10 @@
 import React from "react";
 import GRADIENT_TYPE from "./GRADIENT_TYPE";
 
-const SIZE = 150;
+
 const SIZE_MARGIN = 20;
+const paddingH = 6
+const SIZE = 120 ;
 
 class Red_Layer extends React.Component {
   constructor(props) {
@@ -24,7 +26,13 @@ class Red_Layer extends React.Component {
             <div className={'layerItemTitle'}>{layer.title}</div>
             <div
               className={'transparent_checker'}
-              style={{height: canvasInfo.height / canvasInfo.width * SIZE, cursor: 'pointer'}}
+              style={{
+                width : `${SIZE}px`,
+                height: `${canvasInfo.height / canvasInfo.width * SIZE}px`,
+                cursor: 'pointer',
+                borderRadius: '4px',
+                overflow: 'hidden'
+              }}
               onClick={e => rootComponent.setState({activeData: layer, activeSubData: layer.items[0]})}
             >
               <div className={'layerItem'} style={{background: Red_Layer.calcGradientItems(layer['items'])}} />
@@ -33,18 +41,31 @@ class Red_Layer extends React.Component {
               {
                 layer.items.map(item => {
                   const activeSubDataYn = rootComponentState.activeSubData === item;
-                  return <div>
+                  return <div style={{
+                    opacity: item.visible ? 1 : 0.5,
+                    transition: 'opacity 0.2s'
+                  }}>
                     <div className={'layerItemSubTitle'}>{item.title}</div>
                     <div
                       className={'transparent_checker'}
                       style={{
-                        height: canvasInfo.height / canvasInfo.width * (SIZE - SIZE_MARGIN),
+                        width : `${SIZE - SIZE_MARGIN}px`,
+                        height: `${canvasInfo.height / canvasInfo.width * (SIZE - SIZE_MARGIN)}px`,
                         marginLeft: `${SIZE_MARGIN}px`,
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        borderRadius: '4px',
+                        overflow: 'hidden'
                       }}
                       onClick={e => rootComponent.setState({activeData: layer, activeSubData: item})}
                     >
                       <div className={'layerItem'} style={{background: Red_Layer.calcGradientItem(item)}} />
+                      <button
+                        className={'layerVisible'}
+                        onClick={e => {
+                          item.visible = !item.visible;
+                          rootComponent.setState({});
+                        }}
+                      >{item.visible ? 'on' : 'off'}</button>
                       <button className={'layerType'}>{item.type.charAt(0).toUpperCase()}</button>
                       <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
                     </div>
@@ -61,10 +82,12 @@ class Red_Layer extends React.Component {
   }
 }
 
-Red_Layer.calcGradients = layers => layers.map(layer => Red_Layer.calcGradientItems(layer['items'])).join(',');
-Red_Layer.calcGradientItems = items => items.map(item => Red_Layer.calcGradientItem(item)).join(',');
-Red_Layer.calcGradientItem = data => {
+Red_Layer.calcGradients = (layers, checkVisible) => layers.map(layer => Red_Layer.calcGradientItems(layer['items'], checkVisible)).join(',');
+Red_Layer.calcGradientItems = (items, checkVisible) => items.map(item => Red_Layer.calcGradientItem(item, checkVisible)).join(',');
+Red_Layer.calcGradientItem = (data, checkVisible) => {
   if (!data) return '';
+  if (checkVisible && !data['visible']) return 'linear-gradient(45deg, transparent,transparent )';
+
   //TODO - 여기정리
   if (data['type'] === GRADIENT_TYPE.LINEAR) {
     const gradients = data['colorList'].map(v => {
@@ -90,10 +113,10 @@ Red_Layer.calcGradientItem = data => {
 export default Red_Layer;
 const style = {
   container: {
-    width: `${SIZE}px`,
     borderRight: '1px solid #000',
     overflowX: 'hidden',
-    overflowY: 'auto'
+    overflowY: 'auto',
+    padding : `10px ${paddingH}px`
   },
   layerItem: {
     height: '35px',
@@ -102,10 +125,10 @@ const style = {
   activeLine: {
     position: 'absolute',
     top: 0, left: 0, right: 0, bottom: 0,
-    border: '2px solid rgba(255,0,0,1)',
+    border: '2px solid #5e7ade',
     transition: 'border 0.2s'
   },
   deActiveLine: {
-    border: '2px solid rgba(255,0,0,0)',
+    border: '2px solid transparent',
   }
 };

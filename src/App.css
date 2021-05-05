@@ -147,7 +147,7 @@ input,select {
 
 
 .todo {
-    color : red;
+    color : #5e7ade;
     font-size: 9px;
 }
 
@@ -162,13 +162,27 @@ input,select {
     position: absolute;
     bottom: 0;
     left: 0;
-    width : 20px;
+    width : 30px;
     height: 20px;
-    background: red;
+    background: #5e7ade;
     font-size: 11px;
     color: #fff;
     outline: none;
     border : 0
+}
+.layerVisible{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width : 30px;
+    height: 20px;
+    background: #5e7ade;
+    font-size: 11px;
+    color: #fff;
+    outline: none;
+    border : 0;
+    z-index: 1;
+    cursor: pointer;
 }
 .layerItemTitle {
     margin: 2px;
