@@ -1,5 +1,6 @@
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
+
 //TODO - 일단 더미로 쭉 쳐보고 정리
 class Red_GradientColorEdit extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class Red_GradientColorEdit extends React.Component {
     const gradients = data['colorList'].map((v, index) => {
       console.log('this.state.activeIDX === index', this.state.activeIDX === index);
       const activeYn = this.state.activeIDX === index;
-      let colorRangeTxt
+      let colorRangeTxt;
       colorRangeTxt = `${v['range']}${v['rangeUnit']}`;
       itemList.push(this.renderColorStep(v, index, activeYn));
       return `${v['color']} ${colorRangeTxt}`;
@@ -33,10 +34,10 @@ class Red_GradientColorEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
-    let tLeft
-    if(v['rangeUnit']==='%') tLeft = `${v['range'] || 0}${v['rangeUnit']}`
+    let tLeft;
+    if (v['rangeUnit'] === '%') tLeft = `${v['range'] || 0}${v['rangeUnit']}`;
     else {
-      tLeft = `${v['range']/canvasInfo['width']*100}%`
+      tLeft = `${v['range'] / canvasInfo['width'] * 100}%`;
     }
     return <div
       style={{
@@ -51,7 +52,7 @@ class Red_GradientColorEdit extends React.Component {
         transform: 'translate(-50%,0)',
         textAlign: 'center',
         cursor: 'pointer',
-        transition : 'left 0.2s'
+        transition: 'left 0.2s,background 0.2s'
       }}
       onClick={e => {
         this.setState({
@@ -86,17 +87,24 @@ class Red_GradientColorEdit extends React.Component {
         {
           data['colorList'].map((v, index) => {
             const activeYn = this.state.activeIDX === index;
-            const colorInfo = v['color']
-            let rgba = []
-            if(colorInfo.indexOf('rgba')>-1) rgba = colorInfo.split('(')[1].split(')')[0].split(',')
-            else if(colorInfo==='transparent') rgba = [0,0,0,0]
-            else rgba = hexToRgbA(colorInfo)
-            return <div style={{
-              margin: '3px',
-              border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
-              padding: '4px',
+            const colorInfo = v['color'];
+            let rgba = [];
+            if (colorInfo.indexOf('rgba') > -1) rgba = colorInfo.split('(')[1].split(')')[0].split(',');
+            else if (colorInfo === 'transparent') rgba = [0, 0, 0, 0];
+            else rgba = hexToRgbA(colorInfo);
+            return <div
+              style={{
+                margin: '3px',
+                border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
+                padding: '4px',
 
-            }}>
+              }}
+              onClick={e => {
+                this.setState({
+                  activeIDX: index
+                });
+              }}
+            >
               <div style={{
                 display: 'inline-block'
               }}>
@@ -120,18 +128,19 @@ const style = {
   }
 };
 
-function hexToRgbA(hex){
+function hexToRgbA(hex) {
   var c;
-  if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
-    c= hex.substring(1).split('');
-    if(c.length== 3){
-      c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+    c = hex.substring(1).split('');
+    if (c.length == 3) {
+      c = [c[0], c[0], c[1], c[1], c[2], c[2]];
     }
-    c= '0x'+c.join('');
-    return [(c>>16)&255, (c>>8)&255, c&255,1];
+    c = '0x' + c.join('');
+    return [(c >> 16) & 255, (c >> 8) & 255, c & 255, 1];
   }
   throw new Error('Bad Hex');
 }
+
 function rgba2hex(orig) {
   var a, isPercent,
     rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+),?([^,\s)]+)?/i),
@@ -147,7 +156,7 @@ function rgba2hex(orig) {
     a = 1;
   }
   // multiply before convert to HEX
-  a = ((a * 255) | 1 << 8).toString(16).slice(1)
+  a = ((a * 255) | 1 << 8).toString(16).slice(1);
   hex = hex + a;
 
   return hex;
