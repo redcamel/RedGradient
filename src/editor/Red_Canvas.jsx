@@ -74,7 +74,8 @@ class Red_Canvas extends React.Component {
           style={{
             width: `${canvasInfo.width}px`,
             height: `${canvasInfo.height}px`,
-            background: Red_Layer.calcGradients(layers)
+            background: Red_Layer.calcGradients(layers),
+            transition : 'width 0.2s, height 0.2s'
           }}
         >
         </div>
