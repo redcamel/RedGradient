@@ -8,9 +8,7 @@ import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import Red_GradientColorEdit from "./Red_GradientColorEdit";
 
 class Red_PropertyEdit extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   render() {
     const rootComponent = this.props.rootComponent;
@@ -34,8 +32,9 @@ class Red_PropertyEdit extends React.Component {
           </div>
           <div style={style.itemContainer}>
             Gradient ColorRange
-            <Red_GradientColorEdit rootComponent={rootComponent} key={Math.random()}/>
+            <Red_GradientColorEdit rootComponent={rootComponent} key={Math.random()} />
             <div className={'todo'}>Todo - 스텝추가/삭제, 이동</div>
+            <div className={'todo'}>Todo - 컬러분해신공도 필요함</div>
             <div className={'todo'}>TODO - 그라디언트 컬러셀렉터</div>
           </div>
           <div style={style.itemContainer}>

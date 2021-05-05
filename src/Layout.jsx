@@ -13,7 +13,7 @@ class Layout extends React.Component {
   }
 
   calcPosition() {
-    this.setState({})
+    this.setState({});
   }
 
   render() {
@@ -26,6 +26,4 @@ class Layout extends React.Component {
 }
 
 export default Layout;
-const style = {
-
-};
+const style = {};

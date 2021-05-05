@@ -1,9 +1,7 @@
 import React from "react";
 
 class UI_Select extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   render() {
     return <select

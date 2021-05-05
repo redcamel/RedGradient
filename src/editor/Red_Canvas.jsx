@@ -1,44 +1,43 @@
 import React from "react";
 import UI_Number from "../core/UI_Number";
 import Red_Layer from "./Red_Layer";
+
 const presetSize = [
   {
-    title : '512 x 512',
-    width : 512,
-    height : 512
+    title: '512 x 512',
+    width: 512,
+    height: 512
   },
   {
-    title : 'Google Pixel 4, 4XL',
-    width : 412,
-    height : 870
+    title: 'Google Pixel 4, 4XL',
+    width: 412,
+    height: 870
   },
   {
-    title : 'iPhone 12 Pro Max',
-    width : 428,
-    height : 926
+    title: 'iPhone 12 Pro Max',
+    width: 428,
+    height: 926
   },
   {
-    title : 'web 1366',
-    width : 1366,
-    height : 768
+    title: 'web 1366',
+    width: 1366,
+    height: 768
   },
   {
-    title : 'web 1920',
-    width : 1920,
-    height : 1080
+    title: 'web 1920',
+    width: 1920,
+    height: 1080
   }
-]
+];
+
 class Red_Canvas extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     const layers = rootComponentState.layers;
-    console.log(Red_Layer.calcGradients(layers))
+    console.log(Red_Layer.calcGradients(layers));
     return <div style={style.container}>
       <div style={style.canvasResizer}>
         <UI_Number value={canvasInfo.width} HD_onInput={e => {
@@ -51,16 +50,16 @@ class Red_Canvas extends React.Component {
         }} />
         <div>
           {
-            presetSize.map(v=>{
+            presetSize.map(v => {
               return <button
-                onClick={e=>{
+                onClick={e => {
                   canvasInfo.width = v.width;
                   canvasInfo.height = v.height;
                   rootComponent.setState({});
                 }}
               >
                 <div>{v['title']}({v['width']}x{v['height']})</div>
-              </button>
+              </button>;
             })
           }
         </div>
@@ -75,8 +74,8 @@ class Red_Canvas extends React.Component {
           style={{
             width: `${canvasInfo.width}px`,
             height: `${canvasInfo.height}px`,
-            background: Red_Layer.calcGradients(layers,true),
-            transition : 'width 0.2s, height 0.2s'
+            background: Red_Layer.calcGradients(layers, true),
+            transition: 'width 0.2s, height 0.2s'
           }}
         >
         </div>

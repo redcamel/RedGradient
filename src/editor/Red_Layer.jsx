@@ -7,9 +7,7 @@ const paddingH = 6;
 const SIZE = 120;
 
 class Red_Layer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   render() {
     const rootComponent = this.props.rootComponent;

@@ -1,9 +1,7 @@
 import React from "react";
 
 class UI_Title extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   render() {
     return <div className={'ui_title'}>

@@ -13,7 +13,7 @@ div {
     position: relative;
 }
 
-input,select {
+input, select {
     margin: 2px;
     border-radius: 4px;
     outline: none;
@@ -147,7 +147,7 @@ input,select {
 
 
 .todo {
-    color : #5e7ade;
+    color: #5e7ade;
     font-size: 9px;
 }
 
@@ -159,32 +159,35 @@ input,select {
     border-radius: 4px;
     transition: border 0.2s;
 }
-.layerType{
+
+.layerType {
     position: absolute;
     bottom: 0;
     left: 0;
-    width : 30px;
+    width: 30px;
     height: 20px;
     background: #5e7ade;
     font-size: 11px;
     color: #fff;
     outline: none;
-    border : 0
+    border: 0
 }
-.layerVisible{
+
+.layerVisible {
     position: absolute;
     top: 0;
     left: 0;
-    width : 30px;
+    width: 30px;
     height: 20px;
     background: #5e7ade;
     font-size: 11px;
     color: #fff;
     outline: none;
-    border : 0;
+    border: 0;
     z-index: 1;
     cursor: pointer;
 }
+
 .layerItemTitle {
     margin: 2px;
     font-size: 11px;
