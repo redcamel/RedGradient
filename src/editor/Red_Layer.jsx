@@ -3,8 +3,8 @@ import GRADIENT_TYPE from "./GRADIENT_TYPE";
 
 
 const SIZE_MARGIN = 20;
-const paddingH = 6
-const SIZE = 120 ;
+const paddingH = 6;
+const SIZE = 120;
 
 class Red_Layer extends React.Component {
   constructor(props) {
@@ -22,12 +22,15 @@ class Red_Layer extends React.Component {
       <div className={'todo'}>Todo - 레이어 배경 색상 설정</div>
       {
         layers.map((layer, index) => {
-          return <div>
+          return <div style={{
+            opacity: layer.visible ? 1 : 0.5,
+            transition: 'opacity 0.2s'
+          }}>
             <div className={'layerItemTitle'}>{layer.title}</div>
             <div
               className={'transparent_checker'}
               style={{
-                width : `${SIZE}px`,
+                width: `${SIZE}px`,
                 height: `${canvasInfo.height / canvasInfo.width * SIZE}px`,
                 cursor: 'pointer',
                 borderRadius: '4px',
@@ -36,6 +39,13 @@ class Red_Layer extends React.Component {
               onClick={e => rootComponent.setState({activeData: layer, activeSubData: layer.items[0]})}
             >
               <div className={'layerItem'} style={{background: Red_Layer.calcGradientItems(layer['items'])}} />
+              <button
+                className={'layerVisible'}
+                onClick={e => {
+                  layer.visible = !layer.visible;
+                  rootComponent.setState({});
+                }}
+              >{layer.visible ? 'on' : 'off'}</button>
             </div>
             <div>
               {
@@ -49,7 +59,7 @@ class Red_Layer extends React.Component {
                     <div
                       className={'transparent_checker'}
                       style={{
-                        width : `${SIZE - SIZE_MARGIN}px`,
+                        width: `${SIZE - SIZE_MARGIN}px`,
                         height: `${canvasInfo.height / canvasInfo.width * (SIZE - SIZE_MARGIN)}px`,
                         marginLeft: `${SIZE_MARGIN}px`,
                         cursor: 'pointer',
@@ -82,11 +92,12 @@ class Red_Layer extends React.Component {
   }
 }
 
-Red_Layer.calcGradients = (layers, checkVisible) => layers.map(layer => Red_Layer.calcGradientItems(layer['items'], checkVisible)).join(',');
-Red_Layer.calcGradientItems = (items, checkVisible) => items.map(item => Red_Layer.calcGradientItem(item, checkVisible)).join(',');
-Red_Layer.calcGradientItem = (data, checkVisible) => {
+Red_Layer.calcGradients = (layers, checkVisible) => layers.map(layer => Red_Layer.calcGradientItems(layer['items'], checkVisible, layer)).join(',');
+Red_Layer.calcGradientItems = (items, checkVisible, layer) => items.map(item => Red_Layer.calcGradientItem(item, checkVisible, layer)).join(',');
+Red_Layer.calcGradientItem = (data, checkVisible, layer) => {
   if (!data) return '';
   if (checkVisible && !data['visible']) return 'linear-gradient(45deg, transparent,transparent )';
+  if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
 
   //TODO - 여기정리
   if (data['type'] === GRADIENT_TYPE.LINEAR) {
@@ -116,7 +127,7 @@ const style = {
     borderRight: '1px solid #000',
     overflowX: 'hidden',
     overflowY: 'auto',
-    padding : `10px ${paddingH}px`
+    padding: `10px ${paddingH}px`
   },
   layerItem: {
     height: '35px',
