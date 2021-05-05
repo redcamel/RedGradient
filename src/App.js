@@ -28,7 +28,7 @@ class App extends React.Component {
               position: {x: 30, xUnit: 'px', y: 30, yUnit: 'px'},
               size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
-                {color: 'rgba(255,0,0,0.9)', range: 25, rangeUnit: 'px'},
+                {color: '#ff0000', range: 25, rangeUnit: 'px'},
                 {color: 'transparent', range: 25, rangeUnit: '%'},
                 {color: 'transparent', range: 100, rangeUnit: '%'}
               ]
@@ -41,7 +41,8 @@ class App extends React.Component {
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               colorList: [
-                {color: 'rgba(0,255,0,0.9)', range: 25, rangeUnit: '%'},
+                {color: 'rgba(0,255,0,0.9)', range: 24, rangeUnit: '%'},
+                {color: '#00ff00', range: 25, rangeUnit: '%'},
                 {color: 'transparent', range: 25, rangeUnit: '%'},
                 {color: 'transparent', range: 100, rangeUnit: '%'}
               ]

@@ -1,6 +1,6 @@
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
-
+//TODO - 일단 더미로 쭉 쳐보고 정리
 class Red_GradientColorEdit extends React.Component {
   constructor(props) {
     super(props);
@@ -77,6 +77,7 @@ class Red_GradientColorEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const data = rootComponentState.activeSubData;
+
     return <div style={style.container}>
       <div className={'transparent_checker'}>
         {this.renderGradientColorList(data)}
@@ -85,6 +86,11 @@ class Red_GradientColorEdit extends React.Component {
         {
           data['colorList'].map((v, index) => {
             const activeYn = this.state.activeIDX === index;
+            const colorInfo = v['color']
+            let rgba = []
+            if(colorInfo.indexOf('rgba')>-1) rgba = colorInfo.split('(')[1].split(')')[0].split(',')
+            else if(colorInfo==='transparent') rgba = [0,0,0,0]
+            else rgba = hexToRgbA(colorInfo)
             return <div style={{
               margin: '3px',
               border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
@@ -93,7 +99,11 @@ class Red_GradientColorEdit extends React.Component {
             }}>
               <div style={{
                 display: 'inline-block'
-              }}>{v['range']} {v['rangeUnit']} {v['color']}</div>
+              }}>
+                {v['range']} {v['rangeUnit']} {v['color']}
+                <div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>
+                <div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>
+              </div>
             </div>;
           })
         }
@@ -110,4 +120,35 @@ const style = {
   }
 };
 
+function hexToRgbA(hex){
+  var c;
+  if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+    c= hex.substring(1).split('');
+    if(c.length== 3){
+      c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+    }
+    c= '0x'+c.join('');
+    return [(c>>16)&255, (c>>8)&255, c&255,1];
+  }
+  throw new Error('Bad Hex');
+}
+function rgba2hex(orig) {
+  var a, isPercent,
+    rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+),?([^,\s)]+)?/i),
+    alpha = (rgb && rgb[4] || "").trim(),
+    hex = rgb ?
+      (rgb[1] | 1 << 8).toString(16).slice(1) +
+      (rgb[2] | 1 << 8).toString(16).slice(1) +
+      (rgb[3] | 1 << 8).toString(16).slice(1) : orig;
 
+  if (alpha !== "") {
+    a = alpha;
+  } else {
+    a = 1;
+  }
+  // multiply before convert to HEX
+  a = ((a * 255) | 1 << 8).toString(16).slice(1)
+  hex = hex + a;
+
+  return hex;
+}

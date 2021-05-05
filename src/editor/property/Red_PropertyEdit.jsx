@@ -36,6 +36,7 @@ class Red_PropertyEdit extends React.Component {
             <div className={'todo'}>Todo - 스텝추가/삭제, 이동</div>
             <div className={'todo'}>Todo - 컬러분해신공도 필요함</div>
             <div className={'todo'}>TODO - 그라디언트 컬러셀렉터</div>
+            <div className={'todo'}>TODO - 이동에따른 스텝정렬</div>
           </div>
           <div style={style.itemContainer}>
             <div className={'todo'}>
