@@ -1,4 +1,5 @@
 import React from "react";
+import GRADIENT_TYPE from "../GRADIENT_TYPE";
 
 class Red_GradientColorEdit extends React.Component {
   constructor(props) {
@@ -58,9 +59,11 @@ const renderGradientColorList = data => {
     itemList.push(renderColorStep(v));
     return `${v['color']} ${colorRangeTxt}`;
   });
+  const code = `${GRADIENT_TYPE.LINEAR}(90deg, ${gradients})`
+
   return <div style={{
     height: '35px',
-    background: `${data['type']}(${data['deg']}deg, ${gradients})`
+    background: code
   }}>
     {itemList}
   </div>;

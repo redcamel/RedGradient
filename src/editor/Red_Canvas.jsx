@@ -66,6 +66,7 @@ class Red_Canvas extends React.Component {
         </div>
         <div className={'todo'}>Todo - 레이어를 display item화 시켜서... 객체 에디팅으로도 값 변경할수있도록</div>
         <div className={'todo'}>Todo - 패스기반 레이어도 추가해야하는데 아직 오묘...</div>
+        <div className={'todo'}>Todo - 캔버스 스케일기반 Viewer</div>
 
       </div>
       <div style={style.canvas} className={'transparent_checker'}>
