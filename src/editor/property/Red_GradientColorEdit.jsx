@@ -106,11 +106,25 @@ class Red_GradientColorEdit extends React.Component {
               }}
             >
               <div style={{
-                display: 'inline-block'
+                display : 'flex'
               }}>
-                {v['range']} {v['rangeUnit']} {v['color']}
-                <div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>
-                <div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>
+                <div
+                  className={colorInfo==='transparent' ? 'transparent_checker' : ''}
+                  style={{
+                    width : '50px',
+                    height : '50px',
+                    background : colorInfo==='transparent' ? '' : colorInfo,
+                    borderRadius : '4px',
+                    marginRight : '10px',
+                    border : '1px solid #000'
+                  }}
+                />
+                <div>
+                  {v['range']} {v['rangeUnit']} {v['color']}
+                  <div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>
+                  <div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>
+                </div>
+
               </div>
             </div>;
           })
