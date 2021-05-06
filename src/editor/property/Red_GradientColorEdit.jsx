@@ -1,6 +1,8 @@
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
-import {SketchPicker } from 'react-color';
+import {SketchPicker} from 'react-color';
+import UI_Number from "../../core/UI_Number";
+import UI_Select from "../../core/UI_Select";
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
 class Red_GradientColorEdit extends React.Component {
@@ -57,6 +59,7 @@ class Red_GradientColorEdit extends React.Component {
         transition: 'left 0.2s,background 0.2s'
       }}
       onClick={e => {
+        e.stopPropagation();
         this.setState({
           activeIDX: index
         });
@@ -76,13 +79,50 @@ class Red_GradientColorEdit extends React.Component {
     </div>;
   };
 
+  sortColorList(colorList) {
+    const rootComponent = this.props.rootComponent;
+    const rootComponentState = rootComponent.state;
+    const canvasInfo = rootComponentState.canvasInfo;
+    colorList.sort((a, b) => {
+      const aX = a['rangeUnit'] === '%' ? a['range'] : (a['range'] / canvasInfo['width'] * 100);
+      const bX = b['rangeUnit'] === '%' ? b['range'] : (b['range'] / canvasInfo['width'] * 100);
+      if (aX > bX) return 1;
+      if (aX < bX) return -1;
+      return 0;
+    });
+  }
+
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const data = rootComponentState.activeSubData;
+    const canvasInfo = rootComponentState.canvasInfo;
 
     return <div style={style.container}>
-      <div className={'transparent_checker'}>
+      <div
+        className={'transparent_checker'}
+        onClick={e => {
+          const percentX = (e.nativeEvent.layerX / canvasInfo['width'] * 100).toFixed(0);
+          let targetIndex = 0;
+          const len = data.colorList.length;
+          for (let i = 0; i < len; i++) {
+            const v = data.colorList[i];
+            const vPercentX = v['rangeUnit'] === '%' ? v['range'] : (v['range'] / canvasInfo['width'] * 100);
+            if (vPercentX > percentX) {
+              targetIndex = i;
+              break;
+            }
+          }
+          const newData = {
+            color: data.colorList[targetIndex - 1] ? data.colorList[targetIndex - 1]['color'] : '#ffffff',
+            range: percentX,
+            rangeUnit: '%'
+          };
+          data.colorList.splice(targetIndex, null, newData);
+          this.setState({activeIDX: targetIndex});
+          rootComponent.setState({});
+        }}
+      >
         {this.renderGradientColorList(data)}
       </div>
       <div style={{marginTop: '20px'}}>
@@ -92,6 +132,7 @@ class Red_GradientColorEdit extends React.Component {
             const activeYn = this.state.activeIDX === index;
             const colorInfo = v['color'];
             return <div
+
               style={{
                 margin: '3px',
                 border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
@@ -124,7 +165,35 @@ class Red_GradientColorEdit extends React.Component {
                   }}
                 />
                 <div>
-                  {v['range']} {v['rangeUnit']} {v['color']}
+                  <UI_Number
+                    width={'45px'}
+                    maxValue={100}
+                    value={v['range'] || 0}
+                    HD_onInput={e => {
+                      v['range'] = +e.target.value;
+                      let i = data.colorList.length;
+                      while (i--) {
+                        if (data.colorList[i] === v) this.setState({activeIDX: i});
+                      }
+                    }}
+                    HD_blur={e => {
+                      this.sortColorList(data.colorList);
+                      rootComponent.setState({});
+                    }}
+                  />
+
+                  <UI_Select
+                    value={v['rangeUnit']} options={['px', '%']}
+                    HD_change={e => {
+                      v['rangeUnit'] = e.target.value;
+                      rootComponent.setState({});
+                    }}
+                    HD_blur={e => {
+                      this.sortColorList(data.colorList);
+                      rootComponent.setState({});
+                    }}
+                  />
+                  {v['color']}
                   <div className={'todo'}>Todo - 컬러지원범위 & 포멧 결정</div>
                   {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
                   {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}

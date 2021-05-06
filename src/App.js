@@ -28,7 +28,7 @@ class App extends React.Component {
               position: {x: 30, xUnit: 'px', y: 30, yUnit: 'px'},
               size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
-                {color: '#ff0000', range: 25, rangeUnit: '%'},
+                {color: '#ff0000', range: 25, rangeUnit: 'px'},
                 {color: 'transparent', range: 25, rangeUnit: '%'},
                 {color: 'transparent', range: 100, rangeUnit: '%'}
               ]

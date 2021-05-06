@@ -7,6 +7,7 @@ class UI_Select extends React.Component {
     return <select
       style={{width: `${this.props.width || ''}px`}}
       onChange={this.props.HD_change}
+      onBlur={this.props.HD_blur}
     >
       {(this.props.options || []).map(v => {
         const activeYn = this.props.value === v;
