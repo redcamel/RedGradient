@@ -100,8 +100,7 @@ class Red_GradientColorEdit extends React.Component {
               }}
               onClick={e => {
                 this.setState({
-                  activeIDX: index,
-                  colorPicker: v
+                  activeIDX: index
                 });
               }}
             >
@@ -117,6 +116,11 @@ class Red_GradientColorEdit extends React.Component {
                     borderRadius: '4px',
                     marginRight: '10px',
                     border: '1px solid #000'
+                  }}
+                  onClick={e => {
+                    this.setState({
+                      colorPicker: v
+                    });
                   }}
                 />
                 <div>
