@@ -196,6 +196,12 @@ class Red_GradientColorEdit extends React.Component {
                   />
                   {v['color']}
                   <div className={'todo'}>Todo - 컬러지원범위 & 포멧 결정</div>
+                  <div
+                    onClick={e=>{
+                      data.colorList.splice(data.colorList.indexOf(v),1)
+                      rootComponent.setState({})
+                    }}
+                  >삭제</div>
                   {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
                   {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
                 </div>
