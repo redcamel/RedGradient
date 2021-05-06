@@ -31,6 +31,15 @@ const presetSize = [
 ];
 
 class Red_Canvas extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      useMove: false,
+      offsetX: 0,
+      offsetY: 0,
+      scale: 1
+    };
+  }
 
   render() {
     const rootComponent = this.props.rootComponent;
@@ -38,7 +47,56 @@ class Red_Canvas extends React.Component {
     const canvasInfo = rootComponentState.canvasInfo;
     const layers = rootComponentState.layers;
     console.log(Red_Layer.calcGradients(layers));
-    return <div style={style.container}>
+    return <div
+      style={style.container}
+      onMouseMove={e => {
+        if (this.state.useMove) {
+          e = e.nativeEvent;
+          this.state.offsetX += e.movementX;
+          this.state.offsetY += e.movementY;
+          style.canvas.transition = '';
+          this.setState({});
+          document.body.style.cursor = 'move';
+          console.log(e);
+        }
+      }}
+      onMouseLeave={e => this.state.useMove ? this.setState({useMove: false}) : 0}
+      onMouseUp={e => {
+
+        document.body.style.cursor = 'default';
+        if (this.state.useMove) this.setState({useMove: false});
+      }}
+      onMouseDown={e => {
+        e = e.nativeEvent;
+        if (e.button === 1) {
+          this.setState({useMove: true});
+        }
+      }}
+      onWheel={e => {
+        let t0 = this.state.scale - e.nativeEvent.deltaY / 1000
+        if(t0<0) t0= 0.01
+        this.setState({scale: t0});
+        style.canvas.transition = 'transform 0.1s';
+      }}
+    >
+      <div style={style.canvasViewInfo}>
+        <div>center : {this.state.offsetX},{this.state.offsetY} / scale : {this.state.scale}</div>
+        <button
+          style={style.toCenter}
+          onClick={e => this.setState({offsetX: 0, offsetY: 0})}
+        >set Center
+        </button>
+        <button
+          style={style.toScale}
+          onClick={e => this.setState({scale: 1})}
+        >setScale 1
+        </button>
+        <button
+          style={style.toScale}
+          onClick={e => this.setState({scale: 0.5})}
+        >setScale 0.5
+        </button>
+      </div>
       <div style={style.canvasResizer}>
         <UI_Number value={canvasInfo.width} HD_onInput={e => {
           canvasInfo.width = e.target.value;
@@ -68,7 +126,10 @@ class Red_Canvas extends React.Component {
         <div className={'todo'}>Todo - 캔버스 스케일기반 Viewer</div>
 
       </div>
-      <div style={style.canvas} className={'transparent_checker'}>
+      <div style={{
+        ...style.canvas,
+        transform: `translate(calc(-50% + ${this.state.offsetX}px),calc(-50% + ${this.state.offsetY}px)) scale(${this.state.scale})`
+      }} className={'transparent_checker'}>
         <div
           className={'transparent_checker'}
           style={{
@@ -98,13 +159,44 @@ const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%,-50%)',
-    overflow: 'auto'
+    overflow: 'auto',
+    transition: 'transform 0.01s'
   },
   canvasResizer: {
     position: 'sticky',
     top: 0,
     left: 0,
     zIndex: 1
+  },
+  canvasViewInfo: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    padding: '4px',
+    fontSize: '10px',
+    zIndex: 1
+  },
+  toCenter: {
+    padding: '3px 5px',
+    background: '#5e7ade',
+    color: '#fff',
+    marginTop: '4px',
+    borderRadius: '4px',
+    border: 0,
+    fontSize: '10px',
+    outline: 'none',
+    cursor: 'pointer'
+  },
+  toScale: {
+    marginLeft: '4px',
+    padding: '3px 5px',
+    background: '#7235d4',
+    color: '#fff',
+    marginTop: '4px',
+    borderRadius: '4px',
+    border: 0,
+    fontSize: '10px',
+    outline: 'none',
+    cursor: 'pointer'
   }
 };
