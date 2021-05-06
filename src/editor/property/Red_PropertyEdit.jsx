@@ -128,7 +128,7 @@ class Red_PropertyEdit extends React.Component {
 export default Red_PropertyEdit;
 const style = {
   container: {
-    width: '300px',
+    width: '450px',
     borderRight: '1px solid #000',
     overflowX: 'hidden',
     overflowY: 'auto'
