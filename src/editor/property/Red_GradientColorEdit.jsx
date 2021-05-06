@@ -1,6 +1,6 @@
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
-import {SketchPicker} from 'react-color';
+import {SketchPicker } from 'react-color';
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
 class Red_GradientColorEdit extends React.Component {
@@ -91,16 +91,12 @@ class Red_GradientColorEdit extends React.Component {
           data['colorList'].map((v, index) => {
             const activeYn = this.state.activeIDX === index;
             const colorInfo = v['color'];
-            let rgba = [];
-            if (colorInfo.indexOf('rgba') > -1) rgba = colorInfo.split('(')[1].split(')')[0].split(',');
-            else if (colorInfo === 'transparent') rgba = [0, 0, 0, 0];
-            else rgba = hexToRgbA(colorInfo);
             return <div
               style={{
                 margin: '3px',
                 border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
                 padding: '4px',
-                cursor : 'pointer'
+                cursor: 'pointer'
               }}
               onClick={e => {
                 this.setState({
@@ -125,8 +121,9 @@ class Red_GradientColorEdit extends React.Component {
                 />
                 <div>
                   {v['range']} {v['rangeUnit']} {v['color']}
-                  <div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>
-                  <div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>
+                  <div className={'todo'}>Todo - 컬러지원범위 & 포멧 결정</div>
+                  {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
+                  {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
                 </div>
 
               </div>
@@ -137,32 +134,28 @@ class Red_GradientColorEdit extends React.Component {
       {
         this.state.colorPicker ?
           <div style={{
-            zIndex: 1,position : 'absolute',top : 0,left: '50%' ,transform : 'translate(-50% , 0px)',
-            boxShadow : '0px 0px 16px rgba(0,0,0,0.16)',
-            background : '#fff',
-            borderRadius : '8px',
-            overflow : 'hidden'
+            zIndex: 1, position: 'absolute', top: 0, left: '50%', transform: 'translate(-50% , 0px)',
+            boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
+            background: '#fff',
+            borderRadius: '8px',
+            overflow: 'hidden'
           }}>
 
             <SketchPicker
+              width={250}
               color={this.state.colorPicker.color}
               onChange={color => {
-                // console.log(color);
-                this.state.colorPicker.color = color.hex;
-                rootComponent.setState({});
-              }}
-              handleChangeComplete ={color => {
-                // console.log(color);
-                this.state.colorPicker.color = color.hex;
+                this.state.colorPicker.color = `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`;
                 rootComponent.setState({});
               }}
             />
             <div
-              style={{padding : '4px',background : '#5e7ade',cursor : 'pointer',textAlign:'center'}}
-              onClick={e=>{
-                this.setState({colorPicker : null})
+              style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
+              onClick={e => {
+                this.setState({colorPicker: null});
               }}
-            >완료</div>
+            >완료
+            </div>
           </div> : ''
       }
     </div>;
@@ -175,37 +168,3 @@ const style = {
     paddingTop: '10px',
   }
 };
-
-function hexToRgbA(hex) {
-  var c;
-  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-    c = hex.substring(1).split('');
-    if (c.length == 3) {
-      c = [c[0], c[0], c[1], c[1], c[2], c[2]];
-    }
-    c = '0x' + c.join('');
-    return [(c >> 16) & 255, (c >> 8) & 255, c & 255, 1];
-  }
-  throw new Error('Bad Hex');
-}
-
-function rgba2hex(orig) {
-  var a, isPercent,
-    rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+),?([^,\s)]+)?/i),
-    alpha = (rgb && rgb[4] || "").trim(),
-    hex = rgb ?
-      (rgb[1] | 1 << 8).toString(16).slice(1) +
-      (rgb[2] | 1 << 8).toString(16).slice(1) +
-      (rgb[3] | 1 << 8).toString(16).slice(1) : orig;
-
-  if (alpha !== "") {
-    a = alpha;
-  } else {
-    a = 1;
-  }
-  // multiply before convert to HEX
-  a = ((a * 255) | 1 << 8).toString(16).slice(1);
-  hex = hex + a;
-
-  return hex;
-}
