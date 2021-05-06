@@ -175,6 +175,7 @@ class Red_GradientColorEdit extends React.Component {
                       while (i--) {
                         if (data.colorList[i] === v) this.setState({activeIDX: i});
                       }
+                      rootComponent.setState({});
                     }}
                     HD_blur={e => {
                       this.sortColorList(data.colorList);
