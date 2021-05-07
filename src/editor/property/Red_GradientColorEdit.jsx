@@ -20,7 +20,7 @@ class Red_GradientColorEdit extends React.Component {
       // console.log('this.state.activeIDX === index', this.state.activeIDX === index);
       const activeYn = this.state.activeIDX === index;
       let colorRangeTxt;
-      colorRangeTxt = `${v['range']}%`;
+      colorRangeTxt = `${v['range']}`;
       itemList.push(this.renderColorStep(v, index, activeYn));
       return `${v['color']} ${colorRangeTxt}`;
     });
@@ -39,7 +39,10 @@ class Red_GradientColorEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     let tLeft;
-    tLeft = `${v['range'] / canvasInfo['width'] * 100}%`;
+    if (v['rangeUnit'] === '%') tLeft = `${v['range'] || 0}%`;
+    else {
+      tLeft = `${v['range'] / canvasInfo['width'] * 100}%`;
+    }
     return <div
       style={{
         position: 'absolute',
@@ -104,7 +107,7 @@ class Red_GradientColorEdit extends React.Component {
           const len = data.colorList.length;
           for (let i = 0; i < len; i++) {
             const v = data.colorList[i];
-            const vPercentX =  v['range'];
+            const vPercentX = v['range'];
             if (vPercentX > percentX) {
               targetIndex = i;
               break;
@@ -175,14 +178,18 @@ class Red_GradientColorEdit extends React.Component {
                       this.sortColorList(data.colorList);
                       rootComponent.setState({});
                     }}
-                  />% {v['color']}
+                  />
+
+
+                  {v['color']}
                   <div className={'todo'}>Todo - 컬러지원범위 & 포멧 결정</div>
                   <div
-                    onClick={e=>{
-                      data.colorList.splice(data.colorList.indexOf(v),1)
-                      rootComponent.setState({})
+                    onClick={e => {
+                      data.colorList.splice(data.colorList.indexOf(v), 1);
+                      rootComponent.setState({});
                     }}
-                  >삭제</div>
+                  >삭제
+                  </div>
                   {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
                   {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
                 </div>

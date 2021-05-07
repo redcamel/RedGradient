@@ -38,18 +38,23 @@ class Red_Canvas extends React.Component {
       </div>
     </div>;
   }
-  addItem(){
+
+  addItem() {
 
   }
-  removeItem(){
+
+  removeItem() {
 
   }
+
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     const layers = rootComponentState.layers;
+    const activeData = rootComponentState.activeData;
     const activeSubData = rootComponentState.activeSubData;
+    const layerSize = activeData['size']
     return <div
       style={style.container}
       onMouseMove={e => {
@@ -81,7 +86,7 @@ class Red_Canvas extends React.Component {
           right: '4px',
           bottom: '4px',
           width: `${SIZE}px`,
-          height: `${canvasInfo.height / canvasInfo.width * SIZE}px`,
+          height: `${layerSize.h / layerSize.w * SIZE}px`,
           border: '1px solid red',
           transition: 'width 0.2s,height 0.2s'
         }}
@@ -89,8 +94,8 @@ class Red_Canvas extends React.Component {
         onMouseMove={e => {
           if (this.state.moveCenterStart && e.target.className === 'layerItem') {
             e = e.nativeEvent;
-            let tX = e['layerX'] / SIZE * (activeSubData['position']['xUnit'] === '%' ? 100 : canvasInfo.width);
-            let tY = e['layerY'] / (canvasInfo.height / canvasInfo.width * SIZE) * (activeSubData['position']['yUnit'] === '%' ? 100 : canvasInfo.height);
+            let tX = e['layerX'] / SIZE * (activeSubData['position']['xUnit'] === '%' ? 100 : layerSize.w);
+            let tY = e['layerY'] / (layerSize.h / layerSize.w * SIZE) * (activeSubData['position']['yUnit'] === '%' ? 100 : layerSize.h);
             activeSubData['position']['x'] = tX;
             activeSubData['position']['y'] = tY;
             rootComponent.setState({});
@@ -119,13 +124,14 @@ class Red_Canvas extends React.Component {
           overflow: 'hidden',
           transition: 'height 0.2s'
         }}>
-          <div className={'layerItem'} style={{background: Red_Layer.calcGradientItem(activeSubData)}} />
+          <div className={'layerItem'}
+               style={{background: Red_Layer.calcGradientItem(activeSubData, false, activeData)}} />
         </div>
         <div
           style={{
             position: 'absolute',
-            top: `${activeSubData.position.y * (activeSubData.position.yUnit === '%' ? 1 : SIZE / canvasInfo.height) % 100}%`,
-            left: `${activeSubData.position.x * (activeSubData.position.xUnit === '%' ? 1 : SIZE / canvasInfo.width) % 100}%`,
+            top: `${activeSubData.position.y * (activeSubData.position.yUnit === '%' ? 1 : SIZE / layerSize.h) % 100}%`,
+            left: `${activeSubData.position.x * (activeSubData.position.xUnit === '%' ? 1 : SIZE / layerSize.w) % 100}%`,
             transform: 'translate(-50%,-50%)',
             width: '10px',
             height: '10px',
@@ -193,33 +199,7 @@ class Red_Canvas extends React.Component {
               }} />
             </div>
           </div>
-          <div style={style.itemContainer}>
-            Size
-            <div>
-              <UI_Number
-                width={'80px'}
-                value={activeSubData['size']['w'] || 0}
-                HD_onInput={e => {
-                  activeSubData['size']['w'] = e.target.value;
-                  rootComponent.setState({});
-                }} />
-              <UI_Select value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
-                activeSubData['size']['wUnit'] = e.target.value;
-                rootComponent.setState({});
-              }} />
-              <UI_Number
-                width={'80px'}
-                value={activeSubData['size']['h'] || 0}
-                HD_onInput={e => {
-                  activeSubData['size']['h'] = e.target.value;
-                  rootComponent.setState({});
-                }} />
-              <UI_Select value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {
-                activeSubData['size']['hUnit'] = e.target.value;
-                rootComponent.setState({});
-              }} />
-            </div>
-          </div>
+
           <div className={'todo'}>TODO - 반복 Edit</div>
         </div>
       </div>

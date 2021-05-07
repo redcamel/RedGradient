@@ -81,7 +81,7 @@ function draw_canvasUI() {
 
     </div>
   </>;
-};
+}
 export default draw_canvasUI;
 
 const style = {

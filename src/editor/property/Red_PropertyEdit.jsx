@@ -1,10 +1,7 @@
 import React from "react";
 import UI_Title from "../../core/UI_Title";
 import UI_TextField from "../../core/UI_TextField";
-import UI_Number from "../../core/UI_Number";
-import UI_Select from "../../core/UI_Select";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
-import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import Red_GradientColorEdit from "./Red_GradientColorEdit";
 
 class Red_PropertyEdit extends React.Component {

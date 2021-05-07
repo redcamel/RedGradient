@@ -162,21 +162,24 @@ input, select {
 }
 
 .layerType {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    margin-right: 1px;
     width: 30px;
     height: 20px;
-    background: #5e7ade;
+    background: #7f86a0;
     font-size: 9px;
     color: #fff;
     outline: none;
     border: 0
 }
+
 .layerDel {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*right: 0;*/
+    margin-right: 1px;
     width: 30px;
     height: 20px;
     background: #5e7ade;
@@ -184,19 +187,20 @@ input, select {
     color: #fff;
     outline: none;
     border: 0;
-    cursor:pointer;
+    cursor: pointer;
     z-index: 1;
     transition: background 0.2s;
 }
 
 .layerVisible {
-    position: absolute;
-    top: 0;
-    left: 0;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    margin-right: 1px;
     width: 30px;
     height: 20px;
     background: #5e7ade;
-    font-size: 11px;
+    font-size: 9px;
     color: #fff;
     outline: none;
     border: 0;
@@ -204,7 +208,8 @@ input, select {
     cursor: pointer;
     transition: background 0.2s;
 }
-.layerVisible:hover,.layerDel:hover{
+
+.layerVisible:hover, .layerDel:hover {
     background: red;
 }
 
