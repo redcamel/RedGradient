@@ -145,7 +145,7 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-      <div className={'frame_bottom'}>frame Bottom
+      <div className={'frame_bottom'} style={{height:'300px',maxHeight:'300px',overflow:'auto'}}>frame Bottom
         <div className={'todo'}>Todo - Animation Timeline</div>
         <div style={style.test}>결과 테스트</div>
         <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>

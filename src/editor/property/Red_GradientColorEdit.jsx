@@ -17,7 +17,7 @@ class Red_GradientColorEdit extends React.Component {
   renderGradientColorList(data) {
     const itemList = [];
     const gradients = data['colorList'].map((v, index) => {
-      console.log('this.state.activeIDX === index', this.state.activeIDX === index);
+      // console.log('this.state.activeIDX === index', this.state.activeIDX === index);
       const activeYn = this.state.activeIDX === index;
       let colorRangeTxt;
       colorRangeTxt = `${v['range']}${v['rangeUnit']}`;
