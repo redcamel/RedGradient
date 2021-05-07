@@ -10,12 +10,12 @@ const HD_move = e => {
   if (targetContext.state.moveStepMode && targetContext.refBar.current) {
     const tX = e.pageX - targetContext.refBar.current.getBoundingClientRect().x;
     const percentX = (tX / targetContext.refBar.current.clientWidth * 100);
-    console.log(percentX);
     targetData.range = percentX;
     targetContext.props.rootComponent.setState({});
   }
 };
 const HD_up = e => {
+  targetContext.sortColorList()
   targetContext = null;
   targetData = null;
   window.removeEventListener('mousemove', HD_move);
@@ -103,8 +103,8 @@ class Red_GradientColorEdit extends React.Component {
 
   };
 
-  sortColorList(colorList) {
-    colorList.sort((a, b) => {
+  sortColorList() {
+    this.props.rootComponent.state.activeSubData.colorList.sort((a, b) => {
       const aX = a['range'];
       const bX = b['range'];
       if (aX > bX) return 1;

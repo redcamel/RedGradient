@@ -11,6 +11,12 @@ const paddingH = 6;
 const SIZE = 120;
 
 class Red_Layer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      layerBgColor : 'transparent'
+    }
+  }
 
   _toggleVisible(data, bool) {
     data.visible = !data.visible;
@@ -24,23 +30,27 @@ class Red_Layer extends React.Component {
     return <div style={style.container}>
       <div style={style.addLayer}>
         <div style={style.addLayerItem}
-          onClick={e=>{
-            let targetLayer;
-            layers.splice(0,0,targetLayer = new DataLayer());
-            rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
-          }}
-        >Add Layer</div>
+             onClick={e => {
+               let targetLayer;
+               layers.splice(0, 0, targetLayer = new DataLayer());
+               rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
+             }}
+        >Add Layer
+        </div>
+        <div style={{...style.bgItem, background: '#000', color: '#fff'}} onClick={e=>this.setState({layerBgColor : 'black'})}>black</div>
+        <div style={{...style.bgItem, background: '#fff', color: '#000'}} onClick={e=>this.setState({layerBgColor : 'white'})}>white</div>
+        <div style={{...style.bgItem}} className={'transparent_checker'} onClick={e=>this.setState({layerBgColor : 'transparent'})}>transparent</div>
       </div>
       {
         layers.map((layer, index) => {
           const layerSize = layer['size'];
           return <div style={{
             opacity: layer.visible ? 1 : 0.5, transition: 'opacity 0.2s',
-            border : '1px solid rgba(0,0,0,0.36)',
-            background : 'rgba(0,0,0,0.3)',
-            borderRadius : '4px',
-            margin : '4px',
-            padding :'4px'
+            border: '1px solid rgba(0,0,0,0.36)',
+            background: 'rgba(0,0,0,0.3)',
+            borderRadius: '4px',
+            margin: '4px',
+            padding: '4px'
           }}>
             <div className={'layerItemTitle'}>{layer.title}</div>
             <div>
@@ -78,7 +88,7 @@ class Red_Layer extends React.Component {
               onClick={e => rootComponent.setState({activeLayer: layer, activeSubData: layer.items[0]})}
             >
               <div className={'layerItem'}
-                   style={{background: Red_Layer.calcGradientItems(layer['items'], false, layer)}} />
+                   style={{background: `${Red_Layer.calcGradientItems(layer['items'], false, layer)},${this.state.layerBgColor}`}} />
             </div>
             <div style={style.itemContainer}>
               Layer Size
@@ -147,7 +157,7 @@ class Red_Layer extends React.Component {
                       onClick={e => rootComponent.setState({activeLayer: layer, activeSubData: item})}
                     >
                       <div className={'layerItem'}
-                           style={{background: Red_Layer.calcGradientItem(item, false, layer)}} />
+                           style={{background: `${Red_Layer.calcGradientItem(item, false, layer)},${this.state.layerBgColor}`}} />
 
                       <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
                     </div>
@@ -174,7 +184,7 @@ Red_Layer
   if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
 
   //TODO - 여기정리
-  console.log('layer', data, checkVisible, layer);
+  // console.log('layer', data, checkVisible, layer);
   if (data['type'] === GRADIENT_TYPE.LINEAR) {
     const gradients = data['colorList'].map(v => {
       let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}%`;
@@ -219,9 +229,9 @@ const style = {
   },
   addLayer: {
     position: 'sticky',
-    padding : '5px 4px 3px 4px',
-    top : 0,
-    zIndex : 1,
+    padding: '5px 4px 3px 4px',
+    top: 0,
+    zIndex: 1,
     background: '#000'
   },
   addLayerItem: {
@@ -231,5 +241,13 @@ const style = {
     borderRadius: '4px',
     marginBottom: '4px',
     cursor: 'pointer'
+  },
+  bgItem: {
+    padding: '2px',
+    margin: '2px 0px',
+    fontSize: '11px',
+    cursor: 'pointer',
+    border : '1px solid rgba(255,255,255,0.16)',
+    borderRadius: '4px'
   }
 };
