@@ -53,11 +53,15 @@ function draw_canvasUI() {
       </button>
     </div>
     <div style={style.canvasResizer}>
-      <UI_Number value={canvasInfo.width} HD_onInput={e => {
+      <UI_Number
+        width={'60px'}
+        value={canvasInfo.width} HD_onInput={e => {
         canvasInfo.width = e.target.value;
         rootComponent.setState({});
       }} />
-      <UI_Number value={canvasInfo.height} HD_onInput={e => {
+      <UI_Number
+        width={'60px'}
+        value={canvasInfo.height} HD_onInput={e => {
         canvasInfo.height = e.target.value;
         rootComponent.setState({});
       }} />
@@ -113,6 +117,17 @@ function draw_canvasUI() {
         {
           presetSize.map(v => {
             return <button
+              style={{
+                background : '#464141',
+                border : 0,
+                outline : 'none',
+                color : '#fff',
+                fontSize : '11px',
+                padding : '8px',
+                borderRadius : '4px',
+                margin : '1px',
+                cursor : 'pointer'
+              }}
               onClick={e => {
                 canvasInfo.width = v.width;
                 canvasInfo.height = v.height;

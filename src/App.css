@@ -231,7 +231,7 @@ input, select {
 .layerItemTitle {
     margin : 4px 0;
     border-radius: 4px;
-    background: #1a1a1a;
+    background: #5e5665;
     padding :4px 8px;
     font-size: 11px;
     color: #fff;
@@ -242,7 +242,7 @@ input, select {
 .layerItemSubTitle {
     margin : 4px 0 0 20px;
     border-radius: 4px;
-    background: #1a1a1a;
+    background: #5e5665;
     padding :4px 8px;
     font-size: 11px;
     color: #fff;

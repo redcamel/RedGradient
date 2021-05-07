@@ -34,7 +34,14 @@ class Red_Layer extends React.Component {
       {
         layers.map((layer, index) => {
           const layerSize = layer['size'];
-          return <div style={{opacity: layer.visible ? 1 : 0.5, transition: 'opacity 0.2s'}}>
+          return <div style={{
+            opacity: layer.visible ? 1 : 0.5, transition: 'opacity 0.2s',
+            border : '1px solid rgba(0,0,0,0.36)',
+            background : 'rgba(0,0,0,0.3)',
+            borderRadius : '4px',
+            margin : '4px',
+            padding :'4px'
+          }}>
             <div className={'layerItemTitle'}>{layer.title}</div>
             <div>
               <button className={'layerVisible'}
