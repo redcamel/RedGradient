@@ -119,7 +119,7 @@ Red_Layer.calcGradientItem = (data, checkVisible, layer) => {
 
   if (data['type'] === GRADIENT_TYPE.LINEAR) {
     const gradients = data['colorList'].map(v => {
-      let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
+      let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}%`;
       return `${v['color']} ${colorRangeTxt}`;
     });
     let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
@@ -128,7 +128,7 @@ Red_Layer.calcGradientItem = (data, checkVisible, layer) => {
     return `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt}`;
   } else {
     const gradients = data['colorList'].map(v => {
-      let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
+      let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}%`;
       return `${v['color']} ${colorRangeTxt}`;
     });
     let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';

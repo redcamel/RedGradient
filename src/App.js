@@ -28,9 +28,9 @@ class App extends React.Component {
               position: {x: 30, xUnit: 'px', y: 30, yUnit: 'px'},
               size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
-                {color: '#ff0000', range: 25, rangeUnit: 'px'},
-                {color: 'transparent', range: 25, rangeUnit: '%'},
-                {color: 'transparent', range: 100, rangeUnit: '%'}
+                {color: '#ff0000', range: 25},
+                {color: 'transparent', range: 25},
+                {color: 'transparent', range: 100}
               ]
             },
             {
@@ -41,10 +41,10 @@ class App extends React.Component {
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               colorList: [
-                {color: 'rgba(0,255,0,0.9)', range: 24, rangeUnit: '%'},
-                {color: '#00ff00', range: 25, rangeUnit: '%'},
-                {color: 'transparent', range: 25, rangeUnit: '%'},
-                {color: 'transparent', range: 100, rangeUnit: '%'}
+                {color: 'rgba(0,255,0,0.9)', range: 24},
+                {color: '#00ff00', range: 25},
+                {color: 'transparent', range: 25},
+                {color: 'transparent', range: 100}
               ]
             },
             {
@@ -55,9 +55,9 @@ class App extends React.Component {
               position: {x: 30, xUnit: 'px', y: 30, yUnit: 'px'},
               size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
-                {color: 'rgba(255,0,0,1)', range: 0, rangeUnit: '%'},
-                {color: 'rgba(0,255,255,0.1)', range: 35, rangeUnit: '%'},
-                {color: 'rgba(0,255,0,1)', range: 100, rangeUnit: '%'},
+                {color: 'rgba(255,0,0,1)', range: 0},
+                {color: 'rgba(0,255,255,0.1)', range: 35},
+                {color: 'rgba(0,255,0,1)', range: 100},
               ]
             },
             {
@@ -68,8 +68,8 @@ class App extends React.Component {
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               colorList: [
-                {color: 'transparent', range: 75, rangeUnit: '%'},
-                {color: 'rgba(0,0,255,0.9)', range: 75, rangeUnit: '%'}
+                {color: 'transparent', range: 75},
+                {color: 'rgba(0,0,255,0.9)', range: 75}
               ]
             },
             {
@@ -80,27 +80,8 @@ class App extends React.Component {
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
               colorList: [
-                {color: 'transparent', range: 75, rangeUnit: '%'},
-                {color: 'rgba(255,0,255,0.9)', range: 75, rangeUnit: '%'}
-              ]
-            }
-          ]
-        },
-        {
-          title: 'testLayer ',
-          visible: true,
-          items: [
-            {
-              title: 'test',
-              type: 'radial-gradient',
-              deg: 45,
-              visible: true,
-              position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
-              size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
-              colorList: [
-                {color: 'rgba(255,255,0,0.9)', range: 25, rangeUnit: '%'},
-                {color: 'transparent', range: 50, rangeUnit: '%'},
-                {color: 'transparent', range: 100, rangeUnit: '%'}
+                {color: 'transparent', range: 75},
+                {color: 'rgba(255,0,255,0.9)', range: 75}
               ]
             }
           ]

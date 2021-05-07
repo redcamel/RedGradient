@@ -20,7 +20,7 @@ class Red_GradientColorEdit extends React.Component {
       // console.log('this.state.activeIDX === index', this.state.activeIDX === index);
       const activeYn = this.state.activeIDX === index;
       let colorRangeTxt;
-      colorRangeTxt = `${v['range']}${v['rangeUnit']}`;
+      colorRangeTxt = `${v['range']}%`;
       itemList.push(this.renderColorStep(v, index, activeYn));
       return `${v['color']} ${colorRangeTxt}`;
     });
@@ -39,10 +39,7 @@ class Red_GradientColorEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     let tLeft;
-    if (v['rangeUnit'] === '%') tLeft = `${v['range'] || 0}${v['rangeUnit']}`;
-    else {
-      tLeft = `${v['range'] / canvasInfo['width'] * 100}%`;
-    }
+    tLeft = `${v['range'] / canvasInfo['width'] * 100}%`;
     return <div
       style={{
         position: 'absolute',
@@ -74,7 +71,7 @@ class Red_GradientColorEdit extends React.Component {
           fontSize: '9px',
           whiteSpace: 'nowrap'
         }}>
-        {v['range']} {v['rangeUnit']}
+        {v['range']}%
       </div>
     </div>;
   };
@@ -84,8 +81,8 @@ class Red_GradientColorEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     colorList.sort((a, b) => {
-      const aX = a['rangeUnit'] === '%' ? a['range'] : (a['range'] / canvasInfo['width'] * 100);
-      const bX = b['rangeUnit'] === '%' ? b['range'] : (b['range'] / canvasInfo['width'] * 100);
+      const aX = a['range'];
+      const bX = b['range'];
       if (aX > bX) return 1;
       if (aX < bX) return -1;
       return 0;
@@ -107,7 +104,7 @@ class Red_GradientColorEdit extends React.Component {
           const len = data.colorList.length;
           for (let i = 0; i < len; i++) {
             const v = data.colorList[i];
-            const vPercentX = v['rangeUnit'] === '%' ? v['range'] : (v['range'] / canvasInfo['width'] * 100);
+            const vPercentX =  v['range'];
             if (vPercentX > percentX) {
               targetIndex = i;
               break;
@@ -115,8 +112,7 @@ class Red_GradientColorEdit extends React.Component {
           }
           const newData = {
             color: data.colorList[targetIndex - 1] ? data.colorList[targetIndex - 1]['color'] : '#ffffff',
-            range: percentX,
-            rangeUnit: '%'
+            range: percentX
           };
           data.colorList.splice(targetIndex, null, newData);
           this.setState({activeIDX: targetIndex});
@@ -179,20 +175,7 @@ class Red_GradientColorEdit extends React.Component {
                       this.sortColorList(data.colorList);
                       rootComponent.setState({});
                     }}
-                  />
-
-                  <UI_Select
-                    value={v['rangeUnit']} options={['px', '%']}
-                    HD_change={e => {
-                      v['rangeUnit'] = e.target.value;
-                      rootComponent.setState({});
-                    }}
-                    HD_blur={e => {
-                      this.sortColorList(data.colorList);
-                      rootComponent.setState({});
-                    }}
-                  />
-                  {v['color']}
+                  />% {v['color']}
                   <div className={'todo'}>Todo - 컬러지원범위 & 포멧 결정</div>
                   <div
                     onClick={e=>{
