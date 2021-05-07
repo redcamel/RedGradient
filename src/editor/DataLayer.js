@@ -1,8 +1,8 @@
 import DataItem from "./DataItem";
-
+let uuid = 0
 function DataLayer() {
   return {
-    title: 'undefined',
+    title: `layer${uuid++}`,
     visible: true,
     size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
     items: [new DataItem()]

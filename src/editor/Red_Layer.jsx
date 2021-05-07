@@ -20,10 +20,8 @@ class Red_Layer extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const layers = rootComponentState.layers;
-    const canvasInfo = rootComponentState.canvasInfo;
-    const activeData = rootComponentState.activeData;
     return <div style={style.container}>
-      <div className={'todo'}>Todo - 프리셋 적용메뉴 </div>
+      <div className={'todo'}>Todo - 프리셋 적용메뉴</div>
       {
         layers.map((layer, index) => {
           const layerSize = layer['size'];
@@ -44,9 +42,17 @@ class Red_Layer extends React.Component {
                             items: [new DataItem()]
                           });
                         }
-                        rootComponent.setState({activeData: targetLayer, activeSubData: targetLayer['items'][0]});
+                        rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
                       }}
               >Del
+              </button>
+              <button className={'layerAdd'}
+                      onClick={e => {
+                        e.stopPropagation();
+                        layer.items.splice(0, 0, new DataItem());
+                        rootComponent.setState({activeSubData: layer.items[0]});
+                      }}
+              >Add
               </button>
             </div>
             <div
@@ -59,7 +65,7 @@ class Red_Layer extends React.Component {
                 overflow: 'hidden',
                 transition: 'height 0.2s'
               }}
-              onClick={e => rootComponent.setState({activeData: layer, activeSubData: layer.items[0]})}
+              onClick={e => rootComponent.setState({activeLayer: layer, activeSubData: layer.items[0]})}
             >
               <div className={'layerItem'}
                    style={{background: Red_Layer.calcGradientItems(layer['items'], false, layer)}} />
@@ -128,7 +134,7 @@ class Red_Layer extends React.Component {
                         overflow: 'hidden',
                         transition: 'height 0.2s'
                       }}
-                      onClick={e => rootComponent.setState({activeData: layer, activeSubData: item})}
+                      onClick={e => rootComponent.setState({activeLayer: layer, activeSubData: item})}
                     >
                       <div className={'layerItem'}
                            style={{background: Red_Layer.calcGradientItem(item, false, layer)}} />
@@ -141,52 +147,47 @@ class Red_Layer extends React.Component {
             </div>
           </div>;
         })
-        }
-        </div>;
       }
-      }
+    </div>;
+  }
+}
 
-  Red_Layer
-.
-  calcGradients = (layers, checkVisible,bgColor='transparent') => layers.map(layer => Red_Layer.calcGradientItems(layer['items'], checkVisible, layer)).join(',') + `,${bgColor}`;
-  Red_Layer
-.
-  calcGradientItems = (items, checkVisible, layer) => items.length ? items.map(item => Red_Layer.calcGradientItem(item, checkVisible, layer)).join(',') : '';
-  Red_Layer
-.
-  calcGradientItem = (data, checkVisible, layer) => {
-    if (!data) return '';
-    if (!data['colorList'].length) return '';
-    if (checkVisible && !data['visible']) return 'linear-gradient(45deg, transparent,transparent )';
-    if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
+Red_Layer
+  .calcGradients = (layers, checkVisible, bgColor = 'transparent') => layers.map(layer => Red_Layer.calcGradientItems(layer['items'], checkVisible, layer)).join(',') + `,${bgColor}`;
+Red_Layer
+  .calcGradientItems = (items, checkVisible, layer) => items.length ? items.map(item => Red_Layer.calcGradientItem(item, checkVisible, layer)).join(',') : '';
+Red_Layer
+  .calcGradientItem = (data, checkVisible, layer) => {
+  if (!data) return '';
+  if (!data['colorList'].length) return '';
+  if (checkVisible && !data['visible']) return 'linear-gradient(45deg, transparent,transparent )';
+  if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
 
-    //TODO - 여기정리
-    console.log('layer', data, checkVisible, layer);
-    if (data['type'] === GRADIENT_TYPE.LINEAR) {
-      const gradients = data['colorList'].map(v => {
-        let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}%`;
-        return `${v['color']} ${colorRangeTxt}`;
-      });
-      let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
-      let sizeTxt = layer['size'] ? ` ${layer['size']['w']}${layer['size']['wUnit']} ${layer['size']['h']}${layer['size']['hUnit']}` : '';
+  //TODO - 여기정리
+  console.log('layer', data, checkVisible, layer);
+  if (data['type'] === GRADIENT_TYPE.LINEAR) {
+    const gradients = data['colorList'].map(v => {
+      let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}%`;
+      return `${v['color']} ${colorRangeTxt}`;
+    });
+    let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
+    let sizeTxt = layer['size'] ? ` ${layer['size']['w']}${layer['size']['wUnit']} ${layer['size']['h']}${layer['size']['hUnit']}` : '';
 
-      return `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt}`;
-    } else {
-      const gradients = data['colorList'].map(v => {
-        let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}%`;
-        return `${v['color']} ${colorRangeTxt}`;
-      });
-      let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
-      let sizeTxt = layer['size'] ? ` ${layer['size']['w']}${layer['size']['wUnit']} ${layer['size']['h']}${layer['size']['hUnit']}` : '';
+    return `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt}`;
+  } else {
+    const gradients = data['colorList'].map(v => {
+      let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}%`;
+      return `${v['color']} ${colorRangeTxt}`;
+    });
+    let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
+    let sizeTxt = layer['size'] ? ` ${layer['size']['w']}${layer['size']['wUnit']} ${layer['size']['h']}${layer['size']['hUnit']}` : '';
 
-      return `${data['type']}(${gradients}) ${positionTxt} / ${sizeTxt}`;
-    }
+    return `${data['type']}(${gradients}) ${positionTxt} / ${sizeTxt}`;
+  }
 
-  };
-  export
-  default
-  Red_Layer;
-  const
+};
+export default Red_Layer;
+const
   style = {
     container: {
       borderRight: '1px solid #000',

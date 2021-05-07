@@ -174,7 +174,22 @@ input, select {
     outline: none;
     border: 0
 }
-
+.layerAdd {
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*right: 0;*/
+    margin-right: 1px;
+    width: 30px;
+    height: 20px;
+    background: #5e7ade;
+    font-size: 9px;
+    color: #fff;
+    outline: none;
+    border: 0;
+    cursor: pointer;
+    z-index: 1;
+    transition: background 0.2s;
+}
 .layerDel {
     /*position: absolute;*/
     /*bottom: 0;*/

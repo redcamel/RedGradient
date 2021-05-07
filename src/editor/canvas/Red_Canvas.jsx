@@ -53,9 +53,9 @@ class Red_Canvas extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     const layers = rootComponentState.layers;
-    const activeData = rootComponentState.activeData;
+    const activeLayer = rootComponentState.activeLayer;
     const activeSubData = rootComponentState.activeSubData;
-    const layerSize = activeData['size']
+    const layerSize = activeLayer['size']
     return <div
       style={style.container}
       onMouseMove={e => {
@@ -126,7 +126,7 @@ class Red_Canvas extends React.Component {
           transition: 'height 0.2s'
         }}>
           <div className={'layerItem'}
-               style={{background: Red_Layer.calcGradientItem(activeSubData, false, activeData)}} />
+               style={{background: Red_Layer.calcGradientItem(activeSubData, false, activeLayer)}} />
         </div>
         <div
           style={{

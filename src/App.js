@@ -13,7 +13,7 @@ class App extends React.Component {
         width: 300,
         height: 300
       },
-      activeData: null,
+      activeLayer: null,
       activeSubData: null,
       bgColor : '#fff',
       layers: [
@@ -104,8 +104,8 @@ class App extends React.Component {
         }
       ]
     };
-    this.state.activeData = this.state.layers[0];
-    this.state.activeSubData = this.state.activeData['items'][0];
+    this.state.activeLayer = this.state.layers[0];
+    this.state.activeSubData = this.state.activeLayer['items'][0];
   }
 
   componentDidMount() {

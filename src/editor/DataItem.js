@@ -1,6 +1,7 @@
+let uuid = 0
 function DataItem() {
   return {
-    title: 'untitle',
+    title: `gradient${uuid++}`,
     type: 'linear-gradient',
     deg: 90,
     visible: true,
