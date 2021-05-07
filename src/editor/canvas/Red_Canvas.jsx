@@ -15,13 +15,14 @@ class Red_Canvas extends React.Component {
       useMove: false,
       offsetX: 0,
       offsetY: 0,
-      scale: 1
+      scale: 1,
+      colorPicker : false
     };
   }
 
   draw_canvasUI = draw_canvasUI;
 
-  draw(canvasInfo, layers) {
+  draw(canvasInfo, layers,bgColor) {
     return <div style={{
       ...style.canvas,
       transform: `translate(calc(-50% + ${this.state.offsetX}px),calc(-50% + ${this.state.offsetY}px)) scale(${this.state.scale})`
@@ -31,7 +32,7 @@ class Red_Canvas extends React.Component {
         style={{
           width: `${canvasInfo.width}px`,
           height: `${canvasInfo.height}px`,
-          background: Red_Layer.calcGradients(layers, true),
+          background: Red_Layer.calcGradients(layers, true,bgColor),
           transition: 'width 0.2s, height 0.2s'
         }}
       >
@@ -79,7 +80,7 @@ class Red_Canvas extends React.Component {
       }}
     >
       {this.draw_canvasUI()}
-      {this.draw(canvasInfo, layers)}
+      {this.draw(canvasInfo, layers,rootComponentState.bgColor)}
       <div
         style={{
           position: 'absolute',

@@ -15,6 +15,7 @@ class App extends React.Component {
       },
       activeData: null,
       activeSubData: null,
+      bgColor : '#fff',
       layers: [
         {
           title: 'testLayer sdfsdfsdfsdf',
@@ -149,7 +150,7 @@ class App extends React.Component {
         <div className={'todo'}>Todo - Animation Timeline</div>
         <div style={style.test}>결과 테스트</div>
         <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
-          {JSON.stringify(Red_Layer.calcGradients(this.state.layers), null, 2)}
+          {JSON.stringify(Red_Layer.calcGradients(this.state.layers), null, 2,this.state.bgColor)}
         </SyntaxHighlighter>
       </div>
       <div className={'frame_status'}>frame Status

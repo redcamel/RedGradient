@@ -148,7 +148,7 @@ class Red_Layer extends React.Component {
 
   Red_Layer
 .
-  calcGradients = (layers, checkVisible) => layers.map(layer => Red_Layer.calcGradientItems(layer['items'], checkVisible, layer)).join(',') + ',#fff';
+  calcGradients = (layers, checkVisible,bgColor='transparent') => layers.map(layer => Red_Layer.calcGradientItems(layer['items'], checkVisible, layer)).join(',') + `,${bgColor}`;
   Red_Layer
 .
   calcGradientItems = (items, checkVisible, layer) => items.length ? items.map(item => Red_Layer.calcGradientItem(item, checkVisible, layer)).join(',') : '';

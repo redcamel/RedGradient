@@ -1,4 +1,5 @@
 import UI_Number from "../../core/UI_Number";
+import {SketchPicker} from "react-color";
 
 const presetSize = [
   {
@@ -60,7 +61,55 @@ function draw_canvasUI() {
         canvasInfo.height = e.target.value;
         rootComponent.setState({});
       }} />
+      <div style={{display:'inline-flex',alignItems:'center'}}>
+        배경색상
+        <div
+          className={rootComponentState.bgColor === 'transparent' ? 'transparent_checker' : ''}
+          style={{
+            display: 'inline-block',
+            width: '25px',
+            height: '25px',
+            background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
+            borderRadius: '4px',
+            marginRight: '10px',
+            border: '1px solid #000',
+            cursor: 'pointer'
+          }}
+          onClick={e => {
+            this.setState({
+              colorPicker: true
+            });
+          }}
+        />
+        {
+          this.state.colorPicker ? <div style={{
+              zIndex: 1, position: 'absolute', top: 0, left: '0%', transform: 'translate(-50% , 0px)',
+              boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
+              background: '#fff',
+              borderRadius: '8px',
+              overflow: 'hidden'
+            }}>
+              <SketchPicker
+                width={250}
+                color={rootComponentState.bgColor}
+                onChange={color => {
+                  rootComponentState.bgColor = `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`;
+                  rootComponent.setState({});
+                }}
+              />
+              <div
+                style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
+                onClick={e => {
+                  this.setState({colorPicker: null});
+                }}
+              >완료
+              </div>
+            </div>
+            : ''
+        }
+      </div>
       <div>
+
         {
           presetSize.map(v => {
             return <button
@@ -82,6 +131,7 @@ function draw_canvasUI() {
     </div>
   </>;
 }
+
 export default draw_canvasUI;
 
 const style = {
