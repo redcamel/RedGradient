@@ -79,6 +79,27 @@ class App extends React.Component {
               ]
             }
           ]
+        },
+        {
+          title: 'testLayer ',
+          visible: true,
+          size: {w: 50, wUnit: 'px', h: 50, hUnit: 'px'},
+          items: [
+            {
+              title: 'test',
+              type: 'radial-gradient',
+              deg: 45,
+              visible: true,
+              position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
+
+              colorList: [
+                {color: 'rgba(255,255,0,0.9)', range: 25},
+                {color: 'rgba(255,0,0,0.5)', range: 55},
+                {color: 'transparent', range: 75},
+                {color: 'transparent', range: 100}
+              ]
+            }
+          ]
         }
       ]
     };
@@ -104,7 +125,11 @@ class App extends React.Component {
       <div className={'frame_middle'}>
         <div className={'frame_middle_container'}>
           <div className={'frame_left'}>frame Left
-            <div style={style.test}>이공간이<br />현재는<br />쓸모없으나...<br />예비로...구성함</div>
+            <div className={'todo'}>프리셋공간</div>
+            <div className={'todo'}>Todo - Rect</div>
+            <div className={'todo'}>Todo - Circle</div>
+            <div className={'todo'}>Todo - Line</div>
+            <div className={'todo'}>Todo - Etc</div>
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
