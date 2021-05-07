@@ -3,7 +3,7 @@ import UI_Title from "../../core/UI_Title";
 import UI_TextField from "../../core/UI_TextField";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import Red_GradientColorEdit from "./Red_GradientColorEdit";
-import Red_Layer from "../Red_Layer";
+import Red_Layer from "../layer/Red_Layer";
 
 class Red_PropertyEdit extends React.Component {
 

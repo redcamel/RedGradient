@@ -1,5 +1,5 @@
 import React from "react";
-import Red_Layer from "../Red_Layer";
+import Red_Layer from "../layer/Red_Layer";
 import draw_canvasUI from "./draw_canvasUI";
 import UI_Select from "../../core/UI_Select";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
