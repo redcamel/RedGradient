@@ -164,7 +164,7 @@ class Red_GradientColorEdit extends React.Component {
                 />
                 <div>
                   <UI_Number
-                    width={'45px'}
+                    width={'auto'}
                     value={v['range'] || 0}
                     HD_onInput={e => {
                       v['range'] = +e.target.value;

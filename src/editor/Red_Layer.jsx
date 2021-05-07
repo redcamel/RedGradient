@@ -3,6 +3,7 @@ import GRADIENT_TYPE from "./GRADIENT_TYPE";
 import DataItem from "./DataItem";
 import UI_Number from "../core/UI_Number";
 import UI_Select from "../core/UI_Select";
+import DataLayer from "./DataLayer";
 
 
 const SIZE_MARGIN = 20;
@@ -21,7 +22,15 @@ class Red_Layer extends React.Component {
     const rootComponentState = rootComponent.state;
     const layers = rootComponentState.layers;
     return <div style={style.container}>
-      <div className={'todo'}>Todo - 프리셋 적용메뉴</div>
+      <div style={style.addLayer}>
+        <div style={style.addLayerItem}
+          onClick={e=>{
+            let targetLayer;
+            layers.splice(0,0,targetLayer = new DataLayer());
+            rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
+          }}
+        >Add Layer</div>
+      </div>
       {
         layers.map((layer, index) => {
           const layerSize = layer['size'];
@@ -35,13 +44,7 @@ class Red_Layer extends React.Component {
                         e.stopPropagation();
                         layers.splice(layers.indexOf(layer), 1);
                         let targetLayer = layer;
-                        if (!layers.length) {
-                          layers.push(targetLayer = {
-                            title: 'undefined',
-                            visible: true,
-                            items: [new DataItem()]
-                          });
-                        }
+                        if (!layers.length) layers.push(new DataLayer());
                         rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
                       }}
               >Del
@@ -187,25 +190,39 @@ Red_Layer
 
 };
 export default Red_Layer;
-const
-  style = {
-    container: {
-      borderRight: '1px solid #000',
-      overflowX: 'hidden',
-      overflowY: 'auto',
-      padding: `10px ${paddingH}px`
-    },
-    layerItem: {
-      height: '35px',
-      cursor: 'pointer'
-    },
-    activeLine: {
-      position: 'absolute',
-      top: 0, left: 0, right: 0, bottom: 0,
-      border: '2px solid #5e7ade',
-      transition: 'border 0.2s'
-    },
-    deActiveLine: {
-      border: '2px solid transparent',
-    }
-  };
+const style = {
+  container: {
+    borderRight: '1px solid #000',
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    padding: `0px 0px 10px 0px`
+  },
+  layerItem: {
+    height: '35px',
+    cursor: 'pointer'
+  },
+  activeLine: {
+    position: 'absolute',
+    top: 0, left: 0, right: 0, bottom: 0,
+    border: '2px solid #5e7ade',
+    transition: 'border 0.2s'
+  },
+  deActiveLine: {
+    border: '2px solid transparent',
+  },
+  addLayer: {
+    position: 'sticky',
+    padding : '5px 4px 3px 4px',
+    top : 0,
+    zIndex : 1,
+    background: '#000'
+  },
+  addLayerItem: {
+    background: '#5e7ade',
+    padding: '4px 8px',
+    fontSize: '11px',
+    borderRadius: '4px',
+    marginBottom: '4px',
+    cursor: 'pointer'
+  }
+};
