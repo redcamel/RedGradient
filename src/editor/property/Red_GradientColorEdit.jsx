@@ -15,11 +15,14 @@ const HD_move = e => {
   }
 };
 const HD_up = e => {
-  targetContext.sortColorList()
-  targetContext = null;
-  targetData = null;
+  targetContext.sortColorList();
   window.removeEventListener('mousemove', HD_move);
   window.removeEventListener('mouseup', HD_up);
+  requestAnimationFrame(e => {
+    targetContext.setState({activeIDX: targetContext.props.rootComponent.state.activeSubData.colorList.indexOf(targetData)});
+    targetContext = null;
+    targetData = null;
+  });
 };
 
 class Red_GradientColorEdit extends React.Component {
@@ -35,7 +38,6 @@ class Red_GradientColorEdit extends React.Component {
   renderGradientColorList(data) {
     const itemList = [];
     const gradients = data['colorList'].map((v, index) => {
-      // console.log('this.state.activeIDX === index', this.state.activeIDX === index);
       const activeYn = this.state.activeIDX === index;
       let colorRangeTxt;
       colorRangeTxt = `${v['range']}%`;
@@ -45,7 +47,8 @@ class Red_GradientColorEdit extends React.Component {
     const code = `${GRADIENT_TYPE.LINEAR}(90deg, ${gradients})`;
     return <div style={{
       height: '55px',
-      background: code
+      background: code,
+      transition: 'background 0.2s'
     }}>
       {itemList}
     </div>;
@@ -58,17 +61,17 @@ class Red_GradientColorEdit extends React.Component {
     return <div
       style={{
         position: 'absolute',
-        height : '20px',
+        height: '20px',
         bottom: 0,
         left: tLeft,
         borderRadius: '50%',
         width: '20px',
         background: activeYn ? '#5e7ade' : '#fff',
         border: '1px solid #000',
-        transform: 'translate(-50%,50%)',
+        transform: `translate(-50%,50%)`,
         textAlign: 'center',
         cursor: 'pointer',
-        transition: 'background 0.2s',
+        transition: 'background 0.2s, top 0.2s, bottom 0.2s',
         boxShadow: '0px 0px 10px rgba(0,0,0,0.46)'
       }}
       onClick={e => {
@@ -153,9 +156,9 @@ class Red_GradientColorEdit extends React.Component {
             return <div
 
               style={{
-                margin: '3px',
+                margin: '3px 0px',
                 border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
-                padding: '4px',
+
                 cursor: 'pointer'
               }}
               onClick={e => {
@@ -165,7 +168,8 @@ class Red_GradientColorEdit extends React.Component {
               }}
             >
               <div style={{
-                display: 'flex'
+                display: 'flex',
+                padding: '4px',
               }}>
                 <div
                   className={colorInfo === 'transparent' ? 'transparent_checker' : ''}
@@ -215,6 +219,53 @@ class Red_GradientColorEdit extends React.Component {
                   {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
                 </div>
 
+              </div>
+              <div style={{height : '25px',marginBottom : '10px',alignItems:'center'}}>
+                <div style={{height:'1px',background:'rgba(255,255,255,0.25)',position : 'absolute',top:'16px',left:0,right:0}}/>
+                <div
+                  style={{
+                    position: 'absolute',
+                    height: '20px',
+                    bottom: 0,
+                    left: `${v['range']}%`,
+                    borderRadius: '50%',
+                    width: '20px',
+                    background: activeYn ? '#5e7ade' : '#fff',
+                    border: '1px solid #000',
+                    transform: `translate(-50%,0%)`,
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                    transition: 'background 0.2s, top 0.2s, bottom 0.2s',
+                    boxShadow: '0px 0px 10px rgba(0,0,0,0.46)'
+                  }}
+                  onClick={e => {
+                    e.stopPropagation();
+                    let t0;
+                    if (this.state.moveStepMode) {
+                      t0 = {
+                        activeIDX: index,
+                        moveStepMode: false
+                      };
+                    } else {
+                      t0 = {
+                        activeIDX: index
+                      };
+                    }
+                    this.setState(t0);
+
+                  }}
+                  onMouseDown={e => {
+                    this.setState({
+                      moveStepMode: true,
+                      activeIDX: index
+                    });
+                    targetContext = this;
+                    targetData = v;
+
+                    window.addEventListener('mousemove', HD_move);
+                    window.addEventListener('mouseup', HD_up);
+                  }}
+                />
               </div>
             </div>;
           })
