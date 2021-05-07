@@ -102,6 +102,7 @@ class Red_Canvas extends React.Component {
           }}
         >
           Edit Center
+          <div className={'todo'}>여기다 포지션/사이즈/타입을 넣어도 될것 같은디..</div>
         </div>
         <div className={'transparent_checker'} style={{width: `100%`, height: `100%`, cursor: 'pointer', borderRadius: '4px', overflow: 'hidden', transition: 'height 0.2s'}}>
           <div className={'layerItem'} style={{background: Red_Layer.calcGradientItem(activeSubData)}} />
