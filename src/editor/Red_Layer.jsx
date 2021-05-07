@@ -23,6 +23,7 @@ class Red_Layer extends React.Component {
     const canvasInfo = rootComponentState.canvasInfo;
     const activeData = rootComponentState.activeData;
     return <div style={style.container}>
+      <div className={'todo'}>Todo - 프리셋 적용메뉴 </div>
       {
         layers.map((layer, index) => {
           const layerSize = layer['size'];
