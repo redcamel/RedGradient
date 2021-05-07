@@ -9,7 +9,8 @@ let targetData;
 const HD_move = e => {
   if (targetContext.state.moveStepMode && targetContext.refBar.current) {
     const tX = e.pageX - targetContext.refBar.current.getBoundingClientRect().x;
-    const percentX = (tX / targetContext.refBar.current.clientWidth * 100);
+    let percentX = (tX / targetContext.refBar.current.clientWidth * 100);
+    percentX = Math.max(Math.min(100,percentX),0)
     targetData.range = percentX;
     targetContext.props.rootComponent.setState({});
   }
