@@ -3,6 +3,7 @@ import UI_Title from "../../core/UI_Title";
 import UI_TextField from "../../core/UI_TextField";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import Red_GradientColorEdit from "./Red_GradientColorEdit";
+import Red_Layer from "../Red_Layer";
 
 class Red_PropertyEdit extends React.Component {
 
@@ -10,6 +11,7 @@ class Red_PropertyEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
+    const activeLayer = rootComponentState.activeLayer;
     const data = rootComponentState.activeSubData;
 
     return <div style={style.container}>
@@ -40,6 +42,9 @@ class Red_PropertyEdit extends React.Component {
         </div>
         <div style={style.itemContainer}>
           <div>Current Data</div>
+          <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
+            {JSON.stringify(Red_Layer.calcGradientItem(data,false,activeLayer), null, 2)}
+          </SyntaxHighlighter>
           <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
             {JSON.stringify(data, null, 2)}
           </SyntaxHighlighter>
