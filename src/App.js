@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import Red_Canvas from "./editor/Red_Canvas";
+import Red_Canvas from "./editor/canvas/Red_Canvas";
 import Red_Layer from "./editor/Red_Layer";
 import Red_PropertyEdit from "./editor/property/Red_PropertyEdit";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';

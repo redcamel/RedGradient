@@ -37,13 +37,15 @@ class Red_PropertyEdit extends React.Component {
             <div className={'todo'}>Todo - 컬러분해신공도 필요함</div>
             <div className={'todo'}>TODO - 그라디언트 컬러셀렉터</div>
             <div className={'todo'}>TODO - 이동에따른 스텝정렬</div>
+            <div className={'todo'}>TODO - 일단 이게 오른쪽에 위치하는게 올바른것인가....</div>
           </div>
           <div style={style.itemContainer}>
             <div className={'todo'}>
-              <UI_Select value={data['type'].split('-')[0].toUpperCase()} options={Object.keys(GRADIENT_TYPE)} HD_change={e => {
-                data['type'] = GRADIENT_TYPE[e.target.value];
-                rootComponent.setState({});
-              }} />
+              <UI_Select value={data['type'].split('-')[0].toUpperCase()} options={Object.keys(GRADIENT_TYPE)}
+                         HD_change={e => {
+                           data['type'] = GRADIENT_TYPE[e.target.value];
+                           rootComponent.setState({});
+                         }} />
             </div>
           </div>
           {

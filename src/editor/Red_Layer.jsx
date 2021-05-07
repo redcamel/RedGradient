@@ -8,6 +8,10 @@ const SIZE = 120;
 
 class Red_Layer extends React.Component {
 
+  _toggleVisible(data, bool) {
+    data.visible = !data.visible;
+    this.props.rootComponent.setState({});
+  }
 
   render() {
     const rootComponent = this.props.rootComponent;
@@ -18,13 +22,10 @@ class Red_Layer extends React.Component {
       <div className={'todo'}>Todo - 레이어 추가 삭제</div>
       <div className={'todo'}>Todo - 레이어 그룹 열고닫기</div>
       <div className={'todo'}>Todo - 레이어 배경 색상 설정</div>
-      <div className={'todo'}>Todo - 각도(L), range(R)<br/>개별 레이어위에서 Edit</div>
+      <div className={'todo'}>Todo - 각도(L), range(R)<br />개별 레이어위에서 Edit</div>
       {
         layers.map((layer, index) => {
-          return <div style={{
-            opacity: layer.visible ? 1 : 0.5,
-            transition: 'opacity 0.2s'
-          }}>
+          return <div style={{opacity: layer.visible ? 1 : 0.5, transition: 'opacity 0.2s'}}>
             <div className={'layerItemTitle'}>{layer.title}</div>
             <div
               className={'transparent_checker'}
@@ -34,27 +35,19 @@ class Red_Layer extends React.Component {
                 cursor: 'pointer',
                 borderRadius: '4px',
                 overflow: 'hidden',
-                transition : 'height 0.2s'
+                transition: 'height 0.2s'
               }}
               onClick={e => rootComponent.setState({activeData: layer, activeSubData: layer.items[0]})}
             >
               <div className={'layerItem'} style={{background: Red_Layer.calcGradientItems(layer['items'])}} />
-              <button
-                className={'layerVisible'}
-                onClick={e => {
-                  layer.visible = !layer.visible;
-                  rootComponent.setState({});
-                }}
-              >{layer.visible ? 'on' : 'off'}</button>
+              <button className={'layerVisible'}
+                      onClick={e => this._toggleVisible(layer)}>{layer.visible ? 'on' : 'off'}</button>
             </div>
             <div>
               {
                 layer.items.map(item => {
                   const activeSubDataYn = rootComponentState.activeSubData === item;
-                  return <div style={{
-                    opacity: item.visible ? 1 : 0.5,
-                    transition: 'opacity 0.2s'
-                  }}>
+                  return <div style={{opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s'}}>
                     <div className={'layerItemSubTitle'}>{item.title}</div>
                     <div
                       className={'transparent_checker'}
@@ -65,26 +58,19 @@ class Red_Layer extends React.Component {
                         cursor: 'pointer',
                         borderRadius: '4px',
                         overflow: 'hidden',
-                        transition : 'height 0.2s'
+                        transition: 'height 0.2s'
                       }}
                       onClick={e => rootComponent.setState({activeData: layer, activeSubData: item})}
                     >
                       <div className={'layerItem'} style={{background: Red_Layer.calcGradientItem(item)}} />
-                      <button
-                        className={'layerVisible'}
-                        onClick={e => {
-                          item.visible = !item.visible;
-                          rootComponent.setState({});
-                        }}
-                      >{item.visible ? 'on' : 'off'}</button>
+                      <button className={'layerVisible'}
+                              onClick={e => this._toggleVisible(item)}>{item.visible ? 'on' : 'off'}</button>
                       <button className={'layerType'}>{item.type.charAt(0).toUpperCase()}</button>
                       <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
                     </div>
-
                   </div>;
                 })
               }
-
             </div>
           </div>;
         })
