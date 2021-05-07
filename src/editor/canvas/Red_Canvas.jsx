@@ -38,7 +38,12 @@ class Red_Canvas extends React.Component {
       </div>
     </div>;
   }
+  addItem(){
 
+  }
+  removeItem(){
+
+  }
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;

@@ -1,5 +1,6 @@
 import React from "react";
 import GRADIENT_TYPE from "./GRADIENT_TYPE";
+import DataItem from "./DataItem";
 
 
 const SIZE_MARGIN = 20;
@@ -42,6 +43,21 @@ class Red_Layer extends React.Component {
               <div className={'layerItem'} style={{background: Red_Layer.calcGradientItems(layer['items'])}} />
               <button className={'layerVisible'}
                       onClick={e => this._toggleVisible(layer)}>{layer.visible ? 'on' : 'off'}</button>
+              <button className={'layerDel'}
+                      onClick={e=>{
+                        e.stopPropagation()
+                        layers.splice(layers.indexOf(layer),1)
+                        let targetLayer = layer
+                        if(!layers.length) {
+                          layers.push(targetLayer = {
+                            title: 'undefined',
+                            visible: true,
+                            items:[new DataItem()]
+                          })
+                        }
+                        rootComponent.setState({activeData : targetLayer,activeSubData : targetLayer['items'][0]})
+                      }}
+              >Del</button>
             </div>
             <div>
               {
@@ -66,6 +82,18 @@ class Red_Layer extends React.Component {
                       <button className={'layerVisible'}
                               onClick={e => this._toggleVisible(item)}>{item.visible ? 'on' : 'off'}</button>
                       <button className={'layerType'}>{item.type.charAt(0).toUpperCase()}</button>
+                      <button className={'layerDel'}
+                        onClick={e=>{
+                          e.stopPropagation()
+                          let idx = layer.items.indexOf(item)
+                          layer.items.splice(idx,1)
+                          if(!layer.items.length) {
+                            layer.items.push(new DataItem())
+                            idx = 0
+                          }
+                          rootComponent.setState({activeSubData : layer.items[idx]})
+                        }}
+                      >Del</button>
                       <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
                     </div>
                   </div>;
@@ -80,13 +108,15 @@ class Red_Layer extends React.Component {
 }
 
 Red_Layer.calcGradients = (layers, checkVisible) => layers.map(layer => Red_Layer.calcGradientItems(layer['items'], checkVisible, layer)).join(',');
-Red_Layer.calcGradientItems = (items, checkVisible, layer) => items.map(item => Red_Layer.calcGradientItem(item, checkVisible, layer)).join(',');
+Red_Layer.calcGradientItems = (items, checkVisible, layer) => items.length ? items.map(item => Red_Layer.calcGradientItem(item, checkVisible, layer)).join(',') : '';
 Red_Layer.calcGradientItem = (data, checkVisible, layer) => {
   if (!data) return '';
+  if(!data['colorList'].length) return ''
   if (checkVisible && !data['visible']) return 'linear-gradient(45deg, transparent,transparent )';
   if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
 
   //TODO - 여기정리
+
   if (data['type'] === GRADIENT_TYPE.LINEAR) {
     const gradients = data['colorList'].map(v => {
       let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;

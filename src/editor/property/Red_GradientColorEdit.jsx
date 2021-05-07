@@ -126,7 +126,6 @@ class Red_GradientColorEdit extends React.Component {
         {this.renderGradientColorList(data)}
       </div>
       <div style={{marginTop: '20px'}}>
-
         {
           data['colorList'].map((v, index) => {
             const activeYn = this.state.activeIDX === index;
