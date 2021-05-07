@@ -2,9 +2,26 @@ import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import {SketchPicker} from 'react-color';
 import UI_Number from "../../core/UI_Number";
-import UI_Select from "../../core/UI_Select";
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
+let targetContext;
+let targetData;
+const HD_move = e => {
+  if (targetContext.state.moveStepMode && targetContext.refBar.current) {
+    const tX = e.pageX - targetContext.refBar.current.getBoundingClientRect().x;
+    const percentX = (tX / targetContext.refBar.current.clientWidth * 100);
+    console.log(percentX);
+    targetData.range = percentX;
+    targetContext.props.rootComponent.setState({});
+  }
+};
+const HD_up = e => {
+  targetContext = null;
+  targetData = null;
+  window.removeEventListener('mousemove', HD_move);
+  window.removeEventListener('mouseup', HD_up);
+};
+
 class Red_GradientColorEdit extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +29,7 @@ class Red_GradientColorEdit extends React.Component {
       activeIDX: 0,
       colorPicker: null
     };
+    this.refBar = React.createRef();
   }
 
   renderGradientColorList(data) {
@@ -20,13 +38,13 @@ class Red_GradientColorEdit extends React.Component {
       // console.log('this.state.activeIDX === index', this.state.activeIDX === index);
       const activeYn = this.state.activeIDX === index;
       let colorRangeTxt;
-      colorRangeTxt = `${v['range']}`;
+      colorRangeTxt = `${v['range']}%`;
       itemList.push(this.renderColorStep(v, index, activeYn));
       return `${v['color']} ${colorRangeTxt}`;
     });
     const code = `${GRADIENT_TYPE.LINEAR}(90deg, ${gradients})`;
     return <div style={{
-      height: '35px',
+      height: '55px',
       background: code
     }}>
       {itemList}
@@ -34,15 +52,9 @@ class Red_GradientColorEdit extends React.Component {
   };
 
   renderColorStep(v, index, activeYn) {
-
     const rootComponent = this.props.rootComponent;
-    const rootComponentState = rootComponent.state;
-    const canvasInfo = rootComponentState.canvasInfo;
     let tLeft;
-    if (v['rangeUnit'] === '%') tLeft = `${v['range'] || 0}%`;
-    else {
-      tLeft = `${v['range'] / canvasInfo['width'] * 100}%`;
-    }
+    tLeft = `${v['range']}%`;
     return <div
       style={{
         position: 'absolute',
@@ -56,33 +68,42 @@ class Red_GradientColorEdit extends React.Component {
         transform: 'translate(-50%,0)',
         textAlign: 'center',
         cursor: 'pointer',
-        transition: 'left 0.2s,background 0.2s'
+        transition: 'background 0.2s',
+        boxShadow: '0px 0px 10px rgba(0,0,0,0.46)'
       }}
       onClick={e => {
         e.stopPropagation();
+        let t0;
+        if (this.state.moveStepMode) {
+          t0 = {
+            activeIDX: index,
+            moveStepMode: false
+          };
+        } else {
+          t0 = {
+            activeIDX: index
+          };
+        }
+        this.setState(t0);
+
+      }}
+      onMouseDown={e => {
         this.setState({
+          moveStepMode: true,
           activeIDX: index
         });
+        targetContext = this;
+        targetData = v;
+
+        window.addEventListener('mousemove', HD_move);
+        window.addEventListener('mouseup', HD_up);
       }}
-    >
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          transform: 'translate(-25%,100%)',
-          textAlign: 'center',
-          fontSize: '9px',
-          whiteSpace: 'nowrap'
-        }}>
-        {v['range']}%
-      </div>
-    </div>;
+
+    />;
+
   };
 
   sortColorList(colorList) {
-    const rootComponent = this.props.rootComponent;
-    const rootComponentState = rootComponent.state;
-    const canvasInfo = rootComponentState.canvasInfo;
     colorList.sort((a, b) => {
       const aX = a['range'];
       const bX = b['range'];
@@ -96,13 +117,13 @@ class Red_GradientColorEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const data = rootComponentState.activeSubData;
-    const canvasInfo = rootComponentState.canvasInfo;
 
     return <div style={style.container}>
       <div
+        ref={this.refBar}
         className={'transparent_checker'}
         onClick={e => {
-          const percentX = (e.nativeEvent.layerX / canvasInfo['width'] * 100).toFixed(0);
+          const percentX = (e.nativeEvent.layerX / e.target.clientWidth * 100).toFixed(0);
           let targetIndex = 0;
           const len = data.colorList.length;
           for (let i = 0; i < len; i++) {

@@ -92,7 +92,6 @@ class App extends React.Component {
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
-
               colorList: [
                 {color: 'rgba(255,255,0,0.9)', range: 25},
                 {color: 'rgba(255,0,0,0.5)', range: 55},
