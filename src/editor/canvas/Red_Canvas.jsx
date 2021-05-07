@@ -1,6 +1,9 @@
 import React from "react";
 import Red_Layer from "../Red_Layer";
 import draw_canvasUI from "./draw_canvasUI";
+import UI_Select from "../../core/UI_Select";
+import GRADIENT_TYPE from "../GRADIENT_TYPE";
+import UI_Number from "../../core/UI_Number";
 
 const SIZE = 100;
 
@@ -8,7 +11,7 @@ class Red_Canvas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      moveCenterStart : false,
+      moveCenterStart: false,
       useMove: false,
       offsetX: 0,
       offsetY: 0,
@@ -70,26 +73,26 @@ class Red_Canvas extends React.Component {
       <div
         style={{
           position: 'absolute',
-          right: '16px',
-          bottom: '16px',
+          right: '4px',
+          bottom: '4px',
           width: `${SIZE}px`,
           height: `${canvasInfo.height / canvasInfo.width * SIZE}px`,
           border: '1px solid red',
           transition: 'width 0.2s,height 0.2s'
         }}
-        onMouseDown={e=>this.state.moveCenterStart=true}
-        onMouseMove={e=>{
-          if(this.state.moveCenterStart && e.target.className ==='layerItem'){
-            e = e.nativeEvent
-            let tX = e['layerX']/SIZE * (activeSubData['position']['xUnit']==='%' ? 100 :  canvasInfo.width)
-            let tY = e['layerY']/(canvasInfo.height / canvasInfo.width * SIZE)  * (activeSubData['position']['yUnit']==='%' ? 100 :  canvasInfo.height)
-            activeSubData['position']['x'] = tX
-            activeSubData['position']['y'] = tY
-            rootComponent.setState({})
+        onMouseDown={e => this.state.moveCenterStart = true}
+        onMouseMove={e => {
+          if (this.state.moveCenterStart && e.target.className === 'layerItem') {
+            e = e.nativeEvent;
+            let tX = e['layerX'] / SIZE * (activeSubData['position']['xUnit'] === '%' ? 100 : canvasInfo.width);
+            let tY = e['layerY'] / (canvasInfo.height / canvasInfo.width * SIZE) * (activeSubData['position']['yUnit'] === '%' ? 100 : canvasInfo.height);
+            activeSubData['position']['x'] = tX;
+            activeSubData['position']['y'] = tY;
+            rootComponent.setState({});
           }
         }}
-        onClick={e=>this.state.moveCenterStart=false}
-        onMouseLeave={e=>this.state.moveCenterStart=false}
+        onClick={e => this.state.moveCenterStart = false}
+        onMouseLeave={e => this.state.moveCenterStart = false}
       >
         <div
           style={{
@@ -102,9 +105,15 @@ class Red_Canvas extends React.Component {
           }}
         >
           Edit Center
-          <div className={'todo'}>여기다 포지션/사이즈/타입을 넣어도 될것 같은디..</div>
         </div>
-        <div className={'transparent_checker'} style={{width: `100%`, height: `100%`, cursor: 'pointer', borderRadius: '4px', overflow: 'hidden', transition: 'height 0.2s'}}>
+        <div className={'transparent_checker'} style={{
+          width: `100%`,
+          height: `100%`,
+          cursor: 'pointer',
+          borderRadius: '4px',
+          overflow: 'hidden',
+          transition: 'height 0.2s'
+        }}>
           <div className={'layerItem'} style={{background: Red_Layer.calcGradientItem(activeSubData)}} />
         </div>
         <div
@@ -122,7 +131,92 @@ class Red_Canvas extends React.Component {
             cursor: 'pointer'
           }}
         />
+      </div>
+      <div style={{
+        position: 'absolute',
+        bottom: '4px',
+        right: SIZE + 8 + 'px',
+        background: 'rgba(0,0,0,0.1)',
+        borderRadius: '8px',
+        padding: '16px'
+      }}>
+        <div>
+          <div style={style.itemContainer}>
 
+            <UI_Select value={activeSubData['type'].split('-')[0].toUpperCase()} options={Object.keys(GRADIENT_TYPE)}
+                       HD_change={e => {
+                         activeSubData['type'] = GRADIENT_TYPE[e.target.value];
+                         rootComponent.setState({});
+                       }} />
+            {
+              activeSubData['type'] === GRADIENT_TYPE.LINEAR ? <>
+                Deg <UI_Number
+                width={'80px'}
+                value={activeSubData['deg'] || 0}
+                HD_onInput={e => {
+                  activeSubData['deg'] = e.target.value;
+                  rootComponent.setState({});
+                }} />
+              </> : ''
+            }
+          </div>
+
+          <div style={style.itemContainer}>
+            Position
+            <div>
+              <UI_Number
+                width={'80px'}
+                value={activeSubData['position']['x'] || 0}
+                HD_onInput={e => {
+                  activeSubData['position']['x'] = e.target.value;
+                  rootComponent.setState({});
+                }} />
+              <UI_Select value={activeSubData['position']['xUnit']} options={['px', '%']} HD_change={e => {
+                activeSubData['position']['xUnit'] = e.target.value;
+                rootComponent.setState({});
+              }} />
+              <UI_Number
+                width={'80px'}
+                value={activeSubData['position']['y'] || 0}
+                HD_onInput={e => {
+                  activeSubData['position']['y'] = e.target.value;
+                  rootComponent.setState({});
+                }} />
+              <UI_Select value={activeSubData['position']['yUnit']} options={['px', '%']} HD_change={e => {
+                activeSubData['position']['yUnit'] = e.target.value;
+                rootComponent.setState({});
+              }} />
+            </div>
+          </div>
+          <div style={style.itemContainer}>
+            Size
+            <div>
+              <UI_Number
+                width={'80px'}
+                value={activeSubData['size']['w'] || 0}
+                HD_onInput={e => {
+                  activeSubData['size']['w'] = e.target.value;
+                  rootComponent.setState({});
+                }} />
+              <UI_Select value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
+                activeSubData['size']['wUnit'] = e.target.value;
+                rootComponent.setState({});
+              }} />
+              <UI_Number
+                width={'80px'}
+                value={activeSubData['size']['h'] || 0}
+                HD_onInput={e => {
+                  activeSubData['size']['h'] = e.target.value;
+                  rootComponent.setState({});
+                }} />
+              <UI_Select value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {
+                activeSubData['size']['hUnit'] = e.target.value;
+                rootComponent.setState({});
+              }} />
+            </div>
+          </div>
+          <div className={'todo'}>TODO - 반복 Edit</div>
+        </div>
       </div>
     </div>;
   }
@@ -141,5 +235,8 @@ const style = {
     left: '50%',
     overflow: 'auto',
     transition: 'transform 0.01s'
+  },
+  itemContainer: {
+    whiteSpace: 'nowrap'
   }
 };
