@@ -1,4 +1,5 @@
-let uuid = 0
+let uuid = 0;
+
 function DataItem() {
   return {
     title: `gradient${uuid++}`,

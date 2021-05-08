@@ -1,5 +1,7 @@
 import DataItem from "./DataItem";
-let uuid = 0
+
+let uuid = 0;
+
 function DataLayer() {
   return {
     title: `layer${uuid++}`,

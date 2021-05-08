@@ -174,6 +174,7 @@ input, select {
     outline: none;
     border: 0
 }
+
 .layerAdd {
     /*position: absolute;*/
     /*bottom: 0;*/
@@ -190,6 +191,7 @@ input, select {
     z-index: 1;
     transition: background 0.2s;
 }
+
 .layerDel {
     /*position: absolute;*/
     /*bottom: 0;*/
@@ -229,10 +231,10 @@ input, select {
 }
 
 .layerItemTitle {
-    margin : 4px 0;
+    margin: 4px 0;
     border-radius: 4px;
     background: #5e5665;
-    padding :4px 8px;
+    padding: 4px 8px;
     font-size: 11px;
     color: #fff;
     text-shadow: 0px 0px rgba(0, 0, 0, 1);
@@ -240,10 +242,10 @@ input, select {
 }
 
 .layerItemSubTitle {
-    margin : 4px 0 0 20px;
+    margin: 4px 0 0 20px;
     border-radius: 4px;
     background: #5e5665;
-    padding :4px 8px;
+    padding: 4px 8px;
     font-size: 11px;
     color: #fff;
     text-shadow: 0px 0px rgba(0, 0, 0, 1);

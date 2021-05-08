@@ -10,7 +10,7 @@ const HD_move = e => {
   if (targetContext.state.moveStepMode && targetContext.refBar.current) {
     const tX = e.pageX - targetContext.refBar.current.getBoundingClientRect().x;
     let percentX = (tX / targetContext.refBar.current.clientWidth * 100);
-    percentX = Math.max(Math.min(100,percentX),0)
+    percentX = Math.max(Math.min(100, percentX), 0);
     targetData.range = percentX;
     targetContext.props.rootComponent.setState({});
   }
@@ -221,8 +221,15 @@ class Red_GradientColorEdit extends React.Component {
                 </div>
 
               </div>
-              <div style={{height : '25px',marginBottom : '10px',alignItems:'center'}}>
-                <div style={{height:'1px',background:'rgba(255,255,255,0.25)',position : 'absolute',top:'16px',left:0,right:0}}/>
+              <div style={{height: '25px', marginBottom: '10px', alignItems: 'center'}}>
+                <div style={{
+                  height: '1px',
+                  background: 'rgba(255,255,255,0.25)',
+                  position: 'absolute',
+                  top: '16px',
+                  left: 0,
+                  right: 0
+                }} />
                 <div
                   style={{
                     position: 'absolute',

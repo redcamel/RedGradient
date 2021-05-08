@@ -15,7 +15,7 @@ class App extends React.Component {
       },
       activeLayer: null,
       activeSubData: null,
-      bgColor : '#fff',
+      bgColor: '#fff',
       layers: [
         {
           title: 'testLayer sdfsdfsdfsdf',
@@ -107,10 +107,7 @@ class App extends React.Component {
     this.state.activeSubData = this.state.activeLayer['items'][0];
   }
 
-  componentDidMount() {
-    this.setState({});
-  }
-
+  componentDidMount() {this.setState({});}
 
   render() {
     return <div className={'frame'}>
@@ -155,7 +152,7 @@ class App extends React.Component {
         </div>
         <div style={style.test}>결과 테스트</div>
         <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
-          {JSON.stringify(Red_Layer.calcGradients(this.state.layers), null, 2,this.state.bgColor)}
+          {JSON.stringify(Red_Layer.calcGradients(this.state.layers), null, 2, this.state.bgColor)}
         </SyntaxHighlighter>
       </div>
       <div className={'frame_status'}>frame Status
