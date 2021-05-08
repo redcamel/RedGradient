@@ -4,6 +4,7 @@ function DataItem() {
   return {
     title: `gradient${uuid++}`,
     type: 'linear-gradient',
+    repeatType: 'repeat',
     deg: 90,
     visible: true,
     position: {x: 0, xUnit: '%', y: 0, yUnit: '%'},

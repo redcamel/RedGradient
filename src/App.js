@@ -26,6 +26,7 @@ class App extends React.Component {
             {
               title: 'test1',
               type: 'linear-gradient',
+              repeatType: 'repeat',
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
@@ -45,6 +46,7 @@ class App extends React.Component {
             {
               title: 'test2',
               type: 'linear-gradient',
+              repeatType: 'repeat',
               deg: -45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
@@ -64,6 +66,7 @@ class App extends React.Component {
             {
               title: 'test3',
               type: 'linear-gradient',
+              repeatType: 'repeat',
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
@@ -91,6 +94,7 @@ class App extends React.Component {
             {
               title: 'test',
               type: 'radial-gradient',
+              repeatType: 'no-repeat',
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},

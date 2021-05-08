@@ -8,6 +8,7 @@ import RedPropertyPositionEditByMouse from "./RedPropertyPositionEditByMouse.jsx
 import RedPropertyTypeEdit from "./RedPropertyTypeEdit.jsx";
 import RedPropertyPositionEdit from "./RedPropertyPositionEdit.jsx";
 import RedPropertyDegreeEdit from "./RedPropertyDegreeEdit.jsx";
+import RedPropertyRepeatEdit from "./RedPropertyRepeatEdit.jsx";
 
 class RedPropertyEdit extends React.Component {
   render() {
@@ -30,6 +31,7 @@ class RedPropertyEdit extends React.Component {
               }}/>
               <RedPropertyTypeEdit rootComponent={rootComponent}/>
               <RedPropertyPositionEdit rootComponent={rootComponent}/>
+              <RedPropertyRepeatEdit rootComponent={rootComponent}/>
             </div>
             <div>
               <div>Start Position</div>

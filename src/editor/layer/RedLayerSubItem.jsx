@@ -1,6 +1,8 @@
 import React from "react";
 import DataItem from "../DataItem";
 import RedLayer from "./RedLayer.jsx";
+import {faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const SIZE_MARGIN = 20;
 const SIZE = 120;
@@ -40,7 +42,8 @@ class RedLayerSubItem extends React.Component {
       </div>
       <div style={{margin: '2px 2px 2px 20px'}}>
         <button className={'layerVisible'}
-                onClick={() => this._toggleVisible(item)}>{item.visible ? 'on' : 'off'}</button>
+                onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash}/>
+        </button>
         <button className={'layerDel'}
                 onClick={e => {
                   e.stopPropagation();
@@ -50,9 +53,10 @@ class RedLayerSubItem extends React.Component {
                     layer.items.push(new DataItem());
                     idx = 0;
                   }
+                  if (!layer.items[idx]) idx = idx - 1
                   rootComponent.setState({activeSubData: layer.items[idx]});
                 }}
-        >Del
+        ><FontAwesomeIcon icon={faMinusCircle}/>
         </button>
         <button className={'layerType'}>{item.type.charAt(0).toUpperCase()}</button>
       </div>
@@ -70,7 +74,10 @@ class RedLayerSubItem extends React.Component {
         onClick={() => rootComponent.setState({activeLayer: layer, activeSubData: item})}
       >
         <div className={'layerItem'}
-             style={{background: `${RedLayer.calcGradientItem(item, false, layer)},${this.state.layerBgColor}`}}/>
+             style={{
+               background: `${RedLayer.calcGradientItem(item, false, layer)},${this.state.layerBgColor}`
+             }}
+        />
 
         <div style={activeSubDataYn ? style.activeLine : style.deActiveLine}/>
       </div>

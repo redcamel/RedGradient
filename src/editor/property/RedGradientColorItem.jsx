@@ -185,10 +185,10 @@ const style = {
   },
   ball: {
     position: 'absolute',
-    height: '15px',
+    height: '25px',
     top: '50%',
     borderRadius: '50%',
-    width: '15px',
+    width: '25px',
     border: '1px solid #000',
     transform: `translate(-50%,-50%)`,
     textAlign: 'center',

@@ -65,8 +65,8 @@ class RedCanvas extends React.Component {
           e = e.nativeEvent;
           style.canvas.transition = '';
           this.setState({
-            canvasViewOffsetX : this.state.canvasViewOffsetX + e.movementX,
-            canvasViewOffsetY : this.state.canvasViewOffsetY + e.movementY
+            canvasViewOffsetX: this.state.canvasViewOffsetX + e.movementX,
+            canvasViewOffsetY: this.state.canvasViewOffsetY + e.movementY
           });
           document.body.style.cursor = 'move';
           console.log(e);

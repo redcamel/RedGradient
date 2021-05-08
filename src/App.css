@@ -19,6 +19,7 @@ input, select {
     border-radius: 4px;
     outline: none;
     padding: 3px;
+    font-size: 11px;
     background: rgba(255, 255, 255, 0.4);
     border: 1px solid #2a2a2a;
     box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.16);
@@ -176,7 +177,7 @@ input, select {
     width: 30px;
     height: 20px;
     background: #7f86a0;
-    font-size: 9px;
+    font-size: 11px;
     color: #fff;
     outline: none;
     border: 0
@@ -190,7 +191,7 @@ input, select {
     width: 30px;
     height: 20px;
     background: #5e7ade;
-    font-size: 9px;
+    font-size: 11px;
     color: #fff;
     outline: none;
     border: 0;
@@ -207,7 +208,7 @@ input, select {
     width: 30px;
     height: 20px;
     background: #5e7ade;
-    font-size: 9px;
+    font-size: 11px;
     color: #fff;
     outline: none;
     border: 0;
@@ -224,7 +225,7 @@ input, select {
     width: 30px;
     height: 20px;
     background: #5e7ade;
-    font-size: 9px;
+    font-size: 11px;
     color: #fff;
     outline: none;
     border: 0;
@@ -233,8 +234,8 @@ input, select {
     transition: background 0.2s;
 }
 
-.layerVisible:hover, .layerDel:hover {
-    background: red;
+.layerVisible:hover, .layerDel:hover, .layerAdd:hover {
+    background: #191e3e;
 }
 
 .layerItemTitle {
