@@ -45,13 +45,15 @@ class Red_PropertyPositionEditByMouse extends React.Component {
     let layerPixelW = layerSize.wUnit === '%' ? canvasInfo.width * layerSize.w / 100 : layerSize.w;
     let layerPixelH = layerSize.hUnit === '%' ? canvasInfo.height * layerSize.h / 100 : layerSize.h;
 
-    let tPercentX = position['xUnit'] === '%' ? (position.x / 100 * layerPixelW) % 100 : (position.x * SIZE / layerPixelW * layerPixelW / SIZE % layerPixelW);
-    let tPercentY = position['yUnit'] === '%' ? (position.y / 100 * layerPixelH) % 100 : (position.y * SIZE / layerPixelH * layerPixelH / SIZE % layerPixelH);
+    let tPercentX = position['xUnit'] === '%' ? (position.x / 100 * SIZE) % 100 : ((position.x  / layerPixelW * 100) % 100) ;
+    let tPercentY = position['yUnit'] === '%' ? (position.y / 100 * SIZE) % 100 : ((position.y / layerPixelH * 100) % 100);
+
     if (tPercentX < 0) tPercentX = 100 + tPercentX;
     if (tPercentY < 0) tPercentY = 100 + tPercentY;
     return <div>
       <div
         ref={this.refRect}
+        className={'grid'}
         style={style.box}
         onMouseDown={e => {
           targetContext = this;
@@ -82,7 +84,7 @@ const style = {
     width: `${SIZE}px`, height: `${SIZE}px`,
     border: '1px solid #5e7ade',
     borderRadius: '4px',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
 
   degreeItem: {
