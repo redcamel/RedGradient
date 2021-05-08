@@ -1,6 +1,7 @@
 import React from "react";
 import UI_Number from "../../core/UI_Number";
 import {SketchPicker} from "react-color";
+import DataColor from "../DataColor";
 
 let targetContext;
 let targetColorData;
@@ -9,6 +10,7 @@ const HD_move = e => {
   console.log(targetRefBar);
   if (targetRefBar.current) {
     const tX = e.pageX - targetRefBar.current.getBoundingClientRect().x;
+    //TODO - FIXME 사이즈 자동으로 결정되게 변경해야함
     let percentX = (tX / (targetRefBar.current.clientWidth + 16) * 100);
     percentX = Math.max(Math.min(100, percentX), 0);
     targetColorData.range = percentX;
@@ -59,6 +61,19 @@ class Red_GradientColorItem extends React.Component {
       }}
       onClick={e => this.props.HD_active(this.getIndex())}
     >
+      <button
+        style={style.add}
+        onClick={e => {
+          let prevColorData = activeSubData['colorList'][this.getIndex() - 1];
+          let currentRange = colorData['range'];
+          let newRange = currentRange;
+          if (prevColorData && prevColorData['xUnit'] === colorData['xUnit']) newRange = currentRange - (currentRange - prevColorData['range']) * 0.5;
+          const newColorData = new DataColor(colorData['color'], newRange);
+          activeSubData['colorList'].splice(this.getIndex(), 0, newColorData);
+          rootComponent.setState({});
+        }}
+      >+
+      </button>
       <div style={{display: 'flex', padding: '4px 4px 0px',}}>
         <div
           className={colorInfo === 'transparent' ? 'transparent_checker' : ''}
@@ -89,11 +104,12 @@ class Red_GradientColorItem extends React.Component {
             }}
           />
           <button
+            style={style.del}
             onClick={e => {
               activeSubData.colorList.splice(this.getIndex(), 1);
               rootComponent.setState({});
             }}
-          >삭제
+          >Del
           </button>
           <div>{colorData['color']}</div>
           {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
@@ -144,6 +160,22 @@ const style = {
   },
   complete: {padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'},
   line: {height: '10px', background: 'rgba(255,255,255,0.25)', borderRadius: '5px'},
+  add: {
+    position: 'absolute',
+    width: '20px',
+    height: '16px',
+    lineHeight: 1,
+    top: 0,
+    right: 0,
+    background: '#5e7ade',
+    borderRadius: '4px',
+    color: '#fff',
+    fontSize: '11px',
+    border: '1px solid #000',
+    transform: `translate(50%,-50%)`,
+    cursor: 'pointer',
+    boxShadow: '0px 0px 10px rgba(0,0,0,0.46)'
+  },
   ball: {
     position: 'absolute',
     height: '15px',
@@ -156,5 +188,15 @@ const style = {
     cursor: 'pointer',
     transition: 'background 0.2s, top 0.2s, bottom 0.2s',
     boxShadow: '0px 0px 10px rgba(0,0,0,0.46)'
+  },
+  del: {
+    fontSize: '11px',
+    color: '#fff',
+    background: '#5e7ade',
+    outline: 'none',
+    border: '1px solid #000',
+    borderRadius: '4px',
+    height: '23px',
+    cursor: 'pointer'
   }
 };
