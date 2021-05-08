@@ -114,8 +114,11 @@ class App extends React.Component {
   render() {
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>frame Main Menu
-        <div style={style.test}>최상위 메뉴가 들어감</div>
-        <div style={style.test}>테스트 아이템</div>
+        <div style={style.test}>여기다가 메뉴를 만들어야겠넹</div>
+        <div style={style.test}>단축키도 해야하나 -_-</div>
+        <div style={style.test}>열기</div>
+        <div style={style.test}>저장</div>
+        <div style={style.test}>언두/리두</div>
       </div>
       <div className={'frame_toolbar'}>frame ToolBar
         <div style={style.test}>툴바 아이템</div>
