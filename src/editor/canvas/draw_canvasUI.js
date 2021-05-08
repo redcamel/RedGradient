@@ -50,6 +50,14 @@ function draw_canvasUI() {
         }
       </div>
       <div>
+        레이어 영역 보기
+        <input type={'checkbox'}
+               checked={this.state.layerSizeView}
+          style={{display: 'inline-block', width: '15px', height: '15px', background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor, borderRadius: '4px', marginRight: '10px', border: '1px solid #000', cursor: 'pointer'}}
+          onClick={e => this.setState({layerSizeView: !this.state.layerSizeView})}
+        />
+      </div>
+      <div>
 
         {
           Red_CANVAS_PRESET.map(v => {

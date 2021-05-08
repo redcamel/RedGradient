@@ -12,6 +12,7 @@ class Red_Canvas extends React.Component {
       canvasViewOffsetX: 0,
       canvasViewOffsetY: 0,
       canvasViewScale: 1,
+      layerSizeView: true,
       canvasBgColorPickerOpenYn: false
     };
   }
@@ -19,6 +20,10 @@ class Red_Canvas extends React.Component {
   draw_canvasUI = draw_canvasUI;
 
   drawCall(canvasInfo, layers, bgColor) {
+    const rootComponent = this.props.rootComponent;
+    const rootComponentState = rootComponent.state;
+    const activeLayer = rootComponentState.activeLayer;
+    const activeSubData = rootComponentState.activeSubData;
     return <div style={{
       ...style.canvas,
       transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
@@ -31,6 +36,20 @@ class Red_Canvas extends React.Component {
           transition: 'width 0.2s, height 0.2s'
         }}
       />
+      {
+        this.state.layerSizeView ? <div
+          style={{
+            position: 'absolute',
+            left: `${activeSubData['position']['x']}${activeSubData['position']['xUnit']}`,
+            top: `${activeSubData['position']['y']}${activeSubData['position']['yUnit']}`,
+            width: `${activeLayer['size']['w']}${activeLayer['size']['wUnit']}`,
+            height: `${activeLayer['size']['h']}${activeLayer['size']['hUnit']}`,
+            border: '1px dashed #000',
+            color: '#000'
+          }}
+        >{activeSubData['title']}</div> : ''
+      }
+
 
     </div>;
   }
@@ -41,8 +60,6 @@ class Red_Canvas extends React.Component {
     const canvasInfo = rootComponentState.canvasInfo;
     const layers = rootComponentState.layers;
     const activeLayer = rootComponentState.activeLayer;
-    const activeSubData = rootComponentState.activeSubData;
-    const layerSize = activeLayer['size'];
     return <div
       style={style.container}
       onMouseMove={e => {
@@ -67,7 +84,7 @@ class Red_Canvas extends React.Component {
       }}
     >
       {this.draw_canvasUI()}
-      {this.drawCall(canvasInfo, layers, rootComponentState.bgColor)}
+      {this.drawCall(canvasInfo, layers, rootComponentState.bgColor, activeLayer)}
     </div>;
   }
 }
@@ -83,7 +100,7 @@ const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
-    overflow: 'auto',
+    overflow: 'hidden',
     transition: 'transform 0.01s'
   },
   itemContainer: {

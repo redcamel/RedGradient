@@ -119,7 +119,7 @@ class Red_GradientColorItem extends React.Component {
             }}
           >Todo Lock
           </button>
-          <div>{colorData['color']}</div>
+          <div>{colorData['color']} <span className={'todo'}>Todo - 단위선택 원복</span> </div>
           {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
           {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
         </div>
