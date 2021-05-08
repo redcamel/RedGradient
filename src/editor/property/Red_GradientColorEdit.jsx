@@ -2,6 +2,7 @@ import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import {SketchPicker} from 'react-color';
 import UI_Number from "../../core/UI_Number";
+import Red_Layer from "../layer/Red_Layer";
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
 let targetContext;
@@ -65,8 +66,8 @@ class Red_GradientColorEdit extends React.Component {
         height: '20px',
         bottom: 0,
         left: tLeft,
-        borderRadius: '50%',
-        width: '20px',
+        borderRadius: '4px',
+        width: '10px',
         background: activeYn ? '#5e7ade' : '#fff',
         border: '1px solid #000',
         transform: `translate(-50%,50%)`,
@@ -121,6 +122,7 @@ class Red_GradientColorEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const data = rootComponentState.activeSubData;
+    const activeLayer = rootComponentState.activeLayer;
 
     return <div style={style.container}>
       <div
@@ -219,7 +221,6 @@ class Red_GradientColorEdit extends React.Component {
                   {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
                   {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
                 </div>
-
               </div>
               <div style={{height: '25px', marginBottom: '10px', alignItems: 'center'}}>
                 <div style={{

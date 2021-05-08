@@ -1,75 +1,95 @@
 import React from "react";
-import Red_Layer from "../layer/Red_Layer";
 
 const SIZE = 100;
+let targetContext;
+const HD_move = e => {targetContext.calcSize(e);};
+const HD_up = e => {
+  window.removeEventListener('mousemove', HD_move);
+  window.removeEventListener('mouseup', HD_up);
+};
 
 class Red_PropertyPositionEditByMouse extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-      moveCenterStart: false
-    };
+    this.refRect = React.createRef();
   }
 
+  calcSize(e) {
+    const rootComponent = targetContext.props.rootComponent;
+    const rootComponentState = rootComponent.state;
+    const activeSubData = rootComponentState.activeSubData;
+    const layerSize = rootComponentState.activeLayer.size;
+    const canvasInfo = rootComponentState.canvasInfo;
+    const rect = targetContext.refRect.current.getBoundingClientRect();
+    let tX = (e.pageX - (rect.x));
+    let tY = (e.pageY - (rect.y));
+
+    let layerPixelW = layerSize.wUnit === '%' ? canvasInfo.width * layerSize.w / 100 : layerSize.w;
+    let layerPixelH = layerSize.hUnit === '%' ? canvasInfo.height * layerSize.h / 100 : layerSize.h;
+
+    let tPercentX = activeSubData['position']['xUnit'] === '%' ? tX / SIZE * 100 : tX * layerPixelW / SIZE;
+    let tPercentY = activeSubData['position']['yUnit'] === '%' ? tY / SIZE * 100 : tY * layerPixelH / SIZE;
+
+    activeSubData['position']['x'] = tPercentX;
+    activeSubData['position']['y'] = tPercentY;
+    rootComponent.setState({});
+  }
 
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeLayer = rootComponentState.activeLayer;
-    const layerSize = activeLayer['size'];
     const activeSubData = rootComponentState.activeSubData;
+    const layerSize = rootComponentState.activeLayer.size;
+    const position = activeSubData['position'];
+    const canvasInfo = rootComponentState.canvasInfo;
+    let layerPixelW = layerSize.wUnit === '%' ? canvasInfo.width * layerSize.w / 100 : layerSize.w;
+    let layerPixelH = layerSize.hUnit === '%' ? canvasInfo.height * layerSize.h / 100 : layerSize.h;
 
-    return <div
-      style={{
-        width: `${SIZE}px`,
-        height: `${layerSize.h / layerSize.w * SIZE}px`,
-        border: '1px solid red',
-        transition: 'width 0.2s,height 0.2s'
-      }}
-      onMouseDown={e => this.state.moveCenterStart = true}
-      onMouseMove={e => {
-        if (this.state.moveCenterStart && e.target.className === 'layerItem') {
-          e = e.nativeEvent;
-          let tX = e['layerX'] / SIZE * (activeSubData['position']['xUnit'] === '%' ? 100 : layerSize.w);
-          let tY = e['layerY'] / (layerSize.h / layerSize.w * SIZE) * (activeSubData['position']['yUnit'] === '%' ? 100 : layerSize.h);
-          activeSubData['position']['x'] = tX;
-          activeSubData['position']['y'] = tY;
-          rootComponent.setState({});
-        }
-      }}
-      onClick={e => this.state.moveCenterStart = false}
-      onMouseLeave={e => this.state.moveCenterStart = false}
-    >
-      <div className={'transparent_checker'} style={{
-        width: `100%`,
-        height: `100%`,
-        cursor: 'pointer',
-        borderRadius: '4px',
-        overflow: 'hidden',
-        transition: 'height 0.2s'
-      }}>
-        <div className={'layerItem'}
-             style={{background: Red_Layer.calcGradientItem(activeSubData, false, activeLayer)}} />
-      </div>
+    let tPercentX = position['xUnit'] === '%' ? (position.x / 100 * layerPixelW) % 100 : (position.x * SIZE / layerPixelW * layerPixelW / SIZE % layerPixelW);
+    let tPercentY = position['yUnit'] === '%' ? (position.y / 100 * layerPixelH) % 100 : (position.y * SIZE / layerPixelH * layerPixelH / SIZE % layerPixelH);
+    if (tPercentX < 0) tPercentX = 100 + tPercentX;
+    if (tPercentY < 0) tPercentY = 100 + tPercentY;
+    return <div>
       <div
-        style={{
-          position: 'absolute',
-          top: `${activeSubData.position.y * (activeSubData.position.yUnit === '%' ? 1 : SIZE / layerSize.h) % 100}%`,
-          left: `${activeSubData.position.x * (activeSubData.position.xUnit === '%' ? 1 : SIZE / layerSize.w) % 100}%`,
-          transform: 'translate(-50%,-50%)',
-          width: '10px',
-          height: '10px',
-          borderRadius: '50%',
-          background: '#fff',
-          border: '1px solid red',
-          transition: 'left 0.1s,top 0.1s',
-          cursor: 'pointer'
+        ref={this.refRect}
+        style={style.box}
+        onMouseDown={e => {
+          targetContext = this;
+          window.addEventListener('mousemove', HD_move);
+          window.addEventListener('mouseup', HD_up);
         }}
-      />
+        onClick={e => {
+          targetContext = this;
+          this.calcSize(e.nativeEvent);
+        }}
+      >
+        <div style={{
+          ...style.degreeItem,
+          top: `${tPercentY}%`,
+          left: `${tPercentX}%`
+        }} />
+      </div>
     </div>;
   }
 
 }
 
 export default Red_PropertyPositionEditByMouse;
+const style = {
+  box: {
+    display: 'inline-block',
+    margin: '5px',
+    width: `${SIZE}px`, height: `${SIZE}px`,
+    border: '1px solid #5e7ade',
+    borderRadius: '4px',
+    cursor: 'pointer'
+  },
+
+  degreeItem: {
+    width: '10px', height: '10px',
+    border: '1px solid #5e7ade',
+    borderRadius: '50%',
+    position: 'absolute',
+    top: '50%', left: '50%', transform: 'translate(-50%,-50%)'
+  }
+};

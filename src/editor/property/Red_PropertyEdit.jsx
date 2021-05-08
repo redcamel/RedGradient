@@ -36,7 +36,6 @@ class Red_PropertyEdit extends React.Component {
             </div>
             <div>
               <div>Start Position</div>
-              <div className={'todo'}>개념정리필요</div>
               <Red_PropertyPositionEditByMouse rootComponent={rootComponent} />
               <div style={{height :'5px'}}/>
               <Red_PropertyDegreeEdit rootComponent={rootComponent} />
