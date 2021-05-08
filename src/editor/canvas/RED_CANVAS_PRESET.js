@@ -7,12 +7,14 @@ const RED_CANVAS_PRESET = [
   {
     title: 'Google Pixel 4, 4XL',
     width: 412,
-    height: 870
+    height: 870,
+    type : 'mobile'
   },
   {
     title: 'iPhone 12 Pro Max',
     width: 428,
-    height: 926
+    height: 926,
+    type : 'mobile'
   },
   {
     title: 'web 1366',

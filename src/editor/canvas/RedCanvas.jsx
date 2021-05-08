@@ -1,7 +1,6 @@
 import React from "react";
 import RedLayer from "../layer/RedLayer.jsx";
 import drawCanvasUI from "./drawCanvasUI.js";
-
 class RedCanvas extends React.Component {
   constructor(props) {
     super(props);

@@ -32,6 +32,8 @@ class RedPropertyEdit extends React.Component {
               <RedPropertyTypeEdit rootComponent={rootComponent}/>
               <RedPropertyPositionEdit rootComponent={rootComponent}/>
               <RedPropertyRepeatEdit rootComponent={rootComponent}/>
+              <div className={'todo'}>TODO - Radial일때 센터 포지션? 설정분리해야함 </div>
+              <div className={'todo'}>TODO - conic 타입추가 </div>
             </div>
             <div>
               <div>Start Position</div>
@@ -44,16 +46,20 @@ class RedPropertyEdit extends React.Component {
         <div style={style.itemContainer}>
           Gradient ColorRange
           <RedGradientColorEdit rootComponent={rootComponent}/>
-          <div className={'todo'}>Todo - 스텝추가/삭제, 이동</div>
-          <div className={'todo'}>Todo - 컬러분해신공도 필요함</div>
-          <div className={'todo'}>TODO - 그라디언트 컬러셀렉터</div>
-          <div className={'todo'}>TODO - 이동에따른 스텝정렬</div>
-          <div className={'todo'}>TODO - 일단 이게 오른쪽에 위치하는게 올바른것인가....</div>
         </div>
         <div style={style.itemContainer}>
           <div>Current Data</div>
-          <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
-            {JSON.stringify(RedLayer.calcGradientItem(data, false, activeLayer), null, 2)}
+          <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
+            {
+              JSON.stringify(RedLayer.calcGradientItem(data, false, activeLayer))
+                // .replace(/\s+/g, ' ')
+                // .replace(/, /g, '')
+                .replace(/"/g, '')
+                // .replace(/\(/g, '\(\n')
+                // .replace(/\)/g, '\n\)\n')
+                // .replace(/,/g, ',\n')
+            }
+
           </SyntaxHighlighter>
           <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
             {JSON.stringify(data, null, 2)}

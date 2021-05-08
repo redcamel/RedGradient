@@ -154,16 +154,9 @@ class App extends React.Component {
         </div>
       </div>
       <div className={'frame_bottom'} style={{height: '500px', maxHeight: '500px', overflow: 'auto'}}>frame Bottom
-        <div className={'todo'}>
-          <div>Todo - Animation Timeline</div>
-          <div>Todo - 아마도 전체 레이어 아이템이 들어올것 같고</div>
-          <div>Todo - 애니메이션 이름, delay, duration, timing등을 개별 설정</div>
-          <div>Todo - 그걸 시작화 해서 보여주면 될듯</div>
-          <div>Todo - 프리뷰는 어찌할것 인가..</div>
-        </div>
         <div style={style.test}>결과 테스트</div>
-        <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
-          {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor)}
+        <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
+          {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')}
         </SyntaxHighlighter>
       </div>
       <div className={'frame_status'}>frame Status

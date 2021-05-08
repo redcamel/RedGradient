@@ -149,13 +149,7 @@ class RedLayer extends React.Component {
                 }}/>
               </div>
             </div>
-            <div>
-              {
-                layer.openYn ? layer.items.map(item => {
-                  return <RedLayerSubItem layer={layer} item={item} rootComponent={rootComponent}/>;
-                }) : ''
-              }
-            </div>
+            <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem layer={layer} item={item} rootComponent={rootComponent}/>) : ''}</div>
           </div>;
         })
       }

@@ -2,7 +2,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: rgb(49, 43, 43);
+    background: rgb(51, 51, 51);
 }
 
 * {
@@ -15,14 +15,28 @@ div {
 }
 
 input, select {
-    margin: 2px;
-    border-radius: 4px;
+    margin: 1px;
+    border-radius: 6px;
     outline: none;
-    padding: 3px;
-    font-size: 11px;
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid #2a2a2a;
-    box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.16);
+    padding: 6px;
+    color: #fff;
+    font-size: 12px;
+    background: rgb(49, 49, 49);
+    border: 1px solid rgb(31, 31, 31);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 10px inset;
+}
+
+select {
+    background: linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63));
+    color: #fff;
+    border: 1px solid rgb(31, 31, 31);
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+option {
+    background: #575757;
 }
 
 #root {
@@ -170,9 +184,6 @@ input, select {
 }
 
 .layerType {
-    /*position: absolute;*/
-    /*bottom: 0;*/
-    /*left: 0;*/
     margin-right: 1px;
     width: 30px;
     height: 20px;
@@ -184,13 +195,10 @@ input, select {
 }
 
 .layerAdd {
-    /*position: absolute;*/
-    /*bottom: 0;*/
-    /*right: 0;*/
     margin-right: 1px;
     width: 30px;
     height: 20px;
-    background: #5e7ade;
+    background: #424242;
     font-size: 11px;
     color: #fff;
     outline: none;
@@ -201,13 +209,10 @@ input, select {
 }
 
 .layerDel {
-    /*position: absolute;*/
-    /*bottom: 0;*/
-    /*right: 0;*/
     margin-right: 1px;
     width: 30px;
     height: 20px;
-    background: #5e7ade;
+    background: #424242;
     font-size: 11px;
     color: #fff;
     outline: none;
@@ -218,13 +223,10 @@ input, select {
 }
 
 .layerVisible {
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
     margin-right: 1px;
     width: 30px;
     height: 20px;
-    background: #5e7ade;
+    background: #424242;
     font-size: 11px;
     color: #fff;
     outline: none;
@@ -235,13 +237,15 @@ input, select {
 }
 
 .layerVisible:hover, .layerDel:hover, .layerAdd:hover {
-    background: #191e3e;
+    background: #5e7ade;
 }
 
 .layerItemTitle {
-    margin: 4px 0;
+    margin: 4px 0 2px;
     border-radius: 4px;
-    background: #5e5665;
+    background: linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63));
+    border: 1px solid rgb(31, 31, 31);
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
     padding: 4px 8px;
     font-size: 11px;
     color: #fff;
@@ -252,9 +256,11 @@ input, select {
 }
 
 .layerItemSubTitle {
-    margin: 4px 0 0 20px;
+    margin: 4px 0 2px 20px;
     border-radius: 4px;
-    background: #5e5665;
+    background: linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63));
+    border: 1px solid rgb(31, 31, 31);
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
     padding: 4px 8px;
     font-size: 11px;
     color: #fff;

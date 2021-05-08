@@ -2,6 +2,8 @@ import RedNumber from "../../core/RedNumber.jsx";
 import {SketchPicker} from "react-color";
 import RED_CANVAS_PRESET from "./RED_CANVAS_PRESET.js";
 import React from "react";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faDesktop, faMobileAlt} from '@fortawesome/free-solid-svg-icons'
 
 function drawCanvasUI() {
   const rootComponent = this.props.rootComponent;
@@ -16,6 +18,24 @@ function drawCanvasUI() {
       </button>
       <button style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1</button>
       <button style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5</button>
+      <div style={{display:'inline-block',marginLeft : '5px'}}>
+        {
+          RED_CANVAS_PRESET.map(v => {
+            return <button
+              style={style.presetButton}
+              onClick={() => {
+                canvasInfo.width = v.width;
+                canvasInfo.height = v.height;
+                rootComponent.setState({});
+              }}
+            >
+              <div><FontAwesomeIcon
+                icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
+              </div>
+            </button>;
+          })
+        }
+      </div>
     </div>
     <div style={style.canvasResizer}>
       <RedNumber width={'60px'} value={canvasInfo.width} HD_onInput={e => {
@@ -84,34 +104,6 @@ function drawCanvasUI() {
                onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
         />
       </div>
-      <div>
-
-        {
-          RED_CANVAS_PRESET.map(v => {
-            return <button
-              style={{
-                background: '#464141',
-                border: 0,
-                outline: 'none',
-                color: '#fff',
-                fontSize: '11px',
-                padding: '8px',
-                borderRadius: '4px',
-                margin: '1px',
-                cursor: 'pointer'
-              }}
-              onClick={() => {
-                canvasInfo.width = v.width;
-                canvasInfo.height = v.height;
-                rootComponent.setState({});
-              }}
-            >
-              <div>{v['title']}({v['width']}x{v['height']})</div>
-            </button>;
-          })
-        }
-      </div>
-      <div className={'todo'}>Todo - 패스기반 레이어도 추가해야하는데 아직 오묘...</div>
 
     </div>
   </>;
@@ -130,7 +122,7 @@ const style = {
     bottom: 0,
     left: 0,
     padding: '4px',
-    fontSize: '10px',
+    fontSize: '12px',
     zIndex: 1
   },
   toCenter: {
@@ -140,7 +132,7 @@ const style = {
     marginTop: '4px',
     borderRadius: '4px',
     border: 0,
-    fontSize: '10px',
+    fontSize: '12px',
     outline: 'none',
     cursor: 'pointer'
   },
@@ -152,8 +144,20 @@ const style = {
     marginTop: '4px',
     borderRadius: '4px',
     border: 0,
-    fontSize: '10px',
+    fontSize: '12px',
     outline: 'none',
     cursor: 'pointer'
+  },
+  presetButton: {
+    background: 'linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63))',
+    border: '1px solid rgb(31, 31, 31)',
+    outline: 'none',
+    color: '#fff',
+    fontSize: '12px',
+    padding: '4px 8px',
+    borderRadius: '4px',
+    margin: '1px',
+    cursor: 'pointer',
+    boxShadow: `rgba(0, 0, 0, 0.25) 1px 1px 1px`
   }
 };
