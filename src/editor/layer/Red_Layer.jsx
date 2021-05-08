@@ -8,7 +8,7 @@ import Red_Layer_subItem from "./Red_Layer_subItem";
 
 
 const SIZE_MARGIN = 20;
-const SIZE = 120;
+const SIZE = 100;
 
 class Red_Layer extends React.Component {
   constructor(props) {
