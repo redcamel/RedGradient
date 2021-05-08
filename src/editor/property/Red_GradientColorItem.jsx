@@ -60,6 +60,7 @@ class Red_GradientColorItem extends React.Component {
         borderRadius: '4px'
       }}
       onClick={e => this.props.HD_active(this.getIndex())}
+      onMouseDown={e => this.props.HD_active(this.getIndex())}
     >
       <button
         style={style.add}
