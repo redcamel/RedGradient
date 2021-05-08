@@ -20,6 +20,7 @@ class App extends React.Component {
         {
           title: 'testLayer sdfsdfsdfsdf',
           visible: true,
+          openYn : true,
           size: {w: 100, wUnit: 'px', h: 100, hUnit: 'px'},
           items: [
             {
@@ -84,6 +85,7 @@ class App extends React.Component {
         {
           title: 'testLayer ',
           visible: true,
+          openYn : true,
           size: {w: 50, wUnit: 'px', h: 50, hUnit: 'px'},
           items: [
             {

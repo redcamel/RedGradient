@@ -58,7 +58,28 @@ class Red_Layer extends React.Component {
             margin: '4px',
             padding: '4px'
           }}>
-            <div className={'layerItemTitle'}>{layer.title}</div>
+            <div
+              className={'layerItemTitle'}
+              style={{
+                textOverflow: 'ellipsis',
+                width: '120px',
+                overflow: 'hidden',
+                whiteSpace : 'nowrap'
+              }}
+            >
+              <button
+                style={{
+                  fontSize : '9px',
+                  marginRight: '5px',cursor:'pointer',
+                  transform : `rotate(${layer.openYn ? 0 : 180}deg)`
+                }}
+                onClick={e=>{
+                  layer.openYn = !layer.openYn
+                  rootComponent.setState({})
+                }}
+              >▲</button>
+              {layer.title}
+            </div>
             <div>
               <button className={'layerVisible'}
                       onClick={e => this._toggleVisible(layer)}>{layer.visible ? 'on' : 'off'}</button>
@@ -127,9 +148,9 @@ class Red_Layer extends React.Component {
             </div>
             <div>
               {
-                layer.items.map(item => {
+                layer.openYn ? layer.items.map(item => {
                   return <Red_Layer_subItem layer={layer} item={item} rootComponent={rootComponent} />;
-                })
+                }) : ''
               }
             </div>
           </div>;
