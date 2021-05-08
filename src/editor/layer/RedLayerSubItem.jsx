@@ -1,12 +1,11 @@
 import React from "react";
 import DataItem from "../DataItem";
-import Red_Layer from "./Red_Layer";
-
+import RedLayer from "./RedLayer.jsx";
 
 const SIZE_MARGIN = 20;
 const SIZE = 120;
 
-class Red_Layer_subItem extends React.Component {
+class RedLayerSubItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +13,7 @@ class Red_Layer_subItem extends React.Component {
     };
   }
 
-  _toggleVisible(data, bool) {
+  _toggleVisible(data) {
     data.visible = !data.visible;
     this.props.rootComponent.setState({});
   }
@@ -30,18 +29,18 @@ class Red_Layer_subItem extends React.Component {
       <div className={'layerItemSubTitle'}>{item.title}</div>
       <div style={{margin: '2px 2px 2px 20px'}}>
         <button style={{...style.bgItem, background: '#000', color: '#fff'}}
-                onClick={e => this.setState({layerBgColor: 'black'})}>B
+                onClick={() => this.setState({layerBgColor: 'black'})}>B
         </button>
         <button style={{...style.bgItem, background: '#fff', color: '#000'}}
-                onClick={e => this.setState({layerBgColor: 'white'})}>W
+                onClick={() => this.setState({layerBgColor: 'white'})}>W
         </button>
         <button style={{...style.bgItem}} className={'transparent_checker'}
-                onClick={e => this.setState({layerBgColor: 'transparent'})}>T
+                onClick={() => this.setState({layerBgColor: 'transparent'})}>T
         </button>
       </div>
       <div style={{margin: '2px 2px 2px 20px'}}>
         <button className={'layerVisible'}
-                onClick={e => this._toggleVisible(item)}>{item.visible ? 'on' : 'off'}</button>
+                onClick={() => this._toggleVisible(item)}>{item.visible ? 'on' : 'off'}</button>
         <button className={'layerDel'}
                 onClick={e => {
                   e.stopPropagation();
@@ -68,20 +67,19 @@ class Red_Layer_subItem extends React.Component {
           overflow: 'hidden',
           transition: 'height 0.2s'
         }}
-        onClick={e => rootComponent.setState({activeLayer: layer, activeSubData: item})}
+        onClick={() => rootComponent.setState({activeLayer: layer, activeSubData: item})}
       >
         <div className={'layerItem'}
-             style={{background: `${Red_Layer.calcGradientItem(item, false, layer)},${this.state.layerBgColor}`}} />
+             style={{background: `${RedLayer.calcGradientItem(item, false, layer)},${this.state.layerBgColor}`}}/>
 
-        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
+        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine}/>
       </div>
     </div>;
   }
 }
 
-export default Red_Layer_subItem;
+export default RedLayerSubItem;
 const style = {
-
   activeLine: {
     position: 'absolute',
     top: 0, left: 0, right: 0, bottom: 0,

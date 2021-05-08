@@ -1,8 +1,6 @@
 import React from "react";
 
-class UI_Number extends React.Component {
-
-
+class RedNumber extends React.Component {
   render() {
     return <input
       style={{width: `${this.props.width || ''}`}}
@@ -15,4 +13,4 @@ class UI_Number extends React.Component {
   }
 }
 
-export default UI_Number;
+export default RedNumber;

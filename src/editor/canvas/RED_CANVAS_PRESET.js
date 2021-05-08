@@ -1,4 +1,4 @@
-const Red_CANVAS_PRESET = [
+const RED_CANVAS_PRESET = [
   {
     title: '512 x 512',
     width: 512,
@@ -25,4 +25,4 @@ const Red_CANVAS_PRESET = [
     height: 1080
   }
 ];
-export default Red_CANVAS_PRESET;
+export default RED_CANVAS_PRESET;

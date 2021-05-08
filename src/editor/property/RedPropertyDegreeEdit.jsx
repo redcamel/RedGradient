@@ -1,16 +1,18 @@
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
-import UI_Number from "../../core/UI_Number";
+import RedNumber from "../../core/RedNumber.jsx";
 
 const SIZE = 50;
 let targetContext;
-const HD_move = e => {targetContext.calcDegree(e);};
-const HD_up = e => {
+const HD_move = e => {
+  targetContext.calcDegree(e);
+};
+const HD_up = () => {
   window.removeEventListener('mousemove', HD_move);
   window.removeEventListener('mouseup', HD_up);
 };
 
-class Red_PropertyDegreeEdit extends React.Component {
+class RedPropertyDegreeEdit extends React.Component {
   constructor(props) {
     super(props);
     this.refCenter = React.createRef();
@@ -28,7 +30,6 @@ class Red_PropertyDegreeEdit extends React.Component {
     activeSubData['deg'] += 90;
     if (activeSubData['deg'] < 0) activeSubData['deg'] += 360;
     activeSubData['deg'] = activeSubData['deg'] % 360;
-
     rootComponent.setState({});
   }
 
@@ -37,20 +38,20 @@ class Red_PropertyDegreeEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     const deg = activeSubData['deg'];
-    return <div >
+    return <div>
       {
         activeSubData['type'] === GRADIENT_TYPE.LINEAR ? <>
-          Deg <UI_Number
+          Deg <RedNumber
           width={'71px'}
           value={deg || 0}
           HD_onInput={e => {
             activeSubData['deg'] = e.target.value;
             rootComponent.setState({});
-          }} />
+          }}/>
           <div style={{textAlign: 'center'}}>
             <div
               style={style.box}
-              onMouseDown={e => {
+              onMouseDown={() => {
                 targetContext = this;
                 window.addEventListener('mousemove', HD_move);
                 window.addEventListener('mouseup', HD_up);
@@ -60,22 +61,21 @@ class Red_PropertyDegreeEdit extends React.Component {
                 this.calcDegree(e.nativeEvent);
               }}
             >
-              <div style={style.centerItem} ref={this.refCenter} />
+              <div style={style.centerItem} ref={this.refCenter}/>
               <div style={{
                 ...style.degreeItem,
                 top: `calc(50% + ${Math.sin(Math.PI / 180 * (deg - 90)) * SIZE / 3}px)`,
                 left: `calc(50% + ${Math.cos(Math.PI / 180 * (deg - 90)) * SIZE / 3}px)`
-              }} />
+              }}/>
             </div>
           </div>
         </> : ''
       }
     </div>;
   }
-
 }
 
-export default Red_PropertyDegreeEdit;
+export default RedPropertyDegreeEdit;
 const style = {
   box: {
     display: 'inline-block',

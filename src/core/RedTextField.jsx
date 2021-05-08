@@ -1,7 +1,6 @@
 import React from "react";
 
-class UI_TextField extends React.Component {
-
+class RedTextField extends React.Component {
   render() {
     return <input
       style={{width: `${this.props.width || ''}`}}
@@ -12,4 +11,4 @@ class UI_TextField extends React.Component {
   }
 }
 
-export default UI_TextField;
+export default RedTextField;

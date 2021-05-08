@@ -1,9 +1,9 @@
 import './App.css';
 import React from 'react';
-import Red_Canvas from "./editor/canvas/Red_Canvas";
-import Red_Layer from "./editor/layer/Red_Layer";
+import RedCanvas from "./editor/canvas/RedCanvas.jsx";
+import RedLayer from "./editor/layer/RedLayer.jsx";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
-import Red_PropertyEdit from "./editor/property/Red_PropertyEdit";
+import RedPropertyEdit from "./editor/property/RedPropertyEdit.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class App extends React.Component {
         {
           title: 'testLayer sdfsdfsdfsdf',
           visible: true,
-          openYn : true,
+          openYn: true,
           size: {w: 100, wUnit: 'px', h: 100, hUnit: 'px'},
           items: [
             {
@@ -85,7 +85,7 @@ class App extends React.Component {
         {
           title: 'testLayer ',
           visible: true,
-          openYn : true,
+          openYn: true,
           size: {w: 50, wUnit: 'px', h: 50, hUnit: 'px'},
           items: [
             {
@@ -109,7 +109,9 @@ class App extends React.Component {
     this.state.activeSubData = this.state.activeLayer['items'][0];
   }
 
-  componentDidMount() {this.setState({});}
+  componentDidMount() {
+    this.setState({});
+  }
 
   render() {
     return <div className={'frame'}>
@@ -135,13 +137,13 @@ class App extends React.Component {
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
-            <Red_Canvas rootComponent={this} />
+            <RedCanvas rootComponent={this}/>
           </div>
           <div className={'frame_right'}>
             {/*frame_right Right*/}
             <div style={{display: "flex", height: '100%'}}>
-              <Red_Layer rootComponent={this} />
-              {this.state.activeSubData ? <Red_PropertyEdit rootComponent={this} /> : ''}
+              <RedLayer rootComponent={this}/>
+              {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
             </div>
 
           </div>
@@ -157,7 +159,7 @@ class App extends React.Component {
         </div>
         <div style={style.test}>결과 테스트</div>
         <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
-          {JSON.stringify(Red_Layer.calcGradients(this.state.layers), null, 2, this.state.bgColor)}
+          {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor)}
         </SyntaxHighlighter>
       </div>
       <div className={'frame_status'}>frame Status

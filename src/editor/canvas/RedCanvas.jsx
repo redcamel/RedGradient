@@ -1,10 +1,8 @@
 import React from "react";
-import Red_Layer from "../layer/Red_Layer";
-import draw_canvasUI from "./draw_canvasUI";
+import RedLayer from "../layer/RedLayer.jsx";
+import drawCanvasUI from "./drawCanvasUI.js";
 
-const SIZE = 100;
-
-class Red_Canvas extends React.Component {
+class RedCanvas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +15,7 @@ class Red_Canvas extends React.Component {
     };
   }
 
-  draw_canvasUI = draw_canvasUI;
+  draw_canvasUI = drawCanvasUI;
 
   drawCall(canvasInfo, layers, bgColor) {
     const rootComponent = this.props.rootComponent;
@@ -32,7 +30,7 @@ class Red_Canvas extends React.Component {
         className={'transparent_checker'}
         style={{
           width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
-          background: Red_Layer.calcGradients(layers, true, bgColor),
+          background: RedLayer.calcGradients(layers, true, bgColor),
           transition: 'width 0.2s, height 0.2s'
         }}
       />
@@ -65,16 +63,17 @@ class Red_Canvas extends React.Component {
       onMouseMove={e => {
         if (this.state.useMove) {
           e = e.nativeEvent;
-          this.state.canvasViewOffsetX += e.movementX;
-          this.state.canvasViewOffsetY += e.movementY;
           style.canvas.transition = '';
-          this.setState({});
+          this.setState({
+            canvasViewOffsetX : this.state.canvasViewOffsetX + e.movementX,
+            canvasViewOffsetY : this.state.canvasViewOffsetY + e.movementY
+          });
           document.body.style.cursor = 'move';
           console.log(e);
         }
       }}
-      onMouseLeave={e => this.state.useMove ? this.setState({useMove: false}) : 0}
-      onMouseUp={e => this.state.useMove ? (this.setState({useMove: false}), document.body.style.cursor = 'default') : 0}
+      onMouseLeave={() => this.state.useMove ? this.setState({useMove: false}) : 0}
+      onMouseUp={() => this.state.useMove ? (this.setState({useMove: false}), document.body.style.cursor = 'default') : 0}
       onMouseDown={e => e.nativeEvent.button === 1 ? this.setState({useMove: true}) : 0}
       onWheel={e => {
         let t0 = this.state.canvasViewScale - e.nativeEvent.deltaY / 1000;
@@ -89,7 +88,7 @@ class Red_Canvas extends React.Component {
   }
 }
 
-export default Red_Canvas;
+export default RedCanvas;
 const style = {
   container: {
     position: 'absolute',

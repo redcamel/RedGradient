@@ -1,28 +1,46 @@
-import UI_Number from "../../core/UI_Number";
+import RedNumber from "../../core/RedNumber.jsx";
 import {SketchPicker} from "react-color";
-import Red_CANVAS_PRESET from "./Red_CANVAS_PRESET";
+import RED_CANVAS_PRESET from "./RED_CANVAS_PRESET.js";
+import React from "react";
 
-
-function draw_canvasUI() {
+function drawCanvasUI() {
   const rootComponent = this.props.rootComponent;
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
   return <>
     <div style={style.canvasViewInfo}>
-      <div>center : {this.state.canvasViewOffsetX},{this.state.canvasViewOffsetY} / canvasViewScale : {this.state.canvasViewScale}</div>
-      <button style={style.toCenter} onClick={e => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set Center</button>
-      <button style={style.toScale} onClick={e => this.setState({canvasViewScale: 1})}>setScale 1</button>
-      <button style={style.toScale} onClick={e => this.setState({canvasViewScale: 0.5})}>setScale 0.5</button>
+      <div>center : {this.state.canvasViewOffsetX},{this.state.canvasViewOffsetY} / canvasViewScale
+        : {this.state.canvasViewScale}</div>
+      <button style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
+        Center
+      </button>
+      <button style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1</button>
+      <button style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5</button>
     </div>
     <div style={style.canvasResizer}>
-      <UI_Number width={'60px'} value={canvasInfo.width} HD_onInput={e => {canvasInfo.width = e.target.value;rootComponent.setState({});}} />
-      <UI_Number width={'60px'} value={canvasInfo.height} HD_onInput={e => {canvasInfo.height = e.target.value;rootComponent.setState({});}} />
+      <RedNumber width={'60px'} value={canvasInfo.width} HD_onInput={e => {
+        canvasInfo.width = e.target.value;
+        rootComponent.setState({});
+      }}/>
+      <RedNumber width={'60px'} value={canvasInfo.height} HD_onInput={e => {
+        canvasInfo.height = e.target.value;
+        rootComponent.setState({});
+      }}/>
       <div style={{display: 'inline-flex', alignItems: 'center'}}>
         배경색상
         <div
           className={rootComponentState.bgColor === 'transparent' ? 'transparent_checker' : ''}
-          style={{display: 'inline-block', width: '25px', height: '25px', background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor, borderRadius: '4px', marginRight: '10px', border: '1px solid #000', cursor: 'pointer'}}
-          onClick={e => this.setState({canvasBgColorPickerOpenYn: true})}
+          style={{
+            display: 'inline-block',
+            width: '25px',
+            height: '25px',
+            background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
+            borderRadius: '4px',
+            marginRight: '10px',
+            border: '1px solid #000',
+            cursor: 'pointer'
+          }}
+          onClick={() => this.setState({canvasBgColorPickerOpenYn: true})}
         />
         {
           this.state.canvasBgColorPickerOpenYn ? <div style={{
@@ -42,7 +60,7 @@ function draw_canvasUI() {
               />
               <div
                 style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
-                onClick={e => this.setState({canvasBgColorPickerOpenYn: null})}
+                onClick={() => this.setState({canvasBgColorPickerOpenYn: null})}
               >완료
               </div>
             </div>
@@ -53,14 +71,23 @@ function draw_canvasUI() {
         레이어 영역 보기
         <input type={'checkbox'}
                checked={this.state.layerSizeView}
-          style={{display: 'inline-block', width: '15px', height: '15px', background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor, borderRadius: '4px', marginRight: '10px', border: '1px solid #000', cursor: 'pointer'}}
-          onClick={e => this.setState({layerSizeView: !this.state.layerSizeView})}
+               style={{
+                 display: 'inline-block',
+                 width: '15px',
+                 height: '15px',
+                 background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
+                 borderRadius: '4px',
+                 marginRight: '10px',
+                 border: '1px solid #000',
+                 cursor: 'pointer'
+               }}
+               onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
         />
       </div>
       <div>
 
         {
-          Red_CANVAS_PRESET.map(v => {
+          RED_CANVAS_PRESET.map(v => {
             return <button
               style={{
                 background: '#464141',
@@ -73,7 +100,7 @@ function draw_canvasUI() {
                 margin: '1px',
                 cursor: 'pointer'
               }}
-              onClick={e => {
+              onClick={() => {
                 canvasInfo.width = v.width;
                 canvasInfo.height = v.height;
                 rootComponent.setState({});
@@ -90,8 +117,7 @@ function draw_canvasUI() {
   </>;
 }
 
-export default draw_canvasUI;
-
+export default drawCanvasUI;
 const style = {
   canvasResizer: {
     position: 'sticky',

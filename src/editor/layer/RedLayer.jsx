@@ -1,16 +1,14 @@
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import DataItem from "../DataItem";
-import UI_Number from "../../core/UI_Number";
-import UI_Select from "../../core/UI_Select";
+import RedNumber from "../../core/RedNumber.jsx";
+import RedSelect from "../../core/RedSelect.jsx";
 import DataLayer from "../DataLayer";
-import Red_Layer_subItem from "./Red_Layer_subItem";
+import RedLayerSubItem from "./RedLayerSubItem.jsx";
 
-
-const SIZE_MARGIN = 20;
 const SIZE = 100;
 
-class Red_Layer extends React.Component {
+class RedLayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +16,7 @@ class Red_Layer extends React.Component {
     };
   }
 
-  _toggleVisible(data, bool) {
+  _toggleVisible(data) {
     data.visible = !data.visible;
     this.props.rootComponent.setState({});
   }
@@ -30,7 +28,7 @@ class Red_Layer extends React.Component {
     return <div style={style.container}>
       <div style={style.addLayer}>
         <div style={style.addLayerItem}
-             onClick={e => {
+             onClick={() => {
                let targetLayer;
                layers.splice(0, 0, targetLayer = new DataLayer());
                rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
@@ -38,17 +36,17 @@ class Red_Layer extends React.Component {
         >Add Layer
         </div>
         <div style={{...style.bgItem, background: '#000', color: '#fff'}}
-             onClick={e => this.setState({layerBgColor: 'black'})}>black
+             onClick={() => this.setState({layerBgColor: 'black'})}>black
         </div>
         <div style={{...style.bgItem, background: '#fff', color: '#000'}}
-             onClick={e => this.setState({layerBgColor: 'white'})}>white
+             onClick={() => this.setState({layerBgColor: 'white'})}>white
         </div>
         <div style={{...style.bgItem}} className={'transparent_checker'}
-             onClick={e => this.setState({layerBgColor: 'transparent'})}>transparent
+             onClick={() => this.setState({layerBgColor: 'transparent'})}>transparent
         </div>
       </div>
       {
-        layers.map((layer, index) => {
+        layers.map((layer) => {
           const layerSize = layer['size'];
           return <div style={{
             opacity: layer.visible ? 1 : 0.5, transition: 'opacity 0.2s',
@@ -64,25 +62,26 @@ class Red_Layer extends React.Component {
                 textOverflow: 'ellipsis',
                 width: '120px',
                 overflow: 'hidden',
-                whiteSpace : 'nowrap'
+                whiteSpace: 'nowrap'
               }}
             >
               <button
                 style={{
-                  fontSize : '9px',
-                  marginRight: '5px',cursor:'pointer',
-                  transform : `rotate(${layer.openYn ? 0 : 180}deg)`
+                  fontSize: '9px',
+                  marginRight: '5px', cursor: 'pointer',
+                  transform: `rotate(${layer.openYn ? 0 : 180}deg)`
                 }}
-                onClick={e=>{
+                onClick={() => {
                   layer.openYn = !layer.openYn
                   rootComponent.setState({})
                 }}
-              >▲</button>
+              >▲
+              </button>
               {layer.title}
             </div>
             <div>
               <button className={'layerVisible'}
-                      onClick={e => this._toggleVisible(layer)}>{layer.visible ? 'on' : 'off'}</button>
+                      onClick={() => this._toggleVisible(layer)}>{layer.visible ? 'on' : 'off'}</button>
               <button className={'layerDel'}
                       onClick={e => {
                         e.stopPropagation();
@@ -112,44 +111,44 @@ class Red_Layer extends React.Component {
                 overflow: 'hidden',
                 transition: 'height 0.2s'
               }}
-              onClick={e => rootComponent.setState({activeLayer: layer, activeSubData: layer.items[0]})}
+              onClick={() => rootComponent.setState({activeLayer: layer, activeSubData: layer.items[0]})}
             >
               <div className={'layerItem'}
-                   style={{background: `${Red_Layer.calcGradientItems(layer['items'], false, layer)},${this.state.layerBgColor}`}} />
+                   style={{background: `${RedLayer.calcGradientItems(layer['items'], false, layer)},${this.state.layerBgColor}`}}/>
             </div>
             <div style={style.itemContainer}>
               Layer Size
               <div>
-                <UI_Number
+                <RedNumber
                   width={'70px'}
                   value={layerSize['w'] || 0}
                   HD_onInput={e => {
                     layerSize['w'] = e.target.value;
                     rootComponent.setState({});
-                  }} />
-                <UI_Select value={layerSize['wUnit']} options={['px', '%']} HD_change={e => {
+                  }}/>
+                <RedSelect value={layerSize['wUnit']} options={['px', '%']} HD_change={e => {
                   layerSize['wUnit'] = e.target.value;
                   rootComponent.setState({});
-                }} />
+                }}/>
               </div>
               <div>
-                <UI_Number
+                <RedNumber
                   width={'70px'}
                   value={layerSize['h'] || 0}
                   HD_onInput={e => {
                     layerSize['h'] = e.target.value;
                     rootComponent.setState({});
-                  }} />
-                <UI_Select value={layerSize['hUnit']} options={['px', '%']} HD_change={e => {
+                  }}/>
+                <RedSelect value={layerSize['hUnit']} options={['px', '%']} HD_change={e => {
                   layerSize['hUnit'] = e.target.value;
                   rootComponent.setState({});
-                }} />
+                }}/>
               </div>
             </div>
             <div>
               {
                 layer.openYn ? layer.items.map(item => {
-                  return <Red_Layer_subItem layer={layer} item={item} rootComponent={rootComponent} />;
+                  return <RedLayerSubItem layer={layer} item={item} rootComponent={rootComponent}/>;
                 }) : ''
               }
             </div>
@@ -160,41 +159,35 @@ class Red_Layer extends React.Component {
   }
 }
 
-Red_Layer
-  .calcGradients = (layers, checkVisible, bgColor = 'transparent') => layers.map(layer => Red_Layer.calcGradientItems(layer['items'], checkVisible, layer)).join(',') + `,${bgColor}`;
-Red_Layer
-  .calcGradientItems = (items, checkVisible, layer) => items.length ? items.map(item => Red_Layer.calcGradientItem(item, checkVisible, layer)).join(',') : '';
-Red_Layer
-  .calcGradientItem = (data, checkVisible, layer) => {
+RedLayer.calcGradients = (layers, checkVisible, bgColor = 'transparent') => layers.map(layer => RedLayer.calcGradientItems(layer['items'], checkVisible, layer)).join(',') + `,${bgColor}`;
+RedLayer.calcGradientItems = (items, checkVisible, layer) => items.length ? items.map(item => RedLayer.calcGradientItem(item, checkVisible, layer)).join(',') : '';
+RedLayer.calcGradientItem = (data, checkVisible, layer) => {
   if (!data) return '';
   if (!data['colorList'].length) return '';
   if (checkVisible && !data['visible']) return 'linear-gradient(45deg, transparent,transparent )';
   if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
-
   //TODO - 여기정리
   // console.log('layer', data, checkVisible, layer);
+  let gradients;
   if (data['type'] === GRADIENT_TYPE.LINEAR) {
-    const gradients = data['colorList'].map(v => {
+    gradients = data['colorList'].map(v => {
       let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}%`;
       return `${v['color']} ${colorRangeTxt}`;
     });
     let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
     let sizeTxt = layer['size'] ? ` ${layer['size']['w']}${layer['size']['wUnit']} ${layer['size']['h']}${layer['size']['hUnit']}` : '';
-
     return `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt}`;
   } else {
-    const gradients = data['colorList'].map(v => {
+    gradients = data['colorList'].map(v => {
       let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}%`;
       return `${v['color']} ${colorRangeTxt}`;
     });
     let positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
     let sizeTxt = layer['size'] ? ` ${layer['size']['w']}${layer['size']['wUnit']} ${layer['size']['h']}${layer['size']['hUnit']}` : '';
-
     return `${data['type']}(${gradients}) ${positionTxt} / ${sizeTxt}`;
   }
-
 };
-export default Red_Layer;
+export default RedLayer;
 const style = {
   container: {
     borderRight: '1px solid #000',

@@ -1,10 +1,9 @@
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
-import Red_GradientColorItem from "./Red_GradientColorItem";
+import RedGradientColorItem from "./RedGradientColorItem.jsx";
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
-
-class Red_GradientColorEdit extends React.Component {
+class RedGradientColorEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +51,6 @@ class Red_GradientColorEdit extends React.Component {
         boxShadow: '0px 0px 10px rgba(0,0,0,0.46)'
       }}
     />;
-
   };
 
   sortColorList() {
@@ -69,13 +67,11 @@ class Red_GradientColorEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const data = rootComponentState.activeSubData;
-    const activeLayer = rootComponentState.activeLayer;
-
     return <div style={style.container}>
       <div
         ref={this.refBar}
         className={'transparent_checker'}
-        style={{border:'1px solid rgba(0,0,0,1)'}}
+        style={{border: '1px solid rgba(0,0,0,1)'}}
 
       >
         {this.renderGradientColorList(data)}
@@ -83,14 +79,16 @@ class Red_GradientColorEdit extends React.Component {
       <div style={{marginTop: '20px'}}>
         {
           data['colorList'].map((v, index) => {
-            return <Red_GradientColorItem
+            return <RedGradientColorItem
               rootComponent={rootComponent}
               colorData={v}
               activeYn={this.state.activeIDX === index}
               HD_active={index => {
                 this.setState({activeIDX: index});
               }}
-              HD_sort={e => {this.sortColorList();}}
+              HD_sort={() => {
+                this.sortColorList();
+              }}
             />;
           })
         }
@@ -100,7 +98,7 @@ class Red_GradientColorEdit extends React.Component {
   }
 }
 
-export default Red_GradientColorEdit;
+export default RedGradientColorEdit;
 const style = {
   container: {
     paddingTop: '10px',

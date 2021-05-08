@@ -1,5 +1,5 @@
 import React from "react";
-import UI_Number from "../../core/UI_Number";
+import RedNumber from "../../core/RedNumber.jsx";
 import {SketchPicker} from "react-color";
 import DataColor from "../DataColor";
 
@@ -22,7 +22,7 @@ const HD_up = e => {
   targetContext.props.HD_sort(e);
   window.removeEventListener('mousemove', HD_move);
   window.removeEventListener('mouseup', HD_up);
-  requestAnimationFrame(e => {
+  requestAnimationFrame(() => {
     targetContext.setState({activeIDX: targetContext.getIndex()});
     targetContext = null;
     targetColorData = null;
@@ -30,7 +30,7 @@ const HD_up = e => {
   });
 };
 
-class Red_GradientColorItem extends React.Component {
+class RedGradientColorItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -59,12 +59,12 @@ class Red_GradientColorItem extends React.Component {
         border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
         borderRadius: '4px'
       }}
-      onClick={e => this.props.HD_active(this.getIndex())}
-      onMouseDown={e => this.props.HD_active(this.getIndex())}
+      onClick={() => this.props.HD_active(this.getIndex())}
+      onMouseDown={() => this.props.HD_active(this.getIndex())}
     >
       <button
         style={style.add}
-        onClick={e => {
+        onClick={() => {
           let prevColorData = activeSubData['colorList'][this.getIndex() - 1];
           let currentRange = colorData['range'];
           let newRange = currentRange;
@@ -84,11 +84,11 @@ class Red_GradientColorItem extends React.Component {
             borderRadius: '4px', border: '1px solid #000',
             marginRight: '10px'
           }}
-          onClick={e => this.setState({openColorPicker: colorData})}
+          onClick={() => this.setState({openColorPicker: colorData})}
         />
         <div>
           {/* TODO - 단위모델 변경 처리*/}
-          <UI_Number
+          <RedNumber
             width={'auto'}
             value={colorData['range'] || 0}
             HD_onInput={e => {
@@ -106,7 +106,7 @@ class Red_GradientColorItem extends React.Component {
           />
           <button
             style={style.del}
-            onClick={e => {
+            onClick={() => {
               activeSubData.colorList.splice(this.getIndex(), 1);
               rootComponent.setState({});
             }}
@@ -114,20 +114,19 @@ class Red_GradientColorItem extends React.Component {
           </button>
           <button
             style={style.lock}
-            onClick={e => {
-
+            onClick={() => {
             }}
           >Todo Lock
           </button>
-          <div>{colorData['color']} <span className={'todo'}>Todo - 단위선택 원복</span> </div>
+          <div>{colorData['color']} <span className={'todo'}>Todo - 단위선택 원복</span></div>
           {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
           {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
         </div>
       </div>
       <div style={{margin: '8px 8px', alignItems: 'center'}}>
-        <div style={style.line} ref={this.refBar} />
+        <div style={style.line} ref={this.refBar}/>
         <div style={{...style.ball, left: `${colorData['range']}%`, background: activeYn ? '#5e7ade' : '#fff'}}
-             onMouseDown={e => {
+             onMouseDown={() => {
                targetContext = this;
                targetColorData = colorData;
                targetRefBar = this.refBar;
@@ -147,14 +146,14 @@ class Red_GradientColorItem extends React.Component {
                 rootComponent.setState({});
               }}
             />
-            <div style={style.complete} onClick={e => this.setState({openColorPicker: null})}>완료</div>
+            <div style={style.complete} onClick={() => this.setState({openColorPicker: null})}>완료</div>
           </div> : ''
       }
     </div>;
   }
 }
 
-export default Red_GradientColorItem;
+export default RedGradientColorItem;
 const style = {
   container: {
     paddingTop: '10px',
@@ -207,7 +206,7 @@ const style = {
     height: '23px',
     cursor: 'pointer'
   },
-  lock : {
+  lock: {
     fontSize: '11px',
     color: '#fff',
     background: 'red',

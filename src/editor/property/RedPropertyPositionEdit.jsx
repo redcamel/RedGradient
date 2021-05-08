@@ -1,13 +1,12 @@
 import React from "react";
-import UI_Select from "../../core/UI_Select";
-import UI_Number from "../../core/UI_Number";
+import RedSelect from "../../core/RedSelect.jsx";
+import RedNumber from "../../core/RedNumber.jsx";
 
-class Red_PropertyPositionEdit extends React.Component {
+class RedPropertyPositionEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-
 
   render() {
     const rootComponent = this.props.rootComponent;
@@ -16,32 +15,31 @@ class Red_PropertyPositionEdit extends React.Component {
     return <div>
       Start Position
       <div>
-        <UI_Number
+        <RedNumber
           width={'80px'}
           value={activeSubData['position']['x'] || 0}
           HD_onInput={e => {
             activeSubData['position']['x'] = e.target.value;
             rootComponent.setState({});
-          }} />
-        <UI_Select value={activeSubData['position']['xUnit']} options={['px', '%']} HD_change={e => {
+          }}/>
+        <RedSelect value={activeSubData['position']['xUnit']} options={['px', '%']} HD_change={e => {
           activeSubData['position']['xUnit'] = e.target.value;
           rootComponent.setState({});
-        }} />
-        <UI_Number
+        }}/>
+        <RedNumber
           width={'80px'}
           value={activeSubData['position']['y'] || 0}
           HD_onInput={e => {
             activeSubData['position']['y'] = e.target.value;
             rootComponent.setState({});
-          }} />
-        <UI_Select value={activeSubData['position']['yUnit']} options={['px', '%']} HD_change={e => {
+          }}/>
+        <RedSelect value={activeSubData['position']['yUnit']} options={['px', '%']} HD_change={e => {
           activeSubData['position']['yUnit'] = e.target.value;
           rootComponent.setState({});
-        }} />
+        }}/>
       </div>
     </div>;
   }
-
 }
 
-export default Red_PropertyPositionEdit;
+export default RedPropertyPositionEdit;

@@ -1,50 +1,47 @@
 import React from "react";
-import UI_Title from "../../core/UI_Title";
-import UI_TextField from "../../core/UI_TextField";
+import RedTitle from "../../core/RedTitle.jsx";
+import RedTextField from "../../core/RedTextField.jsx";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
-import Red_GradientColorEdit from "./Red_GradientColorEdit";
-import Red_Layer from "../layer/Red_Layer";
-import Red_PropertyPositionEditByMouse from "./Red_PropertyPositionEditByMouse";
-import Red_PropertyTypeEdit from "./Red_PropertyTypeEdit";
-import Red_PropertyPositionEdit from "./Red_PropertyPositionEdit";
-import Red_PropertyDegreeEdit from "./Red_PropertyDegreeEdit";
+import RedGradientColorEdit from "./RedGradientColorEdit.jsx";
+import RedLayer from "../layer/RedLayer.jsx";
+import RedPropertyPositionEditByMouse from "./RedPropertyPositionEditByMouse.jsx";
+import RedPropertyTypeEdit from "./RedPropertyTypeEdit.jsx";
+import RedPropertyPositionEdit from "./RedPropertyPositionEdit.jsx";
+import RedPropertyDegreeEdit from "./RedPropertyDegreeEdit.jsx";
 
-class Red_PropertyEdit extends React.Component {
-
-
+class RedPropertyEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeLayer = rootComponentState.activeLayer;
     const data = rootComponentState.activeSubData;
-
     return <div style={style.container}>
-      <UI_Title title={'Red_PropertyEdit'} />
+      <RedTitle title={'RedPropertyEdit'}/>
       <div style={style.contentWrap}>
         <div>
           <div style={{...style.itemContainer, display: 'flex'}}>
             <div style={{flexGrow: 100, marginRight: '5px'}}>
               <div>Title</div>
-              <UI_TextField
+              <RedTextField
                 width={'calc(100% - 4px)'}
                 value={data['title']} HD_onInput={e => {
                 data['title'] = e.target.value;
                 rootComponent.setState({});
-              }} />
-              <Red_PropertyTypeEdit rootComponent={rootComponent} />
-              <Red_PropertyPositionEdit rootComponent={rootComponent} />
+              }}/>
+              <RedPropertyTypeEdit rootComponent={rootComponent}/>
+              <RedPropertyPositionEdit rootComponent={rootComponent}/>
             </div>
             <div>
               <div>Start Position</div>
-              <Red_PropertyPositionEditByMouse rootComponent={rootComponent} />
-              <div style={{height :'5px'}}/>
-              <Red_PropertyDegreeEdit rootComponent={rootComponent} />
+              <RedPropertyPositionEditByMouse rootComponent={rootComponent}/>
+              <div style={{height: '5px'}}/>
+              <RedPropertyDegreeEdit rootComponent={rootComponent}/>
             </div>
           </div>
         </div>
         <div style={style.itemContainer}>
           Gradient ColorRange
-          <Red_GradientColorEdit rootComponent={rootComponent} />
+          <RedGradientColorEdit rootComponent={rootComponent}/>
           <div className={'todo'}>Todo - 스텝추가/삭제, 이동</div>
           <div className={'todo'}>Todo - 컬러분해신공도 필요함</div>
           <div className={'todo'}>TODO - 그라디언트 컬러셀렉터</div>
@@ -54,7 +51,7 @@ class Red_PropertyEdit extends React.Component {
         <div style={style.itemContainer}>
           <div>Current Data</div>
           <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
-            {JSON.stringify(Red_Layer.calcGradientItem(data, false, activeLayer), null, 2)}
+            {JSON.stringify(RedLayer.calcGradientItem(data, false, activeLayer), null, 2)}
           </SyntaxHighlighter>
           <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
             {JSON.stringify(data, null, 2)}
@@ -63,10 +60,9 @@ class Red_PropertyEdit extends React.Component {
       </div>
     </div>;
   }
-
 }
 
-export default Red_PropertyEdit;
+export default RedPropertyEdit;
 const style = {
   container: {
     width: '350px',
@@ -81,7 +77,6 @@ const style = {
     height: '30px'
   },
   itemContainer: {
-
     padding: '4px 0px',
     borderBottom: '1px solid rgba(0,0,0,0.5)'
   }

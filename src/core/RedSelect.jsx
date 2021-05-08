@@ -1,7 +1,6 @@
 import React from "react";
 
-class UI_Select extends React.Component {
-
+class RedSelect extends React.Component {
   render() {
     return <select
       style={{width: `${this.props.width || ''}px`}}
@@ -16,4 +15,4 @@ class UI_Select extends React.Component {
   }
 }
 
-export default UI_Select;
+export default RedSelect;

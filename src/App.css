@@ -19,9 +19,9 @@ input, select {
     border-radius: 4px;
     outline: none;
     padding: 3px;
-    background: rgba(255,255,255,0.4);
-    border:1px solid #2a2a2a;
-    box-shadow: inset 0 0 7px rgba(0,0,0,0.16);
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid #2a2a2a;
+    box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.16);
 }
 
 #root {
@@ -36,12 +36,14 @@ input, select {
 .transparent_checker {
     background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
     background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
 }
+
 .grid {
     background-image: linear-gradient(rgba(0, 0, 0, .3) .1em, transparent .1em), linear-gradient(90deg, rgba(0, 0, 0, .3) .1em, transparent .1em);
     background-size: 10px 10px;
 }
+
 /* 프레임 */
 .frame {
     display: flex;
@@ -117,7 +119,7 @@ input, select {
 
 /* 스크롤바 */
 ::-webkit-scrollbar {
-    width: 5.2px;
+    width: 5px;
 }
 
 /* 스크롤 바 */
@@ -242,7 +244,7 @@ input, select {
     padding: 4px 8px;
     font-size: 11px;
     color: #fff;
-    text-shadow: 0px 0px rgba(0, 0, 0, 1);
+    text-shadow: 0 0 rgba(0, 0, 0, 1);
     word-break: break-all;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -255,7 +257,7 @@ input, select {
     padding: 4px 8px;
     font-size: 11px;
     color: #fff;
-    text-shadow: 0px 0px rgba(0, 0, 0, 1);
+    text-shadow: 0 0 rgba(0, 0, 0, 1);
     word-break: break-all;
 }
 
