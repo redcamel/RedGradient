@@ -111,6 +111,13 @@ class Red_GradientColorItem extends React.Component {
             }}
           >Del
           </button>
+          <button
+            style={style.lock}
+            onClick={e => {
+
+            }}
+          >Todo Lock
+          </button>
           <div>{colorData['color']}</div>
           {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
           {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
@@ -193,6 +200,16 @@ const style = {
     fontSize: '11px',
     color: '#fff',
     background: '#5e7ade',
+    outline: 'none',
+    border: '1px solid #000',
+    borderRadius: '4px',
+    height: '23px',
+    cursor: 'pointer'
+  },
+  lock : {
+    fontSize: '11px',
+    color: '#fff',
+    background: 'red',
     outline: 'none',
     border: '1px solid #000',
     borderRadius: '4px',
