@@ -1,6 +1,15 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 import RedLayer from "../layer/RedLayer.jsx";
 import drawCanvasUI from "./drawCanvasUI.js";
+
 class RedCanvas extends React.Component {
   constructor(props) {
     super(props);

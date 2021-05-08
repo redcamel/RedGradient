@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import './App.css';
 import React from 'react';
 import RedCanvas from "./editor/canvas/RedCanvas.jsx";
@@ -156,7 +164,7 @@ class App extends React.Component {
       <div className={'frame_bottom'} style={{height: '500px', maxHeight: '500px', overflow: 'auto'}}>frame Bottom
         <div style={style.test}>결과 테스트</div>
         <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
-          {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')}
+          {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor)}
         </SyntaxHighlighter>
       </div>
       <div className={'frame_status'}>frame Status

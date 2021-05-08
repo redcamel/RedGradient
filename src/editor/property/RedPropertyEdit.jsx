@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 import RedTitle from "../../core/RedTitle.jsx";
 import RedTextField from "../../core/RedTextField.jsx";
@@ -32,8 +40,8 @@ class RedPropertyEdit extends React.Component {
               <RedPropertyTypeEdit rootComponent={rootComponent}/>
               <RedPropertyPositionEdit rootComponent={rootComponent}/>
               <RedPropertyRepeatEdit rootComponent={rootComponent}/>
-              <div className={'todo'}>TODO - Radial일때 센터 포지션? 설정분리해야함 </div>
-              <div className={'todo'}>TODO - conic 타입추가 </div>
+              <div className={'todo'}>TODO - Radial일때 센터 포지션? 설정분리해야함</div>
+              <div className={'todo'}>TODO - conic 타입추가</div>
             </div>
             <div>
               <div>Start Position</div>
@@ -55,9 +63,9 @@ class RedPropertyEdit extends React.Component {
                 // .replace(/\s+/g, ' ')
                 // .replace(/, /g, '')
                 .replace(/"/g, '')
-                // .replace(/\(/g, '\(\n')
-                // .replace(/\)/g, '\n\)\n')
-                // .replace(/,/g, ',\n')
+              // .replace(/\(/g, '\(\n')
+              // .replace(/\)/g, '\n\)\n')
+              // .replace(/,/g, ',\n')
             }
 
           </SyntaxHighlighter>

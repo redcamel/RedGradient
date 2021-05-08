@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import RedNumber from "../../core/RedNumber.jsx";
 import {SketchPicker} from "react-color";
 import RED_CANVAS_PRESET from "./RED_CANVAS_PRESET.js";
@@ -18,7 +26,7 @@ function drawCanvasUI() {
       </button>
       <button style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1</button>
       <button style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5</button>
-      <div style={{display:'inline-block',marginLeft : '5px'}}>
+      <div style={{display: 'inline-block', marginLeft: '5px'}}>
         {
           RED_CANVAS_PRESET.map(v => {
             return <button
@@ -103,6 +111,11 @@ function drawCanvasUI() {
                }}
                onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
         />
+        <div className={'todo'}>Todo - 레이어 & 레이어내 아이템 드래그 드롭으로 옮기기</div>
+        <div className={'todo'}>Todo - 애니메이션 구상</div>
+        <div className={'todo'}>Todo - undo,redo</div>
+        <div className={'todo'}>Todo - save,load</div>
+        <div className={'todo'}>Todo - preview 구상</div>
       </div>
 
     </div>

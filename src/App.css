@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 html, body {
     margin: 0;
     padding: 0;
@@ -243,7 +251,7 @@ option {
 .layerItemTitle {
     margin: 4px 0 2px;
     border-radius: 4px;
-    background: linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63));
+    background: linear-gradient(#5e7ade, #2c3565);
     border: 1px solid rgb(31, 31, 31);
     box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
     padding: 4px 8px;
@@ -256,9 +264,9 @@ option {
 }
 
 .layerItemSubTitle {
-    margin: 4px 0 2px 20px;
+    margin: 4px 0 2px 0px;
     border-radius: 4px;
-    background: linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63));
+    background: linear-gradient(#3c4e9a, #2c3565);
     border: 1px solid rgb(31, 31, 31);
     box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
     padding: 4px 8px;

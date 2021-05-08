@@ -1,11 +1,18 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 import DataItem from "../DataItem";
 import RedLayer from "./RedLayer.jsx";
 import {faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const SIZE_MARGIN = 20;
-const SIZE = 120;
+const SIZE = 100;
 
 class RedLayerSubItem extends React.Component {
   constructor(props) {
@@ -27,9 +34,18 @@ class RedLayerSubItem extends React.Component {
     const layer = this.props.layer;
     const layerSize = layer['size'];
     const activeSubDataYn = rootComponentState.activeSubData === item;
-    return <div style={{opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s'}}>
-      <div className={'layerItemSubTitle'}>{item.title}</div>
-      <div style={{margin: '2px 2px 2px 20px'}}>
+    return <div style={{
+      opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s', padding: '0px 5px 5px 5px',
+      background: '#232323',
+      border: '1px solid #333',
+      borderRadius: '8px',
+      margin: '4px 0px 4px 10px'
+    }}>
+      <div
+        className={'layerItemSubTitle'}
+        style={{textOverflow: 'ellipsis', width: '100px', overflow: 'hidden', whiteSpace: 'nowrap'}}>
+        {item.title}</div>
+      <div style={{margin: '2px 2px 2px 0px'}}>
         <button style={{...style.bgItem, background: '#000', color: '#fff'}}
                 onClick={() => this.setState({layerBgColor: 'black'})}>B
         </button>
@@ -40,7 +56,7 @@ class RedLayerSubItem extends React.Component {
                 onClick={() => this.setState({layerBgColor: 'transparent'})}>T
         </button>
       </div>
-      <div style={{margin: '2px 2px 2px 20px'}}>
+      <div style={{margin: '2px 2px 2px 0px'}}>
         <button className={'layerVisible'}
                 onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash}/>
         </button>
@@ -63,9 +79,8 @@ class RedLayerSubItem extends React.Component {
       <div
         className={'transparent_checker'}
         style={{
-          width: `${SIZE - SIZE_MARGIN}px`,
-          height: `${layerSize.h / layerSize.w * (SIZE - SIZE_MARGIN)}px`,
-          marginLeft: `${SIZE_MARGIN}px`,
+          width: `${SIZE}px`,
+          height: `${layerSize.h / layerSize.w * (SIZE)}px`,
           cursor: 'pointer',
           borderRadius: '4px',
           overflow: 'hidden',

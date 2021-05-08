@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 import RedNumber from "../../core/RedNumber.jsx";
 import {SketchPicker} from "react-color";
@@ -166,7 +174,13 @@ const style = {
     overflow: 'hidden'
   },
   complete: {padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'},
-  line: {height: '10px', background: 'rgba(255,255,255,0.25)', borderRadius: '5px',boxShadow: 'rgba(0, 0, 0, 0.35) 0px 0px 10px inset',border:'1px solid rgb(31, 31, 31)'},
+  line: {
+    height: '10px',
+    background: 'rgba(255,255,255,0.25)',
+    borderRadius: '5px',
+    boxShadow: 'rgba(0, 0, 0, 0.35) 0px 0px 10px inset',
+    border: '1px solid rgb(31, 31, 31)'
+  },
   add: {
     position: 'absolute',
     width: '20px',

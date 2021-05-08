@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 const RED_CANVAS_PRESET = [
   {
     title: '512 x 512',
@@ -8,13 +16,13 @@ const RED_CANVAS_PRESET = [
     title: 'Google Pixel 4, 4XL',
     width: 412,
     height: 870,
-    type : 'mobile'
+    type: 'mobile'
   },
   {
     title: 'iPhone 12 Pro Max',
     width: 428,
     height: 926,
-    type : 'mobile'
+    type: 'mobile'
   },
   {
     title: 'web 1366',
