@@ -36,10 +36,10 @@
     ]
   },
   "devDependencies": {
+    "@easylogic/colorpicker": "^1.9.69",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "react-color": "^2.19.3",
     "react-syntax-highlighter": "^15.4.3"
   },
   "homepage": "./"

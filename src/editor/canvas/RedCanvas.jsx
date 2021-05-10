@@ -20,6 +20,7 @@ class RedCanvas extends React.Component {
       layerSizeView: true,
       canvasBgColorPickerOpenYn: false
     };
+    this.refColorPickerContainer = React.createRef()
   }
 
   draw_canvasUI = drawCanvasUI;

@@ -34,6 +34,7 @@ input, select {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 10px inset;
 }
 
+
 select {
     background: linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63));
     color: #fff;
@@ -46,7 +47,12 @@ select {
 option {
     background: #575757;
 }
+/*컬러피커용*/
+.input-field .input{
+    background : #fff !important;
+    box-shadow: none !important;
 
+}
 #root {
     position: absolute;
     top: 0;

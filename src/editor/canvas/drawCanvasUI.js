@@ -7,13 +7,17 @@
  */
 
 import RedNumber from "../../core/RedNumber.jsx";
-import {SketchPicker} from "react-color";
+import {ColorPicker} from '@easylogic/colorpicker';
+import '@easylogic/colorpicker/dist/colorpicker.css';
 import RED_CANVAS_PRESET from "./RED_CANVAS_PRESET.js";
 import React from "react";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faDesktop, faMobileAlt} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faDesktop, faMobileAlt} from '@fortawesome/free-solid-svg-icons';
+
+let colorPicker;
 
 function drawCanvasUI() {
+
   const rootComponent = this.props.rootComponent;
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
@@ -38,7 +42,7 @@ function drawCanvasUI() {
               }}
             >
               <div><FontAwesomeIcon
-                icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
+                icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop} /> {v['title']}({v['width']}x{v['height']})
               </div>
             </button>;
           })
@@ -49,11 +53,11 @@ function drawCanvasUI() {
       <RedNumber width={'60px'} value={canvasInfo.width} HD_onInput={e => {
         canvasInfo.width = e.target.value;
         rootComponent.setState({});
-      }}/>
+      }} />
       <RedNumber width={'60px'} value={canvasInfo.height} HD_onInput={e => {
         canvasInfo.height = e.target.value;
         rootComponent.setState({});
-      }}/>
+      }} />
       <div style={{display: 'inline-flex', alignItems: 'center'}}>
         배경색상
         <div
@@ -68,32 +72,39 @@ function drawCanvasUI() {
             border: '1px solid #000',
             cursor: 'pointer'
           }}
-          onClick={() => this.setState({canvasBgColorPickerOpenYn: true})}
+          onClick={() => {
+            this.setState({canvasBgColorPickerOpenYn: true});
+            if (!colorPicker) {
+              colorPicker = new ColorPicker({
+                type: "sketch",
+                position: 'inline',
+                color: rootComponentState.bgColor,
+                container: this.refColorPickerContainer.current,
+                onChange: color => rootComponent.setState({bgColor:color})
+              });
+            }
+            colorPicker.setOption({color :rootComponentState.bgColor});
+          }}
         />
-        {
-          this.state.canvasBgColorPickerOpenYn ? <div style={{
-              zIndex: 1, position: 'absolute', top: 0, left: '0%', transform: 'translate(-50% , 0px)',
-              boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
-              background: '#fff',
-              borderRadius: '8px',
-              overflow: 'hidden'
-            }}>
-              <SketchPicker
-                width={250}
-                color={rootComponentState.bgColor}
-                onChange={color => {
-                  rootComponentState.bgColor = `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`;
-                  rootComponent.setState({});
-                }}
-              />
-              <div
-                style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
-                onClick={() => this.setState({canvasBgColorPickerOpenYn: null})}
-              >완료
-              </div>
-            </div>
-            : ''
-        }
+
+        <div style={{
+          zIndex: 1, position: 'absolute', top: 0, left: '0%', transform: 'translate(-50% , 0px)',
+          boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
+          background: '#fff',
+          borderRadius: '8px',
+          overflow: 'hidden',
+          display: this.state.canvasBgColorPickerOpenYn ? 'block' : 'none'
+        }}>
+          <div ref={this.refColorPickerContainer} />
+          <div
+            style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
+            onClick={() => {
+              this.setState({canvasBgColorPickerOpenYn: null});
+            }}
+          >완료
+          </div>
+        </div>
+
       </div>
       <div>
         레이어 영역 보기
