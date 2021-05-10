@@ -10,20 +10,27 @@ import React from "react";
 import RedNumber from "../../core/RedNumber.jsx";
 import {SketchPicker} from "react-color";
 import DataColor from "../DataColor";
+import RedSelect from "../../core/RedSelect";
 
 let targetContext;
 let targetColorData;
 let targetRefBar;
 const HD_move = e => {
-  console.log(targetRefBar);
+  // console.log(targetRefBar);
   if (targetRefBar.current) {
     const tX = e.pageX - targetRefBar.current.getBoundingClientRect().x;
     //TODO - FIXME 사이즈 자동으로 결정되게 변경해야함
     let percentX = (tX / (targetRefBar.current.clientWidth + 16) * 100);
     percentX = Math.max(Math.min(100, percentX), 0);
-    targetColorData.range = percentX;
+    if(targetColorData.rangeUnit==='%'){
+      targetColorData.range = percentX;
+    }else{
+      targetColorData.range = percentX/100 * targetContext.props.rootComponent.state.canvasInfo['width'];
+    }
+
+
     targetContext.props.rootComponent.setState({});
-    console.log(tX);
+    // console.log(tX);
   }
 };
 const HD_up = e => {
@@ -57,6 +64,7 @@ class RedGradientColorItem extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
+    const canvasInfo = rootComponentState.canvasInfo;
     const colorData = this.props.colorData;
     const activeYn = this.props.activeYn;
     const colorInfo = colorData['color'];
@@ -96,6 +104,7 @@ class RedGradientColorItem extends React.Component {
         />
         <div>
           {/* TODO - 단위모델 변경 처리*/}
+
           <RedNumber
             width={'auto'}
             value={colorData['range'] || 0}
@@ -112,6 +121,15 @@ class RedGradientColorItem extends React.Component {
               this.props.HD_active(this.getIndex());
             }}
           />
+          <RedSelect value={colorData['rangeUnit']} options={['px', '%']} HD_change={e => {
+            let tUnit = e.target.value;
+            if (colorData['rangeUnit'] !== tUnit) {
+              if (colorData['rangeUnit'] === '%') colorData['range'] = canvasInfo['width'] * colorData['range'] / 100;
+              else colorData['range'] = tUnit / canvasInfo['width'] * 100;
+            }
+            colorData['rangeUnit'] = tUnit;
+            rootComponent.setState({});
+          }} />
           <button
             style={style.del}
             onClick={() => {
@@ -126,14 +144,14 @@ class RedGradientColorItem extends React.Component {
             }}
           >Todo Lock
           </button>
-          <div>{colorData['color']} <span className={'todo'}>Todo - 단위선택 원복</span></div>
+          <div>{colorData['color']}</div>
           {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
           {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
         </div>
       </div>
       <div style={{margin: '8px 8px', alignItems: 'center'}}>
-        <div style={style.line} ref={this.refBar}/>
-        <div style={{...style.ball, left: `${colorData['range']}%`, background: activeYn ? '#5e7ade' : '#fff'}}
+        <div style={style.line} ref={this.refBar} />
+        <div style={{...style.ball, left: `${colorData['rangeUnit']==='px' ? colorData['range']/canvasInfo['width']*100 : colorData['range']}%`, background: activeYn ? '#5e7ade' : '#fff'}}
              onMouseDown={() => {
                targetContext = this;
                targetColorData = colorData;

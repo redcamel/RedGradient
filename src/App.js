@@ -29,7 +29,6 @@ class App extends React.Component {
           title: 'testLayer sdfsdfsdfsdf',
           visible: true,
           openYn: true,
-          size: {w: 100, wUnit: 'px', h: 100, hUnit: 'px'},
           items: [
             {
               title: 'test1',
@@ -38,17 +37,18 @@ class App extends React.Component {
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
+              size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
-                {color: 'transparent', range: 0},
-                {color: 'transparent', range: 24.1867043847},
-                {color: '#FFEA53', range: 25.6011315417},
-                {color: '#FFEA53', range: 25.6011315417},
-                {color: 'transparent', range: 25.6011315417},
-                {color: 'transparent', range: 74.3988684583},
-                {color: '#FFEA53', range: 74.3988684583},
-                {color: '#FFEA53', range: 75.8132956153},
-                {color: 'transparent', range: 75.8132956153},
-                {color: 'transparent', range: 100}
+                {color: 'transparent', rangeUnit:'%',range: 0},
+                {color: 'transparent', rangeUnit:'%',range: 24.1867043847},
+                {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
+                {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
+                {color: 'transparent', rangeUnit:'%',range: 25.6011315417},
+                {color: 'transparent', rangeUnit:'%',range: 74.3988684583},
+                {color: '#FFEA53', rangeUnit:'%',range: 74.3988684583},
+                {color: '#FFEA53', rangeUnit:'%',range: 75.8132956153},
+                {color: 'transparent', rangeUnit:'%',range: 75.8132956153},
+                {color: 'transparent', rangeUnit:'%',range: 100}
               ]
             },
             {
@@ -58,17 +58,18 @@ class App extends React.Component {
               deg: -45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
+              size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
-                {color: 'transparent', range: 0},
-                {color: 'transparent', range: 24.1867043847},
-                {color: '#FFEA53', range: 25.6011315417},
-                {color: '#FFEA53', range: 25.6011315417},
-                {color: 'transparent', range: 25.6011315417},
-                {color: 'transparent', range: 74.3988684583},
-                {color: '#FFEA53', range: 74.3988684583},
-                {color: '#FFEA53', range: 75.8132956153},
-                {color: 'transparent', range: 75.8132956153},
-                {color: 'transparent', range: 100}
+                {color: 'transparent', rangeUnit:'%',range: 0},
+                {color: 'transparent', rangeUnit:'%',range: 24.1867043847},
+                {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
+                {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
+                {color: 'transparent', rangeUnit:'%',range: 25.6011315417},
+                {color: 'transparent', rangeUnit:'%',range: 74.3988684583},
+                {color: '#FFEA53', rangeUnit:'%',range: 74.3988684583},
+                {color: '#FFEA53', rangeUnit:'%',range: 75.8132956153},
+                {color: 'transparent', rangeUnit:'%',range: 75.8132956153},
+                {color: 'transparent', rangeUnit:'%',range: 100}
               ]
             },
             {
@@ -78,17 +79,18 @@ class App extends React.Component {
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
+              size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
-                {color: '#8F225C', range: 0},
-                {color: '#8F225C', range: 12.4469589816},
-                {color: '#FFEA53', range: 12.4469589816},
-                {color: '#FFEA53', range: 13.8613861386},
-                {color: 'transparent', range: 13.8613861386},
-                {color: 'transparent', range: 86.1386138614},
-                {color: '#FFEA53', range: 86.1386138614},
-                {color: '#FFEA53', range: 87.5530410184},
-                {color: '#8F225C', range: 87.5530410184},
-                {color: '#8F225C', range: 100}
+                {color: '#8F225C', rangeUnit:'%',range: 0},
+                {color: '#8F225C', rangeUnit:'%',range: 12.4469589816},
+                {color: '#FFEA53', rangeUnit:'%',range: 12.4469589816},
+                {color: '#FFEA53', rangeUnit:'%',range: 13.8613861386},
+                {color: 'transparent', rangeUnit:'%',range: 13.8613861386},
+                {color: 'transparent', rangeUnit:'%',range: 86.1386138614},
+                {color: '#FFEA53', rangeUnit:'%',range: 86.1386138614},
+                {color: '#FFEA53', rangeUnit:'%',range: 87.5530410184},
+                {color: '#8F225C', rangeUnit:'%',range: 87.5530410184},
+                {color: '#8F225C', rangeUnit:'%',range: 100}
               ]
             }
           ]
@@ -97,7 +99,6 @@ class App extends React.Component {
           title: 'testLayer ',
           visible: true,
           openYn: true,
-          size: {w: 50, wUnit: 'px', h: 50, hUnit: 'px'},
           items: [
             {
               title: 'test',
@@ -106,11 +107,12 @@ class App extends React.Component {
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
+              size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
-                {color: 'rgba(255,255,0,0.9)', range: 25},
-                {color: 'rgba(255,0,0,0.5)', range: 55},
-                {color: 'transparent', range: 75},
-                {color: 'transparent', range: 100}
+                {color: 'rgba(255,255,0,0.9)', rangeUnit:'%',range: 25},
+                {color: 'rgba(255,0,0,0.5)', rangeUnit:'%',range: 55},
+                {color: 'transparent', rangeUnit:'%',range: 75},
+                {color: 'transparent', rangeUnit:'%',range: 100}
               ]
             }
           ]
@@ -156,16 +158,19 @@ class App extends React.Component {
             <div style={{display: "flex", height: '100%'}}>
               <RedLayer rootComponent={this}/>
               {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
+              <div style={{width:'300px'}}>
+                <div style={style.test}>결과 테스트</div>
+                <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
+                  {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')}
+                </SyntaxHighlighter>
+              </div>
             </div>
 
           </div>
         </div>
       </div>
-      <div className={'frame_bottom'} style={{height: '500px', maxHeight: '500px', overflow: 'auto'}}>frame Bottom
-        <div style={style.test}>결과 테스트</div>
-        <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
-          {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor)}
-        </SyntaxHighlighter>
+      <div className={'frame_bottom'} >frame Bottom
+
       </div>
       <div className={'frame_status'}>frame Status
         <div style={style.test}>상태 아이템</div>

@@ -25,8 +25,8 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const rect = targetContext.refRect.current.getBoundingClientRect();
     let tX = (e.pageX - (rect.x));
     let tY = (e.pageY - (rect.y));
-    let layerPixelW = layerSize.wUnit === '%' ? canvasInfo.width * layerSize.w / 100 : layerSize.w;
-    let layerPixelH = layerSize.hUnit === '%' ? canvasInfo.height * layerSize.h / 100 : layerSize.h;
+    let layerPixelW = canvasInfo.width;
+    let layerPixelH = canvasInfo.height;
     let tPercentX = activeSubData['position']['xUnit'] === '%' ? tX / SIZE * 100 : tX * layerPixelW / SIZE;
     let tPercentY = activeSubData['position']['yUnit'] === '%' ? tY / SIZE * 100 : tY * layerPixelH / SIZE;
     activeSubData['position']['x'] = tPercentX;
@@ -41,8 +41,8 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const layerSize = rootComponentState.activeLayer.size;
     const position = activeSubData['position'];
     const canvasInfo = rootComponentState.canvasInfo;
-    let layerPixelW = layerSize.wUnit === '%' ? canvasInfo.width * layerSize.w / 100 : layerSize.w;
-    let layerPixelH = layerSize.hUnit === '%' ? canvasInfo.height * layerSize.h / 100 : layerSize.h;
+    let layerPixelW = canvasInfo.width;
+    let layerPixelH =  canvasInfo.height;
     let tPercentX = position['xUnit'] === '%' ? (position.x / 100 * SIZE) % 100 : ((position.x / layerPixelW * 100) % 100);
     let tPercentY = position['yUnit'] === '%' ? (position.y / 100 * SIZE) % 100 : ((position.y / layerPixelH * 100) % 100);
     if (tPercentX < 0) tPercentX = 100 + tPercentX;

@@ -80,7 +80,7 @@ class RedLayerSubItem extends React.Component {
         className={'transparent_checker'}
         style={{
           width: `${SIZE}px`,
-          height: `${layerSize.h / layerSize.w * (SIZE)}px`,
+          height: `${SIZE}px`,
           cursor: 'pointer',
           borderRadius: '4px',
           overflow: 'hidden',

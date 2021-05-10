@@ -89,7 +89,7 @@ class RedLayer extends React.Component {
                 className={'transparent_checker'}
                 style={{
                   width: `${SIZE}px`,
-                  height: `${layerSize.h / layerSize.w * SIZE}px`,
+                  height: `${SIZE}px`,
                   cursor: 'pointer',
                   borderRadius: '4px',
                   overflow: 'hidden',
@@ -99,35 +99,6 @@ class RedLayer extends React.Component {
               >
                 <div className={'layerItem'}
                      style={{background: `${RedLayer.calcGradientItems(layer['items'], false, layer)},${this.state.layerBgColor}`}}/>
-              </div>
-              <div style={style.itemContainer}>
-                Layer Size
-                <div>
-                  <RedNumber
-                    width={'70px'}
-                    value={layerSize['w'] || 0}
-                    HD_onInput={e => {
-                      layerSize['w'] = e.target.value;
-                      rootComponent.setState({});
-                    }}/>
-                  <RedSelect value={layerSize['wUnit']} options={['px', '%']} HD_change={e => {
-                    layerSize['wUnit'] = e.target.value;
-                    rootComponent.setState({});
-                  }}/>
-                </div>
-                <div>
-                  <RedNumber
-                    width={'70px'}
-                    value={layerSize['h'] || 0}
-                    HD_onInput={e => {
-                      layerSize['h'] = e.target.value;
-                      rootComponent.setState({});
-                    }}/>
-                  <RedSelect value={layerSize['hUnit']} options={['px', '%']} HD_change={e => {
-                    layerSize['hUnit'] = e.target.value;
-                    rootComponent.setState({});
-                  }}/>
-                </div>
               </div>
               <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem layer={layer} item={item}
                                                                             rootComponent={rootComponent}/>) : ''}</div>
@@ -148,11 +119,11 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
   if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
   //TODO - 여기정리
   const gradients = data['colorList'].map(v => {
-    let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}%`;
+    let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
     return `${v['color']} ${colorRangeTxt}`;
   });
   const positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
-  const sizeTxt = layer['size'] ? ` ${layer['size']['w']}${layer['size']['wUnit']} ${layer['size']['h']}${layer['size']['hUnit']}` : '';
+  const sizeTxt = data['size'] ? ` ${data['size']['w']}${data['size']['wUnit']} ${data['size']['h']}${data['size']['hUnit']}` : '100% 100%';
   const repeatTxt = data['repeatType'] === REPEAT_TYPE.REPEAT ? '' : data['repeatType']
   let result
   if (data['type'] === GRADIENT_TYPE.LINEAR) result = `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;

@@ -9,7 +9,6 @@
 import React from "react";
 import RedLayer from "../layer/RedLayer.jsx";
 import drawCanvasUI from "./drawCanvasUI.js";
-
 class RedCanvas extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +27,6 @@ class RedCanvas extends React.Component {
   drawCall(canvasInfo, layers, bgColor) {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeLayer = rootComponentState.activeLayer;
     const activeSubData = rootComponentState.activeSubData;
     return <div style={{
       ...style.canvas,
@@ -48,8 +46,8 @@ class RedCanvas extends React.Component {
             position: 'absolute',
             left: `${activeSubData['position']['x']}${activeSubData['position']['xUnit']}`,
             top: `${activeSubData['position']['y']}${activeSubData['position']['yUnit']}`,
-            width: `${activeLayer['size']['w']}${activeLayer['size']['wUnit']}`,
-            height: `${activeLayer['size']['h']}${activeLayer['size']['hUnit']}`,
+            width: `${canvasInfo['width']}px`,
+            height: `${canvasInfo['height']}px`,
             border: '1px dashed #000',
             color: '#000'
           }}
@@ -107,7 +105,7 @@ const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
-    overflow: 'hidden',
+    // overflow: 'hidden',
     transition: 'transform 0.01s'
   },
   itemContainer: {

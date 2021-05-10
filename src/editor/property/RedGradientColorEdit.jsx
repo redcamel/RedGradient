@@ -54,9 +54,10 @@ class RedGradientColorEdit extends React.Component {
   };
 
   sortColorList() {
+    const canvasInfo  =this.props.rootComponent.state.canvasInfo
     this.props.rootComponent.state.activeSubData.colorList.sort((a, b) => {
-      const aX = a['range'];
-      const bX = b['range'];
+      const aX = a['rangeUnit'] === '%' ? a['range'] : (a['range'] / canvasInfo['width'] * 100);
+      const bX = b['rangeUnit'] === '%' ? b['range'] : (b['range'] / canvasInfo['width'] * 100);
       if (aX > bX) return 1;
       if (aX < bX) return -1;
       return 0;

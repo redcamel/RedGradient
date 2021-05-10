@@ -52,6 +52,7 @@ class RedPropertyEdit extends React.Component {
           </div>
         </div>
         <div style={style.itemContainer}>
+          <div className={'todo'}>Todo - 단위 변경시 소팅및 픽셀 계산처리</div>
           <RedGradientColorEdit rootComponent={rootComponent}/>
         </div>
         <div style={style.itemContainer}>

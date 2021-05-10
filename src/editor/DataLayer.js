@@ -7,7 +7,6 @@ function DataLayer() {
     title: `layer${uuid++}`,
     visible: true,
     openYn: true,
-    size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
     items: [new DataItem()]
   };
 }
