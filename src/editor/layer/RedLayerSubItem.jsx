@@ -36,7 +36,8 @@ class RedLayerSubItem extends React.Component {
     const activeSubDataYn = rootComponentState.activeSubData === item;
     return <div style={{
       opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s', padding: '0px 5px 5px 5px',
-      background: '#232323',
+      background:  '#232323',
+      boxShadow : activeSubDataYn ? '0px 0px 5px rgba(255,0,0,0.5)' : '',
       border: '1px solid #333',
       borderRadius: '8px',
       margin: '4px 0px 4px 10px'

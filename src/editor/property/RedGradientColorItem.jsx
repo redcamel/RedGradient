@@ -125,7 +125,7 @@ class RedGradientColorItem extends React.Component {
             let tUnit = e.target.value;
             if (colorData['rangeUnit'] !== tUnit) {
               if (colorData['rangeUnit'] === '%') colorData['range'] = canvasInfo['width'] * colorData['range'] / 100;
-              else colorData['range'] = tUnit / canvasInfo['width'] * 100;
+              else colorData['range'] = colorData['range'] / canvasInfo['width'] * 100;
             }
             colorData['rangeUnit'] = tUnit;
             rootComponent.setState({});
