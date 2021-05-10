@@ -28,18 +28,16 @@ const HD_move = e => {
     } else {
       targetColorData.range = percentX / 100 * targetContext.props.rootComponent.state.canvasInfo['width'];
     }
-
-
     targetContext.props.rootComponent.setState({});
     // console.log(tX);
   }
 };
 const HD_up = e => {
-  targetContext.props.HD_sort(e);
+  targetContext.props.HD_sort(targetColorData);
   window.removeEventListener('mousemove', HD_move);
   window.removeEventListener('mouseup', HD_up);
   requestAnimationFrame(() => {
-    targetContext.setState({activeIDX: targetContext.getIndex()});
+    targetContext.props.rootComponent.setState({})
     targetContext = null;
     targetColorData = null;
     targetRefBar = null;
@@ -78,6 +76,7 @@ class RedGradientColorItem extends React.Component {
         margin: '3px 0px',
         cursor: 'pointer',
         border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
+        background: activeYn ? 'linear-gradient(#5e7ade, #3a497d)' : 'rgba(255,255,255,0.1)',
         borderRadius: '4px'
       }}
       onClick={() => this.props.HD_active(this.getIndex())}
@@ -98,12 +97,12 @@ class RedGradientColorItem extends React.Component {
       </button>
       <div style={{display: 'flex', padding: '4px 4px 0px',}}>
         <div
-          style={{  width: '25px', height: '25px'}}
+          style={{width: '28px', height: '28px',margin:'1px'}}
           className={'transparent_checker'}
         >
           <div style={{
             background: colorInfo,
-            width: '100%', height: '100%',
+            width: '28px', height: '28px',
             borderRadius: '4px', border: '1px solid #000',
             marginRight: '10px'
           }}
@@ -213,9 +212,9 @@ const style = {
   complete: {padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'},
   line: {
     height: '10px',
-    background: 'rgba(255,255,255,0.25)',
+    background: 'rgba(255,255,255,0.5)',
     borderRadius: '5px',
-    boxShadow: 'rgba(0, 0, 0, 0.35) 0px 0px 10px inset',
+    boxShadow: 'rgba(0, 0, 0, 0.35) 0px 0px 5px inset',
     border: '1px solid rgb(31, 31, 31)'
   },
   add: {
