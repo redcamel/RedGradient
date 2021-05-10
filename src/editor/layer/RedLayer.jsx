@@ -67,12 +67,15 @@ class RedLayer extends React.Component {
                   <FontAwesomeIcon icon={layer.visible ? faEye : faEyeSlash}/>
                 </button>
                 <button className={'layerDel'}
+                        style={{opacity : layers.length>1 ? 1 : 0.25 }}
                         onClick={e => {
                           e.stopPropagation();
-                          layers.splice(layers.indexOf(layer), 1);
-                          let targetLayer = layer;
-                          if (!layers.length) layers.push(new DataLayer());
-                          rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
+                          if(layers.length>1 ){
+                            layers.splice(layers.indexOf(layer), 1);
+                            let targetLayer = layer;
+                            if (!layers.length) layers.push(new DataLayer());
+                            rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
+                          }
                         }}
                 ><FontAwesomeIcon icon={faMinusCircle}/>
                 </button>
