@@ -158,11 +158,14 @@ class App extends React.Component {
             <div style={{display: "flex", height: '100%'}}>
               <RedLayer rootComponent={this}/>
               {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
+              <div style={{display: "flex", height: '100%',alignContent: 'space-between',flexDirection:'column'}}>
               <div style={{width:'300px'}}>
                 <div style={style.test}>결과 테스트</div>
                 <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
                   {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')}
                 </SyntaxHighlighter>
+              </div>
+              <div>TODO - 애드센스자리</div>
               </div>
             </div>
 
