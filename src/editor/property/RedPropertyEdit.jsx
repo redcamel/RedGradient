@@ -52,7 +52,6 @@ class RedPropertyEdit extends React.Component {
           </div>
         </div>
         <div style={style.itemContainer}>
-          Gradient ColorRange
           <RedGradientColorEdit rootComponent={rootComponent}/>
         </div>
         <div style={style.itemContainer}>

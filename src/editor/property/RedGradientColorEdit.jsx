@@ -21,7 +21,7 @@ class RedGradientColorEdit extends React.Component {
       itemList.push(this.renderColorStep(v, index, activeYn));
       return `${v['color']} ${colorRangeTxt}`;
     });
-    const code = `${GRADIENT_TYPE.LINEAR}(90deg, ${gradients})`;
+    const code = `${GRADIENT_TYPE.LINEAR}(90deg, ${gradients}),${this.state.layerBgColor}`;
     return <div style={{
       height: '55px',
       background: code,
@@ -68,6 +68,20 @@ class RedGradientColorEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const data = rootComponentState.activeSubData;
     return <div style={style.container}>
+     <div style={{display:'flex',margin : '4px 0px',justifyContent: 'space-between'}}>
+       Gradient ColorRange
+       <div>
+         <button style={{...style.bgItem, background: '#000', color: '#fff'}}
+                 onClick={() => this.setState({layerBgColor: 'black'})}>B
+         </button>
+         <button style={{...style.bgItem, background: '#fff', color: '#000'}}
+                 onClick={() => this.setState({layerBgColor: 'white'})}>W
+         </button>
+         <button style={{...style.bgItem}} className={'transparent_checker'}
+                 onClick={() => this.setState({layerBgColor: 'transparent'})}>T
+         </button>
+       </div>
+     </div>
       <div
         ref={this.refBar}
         className={'transparent_checker'}
@@ -101,6 +115,15 @@ class RedGradientColorEdit extends React.Component {
 export default RedGradientColorEdit;
 const style = {
   container: {
-    paddingTop: '10px',
+  },
+  bgItem: {
+    padding: '2px',
+    marginRight: '1px',
+    width: '30px',
+    height: '20px',
+    fontSize: '10px',
+    cursor: 'pointer',
+    border: 0,
+    fontWeight: 'bold'
   }
 };
