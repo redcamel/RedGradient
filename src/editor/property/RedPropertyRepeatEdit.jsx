@@ -11,16 +11,13 @@ class RedPropertyRepeatEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    return <div>
-      Repeat
-      <RedSelect
-        value={activeSubData['typeRepeat'].replace('-', '_').toUpperCase()}
-        options={Object.keys(REPEAT_TYPE)}
-        HD_change={e => {
-          activeSubData['typeRepeat'] = REPEAT_TYPE[e.target.value];
-          rootComponent.setState({});
-        }}/>
-    </div>;
+    return <RedSelect
+      value={activeSubData['typeRepeat'].replace('-', '_').toUpperCase()}
+      options={Object.keys(REPEAT_TYPE)}
+      HD_change={e => {
+        activeSubData['typeRepeat'] = REPEAT_TYPE[e.target.value];
+        rootComponent.setState({});
+      }}/>
   }
 }
 

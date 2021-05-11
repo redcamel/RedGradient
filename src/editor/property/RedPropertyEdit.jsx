@@ -20,6 +20,7 @@ import RedPropertyRepeatEdit from "./RedPropertyRepeatEdit.jsx";
 import RedPropertyTypeEndingShapeEdit from "./RedPropertyTypeEndingShapeEdit";
 import RedPropertyAtEdit from "./RedPropertyAtEdit";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
+import RedPropertySizeEdit from "./RedPropertySizeEdit";
 
 class RedPropertyEdit extends React.Component {
   render() {
@@ -31,8 +32,8 @@ class RedPropertyEdit extends React.Component {
       <RedTitle title={'RedPropertyEdit'} />
       <div style={style.contentWrap}>
         <div>
-          <div style={{...style.itemContainer, display: 'flex'}}>
-            <div style={{flexGrow: 100, marginRight: '5px'}}>
+          <div style={{...style.itemContainer}}>
+            <div>
               <div>Title</div>
               <RedTextField
                 width={'calc(100% - 4px)'}
@@ -40,16 +41,24 @@ class RedPropertyEdit extends React.Component {
                 data['title'] = e.target.value;
                 rootComponent.setState({});
               }} />
+              <div style={style.divide} />
               <RedPropertyTypeEdit rootComponent={rootComponent} />
-              {data.type === GRADIENT_TYPE.RADIAL ? <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} /> : ''}
-              {data.type === GRADIENT_TYPE.RADIAL ? <RedPropertyAtEdit rootComponent={rootComponent} /> : ''}
-              <RedPropertyPositionEdit rootComponent={rootComponent} />
               <RedPropertyRepeatEdit rootComponent={rootComponent} />
-              <div className={'todo'}>TODO - Radial일때 센터 포지션? 설정분리해야함</div>
+              {data.type === GRADIENT_TYPE.RADIAL ? <>
+                <div style={style.divide} />
+                <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />
+                <div style={style.divide} />
+                <RedPropertyAtEdit rootComponent={rootComponent} />
+              </> : ''}
+              <div style={style.divide} />
+              <RedPropertyPositionEdit rootComponent={rootComponent} />
+              <div style={style.divide} />
+              <RedPropertySizeEdit rootComponent={rootComponent} />
               <div className={'todo'}>TODO - conic 타입추가</div>
+
             </div>
-            <div>
-              <div>Start Position</div>
+            <div>Start Position</div>
+            <div style={{display: 'flex'}}>
               <RedPropertyPositionEditByMouse rootComponent={rootComponent} />
               <div style={{height: '5px'}} />
               <RedPropertyDegreeEdit rootComponent={rootComponent} />
@@ -99,5 +108,11 @@ const style = {
   itemContainer: {
     padding: '4px 0px',
     borderBottom: '1px solid rgba(0,0,0,0.5)'
+  },
+  divide: {
+    margin: '5px 0px',
+    height: '2px',
+    background: '#4e4e4e',
+    borderTop: '1px solid #000'
   }
 };

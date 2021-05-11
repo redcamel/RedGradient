@@ -3,7 +3,7 @@ import React from "react";
 class RedNumber extends React.Component {
   render() {
     return <input
-      style={{width: `${this.props.width || ''}`}}
+      style={{width: `${this.props.width || ''}`,flexGrow:10}}
       type={'number'}
       max={this.props.maxValue}
       value={this.props.value}

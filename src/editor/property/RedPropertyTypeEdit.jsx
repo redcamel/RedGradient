@@ -12,16 +12,13 @@ class RedPropertyTypeEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    return <div>
-      Type
-      <RedSelect
-        value={activeSubData['type'].split('-')[0].toUpperCase()}
-        options={Object.keys(GRADIENT_TYPE)}
-        HD_change={e => {
-          activeSubData['type'] = GRADIENT_TYPE[e.target.value];
-          rootComponent.setState({});
-        }}/>
-    </div>;
+    return <RedSelect
+      value={activeSubData['type'].split('-')[0].toUpperCase()}
+      options={Object.keys(GRADIENT_TYPE)}
+      HD_change={e => {
+        activeSubData['type'] = GRADIENT_TYPE[e.target.value];
+        rootComponent.setState({});
+      }}/>
   }
 }
 

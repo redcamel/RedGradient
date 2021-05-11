@@ -159,13 +159,14 @@ class RedGradientColorItem extends React.Component {
             }}
           >Del
           </button>
+          <div style={{display:'inline-block',marginRight : '5px'}}>{colorData['color']}</div>
           <button
             style={style.lock}
             onClick={() => {
             }}
           >Todo Lock
           </button>
-          <div>{colorData['color']}</div>
+
           {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
           {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
         </div>

@@ -12,9 +12,9 @@ class RedPropertyPositionEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    return <div>
+    return <div >
       Position
-      <div>
+      <div style={{display:'flex',justifyContent: 'space-between'}}>
         <RedNumber
           width={'80px'}
           value={activeSubData['position']['x'] || 0}
@@ -35,31 +35,6 @@ class RedPropertyPositionEdit extends React.Component {
           }} />
         <RedSelect value={activeSubData['position']['yUnit']} options={['px', '%']} HD_change={e => {
           activeSubData['position']['yUnit'] = e.target.value;
-          rootComponent.setState({});
-        }} />
-      </div>
-      Size
-      <div>
-        <RedNumber
-          width={'80px'}
-          value={activeSubData['size']['w'] || 0}
-          HD_onInput={e => {
-            activeSubData['size']['w'] = e.target.value;
-            rootComponent.setState({});
-          }} />
-        <RedSelect value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
-          activeSubData['size']['wUnit'] = e.target.value;
-          rootComponent.setState({});
-        }} />
-        <RedNumber
-          width={'80px'}
-          value={activeSubData['size']['h'] || 0}
-          HD_onInput={e => {
-            activeSubData['size']['h'] = e.target.value;
-            rootComponent.setState({});
-          }} />
-        <RedSelect value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {
-          activeSubData['size']['hUnit'] = e.target.value;
           rootComponent.setState({});
         }} />
       </div>
