@@ -13,13 +13,16 @@ class RedPropertyBlendEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    return <RedSelect
-      value={activeSubData['blendMode'].split('-')[0].toUpperCase()}
-      options={Object.keys(BLEND_MODE_TYPE)}
-      HD_change={e => {
-        activeSubData['blendMode'] = BLEND_MODE_TYPE[e.target.value];
-        rootComponent.setState({});
-      }}/>
+    return <div>
+      Todo - Blend Mode
+      <RedSelect
+        value={activeSubData['blendMode'].split('-')[0].toUpperCase()}
+        options={Object.keys(BLEND_MODE_TYPE)}
+        HD_change={e => {
+          activeSubData['blendMode'] = BLEND_MODE_TYPE[e.target.value];
+          rootComponent.setState({});
+        }}/>
+    </div>
   }
 }
 

@@ -35,7 +35,6 @@ class RedPropertyEdit extends React.Component {
         <div>
           <div style={{...style.itemContainer}}>
             <div>
-              <div>Title</div>
               <RedTextField
                 width={'calc(100% - 4px)'}
                 value={data['title']} HD_onInput={e => {
@@ -46,7 +45,8 @@ class RedPropertyEdit extends React.Component {
               <RedPropertyTypeEdit rootComponent={rootComponent} />
               <div style={style.divide} />
               <RedPropertyRepeatEdit rootComponent={rootComponent} />
-              {/*<RedPropertyBlendEdit rootComponent={rootComponent} />*/}
+              <div style={style.divide} />
+              <RedPropertyBlendEdit rootComponent={rootComponent} />
               {data.type === GRADIENT_TYPE.RADIAL? <>
                 <div style={style.divide} />
                 <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />
@@ -59,9 +59,9 @@ class RedPropertyEdit extends React.Component {
               <RedPropertyPositionEdit rootComponent={rootComponent} />
               <div style={style.divide} />
               <RedPropertySizeEdit rootComponent={rootComponent} />
-              <div className={'todo'}>TODO - conic 타입추가</div>
 
             </div>
+            <div style={style.divide} />
             <div>Start Position</div>
             <div style={{display: 'flex'}}>
               <RedPropertyPositionEditByMouse rootComponent={rootComponent} />
