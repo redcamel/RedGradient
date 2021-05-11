@@ -107,7 +107,7 @@ function drawCanvasUI() {
 
       </div>
       <div>
-        레이어 영역 보기
+        그라데이션 영역 보기
         <input type={'checkbox'}
                checked={this.state.layerSizeView}
                style={{

@@ -9,6 +9,8 @@
 import React from "react";
 import RedLayer from "../layer/RedLayer.jsx";
 import drawCanvasUI from "./drawCanvasUI.js";
+import GRADIENT_TYPE from "../GRADIENT_TYPE";
+
 class RedCanvas extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +22,7 @@ class RedCanvas extends React.Component {
       layerSizeView: true,
       canvasBgColorPickerOpenYn: false
     };
-    this.refColorPickerContainer = React.createRef()
+    this.refColorPickerContainer = React.createRef();
   }
 
   draw_canvasUI = drawCanvasUI;
@@ -29,6 +31,13 @@ class RedCanvas extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
+    const activeSubDataPosition = activeSubData['position'];
+    const activeSubDataAt = activeSubData['at'];
+    const activeSubDataSize = activeSubData['size'];
+    const layoutSize = {
+      w :  activeSubDataSize['wUnit']==='%' ? canvasInfo['width'] * activeSubDataSize['w']/100 : activeSubDataSize['w'],
+      h :  activeSubDataSize['hUnit']==='%' ? canvasInfo['height'] * activeSubDataSize['h']/100 : activeSubDataSize['h']
+    }
     return <div style={{
       ...style.canvas,
       transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
@@ -45,16 +54,43 @@ class RedCanvas extends React.Component {
         this.state.layerSizeView ? <div
           style={{
             position: 'absolute',
-            left: `${activeSubData['position']['x']}${activeSubData['position']['xUnit']}`,
-            top: `${activeSubData['position']['y']}${activeSubData['position']['yUnit']}`,
-            width: `${canvasInfo['width']}px`,
-            height: `${canvasInfo['height']}px`,
+            left: `${activeSubDataPosition['x']}${activeSubDataPosition['xUnit']}`,
+            top: `${activeSubDataPosition['y']}${activeSubDataPosition['yUnit']}`,
+            width: `${layoutSize['w']}px`,
+            height: `${layoutSize['h']}px`,
             border: '1px dashed #000',
             color: '#000'
           }}
         >
           {activeSubData['title']}
-          {/*<div>Todo - 실제 에티팅 영역도 보여주는걸로</div>*/}
+          {
+            activeSubData['type']===GRADIENT_TYPE.RADIAL ? <>
+              <div
+                style={{
+                  position: 'absolute',
+                  left: activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x']}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] *activeSubDataAt['x']/100}px`,
+                  top: activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y']}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] *activeSubDataAt['y']/100}px`,
+                  width: `${canvasInfo['width']}px`,
+                  height: `${canvasInfo['height']}px`,
+                  border: '1px dashed rgba(0,0,0,0.25)',
+                  color: '#000'
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  left: activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x']}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] *activeSubDataAt['x']/100}px`,
+                  top: activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y']}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] *activeSubDataAt['y']/100}px`,
+                  width: `10px`,
+                  height: `10px`,
+                  borderRadius:'50%',
+                  background: 'red',
+                  transform : 'translate(-50%,-50%)',
+                  color: '#000'
+                }}
+              />
+            </> : ''
+          }
         </div> : ''
       }
 
