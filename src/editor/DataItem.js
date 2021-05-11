@@ -1,3 +1,5 @@
+import DataColor from "./DataColor";
+
 let uuid = 0;
 
 function DataItem() {
@@ -10,8 +12,8 @@ function DataItem() {
     position: {x: 0, xUnit: '%', y: 0, yUnit: '%'},
     size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
     colorList: [
-      {color: 'rgba(255,255,255,1)', rangeUnit:'%',range: 0},
-      {color: 'rgba(255,255,255,0.1)',rangeUnit:'%',range: 100}
+      new DataColor(`rgba(255,255,255,1)`,0,'%'),
+      new DataColor(`rgba(255,255,255,0.1)`,100,'%')
     ]
   };
 }

@@ -91,7 +91,6 @@ class RedGradientColorItem extends React.Component {
           if (prevColorData && prevColorData['xUnit'] === colorData['xUnit']) newRange = currentRange - (currentRange - prevColorData['range']) * 0.5;
           const newColorData = new DataColor(colorData['color'], newRange);
           activeSubData['colorList'].splice(this.getIndex(), 0, newColorData);
-          rootComponent.setState({});
         }}
       >+
       </button>
