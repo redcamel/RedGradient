@@ -38,31 +38,7 @@ class RedPropertyAtEdit extends React.Component {
           rootComponent.setState({});
         }} />
       </div>
-      Size
-      <div>
-        <RedNumber
-          width={'80px'}
-          value={activeSubData['size']['w'] || 0}
-          HD_onInput={e => {
-            activeSubData['size']['w'] = e.target.value;
-            rootComponent.setState({});
-          }} />
-        <RedSelect value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
-          activeSubData['size']['wUnit'] = e.target.value;
-          rootComponent.setState({});
-        }} />
-        <RedNumber
-          width={'80px'}
-          value={activeSubData['size']['h'] || 0}
-          HD_onInput={e => {
-            activeSubData['size']['h'] = e.target.value;
-            rootComponent.setState({});
-          }} />
-        <RedSelect value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {
-          activeSubData['size']['hUnit'] = e.target.value;
-          rootComponent.setState({});
-        }} />
-      </div>
+
     </div>;
   }
 }
