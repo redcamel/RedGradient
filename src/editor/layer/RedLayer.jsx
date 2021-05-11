@@ -9,12 +9,16 @@
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import DataItem from "../DataItem";
-import RedNumber from "../../core/RedNumber.jsx";
-import RedSelect from "../../core/RedSelect.jsx";
-import DataLayer from "../DataLayer";
 import RedLayerSubItem from "./RedLayerSubItem.jsx";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faEye, faEyeSlash, faFolder, faFolderOpen, faMinusCircle, faPlusCircle} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {
+  faEye,
+  faEyeSlash,
+  faFolder,
+  faFolderOpen,
+  faMinusCircle,
+  faPlusCircle
+} from '@fortawesome/free-solid-svg-icons';
 import REPEAT_TYPE from "../REPEAT_TYPE.js";
 import RedLayerTop from "./RedLayerTop.jsx";
 import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
@@ -40,7 +44,7 @@ class RedLayer extends React.Component {
     const rootComponentState = rootComponent.state;
     const layers = rootComponentState.layers;
     return <div style={{flexDirection: 'column', display: 'flex'}}>
-      <RedLayerTop rootComponent={rootComponent} layersComponent={this}/>
+      <RedLayerTop rootComponent={rootComponent} layersComponent={this} />
       <div style={style.container}>
         {
           layers.map((layer) => {
@@ -58,29 +62,29 @@ class RedLayer extends React.Component {
                   icon={layer.openYn ? faFolderOpen : faFolder}
                   style={{fontSize: '11px', marginRight: '5px', cursor: 'pointer'}}
                   onClick={() => {
-                    layer.openYn = !layer.openYn
-                    rootComponent.setState({})
-                  }}/>
+                    layer.openYn = !layer.openYn;
+                    rootComponent.setState({});
+                  }} />
                 {layer.title}
               </div>
               <div>
                 <button className={'layerVisible'} onClick={() => this._toggleVisible(layer)}>
-                  <FontAwesomeIcon icon={layer.visible ? faEye : faEyeSlash}/>
+                  <FontAwesomeIcon icon={layer.visible ? faEye : faEyeSlash} />
                 </button>
                 <button className={'layerDel'}
-                        style={{opacity : layers.length>1 ? 1 : 0.25 }}
+                        style={{opacity: layers.length > 1 ? 1 : 0.25}}
                         onClick={e => {
                           e.stopPropagation();
-                          if(layers.length>1 ){
-                            let idx = layers.indexOf(layer)
+                          if (layers.length > 1) {
+                            let idx = layers.indexOf(layer);
                             layers.splice(idx, 1);
-                            let targetLayer
-                            if(layers[idx]) targetLayer = layers[idx]
-                            else targetLayer = layers[0]
+                            let targetLayer;
+                            if (layers[idx]) targetLayer = layers[idx];
+                            else targetLayer = layers[0];
                             rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
                           }
                         }}
-                ><FontAwesomeIcon icon={faMinusCircle}/>
+                ><FontAwesomeIcon icon={faMinusCircle} />
                 </button>
                 <button className={'layerAdd'}
                         onClick={e => {
@@ -88,7 +92,7 @@ class RedLayer extends React.Component {
                           layer.items.splice(0, 0, new DataItem());
                           rootComponent.setState({activeSubData: layer.items[0]});
                         }}
-                ><FontAwesomeIcon icon={faPlusCircle}/>
+                ><FontAwesomeIcon icon={faPlusCircle} />
                 </button>
               </div>
               <div
@@ -104,15 +108,15 @@ class RedLayer extends React.Component {
                 onClick={() => rootComponent.setState({activeLayer: layer, activeSubData: layer.items[0]})}
               >
                 <div className={'layerItem'}
-                     style={{background: `${RedLayer.calcGradientItems(layer['items'], false, layer)},${this.state.layerBgColor}`}}/>
+                     style={{background: `${RedLayer.calcGradientItems(layer['items'], false, layer)},${this.state.layerBgColor}`}} />
               </div>
               <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem layer={layer} item={item}
-                                                                            rootComponent={rootComponent}/>) : ''}</div>
+                                                                            rootComponent={rootComponent} />) : ''}</div>
             </div>;
           })
         }
       </div>
-    </div>
+    </div>;
   }
 }
 
@@ -129,20 +133,30 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
     return `${v['color']} ${colorRangeTxt}`;
   });
   let TEMP;
-  TEMP = data['position']
+  TEMP = data['position'];
   const positionTxt = TEMP ? ` ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']}` : '';
-  TEMP = data['size']
+  TEMP = data['size'];
   const sizeTxt = TEMP ? ` ${TEMP['w']}${TEMP['wUnit']} ${TEMP['h']}${TEMP['hUnit']}` : '100% 100%';
-  const repeatTxt = data['typeRepeat'] === REPEAT_TYPE.REPEAT ? '' : data['typeRepeat']
-  let result
-  if (data['type'] === GRADIENT_TYPE.LINEAR) result = `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
-  else {
-    const endingShape = data['typeEndingShape'] === ENDING_SHAPE_TYPE.NONE ? '' : (data['typeEndingShape'])
-    TEMP = data['at']
-    const atTxt = TEMP ? ` ${endingShape} at ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']}` : '';
-    result = `${data['type']}(${[atTxt,gradients].join(',')}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
+  const repeatTxt = data['typeRepeat'] === REPEAT_TYPE.REPEAT ? '' : data['typeRepeat'];
+  let result;
+  let atTxt=''
+  switch (data['type']) {
+    case  GRADIENT_TYPE.LINEAR:
+      result = `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
+      break;
+    case GRADIENT_TYPE.RADIAL :
+      const endingShape = data['typeEndingShape'] === ENDING_SHAPE_TYPE.NONE ? '' : (data['typeEndingShape']);
+      TEMP = data['at'];
+      atTxt = TEMP ? ` ${endingShape} at ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']}` : '';
+      result = `${data['type']}(${[atTxt, gradients].join(',')}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
+      break;
+    case GRADIENT_TYPE.CONIC :
+      TEMP = data['at'];
+      atTxt = TEMP ? `${data['deg']}deg at ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']}` : '';
+      result = `${data['type']}(from ${[atTxt, gradients].join(',')}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
+      break;
   }
-  return result
+  return result;
 };
 export default RedLayer;
 const style = {

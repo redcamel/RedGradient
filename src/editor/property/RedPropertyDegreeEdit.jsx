@@ -40,7 +40,7 @@ class RedPropertyDegreeEdit extends React.Component {
     const deg = activeSubData['deg'];
     return <div>
       {
-        activeSubData['type'] === GRADIENT_TYPE.LINEAR ? <>
+         <>
           Deg <RedNumber
           width={'71px'}
           value={deg || 0}
@@ -69,7 +69,7 @@ class RedPropertyDegreeEdit extends React.Component {
               }}/>
             </div>
           </div>
-        </> : ''
+        </>
       }
     </div>;
   }
