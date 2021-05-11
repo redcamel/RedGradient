@@ -9,6 +9,7 @@ function DataItem() {
     type: GRADIENT_TYPE.LINEAR,
     typeEndingShape: 'linear-gradient',
     typeRepeat: 'repeat',
+    blendMode : 'normal',
     deg: 90,
     visible: true,
     position: {x: 0, xUnit: '%', y: 0, yUnit: '%'},

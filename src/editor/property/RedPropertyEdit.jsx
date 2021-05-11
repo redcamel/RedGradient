@@ -44,11 +44,14 @@ class RedPropertyEdit extends React.Component {
               }} />
               <div style={style.divide} />
               <RedPropertyTypeEdit rootComponent={rootComponent} />
+              <div style={style.divide} />
               <RedPropertyRepeatEdit rootComponent={rootComponent} />
               {/*<RedPropertyBlendEdit rootComponent={rootComponent} />*/}
-              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.CONIC ? <>
+              {data.type === GRADIENT_TYPE.RADIAL? <>
                 <div style={style.divide} />
                 <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />
+              </> : ''}
+              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.CONIC ? <>
                 <div style={style.divide} />
                 <RedPropertyAtEdit rootComponent={rootComponent} />
               </> : ''}
