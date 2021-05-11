@@ -13,14 +13,14 @@ const options = [
   'black',
   'white',
   'transparent'
-]
+];
 
 class RedLayerTop extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const layers = rootComponentState.layers;
-    const layersComponent = this.props.layersComponent
+    const layersComponent = this.props.layersComponent;
     return <div>
       <div style={style.addLayer}>
         <div style={style.addLayerItem}
@@ -35,7 +35,7 @@ class RedLayerTop extends React.Component {
           {options.map(v => <option value={v}>{v}</option>)}
         </select>
       </div>
-    </div>
+    </div>;
   }
 }
 

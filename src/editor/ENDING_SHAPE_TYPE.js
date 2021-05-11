@@ -1,6 +1,6 @@
 const ENDING_SHAPE_TYPE = {
   ELLIPSE: 'ellipse',
   CIRCLE: 'circle',
-  NONE : 'none'
+  NONE: 'none'
 };
 export default ENDING_SHAPE_TYPE;

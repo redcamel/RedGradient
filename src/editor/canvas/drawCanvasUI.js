@@ -80,10 +80,10 @@ function drawCanvasUI() {
                 position: 'inline',
                 color: rootComponentState.bgColor,
                 container: this.refColorPickerContainer.current,
-                onChange: color => rootComponent.setState({bgColor:color})
+                onChange: color => rootComponent.setState({bgColor: color})
               });
             }
-            colorPicker.setOption({color :rootComponentState.bgColor});
+            colorPicker.setOption({color: rootComponentState.bgColor});
           }}
         />
 

@@ -1,6 +1,5 @@
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
-import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
 
 class RedPropertyTypeEndingShapeEdit extends React.Component {
@@ -21,7 +20,7 @@ class RedPropertyTypeEndingShapeEdit extends React.Component {
         HD_change={e => {
           activeSubData['typeEndingShape'] = ENDING_SHAPE_TYPE[e.target.value];
           rootComponent.setState({});
-        }}/>
+        }} />
     </div>;
   }
 }

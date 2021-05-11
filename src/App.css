@@ -47,12 +47,14 @@ select {
 option {
     background: #575757;
 }
+
 /*컬러피커용*/
-.input-field .input{
-    background : #fff !important;
+.input-field .input {
+    background: #fff !important;
     box-shadow: none !important;
 
 }
+
 #root {
     position: absolute;
     top: 0;

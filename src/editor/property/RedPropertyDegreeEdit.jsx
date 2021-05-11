@@ -1,5 +1,4 @@
 import React from "react";
-import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedNumber from "../../core/RedNumber.jsx";
 
 const SIZE = 50;
@@ -40,14 +39,14 @@ class RedPropertyDegreeEdit extends React.Component {
     const deg = activeSubData['deg'];
     return <div>
       {
-         <>
+        <>
           Deg <RedNumber
           width={'71px'}
           value={deg || 0}
           HD_onInput={e => {
             activeSubData['deg'] = e.target.value;
             rootComponent.setState({});
-          }}/>
+          }} />
           <div style={{textAlign: 'center'}}>
             <div
               style={style.box}
@@ -61,12 +60,12 @@ class RedPropertyDegreeEdit extends React.Component {
                 this.calcDegree(e.nativeEvent);
               }}
             >
-              <div style={style.centerItem} ref={this.refCenter}/>
+              <div style={style.centerItem} ref={this.refCenter} />
               <div style={{
                 ...style.degreeItem,
                 top: `calc(50% + ${Math.sin(Math.PI / 180 * (deg - 90)) * SIZE / 3}px)`,
                 left: `calc(50% + ${Math.cos(Math.PI / 180 * (deg - 90)) * SIZE / 3}px)`
-              }}/>
+              }} />
             </div>
           </div>
         </>

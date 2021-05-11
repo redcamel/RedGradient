@@ -22,6 +22,7 @@ import RedPropertyAtEdit from "./RedPropertyAtEdit";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedPropertySizeEdit from "./RedPropertySizeEdit";
 import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
+import RedPreset from "../../preset/RedPreset";
 
 class RedPropertyEdit extends React.Component {
   render() {
@@ -47,7 +48,7 @@ class RedPropertyEdit extends React.Component {
               <RedPropertyRepeatEdit rootComponent={rootComponent} />
               <div style={style.divide} />
               <RedPropertyBlendEdit rootComponent={rootComponent} />
-              {data.type === GRADIENT_TYPE.RADIAL? <>
+              {data.type === GRADIENT_TYPE.RADIAL ? <>
                 <div style={style.divide} />
                 <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />
               </> : ''}
@@ -66,15 +67,21 @@ class RedPropertyEdit extends React.Component {
             <div style={{display: 'flex'}}>
               <RedPropertyPositionEditByMouse rootComponent={rootComponent} />
               <div style={{height: '5px'}} />
-              {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.CONIC ? <RedPropertyDegreeEdit rootComponent={rootComponent} />  :''}
+              {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.CONIC ?
+                <RedPropertyDegreeEdit rootComponent={rootComponent} /> : ''}
             </div>
           </div>
+        </div>
+
+        <div style={style.itemContainer}>
+          <div>Gradient Preset</div>
+          <RedPreset rootComponent={rootComponent}/>
         </div>
         <div style={style.itemContainer}>
           <RedGradientColorEdit rootComponent={rootComponent} />
         </div>
         <div style={style.itemContainer}>
-          <div>Current Data</div>
+          <div>Current Gradient Css</div>
           <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
             {
               JSON.stringify(RedLayer.calcGradientItem(data, false, activeLayer))
@@ -87,6 +94,20 @@ class RedPropertyEdit extends React.Component {
             }
 
           </SyntaxHighlighter>
+          <div>Current Gradient Data</div>
+          <div
+            style={{cursor:'pointer'}}
+            onClick={e=>{
+              var tempElem = document.createElement('textarea');
+              tempElem.value =  JSON.stringify(data, null, 2);
+              document.body.appendChild(tempElem);
+
+              tempElem.select();
+              document.execCommand("copy");
+              document.body.removeChild(tempElem);
+
+            }}
+          >copy</div>
           <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
             {JSON.stringify(data, null, 2)}
           </SyntaxHighlighter>

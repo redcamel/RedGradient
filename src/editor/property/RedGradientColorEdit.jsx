@@ -54,7 +54,7 @@ class RedGradientColorEdit extends React.Component {
   };
 
   sortColorList() {
-    const canvasInfo  =this.props.rootComponent.state.canvasInfo
+    const canvasInfo = this.props.rootComponent.state.canvasInfo;
     this.props.rootComponent.state.activeSubData.colorList.sort((a, b) => {
       const aX = a['rangeUnit'] === '%' ? a['range'] : (a['range'] / canvasInfo['width'] * 100);
       const bX = b['rangeUnit'] === '%' ? b['range'] : (b['range'] / canvasInfo['width'] * 100);
@@ -69,20 +69,20 @@ class RedGradientColorEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const data = rootComponentState.activeSubData;
     return <div style={style.container}>
-     <div style={{display:'flex',margin : '4px 0px',justifyContent: 'space-between'}}>
-       Gradient ColorRange
-       <div>
-         <button style={{...style.bgItem, background: '#000', color: '#fff'}}
-                 onClick={() => this.setState({layerBgColor: 'black'})}>B
-         </button>
-         <button style={{...style.bgItem, background: '#fff', color: '#000'}}
-                 onClick={() => this.setState({layerBgColor: 'white'})}>W
-         </button>
-         <button style={{...style.bgItem}} className={'transparent_checker'}
-                 onClick={() => this.setState({layerBgColor: 'transparent'})}>T
-         </button>
-       </div>
-     </div>
+      <div style={{display: 'flex', margin: '4px 0px', justifyContent: 'space-between'}}>
+        Gradient ColorRange
+        <div>
+          <button style={{...style.bgItem, background: '#000', color: '#fff'}}
+                  onClick={() => this.setState({layerBgColor: 'black'})}>B
+          </button>
+          <button style={{...style.bgItem, background: '#fff', color: '#000'}}
+                  onClick={() => this.setState({layerBgColor: 'white'})}>W
+          </button>
+          <button style={{...style.bgItem}} className={'transparent_checker'}
+                  onClick={() => this.setState({layerBgColor: 'transparent'})}>T
+          </button>
+        </div>
+      </div>
       <div
         ref={this.refBar}
         className={'transparent_checker'}
@@ -115,8 +115,7 @@ class RedGradientColorEdit extends React.Component {
 
 export default RedGradientColorEdit;
 const style = {
-  container: {
-  },
+  container: {},
   bgItem: {
     padding: '2px',
     marginRight: '1px',

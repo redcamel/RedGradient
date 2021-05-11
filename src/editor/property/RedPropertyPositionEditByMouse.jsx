@@ -42,7 +42,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const position = activeSubData['position'];
     const canvasInfo = rootComponentState.canvasInfo;
     let layerPixelW = canvasInfo.width;
-    let layerPixelH =  canvasInfo.height;
+    let layerPixelH = canvasInfo.height;
     let tPercentX = position['xUnit'] === '%' ? (position.x / 100 * SIZE) % 100 : ((position.x / layerPixelW * 100) % 100);
     let tPercentY = position['yUnit'] === '%' ? (position.y / 100 * SIZE) % 100 : ((position.y / layerPixelH * 100) % 100);
     if (tPercentX < 0) tPercentX = 100 + tPercentX;
@@ -66,7 +66,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
           ...style.degreeItem,
           top: `${tPercentY}%`,
           left: `${tPercentX}%`
-        }}/>
+        }} />
       </div>
     </div>;
   }

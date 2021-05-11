@@ -34,24 +34,24 @@ class App extends React.Component {
               title: 'test1',
               type: 'linear-gradient',
               typeRepeat: 'repeat',
-              typeEndingShape : 'none',
-              blendMode : 'normal',
+              typeEndingShape: 'none',
+              blendMode: 'normal',
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               at: {x: 0, xUnit: '%', y: 0, yUnit: '%'},
               size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
-                {color: 'transparent', rangeUnit:'%',range: 0},
-                {color: 'transparent', rangeUnit:'%',range: 24.1867043847},
-                {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
-                {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
-                {color: 'transparent', rangeUnit:'%',range: 25.6011315417},
-                {color: 'transparent', rangeUnit:'%',range: 74.3988684583},
-                {color: '#FFEA53', rangeUnit:'%',range: 74.3988684583},
-                {color: '#FFEA53', rangeUnit:'%',range: 75.8132956153},
-                {color: 'transparent', rangeUnit:'%',range: 75.8132956153},
-                {color: 'transparent', rangeUnit:'%',range: 100}
+                {color: 'transparent', rangeUnit: '%', range: 0},
+                {color: 'transparent', rangeUnit: '%', range: 24.1867043847},
+                {color: '#FFEA53', rangeUnit: '%', range: 25.6011315417},
+                {color: '#FFEA53', rangeUnit: '%', range: 25.6011315417},
+                {color: 'transparent', rangeUnit: '%', range: 25.6011315417},
+                {color: 'transparent', rangeUnit: '%', range: 74.3988684583},
+                {color: '#FFEA53', rangeUnit: '%', range: 74.3988684583},
+                {color: '#FFEA53', rangeUnit: '%', range: 75.8132956153},
+                {color: 'transparent', rangeUnit: '%', range: 75.8132956153},
+                {color: 'transparent', rangeUnit: '%', range: 100}
               ]
             }
           ]
@@ -66,18 +66,18 @@ class App extends React.Component {
               title: 'test',
               type: 'conic-gradient',
               typeRepeat: 'no-repeat',
-              typeEndingShape : 'none',
-              blendMode : 'normal',
+              typeEndingShape: 'none',
+              blendMode: 'normal',
               deg: 0,
               visible: true,
               position: {x: 150, xUnit: 'px', y: 150, yUnit: 'px'},
               at: {x: 50, xUnit: '%', y: 50, yUnit: '%'},
               size: {w: 50, wUnit: '%', h: 50, hUnit: '%'},
               colorList: [
-                {color: 'rgba(255,255,0,0.9)', rangeUnit:'%',range: 25},
-                {color: 'rgba(255,0,0,0.5)', rangeUnit:'%',range: 55},
-                {color: 'transparent', rangeUnit:'%',range: 75},
-                {color: 'transparent', rangeUnit:'%',range: 100}
+                {color: 'rgba(255,255,0,0.9)', rangeUnit: '%', range: 25},
+                {color: 'rgba(255,0,0,0.5)', rangeUnit: '%', range: 55},
+                {color: 'transparent', rangeUnit: '%', range: 75},
+                {color: 'transparent', rangeUnit: '%', range: 100}
               ]
             }
           ]
@@ -91,18 +91,18 @@ class App extends React.Component {
               title: 'test',
               type: 'radial-gradient',
               typeRepeat: 'no-repeat',
-              typeEndingShape : 'none',
-              blendMode : 'normal',
+              typeEndingShape: 'none',
+              blendMode: 'normal',
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
               at: {x: 0, xUnit: '%', y: 0, yUnit: '%'},
               size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
               colorList: [
-                {color: 'rgba(255,255,0,0.9)', rangeUnit:'%',range: 25},
-                {color: 'rgba(255,0,0,0.5)', rangeUnit:'%',range: 55},
-                {color: 'transparent', rangeUnit:'%',range: 75},
-                {color: 'transparent', rangeUnit:'%',range: 100}
+                {color: 'rgba(255,255,0,0.9)', rangeUnit: '%', range: 25},
+                {color: 'rgba(255,0,0,0.5)', rangeUnit: '%', range: 55},
+                {color: 'transparent', rangeUnit: '%', range: 75},
+                {color: 'transparent', rangeUnit: '%', range: 100}
               ]
             }
           ]
@@ -137,28 +137,28 @@ class App extends React.Component {
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
-            <RedCanvas rootComponent={this}/>
+            <RedCanvas rootComponent={this} />
           </div>
           <div className={'frame_right'}>
             {/*frame_right Right*/}
             <div style={{display: "flex", height: '100%'}}>
-              <RedLayer rootComponent={this}/>
-              {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
-              <div style={{display: "flex", height: '100%',alignContent: 'space-between',flexDirection:'column'}}>
-              <div style={{width:'300px'}}>
-                <div style={style.test}>결과 테스트</div>
-                <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
-                  {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')}
-                </SyntaxHighlighter>
-              </div>
-              <div>TODO - 애드센스자리</div>
+              <RedLayer rootComponent={this} />
+              {this.state.activeSubData ? <RedPropertyEdit rootComponent={this} /> : ''}
+              <div style={{display: "flex", height: '100%', alignContent: 'space-between', flexDirection: 'column'}}>
+                <div style={{width: '300px'}}>
+                  <div style={style.test}>결과 테스트</div>
+                  <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
+                    {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')}
+                  </SyntaxHighlighter>
+                </div>
+                <div>TODO - 애드센스자리</div>
               </div>
             </div>
 
           </div>
         </div>
       </div>
-      <div className={'frame_bottom'} >frame Bottom
+      <div className={'frame_bottom'}>frame Bottom
 
       </div>
       <div className={'frame_status'}>frame Status

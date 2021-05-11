@@ -1,6 +1,5 @@
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
-import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import BLEND_MODE_TYPE from "../BLEND_MODE_TYPE";
 
 class RedPropertyBlendEdit extends React.Component {
@@ -21,8 +20,8 @@ class RedPropertyBlendEdit extends React.Component {
         HD_change={e => {
           activeSubData['blendMode'] = BLEND_MODE_TYPE[e.target.value];
           rootComponent.setState({});
-        }}/>
-    </div>
+        }} />
+    </div>;
   }
 }
 

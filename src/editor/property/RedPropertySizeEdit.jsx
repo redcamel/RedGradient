@@ -12,10 +12,10 @@ class RedPropertySizeEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    return <div >
+    return <div>
 
       Size
-      <div style={{display:'flex',justifyContent: 'space-between'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <RedNumber
           width={'80px'}
           value={activeSubData['size']['w'] || 0}

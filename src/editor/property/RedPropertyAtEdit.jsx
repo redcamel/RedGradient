@@ -14,7 +14,7 @@ class RedPropertyAtEdit extends React.Component {
     const activeSubData = rootComponentState.activeSubData;
     return <div>
       At
-      <div style={{display:'flex',justifyContent: 'space-between'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <RedNumber
           width={'80px'}
           value={activeSubData['at']['x'] || 0}

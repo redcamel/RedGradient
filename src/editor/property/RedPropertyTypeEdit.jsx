@@ -1,5 +1,4 @@
 import React from "react";
-import RedSelect from "../../core/RedSelect.jsx";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedRadio from "../../core/RedRadio";
 
@@ -19,7 +18,7 @@ class RedPropertyTypeEdit extends React.Component {
       HD_change={e => {
         activeSubData['type'] = GRADIENT_TYPE[e.target.value];
         rootComponent.setState({});
-      }}/>
+      }} />;
   }
 }
 

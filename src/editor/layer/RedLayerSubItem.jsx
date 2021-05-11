@@ -62,7 +62,7 @@ class RedLayerSubItem extends React.Component {
                 onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash} />
         </button>
         <button className={'layerDel'}
-                style={{opacity : layer.items.length>1 ? 1 : 0.25 }}
+                style={{opacity: layer.items.length > 1 ? 1 : 0.25}}
                 onClick={e => {
                   e.stopPropagation();
                   if (layer.items.length > 1) {

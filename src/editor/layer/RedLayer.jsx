@@ -22,7 +22,6 @@ import {
 import REPEAT_TYPE from "../REPEAT_TYPE.js";
 import RedLayerTop from "./RedLayerTop.jsx";
 import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
-import BLEND_MODE_TYPE from "../BLEND_MODE_TYPE";
 
 const SIZE = 100;
 
@@ -130,10 +129,10 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
   if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
   //TODO - 여기정리
 
-  const gradients = data['colorList'].map((v,index) => {
+  const gradients = data['colorList'].map((v, index) => {
     let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
     //TODO - divideTxt 이거 좀더 보강해야함
-    const divideTxt=v['useDivide']&& data['colorList'][index+1] ? `,${data['colorList'][index+1]['color']} calc(${v['range']}${v['rangeUnit']} + 1px)` : ''
+    const divideTxt = v['useDivide'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['range']}${v['rangeUnit']} + 1px)` : '';
     return `${v['color']} ${colorRangeTxt} ${divideTxt}`;
   });
   let TEMP;
@@ -143,9 +142,9 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
   const sizeTxt = TEMP ? ` ${TEMP['w']}${TEMP['wUnit']} ${TEMP['h']}${TEMP['hUnit']}` : '100% 100%';
   const repeatTxt = data['typeRepeat'] === REPEAT_TYPE.REPEAT ? '' : data['typeRepeat'];
   // const blendTxt = data['blendMode'] === BLEND_MODE_TYPE.NORMAL ? '' : data['blendMode'];
-  const etcs = ` ${sizeTxt} ${repeatTxt}`
+  const etcs = ` ${sizeTxt} ${repeatTxt}`;
   let result;
-  let atTxt=''
+  let atTxt = '';
 
   switch (data['type']) {
     case  GRADIENT_TYPE.LINEAR:
