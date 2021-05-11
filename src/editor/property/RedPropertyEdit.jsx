@@ -21,6 +21,7 @@ import RedPropertyTypeEndingShapeEdit from "./RedPropertyTypeEndingShapeEdit";
 import RedPropertyAtEdit from "./RedPropertyAtEdit";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedPropertySizeEdit from "./RedPropertySizeEdit";
+import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
 
 class RedPropertyEdit extends React.Component {
   render() {
@@ -44,6 +45,7 @@ class RedPropertyEdit extends React.Component {
               <div style={style.divide} />
               <RedPropertyTypeEdit rootComponent={rootComponent} />
               <RedPropertyRepeatEdit rootComponent={rootComponent} />
+              {/*<RedPropertyBlendEdit rootComponent={rootComponent} />*/}
               {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.CONIC ? <>
                 <div style={style.divide} />
                 <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />

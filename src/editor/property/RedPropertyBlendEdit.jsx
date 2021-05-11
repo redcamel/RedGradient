@@ -1,9 +1,9 @@
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
-import RedRadio from "../../core/RedRadio";
+import BLEND_MODE_TYPE from "../BLEND_MODE_TYPE";
 
-class RedPropertyTypeEdit extends React.Component {
+class RedPropertyBlendEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -13,14 +13,14 @@ class RedPropertyTypeEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    return <RedRadio
-      value={activeSubData['type'].split('-')[0].toUpperCase()}
-      options={Object.keys(GRADIENT_TYPE)}
+    return <RedSelect
+      value={activeSubData['blendMode'].split('-')[0].toUpperCase()}
+      options={Object.keys(BLEND_MODE_TYPE)}
       HD_change={e => {
-        activeSubData['type'] = GRADIENT_TYPE[e.target.value];
+        activeSubData['blendMode'] = BLEND_MODE_TYPE[e.target.value];
         rootComponent.setState({});
       }}/>
   }
 }
 
-export default RedPropertyTypeEdit;
+export default RedPropertyBlendEdit;

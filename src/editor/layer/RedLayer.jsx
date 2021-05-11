@@ -22,6 +22,7 @@ import {
 import REPEAT_TYPE from "../REPEAT_TYPE.js";
 import RedLayerTop from "./RedLayerTop.jsx";
 import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
+import BLEND_MODE_TYPE from "../BLEND_MODE_TYPE";
 
 const SIZE = 100;
 
@@ -138,22 +139,24 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
   TEMP = data['size'];
   const sizeTxt = TEMP ? ` ${TEMP['w']}${TEMP['wUnit']} ${TEMP['h']}${TEMP['hUnit']}` : '100% 100%';
   const repeatTxt = data['typeRepeat'] === REPEAT_TYPE.REPEAT ? '' : data['typeRepeat'];
+  // const blendTxt = data['blendMode'] === BLEND_MODE_TYPE.NORMAL ? '' : data['blendMode'];
+  const etcs = ` ${sizeTxt} ${repeatTxt}`
   let result;
   let atTxt=''
   switch (data['type']) {
     case  GRADIENT_TYPE.LINEAR:
-      result = `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
+      result = `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${etcs}`;
       break;
     case GRADIENT_TYPE.RADIAL :
       const endingShape = data['typeEndingShape'] === ENDING_SHAPE_TYPE.NONE ? '' : (data['typeEndingShape']);
       TEMP = data['at'];
       atTxt = TEMP ? ` ${endingShape} at ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']}` : '';
-      result = `${data['type']}(${[atTxt, gradients].join(',')}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
+      result = `${data['type']}(${[atTxt, gradients].join(',')}) ${positionTxt} / ${etcs}`;
       break;
     case GRADIENT_TYPE.CONIC :
       TEMP = data['at'];
       atTxt = TEMP ? `${data['deg']}deg at ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']}` : '';
-      result = `${data['type']}(from ${[atTxt, gradients].join(',')}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
+      result = `${data['type']}(from ${[atTxt, gradients].join(',')}) ${positionTxt} / ${etcs}`;
       break;
   }
   return result;

@@ -35,6 +35,7 @@ class App extends React.Component {
               type: 'linear-gradient',
               typeRepeat: 'repeat',
               typeEndingShape : 'none',
+              blendMode : 'normal',
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
@@ -66,6 +67,7 @@ class App extends React.Component {
               type: 'conic-gradient',
               typeRepeat: 'no-repeat',
               typeEndingShape : 'none',
+              blendMode : 'normal',
               deg: 0,
               visible: true,
               position: {x: 150, xUnit: 'px', y: 150, yUnit: 'px'},
@@ -90,6 +92,7 @@ class App extends React.Component {
               type: 'radial-gradient',
               typeRepeat: 'no-repeat',
               typeEndingShape : 'none',
+              blendMode : 'normal',
               deg: 45,
               visible: true,
               position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
@@ -130,11 +133,7 @@ class App extends React.Component {
       <div className={'frame_middle'}>
         <div className={'frame_middle_container'}>
           <div className={'frame_left'}>frame Left
-            <div className={'todo'}>프리셋공간</div>
-            <div className={'todo'}>Todo - Rect</div>
-            <div className={'todo'}>Todo - Circle</div>
-            <div className={'todo'}>Todo - Line</div>
-            <div className={'todo'}>Todo - Etc</div>
+
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
