@@ -25,84 +25,39 @@ class App extends React.Component {
       activeSubData: null,
       bgColor: '#fff',
       layers: [
-        // {
-        //   title: 'testLayer sdfsdfsdfsdf',
-        //   visible: true,
-        //   openYn: true,
-        //   items: [
-        //     {
-        //       title: 'test1',
-        //       type: 'linear-gradient',
-        //       typeRepeat: 'repeat',
-        //       typeEndingShape : 'none',
-        //       deg: 45,
-        //       visible: true,
-        //       position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
-        //       at: {x: 0, xUnit: '%', y: 0, yUnit: '%'},
-        //       size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
-        //       colorList: [
-        //         {color: 'transparent', rangeUnit:'%',range: 0},
-        //         {color: 'transparent', rangeUnit:'%',range: 24.1867043847},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
-        //         {color: 'transparent', rangeUnit:'%',range: 25.6011315417},
-        //         {color: 'transparent', rangeUnit:'%',range: 74.3988684583},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 74.3988684583},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 75.8132956153},
-        //         {color: 'transparent', rangeUnit:'%',range: 75.8132956153},
-        //         {color: 'transparent', rangeUnit:'%',range: 100}
-        //       ]
-        //     },
-        //     {
-        //       title: 'test2',
-        //       type: 'linear-gradient',
-        //       typeRepeat: 'repeat',
-        //       typeEndingShape : 'none',
-        //       deg: -45,
-        //       visible: true,
-        //       position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
-        //       at: {x: 0, xUnit: '%', y: 0, yUnit: '%'},
-        //       size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
-        //       colorList: [
-        //         {color: 'transparent', rangeUnit:'%',range: 0},
-        //         {color: 'transparent', rangeUnit:'%',range: 24.1867043847},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
-        //         {color: 'transparent', rangeUnit:'%',range: 25.6011315417},
-        //         {color: 'transparent', rangeUnit:'%',range: 74.3988684583},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 74.3988684583},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 75.8132956153},
-        //         {color: 'transparent', rangeUnit:'%',range: 75.8132956153},
-        //         {color: 'transparent', rangeUnit:'%',range: 100}
-        //       ]
-        //     },
-        //     {
-        //       title: 'test3',
-        //       type: 'linear-gradient',
-        //       typeRepeat: 'repeat',
-        //       typeEndingShape : 'none',
-        //       deg: 45,
-        //       visible: true,
-        //       position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
-        //       at: {x: 0, xUnit: '%', y: 0, yUnit: '%'},
-        //       size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
-        //       colorList: [
-        //         {color: '#8F225C', rangeUnit:'%',range: 0},
-        //         {color: '#8F225C', rangeUnit:'%',range: 12.4469589816},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 12.4469589816},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 13.8613861386},
-        //         {color: 'transparent', rangeUnit:'%',range: 13.8613861386},
-        //         {color: 'transparent', rangeUnit:'%',range: 86.1386138614},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 86.1386138614},
-        //         {color: '#FFEA53', rangeUnit:'%',range: 87.5530410184},
-        //         {color: '#8F225C', rangeUnit:'%',range: 87.5530410184},
-        //         {color: '#8F225C', rangeUnit:'%',range: 100}
-        //       ]
-        //     }
-        //   ]
-        // },
         {
-          title: 'testLayer ',
+          title: 'testLayer sdfsdfsdfsdf',
+          visible: true,
+          openYn: true,
+          items: [
+            {
+              title: 'test1',
+              type: 'linear-gradient',
+              typeRepeat: 'repeat',
+              typeEndingShape : 'none',
+              deg: 45,
+              visible: true,
+              position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
+              at: {x: 0, xUnit: '%', y: 0, yUnit: '%'},
+              size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
+              colorList: [
+                {color: 'transparent', rangeUnit:'%',range: 0},
+                {color: 'transparent', rangeUnit:'%',range: 24.1867043847},
+                {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
+                {color: '#FFEA53', rangeUnit:'%',range: 25.6011315417},
+                {color: 'transparent', rangeUnit:'%',range: 25.6011315417},
+                {color: 'transparent', rangeUnit:'%',range: 74.3988684583},
+                {color: '#FFEA53', rangeUnit:'%',range: 74.3988684583},
+                {color: '#FFEA53', rangeUnit:'%',range: 75.8132956153},
+                {color: 'transparent', rangeUnit:'%',range: 75.8132956153},
+                {color: 'transparent', rangeUnit:'%',range: 100}
+              ]
+            }
+          ]
+        },
+
+        {
+          title: 'conic ',
           visible: true,
           openYn: true,
           items: [
@@ -111,7 +66,7 @@ class App extends React.Component {
               type: 'conic-gradient',
               typeRepeat: 'no-repeat',
               typeEndingShape : 'none',
-              deg: 45,
+              deg: 0,
               visible: true,
               position: {x: 150, xUnit: 'px', y: 150, yUnit: 'px'},
               at: {x: 50, xUnit: '%', y: 50, yUnit: '%'},
@@ -126,7 +81,7 @@ class App extends React.Component {
           ]
         },
         {
-          title: 'testLayer ',
+          title: 'radial ',
           visible: true,
           openYn: true,
           items: [
