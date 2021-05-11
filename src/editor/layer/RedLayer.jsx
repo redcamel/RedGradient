@@ -71,9 +71,11 @@ class RedLayer extends React.Component {
                         onClick={e => {
                           e.stopPropagation();
                           if(layers.length>1 ){
-                            layers.splice(layers.indexOf(layer), 1);
-                            let targetLayer = layer;
-                            if (!layers.length) layers.push(new DataLayer());
+                            let idx = layers.indexOf(layer)
+                            layers.splice(idx, 1);
+                            let targetLayer
+                            if(layers[idx]) targetLayer = layers[idx]
+                            else targetLayer = layers[0]
                             rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
                           }
                         }}
