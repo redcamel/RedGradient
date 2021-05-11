@@ -35,9 +35,11 @@ class RedCanvas extends React.Component {
     const activeSubDataAt = activeSubData['at'];
     const activeSubDataSize = activeSubData['size'];
     const layoutSize = {
-      w :  activeSubDataSize['wUnit']==='%' ? canvasInfo['width'] * activeSubDataSize['w']/100 : activeSubDataSize['w'],
-      h :  activeSubDataSize['hUnit']==='%' ? canvasInfo['height'] * activeSubDataSize['h']/100 : activeSubDataSize['h']
-    }
+      w: activeSubDataSize['wUnit'] === '%' ? canvasInfo['width'] * activeSubDataSize['w'] / 100 : activeSubDataSize['w'],
+      h: activeSubDataSize['hUnit'] === '%' ? canvasInfo['height'] * activeSubDataSize['h'] / 100 : activeSubDataSize['h'],
+    };
+    const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x']}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
+    const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y']}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
     return <div style={{
       ...style.canvas,
       transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
@@ -64,12 +66,12 @@ class RedCanvas extends React.Component {
         >
           {activeSubData['title']}
           {
-            activeSubData['type']===GRADIENT_TYPE.RADIAL ? <>
+            activeSubData['type'] === GRADIENT_TYPE.RADIAL  ? <>
               <div
                 style={{
                   position: 'absolute',
-                  left: activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x']}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] *activeSubDataAt['x']/100}px`,
-                  top: activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y']}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] *activeSubDataAt['y']/100}px`,
+                  left: lX,
+                  top: lY,
                   width: `${canvasInfo['width']}px`,
                   height: `${canvasInfo['height']}px`,
                   border: '1px dashed rgba(0,0,0,0.25)',
@@ -79,13 +81,13 @@ class RedCanvas extends React.Component {
               <div
                 style={{
                   position: 'absolute',
-                  left: activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x']}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] *activeSubDataAt['x']/100}px`,
-                  top: activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y']}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] *activeSubDataAt['y']/100}px`,
+                  left: lX,
+                  top: lY,
                   width: `10px`,
                   height: `10px`,
-                  borderRadius:'50%',
+                  borderRadius: '50%',
                   background: 'red',
-                  transform : 'translate(-50%,-50%)',
+                  transform: 'translate(-50%,-50%)',
                   color: '#000'
                 }}
               />
