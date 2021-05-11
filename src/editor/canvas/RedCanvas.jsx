@@ -52,7 +52,10 @@ class RedCanvas extends React.Component {
             border: '1px dashed #000',
             color: '#000'
           }}
-        >{activeSubData['title']}</div> : ''
+        >
+          {activeSubData['title']}
+          {/*<div>Todo - 실제 에티팅 영역도 보여주는걸로</div>*/}
+        </div> : ''
       }
 
 

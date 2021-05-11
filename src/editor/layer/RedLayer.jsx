@@ -137,10 +137,10 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
   let result
   if (data['type'] === GRADIENT_TYPE.LINEAR) result = `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
   else {
-    const endingShape = data['typeEndingShape'] === ENDING_SHAPE_TYPE.NONE ? '' : (data['typeEndingShape']+',')
+    const endingShape = data['typeEndingShape'] === ENDING_SHAPE_TYPE.NONE ? '' : (data['typeEndingShape'])
     TEMP = data['at']
-    const atTxt = TEMP ? `at ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']},` : '';
-    result = `${data['type']}(${endingShape} ${atTxt} ${gradients}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
+    const atTxt = TEMP ? ` ${endingShape} at ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']}` : '';
+    result = `${data['type']}(${[atTxt,gradients].join(',')}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
   }
   return result
 };
