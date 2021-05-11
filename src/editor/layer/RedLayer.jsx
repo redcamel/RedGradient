@@ -17,6 +17,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEye, faEyeSlash, faFolder, faFolderOpen, faMinusCircle, faPlusCircle} from '@fortawesome/free-solid-svg-icons'
 import REPEAT_TYPE from "../REPEAT_TYPE.js";
 import RedLayerTop from "./RedLayerTop.jsx";
+import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
 
 const SIZE = 100;
 
@@ -127,12 +128,20 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
     let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
     return `${v['color']} ${colorRangeTxt}`;
   });
-  const positionTxt = data['position'] ? ` ${data['position']['x']}${data['position']['xUnit']} ${data['position']['y']}${data['position']['yUnit']}` : '';
-  const sizeTxt = data['size'] ? ` ${data['size']['w']}${data['size']['wUnit']} ${data['size']['h']}${data['size']['hUnit']}` : '100% 100%';
-  const repeatTxt = data['repeatType'] === REPEAT_TYPE.REPEAT ? '' : data['repeatType']
+  let TEMP;
+  TEMP = data['position']
+  const positionTxt = TEMP ? ` ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']}` : '';
+  TEMP = data['size']
+  const sizeTxt = TEMP ? ` ${TEMP['w']}${TEMP['wUnit']} ${TEMP['h']}${TEMP['hUnit']}` : '100% 100%';
+  const repeatTxt = data['typeRepeat'] === REPEAT_TYPE.REPEAT ? '' : data['typeRepeat']
   let result
   if (data['type'] === GRADIENT_TYPE.LINEAR) result = `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
-  else result = `${data['type']}(${gradients}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
+  else {
+    const endingShape = data['typeEndingShape'] === ENDING_SHAPE_TYPE.NONE ? '' : (data['typeEndingShape']+',')
+    TEMP = data['at']
+    const atTxt = TEMP ? `at ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']},` : '';
+    result = `${data['type']}(${endingShape} ${atTxt} ${gradients}) ${positionTxt} / ${sizeTxt} ${repeatTxt}`;
+  }
   return result
 };
 export default RedLayer;

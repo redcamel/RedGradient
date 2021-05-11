@@ -17,6 +17,9 @@ import RedPropertyTypeEdit from "./RedPropertyTypeEdit.jsx";
 import RedPropertyPositionEdit from "./RedPropertyPositionEdit.jsx";
 import RedPropertyDegreeEdit from "./RedPropertyDegreeEdit.jsx";
 import RedPropertyRepeatEdit from "./RedPropertyRepeatEdit.jsx";
+import RedPropertyTypeEndingShapeEdit from "./RedPropertyTypeEndingShapeEdit";
+import RedPropertyAtEdit from "./RedPropertyAtEdit";
+import GRADIENT_TYPE from "../GRADIENT_TYPE";
 
 class RedPropertyEdit extends React.Component {
   render() {
@@ -25,7 +28,7 @@ class RedPropertyEdit extends React.Component {
     const activeLayer = rootComponentState.activeLayer;
     const data = rootComponentState.activeSubData;
     return <div style={style.container}>
-      <RedTitle title={'RedPropertyEdit'}/>
+      <RedTitle title={'RedPropertyEdit'} />
       <div style={style.contentWrap}>
         <div>
           <div style={{...style.itemContainer, display: 'flex'}}>
@@ -36,24 +39,25 @@ class RedPropertyEdit extends React.Component {
                 value={data['title']} HD_onInput={e => {
                 data['title'] = e.target.value;
                 rootComponent.setState({});
-              }}/>
-              <RedPropertyTypeEdit rootComponent={rootComponent}/>
-              <RedPropertyPositionEdit rootComponent={rootComponent}/>
-              <RedPropertyRepeatEdit rootComponent={rootComponent}/>
+              }} />
+              <RedPropertyTypeEdit rootComponent={rootComponent} />
+              {data.type === GRADIENT_TYPE.RADIAL ? <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} /> : ''}
+              {data.type === GRADIENT_TYPE.RADIAL ? <RedPropertyAtEdit rootComponent={rootComponent} /> : ''}
+              <RedPropertyPositionEdit rootComponent={rootComponent} />
+              <RedPropertyRepeatEdit rootComponent={rootComponent} />
               <div className={'todo'}>TODO - Radial일때 센터 포지션? 설정분리해야함</div>
               <div className={'todo'}>TODO - conic 타입추가</div>
             </div>
             <div>
               <div>Start Position</div>
-              <RedPropertyPositionEditByMouse rootComponent={rootComponent}/>
-              <div style={{height: '5px'}}/>
-              <RedPropertyDegreeEdit rootComponent={rootComponent}/>
+              <RedPropertyPositionEditByMouse rootComponent={rootComponent} />
+              <div style={{height: '5px'}} />
+              <RedPropertyDegreeEdit rootComponent={rootComponent} />
             </div>
           </div>
         </div>
         <div style={style.itemContainer}>
-          <div className={'todo'}>Todo - 단위 변경시 소팅및 픽셀 계산처리</div>
-          <RedGradientColorEdit rootComponent={rootComponent}/>
+          <RedGradientColorEdit rootComponent={rootComponent} />
         </div>
         <div style={style.itemContainer}>
           <div>Current Data</div>
