@@ -44,15 +44,16 @@ class RedPropertyEdit extends React.Component {
               }} />
               <div style={style.divide} />
               <RedPropertyTypeEdit rootComponent={rootComponent} />
+              <div className={'todo'}>Todo - Repeating X 모델 추가중</div>
               <div style={style.divide} />
               <RedPropertyRepeatEdit rootComponent={rootComponent} />
               <div style={style.divide} />
               <RedPropertyBlendEdit rootComponent={rootComponent} />
-              {data.type === GRADIENT_TYPE.RADIAL ? <>
+              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL ? <>
                 <div style={style.divide} />
                 <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />
               </> : ''}
-              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.CONIC ? <>
+              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC ? <>
                 <div style={style.divide} />
                 <RedPropertyAtEdit rootComponent={rootComponent} />
               </> : ''}
@@ -67,7 +68,7 @@ class RedPropertyEdit extends React.Component {
             <div style={{display: 'flex'}}>
               <RedPropertyPositionEditByMouse rootComponent={rootComponent} />
               <div style={{height: '5px'}} />
-              {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.CONIC ?
+              {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.REPEAT_LINEAR || data.type === GRADIENT_TYPE.CONIC ?
                 <RedPropertyDegreeEdit rootComponent={rootComponent} /> : ''}
             </div>
           </div>

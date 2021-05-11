@@ -151,6 +151,14 @@ class RedGradientColorItem extends React.Component {
             colorData['rangeUnit'] = tUnit;
             rootComponent.setState({});
           }} />
+          <button
+            style={style.del}
+            onClick={() => {
+              activeSubData.colorList.splice(this.getIndex(), 1);
+              rootComponent.setState({});
+            }}
+          >Del
+          </button>
           <div style={{display: 'flex', alignItems: 'center'}}>
             <label
               style={style.lock}
@@ -162,20 +170,10 @@ class RedGradientColorItem extends React.Component {
               }}
             >useDivide <input type={'checkbox'} checked={colorData['useDivide']} />
             </label>
-            <button
-              style={style.del}
-              onClick={() => {
-                activeSubData.colorList.splice(this.getIndex(), 1);
-                rootComponent.setState({});
-              }}
-            >Del
-            </button>
+
             <div style={{display: 'inline-block', marginLeft: '5px'}}>{colorData['color']}</div>
           </div>
 
-
-          {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
-          {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
         </div>
       </div>
       <div style={{margin: '8px 8px', alignItems: 'center'}}>
@@ -259,8 +257,9 @@ const style = {
     background: '#5e7ade',
     outline: 'none',
     border: '1px solid #000',
-    borderRadius: '4px',
-    height: '23px',
+    borderRadius: '6px',
+    height: '30px',
+    marginLeft : '5px',
     cursor: 'pointer'
   },
   lock: {

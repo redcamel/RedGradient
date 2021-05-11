@@ -13,10 +13,10 @@ class RedPropertyTypeEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     return <RedRadio
-      value={activeSubData['type'].split('-')[0].toUpperCase()}
-      options={Object.keys(GRADIENT_TYPE)}
+      value={activeSubData['type']}
+      options={Object.entries(GRADIENT_TYPE)}
       HD_change={e => {
-        activeSubData['type'] = GRADIENT_TYPE[e.target.value];
+        activeSubData['type'] = e.target.value;
         rootComponent.setState({});
       }} />;
   }
