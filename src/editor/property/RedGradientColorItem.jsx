@@ -37,7 +37,7 @@ const HD_up = e => {
   window.removeEventListener('mousemove', HD_move);
   window.removeEventListener('mouseup', HD_up);
   requestAnimationFrame(() => {
-    targetContext.props.rootComponent.setState({})
+    targetContext.props.rootComponent.setState({});
     targetContext = null;
     targetColorData = null;
     targetRefBar = null;
@@ -96,7 +96,7 @@ class RedGradientColorItem extends React.Component {
       </button>
       <div style={{display: 'flex', padding: '4px 4px 0px',}}>
         <div
-          style={{width: '28px', height: '28px',margin:'1px'}}
+          style={{width: '28px', height: '28px', margin: '1px'}}
           className={'transparent_checker'}
         >
           <div style={{
@@ -151,21 +151,28 @@ class RedGradientColorItem extends React.Component {
             colorData['rangeUnit'] = tUnit;
             rootComponent.setState({});
           }} />
-          <button
-            style={style.del}
-            onClick={() => {
-              activeSubData.colorList.splice(this.getIndex(), 1);
-              rootComponent.setState({});
-            }}
-          >Del
-          </button>
-          <div style={{display:'inline-block',marginRight : '5px'}}>{colorData['color']}</div>
-          <button
-            style={style.lock}
-            onClick={() => {
-            }}
-          >Todo Lock
-          </button>
+          <div style={{display: 'flex', alignItems: 'center'}}>
+            <label
+              style={style.lock}
+              onClick={(e) => {
+                if (e.target.type == 'checkbox') {
+                  colorData['useDivide'] = !colorData['useDivide'];
+                  rootComponent.setState({});
+                }
+              }}
+            >useDivide <input type={'checkbox'} checked={colorData['useDivide']} />
+            </label>
+            <button
+              style={style.del}
+              onClick={() => {
+                activeSubData.colorList.splice(this.getIndex(), 1);
+                rootComponent.setState({});
+              }}
+            >Del
+            </button>
+            <div style={{display: 'inline-block', marginLeft: '5px'}}>{colorData['color']}</div>
+          </div>
+
 
           {/*<div>r:{rgba[0]} g:{rgba[1]} b:{rgba[2]} a:{rgba[3]}</div>*/}
           {/*<div>#{rgba2hex(`rgba(${rgba.join(',')})`)}</div>*/}
@@ -257,6 +264,8 @@ const style = {
     cursor: 'pointer'
   },
   lock: {
+    padding: '0px 8px',
+    alignItems: 'center',
     fontSize: '11px',
     color: '#fff',
     background: 'red',

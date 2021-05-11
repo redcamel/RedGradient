@@ -129,9 +129,12 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
   if (checkVisible && !data['visible']) return 'linear-gradient(45deg, transparent,transparent )';
   if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
   //TODO - 여기정리
-  const gradients = data['colorList'].map(v => {
+
+  const gradients = data['colorList'].map((v,index) => {
     let colorRangeTxt = v['range'] === undefined ? '' : `${v['range']}${v['rangeUnit']}`;
-    return `${v['color']} ${colorRangeTxt}`;
+    //TODO - divideTxt 이거 좀더 보강해야함
+    const divideTxt=v['useDivide']&& data['colorList'][index+1] ? `,${data['colorList'][index+1]['color']} ${v['range']}${v['rangeUnit']}` : ''
+    return `${v['color']} ${colorRangeTxt} ${divideTxt}`;
   });
   let TEMP;
   TEMP = data['position'];
@@ -143,6 +146,7 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
   const etcs = ` ${sizeTxt} ${repeatTxt}`
   let result;
   let atTxt=''
+
   switch (data['type']) {
     case  GRADIENT_TYPE.LINEAR:
       result = `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${etcs}`;
