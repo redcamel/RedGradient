@@ -12,119 +12,160 @@ import RedCanvas from "./editor/canvas/RedCanvas.jsx";
 import RedLayer from "./editor/layer/RedLayer.jsx";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import RedPropertyEdit from "./editor/property/RedPropertyEdit.jsx";
-
+import DataLayer from "./editor/DataLayer";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {
+  faEye, faEyeSlash, faFolderOpen,
+  faSave
+} from '@fortawesome/free-solid-svg-icons';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      canvasInfo: {
-        width: 300,
-        height: 300
-      },
-      activeLayer: null,
-      activeSubData: null,
-      bgColor: '#fff',
-      layers: [
-        {
-          title: 'testLayer sdfsdfsdfsdf',
-          visible: true,
-          openYn: true,
-          items: [
-            {
-              title: 'test1',
-              type: 'linear-gradient',
-              typeRepeat: 'repeat',
-              typeEndingShape: 'none',
-              blendMode: 'normal',
-              deg: 45,
-              visible: true,
-              position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
-              at: {x: 0, xUnit: '%', y: 0, yUnit: '%'},
-              size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
-              colorList: [
-                {color: 'transparent', rangeUnit: '%', range: 0},
-                {color: 'transparent', rangeUnit: '%', range: 24.1867043847},
-                {color: '#FFEA53', rangeUnit: '%', range: 25.6011315417},
-                {color: '#FFEA53', rangeUnit: '%', range: 25.6011315417},
-                {color: 'transparent', rangeUnit: '%', range: 25.6011315417},
-                {color: 'transparent', rangeUnit: '%', range: 74.3988684583},
-                {color: '#FFEA53', rangeUnit: '%', range: 74.3988684583},
-                {color: '#FFEA53', rangeUnit: '%', range: 75.8132956153},
-                {color: 'transparent', rangeUnit: '%', range: 75.8132956153},
-                {color: 'transparent', rangeUnit: '%', range: 100}
-              ]
-            }
-          ]
-        },
 
-        {
-          title: 'conic ',
-          visible: true,
-          openYn: true,
-          items: [
-            {
-              title: 'test',
-              type: 'conic-gradient',
-              typeRepeat: 'no-repeat',
-              typeEndingShape: 'none',
-              blendMode: 'normal',
-              deg: 0,
-              visible: true,
-              position: {x: 150, xUnit: 'px', y: 150, yUnit: 'px'},
-              at: {x: 50, xUnit: '%', y: 50, yUnit: '%'},
-              size: {w: 50, wUnit: '%', h: 50, hUnit: '%'},
-              colorList: [
-                {color: 'rgba(255,255,0,0.9)', rangeUnit: '%', range: 25},
-                {color: 'rgba(255,0,0,0.5)', rangeUnit: '%', range: 55},
-                {color: 'transparent', rangeUnit: '%', range: 75},
-                {color: 'transparent', rangeUnit: '%', range: 100}
-              ]
-            }
-          ]
-        },
-        {
-          title: 'radial ',
-          visible: true,
-          openYn: true,
-          items: [
-            {
-              title: 'test',
-              type: 'radial-gradient',
-              typeRepeat: 'no-repeat',
-              typeEndingShape: 'none',
-              blendMode: 'normal',
-              deg: 45,
-              visible: true,
-              position: {x: 0, xUnit: 'px', y: 0, yUnit: 'px'},
-              at: {x: 0, xUnit: '%', y: 0, yUnit: '%'},
-              size: {w: 30, wUnit: '%', h: 30, hUnit: '%'},
-              colorList: [
-                {color: 'rgba(255,255,0,0.9)', rangeUnit: '%', range: 25},
-                {color: 'rgba(255,0,0,0.5)', rangeUnit: '%', range: 55},
-                {color: 'transparent', rangeUnit: '%', range: 75},
-                {color: 'transparent', rangeUnit: '%', range: 100}
-              ]
-            }
-          ]
-        }
-      ]
-    };
-    this.state.activeLayer = this.state.layers[0];
-    this.state.activeSubData = this.state.activeLayer['items'][0];
   }
 
   componentDidMount() {
-    this.setState({});
+
+  }
+
+  renderProjectSelect() {
+    return <div>
+      <div style={{
+        position: 'fixed',
+        display: 'flex',
+        flexDirection: 'column',
+        alignContent: 'space-around',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: '50%', left: '50%',
+        transform: 'translate(-50%,-50%)',
+        width: '800px', padding: '100px 0px',
+        background: '#1d1d1d',
+        borderRadius: '10px',
+        border: '1px solid rgba(0,0,0,0.5)',
+        boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
+        color: '#fff'
+      }}>
+        <button
+          style={{
+            padding: '8px 16px',
+            cursor: 'pointer',
+            background: 'rgba(0,0,0,0.5)',
+            border: '1px solid rgba(0,0,0,0.5)',
+            color: '#fff',
+            fontSize: '11px',
+            borderRadius: '6px',
+            boxShadow: '0px 0px 6px rgba(0,0,0,0.16)',
+            marginBottom: '5px',
+          }}
+          onClick={e => {
+            this.state = {
+              "canvasInfo": {
+                "width": 300,
+                "height": 300
+              },
+              "activeLayer": null,
+              "activeSubData": null,
+              "bgColor": "#fff",
+              "layers": [
+                new DataLayer()
+              ]
+            };
+            this.state.activeLayer = this.state.layers[0];
+            this.state.activeSubData = this.state.activeLayer['items'][0];
+            this.setState(this.state);
+          }}
+        >새 프로젝트
+        </button>
+        <input
+          type={'file'}
+          accept=".json"
+          style={{
+            padding: '8px 16px',
+            cursor: 'pointer',
+            background: 'rgba(0,0,0,0.5)',
+            border: '1px solid rgba(0,0,0,0.5)',
+            color: '#fff',
+            fontSize: '11px',
+            borderRadius: '6px',
+            boxShadow: '0px 0px 6px rgba(0,0,0,0.16)'
+          }}
+          onChange={e => {
+            console.log(e);
+            console.log(e.target.files);
+            var fileReader = new FileReader();
+            fileReader.onload = evt => {
+              this.state = JSON.parse(evt.target.result);
+              this.state.activeLayer = this.state.layers[0];
+              this.state.activeSubData = this.state.activeLayer['items'][0];
+              this.setState(this.state);
+            };
+            fileReader.readAsText(e.target.files[0]);
+          }}
+        />
+        <div style={{padding: '10px'}}>
+          <div style={{fontSize: '11px'}}>
+            <a href={'https://github.com/redcamel/RedGradient'} target={'_blank'}>GitHub :
+              https://github.com/redcamel/RedGradient</a>
+          </div>
+        </div>
+      </div>
+    </div>;
   }
 
   render() {
+    console.log(this.state);
+    if (!this.state) return this.renderProjectSelect();
     return <div className={'frame'}>
-      <div className={'frame_main_menu'}>frame Main Menu
-        <div style={style.test}>여기다가 메뉴를 만들어야겠넹</div>
-        <div style={style.test}>단축키도 해야하나 -_-</div>
-        <div style={style.test}>열기</div>
-        <div style={style.test}>저장</div>
-        <div style={style.test}>언두/리두</div>
+      <div className={'frame_main_menu'}>
+        {/*frame Main Menu*/}
+        {/*<div style={style.test}>여기다가 메뉴를 만들어야겠넹</div>*/}
+        {/*<div style={style.test}>단축키도 해야하나 -_-</div>*/}
+        <div style={{
+          fontSize : '16px',
+          margin : '5px',
+          cursor: 'pointer'
+        }}
+             onClick={e => {
+               const a = document.createElement('input');
+               a.setAttribute('accept','.json')
+               a.setAttribute('type','file')
+               a.click()
+               a.onchange=e=>{
+                 console.log(e);
+                 console.log(e.target.files);
+                 var fileReader = new FileReader();
+                 fileReader.onload = evt => {
+                   this.state = JSON.parse(evt.target.result);
+                   this.state.activeLayer = this.state.layers[0];
+                   this.state.activeSubData = this.state.activeLayer['items'][0];
+                   this.setState(this.state);
+                 };
+                 fileReader.readAsText(e.target.files[0]);
+               }
+             }}
+        >  <FontAwesomeIcon icon={faFolderOpen} />
+        </div>
+        <div
+          style={{
+            fontSize : '16px',
+            margin : '5px',
+            cursor: 'pointer'
+          }}
+          onClick={e => {
+            const a = document.createElement('a');
+            const file = new Blob([JSON.stringify(this.state)], {type: 'application/json'});
+
+            a.href = URL.createObjectURL(file);
+            a.download = `RedGradient.json`;
+            a.click();
+
+            URL.revokeObjectURL(a.href);
+          }}
+
+        ><FontAwesomeIcon icon={faSave} />
+        </div>
+        {/*<div style={style.test}>언두/리두</div>*/}
       </div>
       <div className={'frame_toolbar'}>frame ToolBar
         <div style={style.test}>툴바 아이템</div>
@@ -158,12 +199,12 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-      <div className={'frame_bottom'}>frame Bottom
-
+      <div className={'frame_bottom'}>
+        {/*frame Bottom*/}
       </div>
-      <div className={'frame_status'}>frame Status
-        <div style={style.test}>상태 아이템</div>
-        <div style={style.test}>상태 아이템</div>
+      <div className={'frame_status'}>
+        <a href={'https://github.com/redcamel/RedGradient'} target={'_blank'}>GitHub :
+          https://github.com/redcamel/RedGradient</a>
       </div>
     </div>;
   }

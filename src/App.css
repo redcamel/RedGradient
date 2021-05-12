@@ -21,7 +21,10 @@ html, body {
 div {
     position: relative;
 }
-
+a {
+    color : #acacac;
+    text-decoration: none;
+}
 input, select {
     margin: 1px;
     border-radius: 6px;
@@ -149,7 +152,8 @@ option {
     display: flex;
     align-items: center;
     border: 1px solid #0c0b0b;
-    max-height: 28px
+    padding: 8px;
+    max-height: 36px;
 }
 
 /* 스크롤바 */
