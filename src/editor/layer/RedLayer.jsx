@@ -137,9 +137,9 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
       colorRangeTxt = `${v['range']}${v['rangeUnit']}`;
     }
     //TODO - divideTxt 이거 좀더 보강해야함
-    let divideTxt;
-    if (data['type'] === GRADIENT_TYPE.CONIC) divideTxt = v['useDivide'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} ${v['range']}${v['rangeUnit']}` : '';
-    else divideTxt = v['useDivide'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['range']}${v['rangeUnit']} + 1px)` : '';
+    let divideTxt = '';
+    // if (data['type'] === GRADIENT_TYPE.CONIC) divideTxt = v['useDivide'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} ${v['range']}${v['rangeUnit']}` : '';
+    // else divideTxt = v['useDivide'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['range']}${v['rangeUnit']} + 1px)` : '';
     return `${v['color']} ${colorRangeTxt} ${divideTxt}`;
   });
   let TEMP;
