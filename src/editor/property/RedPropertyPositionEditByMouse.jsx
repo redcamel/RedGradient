@@ -1,4 +1,6 @@
 import React from "react";
+import {faArrowDown, faCircle} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const SIZE = 100;
 let targetContext;
@@ -31,6 +33,15 @@ class RedPropertyPositionEditByMouse extends React.Component {
     let tPercentY = activeSubData['position']['yUnit'] === '%' ? tY / SIZE * 100 : tY * layerPixelH / SIZE;
     activeSubData['position']['x'] = tPercentX;
     activeSubData['position']['y'] = tPercentY;
+    rootComponent.setState({});
+  }
+
+  setPosition(x, y) {
+    const rootComponent = this.props.rootComponent;
+    const rootComponentState = rootComponent.state;
+    const activeSubData = rootComponentState.activeSubData;
+    activeSubData['position']['x'] = x;
+    activeSubData['position']['y'] = y;
     rootComponent.setState({});
   }
 
@@ -68,6 +79,94 @@ class RedPropertyPositionEditByMouse extends React.Component {
           left: `${tPercentX}%`
         }} />
       </div>
+      <div
+        className={'grid3_3'}
+        style={style.box}
+      >
+        {/**/}
+        <button
+          onClick={e => {this.setPosition(0, 0);}}
+          style={{...style.location, top: 0, left: 0}}><FontAwesomeIcon
+          icon={faArrowDown} style={{transform: 'rotate(135deg)'}} /></button>
+        <button
+          onClick={e => {
+            let tX = 50;
+            if (position['xUnit'] === 'px') tX = canvasInfo['width'] * 0.5;
+            this.setPosition(tX, 0);
+          }}
+          style={{...style.location, top: 0, left: '50%', transform: 'translate(-50%,0)'}}><FontAwesomeIcon
+          icon={faArrowDown} style={{transform: 'rotate(180deg)'}} /></button>
+        <button
+          onClick={e => {
+            let tX = 100;
+            if (position['xUnit'] === 'px') tX = canvasInfo['width'];
+            this.setPosition(tX, 0);
+          }}
+          style={{...style.location, top: 0, right: 0}}><FontAwesomeIcon icon={faArrowDown}
+                                                                        style={{transform: 'rotate(225deg)'}} />
+        </button>
+        {/**/}
+        <button
+          onClick={e => {{
+            let tY = 50;
+            if (position['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
+            this.setPosition(0, tY);
+          }}}
+          style={{...style.location, top: '50%', left: 0, transform: 'translate(0%,-50%)'}}><FontAwesomeIcon
+          icon={faArrowDown} style={{transform: 'rotate(90deg)'}} /></button>
+        <button
+          onClick={e => {
+            let tX = 50;
+            let tY = 50;
+            if (position['xUnit'] === 'px') tX = canvasInfo['width'] * 0.5;
+            if (position['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
+            this.setPosition(tX, tY);
+          }}
+          style={{...style.location, top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}><FontAwesomeIcon
+          icon={faCircle} style={{transform: 'rotate(135deg)'}} /></button>
+        <button
+          onClick={e => {
+            let tX = 100;
+            let tY = 50;
+            if (position['xUnit'] === 'px') tX = canvasInfo['width'];
+            if (position['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
+            this.setPosition(tX, tY);
+          }}
+          style={{...style.location, top: '50%', right: 0, transform: 'translate(0%,-50%)'}}><FontAwesomeIcon
+          icon={faArrowDown} style={{transform: 'rotate(270deg)'}} /></button>
+        {/**/}
+        <button
+          onClick={e => {
+            let tY = 100;
+            if (position['yUnit'] === 'px') tY = canvasInfo['height'] ;
+            this.setPosition(0, tY);
+          }}
+          style={{...style.location, bottom: 0, left: 0}}><FontAwesomeIcon icon={faArrowDown}
+                                                                           style={{transform: 'rotate(45deg)'}} />
+        </button>
+        <button
+          onClick={e => {
+            let tX = 50;
+            let tY = 100;
+            if (position['xUnit'] === 'px') tX = canvasInfo['width']*0.5;
+            if (position['yUnit'] === 'px') tY = canvasInfo['height'] ;
+            this.setPosition(tX, tY);
+          }}
+          style={{...style.location, bottom: 0, left: '50%', transform: 'translate(-50%,0)'}}><FontAwesomeIcon
+          icon={faArrowDown} style={{transform: 'rotate(0deg)'}} /></button>
+        <button
+          onClick={e => {
+            let tX = 100;
+            let tY = 100;
+            if (position['xUnit'] === 'px') tX = canvasInfo['width'];
+            if (position['yUnit'] === 'px') tY = canvasInfo['height'] ;
+            this.setPosition(tX, tY);
+          }}
+          style={{...style.location, bottom: 0, right: 0}}><FontAwesomeIcon icon={faArrowDown}
+                                                                            style={{transform: 'rotate(315deg)'}} />
+        </button>
+
+      </div>
     </div>;
   }
 }
@@ -88,5 +187,15 @@ const style = {
     borderRadius: '50%',
     position: 'absolute',
     top: '50%', left: '50%', transform: 'translate(-50%,-50%)'
+  },
+  location: {
+    position: 'absolute',
+    width: '24px', height: '24px',
+    background: 'rgba(0,0,0,0.5)',
+    border: 0,
+    outline: 'none',
+    color: '#fff',
+    fontSize: '11px',
+    cursor: 'pointer'
   }
 };

@@ -74,6 +74,10 @@ option {
     background-image: linear-gradient(rgba(0, 0, 0, .3) .1em, transparent .1em), linear-gradient(90deg, rgba(0, 0, 0, .3) .1em, transparent .1em);
     background-size: 10px 10px;
 }
+.grid3_3 {
+    background-image: linear-gradient(rgba(0, 0, 0, .3) .1em, transparent .1em), linear-gradient(90deg, rgba(0, 0, 0, .3) .1em, transparent .1em);
+    background-size: 10px 10px;
+}
 
 /* 프레임 */
 .frame {
