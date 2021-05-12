@@ -41,8 +41,10 @@ class RedPreset extends React.Component {
             style={style.iconContainer}
             onClick={e => {
               let t0 = new v['component']();
-              for (const k in t0) activeSubData[k] = t0[k];
-              rootComponent.setState({activeSubData: activeSubData});
+              const idx = rootComponentState.activeLayer.items.indexOf(activeSubData)
+              rootComponentState.activeLayer.items.splice(idx,1,t0)
+              rootComponentState.activeSubData = t0
+              rootComponent.setState({});
             }}
           >
             <div style={{

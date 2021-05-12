@@ -15,7 +15,7 @@ class RedPropertyTypeEndingShapeEdit extends React.Component {
     return <div>
       EndingShape
       <RedSelect
-        value={activeSubData['typeEndingShape'].toUpperCase()}
+        value={activeSubData['typeEndingShape']}
         options={Object.entries(ENDING_SHAPE_TYPE)}
         HD_change={e => {
           activeSubData['typeEndingShape'] = e.target.value;
