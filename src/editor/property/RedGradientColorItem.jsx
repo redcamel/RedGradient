@@ -204,7 +204,7 @@ class RedGradientColorItem extends React.Component {
                window.addEventListener('mousemove', HD_move);
                window.addEventListener('mouseup', HD_up);
              }}
-        />
+        >s</div>
         {
           colorData.useRange ? <div style={{
             ...style.ball,
@@ -219,7 +219,7 @@ class RedGradientColorItem extends React.Component {
               window.addEventListener('mousemove', HD_move);
               window.addEventListener('mouseup', HD_up);
             }}
-          /> : ''
+          >e</div> : ''
         }
       </div>
       {
