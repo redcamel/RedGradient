@@ -131,16 +131,19 @@ RedLayer.calcGradientItem = (data, checkVisible, layer) => {
 
   const gradients = data['colorList'].map((v, index) => {
     let colorRangeTxt=''
+    let divideTxt = '';
     if(v['useRange']){
       colorRangeTxt = `${v['range']}${v['rangeUnit']} ${v['rangeEnd']}${v['rangeUnit']}`;
+      return `${v['color']} ${v['range']}${v['rangeUnit']}, ${v['colorEnd']} ${v['rangeEnd']}${v['rangeUnit']} `;
     }else{
       colorRangeTxt = `${v['range']}${v['rangeUnit']}`;
+      return `${v['color']} ${colorRangeTxt}`;
     }
     //TODO - divideTxt 이거 좀더 보강해야함
-    let divideTxt = '';
+    // let divideTxt = '';
     // if (data['type'] === GRADIENT_TYPE.CONIC) divideTxt = v['useDivide'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} ${v['range']}${v['rangeUnit']}` : '';
     // else divideTxt = v['useDivide'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['range']}${v['rangeUnit']} + 1px)` : '';
-    return `${v['color']} ${colorRangeTxt} ${divideTxt}`;
+
   });
   let TEMP;
   TEMP = data['position'];

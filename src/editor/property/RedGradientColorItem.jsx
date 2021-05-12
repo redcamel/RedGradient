@@ -126,6 +126,37 @@ class RedGradientColorItem extends React.Component {
                }}
           />
         </div>
+        <div
+          style={{
+            width: '28px', height: '28px', margin: '1px',
+            display : colorData.useRange ? 'block' : 'none'
+          }}
+          className={'transparent_checker'}
+        >
+          <div style={{
+            background: colorData['colorEnd'],
+            width: '28px', height: '28px',
+            borderRadius: '4px', border: '1px solid #000',
+            marginRight: '10px'
+          }}
+               onClick={() => {
+                 if (!this.state.colorPicker) {
+                   this.state.colorPicker = new ColorPicker({
+                     type: "sketch",
+                     position: 'inline',
+                     color: colorData['colorEnd'],
+                     container: this.refColorPickerContainer.current,
+                     onChange: color => {
+                       colorData['colorEnd'] = color;
+                       rootComponent.setState({activeSubData: activeSubData});
+                     }
+                   });
+                 }
+                 this.state.colorPicker.setOption({color: colorData['colorEnd']});
+                 this.setState({openColorPicker: true});
+               }}
+          />
+        </div>
         <div>
           {/* TODO - 단위모델 변경 처리*/}
 
@@ -178,6 +209,7 @@ class RedGradientColorItem extends React.Component {
               onClick={(e) => {
                 if (e.target.type == 'checkbox') {
                   colorData['useRange'] = !colorData['useRange'];
+                  if(colorData['colorEnd']===undefined) colorData['colorEnd'] = colorData['color'];
                   rootComponent.setState({});
                 }
               }}
