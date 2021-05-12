@@ -3,6 +3,7 @@ import PresetCircle from "./PresetCircle";
 import RedLayer from "../editor/layer/RedLayer";
 import PresetCircle2 from "./PresetCircle2";
 import PresetCircle3 from "./PresetCircle3";
+import PresetCircle4 from "./PresetCircle4";
 
 const presetList = [
   {
@@ -16,6 +17,10 @@ const presetList = [
   {
     name: 'circle3',
     component: PresetCircle3
+  },
+  {
+    name: 'circle4',
+    component: PresetCircle4
   },
 ];
 
