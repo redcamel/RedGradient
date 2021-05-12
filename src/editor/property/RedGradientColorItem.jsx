@@ -12,6 +12,8 @@ import DataColor from "../DataColor";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedNumber from "../../core/RedNumber";
 import RedSelect from "../../core/RedSelect";
+import {faThumbtack} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 let targetContext;
 let targetColorData;
@@ -42,7 +44,7 @@ const HD_up = e => {
     targetContext = null;
     targetColorData = null;
     targetRefBar = null;
-    targetRange = null
+    targetRange = null;
   });
 };
 
@@ -51,10 +53,13 @@ class RedGradientColorItem extends React.Component {
     super(props);
     this.state = {
       openColorPicker: false,
+      openColorEndPicker: false,
+      colorEndPicker: null,
       colorPicker: null
     };
     this.refBar = React.createRef();
     this.refColorPickerContainer = React.createRef();
+    this.refColorEndPickerContainer = React.createRef();
   }
 
   getIndex() {
@@ -106,14 +111,15 @@ class RedGradientColorItem extends React.Component {
             background: colorInfo,
             width: '28px', height: '28px',
             borderRadius: '4px', border: '1px solid #000',
-            marginRight: '10px'
+            marginRight: '10px',
+            textAlign: 'center',
           }}
                onClick={() => {
                  if (!this.state.colorPicker) {
                    this.state.colorPicker = new ColorPicker({
                      type: "sketch",
                      position: 'inline',
-                     color: colorInfo,
+                     color: colorData['color'],
                      container: this.refColorPickerContainer.current,
                      onChange: color => {
                        colorData['color'] = color;
@@ -125,11 +131,18 @@ class RedGradientColorItem extends React.Component {
                  this.setState({openColorPicker: true});
                }}
           />
+          <FontAwesomeIcon
+            icon={faThumbtack} style={{filter: colorData.useDivide ? '' : 'invert(1.0)'}}
+            onClick={e => {
+              colorData['useDivide'] = !colorData['useDivide'];
+              rootComponent.setState({});
+            }}
+          />
         </div>
         <div
           style={{
             width: '28px', height: '28px', margin: '1px',
-            display : colorData.useRange ? 'block' : 'none'
+            display: colorData.useRange ? 'block' : 'none'
           }}
           className={'transparent_checker'}
         >
@@ -140,21 +153,28 @@ class RedGradientColorItem extends React.Component {
             marginRight: '10px'
           }}
                onClick={() => {
-                 if (!this.state.colorPicker) {
-                   this.state.colorPicker = new ColorPicker({
+                 if (!this.state.colorEndPicker) {
+                   this.state.colorEndPicker = new ColorPicker({
                      type: "sketch",
                      position: 'inline',
                      color: colorData['colorEnd'],
-                     container: this.refColorPickerContainer.current,
+                     container: this.refColorEndPickerContainer.current,
                      onChange: color => {
                        colorData['colorEnd'] = color;
                        rootComponent.setState({activeSubData: activeSubData});
                      }
                    });
                  }
-                 this.state.colorPicker.setOption({color: colorData['colorEnd']});
-                 this.setState({openColorPicker: true});
+                 this.state.colorEndPicker.setOption({color: colorData['colorEnd']});
+                 this.setState({openColorEndPicker: true});
                }}
+          />
+          <FontAwesomeIcon
+            icon={faThumbtack} style={{filter: colorData.useDivideEnd ? '' : 'invert(1.0)'}}
+            onClick={e => {
+              colorData['useDivideEnd'] = !colorData['useDivideEnd'];
+              rootComponent.setState({});
+            }}
           />
         </div>
         <div>
@@ -209,7 +229,7 @@ class RedGradientColorItem extends React.Component {
               onClick={(e) => {
                 if (e.target.type == 'checkbox') {
                   colorData['useRange'] = !colorData['useRange'];
-                  if(colorData['colorEnd']===undefined) colorData['colorEnd'] = colorData['color'];
+                  if (colorData['colorEnd'] === undefined) colorData['colorEnd'] = colorData['color'];
                   rootComponent.setState({});
                 }
               }}
@@ -236,30 +256,35 @@ class RedGradientColorItem extends React.Component {
                window.addEventListener('mousemove', HD_move);
                window.addEventListener('mouseup', HD_up);
              }}
-        >s</div>
+        >s
+        </div>
         {
           colorData.useRange ? <div style={{
             ...style.ball,
             left: `${colorData['rangeUnit'] === 'px' ? colorData['rangeEnd'] / canvasInfo['width'] * 100 : colorData['rangeEnd']}%`,
             background: activeYn ? '#5e7ade' : '#fff'
           }}
-            onMouseDown={() => {
-              targetContext = this;
-              targetColorData = colorData;
-              targetRefBar = this.refBar;
-              targetRange = 'rangeEnd';
-              window.addEventListener('mousemove', HD_move);
-              window.addEventListener('mouseup', HD_up);
-            }}
+                                    onMouseDown={() => {
+                                      targetContext = this;
+                                      targetColorData = colorData;
+                                      targetRefBar = this.refBar;
+                                      targetRange = 'rangeEnd';
+                                      window.addEventListener('mousemove', HD_move);
+                                      window.addEventListener('mouseup', HD_up);
+                                    }}
           >e</div> : ''
         }
       </div>
-      {
-        <div style={{...style.colorPicker, display: this.state.openColorPicker ? 'block' : 'none'}}>
-          <div ref={this.refColorPickerContainer} />
-          <div style={style.complete} onClick={() => this.setState({openColorPicker: null})}>완료</div>
-        </div>
-      }
+
+      <div style={{...style.colorPicker, display: this.state.openColorPicker ? 'block' : 'none'}}>
+        <div ref={this.refColorPickerContainer} />
+        <div style={style.complete} onClick={() => this.setState({openColorPicker: null})}>완료</div>
+      </div>
+      <div style={{...style.colorPicker, display: this.state.openColorEndPicker ? 'block' : 'none'}}>
+        <div ref={this.refColorEndPickerContainer} />
+        <div style={style.complete} onClick={() => this.setState({openColorEndPicker: null})}>완료</div>
+      </div>
+
     </div>;
   }
 }
