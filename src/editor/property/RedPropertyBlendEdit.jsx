@@ -16,9 +16,9 @@ class RedPropertyBlendEdit extends React.Component {
       Todo - Blend Mode
       <RedSelect
         value={activeSubData['blendMode'].split('-')[0].toUpperCase()}
-        options={Object.keys(BLEND_MODE_TYPE)}
+        options={Object.entries(BLEND_MODE_TYPE)}
         HD_change={e => {
-          activeSubData['blendMode'] = BLEND_MODE_TYPE[e.target.value];
+          activeSubData['blendMode'] = e.target.value;
           rootComponent.setState({});
         }} />
     </div>;

@@ -15,9 +15,9 @@ class RedPropertyRepeatEdit extends React.Component {
       Repeat Mode
       <RedSelect
         value={activeSubData['typeRepeat'].replace('-', '_').toUpperCase()}
-        options={Object.keys(REPEAT_TYPE)}
+        options={Object.entries(REPEAT_TYPE)}
         HD_change={e => {
-          activeSubData['typeRepeat'] = REPEAT_TYPE[e.target.value];
+          activeSubData['typeRepeat'] = e.target.value;
           rootComponent.setState({});
         }} />
     </div>;

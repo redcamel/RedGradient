@@ -8,8 +8,9 @@ class RedSelect extends React.Component {
       onBlur={this.props.HD_blur}
     >
       {(this.props.options || []).map(v => {
-        const activeYn = this.props.value === v;
-        return <option value={v} selected={activeYn}>{v}</option>;
+        if(!(v instanceof Array)) v= [v,v]
+        const activeYn = this.props.value === v[1];
+        return <option value={v[1]} selected={activeYn}>{v[0]}</option>;
       })}
     </select>;
   }
