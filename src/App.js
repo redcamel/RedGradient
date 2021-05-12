@@ -14,10 +14,8 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import RedPropertyEdit from "./editor/property/RedPropertyEdit.jsx";
 import DataLayer from "./editor/DataLayer";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {
-  faEye, faEyeSlash, faFolderOpen,
-  faSave
-} from '@fortawesome/free-solid-svg-icons';
+import {faFolderOpen, faSave} from '@fortawesome/free-solid-svg-icons';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -43,9 +41,11 @@ class App extends React.Component {
         background: '#1d1d1d',
         borderRadius: '10px',
         border: '1px solid rgba(0,0,0,0.5)',
-        boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
+        boxShadow: '0px 0px 36px rgba(0,0,0,0.36)',
         color: '#fff'
       }}>
+        <div>Todo - Logo</div>
+        <div style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '30px'}}>RedGradient</div>
         <button
           style={{
             padding: '8px 16px',
@@ -104,9 +104,10 @@ class App extends React.Component {
           }}
         />
         <div style={{padding: '10px'}}>
-          <div style={{fontSize: '11px'}}>
+          <div style={{fontSize: '11px',textAlign:"center"}}>
             <a href={'https://github.com/redcamel/RedGradient'} target={'_blank'}>GitHub :
               https://github.com/redcamel/RedGradient</a>
+            <div>This project is maintained by <a href={'mailto:webseon@gmail.com'}>RedCamel</a></div>
           </div>
         </div>
       </div>
@@ -122,16 +123,16 @@ class App extends React.Component {
         {/*<div style={style.test}>여기다가 메뉴를 만들어야겠넹</div>*/}
         {/*<div style={style.test}>단축키도 해야하나 -_-</div>*/}
         <div style={{
-          fontSize : '16px',
-          margin : '5px',
+          fontSize: '16px',
+          margin: '5px',
           cursor: 'pointer'
         }}
              onClick={e => {
                const a = document.createElement('input');
-               a.setAttribute('accept','.json')
-               a.setAttribute('type','file')
-               a.click()
-               a.onchange=e=>{
+               a.setAttribute('accept', '.json');
+               a.setAttribute('type', 'file');
+               a.click();
+               a.onchange = e => {
                  console.log(e);
                  console.log(e.target.files);
                  var fileReader = new FileReader();
@@ -142,14 +143,14 @@ class App extends React.Component {
                    this.setState(this.state);
                  };
                  fileReader.readAsText(e.target.files[0]);
-               }
+               };
              }}
-        >  <FontAwesomeIcon icon={faFolderOpen} />
+        ><FontAwesomeIcon icon={faFolderOpen} />
         </div>
         <div
           style={{
-            fontSize : '16px',
-            margin : '5px',
+            fontSize: '16px',
+            margin: '5px',
             cursor: 'pointer'
           }}
           onClick={e => {
@@ -205,6 +206,7 @@ class App extends React.Component {
       <div className={'frame_status'}>
         <a href={'https://github.com/redcamel/RedGradient'} target={'_blank'}>GitHub :
           https://github.com/redcamel/RedGradient</a>
+        <div >This project is maintained by <a href={'mailto:webseon@gmail.com'}>RedCamel</a></div>
       </div>
     </div>;
   }
