@@ -16,6 +16,7 @@ import RedSelect from "../../core/RedSelect";
 let targetContext;
 let targetColorData;
 let targetRefBar;
+let targetRange;
 const HD_move = e => {
   // console.log(targetRefBar);
   if (targetRefBar.current) {
@@ -24,9 +25,9 @@ const HD_move = e => {
     let percentX = (tX / (targetRefBar.current.clientWidth + 16) * 100);
     percentX = Math.max(Math.min(100, percentX), 0);
     if (targetColorData.rangeUnit === '%') {
-      targetColorData.range = percentX;
+      targetColorData[targetRange] = percentX;
     } else {
-      targetColorData.range = percentX / 100 * targetContext.props.rootComponent.state.canvasInfo['width'];
+      targetColorData[targetRange] = percentX / 100 * targetContext.props.rootComponent.state.canvasInfo['width'];
     }
     targetContext.props.rootComponent.setState({});
     // console.log(tX);
@@ -41,6 +42,7 @@ const HD_up = e => {
     targetContext = null;
     targetColorData = null;
     targetRefBar = null;
+    targetRange = null
   });
 };
 
@@ -71,6 +73,7 @@ class RedGradientColorItem extends React.Component {
     const colorData = this.props.colorData;
     const activeYn = this.props.activeYn;
     const colorInfo = colorData['color'];
+    if (!colorData['useRange']) colorData['rangeEnd'] = colorData['range'];
     return <div
       style={{
         margin: '3px 0px',
@@ -160,15 +163,25 @@ class RedGradientColorItem extends React.Component {
           >Del
           </button>
           <div style={{display: 'flex', alignItems: 'center'}}>
+            {/*<label*/}
+            {/*  style={style.lock}*/}
+            {/*  onClick={(e) => {*/}
+            {/*    if (e.target.type == 'checkbox') {*/}
+            {/*      colorData['useDivide'] = !colorData['useDivide'];*/}
+            {/*      rootComponent.setState({});*/}
+            {/*    }*/}
+            {/*  }}*/}
+            {/*>useDivide <input type={'checkbox'} checked={colorData['useDivide']} />*/}
+            {/*</label>*/}
             <label
               style={style.lock}
               onClick={(e) => {
                 if (e.target.type == 'checkbox') {
-                  colorData['useDivide'] = !colorData['useDivide'];
+                  colorData['useRange'] = !colorData['useRange'];
                   rootComponent.setState({});
                 }
               }}
-            >useDivide <input type={'checkbox'} checked={colorData['useDivide']} />
+            >useRange <input type={'checkbox'} checked={colorData['useRange']} />
             </label>
 
             <div style={{display: 'inline-block', marginLeft: '5px'}}>{colorData['color']}</div>
@@ -187,10 +200,27 @@ class RedGradientColorItem extends React.Component {
                targetContext = this;
                targetColorData = colorData;
                targetRefBar = this.refBar;
+               targetRange = 'range';
                window.addEventListener('mousemove', HD_move);
                window.addEventListener('mouseup', HD_up);
              }}
         />
+        {
+          colorData.useRange ? <div style={{
+            ...style.ball,
+            left: `${colorData['rangeUnit'] === 'px' ? colorData['rangeEnd'] / canvasInfo['width'] * 100 : colorData['rangeEnd']}%`,
+            background: activeYn ? '#5e7ade' : '#fff'
+          }}
+            onMouseDown={() => {
+              targetContext = this;
+              targetColorData = colorData;
+              targetRefBar = this.refBar;
+              targetRange = 'rangeEnd';
+              window.addEventListener('mousemove', HD_move);
+              window.addEventListener('mouseup', HD_up);
+            }}
+          /> : ''
+        }
       </div>
       {
         <div style={{...style.colorPicker, display: this.state.openColorPicker ? 'block' : 'none'}}>
@@ -259,7 +289,7 @@ const style = {
     border: '1px solid #000',
     borderRadius: '6px',
     height: '30px',
-    marginLeft : '5px',
+    marginLeft: '5px',
     cursor: 'pointer'
   },
   lock: {
