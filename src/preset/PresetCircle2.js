@@ -29,7 +29,8 @@ const PresetCircle2 = function() {
       {
         "color": "rgba(255,0,0,0.9)",
         "rangeUnit": "%",
-        "range": 25
+        "range": 25,
+        "useDivide": false
       },
       {
         "color": "rgb(0,24,255)",

@@ -29,22 +29,26 @@ const PresetCircle = function() {
       {
         "color": "rgba(255,255,0,0.9)",
         "rangeUnit": "%",
-        "range": 25
+        "range": 25,
+        "useDivide": false
       },
       {
         "color": "rgba(255,0,0,0.5)",
         "rangeUnit": "%",
-        "range": 55
+        "range": 55,
+        "useDivide": false
       },
       {
         "color": "transparent",
         "rangeUnit": "%",
-        "range": 75
+        "range": 75,
+        "useDivide": false
       },
       {
         "color": "transparent",
         "rangeUnit": "%",
-        "range": 100
+        "range": 100,
+        "useDivide": false
       }
     ]
   }
