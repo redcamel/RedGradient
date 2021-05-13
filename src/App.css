@@ -295,6 +295,9 @@ option {
 
 /* UI */
 .ui_title {
+    position: sticky;
+    top:0;
+    z-index: 1;
     background: linear-gradient(rgb(60, 60, 60), rgb(55, 55, 55));
     height: 26px;
     display: flex;

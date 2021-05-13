@@ -20,6 +20,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import RedLayerTop from "./RedLayerTop.jsx";
 import CALC_GRADIENT from "../CALC_GRADIENT";
+import RedTitle from "../../core/RedTitle.jsx";
 
 const SIZE = 100;
 
@@ -121,7 +122,6 @@ class RedLayer extends React.Component {
 export default RedLayer;
 const style = {
   container: {
-    borderRight: '1px solid #000',
     overflowX: 'hidden',
     overflowY: 'auto',
     padding: `0px 0px 10px 0px`

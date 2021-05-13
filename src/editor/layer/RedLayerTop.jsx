@@ -8,6 +8,7 @@
 
 import React from "react";
 import DataLayer from "../data/DataLayer.js";
+import RedTitle from "../../core/RedTitle.jsx";
 
 const options = [
   'black',
@@ -22,6 +23,7 @@ class RedLayerTop extends React.Component {
     const layers = rootComponentState.layers;
     const layersComponent = this.props.layersComponent;
     return <div>
+      <RedTitle title={'Layer Edit'}/>
       <div style={style.addLayer}>
         <div style={style.addLayerItem}
              onClick={() => {

@@ -31,7 +31,7 @@ class RedPropertyEdit extends React.Component {
     const activeLayer = rootComponentState.activeLayer;
     const data = rootComponentState.activeSubData;
     return <div style={style.container}>
-      <RedTitle title={'RedPropertyEdit'} />
+      <RedTitle title={'Gradient Edit'} />
       <div style={style.contentWrap}>
         <div>
           <div style={{...style.itemContainer}}>
@@ -122,6 +122,7 @@ const style = {
   container: {
     width: '350px',
     borderRight: '1px solid #000',
+    borderLeft: '1px solid #000',
     overflowX: 'hidden',
     overflowY: 'auto'
   },
