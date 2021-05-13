@@ -30,6 +30,15 @@ class RedCanvas extends React.Component {
     console.log(filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(','))
     return filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(' ')
   }
+  getContainerCss(canvasInfo){
+    if(!canvasInfo.hasOwnProperty('border_radius')){
+      canvasInfo['border_radius'] = 0
+      canvasInfo['border_radius_unit'] = 'px'
+    }
+    return {
+      borderRadius : `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`
+    }
+  }
   draw_canvasUI = drawCanvasUI;
 
   drawCall(canvasInfo, layers, bgColor) {
@@ -56,7 +65,7 @@ class RedCanvas extends React.Component {
           background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
           backgroundBlendMode : CALC_GRADIENT.calcBlendMode(layers),
           transition: 'width 0.2s, height 0.2s',
-          borderRadius : `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`,
+          ...this.getContainerCss(canvasInfo),
           filter : this.getFilterCss(canvasInfo['filterList']),
           overflow : 'hidden',
         }}

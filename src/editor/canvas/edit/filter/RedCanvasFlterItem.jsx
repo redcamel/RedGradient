@@ -47,26 +47,27 @@ class RedCanvasFilter extends React.Component {
           filterData['values'] = filterComponent[filterData['type']].getNewDataValues()
           rootComponent.setState({});
         }}/>
+        <button
+          style={style.buttonIcon}
+          onClick={e => {
+            const filterList = rootComponent.state.canvasInfo.filterList
+            filterList.splice(filterList.indexOf(filterData), 1)
+            rootComponent.setState({})
+          }}
+        >Del
+        </button>
+        <button
+          style={style.buttonIcon}
+          onClick={e => {
+            const filterList = rootComponent.state.canvasInfo.filterList
+            filterList.splice(filterList.indexOf(filterData), 0,JSON.parse(JSON.stringify(filterData)))
+            rootComponent.setState({})
+          }}
+        >Copy
+        </button>
       </div>
       {TargetFilterComponent ? <TargetFilterComponent rootComponent={rootComponent} filterData={filterData}/> : ''}
-      <button
-        style={style.buttonIcon}
-        onClick={e => {
-          const filterList = rootComponent.state.canvasInfo.filterList
-          filterList.splice(filterList.indexOf(filterData), 1)
-          rootComponent.setState({})
-        }}
-      >삭제
-      </button>
-      <button
-        style={style.buttonIcon}
-        onClick={e => {
-          const filterList = rootComponent.state.canvasInfo.filterList
-          filterList.splice(filterList.indexOf(filterData), 0,JSON.parse(JSON.stringify(filterData)))
-          rootComponent.setState({})
-        }}
-      >복제
-      </button>
+
       <div style={style.divide}/>
     </div>;
   }
@@ -77,7 +78,8 @@ RedCanvasFilter.FILTER_COMPONENT_MAP = filterComponent
 const style = {
   container: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-around'
   },
   divide: {
     margin: '5px 0px',
@@ -86,9 +88,14 @@ const style = {
     borderTop: '1px solid #000'
   },
   buttonIcon: {
-    border: 0,
     cursor: 'pointer',
     margin : '1px',
-    borderRadius : '4px'
+    borderRadius : '6px',
+    whiteSpace : 'nowrap',
+    padding : '6px 4px',
+    border : '1px solid rgb(31, 31, 31)',
+    boxShadow : 'rgb(0 0 0 / 25%) 1px 1px 1px',
+    background: 'linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63))',
+    color : '#fff'
   }
 };

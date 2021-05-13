@@ -12,6 +12,10 @@ function DataCanvas() {
     canvasInfo: {
       width: 300,
       height: 300,
+      //
+      border_radius: 0,
+      border_radius_unit: 'px',
+      //
       filterList: []
     },
     activeLayer: null,
