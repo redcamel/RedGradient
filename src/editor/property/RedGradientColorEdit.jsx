@@ -8,6 +8,7 @@ class RedGradientColorEdit extends React.Component {
     super(props);
     this.state = {
       activeIDX: 0,
+      layerBgColor : 'transparent'
     };
     this.refBar = React.createRef();
   }
@@ -16,12 +17,26 @@ class RedGradientColorEdit extends React.Component {
     const itemList = [];
     const gradients = data['colorList'].map((v, index) => {
       const activeYn = this.state.activeIDX === index;
-      let colorRangeTxt;
-      colorRangeTxt = `${v['range']}%`;
+
       itemList.push(this.renderColorStep(v, index, activeYn));
-      return `${v['color']} ${colorRangeTxt}`;
+
+      let colorRangeTxt=''
+      if(v['useRange']){
+        let divideTxt = '';
+        divideTxt = v['useDivide'] ? `,${v['colorEnd']} calc(${v['range']}${v['rangeUnit']} + 1px)` : '';
+
+        let divideEndTxt = '';
+        divideEndTxt = v['useDivideEnd'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['rangeEnd']}${v['rangeUnit']} + 1px)` : '';
+        return `${v['color']} ${v['range']}${v['rangeUnit']} ${divideTxt}, ${v['colorEnd']} ${v['rangeEnd']}${v['rangeUnit']} ${divideEndTxt}`;
+      }else{
+        colorRangeTxt = `${v['range']}${v['rangeUnit']}`;
+        let divideTxt = '';
+        divideTxt = v['useDivide'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['range']}${v['rangeUnit']} + 1px)` : '';
+        return `${v['color']} ${colorRangeTxt} ${divideTxt}`;
+      }
     });
     const code = `${GRADIENT_TYPE.LINEAR}(90deg, ${gradients}),${this.state.layerBgColor}`;
+    console.log(code)
     return <div style={{
       height: '55px',
       background: code,
