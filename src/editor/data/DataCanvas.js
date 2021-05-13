@@ -12,10 +12,16 @@ function DataCanvas() {
     canvasInfo: {
       width: 300,
       height: 300,
+      /////////////////////////////////////////////////
       //
       border_radius: 0,
       border_radius_unit: 'px',
       //
+      border_width: 0,
+      border_width_unit: 'px',
+      border_type: 'solid',
+      border_color: '#000',
+      /////////////////////////////////////////////////
       filterList: []
     },
     activeLayer: null,

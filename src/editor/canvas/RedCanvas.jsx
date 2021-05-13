@@ -26,19 +26,7 @@ class RedCanvas extends React.Component {
     this.refColorPickerContainer = React.createRef();
   }
 
-  getFilterCss(filterList){
-    console.log(filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(','))
-    return filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(' ')
-  }
-  getContainerCss(canvasInfo){
-    if(!canvasInfo.hasOwnProperty('border_radius')){
-      canvasInfo['border_radius'] = 0
-      canvasInfo['border_radius_unit'] = 'px'
-    }
-    return {
-      borderRadius : `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`
-    }
-  }
+
   draw_canvasUI = drawCanvasUI;
 
   drawCall(canvasInfo, layers, bgColor) {
@@ -65,8 +53,8 @@ class RedCanvas extends React.Component {
           background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
           backgroundBlendMode : CALC_GRADIENT.calcBlendMode(layers),
           transition: 'width 0.2s, height 0.2s',
-          ...this.getContainerCss(canvasInfo),
-          filter : this.getFilterCss(canvasInfo['filterList']),
+          ...RedCanvas.getContainerCss(canvasInfo),
+          filter : RedCanvas.getFilterCss(canvasInfo['filterList']),
           overflow : 'hidden',
         }}
       />
@@ -155,6 +143,26 @@ class RedCanvas extends React.Component {
 }
 
 export default RedCanvas;
+RedCanvas.getFilterCss=(filterList)=>{
+  console.log(filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(','))
+  return filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(' ')
+}
+RedCanvas.getContainerCss=(canvasInfo)=>{
+  if(!canvasInfo.hasOwnProperty('border_radius')){
+    canvasInfo['border_radius'] = 0
+    canvasInfo['border_radius_unit'] = 'px'
+  }
+  if(!canvasInfo.hasOwnProperty('border_width')){
+    canvasInfo['border_width'] = 0
+    canvasInfo['border_width_unit'] = 'px'
+    canvasInfo['border_type'] = 'solid'
+    canvasInfo['border_color'] = '#000'
+  }
+  return {
+    borderRadius : `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`,
+    border : `${canvasInfo['border_width']}${canvasInfo['border_width_unit']} ${canvasInfo['border_type']} ${canvasInfo['border_color']}`
+  }
+}
 const style = {
   container: {
     position: 'absolute',

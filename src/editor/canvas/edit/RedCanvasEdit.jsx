@@ -9,9 +9,10 @@
 import React from "react";
 import drawCanvasEditUI from "./drawCanvasEditUI";
 import RedTitle from "../../../core/RedTitle";
-import RedCanvasBorderRadiusEdit from "./RedCanvasBorderRadiusEdit";
+import RedCanvasBorderRadiusEdit from "./property/RedCanvasBorderRadiusEdit.jsx";
 import RedCanvasFilter from "./filter/RedCanvasFlterItem.jsx";
 import RedCanvasFilterList from "./filter/RedCanvasFilterList.jsx";
+import RedCanvasBorderEdit from "./property/RedCanvasBorderEdit.jsx";
 
 class RedCanvasEdit extends React.Component {
   constructor(props) {
@@ -30,6 +31,8 @@ class RedCanvasEdit extends React.Component {
       <RedTitle title={'Container Property'} />
       <div style={style.container}>
         {this.drawCanvasEditUI()}
+        <div style={style.divide}/>
+        <RedCanvasBorderEdit rootComponent={rootComponent}/>
         <div style={style.divide}/>
         <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
         <div style={style.divide}/>
