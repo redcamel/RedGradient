@@ -28,7 +28,7 @@ class RedCanvasFilterList extends React.Component {
         <FontAwesomeIcon
           icon={faPlusSquare} style={{fontSize: '16px',cursor:'pointer'}}
           onClick={e=>{
-            canvasInfo['filterList'].push({type:'normal', values :{}, css : ''})
+            canvasInfo['filterList'].splice(0,0,{type:'normal', values :{}, css : ''})
             rootComponent.setState({})
           }}
         />

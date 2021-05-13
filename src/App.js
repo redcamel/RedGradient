@@ -50,6 +50,7 @@ class App extends React.Component {
           <div className={'frame_left'}>
             {/*frame Left*/}
             <RedCanvasEdit rootComponent={this}/>
+            <div className={'todo'}>Todo - 컨테이너 모양 프리셋?</div>
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
