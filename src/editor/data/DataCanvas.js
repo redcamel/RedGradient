@@ -14,11 +14,8 @@ function DataCanvas() {
       height: 300,
       filterList: [
         {
-          type : 'blur',
-          values : {
-            amount  : 10
-          },
-          css : ''
+          type: 'normal',
+          css: ''
         }
       ]
     },
