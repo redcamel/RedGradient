@@ -15,7 +15,7 @@ class RedFrameMenuSave extends React.Component {
     const rootComponentState = rootComponent.state
     return <div
       style={{
-        fontSize: '16px',
+        fontSize: '26px',
         margin: '5px',
         cursor: 'pointer'
       }}

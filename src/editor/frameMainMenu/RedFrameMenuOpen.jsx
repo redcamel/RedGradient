@@ -14,7 +14,7 @@ class RedFrameMenuOpen extends React.Component {
     const rootComponent = this.props.rootComponent
     return <div>
       <div style={{
-        fontSize: '16px',
+        fontSize: '26px',
         margin: '5px',
         cursor: 'pointer'
       }}

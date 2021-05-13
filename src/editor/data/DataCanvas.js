@@ -12,12 +12,7 @@ function DataCanvas() {
     canvasInfo: {
       width: 300,
       height: 300,
-      filterList: [
-        {
-          type: 'normal',
-          css: ''
-        }
-      ]
+      filterList: []
     },
     activeLayer: null,
     activeSubData: null,

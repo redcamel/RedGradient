@@ -11,8 +11,6 @@ import RedCanvas from "./editor/canvas/RedCanvas.jsx";
 import RedLayer from "./editor/layer/RedLayer.jsx";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import RedPropertyEdit from "./editor/property/RedPropertyEdit.jsx";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faFolderOpen, faSave} from '@fortawesome/free-solid-svg-icons';
 import CALC_GRADIENT from "./editor/CALC_GRADIENT";
 import RedCanvasEdit from "./editor/canvas/edit/RedCanvasEdit";
 import RedTitle from "./core/RedTitle";
@@ -37,6 +35,7 @@ class App extends React.Component {
     if (!this.state) return <RedStart rootComponent={this}/>
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
+        <div style={{fontSize: '20px', fontWeight: 'bold',margin:'0px 8px'}}>RedGradient</div>
         <RedFrameMenuOpen rootComponent={this}/>
         <RedFrameMenuSave rootComponent={this}/>
 

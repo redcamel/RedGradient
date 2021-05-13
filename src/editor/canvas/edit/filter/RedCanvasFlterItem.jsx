@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
 import RedCanvasFilterBlur from "./RedCanvasFilterBlur.jsx";
@@ -50,6 +49,24 @@ class RedCanvasFilter extends React.Component {
         }}/>
       </div>
       {TargetFilterComponent ? <TargetFilterComponent rootComponent={rootComponent} filterData={filterData}/> : ''}
+      <button
+        style={style.buttonIcon}
+        onClick={e => {
+          const filterList = rootComponent.state.canvasInfo.filterList
+          filterList.splice(filterList.indexOf(filterData), 1)
+          rootComponent.setState({})
+        }}
+      >삭제
+      </button>
+      <button
+        style={style.buttonIcon}
+        onClick={e => {
+          const filterList = rootComponent.state.canvasInfo.filterList
+          filterList.splice(filterList.indexOf(filterData), 0,JSON.parse(JSON.stringify(filterData)))
+          rootComponent.setState({})
+        }}
+      >복제
+      </button>
       <div style={style.divide}/>
     </div>;
   }
@@ -67,5 +84,11 @@ const style = {
     height: '2px',
     background: '#4e4e4e',
     borderTop: '1px solid #000'
+  },
+  buttonIcon: {
+    border: 0,
+    cursor: 'pointer',
+    margin : '1px',
+    borderRadius : '4px'
   }
 };
