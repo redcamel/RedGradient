@@ -19,17 +19,10 @@ function drawCanvasEditUI() {
   const canvasInfo = rootComponentState.canvasInfo;
   return <div >
     <div style={style.canvasResizer}>
-      <RedNumber width={'60px'} value={canvasInfo.width} HD_onInput={e => {
-        canvasInfo.width = e.target.value;
-        rootComponent.setState({});
-      }} />
-      <RedNumber width={'60px'} value={canvasInfo.height} HD_onInput={e => {
-        canvasInfo.height = e.target.value;
-        rootComponent.setState({});
-      }} />
+
     </div>
-    <div style={{display: 'flex', alignItems: 'center'}}>
-      배경색상
+    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      background
       <div
         className={rootComponentState.bgColor === 'transparent' ? 'transparent_checker' : ''}
         style={{
@@ -38,7 +31,6 @@ function drawCanvasEditUI() {
           height: '25px',
           background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
           borderRadius: '4px',
-          marginRight: '10px',
           border: '1px solid #000',
           cursor: 'pointer'
         }}

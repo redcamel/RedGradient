@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import DataItem from "../data/DataItem.js";
 import {faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +12,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 
 const SIZE = 100;
-
 class RedLayerSubItem extends React.Component {
   constructor(props) {
     super(props);
@@ -27,21 +25,23 @@ class RedLayerSubItem extends React.Component {
     this.props.rootComponent.setState({});
   }
 
+
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const item = this.props.item;
     const layer = this.props.layer;
-    const layerSize = layer['size'];
     const activeSubDataYn = rootComponentState.activeSubData === item;
-    return <div style={{
-      opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s', padding: '0px 5px 5px 5px',
-      background: '#232323',
-      boxShadow: activeSubDataYn ? '0px 0px 5px rgba(255,0,0,0.5)' : '',
-      border: '1px solid #333',
-      borderRadius: '8px',
-      margin: '4px 0px 4px 10px'
-    }}>
+    return <div
+      style={{
+        opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s', padding: '0px 5px 5px 5px',
+        background: '#232323',
+        boxShadow: activeSubDataYn ? '0px 0px 5px rgba(255,0,0,0.5)' : '',
+        border: '1px solid #333',
+        borderRadius: '8px',
+        margin: '4px 0px 4px 10px'
+      }}
+    >
       <div
         className={'layerItemSubTitle'}
         style={{textOverflow: 'ellipsis', width: '100px', overflow: 'hidden', whiteSpace: 'nowrap'}}>
@@ -59,7 +59,7 @@ class RedLayerSubItem extends React.Component {
       </div>
       <div style={{margin: '2px 2px 2px 0px'}}>
         <button className={'layerVisible'}
-                onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash} />
+                onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash}/>
         </button>
         <button className={'layerDel'}
                 style={{opacity: layer.items.length > 1 ? 1 : 0.25}}
@@ -76,7 +76,7 @@ class RedLayerSubItem extends React.Component {
                     rootComponent.setState({activeSubData: layer.items[idx]});
                   }
                 }}
-        ><FontAwesomeIcon icon={faMinusCircle} />
+        ><FontAwesomeIcon icon={faMinusCircle}/>
         </button>
         <button className={'layerType'}>{item.type.charAt(0).toUpperCase()}</button>
       </div>
@@ -98,7 +98,7 @@ class RedLayerSubItem extends React.Component {
              }}
         />
 
-        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
+        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine}/>
       </div>
     </div>;
   }
