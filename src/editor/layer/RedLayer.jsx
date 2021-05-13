@@ -7,7 +7,7 @@
  */
 
 import React from "react";
-import DataItem from "../DataItem";
+import DataItem from "../data/DataItem.js";
 import RedLayerSubItem from "./RedLayerSubItem.jsx";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {

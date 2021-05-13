@@ -10,6 +10,7 @@ import React from "react";
 import drawCanvasUI from "./drawCanvasUI.js";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import CALC_GRADIENT from "../CALC_GRADIENT";
+import RedCanvasFilter from "./edit/filter/RedCanvasFlterItem.jsx";
 
 class RedCanvas extends React.Component {
   constructor(props) {
@@ -25,6 +26,10 @@ class RedCanvas extends React.Component {
     this.refColorPickerContainer = React.createRef();
   }
 
+  getFilterCss(filterList){
+    console.log('filterList',filterList)
+    return filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(',')
+  }
   draw_canvasUI = drawCanvasUI;
 
   drawCall(canvasInfo, layers, bgColor) {
@@ -52,7 +57,7 @@ class RedCanvas extends React.Component {
           backgroundBlendMode : CALC_GRADIENT.calcBlendMode(layers),
           transition: 'width 0.2s, height 0.2s',
           borderRadius : `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`,
-          filter : `${canvasInfo['filterData']? canvasInfo['filterData']['css'] : ''}`,
+          filter : this.getFilterCss(canvasInfo['filterList']),
           overflow : 'hidden',
         }}
       />

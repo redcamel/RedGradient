@@ -1,5 +1,13 @@
-import DataColor from "./DataColor";
-import GRADIENT_TYPE from "./GRADIENT_TYPE";
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
+import DataColor from "./DataColor.js";
+import GRADIENT_TYPE from "../GRADIENT_TYPE.js";
 
 let uuid = 0;
 

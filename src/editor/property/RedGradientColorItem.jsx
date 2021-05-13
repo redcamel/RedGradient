@@ -8,7 +8,7 @@
 
 import React from "react";
 
-import DataColor from "../DataColor";
+import DataColor from "../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedNumber from "../../core/RedNumber";
 import RedSelect from "../../core/RedSelect";

@@ -9,7 +9,7 @@
 import RedNumber from "../../core/RedNumber.jsx";
 import {ColorPicker} from '@easylogic/colorpicker';
 import '@easylogic/colorpicker/dist/colorpicker.css';
-import RED_CANVAS_PRESET from "./RED_CANVAS_PRESET.js";
+import RED_CANVAS_PRESET from "../../RED_CANVAS_PRESET.js";
 import React from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faDesktop, faMobileAlt} from '@fortawesome/free-solid-svg-icons';

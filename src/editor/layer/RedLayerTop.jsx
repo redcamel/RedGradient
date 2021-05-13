@@ -7,7 +7,7 @@
  */
 
 import React from "react";
-import DataLayer from "../DataLayer.js";
+import DataLayer from "../data/DataLayer.js";
 
 const options = [
   'black',
