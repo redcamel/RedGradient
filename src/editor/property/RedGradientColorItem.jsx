@@ -31,6 +31,13 @@ const HD_move = e => {
     } else {
       targetColorData[targetRange] = percentX / 100 * targetContext.props.rootComponent.state.canvasInfo['width'];
     }
+    if(targetColorData['range']>targetColorData['rangeEnd']){
+      let t0 = targetColorData['rangeEnd']
+      targetColorData['rangeEnd'] = targetColorData['range']
+      targetColorData['range'] = t0
+      if(targetRange==='range') targetRange = 'rangeEnd'
+      else targetRange = 'range'
+    }
     targetContext.props.rootComponent.setState({});
     // console.log(tX);
   }
@@ -181,7 +188,7 @@ class RedGradientColorItem extends React.Component {
           {/* TODO - 단위모델 변경 처리*/}
 
           <RedNumber
-            width={'auto'}
+            width={colorData['useRange'] ? '80px' : 'auto'}
             value={colorData['range'] || 0}
             HD_onInput={e => {
               colorData['range'] = +e.target.value;
@@ -196,6 +203,25 @@ class RedGradientColorItem extends React.Component {
               this.props.HD_active(this.getIndex());
             }}
           />
+          {
+            colorData['useRange']  ?<RedNumber
+              width={'80px'}
+              value={colorData['rangeEnd'] || 0}
+              HD_onInput={e => {
+                colorData['rangeEnd'] = +e.target.value;
+                let i = activeSubData.colorList.length;
+                while (i--) {
+                  if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
+                }
+                rootComponent.setState({});
+              }}
+              HD_blur={e => {
+                this.props.HD_sort(e);
+                this.props.HD_active(this.getIndex());
+              }}
+            /> : ''
+          }
+
           <RedSelect value={colorData['rangeUnit']} options={['px', '%']} HD_change={e => {
             let tUnit = e.target.value;
             if (colorData['rangeUnit'] !== tUnit) {

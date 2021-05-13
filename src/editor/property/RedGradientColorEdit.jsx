@@ -36,7 +36,7 @@ class RedGradientColorEdit extends React.Component {
       }
     });
     const code = `${GRADIENT_TYPE.LINEAR}(90deg, ${gradients}),${this.state.layerBgColor}`;
-    console.log(code)
+    // console.log(code)
     return <div style={{
       height: '55px',
       background: code,

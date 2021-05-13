@@ -6,7 +6,7 @@ class RedRadio extends React.Component {
       style={{display: 'flex',flexWrap: 'wrap', width: `${this.props.width || ''}px`, margin: '5px 0px'}}
     >
       {(this.props.options || []).map(v => {
-        console.log(this.props.options)
+        // console.log(this.props.options)
         const activeYn = this.props.value === v[1];
         return <label style={{display: 'flex', cursor: 'pointer', marginRight: '5px'}}>
           <input

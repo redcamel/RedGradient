@@ -115,7 +115,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     if (!this.state) return this.renderProjectSelect();
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
