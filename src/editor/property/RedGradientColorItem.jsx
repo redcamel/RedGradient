@@ -31,13 +31,16 @@ const HD_move = e => {
     } else {
       targetColorData[targetRange] = percentX / 100 * targetContext.props.rootComponent.state.canvasInfo['width'];
     }
-    if(targetColorData['range']>targetColorData['rangeEnd']){
-      let t0 = targetColorData['rangeEnd']
-      targetColorData['rangeEnd'] = targetColorData['range']
-      targetColorData['range'] = t0
-      if(targetRange==='range') targetRange = 'rangeEnd'
-      else targetRange = 'range'
+    if(targetColorData['useRange']){
+      if(targetColorData['range']>targetColorData['rangeEnd']){
+        let t0 = targetColorData['rangeEnd']
+        targetColorData['rangeEnd'] = targetColorData['range']
+        targetColorData['range'] = t0
+        if(targetRange==='range') targetRange = 'rangeEnd'
+        else targetRange = 'range'
+      }
     }
+
     targetContext.props.rootComponent.setState({});
     // console.log(tX);
   }

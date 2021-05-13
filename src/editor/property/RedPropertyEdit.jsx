@@ -44,7 +44,6 @@ class RedPropertyEdit extends React.Component {
               }} />
               <div style={style.divide} />
               <RedPropertyTypeEdit rootComponent={rootComponent} />
-              <div className={'todo'}>Todo - Repeating X 모델 추가중</div>
               <div style={style.divide} />
               <RedPropertyRepeatEdit rootComponent={rootComponent} />
               <div style={style.divide} />
@@ -77,7 +76,6 @@ class RedPropertyEdit extends React.Component {
         <div style={style.itemContainer}>
           <div>Gradient Preset</div>
           <RedPreset rootComponent={rootComponent}/>
-          <div className={'todo'}>Todo - 적용시에 새창에서 사이즈정책 등등을 정의할수있게</div>
         </div>
         <div style={style.itemContainer}>
           <RedGradientColorEdit rootComponent={rootComponent} />
