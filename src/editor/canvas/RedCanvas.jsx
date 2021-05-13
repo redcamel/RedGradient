@@ -144,7 +144,7 @@ class RedCanvas extends React.Component {
 
 export default RedCanvas;
 RedCanvas.getFilterCss=(filterList)=>{
-  console.log(filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(','))
+  // console.log(filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(','))
   return filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(' ')
 }
 RedCanvas.getContainerCss=(canvasInfo)=>{

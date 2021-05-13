@@ -15,15 +15,17 @@ import RedCanvasFilterContrast from "./RedCanvasFilterContrast.jsx";
 import RedCanvasFilterInvert from "./RedCanvasFilterInvert.jsx";
 import RedCanvasFilterSaturate from "./RedCanvasFilterSaturate.jsx";
 import RedCanvasFilterSepia from "./RedCanvasFilterSepia.jsx";
+import RedCanvasFilterDropShadow from "./RedCanvasFilterDropShadow.jsx";
 
 const filterList = [
-  'normal', 'blur', 'brightness', 'contrast', 'grayScale', 'invert', 'saturate', 'sepia'
+  'normal', 'blur', 'brightness', 'contrast', 'dropShadow', 'grayScale', 'invert', 'saturate', 'sepia'
 ];
 const filterComponent = {
   normal: RedCanvasFilterNormal,
   blur: RedCanvasFilterBlur,
   brightness: RedCanvasFilterBrightness,
   contrast: RedCanvasFilterContrast,
+  dropShadow: RedCanvasFilterDropShadow,
   grayScale: RedCanvasFilterGrayScale,
   invert: RedCanvasFilterInvert,
   saturate: RedCanvasFilterSaturate,
@@ -60,7 +62,7 @@ class RedCanvasFilter extends React.Component {
           style={style.buttonIcon}
           onClick={e => {
             const filterList = rootComponent.state.canvasInfo.filterList
-            filterList.splice(filterList.indexOf(filterData), 0,JSON.parse(JSON.stringify(filterData)))
+            filterList.splice(filterList.indexOf(filterData), 0, JSON.parse(JSON.stringify(filterData)))
             rootComponent.setState({})
           }}
         >Copy
@@ -89,13 +91,13 @@ const style = {
   },
   buttonIcon: {
     cursor: 'pointer',
-    margin : '1px',
-    borderRadius : '6px',
-    whiteSpace : 'nowrap',
-    padding : '6px 4px',
-    border : '1px solid rgb(31, 31, 31)',
-    boxShadow : 'rgb(0 0 0 / 25%) 1px 1px 1px',
+    margin: '1px',
+    borderRadius: '6px',
+    whiteSpace: 'nowrap',
+    padding: '6px 4px',
+    border: '1px solid rgb(31, 31, 31)',
+    boxShadow: 'rgb(0 0 0 / 25%) 1px 1px 1px',
     background: 'linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63))',
-    color : '#fff'
+    color: '#fff'
   }
 };
