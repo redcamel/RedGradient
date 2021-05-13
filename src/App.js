@@ -16,6 +16,8 @@ import DataLayer from "./editor/DataLayer";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFolderOpen, faSave} from '@fortawesome/free-solid-svg-icons';
 import CALC_GRADIENT from "./editor/CALC_GRADIENT";
+import RedCanvasEdit from "./editor/canvas/RedCanvasEdit";
+import RedTitle from "./core/RedTitle";
 
 class App extends React.Component {
   constructor(props) {
@@ -175,8 +177,9 @@ class App extends React.Component {
       </div>
       <div className={'frame_middle'}>
         <div className={'frame_middle_container'}>
-          <div className={'frame_left'}>frame Left
-
+          <div className={'frame_left'}>
+            {/*frame Left*/}
+            <RedCanvasEdit rootComponent={this} />
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
@@ -188,7 +191,8 @@ class App extends React.Component {
               <RedLayer rootComponent={this} />
               {this.state.activeSubData ? <RedPropertyEdit rootComponent={this} /> : ''}
               <div style={{display: "flex", height: '100%', alignContent: 'space-between', flexDirection: 'column'}}>
-                <div style={{width: '300px'}}>
+                <div style={{width: '200px'}}>
+                  <RedTitle title={'Result'} />
                   <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
                     {
 `.result {

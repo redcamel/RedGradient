@@ -50,62 +50,7 @@ function drawCanvasUI() {
       </div>
     </div>
     <div style={style.canvasResizer}>
-      <RedNumber width={'60px'} value={canvasInfo.width} HD_onInput={e => {
-        canvasInfo.width = e.target.value;
-        rootComponent.setState({});
-      }} />
-      <RedNumber width={'60px'} value={canvasInfo.height} HD_onInput={e => {
-        canvasInfo.height = e.target.value;
-        rootComponent.setState({});
-      }} />
-      <div style={{display: 'inline-flex', alignItems: 'center'}}>
-        배경색상
-        <div
-          className={rootComponentState.bgColor === 'transparent' ? 'transparent_checker' : ''}
-          style={{
-            display: 'inline-block',
-            width: '25px',
-            height: '25px',
-            background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
-            borderRadius: '4px',
-            marginRight: '10px',
-            border: '1px solid #000',
-            cursor: 'pointer'
-          }}
-          onClick={() => {
-            this.setState({canvasBgColorPickerOpenYn: true});
-            if (!colorPicker) {
-              colorPicker = new ColorPicker({
-                type: "sketch",
-                position: 'inline',
-                color: rootComponentState.bgColor,
-                container: this.refColorPickerContainer.current,
-                onChange: color => rootComponent.setState({bgColor: color})
-              });
-            }
-            colorPicker.setOption({color: rootComponentState.bgColor});
-          }}
-        />
 
-        <div style={{
-          zIndex: 1, position: 'absolute', top: 0, left: '0%', transform: 'translate(-50% , 0px)',
-          boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
-          background: '#fff',
-          borderRadius: '8px',
-          overflow: 'hidden',
-          display: this.state.canvasBgColorPickerOpenYn ? 'block' : 'none'
-        }}>
-          <div ref={this.refColorPickerContainer} />
-          <div
-            style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
-            onClick={() => {
-              this.setState({canvasBgColorPickerOpenYn: null});
-            }}
-          >완료
-          </div>
-        </div>
-
-      </div>
       <div>
         그라데이션 영역 보기
         <input type={'checkbox'}
@@ -122,11 +67,6 @@ function drawCanvasUI() {
                }}
                onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
         />
-        <div className={'todo'}>Todo - 레이어 & 레이어내 아이템 드래그 드롭으로 옮기기</div>
-        <div className={'todo'}>Todo - 애니메이션 구상</div>
-        <div className={'todo'}>Todo - undo,redo</div>
-        <div className={'todo'}>Todo - save,load</div>
-        <div className={'todo'}>Todo - preview 구상</div>
       </div>
 
     </div>
