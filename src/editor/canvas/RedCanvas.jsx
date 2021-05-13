@@ -58,6 +58,7 @@ class RedCanvas extends React.Component {
           overflow : 'hidden',
         }}
       />
+      {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
       {
         this.state.layerSizeView ? <div
           style={{
