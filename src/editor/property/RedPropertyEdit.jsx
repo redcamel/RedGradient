@@ -23,6 +23,7 @@ import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedPropertySizeEdit from "./RedPropertySizeEdit";
 import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
 import RedPreset from "../../preset/RedPreset";
+import CALC_GRADIENT from "../CALC_GRADIENT";
 
 class RedPropertyEdit extends React.Component {
   render() {
@@ -84,7 +85,7 @@ class RedPropertyEdit extends React.Component {
           <div>Current Gradient Css</div>
           <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
             {
-              JSON.stringify(RedLayer.calcGradientItem(data, false, activeLayer))
+              JSON.stringify(CALC_GRADIENT.calcGradientItem(data, false, activeLayer))
                 // .replace(/\s+/g, ' ')
                 // .replace(/, /g, '')
                 .replace(/"/g, '')

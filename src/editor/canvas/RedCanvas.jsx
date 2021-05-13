@@ -10,6 +10,7 @@ import React from "react";
 import RedLayer from "../layer/RedLayer.jsx";
 import drawCanvasUI from "./drawCanvasUI.js";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
+import CALC_GRADIENT from "../CALC_GRADIENT";
 
 class RedCanvas extends React.Component {
   constructor(props) {
@@ -48,7 +49,8 @@ class RedCanvas extends React.Component {
         className={'transparent_checker'}
         style={{
           width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
-          background: RedLayer.calcGradients(layers, true, bgColor),
+          background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
+          backgroundBlendMode : CALC_GRADIENT.calcBlendMode(layers),
           transition: 'width 0.2s, height 0.2s'
         }}
       />

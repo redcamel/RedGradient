@@ -13,9 +13,9 @@ class RedPropertyBlendEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     return <div>
-      Todo - Blend Mode
+      Gradient Blend Mode
       <RedSelect
-        value={activeSubData['blendMode'].split('-')[0].toUpperCase()}
+        value={activeSubData['blendMode']}
         options={Object.entries(BLEND_MODE_TYPE)}
         HD_change={e => {
           activeSubData['blendMode'] = e.target.value;

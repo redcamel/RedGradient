@@ -15,6 +15,7 @@ import RedPropertyEdit from "./editor/property/RedPropertyEdit.jsx";
 import DataLayer from "./editor/DataLayer";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFolderOpen, faSave} from '@fortawesome/free-solid-svg-icons';
+import CALC_GRADIENT from "./editor/CALC_GRADIENT";
 
 class App extends React.Component {
   constructor(props) {
@@ -104,7 +105,7 @@ class App extends React.Component {
           }}
         />
         <div style={{padding: '10px'}}>
-          <div style={{fontSize: '11px',textAlign:"center"}}>
+          <div style={{fontSize: '11px', textAlign: "center"}}>
             <a href={'https://github.com/redcamel/RedGradient'} target={'_blank'}>GitHub :
               https://github.com/redcamel/RedGradient</a>
             <div>This project is maintained by <a href={'mailto:webseon@gmail.com'}>RedCamel</a></div>
@@ -188,9 +189,13 @@ class App extends React.Component {
               {this.state.activeSubData ? <RedPropertyEdit rootComponent={this} /> : ''}
               <div style={{display: "flex", height: '100%', alignContent: 'space-between', flexDirection: 'column'}}>
                 <div style={{width: '300px'}}>
-                  <div style={style.test}>결과 테스트</div>
                   <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
-                    {JSON.stringify(RedLayer.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')}
+                    {
+`.result {
+background : ${JSON.stringify(CALC_GRADIENT.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')};
+background-blend-mode : ${CALC_GRADIENT.calcBlendMode(this.state.layers)}
+}`.replace(/\s\s+/g,' ')
+                    }
                   </SyntaxHighlighter>
                 </div>
                 <div>TODO - 애드센스자리</div>
@@ -206,7 +211,7 @@ class App extends React.Component {
       <div className={'frame_status'}>
         <a href={'https://github.com/redcamel/RedGradient'} target={'_blank'}>GitHub :
           https://github.com/redcamel/RedGradient</a>
-        <div >This project is maintained by <a href={'mailto:webseon@gmail.com'}>RedCamel</a></div>
+        <div>This project is maintained by <a href={'mailto:webseon@gmail.com'}>RedCamel</a></div>
       </div>
     </div>;
   }

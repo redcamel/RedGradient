@@ -11,6 +11,7 @@ import DataItem from "../DataItem";
 import RedLayer from "./RedLayer.jsx";
 import {faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import CALC_GRADIENT from "../CALC_GRADIENT";
 
 const SIZE = 100;
 
@@ -94,7 +95,7 @@ class RedLayerSubItem extends React.Component {
       >
         <div className={'layerItem'}
              style={{
-               background: `${RedLayer.calcGradientItem(item, false, layer)},${this.state.layerBgColor}`
+               background: `${CALC_GRADIENT.calcGradientItem(item, false, layer)},${this.state.layerBgColor}`
              }}
         />
 

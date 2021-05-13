@@ -4,6 +4,7 @@ import RedLayer from "../editor/layer/RedLayer";
 import PresetCircle2 from "./PresetCircle2";
 import PresetCircle3 from "./PresetCircle3";
 import PresetCircle4 from "./PresetCircle4";
+import CALC_GRADIENT from "../editor/CALC_GRADIENT";
 
 const presetList = [
   {
@@ -49,7 +50,7 @@ class RedPreset extends React.Component {
           >
             <div style={{
               ...style.icon,
-              background: RedLayer.calcGradientItem(new v['component']())
+              background: CALC_GRADIENT.calcGradientItem(new v['component']())
             }}>
             </div>
             {v['name']}
