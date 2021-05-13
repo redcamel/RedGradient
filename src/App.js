@@ -16,7 +16,7 @@ import DataLayer from "./editor/DataLayer";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFolderOpen, faSave} from '@fortawesome/free-solid-svg-icons';
 import CALC_GRADIENT from "./editor/CALC_GRADIENT";
-import RedCanvasEdit from "./editor/canvas/RedCanvasEdit";
+import RedCanvasEdit from "./editor/canvas/edit/RedCanvasEdit";
 import RedTitle from "./core/RedTitle";
 
 class App extends React.Component {

@@ -6,7 +6,7 @@
  *
  */
 
-import RedNumber from "../../core/RedNumber.jsx";
+import RedNumber from "../../../core/RedNumber.jsx";
 import {ColorPicker} from '@easylogic/colorpicker';
 import '@easylogic/colorpicker/dist/colorpicker.css';
 import React from "react";
@@ -14,11 +14,10 @@ import React from "react";
 let colorPicker;
 
 function drawCanvasEditUI() {
-
   const rootComponent = this.props.rootComponent;
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
-  return <div style={style.container}>
+  return <div >
     <div style={style.canvasResizer}>
       <RedNumber width={'60px'} value={canvasInfo.width} HD_onInput={e => {
         canvasInfo.width = e.target.value;
@@ -82,58 +81,11 @@ function drawCanvasEditUI() {
 
 export default drawCanvasEditUI;
 const style = {
-  container: {
-    padding: '4px',
-    width: '200px'
-  },
   canvasResizer: {
     position: 'sticky',
     top: 0,
     left: 0,
     zIndex: 1,
     display: 'flex',
-  },
-  canvasViewInfo: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    padding: '4px',
-    fontSize: '12px',
-    zIndex: 1
-  },
-  toCenter: {
-    padding: '3px 5px',
-    background: '#5e7ade',
-    color: '#fff',
-    marginTop: '4px',
-    borderRadius: '4px',
-    border: 0,
-    fontSize: '12px',
-    outline: 'none',
-    cursor: 'pointer'
-  },
-  toScale: {
-    marginLeft: '4px',
-    padding: '3px 5px',
-    background: '#7235d4',
-    color: '#fff',
-    marginTop: '4px',
-    borderRadius: '4px',
-    border: 0,
-    fontSize: '12px',
-    outline: 'none',
-    cursor: 'pointer'
-  },
-  presetButton: {
-    background: 'linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63))',
-    border: '1px solid rgb(31, 31, 31)',
-    outline: 'none',
-    color: '#fff',
-    fontSize: '12px',
-    padding: '4px 8px',
-    borderRadius: '4px',
-    margin: '1px',
-    cursor: 'pointer',
-    boxShadow: `rgba(0, 0, 0, 0.25) 1px 1px 1px`
   }
 };
