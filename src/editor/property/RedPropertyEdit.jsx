@@ -11,7 +11,6 @@ import RedTitle from "../../core/RedTitle.jsx";
 import RedTextField from "../../core/RedTextField.jsx";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import RedGradientColorEdit from "./RedGradientColorEdit.jsx";
-import RedLayer from "../layer/RedLayer.jsx";
 import RedPropertyPositionEditByMouse from "./RedPropertyPositionEditByMouse.jsx";
 import RedPropertyTypeEdit from "./RedPropertyTypeEdit.jsx";
 import RedPropertyPositionEdit from "./RedPropertyPositionEdit.jsx";

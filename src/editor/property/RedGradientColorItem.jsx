@@ -132,11 +132,15 @@ class RedGradientColorItem extends React.Component {
                      color: colorData['color'],
                      container: this.refColorPickerContainer.current,
                      onChange: color => {
-                       colorData['color'] = color;
-                       rootComponent.setState({activeSubData: activeSubData});
+                       targetColorData['color'] = color;
+                       targetContext.props.rootComponent.setState({
+                         activeSubData: targetContext.props.rootComponent.state.activeSubData
+                       });
                      }
                    });
                  }
+                 targetContext = this;
+                 targetColorData = colorData
                  this.state.colorPicker.setOption({color: colorData['color']});
                  this.setState({openColorPicker: true});
                }}
@@ -170,11 +174,15 @@ class RedGradientColorItem extends React.Component {
                      color: colorData['colorEnd'],
                      container: this.refColorEndPickerContainer.current,
                      onChange: color => {
-                       colorData['colorEnd'] = color;
-                       rootComponent.setState({activeSubData: activeSubData});
+                       targetColorData['colorEnd'] = color;
+                       targetContext.props.rootComponent.setState({
+                         activeSubData: targetContext.props.rootComponent.state.activeSubData
+                       });
                      }
                    });
                  }
+                 targetContext = this;
+                 targetColorData = colorData
                  this.state.colorEndPicker.setOption({color: colorData['colorEnd']});
                  this.setState({openColorEndPicker: true});
                }}
@@ -293,14 +301,14 @@ class RedGradientColorItem extends React.Component {
             left: `${colorData['rangeUnit'] === 'px' ? colorData['rangeEnd'] / canvasInfo['width'] * 100 : colorData['rangeEnd']}%`,
             background: activeYn ? '#5e7ade' : '#fff'
           }}
-                                    onMouseDown={() => {
-                                      targetContext = this;
-                                      targetColorData = colorData;
-                                      targetRefBar = this.refBar;
-                                      targetRange = 'rangeEnd';
-                                      window.addEventListener('mousemove', HD_move);
-                                      window.addEventListener('mouseup', HD_up);
-                                    }}
+              onMouseDown={() => {
+                targetContext = this;
+                targetColorData = colorData;
+                targetRefBar = this.refBar;
+                targetRange = 'rangeEnd';
+                window.addEventListener('mousemove', HD_move);
+                window.addEventListener('mouseup', HD_up);
+              }}
           >e</div> : ''
         }
       </div>

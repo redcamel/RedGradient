@@ -7,7 +7,6 @@
  */
 
 import React from "react";
-import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import DataItem from "../DataItem";
 import RedLayerSubItem from "./RedLayerSubItem.jsx";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -19,9 +18,7 @@ import {
   faMinusCircle,
   faPlusCircle
 } from '@fortawesome/free-solid-svg-icons';
-import REPEAT_TYPE from "../REPEAT_TYPE.js";
 import RedLayerTop from "./RedLayerTop.jsx";
-import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 
 const SIZE = 100;

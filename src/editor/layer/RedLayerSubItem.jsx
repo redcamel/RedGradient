@@ -8,7 +8,6 @@
 
 import React from "react";
 import DataItem from "../DataItem";
-import RedLayer from "./RedLayer.jsx";
 import {faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CALC_GRADIENT from "../CALC_GRADIENT";
