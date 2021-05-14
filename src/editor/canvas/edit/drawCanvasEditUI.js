@@ -50,7 +50,7 @@ function drawCanvasEditUI() {
       />
 
       <div style={{
-        zIndex: 1, position: 'absolute', top: 0, left: '0%', transform: 'translate(16px , 0px)',
+        zIndex: 2, position: 'absolute', top: 0, left: '0%', transform: 'translate(16px , 0px)',
         boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
         background: '#fff',
         borderRadius: '8px',
@@ -77,7 +77,7 @@ const style = {
     position: 'sticky',
     top: 0,
     left: 0,
-    zIndex: 1,
+    zIndex: 2,
     display: 'flex',
   }
 };
