@@ -51,11 +51,11 @@ class RedCanvas extends React.Component {
         style={{
           width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
           background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
-          backgroundBlendMode : CALC_GRADIENT.calcBlendMode(layers),
+          backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
           transition: 'width 0.2s, height 0.2s',
           ...RedCanvas.getContainerCss(canvasInfo),
-          filter : RedCanvas.getFilterCss(canvasInfo['filterList']),
-          overflow : 'hidden',
+          filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
+          overflow: 'hidden',
         }}
       />
       {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
@@ -74,34 +74,34 @@ class RedCanvas extends React.Component {
           {activeSubData['title']}
           {
             activeSubData['type'] === GRADIENT_TYPE.RADIAL ||
-            activeSubData['type'] === GRADIENT_TYPE.REPEAT_RADIAL||
+            activeSubData['type'] === GRADIENT_TYPE.REPEAT_RADIAL ||
             activeSubData['type'] === GRADIENT_TYPE.CONIC
-            ? <>
-              <div
-                style={{
-                  position: 'absolute',
-                  left: lX,
-                  top: lY,
-                  width: `${canvasInfo['width']}px`,
-                  height: `${canvasInfo['height']}px`,
-                  border: '1px dashed rgba(0,0,0,0.25)',
-                  color: '#000'
-                }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  left: lX,
-                  top: lY,
-                  width: `10px`,
-                  height: `10px`,
-                  borderRadius: '50%',
-                  background: 'red',
-                  transform: 'translate(-50%,-50%)',
-                  color: '#000'
-                }}
-              />
-            </> : ''
+              ? <>
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: lX,
+                    top: lY,
+                    width: `${canvasInfo['width']}px`,
+                    height: `${canvasInfo['height']}px`,
+                    border: '1px dashed rgba(0,0,0,0.25)',
+                    color: '#000'
+                  }}
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: lX,
+                    top: lY,
+                    width: `10px`,
+                    height: `10px`,
+                    borderRadius: '50%',
+                    background: 'red',
+                    transform: 'translate(-50%,-50%)',
+                    color: '#000'
+                  }}
+                />
+              </> : ''
           }
         </div> : ''
       }
@@ -147,26 +147,36 @@ class RedCanvas extends React.Component {
 }
 
 export default RedCanvas;
-RedCanvas.getFilterCss=(filterList)=>{
+RedCanvas.getFilterCss = (filterList) => {
   // console.log(filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(','))
-  return filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(' ')
-}
-RedCanvas.getContainerCss=(canvasInfo)=>{
-  if(!canvasInfo.hasOwnProperty('border_radius')){
-    canvasInfo['border_radius'] = 0
-    canvasInfo['border_radius_unit'] = 'px'
+  return filterList.map(v => RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(' ');
+};
+RedCanvas.getContainerCss = (canvasInfo) => {
+  if (!canvasInfo.hasOwnProperty('border_radius')) {
+    canvasInfo['border_radius'] = 0;
+    canvasInfo['border_radius_unit'] = 'px';
   }
-  if(!canvasInfo.hasOwnProperty('border_width')){
-    canvasInfo['border_width'] = 0
-    canvasInfo['border_width_unit'] = 'px'
-    canvasInfo['border_type'] = 'solid'
-    canvasInfo['border_color'] = '#000'
+  if (!canvasInfo.hasOwnProperty('border_width')) {
+    canvasInfo['border_width'] = 0;
+    canvasInfo['border_width_unit'] = 'px';
+    canvasInfo['border_type'] = 'solid';
+    canvasInfo['border_color'] = '#000';
+  }
+  if (!canvasInfo.hasOwnProperty('outline_width')) {
+    canvasInfo['outline_width'] = 0;
+    canvasInfo['outline_width_unit'] = 'px';
+    canvasInfo['outline_type'] = 'solid';
+    canvasInfo['outline_color'] = '#000';
+    canvasInfo['outline_offset'] = 0;
+    canvasInfo['outline_offset_unit'] = 'px';
   }
   return {
-    borderRadius : `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`,
-    border : `${canvasInfo['border_width']}${canvasInfo['border_width_unit']} ${canvasInfo['border_type']} ${canvasInfo['border_color']}`
-  }
-}
+    borderRadius: `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`,
+    border: `${canvasInfo['border_width']}${canvasInfo['border_width_unit']} ${canvasInfo['border_type']} ${canvasInfo['border_color']}`,
+    outline: `${canvasInfo['outline_width']}${canvasInfo['outline_width_unit']} ${canvasInfo['outline_type']} ${canvasInfo['outline_color']}`,
+    outlineOffset: `${canvasInfo['outline_offset']}${canvasInfo['outline_offset_unit']}`
+  };
+};
 const style = {
   container: {
     position: 'absolute',

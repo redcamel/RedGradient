@@ -3,7 +3,7 @@
  *  * RedGL - MIT License
  *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
  *  * https://github.com/redcamel/RedGradient
- *  
+ *
  */
 import DataLayer from "./DataLayer.js";
 
@@ -21,6 +21,13 @@ function DataCanvas() {
       border_width_unit: 'px',
       border_type: 'solid',
       border_color: '#000',
+      //
+      outline_width: 0,
+      outline_width_unit: 'px',
+      outline_type: 'solid',
+      outline_color: '#000',
+      outline_offset: 0,
+      outline_offset_unit: 'px',
       /////////////////////////////////////////////////
       filterList: []
     },
