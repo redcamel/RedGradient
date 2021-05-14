@@ -52,6 +52,11 @@ class RedPropertyEdit extends React.Component {
                 <div style={style.divide} />
                 <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />
               </> : ''}
+              {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.REPEAT_LINEAR || data.type === GRADIENT_TYPE.CONIC ?
+                <>
+                  <div style={style.divide} />
+                  <RedPropertyDegreeEdit rootComponent={rootComponent} />
+                </> : ''}
               <div style={style.divide} />
               <RedPropertySizeEdit rootComponent={rootComponent} />
               {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC ? <>
@@ -60,14 +65,11 @@ class RedPropertyEdit extends React.Component {
               </> : ''}
 
             </div>
+
             <div style={style.divide} />
             <RedPropertyPositionEdit rootComponent={rootComponent} />
 
-            {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.REPEAT_LINEAR || data.type === GRADIENT_TYPE.CONIC ?
-              <>
-                <div style={style.divide} />
-                <RedPropertyDegreeEdit rootComponent={rootComponent} />
-              </> : ''}
+
             <div style={style.divide} />
             <div style={{display: 'flex'}}>
               <div>

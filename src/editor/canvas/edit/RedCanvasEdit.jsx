@@ -30,9 +30,6 @@ class RedCanvasEdit extends React.Component {
     return <div>
       <RedTitle title={'Container Property'}/>
       <div style={style.container}>
-        <div style={style.divide}/>
-        <RedCanvasSizeEdit rootComponent={rootComponent}/>
-        <div style={style.divide}/>
         {this.drawCanvasEditUI()}
         <div style={style.divide}/>
         <RedCanvasBorderEdit rootComponent={rootComponent}/>
