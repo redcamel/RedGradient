@@ -69,7 +69,6 @@ class RedPropertyEdit extends React.Component {
             <div style={style.divide} />
             <RedPropertyPositionEdit rootComponent={rootComponent} />
 
-
             <div style={style.divide} />
             <div style={{display: 'flex'}}>
               <div>
