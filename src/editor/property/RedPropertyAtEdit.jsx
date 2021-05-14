@@ -13,7 +13,7 @@ class RedPropertyAtEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     return <div>
-      At
+      Center
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <RedNumber
           width={'80px'}

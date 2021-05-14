@@ -2,7 +2,7 @@ import React from "react";
 import {faArrowDown, faCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const SIZE = 100;
+const SIZE = 65;
 let targetContext;
 const HD_move = e => {
   targetContext.calcSize(e);
@@ -24,15 +24,16 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const activeSubData = rootComponentState.activeSubData;
     const layerSize = rootComponentState.activeLayer.size;
     const canvasInfo = rootComponentState.canvasInfo;
+    const targetKey = this.props.targetKey
     const rect = targetContext.refRect.current.getBoundingClientRect();
     let tX = (e.pageX - (rect.x));
     let tY = (e.pageY - (rect.y));
     let layerPixelW = canvasInfo.width;
     let layerPixelH = canvasInfo.height;
-    let tPercentX = activeSubData['position']['xUnit'] === '%' ? tX / SIZE * 100 : tX * layerPixelW / SIZE;
-    let tPercentY = activeSubData['position']['yUnit'] === '%' ? tY / SIZE * 100 : tY * layerPixelH / SIZE;
-    activeSubData['position']['x'] = tPercentX;
-    activeSubData['position']['y'] = tPercentY;
+    let tPercentX = activeSubData[targetKey]['xUnit'] === '%' ? tX / SIZE * 100 : tX * layerPixelW / SIZE;
+    let tPercentY = activeSubData[targetKey]['yUnit'] === '%' ? tY / SIZE * 100 : tY * layerPixelH / SIZE;
+    activeSubData[targetKey]['x'] = tPercentX;
+    activeSubData[targetKey]['y'] = tPercentY;
     rootComponent.setState({});
   }
 
@@ -40,8 +41,9 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    activeSubData['position']['x'] = x;
-    activeSubData['position']['y'] = y;
+    const targetKey = this.props.targetKey
+    activeSubData[targetKey]['x'] = x;
+    activeSubData[targetKey]['y'] = y;
     rootComponent.setState({});
   }
 
@@ -50,12 +52,12 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     const layerSize = rootComponentState.activeLayer.size;
-    const position = activeSubData['position'];
+    const targetData = activeSubData[this.props.targetKey];
     const canvasInfo = rootComponentState.canvasInfo;
     let layerPixelW = canvasInfo.width;
     let layerPixelH = canvasInfo.height;
-    let tPercentX = position['xUnit'] === '%' ? (position.x / 100 * SIZE) % 100 : ((position.x / layerPixelW * 100) % 100);
-    let tPercentY = position['yUnit'] === '%' ? (position.y / 100 * SIZE) % 100 : ((position.y / layerPixelH * 100) % 100);
+    let tPercentX = targetData['xUnit'] === '%' ? (targetData.x ) % 100 : ((targetData.x / layerPixelW * 100) % 100);
+    let tPercentY = targetData['yUnit'] === '%' ? (targetData.y ) % 100 : ((targetData.y / layerPixelH * 100) % 100);
     if (tPercentX < 0) tPercentX = 100 + tPercentX;
     if (tPercentY < 0) tPercentY = 100 + tPercentY;
     return <div>
@@ -91,7 +93,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
         <button
           onClick={e => {
             let tX = 50;
-            if (position['xUnit'] === 'px') tX = canvasInfo['width'] * 0.5;
+            if (targetData['xUnit'] === 'px') tX = canvasInfo['width'] * 0.5;
             this.setPosition(tX, 0);
           }}
           style={{...style.location, top: 0, left: '50%', transform: 'translate(-50%,0)'}}><FontAwesomeIcon
@@ -99,7 +101,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
         <button
           onClick={e => {
             let tX = 100;
-            if (position['xUnit'] === 'px') tX = canvasInfo['width'];
+            if (targetData['xUnit'] === 'px') tX = canvasInfo['width'];
             this.setPosition(tX, 0);
           }}
           style={{...style.location, top: 0, right: 0}}><FontAwesomeIcon icon={faArrowDown}
@@ -109,7 +111,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
         <button
           onClick={e => {{
             let tY = 50;
-            if (position['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
+            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
             this.setPosition(0, tY);
           }}}
           style={{...style.location, top: '50%', left: 0, transform: 'translate(0%,-50%)'}}><FontAwesomeIcon
@@ -118,8 +120,8 @@ class RedPropertyPositionEditByMouse extends React.Component {
           onClick={e => {
             let tX = 50;
             let tY = 50;
-            if (position['xUnit'] === 'px') tX = canvasInfo['width'] * 0.5;
-            if (position['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
+            if (targetData['xUnit'] === 'px') tX = canvasInfo['width'] * 0.5;
+            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
             this.setPosition(tX, tY);
           }}
           style={{...style.location, top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}><FontAwesomeIcon
@@ -128,8 +130,8 @@ class RedPropertyPositionEditByMouse extends React.Component {
           onClick={e => {
             let tX = 100;
             let tY = 50;
-            if (position['xUnit'] === 'px') tX = canvasInfo['width'];
-            if (position['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
+            if (targetData['xUnit'] === 'px') tX = canvasInfo['width'];
+            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
             this.setPosition(tX, tY);
           }}
           style={{...style.location, top: '50%', right: 0, transform: 'translate(0%,-50%)'}}><FontAwesomeIcon
@@ -138,7 +140,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
         <button
           onClick={e => {
             let tY = 100;
-            if (position['yUnit'] === 'px') tY = canvasInfo['height'] ;
+            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] ;
             this.setPosition(0, tY);
           }}
           style={{...style.location, bottom: 0, left: 0}}><FontAwesomeIcon icon={faArrowDown}
@@ -148,8 +150,8 @@ class RedPropertyPositionEditByMouse extends React.Component {
           onClick={e => {
             let tX = 50;
             let tY = 100;
-            if (position['xUnit'] === 'px') tX = canvasInfo['width']*0.5;
-            if (position['yUnit'] === 'px') tY = canvasInfo['height'] ;
+            if (targetData['xUnit'] === 'px') tX = canvasInfo['width']*0.5;
+            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] ;
             this.setPosition(tX, tY);
           }}
           style={{...style.location, bottom: 0, left: '50%', transform: 'translate(-50%,0)'}}><FontAwesomeIcon
@@ -158,8 +160,8 @@ class RedPropertyPositionEditByMouse extends React.Component {
           onClick={e => {
             let tX = 100;
             let tY = 100;
-            if (position['xUnit'] === 'px') tX = canvasInfo['width'];
-            if (position['yUnit'] === 'px') tY = canvasInfo['height'] ;
+            if (targetData['xUnit'] === 'px') tX = canvasInfo['width'];
+            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] ;
             this.setPosition(tX, tY);
           }}
           style={{...style.location, bottom: 0, right: 0}}><FontAwesomeIcon icon={faArrowDown}

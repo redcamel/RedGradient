@@ -52,30 +52,42 @@ class RedPropertyEdit extends React.Component {
                 <div style={style.divide} />
                 <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />
               </> : ''}
+              <div style={style.divide} />
+              <RedPropertySizeEdit rootComponent={rootComponent} />
               {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC ? <>
                 <div style={style.divide} />
                 <RedPropertyAtEdit rootComponent={rootComponent} />
               </> : ''}
-              <div style={style.divide} />
-              <RedPropertyPositionEdit rootComponent={rootComponent} />
-              <div style={style.divide} />
-              <RedPropertySizeEdit rootComponent={rootComponent} />
 
             </div>
             <div style={style.divide} />
-            <div>Start Position</div>
+            <RedPropertyPositionEdit rootComponent={rootComponent} />
+
+            {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.REPEAT_LINEAR || data.type === GRADIENT_TYPE.CONIC ?
+              <>
+                <div style={style.divide} />
+                <RedPropertyDegreeEdit rootComponent={rootComponent} />
+              </> : ''}
+            <div style={style.divide} />
             <div style={{display: 'flex'}}>
-              <RedPropertyPositionEditByMouse rootComponent={rootComponent} />
-              <div style={{height: '5px'}} />
-              {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.REPEAT_LINEAR || data.type === GRADIENT_TYPE.CONIC ?
-                <RedPropertyDegreeEdit rootComponent={rootComponent} /> : ''}
+              <div>
+                position
+                <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'position'} />
+              </div>
+              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC ?
+                <div>
+                  center
+                  <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'at'} />
+                </div> : ''
+              }
+
             </div>
           </div>
         </div>
 
         <div style={style.itemContainer}>
           <div>Gradient Preset</div>
-          <RedPreset rootComponent={rootComponent}/>
+          <RedPreset rootComponent={rootComponent} />
         </div>
         <div style={style.itemContainer}>
           <RedGradientColorEdit rootComponent={rootComponent} />
@@ -96,10 +108,10 @@ class RedPropertyEdit extends React.Component {
           </SyntaxHighlighter>
           <div>Current Gradient Data</div>
           <div
-            style={{cursor:'pointer'}}
-            onClick={e=>{
+            style={{cursor: 'pointer'}}
+            onClick={e => {
               var tempElem = document.createElement('textarea');
-              tempElem.value =  JSON.stringify(data, null, 2);
+              tempElem.value = JSON.stringify(data, null, 2);
               document.body.appendChild(tempElem);
 
               tempElem.select();
@@ -107,7 +119,8 @@ class RedPropertyEdit extends React.Component {
               document.body.removeChild(tempElem);
 
             }}
-          >copy</div>
+          >copy
+          </div>
           <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
             {JSON.stringify(data, null, 2)}
           </SyntaxHighlighter>

@@ -73,7 +73,10 @@ class RedCanvas extends React.Component {
         >
           {activeSubData['title']}
           {
-            activeSubData['type'] === GRADIENT_TYPE.RADIAL ? <>
+            activeSubData['type'] === GRADIENT_TYPE.RADIAL ||
+            activeSubData['type'] === GRADIENT_TYPE.REPEAT_RADIAL||
+            activeSubData['type'] === GRADIENT_TYPE.CONIC
+            ? <>
               <div
                 style={{
                   position: 'absolute',

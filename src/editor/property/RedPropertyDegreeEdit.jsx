@@ -1,7 +1,7 @@
 import React from "react";
 import RedNumber from "../../core/RedNumber.jsx";
 
-const SIZE = 50;
+const SIZE = 37;
 let targetContext;
 const HD_move = e => {
   targetContext.calcDegree(e);
@@ -37,7 +37,7 @@ class RedPropertyDegreeEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     const deg = activeSubData['deg'];
-    return <div>
+    return <div style={{display:'flex',alignItems: 'center'}}>
       {
         <>
           Deg <RedNumber
@@ -47,7 +47,7 @@ class RedPropertyDegreeEdit extends React.Component {
             activeSubData['deg'] = e.target.value;
             rootComponent.setState({});
           }} />
-          <div style={{textAlign: 'center'}}>
+          <div style={{textAlign: 'center',marginLeft :'10px '}}>
             <div
               style={style.box}
               onMouseDown={() => {
@@ -78,7 +78,6 @@ export default RedPropertyDegreeEdit;
 const style = {
   box: {
     display: 'inline-block',
-    margin: '5px',
     width: `${SIZE}px`, height: `${SIZE}px`,
     border: '1px solid #5e7ade',
     borderRadius: '50%',
