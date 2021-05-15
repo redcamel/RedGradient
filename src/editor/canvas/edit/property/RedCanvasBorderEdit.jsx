@@ -32,10 +32,12 @@ class RedCanvasBorderEdit extends React.Component {
           canvasInfo['border_width'] = e.target.value;
           rootComponent.setState({});
         }}/>
-      <RedSelect value={canvasInfo['border_type']} options={['solid', 'dotted', 'dashed']} HD_change={e => {
-        canvasInfo['border_type'] = e.target.value;
-        rootComponent.setState({});
-      }}/>
+      <RedSelect value={canvasInfo['border_type']}
+                 options={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']}
+                 HD_change={e => {
+                   canvasInfo['border_type'] = e.target.value;
+                   rootComponent.setState({});
+                 }}/>
       <div
         className={rootComponentState.border_color === 'transparent' ? 'transparent_checker' : ''}
         style={{
