@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import PresetCircle from "./PresetCircle.js";
 import PresetCircle2 from "./PresetCircle2.js";
@@ -78,7 +77,7 @@ class RedPreset extends React.Component {
     return <div>
       <div style={style.container}>{this.renderList(presetList)}</div>
       <div style={style.divide}/>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between',alignItems: 'center'}}>
         User Preset
         <div style={{
           display: 'flex',
@@ -94,7 +93,15 @@ class RedPreset extends React.Component {
           </div>
           <div
             onClick={e => this.setState({mode: 1})}
-            style={{...style.mode, background: this.state.mode === 1 ? '#5e7ade' : '#2f2f2f'}}>del
+            style={{...style.mode, borderLeft: '1px solid #000', background: this.state.mode === 1 ? '#5e7ade' : '#2f2f2f'}}>del
+          </div>
+          <div
+            onClick={e => RedPreset.exportPreset()}
+            style={{...style.mode, borderLeft: '1px solid #000', background: '#2f2f2f'}}>export
+          </div>
+          <div
+            onClick={e => RedPreset.importPreset(this.props.rootComponent)}
+            style={{...style.mode, borderLeft: '1px solid #000', background: '#2f2f2f'}}>import
           </div>
         </div>
       </div>
@@ -117,13 +124,35 @@ RedPreset.delUserPreset = (context, index) => {
   localStorage.setItem('userPresetList', JSON.stringify(t0))
   context.setState({})
 }
+RedPreset.exportPreset = ()=>{
+  const a = document.createElement('a');
+  const file = new Blob([JSON.stringify(RedPreset.getUserPreset())], {type: 'application/json'});
+  a.href = URL.createObjectURL(file);
+  a.download = `RedGradientPreset.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+RedPreset.importPreset = (context)=>{
+  const a = document.createElement('input');
+  a.setAttribute('accept', '.json');
+  a.setAttribute('type', 'file');
+  a.click();
+  a.onchange = e => {
+    let fileReader = new FileReader();
+    fileReader.onload = evt => {
+      localStorage.setItem('userPresetList', evt.target.result)
+      context.setState({})
+    }
+    fileReader.readAsText(e.target.files[0]);
+  };
+}
 const style = {
   container: {
     display: 'flex',
     flexWrap: 'wrap'
   },
   mode: {
-    padding: '2px 6px',
+    padding: '2px 5px',
     cursor: 'pointer',
   },
   name: {
