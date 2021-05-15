@@ -48,6 +48,7 @@ class RedCanvasEdit extends React.Component {
             marginRight: '4px',
             overflow: 'hidden'
           }}>
+
             <div
               onClick={e => {
                 canvasInfo.borderIsGradientMode = false
@@ -67,9 +68,10 @@ class RedCanvasEdit extends React.Component {
               }}>gradient
             </div>
           </div>
-
         </div>
-
+        <div style={{margin:'5px 0px'}}>
+        <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
+        </div>
         <div style={{display: canvasInfo.borderIsGradientMode ? 'none' : 'block'}}><RedCanvasBorderModeEdit
           rootComponent={rootComponent}/></div>
         <div style={{display: canvasInfo.borderIsGradientMode ? 'block' : 'none'}}><RedCanvasBorderModeGradientEdit
@@ -77,8 +79,7 @@ class RedCanvasEdit extends React.Component {
           {canvasInfo.borderIsGradientMode ? <RedCanvasBorderGradientFrame rootComponent={rootComponent}/> : ''}
         </div>
 
-        <div style={style.divide}/>
-        <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
+
         <div style={style.divide}/>
         <RedCanvasFilterList rootComponent={rootComponent}/>
         <div style={style.divide}/>

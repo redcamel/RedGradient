@@ -24,6 +24,7 @@ class RedCanvasBorderModeEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     return <div style={style.container}>
+
       width <RedNumber
         width={'71px'}
         value={canvasInfo['border_width'] || 0}
