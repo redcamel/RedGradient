@@ -1,16 +1,23 @@
-const PresetCircle2 = function() {
-  return {
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
+const PresetCircle4 =  {
     "title": "test",
-    "type": "radial-gradient",
-    "typeRepeat": "no-repeat",
+    "type": "repeating-radial-gradient",
+    "typeRepeat": "repeat",
     "typeEndingShape": "none",
     "blendMode": "normal",
     "deg": 45,
     "visible": true,
     "position": {
-      "x": 0,
+      "x": "50",
       "xUnit": "px",
-      "y": 0,
+      "y": "50",
       "yUnit": "px"
     },
     "at": {
@@ -27,24 +34,29 @@ const PresetCircle2 = function() {
     },
     "colorList": [
       {
-        "color": "rgba(255,0,0,0.9)",
+        "color": "rgb(0,24,255)",
         "rangeUnit": "%",
-        "range": 25,
+        "range": 29.6875,
         "useDivide": false
       },
       {
-        "color": "rgb(0,24,255)",
+        "color": "rgba(255,0,0,0.9)",
         "rangeUnit": "%",
-        "range": 37.5,
+        "range": 49.375,
         "useDivide": true
+      },
+      {
+        "color": "rgba(6,6,6,0.27)",
+        "rangeUnit": "%",
+        "range": 51.87500000000001,
+        "useDivide": false
       },
       {
         "color": "rgba(0,24,255,0)",
         "rangeUnit": "%",
-        "range": 100,
+        "range": 58.4375,
         "useDivide": false
       }
     ]
   }
-};
-export default PresetCircle2
+export default PresetCircle4

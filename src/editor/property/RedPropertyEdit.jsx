@@ -21,7 +21,7 @@ import RedPropertyAtEdit from "./RedPropertyAtEdit";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedPropertySizeEdit from "./RedPropertySizeEdit";
 import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
-import RedPreset from "../../preset/RedPreset";
+import RedPreset from "./preset/RedPreset";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 
 class RedPropertyEdit extends React.Component {
@@ -86,10 +86,6 @@ class RedPropertyEdit extends React.Component {
           </div>
         </div>
 
-        <div style={style.itemContainer}>
-          <div>Gradient Preset</div>
-          <RedPreset rootComponent={rootComponent} />
-        </div>
         <div style={style.itemContainer}>
           <RedGradientColorEdit rootComponent={rootComponent} />
         </div>

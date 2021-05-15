@@ -17,6 +17,7 @@ import RedTitle from "./core/RedTitle";
 import RedStart from "./start/RedStart.jsx";
 import RedFrameMenuOpen from "./editor/frameMainMenu/RedFrameMenuOpen.jsx";
 import RedFrameMenuSave from "./editor/frameMainMenu/RedFrameMenuSave.jsx";
+import RedPreset from "./editor/property/preset/RedPreset.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -62,7 +63,11 @@ class App extends React.Component {
               <RedLayer rootComponent={this}/>
               {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
               <div style={{display: "flex", height: '100%', alignContent: 'space-between', flexDirection: 'column'}}>
-                <div style={{width: '200px'}}>
+                <div style={{width: '225px'}}>
+                  <RedTitle title={'Gradient Preset'}/>
+                  <div style={{height : '400px',overflowY:'auto',padding : '4px'}}>
+                    <RedPreset rootComponent={this} />
+                  </div>
                   <RedTitle title={'Result'}/>
                   <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
                     {

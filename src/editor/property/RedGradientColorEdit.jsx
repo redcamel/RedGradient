@@ -1,8 +1,17 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedGradientColorItem from "./RedGradientColorItem";
-import {faExchangeAlt, faThumbtack} from "@fortawesome/free-solid-svg-icons";
+import {faExchangeAlt, faSave} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import RedPreset from "./preset/RedPreset.jsx";
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
 class RedGradientColorEdit extends React.Component {
@@ -19,14 +28,11 @@ class RedGradientColorEdit extends React.Component {
     const itemList = [];
     const gradients = data['colorList'].map((v, index) => {
       const activeYn = this.state.activeIDX === index;
-
       itemList.push(this.renderColorStep(v, index, activeYn));
-
       let colorRangeTxt = '';
       if (v['useRange']) {
         let divideTxt = '';
         divideTxt = v['useDivide'] ? `,${v['colorEnd']} calc(${v['range']}${v['rangeUnit']} + 1px)` : '';
-
         let divideEndTxt = '';
         divideEndTxt = v['useDivideEnd'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['rangeEnd']}${v['rangeUnit']} + 1px)` : '';
         return `${v['color']} ${v['range']}${v['rangeUnit']} ${divideTxt}, ${v['colorEnd']} ${v['rangeEnd']}${v['rangeUnit']} ${divideEndTxt}`;
@@ -87,48 +93,53 @@ class RedGradientColorEdit extends React.Component {
     const activeSubData = rootComponentState.activeSubData;
     return <div style={style.container}>
       <div style={{display: 'flex', margin: '4px 0px', justifyContent: 'space-between'}}>
-        <div style={{flexGrow:10}}>Gradient ColorRange</div>
+        <div style={{flexGrow: 10}}>Preview</div>
         <button
-        style={style.reverse}
-        onClick={e => {
-          console.log('원본', JSON.parse(JSON.stringify(activeSubData['colorList'])));
-          let t0 = JSON.parse(JSON.stringify(activeSubData['colorList']));
-          t0 = t0.reverse();
-          t0.forEach(v => {
-            if (v['rangeUnit'] === '%') {
-              const base = 100;
-              if (v['useRange']) {
-                let t0 = base - v['range'];
-                v['range'] = base - v['rangeEnd'];
-                v['rangeEnd'] = t0;
-                t0 = v['color'];
-                v['color'] = v['colorEnd'];
-                v['colorEnd'] = t0;
+          style={style.preset}
+          onClick={e => RedPreset.addUserPreset(rootComponent,activeSubData)}
+        ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}}/> Add Preset
+        </button>
+        <button
+          style={style.reverse}
+          onClick={e => {
+            console.log('원본', JSON.parse(JSON.stringify(activeSubData['colorList'])));
+            let t0 = JSON.parse(JSON.stringify(activeSubData['colorList']));
+            t0 = t0.reverse();
+            t0.forEach(v => {
+              if (v['rangeUnit'] === '%') {
+                const base = 100;
+                if (v['useRange']) {
+                  let t0 = base - v['range'];
+                  v['range'] = base - v['rangeEnd'];
+                  v['rangeEnd'] = t0;
+                  t0 = v['color'];
+                  v['color'] = v['colorEnd'];
+                  v['colorEnd'] = t0;
+                } else {
+                  v['range'] = base - v['range'];
+                  v['rangeEnd'] = base - v['rangeEnd'];
+                }
               } else {
-                v['range'] = base - v['range'];
-                v['rangeEnd'] = base - v['rangeEnd'];
+                const base = this.props.rootComponent.state.canvasInfo.width;
+                if (v['useRange']) {
+                  let t0 = base - v['range'];
+                  v['range'] = base - v['rangeEnd'];
+                  v['rangeEnd'] = t0;
+                  t0 = v['color'];
+                  v['color'] = v['colorEnd'];
+                  v['colorEnd'] = t0;
+                } else {
+                  v['range'] = base - v['range'];
+                  v['rangeEnd'] = base - v['rangeEnd'];
+                }
               }
-            } else {
-              const base = this.props.rootComponent.state.canvasInfo.width;
-              if (v['useRange']) {
-                let t0 = base - v['range'];
-                v['range'] = base - v['rangeEnd'];
-                v['rangeEnd'] = t0;
-                t0 = v['color'];
-                v['color'] = v['colorEnd'];
-                v['colorEnd'] = t0;
-              } else {
-                v['range'] = base - v['range'];
-                v['rangeEnd'] = base - v['rangeEnd'];
-              }
-            }
-          });
-          activeSubData['colorList'] = t0;
-          rootComponent.setState({});
-          console.log('결과', t0);
-        }}
-      ><FontAwesomeIcon icon={faExchangeAlt} style={{marginRight:'5px'}}/> Reverse
-      </button>
+            });
+            activeSubData['colorList'] = t0;
+            rootComponent.setState({});
+            console.log('결과', t0);
+          }}
+        ><FontAwesomeIcon icon={faExchangeAlt} style={{marginRight: '5px'}}/> Reverse
+        </button>
         <div>
           <button style={{...style.bgItem, background: '#000', color: '#fff'}}
                   onClick={() => this.setState({layerBgColor: 'black'})}>B
@@ -186,16 +197,30 @@ const style = {
     border: 0,
     fontWeight: 'bold'
   },
-  reverse : {
-    display:'flex',
+
+  preset: {
+    display: 'flex',
     alignItems: 'center',
-    marginRight:  '3px',
-    background : '#5e7ade',
-    color : '#fff',
-    fontSize:  '12px',
-    border : '1px solid #000',
-    borderRadius : '4px',
-    height : '21px',
+    marginRight: '3px',
+    background: '#5e7ade',
+    color: '#fff',
+    fontSize: '12px',
+    border: '1px solid #000',
+    borderRadius: '4px',
+    height: '21px',
+    whiteSpace : 'nowrap',
+    cursor: 'pointer'
+  },
+  reverse: {
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: '3px',
+    background: '#5e7ade',
+    color: '#fff',
+    fontSize: '12px',
+    border: '1px solid #000',
+    borderRadius: '4px',
+    height: '21px',
     cursor: 'pointer'
   }
 };
