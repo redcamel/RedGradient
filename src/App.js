@@ -22,6 +22,14 @@ import RedPreset from "./editor/property/preset/RedPreset.jsx";
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+  }
+  checkUnloadEvent(){
+    if(this.state && !window.onbeforeunload){
+      window.onbeforeunload = e=>{
+        return "레알 나감????????????";
+      }
+    }
   }
 
   setNewCanvas(newState) {
@@ -34,6 +42,7 @@ class App extends React.Component {
   render() {
     // console.log(this.state);
     if (!this.state) return <RedStart rootComponent={this}/>
+    this.checkUnloadEvent()
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
         <div style={{fontSize: '20px', fontWeight: 'bold',margin:'0px 8px'}}>RedGradient</div>
