@@ -56,14 +56,17 @@ class RedLayer extends React.Component {
             }}>
               <div
                 className={'layerItemTitle'}
-                style={{textOverflow: 'ellipsis', width: '123px', overflow: 'hidden', whiteSpace: 'nowrap'}}>
+                style={{cursor: 'pointer',textOverflow: 'ellipsis', width: '123px', overflow: 'hidden', whiteSpace: 'nowrap'}}
+                onClick={() => {
+                  layer.openYn = !layer.openYn;
+                  rootComponent.setState({});
+                }}
+              >
+
                 <FontAwesomeIcon
                   icon={layer.openYn ? faFolderOpen : faFolder}
-                  style={{fontSize: '11px', marginRight: '5px', cursor: 'pointer'}}
-                  onClick={() => {
-                    layer.openYn = !layer.openYn;
-                    rootComponent.setState({});
-                  }} />
+                  style={{fontSize: '11px', marginRight: '5px', }}
+                  />
                 {layer.title}
               </div>
               <div>
