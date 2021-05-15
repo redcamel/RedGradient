@@ -42,7 +42,7 @@ function drawCanvasEditUI() {
               position: 'inline',
               color: rootComponentState.bgColor,
               container: this.refColorPickerContainer.current,
-              onChange: color => rootComponent.setState({bgColor: color})
+              onChange: color => rootComponent.updateRootState({bgColor: color})
             });
           }
           colorPicker.setOption({color: rootComponentState.bgColor});

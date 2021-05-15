@@ -27,7 +27,7 @@ class RedCanvasFilterBlur extends React.Component {
           HD_onInput={e => {
             filterData['values']['amount'] = e.target.value;
             filterData['css'] = this.getCss(filterData)
-            rootComponent.setState({});
+            rootComponent.updateRootState({});
           }}/>
       </div>
     </div>;

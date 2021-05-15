@@ -57,7 +57,7 @@ class RedPreset extends React.Component {
             rootComponentState.activeLayer.items.splice(idx, 1, newData)
             rootComponentState.activeSubData = newData
           }
-          rootComponent.setState({});
+          rootComponent.updateRootState({});
         }}
       >
         <div style={{

@@ -33,7 +33,7 @@ class RedCanvasFilterDropShadow extends React.Component {
         HD_onInput={e => {
           filterData['values']['offsetX'] = e.target.value;
           filterData['css'] = this.getCss(filterData)
-          rootComponent.setState({});
+          rootComponent.updateRootState({});
         }}/>
         offsetY <RedNumber
         width={'50px'}
@@ -41,7 +41,7 @@ class RedCanvasFilterDropShadow extends React.Component {
         HD_onInput={e => {
           filterData['values']['offsetY'] = e.target.value;
           filterData['css'] = this.getCss(filterData)
-          rootComponent.setState({});
+          rootComponent.updateRootState({});
         }}/>
       </div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -52,7 +52,7 @@ class RedCanvasFilterDropShadow extends React.Component {
         HD_onInput={e => {
           filterData['values']['radius'] = e.target.value;
           filterData['css'] = this.getCss(filterData)
-          rootComponent.setState({});
+          rootComponent.updateRootState({});
         }}/>
         <div
           className={ filterData['values']['color'] === 'transparent' ? 'transparent_checker' : ''}
@@ -75,7 +75,7 @@ class RedCanvasFilterDropShadow extends React.Component {
                 container: this.refColorPickerContainer.current,
                 onChange: color => {
                   filterData['values']['color'] = color
-                  rootComponent.setState({filterData})
+                  rootComponent.updateRootState({filterData})
                 }
               });
             }

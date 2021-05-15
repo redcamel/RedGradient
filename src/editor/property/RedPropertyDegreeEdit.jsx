@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 import RedNumber from "../../core/RedNumber.jsx";
 
@@ -29,7 +37,7 @@ class RedPropertyDegreeEdit extends React.Component {
     activeSubData['deg'] += 90;
     if (activeSubData['deg'] < 0) activeSubData['deg'] += 360;
     activeSubData['deg'] = activeSubData['deg'] % 360;
-    rootComponent.setState({});
+    rootComponent.updateRootState({});
   }
 
   render() {
@@ -45,7 +53,7 @@ class RedPropertyDegreeEdit extends React.Component {
           value={deg || 0}
           HD_onInput={e => {
             activeSubData['deg'] = e.target.value;
-            rootComponent.setState({});
+            rootComponent.updateRootState({});
           }} />
           <div style={{textAlign: 'center',marginLeft :'10px '}}>
             <div

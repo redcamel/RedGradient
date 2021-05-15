@@ -29,7 +29,7 @@ class RedLayerTop extends React.Component {
              onClick={() => {
                let targetLayer;
                layers.splice(0, 0, targetLayer = new DataLayer());
-               rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
+               rootComponent.updateRootState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
              }}
         >Add Layer
         </div>

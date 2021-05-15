@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedRadio from "../../core/RedRadio";
@@ -17,7 +25,7 @@ class RedPropertyTypeEdit extends React.Component {
       options={Object.entries(GRADIENT_TYPE)}
       HD_change={e => {
         activeSubData['type'] = e.target.value;
-        rootComponent.setState({});
+        rootComponent.updateRootState({});
       }} />;
   }
 }

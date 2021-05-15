@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 import {faArrowDown, faCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -34,7 +42,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
     let tPercentY = activeSubData[targetKey]['yUnit'] === '%' ? tY / SIZE * 100 : tY * layerPixelH / SIZE;
     activeSubData[targetKey]['x'] = tPercentX;
     activeSubData[targetKey]['y'] = tPercentY;
-    rootComponent.setState({});
+    rootComponent.updateRootState({});
   }
 
   setPosition(x, y) {
@@ -44,7 +52,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const targetKey = this.props.targetKey
     activeSubData[targetKey]['x'] = x;
     activeSubData[targetKey]['y'] = y;
-    rootComponent.setState({});
+    rootComponent.updateRootState({});
   }
 
   render() {

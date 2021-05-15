@@ -8,6 +8,7 @@
 
 import DataColor from "./DataColor.js";
 import GRADIENT_TYPE from "../GRADIENT_TYPE.js";
+import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE.js";
 
 let uuid = 0;
 
@@ -15,7 +16,7 @@ function DataItem() {
   return {
     title: `gradient${uuid++}`,
     type: GRADIENT_TYPE.LINEAR,
-    typeEndingShape: 'linear-gradient',
+    typeEndingShape: ENDING_SHAPE_TYPE.NONE,
     typeRepeat: 'repeat',
     blendMode: 'normal',
     deg: 90,

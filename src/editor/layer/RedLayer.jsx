@@ -22,20 +22,22 @@ import RedLayerTop from "./RedLayerTop.jsx";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 import RedTitle from "../../core/RedTitle.jsx";
 
-const SIZE = 100;
+
 
 //TODO - 여기 정리해야함
 class RedLayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      layerBgColor: 'transparent'
+      layerBgColor: 'transparent',
+      SIZE : props.size || 100
     };
+    
   }
 
   _toggleVisible(data) {
     data.visible = !data.visible;
-    this.props.rootComponent.setState({});
+    this.props.rootComponent.updateRootState({});
   }
 
   render() {
@@ -59,7 +61,7 @@ class RedLayer extends React.Component {
                 style={{cursor: 'pointer',textOverflow: 'ellipsis', width: '123px', overflow: 'hidden', whiteSpace: 'nowrap'}}
                 onClick={() => {
                   layer.openYn = !layer.openYn;
-                  rootComponent.setState({});
+                  rootComponent.updateRootState({});
                 }}
               >
 
@@ -83,7 +85,7 @@ class RedLayer extends React.Component {
                             let targetLayer;
                             if (layers[idx]) targetLayer = layers[idx];
                             else targetLayer = layers[0];
-                            rootComponent.setState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
+                            rootComponent.updateRootState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
                           }
                         }}
                 ><FontAwesomeIcon icon={faMinusCircle} />
@@ -92,7 +94,7 @@ class RedLayer extends React.Component {
                         onClick={e => {
                           e.stopPropagation();
                           layer.items.splice(0, 0, new DataItem());
-                          rootComponent.setState({activeSubData: layer.items[0]});
+                          rootComponent.updateRootState({activeSubData: layer.items[0]});
                         }}
                 ><FontAwesomeIcon icon={faPlusCircle} />
                 </button>
@@ -100,20 +102,20 @@ class RedLayer extends React.Component {
               <div
                 className={'transparent_checker'}
                 style={{
-                  width: `${SIZE}px`,
-                  height: `${SIZE}px`,
+                  width: `${this.state.SIZE}px`,
+                  height: `${this.state.SIZE}px`,
                   cursor: 'pointer',
                   borderRadius: '4px',
                   overflow: 'hidden',
                   transition: 'height 0.2s'
                 }}
-                onClick={() => rootComponent.setState({activeLayer: layer, activeSubData: layer.items[0]})}
+                onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: layer.items[0]})}
               >
                 <div className={'layerItem'}
                      style={{background: `${CALC_GRADIENT.calcGradientItems(layer['items'], false, layer)},${this.state.layerBgColor}`}} />
               </div>
               <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem layer={layer} item={item}
-                                                                            rootComponent={rootComponent} />) : ''}</div>
+                                                                            rootComponent={rootComponent} size={this.state.SIZE}/>) : ''}</div>
             </div>;
           })
         }

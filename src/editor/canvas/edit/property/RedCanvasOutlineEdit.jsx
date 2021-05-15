@@ -34,14 +34,14 @@ class RedCanvasOutlineEdit extends React.Component {
           value={canvasInfo['outline_width'] || 0}
           HD_onInput={e => {
             canvasInfo['outline_width'] = e.target.value;
-            rootComponent.setState({});
+            rootComponent.updateRootState({});
           }} />
         offset <RedNumber
           width={'71px'}
           value={canvasInfo['outline_offset'] || 0}
           HD_onInput={e => {
             canvasInfo['outline_offset'] = e.target.value;
-            rootComponent.setState({});
+            rootComponent.updateRootState({});
           }} />
 
       </div>
@@ -56,7 +56,7 @@ class RedCanvasOutlineEdit extends React.Component {
                    options={['dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'none', 'hidden']}
                    HD_change={e => {
                      canvasInfo['outline_type'] = e.target.value;
-                     rootComponent.setState({});
+                     rootComponent.updateRootState({});
                    }} />
 
         <div
@@ -80,7 +80,7 @@ class RedCanvasOutlineEdit extends React.Component {
                 container: this.refColorPickerContainer.current,
                 onChange: color => {
                   canvasInfo['outline_color'] = color;
-                  rootComponent.setState({canvasInfo});
+                  rootComponent.updateRootState({canvasInfo});
                 }
               });
             }

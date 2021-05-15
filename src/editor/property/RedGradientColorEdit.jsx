@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedGradientColorItem from "./RedGradientColorItem";
@@ -95,8 +94,8 @@ class RedGradientColorEdit extends React.Component {
       <div style={{display: 'flex', margin: '4px 0px', justifyContent: 'space-between'}}>
         <div style={{flexGrow: 10}}>Preview</div>
         <button
-          style={style.preset}
-          onClick={e => RedPreset.addUserPreset(rootComponent,activeSubData)}
+          style={{...style.preset, display: this.props.borderMode ? 'none' : ' none'}}
+          onClick={e => RedPreset.addUserPreset(rootComponent, activeSubData)}
         ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}}/> Add Preset
         </button>
         <button
@@ -135,7 +134,7 @@ class RedGradientColorEdit extends React.Component {
               }
             });
             activeSubData['colorList'] = t0;
-            rootComponent.setState({});
+            rootComponent.updateRootState({});
             console.log('결과', t0);
           }}
         ><FontAwesomeIcon icon={faExchangeAlt} style={{marginRight: '5px'}}/> Reverse
@@ -197,7 +196,6 @@ const style = {
     border: 0,
     fontWeight: 'bold'
   },
-
   preset: {
     display: 'flex',
     alignItems: 'center',
@@ -208,7 +206,7 @@ const style = {
     border: '1px solid #000',
     borderRadius: '4px',
     height: '21px',
-    whiteSpace : 'nowrap',
+    whiteSpace: 'nowrap',
     cursor: 'pointer'
   },
   reverse: {

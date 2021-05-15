@@ -24,11 +24,11 @@ class RedCanvasSizeEdit extends React.Component {
     return <div style={style.container}>
       <RedNumber width={'60px'} value={canvasInfo.width} HD_onInput={e => {
         canvasInfo.width = e.target.value;
-        rootComponent.setState({});
+        rootComponent.updateRootState({});
       }} />
       <RedNumber width={'60px'} value={canvasInfo.height} HD_onInput={e => {
         canvasInfo.height = e.target.value;
-        rootComponent.setState({});
+        rootComponent.updateRootState({});
       }} />
     </div>;
   }

@@ -12,7 +12,7 @@ import {ColorPicker} from "@easylogic/colorpicker";
 
 let colorPicker
 
-class RedCanvasBorderEdit extends React.Component {
+class RedCanvasBorderModeEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {canvasBgColorPickerOpenYn: false}
@@ -24,19 +24,18 @@ class RedCanvasBorderEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     return <div style={style.container}>
-      border
-      <RedNumber
+      width <RedNumber
         width={'71px'}
         value={canvasInfo['border_width'] || 0}
         HD_onInput={e => {
           canvasInfo['border_width'] = e.target.value;
-          rootComponent.setState({});
+          rootComponent.updateRootState({});
         }}/>
       <RedSelect value={canvasInfo['border_type']}
                  options={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']}
                  HD_change={e => {
                    canvasInfo['border_type'] = e.target.value;
-                   rootComponent.setState({});
+                   rootComponent.updateRootState({});
                  }}/>
       <div
         className={rootComponentState.border_color === 'transparent' ? 'transparent_checker' : ''}
@@ -59,7 +58,7 @@ class RedCanvasBorderEdit extends React.Component {
               container: this.refColorPickerContainer.current,
               onChange: color => {
                 canvasInfo['border_color'] = color
-                rootComponent.setState({canvasInfo})
+                rootComponent.updateRootState({canvasInfo})
               }
             });
           }
@@ -88,7 +87,7 @@ class RedCanvasBorderEdit extends React.Component {
   }
 }
 
-export default RedCanvasBorderEdit;
+export default RedCanvasBorderModeEdit;
 const style = {
   container: {
     display: 'flex',

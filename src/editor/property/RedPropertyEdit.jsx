@@ -40,7 +40,7 @@ class RedPropertyEdit extends React.Component {
                 width={'calc(100% - 4px)'}
                 value={data['title']} HD_onInput={e => {
                 data['title'] = e.target.value;
-                rootComponent.setState({});
+                rootComponent.updateRootState({});
               }} />
               <div style={style.divide} />
               <RedPropertyTypeEdit rootComponent={rootComponent} />

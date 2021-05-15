@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
 import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
@@ -19,7 +27,7 @@ class RedPropertyTypeEndingShapeEdit extends React.Component {
         options={Object.entries(ENDING_SHAPE_TYPE)}
         HD_change={e => {
           activeSubData['typeEndingShape'] = e.target.value;
-          rootComponent.setState({});
+          rootComponent.updateRootState({});
         }} />
     </div>;
   }

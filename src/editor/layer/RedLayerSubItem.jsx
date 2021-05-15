@@ -11,18 +11,18 @@ import {faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icon
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 
-const SIZE = 100;
 class RedLayerSubItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      layerBgColor: 'transparent'
+      layerBgColor: 'transparent',
+      SIZE : props.size || 100
     };
   }
 
   _toggleVisible(data) {
     data.visible = !data.visible;
-    this.props.rootComponent.setState({});
+    this.props.rootComponent.updateRootState({});
   }
 
 
@@ -73,7 +73,7 @@ class RedLayerSubItem extends React.Component {
                       idx = 0;
                     }
                     if (!layer.items[idx]) idx = idx - 1;
-                    rootComponent.setState({activeSubData: layer.items[idx]});
+                    rootComponent.updateRootState({activeSubData: layer.items[idx]});
                   }
                 }}
         ><FontAwesomeIcon icon={faMinusCircle}/>
@@ -83,14 +83,14 @@ class RedLayerSubItem extends React.Component {
       <div
         className={'transparent_checker'}
         style={{
-          width: `${SIZE}px`,
-          height: `${SIZE}px`,
+          width: `${this.state.SIZE}px`,
+          height: `${this.state.SIZE}px`,
           cursor: 'pointer',
           borderRadius: '4px',
           overflow: 'hidden',
           transition: 'height 0.2s'
         }}
-        onClick={() => rootComponent.setState({activeLayer: layer, activeSubData: item})}
+        onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: item})}
       >
         <div className={'layerItem'}
              style={{

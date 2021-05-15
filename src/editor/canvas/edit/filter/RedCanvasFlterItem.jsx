@@ -49,14 +49,14 @@ class RedCanvasFilter extends React.Component {
         <RedSelect value={filterData['type']} options={filterList} HD_change={e => {
           filterData['type'] = e.target.value;
           filterData['values'] = filterComponent[filterData['type']].getNewDataValues()
-          rootComponent.setState({});
+          rootComponent.updateRootState({});
         }}/>
         <button
           style={style.buttonIcon}
           onClick={e => {
             const filterList = rootComponent.state.canvasInfo.filterList
             filterList.splice(filterList.indexOf(filterData), 1)
-            rootComponent.setState({})
+            rootComponent.updateRootState({})
           }}
         >Del
         </button>
@@ -65,7 +65,7 @@ class RedCanvasFilter extends React.Component {
           onClick={e => {
             const filterList = rootComponent.state.canvasInfo.filterList
             filterList.splice(filterList.indexOf(filterData), 0, JSON.parse(JSON.stringify(filterData)))
-            rootComponent.setState({})
+            rootComponent.updateRootState({})
           }}
         >Copy
         </button>

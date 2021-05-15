@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
 import REPEAT_TYPE from "../REPEAT_TYPE.js";
@@ -19,7 +27,7 @@ class RedPropertyRepeatEdit extends React.Component {
           <div style={{...style.icon}}
                onClick={e => {
                  activeSubData['typeRepeat'] = 'no-repeat';
-                 rootComponent.setState({});
+                 rootComponent.updateRootState({});
                }}
           >
             <div style={{
@@ -33,7 +41,7 @@ class RedPropertyRepeatEdit extends React.Component {
           <div style={{...style.icon}}
                onClick={e => {
                  activeSubData['typeRepeat'] = 'repeat-x';
-                 rootComponent.setState({});
+                 rootComponent.updateRootState({});
                }}
           >
             <div style={{
@@ -47,7 +55,7 @@ class RedPropertyRepeatEdit extends React.Component {
           <div style={{...style.icon}}
                onClick={e => {
                  activeSubData['typeRepeat'] = 'repeat-y';
-                 rootComponent.setState({});
+                 rootComponent.updateRootState({});
                }}
           >
             <div style={{
@@ -61,7 +69,7 @@ class RedPropertyRepeatEdit extends React.Component {
           <div style={{...style.icon}}
                onClick={e => {
                  activeSubData['typeRepeat'] = 'repeat';
-                 rootComponent.setState({});
+                 rootComponent.updateRootState({});
                }}
           >
             <div style={{
@@ -75,7 +83,7 @@ class RedPropertyRepeatEdit extends React.Component {
           <div style={{...style.icon}}
                onClick={e => {
                  activeSubData['typeRepeat'] = 'space';
-                 rootComponent.setState({});
+                 rootComponent.updateRootState({});
                }}
           >
             <div style={{
@@ -89,7 +97,7 @@ class RedPropertyRepeatEdit extends React.Component {
           <div style={{...style.icon}}
                onClick={e => {
                  activeSubData['typeRepeat'] = 'round';
-                 rootComponent.setState({});
+                 rootComponent.updateRootState({});
                }}
           >
             <div style={{
@@ -106,7 +114,7 @@ class RedPropertyRepeatEdit extends React.Component {
           options={Object.entries(REPEAT_TYPE)}
           HD_change={e => {
             activeSubData['typeRepeat'] = e.target.value;
-            rootComponent.setState({});
+            rootComponent.updateRootState({});
           }} />
       </div>
     </div>;

@@ -20,7 +20,7 @@ function DataCanvas() {
       border_width: 0,
       border_width_unit: 'px',
       border_type: 'solid',
-      border_color: '#000',
+      border_color : '#000',
       //
       outline_width: 0,
       outline_width_unit: 'px',

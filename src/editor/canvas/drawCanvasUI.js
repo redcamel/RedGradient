@@ -31,7 +31,7 @@ function drawCanvasUI() {
             onClick={() => {
               canvasInfo.width = v.width;
               canvasInfo.height = v.height;
-              rootComponent.setState({});
+              rootComponent.updateRootState({});
             }}
           >
             <div><FontAwesomeIcon

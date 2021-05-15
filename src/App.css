@@ -127,6 +127,7 @@ option {
     border-right: 1px solid #0c0b0b;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .frame_center {

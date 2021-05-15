@@ -18,25 +18,31 @@ import RedStart from "./start/RedStart.jsx";
 import RedFrameMenuOpen from "./editor/frameMainMenu/RedFrameMenuOpen.jsx";
 import RedFrameMenuSave from "./editor/frameMainMenu/RedFrameMenuSave.jsx";
 import RedPreset from "./editor/property/preset/RedPreset.jsx";
+import RedCanvasBorderModeGradientEdit from "./editor/canvas/edit/property/RedCanvasBorderModeGradientEdit.jsx";
+import RedCanvasBorderGradientFrame from "./editor/canvas/edit/property/RedCanvasBorderGradientFrame.jsx";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
   }
-  checkUnloadEvent(){
-    if(this.state && !window.onbeforeunload){
-      window.onbeforeunload = e=>{
+
+  checkUnloadEvent() {
+    if (this.state && !window.onbeforeunload) {
+      window.onbeforeunload = e => {
         return "레알 나감????????????";
       }
     }
+  }
+
+  updateRootState(v = {}) {
+    this.setState(v)
   }
 
   setNewCanvas(newState) {
     this.state = newState
     this.state.activeLayer = this.state.layers[0];
     this.state.activeSubData = this.state.activeLayer['items'][0];
-    this.setState(this.state);
+    this.updateRootState(this.state);
   }
 
   render() {
@@ -45,22 +51,23 @@ class App extends React.Component {
     this.checkUnloadEvent()
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
-        <div style={{fontSize: '20px', fontWeight: 'bold',margin:'0px 8px'}}>RedGradient</div>
+        <div style={{fontSize: '20px', fontWeight: 'bold', margin: '0px 8px'}}>RedGradient</div>
         <RedFrameMenuOpen rootComponent={this}/>
         <RedFrameMenuSave rootComponent={this}/>
 
         {/*<div style={style.test}>언두/리두</div>*/}
       </div>
       <div className={'frame_toolbar'}>frame ToolBar
-        <div style={style.test}>툴바 아이템</div>
-        <div style={style.test}>툴바 아이템</div>
+
       </div>
       <div className={'frame_middle'}>
         <div className={'frame_middle_container'}>
           <div className={'frame_left'}>
             {/*frame Left*/}
-            <RedCanvasEdit rootComponent={this}/>
-            <div className={'todo'}>Todo - 컨테이너 모양 프리셋?</div>
+            <div style={{display: "flex", height: '100%',overflowY:'auto'}}>
+              <RedCanvasEdit rootComponent={this}/>
+
+            </div>
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
@@ -74,8 +81,8 @@ class App extends React.Component {
               <div style={{display: "flex", height: '100%', alignContent: 'space-between', flexDirection: 'column'}}>
                 <div style={{width: '225px'}}>
                   <RedTitle title={'Gradient Preset'}/>
-                  <div style={{height : '400px',overflowY:'auto',padding : '4px'}}>
-                    <RedPreset rootComponent={this} />
+                  <div style={{height: '400px', overflowY: 'auto', padding: '4px'}}>
+                    <RedPreset rootComponent={this}/>
                   </div>
                   <RedTitle title={'Result'}/>
                   <SyntaxHighlighter language="css" wrapLongLines={'pre'}>

@@ -152,6 +152,7 @@ RedCanvas.getFilterCss = (filterList) => {
   return filterList.map(v => RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(' ');
 };
 RedCanvas.getContainerCss = (canvasInfo) => {
+  let borderData={}
   if (!canvasInfo.hasOwnProperty('border_radius')) {
     canvasInfo['border_radius'] = 0;
     canvasInfo['border_radius_unit'] = 'px';
@@ -162,6 +163,27 @@ RedCanvas.getContainerCss = (canvasInfo) => {
     canvasInfo['border_type'] = 'solid';
     canvasInfo['border_color'] = '#000';
   }
+  if(canvasInfo.borderIsGradientMode){
+    let gradient = CALC_GRADIENT.calcGradients(canvasInfo['borderGradientInfo']['layers'])
+    gradient = gradient.split(')')
+    gradient.pop()
+    gradient = gradient.join(')')+')'
+    borderData = {
+      borderImageWidth : `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
+      borderStyle : `${canvasInfo['border_type']}`,
+      borderImageSlice : `${canvasInfo['border_image_slice']}`,
+      borderImageSource :gradient,
+      borderImageRepeat  :`${canvasInfo['border_image_repeat']}`,
+      borderImageOutset  :`${canvasInfo['border_image_outset']}`,
+    }
+    console.log(borderData)
+  }else{
+    borderData = {
+      borderWidth : `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
+      borderStyle : `${canvasInfo['border_type']}`,
+      borderColor : `${canvasInfo['border_color']}`
+    }
+  }
   if (!canvasInfo.hasOwnProperty('outline_width')) {
     canvasInfo['outline_width'] = 0;
     canvasInfo['outline_width_unit'] = 'px';
@@ -170,9 +192,10 @@ RedCanvas.getContainerCss = (canvasInfo) => {
     canvasInfo['outline_offset'] = 0;
     canvasInfo['outline_offset_unit'] = 'px';
   }
+
   return {
     borderRadius: `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`,
-    border: `${canvasInfo['border_width']}${canvasInfo['border_width_unit']} ${canvasInfo['border_type']} ${canvasInfo['border_color']}`,
+    ...borderData,
     outline: `${canvasInfo['outline_width']}${canvasInfo['outline_width_unit']} ${canvasInfo['outline_type']} ${canvasInfo['outline_color']}`,
     outlineOffset: `${canvasInfo['outline_offset']}${canvasInfo['outline_offset_unit']}`
   };

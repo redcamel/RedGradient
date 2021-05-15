@@ -29,7 +29,7 @@ class RedCanvasFilterList extends React.Component {
           icon={faPlusSquare} style={{fontSize: '16px',cursor:'pointer'}}
           onClick={e=>{
             canvasInfo['filterList'].splice(0,0,{type:'normal', values :{}, css : ''})
-            rootComponent.setState({})
+            rootComponent.updateRootState({})
           }}
         />
       </div>

@@ -26,11 +26,11 @@ class RedCanvasBorderRadiusEdit extends React.Component {
         value={canvasInfo['border_radius'] || 0}
         HD_onInput={e => {
           canvasInfo['border_radius'] = e.target.value;
-          rootComponent.setState({});
+          rootComponent.updateRootState({});
         }}/>
       <RedSelect value={canvasInfo['border_radius_unit']} options={['px', '%']} HD_change={e => {
         canvasInfo['border_radius_unit'] = e.target.value;
-        rootComponent.setState({});
+        rootComponent.updateRootState({});
       }}/>
     </div>;
   }

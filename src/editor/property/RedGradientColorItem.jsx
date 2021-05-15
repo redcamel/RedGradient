@@ -41,7 +41,7 @@ const HD_move = e => {
       }
     }
 
-    targetContext.props.rootComponent.setState({});
+    targetContext.props.rootComponent.updateRootState({});
     // console.log(tX);
   }
 };
@@ -50,7 +50,7 @@ const HD_up = e => {
   window.removeEventListener('mousemove', HD_move);
   window.removeEventListener('mouseup', HD_up);
   requestAnimationFrame(() => {
-    targetContext.props.rootComponent.setState({});
+    targetContext.props.rootComponent.updateRootState({});
     targetContext = null;
     targetColorData = null;
     targetRefBar = null;
@@ -133,7 +133,7 @@ class RedGradientColorItem extends React.Component {
                      container: this.refColorPickerContainer.current,
                      onChange: color => {
                        targetColorData['color'] = color;
-                       targetContext.props.rootComponent.setState({
+                       targetContext.props.rootComponent.updateRootState({
                          activeSubData: targetContext.props.rootComponent.state.activeSubData
                        });
                      }
@@ -149,7 +149,7 @@ class RedGradientColorItem extends React.Component {
             icon={faThumbtack} style={{filter: colorData.useDivide ? '' : 'invert(1.0)'}}
             onClick={e => {
               colorData['useDivide'] = !colorData['useDivide'];
-              rootComponent.setState({});
+              rootComponent.updateRootState({});
             }}
           />
         </div>
@@ -175,7 +175,7 @@ class RedGradientColorItem extends React.Component {
                      container: this.refColorEndPickerContainer.current,
                      onChange: color => {
                        targetColorData['colorEnd'] = color;
-                       targetContext.props.rootComponent.setState({
+                       targetContext.props.rootComponent.updateRootState({
                          activeSubData: targetContext.props.rootComponent.state.activeSubData
                        });
                      }
@@ -191,7 +191,7 @@ class RedGradientColorItem extends React.Component {
             icon={faThumbtack} style={{filter: colorData.useDivideEnd ? '' : 'invert(1.0)'}}
             onClick={e => {
               colorData['useDivideEnd'] = !colorData['useDivideEnd'];
-              rootComponent.setState({});
+              rootComponent.updateRootState({});
             }}
           />
         </div>
@@ -207,7 +207,7 @@ class RedGradientColorItem extends React.Component {
               while (i--) {
                 if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
               }
-              rootComponent.setState({});
+              rootComponent.updateRootState({});
             }}
             HD_blur={e => {
               this.props.HD_sort(e);
@@ -224,7 +224,7 @@ class RedGradientColorItem extends React.Component {
                 while (i--) {
                   if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
                 }
-                rootComponent.setState({});
+                rootComponent.updateRootState({});
               }}
               HD_blur={e => {
                 this.props.HD_sort(e);
@@ -240,13 +240,13 @@ class RedGradientColorItem extends React.Component {
               else colorData['range'] = colorData['range'] / canvasInfo['width'] * 100;
             }
             colorData['rangeUnit'] = tUnit;
-            rootComponent.setState({});
+            rootComponent.updateRootState({});
           }} />
           <button
             style={style.del}
             onClick={() => {
               activeSubData.colorList.splice(this.getIndex(), 1);
-              rootComponent.setState({});
+              rootComponent.updateRootState({});
             }}
           >Del
           </button>
@@ -256,7 +256,7 @@ class RedGradientColorItem extends React.Component {
             {/*  onClick={(e) => {*/}
             {/*    if (e.target.type == 'checkbox') {*/}
             {/*      colorData['useDivide'] = !colorData['useDivide'];*/}
-            {/*      rootComponent.setState({});*/}
+            {/*      rootComponent.updateRootState({});*/}
             {/*    }*/}
             {/*  }}*/}
             {/*>useDivide <input type={'checkbox'} checked={colorData['useDivide']} />*/}
@@ -267,7 +267,7 @@ class RedGradientColorItem extends React.Component {
                 if (e.target.type == 'checkbox') {
                   colorData['useRange'] = !colorData['useRange'];
                   if (colorData['colorEnd'] === undefined) colorData['colorEnd'] = colorData['color'];
-                  rootComponent.setState({});
+                  rootComponent.updateRootState({});
                 }
               }}
             >useRange <input type={'checkbox'} checked={colorData['useRange']} />
