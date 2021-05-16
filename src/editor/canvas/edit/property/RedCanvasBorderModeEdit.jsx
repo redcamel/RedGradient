@@ -9,6 +9,7 @@ import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
 import RedNumber from "../../../../core/RedNumber.jsx";
 import {ColorPicker} from "@easylogic/colorpicker";
+import RedCanvasBorderRadiusEdit from "./RedCanvasBorderRadiusEdit.jsx";
 
 let colorPicker
 
@@ -24,9 +25,10 @@ class RedCanvasBorderModeEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     return <div style={style.container}>
-
+      <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
       width <RedNumber
-        width={'71px'}
+        width={'31px'}
+        flexGrow={1}
         value={canvasInfo['border_width'] || 0}
         HD_onInput={e => {
           canvasInfo['border_width'] = e.target.value;
@@ -68,7 +70,7 @@ class RedCanvasBorderModeEdit extends React.Component {
       />
 
       <div style={{
-        zIndex: 2, position: 'absolute', top: 0, left: '0%', transform: 'translate(16px , 0px)',
+        zIndex: 2, position: 'absolute', top: 0, right: 0, transform: 'translate(-32px , 0px)',
         boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
         background: '#fff',
         borderRadius: '8px',

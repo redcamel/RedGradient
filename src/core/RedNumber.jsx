@@ -11,7 +11,7 @@ import React from "react";
 class RedNumber extends React.Component {
   render() {
     return <input
-      style={{width: `${this.props.width || ''}`, flexGrow: 10}}
+      style={{width: `${this.props.width || ''}`, flexGrow: 1}}
       type={'number'}
       step={this.props.step || 1}
       max={this.props.maxValue}

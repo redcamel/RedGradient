@@ -30,28 +30,22 @@ class RedCanvasOutlineEdit extends React.Component {
         alignItems: 'center'
       }}>
         width <RedNumber
-          width={'71px'}
+          width={'41px'}
           value={canvasInfo['outline_width'] || 0}
           HD_onInput={e => {
             canvasInfo['outline_width'] = e.target.value;
             rootComponent.updateRootState({});
           }} />
         offset <RedNumber
-          width={'71px'}
+          width={'41px'}
           value={canvasInfo['outline_offset'] || 0}
           HD_onInput={e => {
             canvasInfo['outline_offset'] = e.target.value;
             rootComponent.updateRootState({});
           }} />
 
-      </div>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-      }}>
         style <RedSelect
-          width={'150'}
+          width={'90'}
           value={canvasInfo['outline_type']}
                    options={['dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'none', 'hidden']}
                    HD_change={e => {
@@ -89,7 +83,7 @@ class RedCanvasOutlineEdit extends React.Component {
         />
 
         <div style={{
-          zIndex: 2, position: 'absolute', top: 0, left: '0%', transform: 'translate(16px , 0px)',
+          zIndex: 2, position: 'absolute', top: 0, right: 0, transform: 'translate(-32px , 0px)',
           boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
           background: '#fff',
           borderRadius: '8px',

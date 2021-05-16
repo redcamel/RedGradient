@@ -8,6 +8,7 @@
 import React from "react";
 import DataLayer from "../../../data/DataLayer.js";
 import RedPropertyBorderGradientEdit from "../../../property/RedPropertyBorderGradientEdit.jsx";
+import RedCanvasBorderRadiusEdit from "./RedCanvasBorderRadiusEdit.jsx";
 
 class RedCanvasBorderGradientFrame extends React.Component {
   constructor(props) {
@@ -36,6 +37,8 @@ class RedCanvasBorderGradientFrame extends React.Component {
   render() {
     return <>
       {/*<RedLayer rootComponent={this}/>*/}
+
+
       {this.state.activeSubData ? <RedPropertyBorderGradientEdit rootComponent={this}/> : ''}
     </>;
   }

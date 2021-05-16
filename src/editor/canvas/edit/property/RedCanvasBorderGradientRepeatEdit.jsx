@@ -21,7 +21,7 @@ class RedCanvasBorderGradientRepeatEdit extends React.Component {
     const canvasInfo = rootComponentState.canvasInfo;
     return <div>
       <div style={{display: 'flex', marginTop: '3px',alignItems : 'center'}}>
-        Repeat Mode
+        Repeat
         <RedSelect
           value={canvasInfo['border_image_repeat']}
           options={Object.entries(BORDER_REPEAT_TYPE)}

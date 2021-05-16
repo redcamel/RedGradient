@@ -20,9 +20,9 @@ class RedCanvasBorderRadiusEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     return <div style={style.container}>
-      border radius
+      radius
       <RedNumber
-        width={'71px'}
+        width={'51px'}
         value={canvasInfo['border_radius'] || 0}
         HD_onInput={e => {
           canvasInfo['border_radius'] = e.target.value;

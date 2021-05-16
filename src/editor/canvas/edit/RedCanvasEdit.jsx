@@ -69,9 +69,6 @@ class RedCanvasEdit extends React.Component {
             </div>
           </div>
         </div>
-        <div style={{margin:'5px 0px'}}>
-        <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
-        </div>
         <div style={{display: canvasInfo.borderIsGradientMode ? 'none' : 'block'}}><RedCanvasBorderModeEdit
           rootComponent={rootComponent}/></div>
         <div style={{display: canvasInfo.borderIsGradientMode ? 'block' : 'none'}}><RedCanvasBorderModeGradientEdit
@@ -91,7 +88,7 @@ class RedCanvasEdit extends React.Component {
 export default RedCanvasEdit;
 const style = {
   container: {
-    minWidth: '220px',
+   width: '358px',
     padding: '4px'
   },
   divide: {
