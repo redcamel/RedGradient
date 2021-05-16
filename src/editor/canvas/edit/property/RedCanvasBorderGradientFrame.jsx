@@ -29,6 +29,9 @@ class RedCanvasBorderGradientFrame extends React.Component {
     this.state = rootComponentState['canvasInfo']['borderGradientInfo']
     this.state.activeLayer = this.state.layers[0];
     this.state.activeSubData = this.state.activeLayer['items'][0];
+    this.state.activeSubData.colorList[0].color = 'rgba(255,255,0,1)'
+    this.state.activeSubData.colorList[1].color = 'rgba(0,255,0,1)'
+    this.state.activeSubData.colorList[1].range = 50
   }
   updateRootState(v = {}) {
     this.setState(v)

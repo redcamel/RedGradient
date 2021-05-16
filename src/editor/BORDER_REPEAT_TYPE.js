@@ -7,9 +7,9 @@
  */
 
 const BORDER_REPEAT_TYPE = {
+  STRETCH: 'stretch',
   REPEAT: 'repeat',
   SPACE: 'space',
-  ROUND: 'round',
-  STRETCH: 'stretch'
+  ROUND: 'round'
 };
 export default BORDER_REPEAT_TYPE;

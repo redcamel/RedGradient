@@ -171,7 +171,8 @@ RedCanvas.getContainerCss = (canvasInfo) => {
     borderData = {
       borderImageWidth : `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
       borderStyle : `${canvasInfo['border_type']}`,
-      borderImageSlice : `${canvasInfo['border_image_slice']}`,
+      borderImageSlice : `${canvasInfo['border_image_sliceT']} ${canvasInfo['border_image_sliceR']} ${canvasInfo['border_image_sliceB']} ${canvasInfo['border_image_sliceL']}`,
+
       borderImageSource :gradient,
       borderImageRepeat  :`${canvasInfo['border_image_repeat']}`,
       borderImageOutset  :`${canvasInfo['border_image_outset']}`,
