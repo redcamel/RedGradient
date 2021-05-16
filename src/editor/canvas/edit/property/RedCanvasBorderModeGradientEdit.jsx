@@ -38,7 +38,13 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
           canvasInfo['border_width'] = e.target.value;
           rootComponent.updateRootState({});
         }}/>
-        <RedCanvasBorderGradientRepeatEdit rootComponent={rootComponent}/>
+        outset <RedNumber
+        width={'61px'}
+        value={canvasInfo['border_image_outset'] || 0}
+        HD_onInput={e => {
+          canvasInfo['border_image_outset'] = e.target.value;
+          rootComponent.updateRootState({});
+        }}/>
       </div>
       <div style={style.container}>
         sliceT <RedNumber
@@ -73,14 +79,9 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
           rootComponent.updateRootState({});
         }}/>
       </div>
-      outset <RedNumber
-      width={'61px'}
-      value={canvasInfo['border_image_outset'] || 0}
-      HD_onInput={e => {
-        canvasInfo['border_image_outset'] = e.target.value;
-        rootComponent.updateRootState({});
-      }}/>
 
+
+      <RedCanvasBorderGradientRepeatEdit rootComponent={rootComponent}/>
     </div>
       ;
   }

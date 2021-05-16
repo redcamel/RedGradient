@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
 import BORDER_REPEAT_TYPE from "../../../BORDER_REPEAT_TYPE.js";

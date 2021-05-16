@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import '@easylogic/colorpicker/dist/colorpicker.css';
 import RED_CANVAS_PRESET from "../../RED_CANVAS_PRESET.js";
 import React from "react";

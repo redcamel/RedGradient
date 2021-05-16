@@ -8,6 +8,7 @@
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
 import {ColorPicker} from "@easylogic/colorpicker";
+
 let colorPicker
 class RedCanvasFilterDropShadow extends React.Component {
   constructor(props) {

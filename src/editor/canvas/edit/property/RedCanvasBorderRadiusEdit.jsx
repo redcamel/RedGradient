@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
 import RedNumber from "../../../../core/RedNumber.jsx";

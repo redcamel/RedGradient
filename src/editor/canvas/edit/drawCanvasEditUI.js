@@ -5,8 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
-import RedNumber from "../../../core/RedNumber.jsx";
 import {ColorPicker} from '@easylogic/colorpicker';
 import '@easylogic/colorpicker/dist/colorpicker.css';
 import React from "react";

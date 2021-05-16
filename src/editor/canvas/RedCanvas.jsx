@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import drawCanvasUI from "./drawCanvasUI.js";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";

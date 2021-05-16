@@ -1,9 +1,17 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 
 class RedSelect extends React.Component {
   render() {
     return <select
-      style={{width: `${this.props.width || ''}px`}}
+      style={{width: `${this.props.width || ''}px`,flexGrow:1}}
       onChange={this.props.HD_change}
       onBlur={this.props.HD_blur}
     >

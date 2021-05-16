@@ -11,6 +11,7 @@ import RedGradientColorItem from "./RedGradientColorItem";
 import {faExchangeAlt, faSave} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RedPreset from "./preset/RedPreset.jsx";
+import RedPresetBorder from "../canvas/edit/preset/RedPresetBorder.jsx";
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
 class RedGradientColorEdit extends React.Component {
@@ -94,8 +95,10 @@ class RedGradientColorEdit extends React.Component {
       <div style={{display: 'flex', margin: '4px 0px', justifyContent: 'space-between'}}>
         <div style={{flexGrow: 10}}>Preview</div>
         <button
-          style={{...style.preset, display: this.props.borderMode ? 'none' : ''}}
-          onClick={e => RedPreset.addUserPreset(rootComponent, activeSubData)}
+          style={{...style.preset}}
+          onClick={e =>{
+            this.props.borderMode ? RedPresetBorder.addUserPreset(rootComponent, activeSubData) : RedPreset.addUserPreset(rootComponent, activeSubData)
+          } }
         ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}}/> Add Preset
         </button>
         <button

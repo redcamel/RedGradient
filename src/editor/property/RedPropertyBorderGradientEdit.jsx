@@ -13,9 +13,8 @@ import RedPropertyTypeEdit from "./RedPropertyTypeEdit.jsx";
 import RedPropertyDegreeEdit from "./RedPropertyDegreeEdit.jsx";
 import RedPropertyAtEdit from "./RedPropertyAtEdit";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
-import RedCanvasBorderGradientRepeatEdit from "../canvas/edit/property/RedCanvasBorderGradientRepeatEdit.jsx";
 import RedPropertyTypeEndingShapeEdit from "./RedPropertyTypeEndingShapeEdit.jsx";
-import RedPropertySizeEdit from "./RedPropertySizeEdit.jsx";
+import RedPresetBorder from "../canvas/edit/preset/RedPresetBorder.jsx";
 
 class RedPropertyBorderGradientEdit extends React.Component {
   render() {
@@ -23,8 +22,9 @@ class RedPropertyBorderGradientEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     return <div style={style.container}>
-
-
+      <div style={style.divide}/>
+      <RedPresetBorder rootComponent={rootComponent}/>
+      <div style={style.divide}/>
 
       <div style={style.contentWrap}>
         <div>
@@ -83,7 +83,7 @@ class RedPropertyBorderGradientEdit extends React.Component {
 export default RedPropertyBorderGradientEdit;
 const style = {
   container: {
-    width: '350px',
+    width: '340px',
     // borderRight: '1px solid #000',
     // borderLeft: '1px solid #000',
     overflowX: 'hidden',
@@ -91,9 +91,9 @@ const style = {
   },
   contentWrap: {
     marginTop: '5px',
-    padding: '10px 10px',
-    border: '1px solid #000',
-    borderRadius: '8px'
+    // padding: '10px 10px',
+    // border: '1px solid #000',
+    // borderRadius: '8px'
   },
   layer: {
     height: '30px'
