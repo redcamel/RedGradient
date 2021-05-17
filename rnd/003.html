@@ -5,6 +5,12 @@
     <title>Title</title>
     <script>
       CSS.registerProperty({
+        name: '--size2',
+        syntax: '<length>',
+        inherits: true,
+        initialValue: '400px'
+      });
+      CSS.registerProperty({
         name: '--deg2',
         syntax: '<angle>',
         inherits: true,
@@ -39,6 +45,7 @@
         @keyframes rgGrad_002 {
             0% {
                 --deg2 : 100deg;
+                --size2 : 400px;
                 --rg-grad002-color-1-r: 255;
                 --rg-grad002-color-1-g: 0;
                 --rg-grad002-color-1-b: 255;
@@ -46,6 +53,7 @@
             }
             50% {
                 --deg2 : 50deg;
+                --size2 : 500px;
                 --rg-grad002-color-1-r: 255;
                 --rg-grad002-color-1-g: 255;
                 --rg-grad002-color-1-b: 35;
@@ -53,6 +61,7 @@
             }
             100% {
                 --deg2 : 100deg;
+                --size2 : 400px;
                 --rg-grad002-color-1-r: 255;
                 --rg-grad002-color-1-g: 0;
                 --rg-grad002-color-1-b: 255;
@@ -61,7 +70,7 @@
         }
         .result2 {
             transition: all 0.3s;
-            width:300px;
+            width:var(--size2);
             height:300px;
             animation: rgGrad_002 2s infinite;
             background : linear-gradient(var(--deg2),
@@ -73,6 +82,7 @@
     <style>
         :root {
             --deg : 0deg;
+            --size : 400px;
             --rg-grad001-color-1-r: 0;
             --rg-grad001-color-1-g: 0;
             --rg-grad001-color-1-b: 0;
@@ -81,6 +91,7 @@
         @keyframes rgGrad_001 {
             0% {
                 --deg : 100deg;
+                --size : 400px;
                 --rg-grad001-color-1-r: 255;
                 --rg-grad001-color-1-g: 0;
                 --rg-grad001-color-1-b: 255;
@@ -88,6 +99,7 @@
             }
             50% {
                 --deg : 50deg;
+                --size : 500px;
                 --rg-grad001-color-1-r: 255;
                 --rg-grad001-color-1-g: 0;
                 --rg-grad001-color-1-b: 255;
@@ -95,6 +107,7 @@
             }
             100% {
                 --deg : 100deg;
+                --size : 400px;
                 --rg-grad001-color-1-r: 255;
                 --rg-grad001-color-1-g: 0;
                 --rg-grad001-color-1-b: 255;
@@ -103,7 +116,7 @@
         }
         .result {
             transition: all 0.3s;
-            width:300px;
+            width:var(--size);
             height:300px;
             animation: rgGrad_001 2s infinite;
             background : linear-gradient(var(--deg),
