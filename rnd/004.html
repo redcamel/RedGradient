@@ -5,78 +5,118 @@
     <title>Title</title>
     <script>
       CSS.registerProperty({
-        name: '--rg-layer_index_subIndex-size',
+        name: '--rg-layer-index-subIndex-size-1',
         syntax: '<length>',
         inherits: true,
         initialValue: '400px'
       });
       CSS.registerProperty({
-        name: '--rg-layer_index_subIndex-deg',
+        name: '--rg-layer-index-subIndex-deg-1',
         syntax: '<angle>',
         inherits: true,
         initialValue: '0deg'
       });
       CSS.registerProperty({
-        name: '--rg-layer_index_subIndex-colorList-1-r',
+        name: '--rg-layer-index-subIndex-colorList-0-r',
         syntax: '<number>',
         inherits: true,
         initialValue: 0
       });
       CSS.registerProperty({
-        name: '--rg-layer_index_subIndex-colorList-1-g',
+        name: '--rg-layer-index-subIndex-colorList-0-g',
         syntax: '<number>',
         inherits: true,
         initialValue: 0
       });
       CSS.registerProperty({
-        name: '--rg-layer_index_subIndex-colorList-1-b',
+        name: '--rg-layer-index-subIndex-colorList-0-b',
         syntax: '<number>',
         inherits: true,
         initialValue: 0
       });
       CSS.registerProperty({
-        name: '--rg-layer_index_subIndex-colorList-1-a',
+        name: '--rg-layer-index-subIndex-colorList-0-a',
+        syntax: '<number>',
+        inherits: true,
+        initialValue: 1
+      });
+
+      CSS.registerProperty({
+        name: '--rg-layer-index-subIndex-colorList-1-r',
+        syntax: '<number>',
+        inherits: true,
+        initialValue: 0
+      });
+      CSS.registerProperty({
+        name: '--rg-layer-index-subIndex-colorList-1-g',
+        syntax: '<number>',
+        inherits: true,
+        initialValue: 0
+      });
+      CSS.registerProperty({
+        name: '--rg-layer-index-subIndex-colorList-1-b',
+        syntax: '<number>',
+        inherits: true,
+        initialValue: 0
+      });
+      CSS.registerProperty({
+        name: '--rg-layer-index-subIndex-colorList-1-a',
         syntax: '<number>',
         inherits: true,
         initialValue: 1
       });
     </script>
     <style>
-        @keyframes rgGrad_002 {
+        @keyframes rg-layer-index-subIndex {
             0% {
-                --rg-layer_index_subIndex-deg: 100deg;
-                --rg-layer_index_subIndex-size: 400px;
-                --rg-layer_index_subIndex-colorList-1-r: 255;
-                --rg-layer_index_subIndex-colorList-1-g: 0;
-                --rg-layer_index_subIndex-colorList-1-b: 255;
-                --rg-layer_index_subIndex-colorList-1-a: 1;
+                --rg-layer-index-subIndex-deg-1: 100deg;
+                --rg-layer-index-subIndex-size-1: 400px;
+                --rg-layer-index-subIndex-colorList-0-r: 255;
+                --rg-layer-index-subIndex-colorList-0-g: 0;
+                --rg-layer-index-subIndex-colorList-0-b: 255;
+                --rg-layer-index-subIndex-colorList-0-a: 1;
+                --rg-layer-index-subIndex-colorList-1-r: 0;
+                --rg-layer-index-subIndex-colorList-1-g: 0;
+                --rg-layer-index-subIndex-colorList-1-b: 255;
+                --rg-layer-index-subIndex-colorList-1-a: 1;
             }
             50% {
-                --rg-layer_index_subIndex-deg: 50deg;
-                --rg-layer_index_subIndex-size: 500px;
-                --rg-layer_index_subIndex-colorList-1-r: 255;
-                --rg-layer_index_subIndex-colorList-1-g: 255;
-                --rg-layer_index_subIndex-colorList-1-b: 35;
-                --rg-layer_index_subIndex-colorList-1-a: 1;
+                --rg-layer-index-subIndex-deg-1: 50deg;
+                --rg-layer-index-subIndex-size-1: 500px;
+                --rg-layer-index-subIndex-colorList-0-r: 255;
+                --rg-layer-index-subIndex-colorList-0-g: 255;
+                --rg-layer-index-subIndex-colorList-0-b: 35;
+                --rg-layer-index-subIndex-colorList-0-a: 1;
+                --rg-layer-index-subIndex-colorList-1-r: 0;
+                --rg-layer-index-subIndex-colorList-1-g: 32;
+                --rg-layer-index-subIndex-colorList-1-b: 35;
+                --rg-layer-index-subIndex-colorList-1-a: 1;
             }
             100% {
-                --rg-layer_index_subIndex-deg: 100deg;
-                --rg-layer_index_subIndex-size: 400px;
-                --rg-layer_index_subIndex-colorList-1-r: 255;
-                --rg-layer_index_subIndex-colorList-1-g: 0;
-                --rg-layer_index_subIndex-colorList-1-b: 255;
-                --rg-layer_index_subIndex-colorList-1-a: 1;
+                --rg-layer-index-subIndex-deg-1: 100deg;
+                --rg-layer-index-subIndex-size-1: 400px;
+                --rg-layer-index-subIndex-colorList-0-r: 255;
+                --rg-layer-index-subIndex-colorList-0-g: 0;
+                --rg-layer-index-subIndex-colorList-0-b: 255;
+                --rg-layer-index-subIndex-colorList-0-a: 1;
+                --rg-layer-index-subIndex-colorList-1-r: 0;
+                --rg-layer-index-subIndex-colorList-1-g: 0;
+                --rg-layer-index-subIndex-colorList-1-b: 255;
+                --rg-layer-index-subIndex-colorList-1-a: 1;
             }
         }
 
         .result2 {
             transition: all 0.3s;
-            width: var(--rg-layer_index_subIndex-size);
+            width: var(--rg-layer-index-subIndex-size-1);
             height: 300px;
-            animation: rgGrad_002 2s infinite;
-            background: linear-gradient(var(--rg-layer_index_subIndex-deg),
-            rgba(var(--rg-layer_index_subIndex-colorList-1-r), var(--rg-layer_index_subIndex-colorList-1-g), var(--rg-layer_index_subIndex-colorList-1-b), var(--rg-layer_index_subIndex-colorList-1-a)) 0%,
-            rgba(0, 255, 0, 1) 100%) 0% 0% / 100% 100%, transparent;
+            animation: rg-layer-index-subIndex 2s infinite;
+            background: linear-gradient(
+                    var(--rg-layer-index-subIndex-deg-1),
+                    rgba(var(--rg-layer-index-subIndex-colorList-0-r), var(--rg-layer-index-subIndex-colorList-0-g), var(--rg-layer-index-subIndex-colorList-0-b), var(--rg-layer-index-subIndex-colorList-0-a)) 0%,
+                    rgba(var(--rg-layer-index-subIndex-colorList-1-r), var(--rg-layer-index-subIndex-colorList-1-g), var(--rg-layer-index-subIndex-colorList-1-b), var(--rg-layer-index-subIndex-colorList-1-a)) 100%
+            ) 0% 0% / 100% 100%,
+            transparent;
             background-blend-mode: normal
         }
     </style>
