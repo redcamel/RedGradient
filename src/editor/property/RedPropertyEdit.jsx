@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import RedTitle from "../../core/RedTitle.jsx";
 import RedTextField from "../../core/RedTextField.jsx";
@@ -21,7 +20,6 @@ import RedPropertyAtEdit from "./RedPropertyAtEdit";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedPropertySizeEdit from "./RedPropertySizeEdit";
 import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
-import RedPreset from "./preset/RedPreset";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 
 class RedPropertyEdit extends React.Component {
@@ -31,7 +29,7 @@ class RedPropertyEdit extends React.Component {
     const activeLayer = rootComponentState.activeLayer;
     const data = rootComponentState.activeSubData;
     return <div style={style.container}>
-      <RedTitle title={'Gradient Edit'} />
+      <RedTitle title={'Gradient Edit'}/>
       <div style={style.contentWrap}>
         <div>
           <div style={{...style.itemContainer}}>
@@ -41,44 +39,44 @@ class RedPropertyEdit extends React.Component {
                 value={data['title']} HD_onInput={e => {
                 data['title'] = e.target.value;
                 rootComponent.updateRootState({});
-              }} />
-              <div style={style.divide} />
-              <RedPropertyTypeEdit rootComponent={rootComponent} />
-              <div style={style.divide} />
-              <RedPropertyRepeatEdit rootComponent={rootComponent} />
-              <div style={style.divide} />
-              <RedPropertyBlendEdit rootComponent={rootComponent} />
+              }}/>
+              <div style={style.divide}/>
+              <RedPropertyTypeEdit rootComponent={rootComponent}/>
+              <div style={style.divide}/>
+              <RedPropertyRepeatEdit rootComponent={rootComponent}/>
+              <div style={style.divide}/>
+              <RedPropertyBlendEdit rootComponent={rootComponent}/>
               {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL ? <>
-                <div style={style.divide} />
-                <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />
+                <div style={style.divide}/>
+                <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent}/>
               </> : ''}
               {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.REPEAT_LINEAR || data.type === GRADIENT_TYPE.CONIC ?
                 <>
-                  <div style={style.divide} />
-                  <RedPropertyDegreeEdit rootComponent={rootComponent} />
+                  <div style={style.divide}/>
+                  <RedPropertyDegreeEdit rootComponent={rootComponent}/>
                 </> : ''}
-              <div style={style.divide} />
-              <RedPropertySizeEdit rootComponent={rootComponent} />
+              <div style={style.divide}/>
+              <RedPropertySizeEdit rootComponent={rootComponent}/>
               {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC ? <>
-                <div style={style.divide} />
-                <RedPropertyAtEdit rootComponent={rootComponent} />
+                <div style={style.divide}/>
+                <RedPropertyAtEdit rootComponent={rootComponent}/>
               </> : ''}
 
             </div>
 
-            <div style={style.divide} />
-            <RedPropertyPositionEdit rootComponent={rootComponent} />
+            <div style={style.divide}/>
+            <RedPropertyPositionEdit rootComponent={rootComponent}/>
 
-            <div style={style.divide} />
+            <div style={style.divide}/>
             <div style={{display: 'flex'}}>
               <div>
                 position
-                <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'position'} />
+                <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'position'}/>
               </div>
               {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC ?
                 <div>
                   center
-                  <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'at'} />
+                  <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'at'}/>
                 </div> : ''
               }
 
@@ -87,7 +85,7 @@ class RedPropertyEdit extends React.Component {
         </div>
 
         <div style={style.itemContainer}>
-          <RedGradientColorEdit rootComponent={rootComponent} />
+          <RedGradientColorEdit rootComponent={rootComponent}/>
         </div>
         <div style={style.itemContainer}>
           <div>Current Gradient Css</div>
@@ -110,11 +108,9 @@ class RedPropertyEdit extends React.Component {
               var tempElem = document.createElement('textarea');
               tempElem.value = JSON.stringify(data, null, 2);
               document.body.appendChild(tempElem);
-
               tempElem.select();
               document.execCommand("copy");
               document.body.removeChild(tempElem);
-
             }}
           >copy
           </div>

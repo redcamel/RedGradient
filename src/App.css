@@ -21,10 +21,12 @@ html, body {
 div {
     position: relative;
 }
+
 a {
-    color : #acacac;
+    color: #acacac;
     text-decoration: none;
 }
+
 input, select {
     margin: 1px;
     border-radius: 6px;
@@ -77,6 +79,7 @@ option {
     background-image: linear-gradient(rgba(0, 0, 0, .3) .1em, transparent .1em), linear-gradient(90deg, rgba(0, 0, 0, .3) .1em, transparent .1em);
     background-size: 10px 10px;
 }
+
 .grid3_3 {
     background-image: linear-gradient(rgba(0, 0, 0, .3) .1em, transparent .1em), linear-gradient(90deg, rgba(0, 0, 0, .3) .1em, transparent .1em);
     background-size: 10px 10px;
@@ -297,7 +300,7 @@ option {
 /* UI */
 .ui_title {
     position: sticky;
-    top:0;
+    top: 0;
     z-index: 1;
     background: linear-gradient(rgb(60, 60, 60), rgb(55, 55, 55));
     height: 26px;

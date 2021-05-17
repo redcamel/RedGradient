@@ -24,7 +24,7 @@ class RedCanvasBorderGradientFrame extends React.Component {
 
   updateRootState(v = {}) {
     this.setState(v)
-    this.props.rootComponent.setState({borderGradientInfo : this.state})
+    this.props.rootComponent.setState({borderGradientInfo: this.state})
   }
 
   render() {

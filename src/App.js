@@ -91,29 +91,31 @@ class App extends React.Component {
     let containerCssText
     {
       containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo))
-      containerCssText = containerCssText.map(v=>{
+      containerCssText = containerCssText.map(v => {
         return `${v[0]} : ${v[1]}`
       });
       containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
-      containerCssText =`.result {
+      containerCssText = `.result {
           background : ${JSON.stringify(CALC_GRADIENT.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')};
           background-blend-mode : ${CALC_GRADIENT.calcBlendMode(this.state.layers)};
           ${containerCssText}
           }`.replace(/\s\s+/g, ' ')
-
     }
     this.checkUnloadEvent()
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
-        <div style={{fontSize: '20px', fontWeight: 'bold', margin: '0px 8px'}}>RedGradient</div>
+        <div style={{display: 'flex', alignItems: 'center', fontSize: '16px', fontWeight: 'bold', margin: '0px 8px'}}>
+          <img src={'./tempLogo.svg'} height={'26px'} style={{marginRight: '7px'}}/>
+          RedGradient
+        </div>
         <RedFrameMenuOpen rootComponent={this}/>
         <RedFrameMenuSave rootComponent={this}/>
 
         {/*<div style={style.test}>언두/리두</div>*/}
       </div>
-      <div className={'frame_toolbar'}>frame ToolBar
+      {/*<div className={'frame_toolbar'}>frame ToolBar*/}
 
-      </div>
+      {/*</div>*/}
       <div className={'frame_middle'}>
         <div className={'frame_middle_container'}>
           <div className={'frame_left'}>
@@ -141,17 +143,17 @@ class App extends React.Component {
                   <RedTitle title={'Result'}/>
                   <button
                     style={style.copyClass}
-                    onClick={e=>{
+                    onClick={e => {
                       var tempElem = document.createElement('textarea');
                       tempElem.value = containerCssText;
                       document.body.appendChild(tempElem);
-
                       tempElem.select();
                       document.execCommand("copy");
                       document.body.removeChild(tempElem);
                       alert('Copy Class!')
                     }}
-                  >Copy Class</button>
+                  >Copy Class
+                  </button>
                   <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
                     {containerCssText}
                   </SyntaxHighlighter>
@@ -181,16 +183,16 @@ const style = {
     background: '#5e7ade',
     margin: '1px'
   },
-  copyClass : {
-    cursor : 'pointer',
-    margin :'4px 4px 0px',
-    padding : '4px',
-    width : 'calc(100% - 8px)',
-    fontSize : '12px',
-    color : '#fff',
-    outline : 'none',
-    border : '1px solid #111',
-    background : 'linear-gradient(#5e7ade, #2c3565)',
-    borderRadius:'4px'
+  copyClass: {
+    cursor: 'pointer',
+    margin: '4px 4px 0px',
+    padding: '4px',
+    width: 'calc(100% - 8px)',
+    fontSize: '12px',
+    color: '#fff',
+    outline: 'none',
+    border: '1px solid #111',
+    background: 'linear-gradient(#5e7ade, #2c3565)',
+    borderRadius: '4px'
   }
 };

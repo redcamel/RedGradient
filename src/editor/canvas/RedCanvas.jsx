@@ -25,7 +25,6 @@ class RedCanvas extends React.Component {
     this.refColorPickerContainer = React.createRef();
   }
 
-
   draw_canvasUI = drawCanvasUI;
 
   drawCall(canvasInfo, layers, bgColor) {
@@ -53,7 +52,7 @@ class RedCanvas extends React.Component {
           background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
           backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
           transition: 'width 0.2s, height 0.2s',
-          ...RedCanvas.getContainerCss(canvasInfo,borderGradientInfo),
+          ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
           filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
           overflow: 'hidden',
         }}
@@ -151,36 +150,32 @@ RedCanvas.getFilterCss = (filterList) => {
   // console.log(filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(','))
   return filterList.map(v => RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(' ');
 };
-RedCanvas.getContainerCss = (canvasInfo,borderGradientInfo) => {
-  let borderData={}
-  console.log('borderGradientInfo',borderGradientInfo)
-  if(canvasInfo.borderIsGradientMode && borderGradientInfo){
+RedCanvas.getContainerCss = (canvasInfo, borderGradientInfo) => {
+  let borderData = {}
+  console.log('borderGradientInfo', borderGradientInfo)
+  if (canvasInfo.borderIsGradientMode && borderGradientInfo) {
     let gradient = CALC_GRADIENT.calcGradients(borderGradientInfo['layers'])
     gradient = gradient.split(')')
     gradient.pop()
-    gradient = gradient.join(')')+')'
+    gradient = gradient.join(')') + ')'
     borderData = {
-      borderImageWidth : `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
-      borderStyle : canvasInfo['border_type'],
-      borderImageSlice : `${borderGradientInfo['border_image_sliceT']} ${borderGradientInfo['border_image_sliceR']} ${borderGradientInfo['border_image_sliceB']} ${borderGradientInfo['border_image_sliceL']}`,
-
-      borderImageSource :gradient,
-      borderImageRepeat  :borderGradientInfo['border_image_repeat'],
-      borderImageOutset  :borderGradientInfo['border_image_outset'],
+      borderImageWidth: `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
+      borderStyle: canvasInfo['border_type'],
+      borderImageSlice: `${borderGradientInfo['border_image_sliceT']} ${borderGradientInfo['border_image_sliceR']} ${borderGradientInfo['border_image_sliceB']} ${borderGradientInfo['border_image_sliceL']}`,
+      borderImageSource: gradient,
+      borderImageRepeat: borderGradientInfo['border_image_repeat'],
+      borderImageOutset: borderGradientInfo['border_image_outset'],
     }
-
-  }else{
+  } else {
     borderData = {
-      borderWidth : `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
-      borderStyle : `${canvasInfo['border_type']}`,
-      borderColor : `${canvasInfo['border_color']}`
+      borderWidth: `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
+      borderStyle: `${canvasInfo['border_type']}`,
+      borderColor: `${canvasInfo['border_color']}`
     }
   }
   console.log(borderData)
-
-
   return {
-    boxSizing : canvasInfo['box_sizing'],
+    boxSizing: canvasInfo['box_sizing'],
     borderRadius: `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`,
     ...borderData,
     outline: `${canvasInfo['outline_width']}${canvasInfo['outline_width_unit']} ${canvasInfo['outline_type']} ${canvasInfo['outline_color']}`,

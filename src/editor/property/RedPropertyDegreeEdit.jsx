@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import RedNumber from "../../core/RedNumber.jsx";
 
@@ -45,7 +44,7 @@ class RedPropertyDegreeEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     const deg = activeSubData['deg'];
-    return <div style={{display:'flex',alignItems: 'center'}}>
+    return <div style={{display: 'flex', alignItems: 'center'}}>
       {
         <>
           Deg <RedNumber
@@ -54,8 +53,8 @@ class RedPropertyDegreeEdit extends React.Component {
           HD_onInput={e => {
             activeSubData['deg'] = e.target.value;
             rootComponent.updateRootState({});
-          }} />
-          <div style={{textAlign: 'center',marginLeft :'10px '}}>
+          }}/>
+          <div style={{textAlign: 'center', marginLeft: '10px '}}>
             <div
               style={style.box}
               onMouseDown={() => {
@@ -68,12 +67,12 @@ class RedPropertyDegreeEdit extends React.Component {
                 this.calcDegree(e.nativeEvent);
               }}
             >
-              <div style={style.centerItem} ref={this.refCenter} />
+              <div style={style.centerItem} ref={this.refCenter}/>
               <div style={{
                 ...style.degreeItem,
                 top: `calc(50% + ${Math.sin(Math.PI / 180 * (deg - 90)) * SIZE / 3}px)`,
                 left: `calc(50% + ${Math.cos(Math.PI / 180 * (deg - 90)) * SIZE / 3}px)`
-              }} />
+              }}/>
             </div>
           </div>
         </>

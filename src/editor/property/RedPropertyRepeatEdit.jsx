@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
 import REPEAT_TYPE from "../REPEAT_TYPE.js";
@@ -22,7 +21,7 @@ class RedPropertyRepeatEdit extends React.Component {
     const gradient = 'radial-gradient(at 50% 50%, rgba(255, 255, 0, 0.9) 1.5px, rgba(255, 0, 0, 0.5) 5px, transparent 10px)';
     return <div>
       Repeat Mode
-      <div style={{display: 'flex',marginTop : '3px'}}>
+      <div style={{display: 'flex', marginTop: '3px'}}>
         <div style={{display: 'flex'}}>
           <div style={{...style.icon}}
                onClick={e => {
@@ -115,7 +114,7 @@ class RedPropertyRepeatEdit extends React.Component {
           HD_change={e => {
             activeSubData['typeRepeat'] = e.target.value;
             rootComponent.updateRootState({});
-          }} />
+          }}/>
       </div>
     </div>;
   }
@@ -130,12 +129,11 @@ const style = {
     border: '1px solid #000',
     overflow: 'hidden',
     marginRight: '5px',
-    cursor : 'pointer'
+    cursor: 'pointer'
   },
   baseBg: {
     position: 'absolute',
     top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
     width: '100%', height: '100%',
-
   }
 };

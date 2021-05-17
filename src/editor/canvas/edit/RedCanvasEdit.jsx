@@ -11,7 +11,6 @@ import RedTitle from "../../../core/RedTitle";
 import RedCanvasFilterList from "./filter/RedCanvasFilterList.jsx";
 import RedCanvasBorderModeEdit from "./property/RedCanvasBorderModeEdit.jsx";
 import RedCanvasOutlineEdit from "./property/RedCanvasOutlineEdit";
-import RedCanvasBorderModeGradientEdit from "./property/RedCanvasBorderModeGradientEdit.jsx";
 import RedCanvasBorderGradientFrame from "./property/RedCanvasBorderGradientFrame.jsx";
 import RedCanvasBoxSizingEdit from "./property/RedCanvasBoxSizingEdit.jsx";
 
@@ -80,7 +79,7 @@ class RedCanvasEdit extends React.Component {
           <div style={{display: canvasInfo.borderIsGradientMode ? 'none' : 'block'}}><RedCanvasBorderModeEdit
             rootComponent={rootComponent}/></div>
 
-            {canvasInfo.borderIsGradientMode ? <RedCanvasBorderGradientFrame rootComponent={rootComponent}/> : ''}
+          {canvasInfo.borderIsGradientMode ? <RedCanvasBorderGradientFrame rootComponent={rootComponent}/> : ''}
 
         </div>
 

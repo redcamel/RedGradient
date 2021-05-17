@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
 import RedNumber from "../../core/RedNumber.jsx";
@@ -29,22 +28,22 @@ class RedPropertyPositionEdit extends React.Component {
           HD_onInput={e => {
             activeSubData['position']['x'] = e.target.value;
             rootComponent.updateRootState({});
-          }} />
+          }}/>
         <RedSelect value={activeSubData['position']['xUnit']} options={['px', '%']} HD_change={e => {
           activeSubData['position']['xUnit'] = e.target.value;
           rootComponent.updateRootState({});
-        }} />
+        }}/>
         <RedNumber
           width={'80px'}
           value={activeSubData['position']['y'] || 0}
           HD_onInput={e => {
             activeSubData['position']['y'] = e.target.value;
             rootComponent.updateRootState({});
-          }} />
+          }}/>
         <RedSelect value={activeSubData['position']['yUnit']} options={['px', '%']} HD_change={e => {
           activeSubData['position']['yUnit'] = e.target.value;
           rootComponent.updateRootState({});
-        }} />
+        }}/>
       </div>
     </div>;
   }

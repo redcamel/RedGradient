@@ -5,9 +5,7 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
-
 import DataColor from "../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedNumber from "../../core/RedNumber";
@@ -31,16 +29,15 @@ const HD_move = e => {
     } else {
       targetColorData[targetRange] = percentX / 100 * targetContext.props.rootComponent.state.canvasInfo['width'];
     }
-    if(targetColorData['useRange']){
-      if(targetColorData['range']>targetColorData['rangeEnd']){
+    if (targetColorData['useRange']) {
+      if (targetColorData['range'] > targetColorData['rangeEnd']) {
         let t0 = targetColorData['rangeEnd']
         targetColorData['rangeEnd'] = targetColorData['range']
         targetColorData['range'] = t0
-        if(targetRange==='range') targetRange = 'rangeEnd'
+        if (targetRange === 'range') targetRange = 'rangeEnd'
         else targetRange = 'range'
       }
     }
-
     targetContext.props.rootComponent.updateRootState({});
     // console.log(tX);
   }
@@ -215,7 +212,7 @@ class RedGradientColorItem extends React.Component {
             }}
           />
           {
-            colorData['useRange']  ?<RedNumber
+            colorData['useRange'] ? <RedNumber
               width={'80px'}
               value={colorData['rangeEnd'] || 0}
               HD_onInput={e => {
@@ -241,7 +238,7 @@ class RedGradientColorItem extends React.Component {
             }
             colorData['rangeUnit'] = tUnit;
             rootComponent.updateRootState({});
-          }} />
+          }}/>
           <button
             style={style.del}
             onClick={() => {
@@ -270,7 +267,7 @@ class RedGradientColorItem extends React.Component {
                   rootComponent.updateRootState({});
                 }
               }}
-            >useRange <input type={'checkbox'} checked={colorData['useRange']} />
+            >useRange <input type={'checkbox'} checked={colorData['useRange']}/>
             </label>
 
             <div style={{display: 'inline-block', marginLeft: '5px'}}>{colorData['color']}</div>
@@ -279,7 +276,7 @@ class RedGradientColorItem extends React.Component {
         </div>
       </div>
       <div style={{margin: '8px 8px', alignItems: 'center'}}>
-        <div style={style.line} ref={this.refBar} />
+        <div style={style.line} ref={this.refBar}/>
         <div style={{
           ...style.ball,
           left: `${colorData['rangeUnit'] === 'px' ? colorData['range'] / canvasInfo['width'] * 100 : colorData['range']}%`,
@@ -301,24 +298,24 @@ class RedGradientColorItem extends React.Component {
             left: `${colorData['rangeUnit'] === 'px' ? colorData['rangeEnd'] / canvasInfo['width'] * 100 : colorData['rangeEnd']}%`,
             background: activeYn ? '#5e7ade' : '#fff'
           }}
-              onMouseDown={() => {
-                targetContext = this;
-                targetColorData = colorData;
-                targetRefBar = this.refBar;
-                targetRange = 'rangeEnd';
-                window.addEventListener('mousemove', HD_move);
-                window.addEventListener('mouseup', HD_up);
-              }}
+                                    onMouseDown={() => {
+                                      targetContext = this;
+                                      targetColorData = colorData;
+                                      targetRefBar = this.refBar;
+                                      targetRange = 'rangeEnd';
+                                      window.addEventListener('mousemove', HD_move);
+                                      window.addEventListener('mouseup', HD_up);
+                                    }}
           >e</div> : ''
         }
       </div>
 
       <div style={{...style.colorPicker, display: this.state.openColorPicker ? 'block' : 'none'}}>
-        <div ref={this.refColorPickerContainer} />
+        <div ref={this.refColorPickerContainer}/>
         <div style={style.complete} onClick={() => this.setState({openColorPicker: null})}>완료</div>
       </div>
       <div style={{...style.colorPicker, display: this.state.openColorEndPicker ? 'block' : 'none'}}>
-        <div ref={this.refColorEndPickerContainer} />
+        <div ref={this.refColorEndPickerContainer}/>
         <div style={style.complete} onClick={() => this.setState({openColorEndPicker: null})}>완료</div>
       </div>
 

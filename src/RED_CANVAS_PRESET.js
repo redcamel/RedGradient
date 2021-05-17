@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 const RED_CANVAS_PRESET = [
   {
     title: '512 x 512',

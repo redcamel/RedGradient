@@ -29,7 +29,7 @@ class RedStart extends React.Component {
         color: '#fff'
       }}>
 
-        <div style={{textAlign : 'center'}}>
+        <div style={{textAlign: 'center'}}>
           <img src={'./tempLogo.svg'}/>
           <div style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '30px'}}>RedGradient</div>
         </div>

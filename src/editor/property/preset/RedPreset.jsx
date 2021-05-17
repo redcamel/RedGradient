@@ -77,7 +77,7 @@ class RedPreset extends React.Component {
     return <div>
       <div style={style.container}>{this.renderList(presetList)}</div>
       <div style={style.divide}/>
-      <div style={{display: 'flex', justifyContent: 'space-between',alignItems: 'center'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         User Preset
         <div style={{
           display: 'flex',
@@ -93,7 +93,11 @@ class RedPreset extends React.Component {
           </div>
           <div
             onClick={e => this.setState({mode: 1})}
-            style={{...style.mode, borderLeft: '1px solid #000', background: this.state.mode === 1 ? '#5e7ade' : '#2f2f2f'}}>del
+            style={{
+              ...style.mode,
+              borderLeft: '1px solid #000',
+              background: this.state.mode === 1 ? '#5e7ade' : '#2f2f2f'
+            }}>del
           </div>
           <div
             onClick={e => RedPreset.exportPreset()}
@@ -124,7 +128,7 @@ RedPreset.delUserPreset = (context, index) => {
   localStorage.setItem('userPresetList', JSON.stringify(t0))
   context.setState({})
 }
-RedPreset.exportPreset = ()=>{
+RedPreset.exportPreset = () => {
   const a = document.createElement('a');
   const file = new Blob([JSON.stringify(RedPreset.getUserPreset())], {type: 'application/json'});
   a.href = URL.createObjectURL(file);
@@ -132,7 +136,7 @@ RedPreset.exportPreset = ()=>{
   a.click();
   URL.revokeObjectURL(a.href);
 }
-RedPreset.importPreset = (context)=>{
+RedPreset.importPreset = (context) => {
   const a = document.createElement('input');
   a.setAttribute('accept', '.json');
   a.setAttribute('type', 'file');

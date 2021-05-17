@@ -16,12 +16,11 @@ import RedCanvasSizeEdit from "./edit/property/RedCanvasSizeEdit";
 let colorPicker;
 
 function drawCanvasUI() {
-
   const rootComponent = this.props.rootComponent;
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
   return <div style={style.container}>
-    <RedTitle title={'Canvas Information'} />
+    <RedTitle title={'Canvas Information'}/>
     <div style={{display: 'inline-block', marginLeft: '5px'}}>
       {
         RED_CANVAS_PRESET.map(v => {
@@ -34,7 +33,7 @@ function drawCanvasUI() {
             }}
           >
             <div><FontAwesomeIcon
-              icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop} /> {v['title']}({v['width']}x{v['height']})
+              icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
             </div>
           </button>;
         })
@@ -97,7 +96,7 @@ const style = {
   canvasViewInfo: {
     padding: '4px',
     fontSize: '12px',
-    textAlign : 'right'
+    textAlign: 'right'
   },
   toCenter: {
     padding: '3px 5px',

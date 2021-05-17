@@ -96,9 +96,9 @@ class RedGradientColorEdit extends React.Component {
         <div style={{flexGrow: 10}}>Preview</div>
         <button
           style={{...style.preset}}
-          onClick={e =>{
+          onClick={e => {
             this.props.borderMode ? RedPresetBorder.addUserPreset(rootComponent, activeSubData) : RedPreset.addUserPreset(rootComponent, activeSubData)
-          } }
+          }}
         ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}}/> Add Preset
         </button>
         <button

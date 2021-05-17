@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 const BORDER_REPEAT_TYPE = {
   STRETCH: 'stretch',
   REPEAT: 'repeat',

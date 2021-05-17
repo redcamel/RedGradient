@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 const PresetCircle2 = {
   "title": "test",
   "type": "radial-gradient",

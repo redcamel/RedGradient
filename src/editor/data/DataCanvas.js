@@ -14,7 +14,7 @@ function DataCanvas() {
       height: 300,
       /////////////////////////////////////////////////
       //
-      box_sizing : 'border-box',
+      box_sizing: 'border-box',
       //
       border_radius: 0,
       border_radius_unit: 'px',

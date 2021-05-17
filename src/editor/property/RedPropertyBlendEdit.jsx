@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
 import BLEND_MODE_TYPE from "../BLEND_MODE_TYPE";
@@ -28,7 +27,7 @@ class RedPropertyBlendEdit extends React.Component {
         HD_change={e => {
           activeSubData['blendMode'] = e.target.value;
           rootComponent.updateRootState({});
-        }} />
+        }}/>
     </div>;
   }
 }

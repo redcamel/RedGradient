@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import {faArrowDown, faCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -64,8 +63,8 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const canvasInfo = rootComponentState.canvasInfo;
     let layerPixelW = canvasInfo.width;
     let layerPixelH = canvasInfo.height;
-    let tPercentX = targetData['xUnit'] === '%' ? (targetData.x ) % 100 : ((targetData.x / layerPixelW * 100) % 100);
-    let tPercentY = targetData['yUnit'] === '%' ? (targetData.y ) % 100 : ((targetData.y / layerPixelH * 100) % 100);
+    let tPercentX = targetData['xUnit'] === '%' ? (targetData.x) % 100 : ((targetData.x / layerPixelW * 100) % 100);
+    let tPercentY = targetData['yUnit'] === '%' ? (targetData.y) % 100 : ((targetData.y / layerPixelH * 100) % 100);
     if (tPercentX < 0) tPercentX = 100 + tPercentX;
     if (tPercentY < 0) tPercentY = 100 + tPercentY;
     return <div>
@@ -87,7 +86,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
           ...style.degreeItem,
           top: `${tPercentY}%`,
           left: `${tPercentX}%`
-        }} />
+        }}/>
       </div>
       <div
         className={'grid3_3'}
@@ -95,9 +94,11 @@ class RedPropertyPositionEditByMouse extends React.Component {
       >
         {/**/}
         <button
-          onClick={e => {this.setPosition(0, 0);}}
+          onClick={e => {
+            this.setPosition(0, 0);
+          }}
           style={{...style.location, top: 0, left: 0}}><FontAwesomeIcon
-          icon={faArrowDown} style={{transform: 'rotate(135deg)'}} /></button>
+          icon={faArrowDown} style={{transform: 'rotate(135deg)'}}/></button>
         <button
           onClick={e => {
             let tX = 50;
@@ -105,7 +106,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(tX, 0);
           }}
           style={{...style.location, top: 0, left: '50%', transform: 'translate(-50%,0)'}}><FontAwesomeIcon
-          icon={faArrowDown} style={{transform: 'rotate(180deg)'}} /></button>
+          icon={faArrowDown} style={{transform: 'rotate(180deg)'}}/></button>
         <button
           onClick={e => {
             let tX = 100;
@@ -113,17 +114,19 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(tX, 0);
           }}
           style={{...style.location, top: 0, right: 0}}><FontAwesomeIcon icon={faArrowDown}
-                                                                        style={{transform: 'rotate(225deg)'}} />
+                                                                         style={{transform: 'rotate(225deg)'}}/>
         </button>
         {/**/}
         <button
-          onClick={e => {{
-            let tY = 50;
-            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
-            this.setPosition(0, tY);
-          }}}
+          onClick={e => {
+            {
+              let tY = 50;
+              if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] * 0.5;
+              this.setPosition(0, tY);
+            }
+          }}
           style={{...style.location, top: '50%', left: 0, transform: 'translate(0%,-50%)'}}><FontAwesomeIcon
-          icon={faArrowDown} style={{transform: 'rotate(90deg)'}} /></button>
+          icon={faArrowDown} style={{transform: 'rotate(90deg)'}}/></button>
         <button
           onClick={e => {
             let tX = 50;
@@ -133,7 +136,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(tX, tY);
           }}
           style={{...style.location, top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}><FontAwesomeIcon
-          icon={faCircle} style={{transform: 'rotate(135deg)'}} /></button>
+          icon={faCircle} style={{transform: 'rotate(135deg)'}}/></button>
         <button
           onClick={e => {
             let tX = 100;
@@ -143,37 +146,37 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(tX, tY);
           }}
           style={{...style.location, top: '50%', right: 0, transform: 'translate(0%,-50%)'}}><FontAwesomeIcon
-          icon={faArrowDown} style={{transform: 'rotate(270deg)'}} /></button>
+          icon={faArrowDown} style={{transform: 'rotate(270deg)'}}/></button>
         {/**/}
         <button
           onClick={e => {
             let tY = 100;
-            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] ;
+            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'];
             this.setPosition(0, tY);
           }}
           style={{...style.location, bottom: 0, left: 0}}><FontAwesomeIcon icon={faArrowDown}
-                                                                           style={{transform: 'rotate(45deg)'}} />
+                                                                           style={{transform: 'rotate(45deg)'}}/>
         </button>
         <button
           onClick={e => {
             let tX = 50;
             let tY = 100;
-            if (targetData['xUnit'] === 'px') tX = canvasInfo['width']*0.5;
-            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] ;
+            if (targetData['xUnit'] === 'px') tX = canvasInfo['width'] * 0.5;
+            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'];
             this.setPosition(tX, tY);
           }}
           style={{...style.location, bottom: 0, left: '50%', transform: 'translate(-50%,0)'}}><FontAwesomeIcon
-          icon={faArrowDown} style={{transform: 'rotate(0deg)'}} /></button>
+          icon={faArrowDown} style={{transform: 'rotate(0deg)'}}/></button>
         <button
           onClick={e => {
             let tX = 100;
             let tY = 100;
             if (targetData['xUnit'] === 'px') tX = canvasInfo['width'];
-            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] ;
+            if (targetData['yUnit'] === 'px') tY = canvasInfo['height'];
             this.setPosition(tX, tY);
           }}
           style={{...style.location, bottom: 0, right: 0}}><FontAwesomeIcon icon={faArrowDown}
-                                                                            style={{transform: 'rotate(315deg)'}} />
+                                                                            style={{transform: 'rotate(315deg)'}}/>
         </button>
 
       </div>

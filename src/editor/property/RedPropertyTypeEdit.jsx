@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedRadio from "../../core/RedRadio";
@@ -26,7 +25,7 @@ class RedPropertyTypeEdit extends React.Component {
       HD_change={e => {
         activeSubData['type'] = e.target.value;
         rootComponent.updateRootState({});
-      }} />;
+      }}/>;
   }
 }
 
