@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+      CSS.registerProperty({
+        name: '--deg2',
+        syntax: '<angle>',
+        inherits: true,
+        initialValue: '0deg'
+      });
+      CSS.registerProperty({
+        name: '--rg-grad002-color-1-r',
+        syntax: '<number>',
+        inherits: true,
+        initialValue: 0
+      });
+      CSS.registerProperty({
+        name: '--rg-grad002-color-1-g',
+        syntax: '<number>',
+        inherits: true,
+        initialValue: 0
+      });
+      CSS.registerProperty({
+        name: '--rg-grad002-color-1-b',
+        syntax: '<number>',
+        inherits: true,
+        initialValue: 0
+      });
+      CSS.registerProperty({
+        name: '--rg-grad002-color-1-a',
+        syntax: '<number>',
+        inherits: true,
+        initialValue: 1
+      });
+    </script>
+    <style>
+        @keyframes rgGrad_002 {
+            0% {
+                --deg2 : 100deg;
+                --rg-grad002-color-1-r: 255;
+                --rg-grad002-color-1-g: 0;
+                --rg-grad002-color-1-b: 255;
+                --rg-grad002-color-1-a: 1;
+            }
+            50% {
+                --deg2 : 50deg;
+                --rg-grad002-color-1-r: 255;
+                --rg-grad002-color-1-g: 255;
+                --rg-grad002-color-1-b: 35;
+                --rg-grad002-color-1-a: 1;
+            }
+            100% {
+                --deg2 : 100deg;
+                --rg-grad002-color-1-r: 255;
+                --rg-grad002-color-1-g: 0;
+                --rg-grad002-color-1-b: 255;
+                --rg-grad002-color-1-a: 1;
+            }
+        }
+        .result2 {
+            transition: all 0.3s;
+            width:300px;
+            height:300px;
+            animation: rgGrad_002 1s infinite;
+            background : linear-gradient(var(--deg2),
+            rgba(var(--rg-grad002-color-1-r), var(--rg-grad002-color-1-g), var(--rg-grad002-color-1-b), var(--rg-grad002-color-1-a)) 0% ,
+            rgba(0, 255, 0, 1) 100% ) 0% 0% / 100% 100% ,transparent;
+            background-blend-mode : normal
+        }
+    </style>
+    <style>
+        :root {
+            --deg : 100deg;
+            --rg-grad001-color-1-r: 255;
+            --rg-grad001-color-1-g: 0;
+            --rg-grad001-color-1-b: 0;
+            --rg-grad001-color-1-a: 1;
+        }
+        @keyframes rgGrad_001 {
+            0% {
+                --deg : 100deg;
+            }
+            50% {
+                --deg : 50deg;
+            }
+            100% {
+                --deg : 100deg;
+            }
+        }
+        .result {
+            transition: all 0.3s;
+            width:300px;
+            height:300px;
+            animation: rgGrad_001 1s infinite;
+            background : linear-gradient(var(--deg), rgba(255, 0, 0, 1) 0% ,rgba(0, 255, 0, 1) 100% ) 0% 0% / 100% 100% ,transparent;
+            background-blend-mode : normal
+        }
+    </style>
+    <script>
+
+    </script>
+</head>
+<body>
+<div class="result"></div>
+<div class="result2"></div>
+</body>
+</html>
