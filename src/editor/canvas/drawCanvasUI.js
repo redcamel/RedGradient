@@ -76,8 +76,6 @@ function drawCanvasUI() {
 
       </div>
     </div>
-      <div className={'todo'}>Todo - 영역 배치를 좀 고민해야함</div>
-    <div className={'todo'}>Todo - 열고 닫기가 필요하려나..</div>
 
   </div>;
 }

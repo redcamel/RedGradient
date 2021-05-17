@@ -28,8 +28,12 @@ class RedStart extends React.Component {
         boxShadow: '0px 0px 36px rgba(0,0,0,0.36)',
         color: '#fff'
       }}>
-        <div>Todo - Logo</div>
-        <div style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '30px'}}>RedGradient</div>
+
+        <div style={{textAlign : 'center'}}>
+          <img src={'./tempLogo.svg'}/>
+          <div style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '30px'}}>RedGradient</div>
+        </div>
+
         <button
           style={{
             padding: '8px 16px',
