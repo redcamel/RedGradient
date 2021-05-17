@@ -63,7 +63,7 @@
             transition: all 0.3s;
             width:300px;
             height:300px;
-            animation: rgGrad_002 1s infinite;
+            animation: rgGrad_002 2s infinite;
             background : linear-gradient(var(--deg2),
             rgba(var(--rg-grad002-color-1-r), var(--rg-grad002-color-1-g), var(--rg-grad002-color-1-b), var(--rg-grad002-color-1-a)) 0% ,
             rgba(0, 255, 0, 1) 100% ) 0% 0% / 100% 100% ,transparent;
@@ -72,8 +72,8 @@
     </style>
     <style>
         :root {
-            --deg : 100deg;
-            --rg-grad001-color-1-r: 255;
+            --deg : 0deg;
+            --rg-grad001-color-1-r: 0;
             --rg-grad001-color-1-g: 0;
             --rg-grad001-color-1-b: 0;
             --rg-grad001-color-1-a: 1;
@@ -81,20 +81,34 @@
         @keyframes rgGrad_001 {
             0% {
                 --deg : 100deg;
+                --rg-grad001-color-1-r: 255;
+                --rg-grad001-color-1-g: 0;
+                --rg-grad001-color-1-b: 255;
+                --rg-grad001-color-1-a: 1;
             }
             50% {
                 --deg : 50deg;
+                --rg-grad001-color-1-r: 255;
+                --rg-grad001-color-1-g: 0;
+                --rg-grad001-color-1-b: 255;
+                --rg-grad001-color-1-a: 1;
             }
             100% {
                 --deg : 100deg;
+                --rg-grad001-color-1-r: 255;
+                --rg-grad001-color-1-g: 0;
+                --rg-grad001-color-1-b: 255;
+                --rg-grad001-color-1-a: 1;
             }
         }
         .result {
             transition: all 0.3s;
             width:300px;
             height:300px;
-            animation: rgGrad_001 1s infinite;
-            background : linear-gradient(var(--deg), rgba(255, 0, 0, 1) 0% ,rgba(0, 255, 0, 1) 100% ) 0% 0% / 100% 100% ,transparent;
+            animation: rgGrad_001 2s infinite;
+            background : linear-gradient(var(--deg),
+            rgba(var(--rg-grad001-color-1-r), var(--rg-grad001-color-1-g), var(--rg-grad001-color-1-b), var(--rg-grad001-color-1-a)) 0% ,
+            rgba(0, 255, 0, 1) 100% ) 0% 0% / 100% 100% ,transparent;
             background-blend-mode : normal
         }
     </style>
@@ -103,7 +117,7 @@
     </script>
 </head>
 <body>
-<div class="result"></div>
-<div class="result2"></div>
+<div class="result">:root기반</div>
+<div class="result2">CSS.registerProperty</div>
 </body>
 </html>
