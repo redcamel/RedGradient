@@ -5,7 +5,7 @@
     <title>Title</title>
     <script>
       CSS.registerProperty({
-        name: '--rg-layer-index-subIndex-size-1',
+        name: '--rg-layer-index-subIndex-size',
         syntax: '<length>',
         inherits: true,
         initialValue: '400px'
@@ -32,20 +32,21 @@
     <style>
         @keyframes rg-layer-index-subIndex {
             0% {
+                /* -rg-layer-레이어인덱스-레이어내그라디언트인덱스-속성*/
                 --rg-layer-index-subIndex-deg: 100deg;
-                --rg-layer-index-subIndex-size-1: 400px;
+                --rg-layer-index-subIndex-size: 400px;
                 --rg-layer-index-subIndex-colorList-0-rgba: rgba(255,0,0,1);
                 --rg-layer-index-subIndex-colorList-1-rgba: rgba(23,127,32,1);
             }
             50% {
                 --rg-layer-index-subIndex-deg: 50deg;
-                --rg-layer-index-subIndex-size-1: 500px;
+                --rg-layer-index-subIndex-size: 500px;
                 --rg-layer-index-subIndex-colorList-0-rgba: rgba(54,32,0,1);
                 --rg-layer-index-subIndex-colorList-1-rgba: rgba(23,255,32,1);
             }
             100% {
                 --rg-layer-index-subIndex-deg: 100deg;
-                --rg-layer-index-subIndex-size-1: 400px;
+                --rg-layer-index-subIndex-size: 400px;
                 --rg-layer-index-subIndex-colorList-0-rgba: rgba(255,0,0,1);
                 --rg-layer-index-subIndex-colorList-1-rgba: rgba(23,127,32,1);
             }
@@ -53,7 +54,7 @@
 
         .result2 {
             transition: all 0.3s;
-            width: var(--rg-layer-index-subIndex-size-1);
+            width: var(--rg-layer-index-subIndex-size);
             height: 300px;
             animation: rg-layer-index-subIndex 2s infinite;
             background: linear-gradient(
