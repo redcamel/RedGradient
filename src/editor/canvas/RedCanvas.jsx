@@ -153,8 +153,8 @@ RedCanvas.getFilterCss = (filterList) => {
 };
 RedCanvas.getContainerCss = (canvasInfo,borderGradientInfo) => {
   let borderData={}
-
-  if(canvasInfo.borderIsGradientMode){
+  console.log('borderGradientInfo',borderGradientInfo)
+  if(canvasInfo.borderIsGradientMode && borderGradientInfo){
     let gradient = CALC_GRADIENT.calcGradients(borderGradientInfo['layers'])
     gradient = gradient.split(')')
     gradient.pop()
