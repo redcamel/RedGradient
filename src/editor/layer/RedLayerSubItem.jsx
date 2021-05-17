@@ -16,7 +16,7 @@ class RedLayerSubItem extends React.Component {
     super(props);
     this.state = {
       layerBgColor: 'transparent',
-      SIZE : props.size || 100
+      SIZE: props.size || 100
     };
   }
 
@@ -24,7 +24,6 @@ class RedLayerSubItem extends React.Component {
     data.visible = !data.visible;
     this.props.rootComponent.updateRootState({});
   }
-
 
   render() {
     const rootComponent = this.props.rootComponent;

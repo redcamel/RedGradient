@@ -19,7 +19,7 @@ import RedCanvasFilterDropShadow from "./RedCanvasFilterDropShadow.jsx";
 import RedCanvasFilterHueRotate from "./RedCanvasFilterHueRotate.jsx";
 
 const filterList = [
-  'normal', 'blur', 'brightness', 'contrast', 'dropShadow', 'grayScale','hueRotate', 'invert', 'saturate', 'sepia'
+  'normal', 'blur', 'brightness', 'contrast', 'dropShadow', 'grayScale', 'hueRotate', 'invert', 'saturate', 'sepia'
 ];
 const filterComponent = {
   normal: RedCanvasFilterNormal,
@@ -28,7 +28,7 @@ const filterComponent = {
   contrast: RedCanvasFilterContrast,
   dropShadow: RedCanvasFilterDropShadow,
   grayScale: RedCanvasFilterGrayScale,
-  hueRotate : RedCanvasFilterHueRotate,
+  hueRotate: RedCanvasFilterHueRotate,
   invert: RedCanvasFilterInvert,
   saturate: RedCanvasFilterSaturate,
   sepia: RedCanvasFilterSepia

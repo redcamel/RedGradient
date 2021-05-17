@@ -1,9 +1,17 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 import React from "react";
 
 class RedRadio extends React.Component {
   render() {
     return <div
-      style={{display: 'flex',flexWrap: 'wrap', width: `${this.props.width || ''}px`, margin: '5px 0px'}}
+      style={{display: 'flex', flexWrap: 'wrap', width: `${this.props.width || ''}px`, margin: '5px 0px'}}
     >
       {(this.props.options || []).map(v => {
         // console.log(this.props.options)

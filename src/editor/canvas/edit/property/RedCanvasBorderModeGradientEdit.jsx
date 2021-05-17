@@ -21,16 +21,10 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
-    const activeSubData = rootComponentState.activeSubData;
-    if(!canvasInfo.hasOwnProperty('border_image_sliceT')){
-      canvasInfo['border_image_sliceT'] =
-        canvasInfo['border_image_sliceR'] =
-          canvasInfo['border_image_sliceL'] =
-            canvasInfo['border_image_sliceB'] = 1
-    }
+    const borderGradientInfo = rootComponentState;
     return <div>
       <div style={style.container}>
-        <RedCanvasBorderRadiusEdit rootComponent={this.props.rootComponent}/>
+        <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
         width <RedNumber
         width={'51px'}
         value={canvasInfo['border_width'] || 0}
@@ -40,42 +34,43 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
         }}/>
         outset <RedNumber
         width={'61px'}
-        value={canvasInfo['border_image_outset'] || 0}
+        value={borderGradientInfo['border_image_outset'] || 0}
         HD_onInput={e => {
-          canvasInfo['border_image_outset'] = e.target.value;
-          rootComponent.updateRootState({});
+          console.log(borderGradientInfo)
+          borderGradientInfo['border_image_outset'] =+e.target.value;
+          rootComponent.updateRootState(borderGradientInfo);
         }}/>
       </div>
       <div style={style.container}>
         sliceT <RedNumber
         width={'51px'}
-        value={canvasInfo['border_image_sliceT'] || 0}
+        value={borderGradientInfo['border_image_sliceT'] || 0}
         HD_onInput={e => {
-          canvasInfo['border_image_sliceT'] = e.target.value;
+          borderGradientInfo['border_image_sliceT'] = +e.target.value;
           rootComponent.updateRootState({});
         }}/>
 
         sliceR <RedNumber
         width={'51px'}
-        value={canvasInfo['border_image_sliceR'] || 0}
+        value={borderGradientInfo['border_image_sliceR'] || 0}
         HD_onInput={e => {
-          canvasInfo['border_image_sliceR'] = e.target.value;
+          borderGradientInfo['border_image_sliceR'] = +e.target.value;
           rootComponent.updateRootState({});
         }}/>
 
         sliceB <RedNumber
         width={'51px'}
-        value={canvasInfo['border_image_sliceB'] || 0}
+        value={borderGradientInfo['border_image_sliceB'] || 0}
         HD_onInput={e => {
-          canvasInfo['border_image_sliceB'] = e.target.value;
+          borderGradientInfo['border_image_sliceB'] =+ e.target.value;
           rootComponent.updateRootState({});
         }}/>
 
         sliceL <RedNumber
         width={'51px'}
-        value={canvasInfo['border_image_sliceL'] || 0}
+        value={borderGradientInfo['border_image_sliceL'] || 0}
         HD_onInput={e => {
-          canvasInfo['border_image_sliceL'] = e.target.value;
+          borderGradientInfo['border_image_sliceL'] = +e.target.value;
           rootComponent.updateRootState({});
         }}/>
       </div>

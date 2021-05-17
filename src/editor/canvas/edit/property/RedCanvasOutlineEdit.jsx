@@ -30,28 +30,28 @@ class RedCanvasOutlineEdit extends React.Component {
         alignItems: 'center'
       }}>
         width <RedNumber
-          width={'41px'}
-          value={canvasInfo['outline_width'] || 0}
-          HD_onInput={e => {
-            canvasInfo['outline_width'] = e.target.value;
-            rootComponent.updateRootState({});
-          }} />
+        width={'41px'}
+        value={canvasInfo['outline_width'] || 0}
+        HD_onInput={e => {
+          canvasInfo['outline_width'] = e.target.value;
+          rootComponent.updateRootState({});
+        }}/>
         offset <RedNumber
-          width={'41px'}
-          value={canvasInfo['outline_offset'] || 0}
-          HD_onInput={e => {
-            canvasInfo['outline_offset'] = e.target.value;
-            rootComponent.updateRootState({});
-          }} />
+        width={'41px'}
+        value={canvasInfo['outline_offset'] || 0}
+        HD_onInput={e => {
+          canvasInfo['outline_offset'] = e.target.value;
+          rootComponent.updateRootState({});
+        }}/>
 
         style <RedSelect
-          width={'90'}
-          value={canvasInfo['outline_type']}
-                   options={['dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'none', 'hidden']}
-                   HD_change={e => {
-                     canvasInfo['outline_type'] = e.target.value;
-                     rootComponent.updateRootState({});
-                   }} />
+        width={'90'}
+        value={canvasInfo['outline_type']}
+        options={['dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'none', 'hidden']}
+        HD_change={e => {
+          canvasInfo['outline_type'] = e.target.value;
+          rootComponent.updateRootState({});
+        }}/>
 
         <div
           className={rootComponentState.outline_color === 'transparent' ? 'transparent_checker' : ''}
@@ -90,7 +90,7 @@ class RedCanvasOutlineEdit extends React.Component {
           overflow: 'hidden',
           display: this.state.canvasBgColorPickerOpenYn ? 'block' : 'none'
         }}>
-          <div ref={this.refColorPickerContainer} />
+          <div ref={this.refColorPickerContainer}/>
           <div
             style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
             onClick={() => {

@@ -21,14 +21,14 @@ class RedCanvasFilterBlur extends React.Component {
     const rootComponent = this.props.rootComponent;
     const filterData = this.props.filterData
     return <div>
-      <div style={{display: 'flex', justifyContent: 'space-between',alignItems: 'center'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         size <RedNumber
-          value={filterData['values']['amount'] || 0}
-          HD_onInput={e => {
-            filterData['values']['amount'] = e.target.value;
-            filterData['css'] = this.getCss(filterData)
-            rootComponent.updateRootState({});
-          }}/>
+        value={filterData['values']['amount'] || 0}
+        HD_onInput={e => {
+          filterData['values']['amount'] = e.target.value;
+          filterData['css'] = this.getCss(filterData)
+          rootComponent.updateRootState({});
+        }}/>
       </div>
     </div>;
   }

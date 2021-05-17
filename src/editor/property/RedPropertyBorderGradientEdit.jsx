@@ -15,6 +15,7 @@ import RedPropertyAtEdit from "./RedPropertyAtEdit";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedPropertyTypeEndingShapeEdit from "./RedPropertyTypeEndingShapeEdit.jsx";
 import RedPresetBorder from "../canvas/edit/preset/RedPresetBorder.jsx";
+import RedCanvasBorderModeGradientEdit from "../canvas/edit/property/RedCanvasBorderModeGradientEdit.jsx";
 
 class RedPropertyBorderGradientEdit extends React.Component {
   render() {
@@ -22,6 +23,7 @@ class RedPropertyBorderGradientEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     return <div style={style.container}>
+
       <div style={style.divide}/>
       <RedPresetBorder rootComponent={rootComponent}/>
       <div style={style.divide}/>

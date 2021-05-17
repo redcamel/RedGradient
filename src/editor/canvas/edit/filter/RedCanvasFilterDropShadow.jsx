@@ -10,11 +10,12 @@ import RedNumber from "../../../../core/RedNumber.jsx";
 import {ColorPicker} from "@easylogic/colorpicker";
 
 let colorPicker
+
 class RedCanvasFilterDropShadow extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-      colorPickerOpenYn : false
+    this.state = {
+      colorPickerOpenYn: false
     }
     this.refColorPickerContainer = React.createRef()
   }
@@ -56,12 +57,12 @@ class RedCanvasFilterDropShadow extends React.Component {
           rootComponent.updateRootState({});
         }}/>
         <div
-          className={ filterData['values']['color'] === 'transparent' ? 'transparent_checker' : ''}
+          className={filterData['values']['color'] === 'transparent' ? 'transparent_checker' : ''}
           style={{
             display: 'inline-block',
             width: '28px',
             height: '28px',
-            background:  filterData['values']['color'] === 'transparent' ? '' :  filterData['values']['color'],
+            background: filterData['values']['color'] === 'transparent' ? '' : filterData['values']['color'],
             borderRadius: '6px',
             border: '1px solid #000',
             cursor: 'pointer'
@@ -72,7 +73,7 @@ class RedCanvasFilterDropShadow extends React.Component {
               colorPicker = new ColorPicker({
                 type: "sketch",
                 position: 'inline',
-                color:  filterData['values']['color'],
+                color: filterData['values']['color'],
                 container: this.refColorPickerContainer.current,
                 onChange: color => {
                   filterData['values']['color'] = color
@@ -80,7 +81,7 @@ class RedCanvasFilterDropShadow extends React.Component {
                 }
               });
             }
-            colorPicker.setOption({color:  filterData['values']['color']});
+            colorPicker.setOption({color: filterData['values']['color']});
           }}
         />
 

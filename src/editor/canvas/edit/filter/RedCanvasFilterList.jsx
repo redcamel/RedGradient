@@ -19,16 +19,15 @@ class RedCanvasFilterList extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
-    if(!canvasInfo.filterList) canvasInfo.filterList = []
+    if (!canvasInfo.filterList) canvasInfo.filterList = []
     const filterList = canvasInfo.filterList
-
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         filterList
         <FontAwesomeIcon
-          icon={faPlusSquare} style={{fontSize: '16px',cursor:'pointer'}}
-          onClick={e=>{
-            canvasInfo['filterList'].splice(0,0,{type:'normal', values :{}, css : ''})
+          icon={faPlusSquare} style={{fontSize: '16px', cursor: 'pointer'}}
+          onClick={e => {
+            canvasInfo['filterList'].splice(0, 0, {type: 'normal', values: {}, css: ''})
             rootComponent.updateRootState({})
           }}
         />

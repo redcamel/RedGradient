@@ -6,7 +6,6 @@
  *
  */
 import React from "react";
-import DataLayer from "../editor/data/DataLayer.js";
 import DataCanvas from "../editor/data/DataCanvas.js";
 
 class RedStart extends React.Component {

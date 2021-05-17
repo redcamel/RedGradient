@@ -59,8 +59,8 @@ class RedPresetBorder extends React.Component {
 
   render() {
     const userPresetBorder = RedPresetBorder.getUserPreset()
-    console.log('presetList',presetList)
-    console.log('userPresetBorder',userPresetBorder)
+    console.log('presetList', presetList)
+    console.log('userPresetBorder', userPresetBorder)
     return <div>
       Preset Border Gradient
       <div style={style.container}>{this.renderList(presetList)}</div>

@@ -27,13 +27,13 @@ class RedCanvasBorderModeEdit extends React.Component {
     return <div style={style.container}>
       <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
       width <RedNumber
-        width={'31px'}
-        flexGrow={1}
-        value={canvasInfo['border_width'] || 0}
-        HD_onInput={e => {
-          canvasInfo['border_width'] = e.target.value;
-          rootComponent.updateRootState({});
-        }}/>
+      width={'31px'}
+      flexGrow={1}
+      value={canvasInfo['border_width'] || 0}
+      HD_onInput={e => {
+        canvasInfo['border_width'] = e.target.value;
+        rootComponent.updateRootState({});
+      }}/>
       <RedSelect value={canvasInfo['border_type']}
                  options={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']}
                  HD_change={e => {

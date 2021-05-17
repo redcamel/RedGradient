@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import DataItem from "./DataItem.js";
 
 let uuid = 0;

@@ -15,7 +15,7 @@ function drawCanvasEditUI() {
   const rootComponent = this.props.rootComponent;
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
-  return <div >
+  return <div>
     <div style={style.canvasResizer}>
 
     </div>
@@ -55,7 +55,7 @@ function drawCanvasEditUI() {
         overflow: 'hidden',
         display: this.state.canvasBgColorPickerOpenYn ? 'block' : 'none'
       }}>
-        <div ref={this.refColorPickerContainer} />
+        <div ref={this.refColorPickerContainer}/>
         <div
           style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
           onClick={() => {

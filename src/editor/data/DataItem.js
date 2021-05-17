@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import DataColor from "./DataColor.js";
 import GRADIENT_TYPE from "../GRADIENT_TYPE.js";
 import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE.js";

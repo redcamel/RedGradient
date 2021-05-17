@@ -17,15 +17,15 @@ class RedCanvasBorderGradientRepeatEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const canvasInfo = rootComponentState.canvasInfo;
+    const borderGradientInfo = rootComponentState;
     return <div>
-      <div style={{display: 'flex', marginTop: '3px',alignItems : 'center'}}>
+      <div style={{display: 'flex', marginTop: '3px', alignItems: 'center'}}>
         Repeat
         <RedSelect
-          value={canvasInfo['border_image_repeat']}
+          value={borderGradientInfo['border_image_repeat']}
           options={Object.entries(BORDER_REPEAT_TYPE)}
           HD_change={e => {
-            canvasInfo['border_image_repeat'] = e.target.value;
+            borderGradientInfo['border_image_repeat'] = e.target.value;
             rootComponent.updateRootState({});
           }}/>
       </div>

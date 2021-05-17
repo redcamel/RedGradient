@@ -18,8 +18,8 @@ import RedStart from "./start/RedStart.jsx";
 import RedFrameMenuOpen from "./editor/frameMainMenu/RedFrameMenuOpen.jsx";
 import RedFrameMenuSave from "./editor/frameMainMenu/RedFrameMenuSave.jsx";
 import RedPreset from "./editor/property/preset/RedPreset.jsx";
-import RedCanvasBorderModeGradientEdit from "./editor/canvas/edit/property/RedCanvasBorderModeGradientEdit.jsx";
-import RedCanvasBorderGradientFrame from "./editor/canvas/edit/property/RedCanvasBorderGradientFrame.jsx";
+import DataLayer from "./editor/data/DataLayer.js";
+import BORDER_REPEAT_TYPE from "./editor/BORDER_REPEAT_TYPE.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -35,6 +35,7 @@ class App extends React.Component {
   }
 
   updateRootState(v = {}) {
+    console.log(v)
     this.setState(v)
   }
 
@@ -42,6 +43,25 @@ class App extends React.Component {
     this.state = newState
     this.state.activeLayer = this.state.layers[0];
     this.state.activeSubData = this.state.activeLayer['items'][0];
+    //
+    this.state.borderGradientInfo = {
+      'border_image_sliceT': 1,
+      'border_image_sliceR': 1,
+      'border_image_sliceL': 1,
+      'border_image_sliceB': 1,
+      'border_image_repeat': BORDER_REPEAT_TYPE.STRETCH,
+      'border_image_outset': 0,
+      "activeLayer": null,
+      "activeSubData": null,
+      "bgColor": "#fff",
+      "layers": [
+        new DataLayer()
+      ]
+    }
+    this.state.borderGradientInfo.canvasInfo = this.state.canvasInfo
+    this.state.borderGradientInfo.activeLayer = this.state.borderGradientInfo.layers[0];
+    this.state.borderGradientInfo.activeSubData = this.state.borderGradientInfo.activeLayer['items'][0];
+    //
     this.updateRootState(this.state);
   }
 
@@ -64,7 +84,7 @@ class App extends React.Component {
         <div className={'frame_middle_container'}>
           <div className={'frame_left'}>
             {/*frame Left*/}
-            <div style={{display: "flex", height: '100%',overflowY:'auto'}}>
+            <div style={{display: "flex", height: '100%', overflowY: 'auto'}}>
               <RedCanvasEdit rootComponent={this}/>
 
             </div>

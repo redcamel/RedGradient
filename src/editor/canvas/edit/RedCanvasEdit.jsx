@@ -13,6 +13,7 @@ import RedCanvasBorderModeEdit from "./property/RedCanvasBorderModeEdit.jsx";
 import RedCanvasOutlineEdit from "./property/RedCanvasOutlineEdit";
 import RedCanvasBorderModeGradientEdit from "./property/RedCanvasBorderModeGradientEdit.jsx";
 import RedCanvasBorderGradientFrame from "./property/RedCanvasBorderGradientFrame.jsx";
+import RedCanvasBoxSizingEdit from "./property/RedCanvasBoxSizingEdit.jsx";
 
 class RedCanvasEdit extends React.Component {
   constructor(props) {
@@ -34,6 +35,8 @@ class RedCanvasEdit extends React.Component {
       <div style={style.container}>
         {this.drawCanvasEditUI()}
 
+        <div style={style.divide}/>
+        <RedCanvasBoxSizingEdit rootComponent={rootComponent}/>
         <div style={style.divide}/>
         <RedCanvasOutlineEdit rootComponent={rootComponent}/>
         <div style={style.divide}/>
@@ -69,19 +72,17 @@ class RedCanvasEdit extends React.Component {
           </div>
         </div>
         <div style={{
-          marginTop : '5px',
+          marginTop: '5px',
           borderRadius: '4px',
           border: '1px solid #000',
           padding: '10px 6px',
         }}>
           <div style={{display: canvasInfo.borderIsGradientMode ? 'none' : 'block'}}><RedCanvasBorderModeEdit
             rootComponent={rootComponent}/></div>
-          <div style={{display: canvasInfo.borderIsGradientMode ? 'block' : 'none'}}><RedCanvasBorderModeGradientEdit
-            rootComponent={rootComponent}/>
-            {canvasInfo.borderIsGradientMode ? <RedCanvasBorderGradientFrame rootComponent={rootComponent}/> : ''}
-          </div>
-        </div>
 
+            {canvasInfo.borderIsGradientMode ? <RedCanvasBorderGradientFrame rootComponent={rootComponent}/> : ''}
+
+        </div>
 
 
         <div style={style.divide}/>
@@ -95,7 +96,7 @@ class RedCanvasEdit extends React.Component {
 export default RedCanvasEdit;
 const style = {
   container: {
-   width: '360px',
+    width: '360px',
     padding: '4px'
   },
   divide: {

@@ -8,6 +8,8 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFolderOpen} from "@fortawesome/free-solid-svg-icons";
+import DataLayer from "../data/DataLayer.js";
+import DataCanvas from "../data/DataCanvas.js";
 
 class RedFrameMenuOpen extends React.Component {
   render() {
@@ -27,7 +29,12 @@ class RedFrameMenuOpen extends React.Component {
                console.log(e);
                console.log(e.target.files);
                let fileReader = new FileReader();
-               fileReader.onload = evt => rootComponent.setNewCanvas(JSON.parse(evt.target.result))
+               fileReader.onload = evt => {
+                 rootComponent.setNewCanvas(new DataCanvas())
+                 requestAnimationFrame(e=>{
+                   rootComponent.setNewCanvas(JSON.parse(evt.target.result))
+                 })
+               };
                fileReader.readAsText(e.target.files[0]);
              };
            }}

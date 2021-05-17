@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import DataLayer from "../data/DataLayer.js";
 import RedTitle from "../../core/RedTitle.jsx";

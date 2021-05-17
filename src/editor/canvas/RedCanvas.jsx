@@ -35,6 +35,7 @@ class RedCanvas extends React.Component {
     const activeSubDataPosition = activeSubData['position'];
     const activeSubDataAt = activeSubData['at'];
     const activeSubDataSize = activeSubData['size'];
+    const borderGradientInfo = rootComponentState.borderGradientInfo
     const layoutSize = {
       w: activeSubDataSize['wUnit'] === '%' ? canvasInfo['width'] * activeSubDataSize['w'] / 100 : activeSubDataSize['w'],
       h: activeSubDataSize['hUnit'] === '%' ? canvasInfo['height'] * activeSubDataSize['h'] / 100 : activeSubDataSize['h'],
@@ -52,7 +53,7 @@ class RedCanvas extends React.Component {
           background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
           backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
           transition: 'width 0.2s, height 0.2s',
-          ...RedCanvas.getContainerCss(canvasInfo),
+          ...RedCanvas.getContainerCss(canvasInfo,borderGradientInfo),
           filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
           overflow: 'hidden',
         }}
@@ -150,7 +151,7 @@ RedCanvas.getFilterCss = (filterList) => {
   // console.log(filterList.map(v=>RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(','))
   return filterList.map(v => RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(' ');
 };
-RedCanvas.getContainerCss = (canvasInfo) => {
+RedCanvas.getContainerCss = (canvasInfo,borderGradientInfo) => {
   let borderData={}
   if (!canvasInfo.hasOwnProperty('border_radius')) {
     canvasInfo['border_radius'] = 0;
@@ -163,20 +164,20 @@ RedCanvas.getContainerCss = (canvasInfo) => {
     canvasInfo['border_color'] = '#000';
   }
   if(canvasInfo.borderIsGradientMode){
-    let gradient = CALC_GRADIENT.calcGradients(canvasInfo['borderGradientInfo']['layers'])
+    let gradient = CALC_GRADIENT.calcGradients(borderGradientInfo['layers'])
     gradient = gradient.split(')')
     gradient.pop()
     gradient = gradient.join(')')+')'
     borderData = {
       borderImageWidth : `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
-      borderStyle : `${canvasInfo['border_type']}`,
-      borderImageSlice : `${canvasInfo['border_image_sliceT']} ${canvasInfo['border_image_sliceR']} ${canvasInfo['border_image_sliceB']} ${canvasInfo['border_image_sliceL']}`,
+      borderStyle : canvasInfo['border_type'],
+      borderImageSlice : `${borderGradientInfo['border_image_sliceT']} ${borderGradientInfo['border_image_sliceR']} ${borderGradientInfo['border_image_sliceB']} ${borderGradientInfo['border_image_sliceL']}`,
 
       borderImageSource :gradient,
-      borderImageRepeat  :`${canvasInfo['border_image_repeat']}`,
-      borderImageOutset  :`${canvasInfo['border_image_outset']}`,
+      borderImageRepeat  :borderGradientInfo['border_image_repeat'],
+      borderImageOutset  :borderGradientInfo['border_image_outset'],
     }
-    console.log(borderData)
+
   }else{
     borderData = {
       borderWidth : `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
@@ -184,6 +185,7 @@ RedCanvas.getContainerCss = (canvasInfo) => {
       borderColor : `${canvasInfo['border_color']}`
     }
   }
+  console.log(borderData)
   if (!canvasInfo.hasOwnProperty('outline_width')) {
     canvasInfo['outline_width'] = 0;
     canvasInfo['outline_width_unit'] = 'px';
@@ -194,6 +196,7 @@ RedCanvas.getContainerCss = (canvasInfo) => {
   }
 
   return {
+    boxSizing : canvasInfo['box_sizing'],
     borderRadius: `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`,
     ...borderData,
     outline: `${canvasInfo['outline_width']}${canvasInfo['outline_width_unit']} ${canvasInfo['outline_type']} ${canvasInfo['outline_color']}`,

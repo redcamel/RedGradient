@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 import DataItem from "../data/DataItem.js";
 import RedLayerSubItem from "./RedLayerSubItem.jsx";
@@ -20,9 +19,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import RedLayerTop from "./RedLayerTop.jsx";
 import CALC_GRADIENT from "../CALC_GRADIENT";
-import RedTitle from "../../core/RedTitle.jsx";
-
-
 
 //TODO - 여기 정리해야함
 class RedLayer extends React.Component {
@@ -30,9 +26,8 @@ class RedLayer extends React.Component {
     super(props);
     this.state = {
       layerBgColor: 'transparent',
-      SIZE : props.size || 100
+      SIZE: props.size || 100
     };
-    
   }
 
   _toggleVisible(data) {
@@ -45,7 +40,7 @@ class RedLayer extends React.Component {
     const rootComponentState = rootComponent.state;
     const layers = rootComponentState.layers;
     return <div style={{flexDirection: 'column', display: 'flex'}}>
-      <RedLayerTop rootComponent={rootComponent} layersComponent={this} />
+      <RedLayerTop rootComponent={rootComponent} layersComponent={this}/>
       <div style={style.container}>
         {
           layers.map((layer) => {
@@ -58,7 +53,13 @@ class RedLayer extends React.Component {
             }}>
               <div
                 className={'layerItemTitle'}
-                style={{cursor: 'pointer',textOverflow: 'ellipsis', width: '123px', overflow: 'hidden', whiteSpace: 'nowrap'}}
+                style={{
+                  cursor: 'pointer',
+                  textOverflow: 'ellipsis',
+                  width: '123px',
+                  overflow: 'hidden',
+                  whiteSpace: 'nowrap'
+                }}
                 onClick={() => {
                   layer.openYn = !layer.openYn;
                   rootComponent.updateRootState({});
@@ -67,13 +68,13 @@ class RedLayer extends React.Component {
 
                 <FontAwesomeIcon
                   icon={layer.openYn ? faFolderOpen : faFolder}
-                  style={{fontSize: '11px', marginRight: '5px', }}
-                  />
+                  style={{fontSize: '11px', marginRight: '5px',}}
+                />
                 {layer.title}
               </div>
               <div>
                 <button className={'layerVisible'} onClick={() => this._toggleVisible(layer)}>
-                  <FontAwesomeIcon icon={layer.visible ? faEye : faEyeSlash} />
+                  <FontAwesomeIcon icon={layer.visible ? faEye : faEyeSlash}/>
                 </button>
                 <button className={'layerDel'}
                         style={{opacity: layers.length > 1 ? 1 : 0.25}}
@@ -85,10 +86,13 @@ class RedLayer extends React.Component {
                             let targetLayer;
                             if (layers[idx]) targetLayer = layers[idx];
                             else targetLayer = layers[0];
-                            rootComponent.updateRootState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
+                            rootComponent.updateRootState({
+                              activeLayer: targetLayer,
+                              activeSubData: targetLayer['items'][0]
+                            });
                           }
                         }}
-                ><FontAwesomeIcon icon={faMinusCircle} />
+                ><FontAwesomeIcon icon={faMinusCircle}/>
                 </button>
                 <button className={'layerAdd'}
                         onClick={e => {
@@ -96,7 +100,7 @@ class RedLayer extends React.Component {
                           layer.items.splice(0, 0, new DataItem());
                           rootComponent.updateRootState({activeSubData: layer.items[0]});
                         }}
-                ><FontAwesomeIcon icon={faPlusCircle} />
+                ><FontAwesomeIcon icon={faPlusCircle}/>
                 </button>
               </div>
               <div
@@ -112,10 +116,11 @@ class RedLayer extends React.Component {
                 onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: layer.items[0]})}
               >
                 <div className={'layerItem'}
-                     style={{background: `${CALC_GRADIENT.calcGradientItems(layer['items'], false, layer)},${this.state.layerBgColor}`}} />
+                     style={{background: `${CALC_GRADIENT.calcGradientItems(layer['items'], false, layer)},${this.state.layerBgColor}`}}/>
               </div>
               <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem layer={layer} item={item}
-                                                                            rootComponent={rootComponent} size={this.state.SIZE}/>) : ''}</div>
+                                                                            rootComponent={rootComponent}
+                                                                            size={this.state.SIZE}/>) : ''}</div>
             </div>;
           })
         }
