@@ -58,6 +58,25 @@ class App extends React.Component {
         new DataLayer()
       ]
     }
+    const canvasInfo = this.state.canvasInfo
+    if (!canvasInfo.hasOwnProperty('border_radius')) {
+      canvasInfo['border_radius'] = 0;
+      canvasInfo['border_radius_unit'] = 'px';
+    }
+    if (!canvasInfo.hasOwnProperty('border_width')) {
+      canvasInfo['border_width'] = 0;
+      canvasInfo['border_width_unit'] = 'px';
+      canvasInfo['border_type'] = 'solid';
+      canvasInfo['border_color'] = '#000';
+    }
+    if (!canvasInfo.hasOwnProperty('outline_width')) {
+      canvasInfo['outline_width'] = 0;
+      canvasInfo['outline_width_unit'] = 'px';
+      canvasInfo['outline_type'] = 'solid';
+      canvasInfo['outline_color'] = '#000';
+      canvasInfo['outline_offset'] = 0;
+      canvasInfo['outline_offset_unit'] = 'px';
+    }
     this.state.borderGradientInfo.canvasInfo = this.state.canvasInfo
     this.state.borderGradientInfo.activeLayer = this.state.borderGradientInfo.layers[0];
     this.state.borderGradientInfo.activeSubData = this.state.borderGradientInfo.activeLayer['items'][0];
@@ -68,6 +87,21 @@ class App extends React.Component {
   render() {
     // console.log(this.state);
     if (!this.state) return <RedStart rootComponent={this}/>
+    const canvasInfo = this.state.canvasInfo
+    let containerCssText
+    {
+      containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo))
+      containerCssText = containerCssText.map(v=>{
+        return `${v[0]} : ${v[1]}`
+      });
+      containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
+      containerCssText =`.result {
+          background : ${JSON.stringify(CALC_GRADIENT.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')};
+          background-blend-mode : ${CALC_GRADIENT.calcBlendMode(this.state.layers)};
+          ${containerCssText}
+          }`.replace(/\s\s+/g, ' ')
+
+    }
     this.checkUnloadEvent()
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
@@ -105,13 +139,21 @@ class App extends React.Component {
                     <RedPreset rootComponent={this}/>
                   </div>
                   <RedTitle title={'Result'}/>
+                  <button
+                    style={style.copyClass}
+                    onClick={e=>{
+                      var tempElem = document.createElement('textarea');
+                      tempElem.value = containerCssText;
+                      document.body.appendChild(tempElem);
+
+                      tempElem.select();
+                      document.execCommand("copy");
+                      document.body.removeChild(tempElem);
+                      alert('Copy Class!')
+                    }}
+                  >Copy Class</button>
                   <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
-                    {
-                      `.result {
-background : ${JSON.stringify(CALC_GRADIENT.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')};
-background-blend-mode : ${CALC_GRADIENT.calcBlendMode(this.state.layers)}
-}`.replace(/\s\s+/g, ' ')
-                    }
+                    {containerCssText}
                   </SyntaxHighlighter>
                 </div>
                 <div>TODO - 애드센스자리</div>
@@ -138,5 +180,17 @@ const style = {
   test: {
     background: '#5e7ade',
     margin: '1px'
+  },
+  copyClass : {
+    cursor : 'pointer',
+    margin :'4px 4px 0px',
+    padding : '4px',
+    width : 'calc(100% - 8px)',
+    fontSize : '12px',
+    color : '#fff',
+    outline : 'none',
+    border : '1px solid #111',
+    background : 'linear-gradient(#5e7ade, #2c3565)',
+    borderRadius:'4px'
   }
 };

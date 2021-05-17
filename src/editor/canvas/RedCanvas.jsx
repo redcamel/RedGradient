@@ -153,16 +153,7 @@ RedCanvas.getFilterCss = (filterList) => {
 };
 RedCanvas.getContainerCss = (canvasInfo,borderGradientInfo) => {
   let borderData={}
-  if (!canvasInfo.hasOwnProperty('border_radius')) {
-    canvasInfo['border_radius'] = 0;
-    canvasInfo['border_radius_unit'] = 'px';
-  }
-  if (!canvasInfo.hasOwnProperty('border_width')) {
-    canvasInfo['border_width'] = 0;
-    canvasInfo['border_width_unit'] = 'px';
-    canvasInfo['border_type'] = 'solid';
-    canvasInfo['border_color'] = '#000';
-  }
+
   if(canvasInfo.borderIsGradientMode){
     let gradient = CALC_GRADIENT.calcGradients(borderGradientInfo['layers'])
     gradient = gradient.split(')')
@@ -186,14 +177,7 @@ RedCanvas.getContainerCss = (canvasInfo,borderGradientInfo) => {
     }
   }
   console.log(borderData)
-  if (!canvasInfo.hasOwnProperty('outline_width')) {
-    canvasInfo['outline_width'] = 0;
-    canvasInfo['outline_width_unit'] = 'px';
-    canvasInfo['outline_type'] = 'solid';
-    canvasInfo['outline_color'] = '#000';
-    canvasInfo['outline_offset'] = 0;
-    canvasInfo['outline_offset_unit'] = 'px';
-  }
+
 
   return {
     boxSizing : canvasInfo['box_sizing'],
