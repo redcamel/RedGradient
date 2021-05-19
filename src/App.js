@@ -68,7 +68,7 @@ class App extends React.Component {
       canvasInfo['border_radius_unit'] = 'px';
     }
     if (!canvasInfo.hasOwnProperty('border_radius_mergeMode')) {
-      canvasInfo['border_radius_mergeMode'] = 0
+      canvasInfo['border_radius_mergeMode'] = 1
       canvasInfo['border_radius_split'] = [0,0,0,0];
       canvasInfo['border_radius_unit_split'] = ['px','px','px','px'];
     }
