@@ -244,7 +244,7 @@ class RedGradientColorItem extends React.Component {
               rootComponent.updateRootState({});
             }}/>
             <button
-              style={style.del}
+              style={{...style.del,display :activeSubData.colorList.length<2 ? 'none' : 'inline-block' }}
               onClick={() => {
                 activeSubData.colorList.splice(this.getIndex(), 1);
                 rootComponent.updateRootState({});
