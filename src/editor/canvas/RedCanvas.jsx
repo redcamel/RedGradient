@@ -173,10 +173,17 @@ RedCanvas.getContainerCss = (canvasInfo, borderGradientInfo) => {
       borderColor: `${canvasInfo['border_color']}`
     }
   }
+  if(canvasInfo['border_radius_mergeMode']){
+    borderData['borderRadius'] = `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`
+  }else{
+    borderData['borderTopLeftRadius'] = `${canvasInfo['border_radius_split'][0]}${canvasInfo['border_radius_unit_split'][0]}`
+    borderData['borderBottomLeftRadius'] = `${canvasInfo['border_radius_split'][1]}${canvasInfo['border_radius_unit_split'][1]}`
+    borderData['borderTopRightRadius'] = `${canvasInfo['border_radius_split'][2]}${canvasInfo['border_radius_unit_split'][2]}`
+    borderData['borderBottomRightRadius'] = `${canvasInfo['border_radius_split'][3]}${canvasInfo['border_radius_unit_split'][3]}`
+  }
   console.log(borderData)
   return {
     boxSizing: canvasInfo['box_sizing'],
-    borderRadius: `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`,
     ...borderData,
     outline: `${canvasInfo['outline_width']}${canvasInfo['outline_width_unit']} ${canvasInfo['outline_type']} ${canvasInfo['outline_color']}`,
     outlineOffset: `${canvasInfo['outline_offset']}${canvasInfo['outline_offset_unit']}`

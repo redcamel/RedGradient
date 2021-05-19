@@ -23,8 +23,9 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
     const canvasInfo = rootComponentState.canvasInfo;
     const borderGradientInfo = rootComponentState;
     return <div>
+      <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
+      <div style={style.divide}/>
       <div style={style.container}>
-        <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
         width <RedNumber
         width={'51px'}
         value={canvasInfo['border_width'] || 0}
@@ -87,5 +88,11 @@ const style = {
   container: {
     display: 'flex',
     alignItems: 'center'
+  },
+  divide: {
+    margin: '5px 0px',
+    height: '2px',
+    background: '#4e4e4e',
+    borderTop: '1px solid #000'
   }
 }

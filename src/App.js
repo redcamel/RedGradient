@@ -54,7 +54,7 @@ class App extends React.Component {
         'border_image_outset': 0,
         "activeLayer": null,
         "activeSubData": null,
-        "bgColor": "#fff",
+        "bgColor": "#ffffff",
         "layers": [
           new DataLayer()
         ]
@@ -63,8 +63,14 @@ class App extends React.Component {
 
     const canvasInfo = this.state.canvasInfo
     if (!canvasInfo.hasOwnProperty('border_radius')) {
+
       canvasInfo['border_radius'] = 0;
       canvasInfo['border_radius_unit'] = 'px';
+    }
+    if (!canvasInfo.hasOwnProperty('border_radius_mergeMode')) {
+      canvasInfo['border_radius_mergeMode'] = 0
+      canvasInfo['border_radius_split'] = [0,0,0,0];
+      canvasInfo['border_radius_unit_split'] = ['px','px','px','px'];
     }
     if (!canvasInfo.hasOwnProperty('border_width')) {
       canvasInfo['border_width'] = 0;
