@@ -89,7 +89,7 @@ class RedLayerSubItem extends React.Component {
         borderRadius: '8px',
         margin: '4px 0px 4px 10px',
       }}
-      draggable={true}
+      draggable={layer.items.length>1}
       onDragStart={e => this.handleDragStart(e)}
       onDrop={e => this.handleDrop(e)}
       onDragOver={e => this.handleDragOver(e)}
