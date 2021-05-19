@@ -10,7 +10,7 @@ import DataColor from "../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedNumber from "../../core/RedNumber";
 import RedSelect from "../../core/RedSelect";
-import {faThumbtack} from "@fortawesome/free-solid-svg-icons";
+import {faPlus, faThumbtack} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 let targetContext;
@@ -86,137 +86,124 @@ class RedGradientColorItem extends React.Component {
     const activeYn = this.props.activeYn;
     const colorInfo = colorData['color'];
     if (!colorData['useRange']) colorData['rangeEnd'] = colorData['range'];
-    return <div
-      style={{
-        margin: '3px 0px',
-        cursor: 'pointer',
-        border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
-        background: activeYn ? 'linear-gradient(#5e7ade, #3a497d)' : 'rgba(255,255,255,0.1)',
-        borderRadius: '4px'
-      }}
-      onClick={() => this.props.HD_active(this.getIndex())}
-      onMouseDown={() => this.props.HD_active(this.getIndex())}
-    >
+    return <div>
       <button
         style={style.add}
-        onClick={() => {
+        onClick={(e) => {
           let prevColorData = activeSubData['colorList'][this.getIndex() - 1];
           let currentRange = colorData['range'];
           let newRange = currentRange;
           if (prevColorData && prevColorData['xUnit'] === colorData['xUnit']) newRange = currentRange - (currentRange - prevColorData['range']) * 0.5;
           const newColorData = new DataColor(colorData['color'], newRange);
           activeSubData['colorList'].splice(this.getIndex(), 0, newColorData);
+          this.props.HD_active(this.getIndex())
         }}
-      >+
+      >
+        <FontAwesomeIcon icon={faPlus}/>
       </button>
-      <div style={{display: 'flex', padding: '4px 4px 0px',}}>
-        <div
-          style={{width: '28px', height: '28px', margin: '1px'}}
-          className={'transparent_checker'}
-        >
-          <div style={{
-            background: colorInfo,
-            width: '28px', height: '28px',
-            borderRadius: '4px', border: '1px solid #000',
-            marginRight: '10px',
-            textAlign: 'center',
-          }}
-               onClick={() => {
-                 if (!this.state.colorPicker) {
-                   this.state.colorPicker = new ColorPicker({
-                     type: "sketch",
-                     position: 'inline',
-                     color: colorData['color'],
-                     container: this.refColorPickerContainer.current,
-                     onChange: color => {
-                       targetColorData['color'] = color;
-                       targetContext.props.rootComponent.updateRootState({
-                         activeSubData: targetContext.props.rootComponent.state.activeSubData
-                       });
-                     }
-                   });
-                 }
-                 targetContext = this;
-                 targetColorData = colorData
-                 this.state.colorPicker.setOption({color: colorData['color']});
-                 this.setState({openColorPicker: true});
-               }}
-          />
-          <FontAwesomeIcon
-            icon={faThumbtack} style={{filter: colorData.useDivide ? '' : 'invert(1.0)'}}
-            onClick={e => {
-              colorData['useDivide'] = !colorData['useDivide'];
-              rootComponent.updateRootState({});
-            }}
-          />
-        </div>
-        <div
-          style={{
-            width: '28px', height: '28px', margin: '1px',
-            display: colorData.useRange ? 'block' : 'none'
-          }}
-          className={'transparent_checker'}
-        >
-          <div style={{
-            background: colorData['colorEnd'],
-            width: '28px', height: '28px',
-            borderRadius: '4px', border: '1px solid #000',
-            marginRight: '10px'
-          }}
-               onClick={() => {
-                 if (!this.state.colorEndPicker) {
-                   this.state.colorEndPicker = new ColorPicker({
-                     type: "sketch",
-                     position: 'inline',
-                     color: colorData['colorEnd'],
-                     container: this.refColorEndPickerContainer.current,
-                     onChange: color => {
-                       targetColorData['colorEnd'] = color;
-                       targetContext.props.rootComponent.updateRootState({
-                         activeSubData: targetContext.props.rootComponent.state.activeSubData
-                       });
-                     }
-                   });
-                 }
-                 targetContext = this;
-                 targetColorData = colorData
-                 this.state.colorEndPicker.setOption({color: colorData['colorEnd']});
-                 this.setState({openColorEndPicker: true});
-               }}
-          />
-          <FontAwesomeIcon
-            icon={faThumbtack} style={{filter: colorData.useDivideEnd ? '' : 'invert(1.0)'}}
-            onClick={e => {
-              colorData['useDivideEnd'] = !colorData['useDivideEnd'];
-              rootComponent.updateRootState({});
-            }}
-          />
-        </div>
-        <div>
-          {/* TODO - 단위모델 변경 처리*/}
+      <div
+        style={{
+          margin: '3px 0px',
+          cursor: 'pointer',
+          border: activeYn ? '1px solid #5e7ade' : '1px solid rgba(255,255,255,0.1)',
+          background: activeYn ? 'linear-gradient(#5e7ade, #3a497d)' : 'rgba(255,255,255,0.1)',
+          borderRadius: '4px'
+        }}
+        onClick={() => this.props.HD_active(this.getIndex())}
+        onMouseDown={() => this.props.HD_active(this.getIndex())}
+      >
 
-          <RedNumber
-            width={colorData['useRange'] ? '80px' : 'auto'}
-            value={colorData['range'] || 0}
-            HD_onInput={e => {
-              colorData['range'] = +e.target.value;
-              let i = activeSubData.colorList.length;
-              while (i--) {
-                if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
-              }
-              rootComponent.updateRootState({});
+        <div style={{display: 'flex', padding: '4px 4px 0px',}}>
+          <div
+            style={{width: '28px', height: '28px', margin: '1px'}}
+            className={'transparent_checker'}
+          >
+            <div style={{
+              background: colorInfo,
+              width: '28px', height: '28px',
+              borderRadius: '4px', border: '1px solid #000',
+              marginRight: '10px',
+              textAlign: 'center',
             }}
-            HD_blur={e => {
-              this.props.HD_sort(e);
-              this.props.HD_active(this.getIndex());
+                 onClick={() => {
+                   if (!this.state.colorPicker) {
+                     this.state.colorPicker = new ColorPicker({
+                       type: "sketch",
+                       position: 'inline',
+                       color: colorData['color'],
+                       container: this.refColorPickerContainer.current,
+                       onChange: color => {
+                         targetColorData['color'] = color;
+                         targetContext.props.rootComponent.updateRootState({
+                           activeSubData: targetContext.props.rootComponent.state.activeSubData
+                         });
+                       }
+                     });
+                   }
+                   targetContext = this;
+                   targetColorData = colorData
+                   this.state.colorPicker.setOption({color: colorData['color']});
+                   this.setState({openColorPicker: true});
+                 }}
+            />
+            <FontAwesomeIcon
+              icon={faThumbtack} style={{filter: colorData.useDivide ? '' : 'invert(1.0)'}}
+              onClick={e => {
+                colorData['useDivide'] = !colorData['useDivide'];
+                rootComponent.updateRootState({});
+              }}
+            />
+          </div>
+          <div
+            style={{
+              width: '28px', height: '28px', margin: '1px',
+              display: colorData.useRange ? 'block' : 'none'
             }}
-          />
-          {
-            colorData['useRange'] ? <RedNumber
-              width={'80px'}
-              value={colorData['rangeEnd'] || 0}
+            className={'transparent_checker'}
+          >
+            <div style={{
+              background: colorData['colorEnd'],
+              width: '28px', height: '28px',
+              borderRadius: '4px', border: '1px solid #000',
+              marginRight: '10px'
+            }}
+                 onClick={() => {
+                   if (!this.state.colorEndPicker) {
+                     this.state.colorEndPicker = new ColorPicker({
+                       type: "sketch",
+                       position: 'inline',
+                       color: colorData['colorEnd'],
+                       container: this.refColorEndPickerContainer.current,
+                       onChange: color => {
+                         targetColorData['colorEnd'] = color;
+                         targetContext.props.rootComponent.updateRootState({
+                           activeSubData: targetContext.props.rootComponent.state.activeSubData
+                         });
+                       }
+                     });
+                   }
+                   targetContext = this;
+                   targetColorData = colorData
+                   this.state.colorEndPicker.setOption({color: colorData['colorEnd']});
+                   this.setState({openColorEndPicker: true});
+                 }}
+            />
+            <FontAwesomeIcon
+              icon={faThumbtack} style={{filter: colorData.useDivideEnd ? '' : 'invert(1.0)'}}
+              onClick={e => {
+                colorData['useDivideEnd'] = !colorData['useDivideEnd'];
+                rootComponent.updateRootState({});
+              }}
+            />
+          </div>
+          <div>
+            {/* TODO - 단위모델 변경 처리*/}
+
+            <RedNumber
+              width={colorData['useRange'] ? '80px' : 'auto'}
+              value={colorData['range'] || 0}
               HD_onInput={e => {
-                colorData['rangeEnd'] = +e.target.value;
+                colorData['range'] = +e.target.value;
                 let i = activeSubData.colorList.length;
                 while (i--) {
                   if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
@@ -227,98 +214,116 @@ class RedGradientColorItem extends React.Component {
                 this.props.HD_sort(e);
                 this.props.HD_active(this.getIndex());
               }}
-            /> : ''
-          }
-
-          <RedSelect value={colorData['rangeUnit']} options={['px', '%']} HD_change={e => {
-            let tUnit = e.target.value;
-            if (colorData['rangeUnit'] !== tUnit) {
-              if (colorData['rangeUnit'] === '%') colorData['range'] = canvasInfo['width'] * colorData['range'] / 100;
-              else colorData['range'] = colorData['range'] / canvasInfo['width'] * 100;
-            }
-            colorData['rangeUnit'] = tUnit;
-            rootComponent.updateRootState({});
-          }}/>
-          <button
-            style={style.del}
-            onClick={() => {
-              activeSubData.colorList.splice(this.getIndex(), 1);
-              rootComponent.updateRootState({});
-            }}
-          >Del
-          </button>
-          <div style={{display: 'flex', alignItems: 'center'}}>
-            {/*<label*/}
-            {/*  style={style.lock}*/}
-            {/*  onClick={(e) => {*/}
-            {/*    if (e.target.type == 'checkbox') {*/}
-            {/*      colorData['useDivide'] = !colorData['useDivide'];*/}
-            {/*      rootComponent.updateRootState({});*/}
-            {/*    }*/}
-            {/*  }}*/}
-            {/*>useDivide <input type={'checkbox'} checked={colorData['useDivide']} />*/}
-            {/*</label>*/}
-            <label
-              style={style.lock}
-              onClick={(e) => {
-                if (e.target.type == 'checkbox') {
-                  colorData['useRange'] = !colorData['useRange'];
-                  if (colorData['colorEnd'] === undefined) colorData['colorEnd'] = colorData['color'];
+            />
+            {
+              colorData['useRange'] ? <RedNumber
+                width={'80px'}
+                value={colorData['rangeEnd'] || 0}
+                HD_onInput={e => {
+                  colorData['rangeEnd'] = +e.target.value;
+                  let i = activeSubData.colorList.length;
+                  while (i--) {
+                    if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
+                  }
                   rootComponent.updateRootState({});
-                }
+                }}
+                HD_blur={e => {
+                  this.props.HD_sort(e);
+                  this.props.HD_active(this.getIndex());
+                }}
+              /> : ''
+            }
+
+            <RedSelect value={colorData['rangeUnit']} options={['px', '%']} HD_change={e => {
+              let tUnit = e.target.value;
+              if (colorData['rangeUnit'] !== tUnit) {
+                if (colorData['rangeUnit'] === '%') colorData['range'] = canvasInfo['width'] * colorData['range'] / 100;
+                else colorData['range'] = colorData['range'] / canvasInfo['width'] * 100;
+              }
+              colorData['rangeUnit'] = tUnit;
+              rootComponent.updateRootState({});
+            }}/>
+            <button
+              style={style.del}
+              onClick={() => {
+                activeSubData.colorList.splice(this.getIndex(), 1);
+                rootComponent.updateRootState({});
               }}
-            >useRange <input type={'checkbox'} checked={colorData['useRange']}/>
-            </label>
+            >Del
+            </button>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              {/*<label*/}
+              {/*  style={style.lock}*/}
+              {/*  onClick={(e) => {*/}
+              {/*    if (e.target.type == 'checkbox') {*/}
+              {/*      colorData['useDivide'] = !colorData['useDivide'];*/}
+              {/*      rootComponent.updateRootState({});*/}
+              {/*    }*/}
+              {/*  }}*/}
+              {/*>useDivide <input type={'checkbox'} checked={colorData['useDivide']} />*/}
+              {/*</label>*/}
+              <label
+                style={style.lock}
+                onClick={(e) => {
+                  if (e.target.type == 'checkbox') {
+                    colorData['useRange'] = !colorData['useRange'];
+                    if (colorData['colorEnd'] === undefined) colorData['colorEnd'] = colorData['color'];
+                    rootComponent.updateRootState({});
+                  }
+                }}
+              >useRange <input type={'checkbox'} checked={colorData['useRange']}/>
+              </label>
 
-            <div style={{display: 'inline-block', marginLeft: '5px'}}>{colorData['color']}</div>
+              <div style={{display: 'inline-block', marginLeft: '5px'}}>{colorData['color']}</div>
+            </div>
+
           </div>
-
         </div>
-      </div>
-      <div style={{margin: '8px 8px', alignItems: 'center'}}>
-        <div style={style.line} ref={this.refBar}/>
-        <div style={{
-          ...style.ball,
-          left: `${colorData['rangeUnit'] === 'px' ? colorData['range'] / canvasInfo['width'] * 100 : colorData['range']}%`,
-          background: activeYn ? '#5e7ade' : '#fff'
-        }}
-             onMouseDown={() => {
-               targetContext = this;
-               targetColorData = colorData;
-               targetRefBar = this.refBar;
-               targetRange = 'range';
-               window.addEventListener('mousemove', HD_move);
-               window.addEventListener('mouseup', HD_up);
-             }}
-        >s
-        </div>
-        {
-          colorData.useRange ? <div style={{
+        <div style={{margin: '8px 8px', alignItems: 'center'}}>
+          <div style={style.line} ref={this.refBar}/>
+          <div style={{
             ...style.ball,
-            left: `${colorData['rangeUnit'] === 'px' ? colorData['rangeEnd'] / canvasInfo['width'] * 100 : colorData['rangeEnd']}%`,
+            left: `${colorData['rangeUnit'] === 'px' ? colorData['range'] / canvasInfo['width'] * 100 : colorData['range']}%`,
             background: activeYn ? '#5e7ade' : '#fff'
           }}
-                                    onMouseDown={() => {
-                                      targetContext = this;
-                                      targetColorData = colorData;
-                                      targetRefBar = this.refBar;
-                                      targetRange = 'rangeEnd';
-                                      window.addEventListener('mousemove', HD_move);
-                                      window.addEventListener('mouseup', HD_up);
-                                    }}
-          >e</div> : ''
-        }
-      </div>
+               onMouseDown={() => {
+                 targetContext = this;
+                 targetColorData = colorData;
+                 targetRefBar = this.refBar;
+                 targetRange = 'range';
+                 window.addEventListener('mousemove', HD_move);
+                 window.addEventListener('mouseup', HD_up);
+               }}
+          >s
+          </div>
+          {
+            colorData.useRange ? <div style={{
+              ...style.ball,
+              left: `${colorData['rangeUnit'] === 'px' ? colorData['rangeEnd'] / canvasInfo['width'] * 100 : colorData['rangeEnd']}%`,
+              background: activeYn ? '#5e7ade' : '#fff'
+            }}
+                                      onMouseDown={() => {
+                                        targetContext = this;
+                                        targetColorData = colorData;
+                                        targetRefBar = this.refBar;
+                                        targetRange = 'rangeEnd';
+                                        window.addEventListener('mousemove', HD_move);
+                                        window.addEventListener('mouseup', HD_up);
+                                      }}
+            >e</div> : ''
+          }
+        </div>
 
-      <div style={{...style.colorPicker, display: this.state.openColorPicker ? 'block' : 'none'}}>
-        <div ref={this.refColorPickerContainer}/>
-        <div style={style.complete} onClick={() => this.setState({openColorPicker: null})}>완료</div>
-      </div>
-      <div style={{...style.colorPicker, display: this.state.openColorEndPicker ? 'block' : 'none'}}>
-        <div ref={this.refColorEndPickerContainer}/>
-        <div style={style.complete} onClick={() => this.setState({openColorEndPicker: null})}>완료</div>
-      </div>
+        <div style={{...style.colorPicker, display: this.state.openColorPicker ? 'block' : 'none'}}>
+          <div ref={this.refColorPickerContainer}/>
+          <div style={style.complete} onClick={() => this.setState({openColorPicker: null})}>완료</div>
+        </div>
+        <div style={{...style.colorPicker, display: this.state.openColorEndPicker ? 'block' : 'none'}}>
+          <div ref={this.refColorEndPickerContainer}/>
+          <div style={style.complete} onClick={() => this.setState({openColorEndPicker: null})}>완료</div>
+        </div>
 
+      </div>
     </div>;
   }
 }
@@ -346,17 +351,18 @@ const style = {
   add: {
     position: 'absolute',
     width: '20px',
-    height: '16px',
+    height: '20px',
     lineHeight: 1,
     top: 0,
     right: 0,
     background: '#5e7ade',
     borderRadius: '4px',
     color: '#fff',
-    fontSize: '11px',
+    fontSize: '8px',
     border: '1px solid #000',
-    transform: `translate(50%,-50%)`,
+    transform: `translate(-3px,-11px)`,
     cursor: 'pointer',
+    zIndex:1,
     boxShadow: '0px 0px 10px rgba(0,0,0,0.46)'
   },
   ball: {

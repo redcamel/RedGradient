@@ -6,15 +6,15 @@
  *
  */
 import React from "react";
-import RedTextField from "../../core/RedTextField.jsx";
-import RedGradientColorEdit from "./RedGradientColorEdit.jsx";
-import RedPropertyPositionEditByMouse from "./RedPropertyPositionEditByMouse.jsx";
-import RedPropertyTypeEdit from "./RedPropertyTypeEdit.jsx";
-import RedPropertyDegreeEdit from "./RedPropertyDegreeEdit.jsx";
-import RedPropertyAtEdit from "./RedPropertyAtEdit";
-import GRADIENT_TYPE from "../GRADIENT_TYPE";
-import RedPropertyTypeEndingShapeEdit from "./RedPropertyTypeEndingShapeEdit.jsx";
-import RedPresetBorder from "../canvas/edit/preset/RedPresetBorder.jsx";
+import RedTextField from "../../../../core/RedTextField.jsx";
+import RedGradientColorEdit from "../../../property/RedGradientColorEdit.jsx";
+import RedPropertyPositionEditByMouse from "../../../property/RedPropertyPositionEditByMouse.jsx";
+import RedPropertyTypeEdit from "../../../property/RedPropertyTypeEdit.jsx";
+import RedPropertyDegreeEdit from "../../../property/RedPropertyDegreeEdit.jsx";
+import RedPropertyAtEdit from "../../../property/RedPropertyAtEdit.jsx";
+import GRADIENT_TYPE from "../../../GRADIENT_TYPE.js";
+import RedPropertyTypeEndingShapeEdit from "../../../property/RedPropertyTypeEndingShapeEdit.jsx";
+import RedPresetBorder from "../preset/RedPresetBorder.jsx";
 
 class RedPropertyBorderGradientEdit extends React.Component {
   render() {

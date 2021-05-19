@@ -6,7 +6,7 @@
  *
  */
 import React from "react";
-import RedPropertyBorderGradientEdit from "../../../property/RedPropertyBorderGradientEdit.jsx";
+import RedPropertyBorderGradientEdit from "./RedPropertyBorderGradientEdit.jsx";
 import RedCanvasBorderModeGradientEdit from "./RedCanvasBorderModeGradientEdit.jsx";
 
 class RedCanvasBorderGradientFrame extends React.Component {
