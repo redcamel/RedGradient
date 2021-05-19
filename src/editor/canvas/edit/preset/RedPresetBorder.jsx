@@ -120,13 +120,13 @@ RedPresetBorder.exportPreset = () => {
   const a = document.createElement('a');
   const file = new Blob([JSON.stringify(RedPresetBorder.getUserPreset())], {type: 'application/json'});
   a.href = URL.createObjectURL(file);
-  a.download = `RedBorderGradientPreset.jsonBorder`;
+  a.download = `RedBorderGradientPreset.json`;
   a.click();
   URL.revokeObjectURL(a.href);
 }
 RedPresetBorder.importPreset = (context) => {
   const a = document.createElement('input');
-  a.setAttribute('accept', '.jsonBorder');
+  a.setAttribute('accept', '.json');
   a.setAttribute('type', 'file');
   a.click();
   a.onchange = e => {

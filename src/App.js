@@ -44,20 +44,23 @@ class App extends React.Component {
     this.state.activeLayer = this.state.layers[0];
     this.state.activeSubData = this.state.activeLayer['items'][0];
     //
-    this.state.borderGradientInfo = {
-      'border_image_sliceT': 1,
-      'border_image_sliceR': 1,
-      'border_image_sliceL': 1,
-      'border_image_sliceB': 1,
-      'border_image_repeat': BORDER_REPEAT_TYPE.STRETCH,
-      'border_image_outset': 0,
-      "activeLayer": null,
-      "activeSubData": null,
-      "bgColor": "#fff",
-      "layers": [
-        new DataLayer()
-      ]
+    if(!this.state.borderGradientInfo){
+      this.state.borderGradientInfo = {
+        'border_image_sliceT': 1,
+        'border_image_sliceR': 1,
+        'border_image_sliceL': 1,
+        'border_image_sliceB': 1,
+        'border_image_repeat': BORDER_REPEAT_TYPE.STRETCH,
+        'border_image_outset': 0,
+        "activeLayer": null,
+        "activeSubData": null,
+        "bgColor": "#fff",
+        "layers": [
+          new DataLayer()
+        ]
+      }
     }
+
     const canvasInfo = this.state.canvasInfo
     if (!canvasInfo.hasOwnProperty('border_radius')) {
       canvasInfo['border_radius'] = 0;
