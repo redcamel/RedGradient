@@ -35,9 +35,10 @@ class RedLayerSubItem extends React.Component {
     console.log(this)
     console.log(this.props.layer)
     console.log(this.props.item)
+    RedLayerItem.clearDragInfo()
+    RedLayerSubItem.clearDragInfo()
     startDragLayer = this.props.layer
     startDragItem = this.props.item
-    RedLayerItem.clearDragInfo()
   }
 
   handleDragEnter(e) {
@@ -73,8 +74,12 @@ class RedLayerSubItem extends React.Component {
       const startIDX = startDragLayer.items.indexOf(startDragItem)
       startDragLayer.items.splice(startIDX, 1)
       dropAreaLayer.items.splice(dstIDX, 0, startDragItem)
+
+      RedLayerItem.clearDragInfo()
+      RedLayerSubItem.clearDragInfo()
       this.props.rootComponent.updateRootState({})
     }
+
   }
 
   render() {
