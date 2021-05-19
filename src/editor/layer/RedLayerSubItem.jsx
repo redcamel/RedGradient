@@ -11,18 +11,67 @@ import {faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icon
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 
+let startDragLayer
+let startDragItem
 class RedLayerSubItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       layerBgColor: 'transparent',
-      SIZE: props.size || 100
+      SIZE: props.size || 100,
+      dragOverYn : false
     };
   }
 
   _toggleVisible(data) {
     data.visible = !data.visible;
     this.props.rootComponent.updateRootState({});
+  }
+  handleDragStart(e) {
+    console.log('start ///////////////////')
+    console.log(this)
+    console.log(this.props.layer)
+    console.log(this.props.item)
+    startDragLayer = this.props.layer
+    startDragItem = this.props.item
+  }
+  handleDragEnter(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+  }
+
+  handleDragLeave(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({dragOverYn : false})
+  }
+
+
+  handleDragOver(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({dragOverYn : true})
+  }
+
+  handleDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('drop ///////////////////')
+    console.log(this)
+    console.log(this.props.layer)
+    console.log(this.props.item)
+    console.log(e.nativeEvent)
+    this.setState({dragOverYn : false})
+
+
+    const dropAreaLayer = this.props.layer
+    const dropAreaItem = this.props.item
+    const dstIDX  = dropAreaLayer.items.indexOf(dropAreaItem)
+    const startIDX  = startDragLayer.items.indexOf(startDragItem)
+    startDragLayer.items.splice(startIDX,1)
+    dropAreaLayer.items.splice(dstIDX,0,startDragItem)
+    this.props.rootComponent.updateRootState({})
   }
 
   render() {
@@ -38,9 +87,21 @@ class RedLayerSubItem extends React.Component {
         boxShadow: activeSubDataYn ? '0px 0px 5px rgba(255,0,0,0.5)' : '',
         border: '1px solid #333',
         borderRadius: '8px',
-        margin: '4px 0px 4px 10px'
+        margin: '4px 0px 4px 10px',
       }}
+      draggable={true}
+      onDragStart={e => this.handleDragStart(e)}
+      onDrop={e => this.handleDrop(e)}
+      onDragOver={e => this.handleDragOver(e)}
+      onDragEnter={e => this.handleDragEnter(e)}
+      onDragLeave={e => this.handleDragLeave(e)}
     >
+      {this.state.dragOverYn ? <div style={{
+        background : 'red',
+        padding : '4px',
+        margin : '4px 0px',
+        borderRadius: '4px'
+      }}>drop here</div> : ''}
       <div
         className={'layerItemSubTitle'}
         style={{textOverflow: 'ellipsis', width: '100px', overflow: 'hidden', whiteSpace: 'nowrap'}}>
