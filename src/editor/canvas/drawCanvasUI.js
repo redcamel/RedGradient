@@ -20,7 +20,7 @@ function drawCanvasUI() {
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
   return <div style={style.container}>
-    <RedTitle title={'Canvas Information'}/>
+    <RedTitle title={'Container Information'}/>
     <div style={{display: 'inline-block', marginLeft: '5px'}}>
       {
         RED_CANVAS_PRESET.map(v => {
@@ -43,7 +43,7 @@ function drawCanvasUI() {
     <div style={{display: 'flex', justifyContent: 'space-between'}}>
 
       <div style={style.canvasResizer}>
-        Canvas Size
+        Container Size
         <RedCanvasSizeEdit rootComponent={rootComponent}/>
         <div>
           그라데이션 영역 보기
