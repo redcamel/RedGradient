@@ -93,8 +93,17 @@ class RedGradientColorItem extends React.Component {
           let prevColorData = activeSubData['colorList'][this.getIndex() - 1];
           let currentRange = colorData['range'];
           let newRange = currentRange;
+          let newRangeEnd = currentRange;
           if (prevColorData && prevColorData['xUnit'] === colorData['xUnit']) newRange = currentRange - (currentRange - prevColorData['range']) * 0.5;
-          const newColorData = new DataColor(colorData['color'], newRange);
+          const newColorData = new DataColor(
+            colorData['color'],
+            newRange,
+            colorData['rangeUnit'],
+            colorData['useDivide'],
+            colorData['useDivideEnd'],
+            colorData['useRange'],
+            newRangeEnd
+          );
           activeSubData['colorList'].splice(this.getIndex(), 0, newColorData);
           this.props.HD_active(this.getIndex())
         }}
