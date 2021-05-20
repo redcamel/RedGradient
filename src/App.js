@@ -24,6 +24,44 @@ import BORDER_REPEAT_TYPE from "./editor/BORDER_REPEAT_TYPE.js";
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.history = []
+    this.historyRedo = []
+  }
+
+  HD_keydown(e) {
+    if (e.ctrlKey && e.shiftKey && e.key === 'Z') {
+      // console.log('리두 실행해야함')
+      let targetState = this.historyRedo.pop()
+      if (targetState) {
+        this.state = JSON.parse(JSON.stringify(targetState))
+        this.state.activeLayer = this.state.layers[0];
+        this.state.activeSubData = this.state.activeLayer['items'][0];
+        this.updateRootState(this.state)
+      }
+      // console.log('history',this.history)
+      // console.log('historyRedo',this.historyRedo)
+    } else if (e.ctrlKey && e.key === 'z') {
+      // console.log('언두 실행해야함')
+      let targetState = this.history.pop()
+      if (targetState) {
+        this.historyRedo.push(JSON.parse(JSON.stringify(targetState)))
+        targetState = this.history[this.history.length-1]
+        if(targetState){
+          this.state = JSON.parse(JSON.stringify(targetState))
+          this.state.activeLayer = this.state.layers[0];
+          this.state.activeSubData = this.state.activeLayer['items'][0];
+          this.setState(this.state)
+        }
+      }
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.HD_keydown.bind(this))
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.HD_keydown.bind(this))
   }
 
   checkUnloadEvent() {
@@ -37,6 +75,8 @@ class App extends React.Component {
   updateRootState(v = {}) {
     console.log(v)
     this.setState(v)
+    if (this.history.length > 50) this.history.shift()
+    this.history.push(JSON.parse(JSON.stringify(this.state)))
   }
 
   setNewCanvas(newState) {
@@ -44,7 +84,7 @@ class App extends React.Component {
     this.state.activeLayer = this.state.layers[0];
     this.state.activeSubData = this.state.activeLayer['items'][0];
     //
-    if(!this.state.borderGradientInfo){
+    if (!this.state.borderGradientInfo) {
       this.state.borderGradientInfo = {
         'border_image_sliceT': 1,
         'border_image_sliceR': 1,
@@ -60,17 +100,15 @@ class App extends React.Component {
         ]
       }
     }
-
     const canvasInfo = this.state.canvasInfo
     if (!canvasInfo.hasOwnProperty('border_radius')) {
-
       canvasInfo['border_radius'] = 0;
       canvasInfo['border_radius_unit'] = 'px';
     }
     if (!canvasInfo.hasOwnProperty('border_radius_mergeMode')) {
       canvasInfo['border_radius_mergeMode'] = 1
-      canvasInfo['border_radius_split'] = [0,0,0,0];
-      canvasInfo['border_radius_unit_split'] = ['px','px','px','px'];
+      canvasInfo['border_radius_split'] = [0, 0, 0, 0];
+      canvasInfo['border_radius_unit_split'] = ['px', 'px', 'px', 'px'];
     }
     if (!canvasInfo.hasOwnProperty('border_width')) {
       canvasInfo['border_width'] = 0;
@@ -99,7 +137,7 @@ class App extends React.Component {
     const canvasInfo = this.state.canvasInfo
     let containerCssText
     {
-      containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo,this.state.borderGradientInfo))
+      containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo, this.state.borderGradientInfo))
       containerCssText = containerCssText.map(v => {
         return `${v[0]} : ${v[1]}`
       });
