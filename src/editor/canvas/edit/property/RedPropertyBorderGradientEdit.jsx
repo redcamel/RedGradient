@@ -43,14 +43,14 @@ class RedPropertyBorderGradientEdit extends React.Component {
               {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL ? <>
                 <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent}/>
               </> : ''}
-              {activeSubData.type === GRADIENT_TYPE.LINEAR || activeSubData.type === GRADIENT_TYPE.REPEAT_LINEAR || activeSubData.type === GRADIENT_TYPE.CONIC ?
+              {activeSubData.type === GRADIENT_TYPE.LINEAR || activeSubData.type === GRADIENT_TYPE.REPEAT_LINEAR || activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC?
                 <>
                   <div style={style.divide}/>
                   <RedPropertyDegreeEdit rootComponent={rootComponent}/>
                 </> : ''}
               {/*<div style={style.divide} />*/}
               {/*<RedPropertySizeEdit rootComponent={rootComponent} />*/}
-              {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL || activeSubData.type === GRADIENT_TYPE.CONIC ? <>
+              {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL || activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC? <>
                 <div style={style.divide}/>
                 <RedPropertyAtEdit rootComponent={rootComponent}/>
               </> : ''}
@@ -62,7 +62,7 @@ class RedPropertyBorderGradientEdit extends React.Component {
 
 
             <div style={{display: 'flex'}}>
-              {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL || activeSubData.type === GRADIENT_TYPE.CONIC ?
+              {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL || activeSubData.type === GRADIENT_TYPE.CONIC|| activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ?
                 <div>
                   center
                   <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'at'}/>

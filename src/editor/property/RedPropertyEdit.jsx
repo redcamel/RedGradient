@@ -50,14 +50,14 @@ class RedPropertyEdit extends React.Component {
                 <div style={style.divide}/>
                 <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent}/>
               </> : ''}
-              {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.REPEAT_LINEAR || data.type === GRADIENT_TYPE.CONIC ?
+              {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.REPEAT_LINEAR || data.type === GRADIENT_TYPE.CONIC || data.type === GRADIENT_TYPE.REPEAT_CONIC ?
                 <>
                   <div style={style.divide}/>
                   <RedPropertyDegreeEdit rootComponent={rootComponent}/>
                 </> : ''}
               <div style={style.divide}/>
               <RedPropertySizeEdit rootComponent={rootComponent}/>
-              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC ? <>
+              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC || data.type === GRADIENT_TYPE.REPEAT_CONIC? <>
                 <div style={style.divide}/>
                 <RedPropertyAtEdit rootComponent={rootComponent}/>
               </> : ''}
@@ -73,7 +73,7 @@ class RedPropertyEdit extends React.Component {
                 position
                 <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'position'}/>
               </div>
-              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC ?
+              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC || data.type === GRADIENT_TYPE.REPEAT_CONIC ?
                 <div>
                   center
                   <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'at'}/>
