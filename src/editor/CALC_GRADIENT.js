@@ -27,8 +27,9 @@ const CALC_GRADIENT = {
         if (data['type'] === GRADIENT_TYPE.CONIC || data['type'] === GRADIENT_TYPE.REPEAT_CONIC) divideTxt = v['useDivide'] ? `,${v['colorEnd']} ${v['range']}${v['rangeUnit']}` : '';
         else divideTxt = v['useDivide'] ? `,${v['colorEnd']} calc(${v['range']}${v['rangeUnit']} + 1px)` : '';
         let divideEndTxt = '';
-        if (data['type'] === GRADIENT_TYPE.CONIC || data['type'] === GRADIENT_TYPE.REPEAT_CONIC) divideEndTxt = v['useDivideEnd'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['colorEnd']} ${v['rangeEnd']}${v['rangeUnit']}` : '';
+        if (data['type'] === GRADIENT_TYPE.CONIC || data['type'] === GRADIENT_TYPE.REPEAT_CONIC) divideEndTxt = v['useDivideEnd'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} ${v['rangeEnd']}${v['rangeUnit']}` : '';
         else divideEndTxt = v['useDivideEnd'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['rangeEnd']}${v['rangeUnit']} + 1px)` : '';
+
         return `${v['color']} ${v['range']}${v['rangeUnit']} ${divideTxt}, ${v['colorEnd']} ${v['rangeEnd']}${v['rangeUnit']} ${divideEndTxt}`;
       } else {
         colorRangeTxt = `${v['range']}${v['rangeUnit']}`;

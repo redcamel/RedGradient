@@ -12,6 +12,7 @@ import RedNumber from "../../core/RedNumber";
 import RedSelect from "../../core/RedSelect";
 import {faPlus, faThumbtack} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import GRADIENT_TYPE from "../GRADIENT_TYPE.js";
 
 let targetContext;
 let targetColorData;
@@ -24,10 +25,13 @@ const HD_move = e => {
     //TODO - FIXME 사이즈 자동으로 결정되게 변경해야함
     let percentX = (tX / (targetRefBar.current.clientWidth + 16) * 100);
     percentX = Math.max(Math.min(100, percentX), 0);
+
     if (targetColorData.rangeUnit === '%') {
       targetColorData[targetRange] = percentX;
-    } else {
+    } else if (targetColorData.rangeUnit === 'px') {
       targetColorData[targetRange] = percentX / 100 * targetContext.props.rootComponent.state.canvasInfo['width'];
+    } else if (targetColorData.rangeUnit === 'deg') {
+      targetColorData[targetRange] = percentX / 100 * 360;
     }
     if (targetColorData['useRange']) {
       if (targetColorData['range'] > targetColorData['rangeEnd']) {
@@ -86,6 +90,7 @@ class RedGradientColorItem extends React.Component {
     const activeYn = this.props.activeYn;
     const colorInfo = colorData['color'];
     if (!colorData['useRange']) colorData['rangeEnd'] = colorData['range'];
+    const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? [ '%','deg'] : ['px', '%']
     return <div>
       <button
         style={style.add}
@@ -255,11 +260,22 @@ class RedGradientColorItem extends React.Component {
               /> : ''
             }
 
-            <RedSelect value={colorData['rangeUnit']} options={['px', '%']} HD_change={e => {
+            <RedSelect value={colorData['rangeUnit']} options={unitList} HD_change={e => {
               let tUnit = e.target.value;
               if (colorData['rangeUnit'] !== tUnit) {
-                if (colorData['rangeUnit'] === '%') colorData['range'] = canvasInfo['width'] * colorData['range'] / 100;
-                else colorData['range'] = colorData['range'] / canvasInfo['width'] * 100;
+                if(colorData['rangeUnit']==='px'){
+                  if(tUnit==='%') colorData['range'] =  colorData['range'] / canvasInfo['width'] * 100;
+                  else if(tUnit==='deg') colorData['range'] = 360 *  colorData['range'] / canvasInfo['width'];
+                }else if(colorData['rangeUnit']==='%'){
+                  if(tUnit==='px') colorData['range'] =  canvasInfo['width'] * colorData['range'] / 100;
+                  else if(tUnit==='deg') colorData['range'] = 360 *  colorData['range'] / 100;
+                }else if(colorData['rangeUnit']==='deg'){
+                  if(tUnit==='px') colorData['range'] =  canvasInfo['width'] * colorData['range'] / 360
+                  else if(tUnit==='%') colorData['range'] = colorData['range'] / 360 * 100;
+                }
+                // if (colorData['rangeUnit'] === 'deg') colorData['range'] = 360 * colorData['range'] / 100;
+                // else if (colorData['rangeUnit'] === '%') colorData['range'] = canvasInfo['width'] * colorData['range'] / 100;
+                // else colorData['range'] = colorData['range'] / canvasInfo['width'] * 100;
               }
               colorData['rangeUnit'] = tUnit;
               rootComponent.updateRootState({});
@@ -308,7 +324,7 @@ class RedGradientColorItem extends React.Component {
           <div style={style.line} ref={this.refBar}/>
           <div style={{
             ...style.ball,
-            left: `${colorData['rangeUnit'] === 'px' ? colorData['range'] / canvasInfo['width'] * 100 : colorData['range']}%`,
+            left: `${colorData['rangeUnit'] === 'deg' ? colorData['range']/360 * 100 : colorData['rangeUnit'] === 'px' ? colorData['range'] / canvasInfo['width'] * 100 : colorData['range']}%`,
             background: activeYn ? '#5e7ade' : '#fff'
           }}
                onMouseDown={() => {
@@ -324,7 +340,7 @@ class RedGradientColorItem extends React.Component {
           {
             colorData.useRange ? <div style={{
               ...style.ball,
-              left: `${colorData['rangeUnit'] === 'px' ? colorData['rangeEnd'] / canvasInfo['width'] * 100 : colorData['rangeEnd']}%`,
+              left: `${colorData['rangeUnit'] === 'deg' ? colorData['rangeEnd']/360 * 100 : colorData['rangeUnit'] === 'px' ? colorData['rangeEnd'] / canvasInfo['width'] * 100 : colorData['rangeEnd']}%`,
               background: activeYn ? '#5e7ade' : '#fff'
             }}
                                       onMouseDown={() => {

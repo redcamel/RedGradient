@@ -108,32 +108,20 @@ class RedGradientColorEdit extends React.Component {
             let t0 = JSON.parse(JSON.stringify(activeSubData['colorList']));
             t0 = t0.reverse();
             t0.forEach(v => {
-              if (v['rangeUnit'] === '%') {
-                const base = 100;
-                if (v['useRange']) {
-                  let t0 = base - v['range'];
-                  v['range'] = base - v['rangeEnd'];
-                  v['rangeEnd'] = t0;
-                  t0 = v['color'];
-                  v['color'] = v['colorEnd'];
-                  v['colorEnd'] = t0;
-                } else {
-                  v['range'] = base - v['range'];
-                  v['rangeEnd'] = base - v['rangeEnd'];
-                }
+              let base = 100;
+              if (v['rangeUnit'] === '%') base = 100;
+              else if (v['rangeUnit'] === 'deg') base = 100;
+              else base = this.props.rootComponent.state.canvasInfo.width;
+              if (v['useRange']) {
+                let t0 = base - v['range'];
+                v['range'] = base - v['rangeEnd'];
+                v['rangeEnd'] = t0;
+                t0 = v['color'];
+                v['color'] = v['colorEnd'];
+                v['colorEnd'] = t0;
               } else {
-                const base = this.props.rootComponent.state.canvasInfo.width;
-                if (v['useRange']) {
-                  let t0 = base - v['range'];
-                  v['range'] = base - v['rangeEnd'];
-                  v['rangeEnd'] = t0;
-                  t0 = v['color'];
-                  v['color'] = v['colorEnd'];
-                  v['colorEnd'] = t0;
-                } else {
-                  v['range'] = base - v['range'];
-                  v['rangeEnd'] = base - v['rangeEnd'];
-                }
+                v['range'] = base - v['range'];
+                v['rangeEnd'] = base - v['rangeEnd'];
               }
             });
             activeSubData['colorList'] = t0;
