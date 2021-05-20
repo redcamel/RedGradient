@@ -123,87 +123,99 @@ class RedGradientColorItem extends React.Component {
       >
 
         <div style={{display: 'flex', padding: '4px 4px 0px',}}>
-          <div
-            style={{width: '28px', height: '28px', margin: '1px'}}
-            className={'transparent_checker'}
-          >
-            <div style={{
-              background: colorInfo,
-              width: '28px', height: '28px',
-              borderRadius: '4px', border: '1px solid #000',
-              marginRight: '10px',
-              textAlign: 'center',
-            }}
-                 onClick={() => {
-                   if (!this.state.colorPicker) {
-                     this.state.colorPicker = new ColorPicker({
-                       type: "sketch",
-                       position: 'inline',
-                       color: colorData['color'],
-                       container: this.refColorPickerContainer.current,
-                       onChange: color => {
-                         targetColorData['color'] = color;
-                         targetContext.props.rootComponent.updateRootState({
-                           activeSubData: targetContext.props.rootComponent.state.activeSubData
+          <div>
+            <div style={{whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row'}}>
+              <div
+                style={{
+                  width: '28px', height: '28px', margin: '1px',
+                  textAlign: 'center'
+                }}
+                className={'transparent_checker'}
+              >
+                <div style={{
+                  background: colorInfo,
+                  width: '28px', height: '28px',
+                  borderRadius: '4px', border: '1px solid #000',
+                  marginRight: '10px',
+                  textAlign: 'center',
+                }}
+                     onClick={() => {
+                       if (!this.state.colorPicker) {
+                         this.state.colorPicker = new ColorPicker({
+                           type: "sketch",
+                           position: 'inline',
+                           color: colorData['color'],
+                           container: this.refColorPickerContainer.current,
+                           onChange: color => {
+                             targetColorData['color'] = color;
+                             targetContext.props.rootComponent.updateRootState({
+                               activeSubData: targetContext.props.rootComponent.state.activeSubData
+                             });
+                           }
                          });
                        }
-                     });
-                   }
-                   targetContext = this;
-                   targetColorData = colorData
-                   this.state.colorPicker.setOption({color: colorData['color']});
-                   this.setState({openColorPicker: true});
-                 }}
-            />
-            <FontAwesomeIcon
-              icon={faThumbtack} style={{filter: colorData.useDivide ? '' : 'invert(1.0)'}}
-              onClick={e => {
-                colorData['useDivide'] = !colorData['useDivide'];
-                rootComponent.updateRootState({});
-              }}
-            />
-          </div>
-          <div
-            style={{
-              width: '28px', height: '28px', margin: '1px',
-              display: colorData.useRange ? 'block' : 'none'
-            }}
-            className={'transparent_checker'}
-          >
-            <div style={{
-              background: colorData['colorEnd'],
-              width: '28px', height: '28px',
-              borderRadius: '4px', border: '1px solid #000',
-              marginRight: '10px'
-            }}
-                 onClick={() => {
-                   if (!this.state.colorEndPicker) {
-                     this.state.colorEndPicker = new ColorPicker({
-                       type: "sketch",
-                       position: 'inline',
-                       color: colorData['colorEnd'],
-                       container: this.refColorEndPickerContainer.current,
-                       onChange: color => {
-                         targetColorData['colorEnd'] = color;
-                         targetContext.props.rootComponent.updateRootState({
-                           activeSubData: targetContext.props.rootComponent.state.activeSubData
+                       targetContext = this;
+                       targetColorData = colorData
+                       this.state.colorPicker.setOption({color: colorData['color']});
+                       this.setState({openColorPicker: true});
+                     }}
+                />
+                <FontAwesomeIcon
+                  icon={faThumbtack} style={{
+                  filter: colorData.useDivide ? '' : 'invert(1.0)'
+                }}
+                  onClick={e => {
+                    colorData['useDivide'] = !colorData['useDivide'];
+                    rootComponent.updateRootState({});
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  width: '28px', height: '28px', margin: '1px',
+                  display: colorData.useRange ? 'block' : 'none',
+                  textAlign: 'center'
+                }}
+                className={'transparent_checker'}
+              >
+                <div style={{
+                  background: colorData['colorEnd'],
+                  width: '28px', height: '28px',
+                  borderRadius: '4px', border: '1px solid #000',
+                  marginRight: '10px'
+                }}
+                     onClick={() => {
+                       if (!this.state.colorEndPicker) {
+                         this.state.colorEndPicker = new ColorPicker({
+                           type: "sketch",
+                           position: 'inline',
+                           color: colorData['colorEnd'],
+                           container: this.refColorEndPickerContainer.current,
+                           onChange: color => {
+                             targetColorData['colorEnd'] = color;
+                             targetContext.props.rootComponent.updateRootState({
+                               activeSubData: targetContext.props.rootComponent.state.activeSubData
+                             });
+                           }
                          });
                        }
-                     });
-                   }
-                   targetContext = this;
-                   targetColorData = colorData
-                   this.state.colorEndPicker.setOption({color: colorData['colorEnd']});
-                   this.setState({openColorEndPicker: true});
-                 }}
-            />
-            <FontAwesomeIcon
-              icon={faThumbtack} style={{filter: colorData.useDivideEnd ? '' : 'invert(1.0)'}}
-              onClick={e => {
-                colorData['useDivideEnd'] = !colorData['useDivideEnd'];
-                rootComponent.updateRootState({});
-              }}
-            />
+                       targetContext = this;
+                       targetColorData = colorData
+                       this.state.colorEndPicker.setOption({color: colorData['colorEnd']});
+                       this.setState({openColorEndPicker: true});
+                     }}
+                />
+                <FontAwesomeIcon
+                  icon={faThumbtack} style={{
+                  filter: colorData.useDivideEnd ? '' : 'invert(1.0)'
+                }}
+                  onClick={e => {
+                    colorData['useDivideEnd'] = !colorData['useDivideEnd'];
+                    rootComponent.updateRootState({});
+                  }}
+                />
+              </div>
+            </div>
           </div>
           <div>
             {/* TODO - 단위모델 변경 처리*/}
@@ -253,7 +265,7 @@ class RedGradientColorItem extends React.Component {
               rootComponent.updateRootState({});
             }}/>
             <button
-              style={{...style.del,display :activeSubData.colorList.length<2 ? 'none' : 'inline-block' }}
+              style={{...style.del, display: activeSubData.colorList.length < 2 ? 'none' : 'inline-block'}}
               onClick={() => {
                 activeSubData.colorList.splice(this.getIndex(), 1);
                 rootComponent.updateRootState({});
@@ -261,16 +273,18 @@ class RedGradientColorItem extends React.Component {
             >Del
             </button>
             <div style={{display: 'flex', alignItems: 'center'}}>
-              {/*<label*/}
-              {/*  style={style.lock}*/}
-              {/*  onClick={(e) => {*/}
-              {/*    if (e.target.type == 'checkbox') {*/}
-              {/*      colorData['useDivide'] = !colorData['useDivide'];*/}
-              {/*      rootComponent.updateRootState({});*/}
-              {/*    }*/}
-              {/*  }}*/}
-              {/*>useDivide <input type={'checkbox'} checked={colorData['useDivide']} />*/}
-              {/*</label>*/}
+              {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
+                                            onClick={e => {
+                                              colorData['colorEnd'] = colorData['color']
+                                              rootComponent.updateRootState({});
+                                            }}
+              >Copy L to R</div> : ''}
+              {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
+                                            onClick={e => {
+                                              colorData['color'] = colorData['colorEnd']
+                                              rootComponent.updateRootState({});
+                                            }}
+              >Copy R to L</div> : ''}
               <label
                 style={style.lock}
                 onClick={(e) => {
@@ -280,10 +294,12 @@ class RedGradientColorItem extends React.Component {
                     rootComponent.updateRootState({});
                   }
                 }}
-              >useRange <input type={'checkbox'} checked={colorData['useRange']}/>
+              >useRange <input type={'checkbox'} checked={colorData['useRange']}
+                               style={{border: '1px solid #fff', marginLeft: '5px'}}/>
               </label>
 
-              <div style={{display: 'inline-block', marginLeft: '5px'}}>{colorData['color']}</div>
+
+              {/*<div style={{display: 'inline-block', marginLeft: '5px'}}>{colorData['color']}</div>*/}
             </div>
 
           </div>
@@ -371,7 +387,7 @@ const style = {
     border: '1px solid #000',
     transform: `translate(-3px,-11px)`,
     cursor: 'pointer',
-    zIndex:1,
+    zIndex: 1,
     boxShadow: '0px 0px 10px rgba(0,0,0,0.46)'
   },
   ball: {
@@ -399,11 +415,12 @@ const style = {
     cursor: 'pointer'
   },
   lock: {
+    display: 'flex',
     padding: '0px 8px',
     alignItems: 'center',
     fontSize: '11px',
     color: '#fff',
-    background: 'red',
+    background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
     outline: 'none',
     border: '1px solid #000',
     borderRadius: '4px',
