@@ -131,7 +131,9 @@ class RedCanvas extends React.Component {
       }}
       onMouseLeave={() => this.state.useMove ? this.setState({useMove: false}) : 0}
       onMouseUp={() => this.state.useMove ? (this.setState({useMove: false}), document.body.style.cursor = 'default') : 0}
-      onMouseDown={e => e.nativeEvent.button === 1 ? this.setState({useMove: true}) : 0}
+      onMouseDown={e => {
+        this.setState({useMove: true})
+      }}
       onWheel={e => {
         let t0 = this.state.canvasViewScale - e.nativeEvent.deltaY / 1000;
         if (t0 < 0) t0 = 0.01;
