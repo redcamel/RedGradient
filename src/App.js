@@ -99,7 +99,7 @@ class App extends React.Component {
     const canvasInfo = this.state.canvasInfo
     let containerCssText
     {
-      containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo))
+      containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo,this.state.borderGradientInfo))
       containerCssText = containerCssText.map(v => {
         return `${v[0]} : ${v[1]}`
       });
