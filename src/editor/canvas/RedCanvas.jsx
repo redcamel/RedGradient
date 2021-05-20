@@ -162,7 +162,6 @@ RedCanvas.getContainerCss = (canvasInfo, borderGradientInfo) => {
     gradient.pop()
     gradient = gradient.join(')') + ')'
     borderData = {
-      borderImageWidth: `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
       borderStyle: canvasInfo['border_type'],
       borderImageSlice: `${borderGradientInfo['border_image_sliceT']} ${borderGradientInfo['border_image_sliceR']} ${borderGradientInfo['border_image_sliceB']} ${borderGradientInfo['border_image_sliceL']}`,
       borderImageSource: gradient,
@@ -171,18 +170,22 @@ RedCanvas.getContainerCss = (canvasInfo, borderGradientInfo) => {
     }
   } else {
     borderData = {
-      borderWidth: `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`,
       borderStyle: `${canvasInfo['border_type']}`,
       borderColor: `${canvasInfo['border_color']}`
     }
   }
-  if(canvasInfo['border_radius_mergeMode']){
+  if (canvasInfo['border_radius_mergeMode']) {
     borderData['borderRadius'] = `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`
-  }else{
+  } else {
     borderData['borderTopLeftRadius'] = `${canvasInfo['border_radius_split'][0]}${canvasInfo['border_radius_unit_split'][0]}`
     borderData['borderBottomLeftRadius'] = `${canvasInfo['border_radius_split'][1]}${canvasInfo['border_radius_unit_split'][1]}`
     borderData['borderTopRightRadius'] = `${canvasInfo['border_radius_split'][2]}${canvasInfo['border_radius_unit_split'][2]}`
     borderData['borderBottomRightRadius'] = `${canvasInfo['border_radius_split'][3]}${canvasInfo['border_radius_unit_split'][3]}`
+  }
+  if (canvasInfo['border_width_mergeMode']) {
+    borderData['borderWidth'] = `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`
+  } else {
+    borderData['borderWidth'] = `${canvasInfo['border_width_split'][0]}${canvasInfo['border_width_unit_split'][0]} ${canvasInfo['border_width_split'][1]}${canvasInfo['border_width_unit_split'][1]} ${canvasInfo['border_width_split'][2]}${canvasInfo['border_width_unit_split'][2]} ${canvasInfo['border_width_split'][3]}${canvasInfo['border_width_unit_split'][3]}`
   }
   console.log(borderData)
   return {
