@@ -92,5 +92,11 @@ const style = {
   container: {
     display: 'flex',
     alignItems: 'center'
+  },
+  divide: {
+    margin: '5px 0px',
+    height: '2px',
+    background: '#4e4e4e',
+    borderTop: '1px solid #000'
   }
 }
