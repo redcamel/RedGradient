@@ -20,7 +20,7 @@ import RedFrameMenuSave from "./editor/frameMainMenu/RedFrameMenuSave.jsx";
 import RedPreset from "./editor/property/preset/RedPreset.jsx";
 import DataLayer from "./editor/data/DataLayer.js";
 import BORDER_REPEAT_TYPE from "./editor/BORDER_REPEAT_TYPE.js";
-
+import CleanCSS from "clean-css"
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -148,10 +148,12 @@ class App extends React.Component {
       });
       containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
       containerCssText = `.result {
-          background : ${JSON.stringify(CALC_GRADIENT.calcGradients(this.state.layers), null, 2, this.state.bgColor).replace(/"/g, '')};
+          background : ${JSON.stringify(CALC_GRADIENT.calcGradients(this.state.layers,true,this.state.bgColor), null, 2).replace(/"/g, '')};
           background-blend-mode : ${CALC_GRADIENT.calcBlendMode(this.state.layers)};
           ${containerCssText}
           }`.replace(/\s\s+/g, ' ')
+
+      containerCssText = new CleanCSS({}).minify(containerCssText).styles;
     }
     this.checkUnloadEvent()
     return <div className={'frame'}>
@@ -209,6 +211,11 @@ class App extends React.Component {
                   <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
                     {containerCssText}
                   </SyntaxHighlighter>
+                  {/*optimized*/}
+                  {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'}>*/}
+                  {/*  {containerCssTextOptimize}*/}
+                  {/*</SyntaxHighlighter>*/}
+
                 </div>
                 <div>TODO - 애드센스자리</div>
               </div>
