@@ -110,7 +110,7 @@ class RedGradientColorEdit extends React.Component {
             t0.forEach(v => {
               let base = 100;
               if (v['rangeUnit'] === '%') base = 100;
-              else if (v['rangeUnit'] === 'deg') base = 100;
+              else if (v['rangeUnit'] === 'deg') base = 360;
               else base = this.props.rootComponent.state.canvasInfo.width;
               if (v['useRange']) {
                 let t0 = base - v['range'];
