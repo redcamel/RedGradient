@@ -161,8 +161,10 @@ class RedGradientColorItem extends React.Component {
                        }
                        targetContext = this;
                        targetColorData = colorData
-                       this.state.colorPicker.initColorWithoutChangeEvent(colorData['color'])
                        this.setState({openColorPicker: true});
+                       setTimeout(() => {
+                        this.state.colorPicker.initColorWithoutChangeEvent(colorData['color'])                       
+                       }, 10)                       
                      }}
                 />
                 <FontAwesomeIcon
