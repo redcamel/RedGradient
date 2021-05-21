@@ -3,7 +3,7 @@
  *  * RedGL - MIT License
  *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
  *  * https://github.com/redcamel/RedGradient
- *  
+ *
  */
 import React from "react";
 import CALC_GRADIENT from "../../../CALC_GRADIENT.js";
@@ -124,6 +124,26 @@ RedPresetBorder.exportPreset = () => {
   a.click();
   URL.revokeObjectURL(a.href);
 }
+RedPresetBorder.checkValidate=(v)=> {
+  /**
+   * JSON 파싱이 되어야하고..
+   * 빈배열은 그냥 통과
+   * colorList 키를 가지고있는 경우만 통과
+   *
+   */
+  let result = true;
+  try {
+    let t0 = JSON.parse(v);
+    if(t0 instanceof Array) {
+      if(t0.length===0) result = true
+      else if (!t0[0].hasOwnProperty('data') || !t0[0]['data'].hasOwnProperty('colorList')) result = false;
+    }
+    else result = false
+  } catch (e) {
+    result = false;
+  }
+  return result;
+}
 RedPresetBorder.importPreset = (context) => {
   const a = document.createElement('input');
   a.setAttribute('accept', '.json');
@@ -133,8 +153,12 @@ RedPresetBorder.importPreset = (context) => {
     let fileReader = new FileReader();
     fileReader.onload = evt => {
       console.log(evt.target.result)
-      localStorage.setItem('userPresetBorder', evt.target.result)
-      context.setState({})
+      if(RedPresetBorder.checkValidate(evt.target.result)) {
+        localStorage.setItem('userPresetBorder', evt.target.result)
+        context.setState({})
+      }
+      else alert('RedGradient Preset 형식의 파일이 아닙니다.')
+
     }
     fileReader.readAsText(e.target.files[0]);
   };
