@@ -161,7 +161,7 @@ class RedGradientColorItem extends React.Component {
                        }
                        targetContext = this;
                        targetColorData = colorData
-                       this.state.colorPicker.setOption({color: colorData['color']});
+                       this.state.colorPicker.initColorWithoutChangeEvent(colorData['color'])
                        this.setState({openColorPicker: true});
                      }}
                 />
