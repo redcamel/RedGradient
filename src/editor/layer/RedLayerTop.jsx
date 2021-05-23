@@ -55,7 +55,13 @@ class RedLayerTop extends React.Component {
       </div>
       {this.state.openPanel ? <RedAddLayerSet
         HD_cancel={e => this.setState({openPanel: false})}
-        HD_apply={e => this.setState({openPanel: false})}
+        HD_apply={v => {
+          let t0 = new DataLayer()
+          t0.items[0].colorList = v
+          layers.push(t0)
+          this.setState({openPanel: false})
+          rootComponent.updateRootState({layers : rootComponentState.layers})
+        }}
       /> : ''}
     </div>;
   }

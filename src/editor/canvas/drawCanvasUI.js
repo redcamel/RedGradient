@@ -43,7 +43,6 @@ function drawCanvasUI() {
                      height: '15px',
                      background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
                      borderRadius: '4px',
-                     marginRight: '10px',
                      border: '1px solid #000',
                      cursor: 'pointer',
                      marginLeft: '5px'
@@ -55,8 +54,8 @@ function drawCanvasUI() {
 
       </div>
       <div style={style.canvasViewInfo}>
-        <div style={{marginRight: '5px',color:'#696969'}}>Center : {this.state.canvasViewOffsetX},{this.state.canvasViewOffsetY} /
-          ViewScale : {this.state.canvasViewScale}</div>
+        <div style={{marginRight: '5px',color:'#696969'}}>Center : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY} /
+          ViewScale : {this.state.canvasViewScale.toFixed(2)}</div>
         <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
           Center
         </div>

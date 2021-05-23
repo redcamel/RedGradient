@@ -100,7 +100,7 @@ class RedAddLayerSet extends React.Component {
               tS = tSTween.ratio * 100
               tE = tETween.ratio * 100
               let t0 = index / rangeList.length /2 +0.5
-              tempColorList.push(new DataColor(`rgba(255,${255 * t0},${255-255 * t0},${t0})`, tS, '%', false, false, true, tE))
+              tempColorList.push(new DataColor(`rgba(255,${255 * t0},${255-255 * t0},1)`, tS, '%', false, false, true, tE))
               return <div style={{padding: '5px', border: '1px solid red'}}>
                 <div>{tS.toFixed()}% ~</div>
                 <div>{tE.toFixed()}%</div>
@@ -135,7 +135,7 @@ class RedAddLayerSet extends React.Component {
           >Cancel
           </button>
           <button
-            onClick={v => this.props.HD_apply(v)}
+            onClick={v => this.props.HD_apply(tempColorList)}
           >Apply
           </button>
         </div>
