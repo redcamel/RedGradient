@@ -10,6 +10,7 @@ import React from 'react';
 import RedCanvas from "./editor/canvas/RedCanvas.jsx";
 import RedLayer from "./editor/layer/RedLayer.jsx";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import RedPropertyEdit from "./editor/property/RedPropertyEdit.jsx";
 import CALC_GRADIENT from "./editor/CALC_GRADIENT";
 import RedCanvasEdit from "./editor/canvas/edit/RedCanvasEdit";
@@ -208,7 +209,7 @@ class App extends React.Component {
                     }}
                   >Copy Class
                   </button>
-                  <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
+                  <SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>
                     {containerCssText}
                   </SyntaxHighlighter>
                   {/*optimized*/}

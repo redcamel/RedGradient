@@ -21,6 +21,7 @@ import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedPropertySizeEdit from "./RedPropertySizeEdit";
 import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
 import CALC_GRADIENT from "../CALC_GRADIENT";
+import {dracula} from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 class RedPropertyEdit extends React.Component {
   render() {
@@ -90,7 +91,7 @@ class RedPropertyEdit extends React.Component {
         </div>
         <div style={style.itemContainer}>
           <div>Current Gradient Css</div>
-          <SyntaxHighlighter language="css" wrapLongLines={'pre'}>
+          <SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>
             {
               JSON.stringify(CALC_GRADIENT.calcGradientItem(data, false, activeLayer))
                 // .replace(/\s+/g, ' ')
@@ -103,19 +104,7 @@ class RedPropertyEdit extends React.Component {
 
           </SyntaxHighlighter>
           <div>Current Gradient Data</div>
-          <div
-            style={{cursor: 'pointer'}}
-            onClick={e => {
-              var tempElem = document.createElement('textarea');
-              tempElem.value = JSON.stringify(data, null, 2);
-              document.body.appendChild(tempElem);
-              tempElem.select();
-              document.execCommand("copy");
-              document.body.removeChild(tempElem);
-            }}
-          >copy
-          </div>
-          <SyntaxHighlighter language="javascript" wrapLongLines={'pre'}>
+          <SyntaxHighlighter language="javascript" wrapLongLines={'pre'} style={dracula}>
             {JSON.stringify(data, null, 2)}
           </SyntaxHighlighter>
         </div>
