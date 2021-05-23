@@ -222,11 +222,11 @@ class RedGradientColorItem extends React.Component {
               </div>
             </div>
           </div>
-          <div>
+          <div >
             {/* TODO - 단위모델 변경 처리*/}
 
             <RedNumber
-              width={colorData['useRange'] ? '75px' : 'auto'}
+              width={colorData['useRange'] ? '80px' : 'auto'}
               value={colorData['range'] || 0}
               HD_onInput={e => {
                 colorData['range'] = +e.target.value;
@@ -243,7 +243,7 @@ class RedGradientColorItem extends React.Component {
             />
             {
               colorData['useRange'] ? <RedNumber
-                width={'75px'}
+                width={'80px'}
                 value={colorData['rangeEnd'] || 0}
                 HD_onInput={e => {
                   colorData['rangeEnd'] = +e.target.value;
@@ -305,7 +305,7 @@ class RedGradientColorItem extends React.Component {
               }}
             >Del
             </button>
-            <div style={{display: 'flex', alignItems: 'center'}}>
+            <div style={{display: 'flex', alignItems: 'center',margin : '5px 0px',justifyContent: 'space-between'}}>
               {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
                                             onClick={e => {
                                               colorData['colorEnd'] = colorData['color']
