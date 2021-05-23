@@ -33,14 +33,13 @@ class RedCanvasEdit extends React.Component {
       <RedTitle title={'Container Property'}/>
       <div style={style.container}>
         {this.drawCanvasEditUI()}
-
         <div style={style.divide}/>
         <RedCanvasBoxSizingEdit rootComponent={rootComponent}/>
         <div style={style.divide}/>
         <RedCanvasOutlineEdit rootComponent={rootComponent}/>
         <div style={style.divide}/>
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          border
+          <div className={'ui_subTitle'}>border</div>
           <div style={{
             display: 'flex',
             borderRadius: '4px',

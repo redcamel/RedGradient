@@ -52,6 +52,7 @@ class RedCanvasBorderRadiusEdit extends React.Component {
           </div>
         </div>
       </div>
+      <div style={{marginTop:'6px'}}/>
       {
         canvasInfo['border_radius_mergeMode']
           ? <div style={style.container}>

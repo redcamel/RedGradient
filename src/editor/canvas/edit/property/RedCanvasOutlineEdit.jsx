@@ -24,8 +24,10 @@ class RedCanvasOutlineEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     return <div style={style.container}>
-      outline
+
+      <div className={'ui_subTitle'}>outline</div>
       <div style={{
+        marginTop:'6px',
         display: 'flex',
         alignItems: 'center'
       }}>

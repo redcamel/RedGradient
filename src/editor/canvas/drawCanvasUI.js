@@ -44,7 +44,7 @@ function drawCanvasUI() {
 
       <div style={style.canvasResizer}>
         Container Size
-        <RedCanvasSizeEdit rootComponent={rootComponent}/>
+        <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
         <div>
           그라데이션 영역 보기
           <input type={'checkbox'}
@@ -65,7 +65,7 @@ function drawCanvasUI() {
 
       </div>
       <div style={style.canvasViewInfo}>
-        <div>center : {this.state.canvasViewOffsetX},{this.state.canvasViewOffsetY} <br/> canvasViewScale
+        <div>Center : {this.state.canvasViewOffsetX},{this.state.canvasViewOffsetY} <br/> ViewScale
           : {this.state.canvasViewScale}</div>
         <button style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
           Center

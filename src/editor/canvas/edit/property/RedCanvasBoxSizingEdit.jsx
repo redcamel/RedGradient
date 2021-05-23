@@ -20,13 +20,12 @@ class RedCanvasBoxSizingEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     return <div style={style.container}>
-
       <div style={{
         display: 'flex',
         alignItems: 'center'
       }}>
-
-        boxSizing <RedSelect
+        <div className={'ui_subTitle'}>boxSizing</div>
+         <RedSelect
         width={'90'}
         value={canvasInfo['box_sizing']}
         options={['border-box', 'content-box']}

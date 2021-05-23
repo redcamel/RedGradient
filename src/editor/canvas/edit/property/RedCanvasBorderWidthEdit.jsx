@@ -52,6 +52,7 @@ class RedCanvasBorderWidthEdit extends React.Component {
           </div>
         </div>
       </div>
+      <div style={{marginTop:'6px'}}/>
       {
         canvasInfo['border_width_mergeMode']
           ? <div style={style.container}>

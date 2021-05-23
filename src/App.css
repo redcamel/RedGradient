@@ -311,3 +311,10 @@ option {
     border-top: 1px solid rgb(71, 71, 71);
     border-bottom: 1px solid rgb(26, 26, 26);
 }
+.ui_subTitle {
+    padding :3px 10px;
+    background: linear-gradient(180deg, #272727, rgba(0,0,0,0));
+    border-radius: 6px 10px 0px 0px;
+    color : #efb26a;
+    margin-right: 5px;
+}

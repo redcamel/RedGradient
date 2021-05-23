@@ -20,7 +20,7 @@ function drawCanvasEditUI() {
 
     </div>
     <div style={{display: 'flex', justifyContent: 'space-between'}}>
-      background
+      <div className={'ui_subTitle'}>background</div>
       <div
         className={rootComponentState.bgColor === 'transparent' ? 'transparent_checker' : ''}
         style={{
