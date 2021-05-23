@@ -8,6 +8,7 @@
 import React from "react";
 import DataLayer from "../data/DataLayer.js";
 import RedTitle from "../../core/RedTitle.jsx";
+import RedAddLayerSet from "./RedAddLayerSet.jsx";
 
 const options = [
   'black',
@@ -16,6 +17,13 @@ const options = [
 ];
 
 class RedLayerTop extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openPanel: false
+    }
+  }
+
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
@@ -24,6 +32,15 @@ class RedLayerTop extends React.Component {
     return <div>
       <RedTitle title={'Layer Edit'}/>
       <div style={style.addLayer}>
+        <div style={style.addLayerItem}
+             onClick={() => {
+               this.setState({openPanel: true})
+               // let targetLayer;
+               // layers.splice(0, 0, targetLayer = new DataLayer());
+               // rootComponent.updateRootState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
+             }}
+        >Add Layer Set
+        </div>
         <div style={style.addLayerItem}
              onClick={() => {
                let targetLayer;
@@ -36,6 +53,10 @@ class RedLayerTop extends React.Component {
           {options.map(v => <option value={v}>{v}</option>)}
         </select>
       </div>
+      {this.state.openPanel ? <RedAddLayerSet
+        HD_cancel={e => this.setState({openPanel: false})}
+        HD_apply={e => this.setState({openPanel: false})}
+      /> : ''}
     </div>;
   }
 }

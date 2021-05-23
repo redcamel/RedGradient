@@ -41,6 +41,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "clean-css": "^5.1.2",
+    "gsap": "^3.6.1",
     "react-syntax-highlighter": "^15.4.3"
   },
   "homepage": "./"
