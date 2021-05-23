@@ -25,13 +25,15 @@ const CALC_GRADIENT = {
       //TODO - divideTxt 이거 좀더 보강해야함
       let colorRangeTxt = '';
       if (v['useRange']) {
+        colorRangeTxt = `calc(${v['range']}${v['rangeUnit']} ${offsetTxt})`;
+        let colorRangeEndTxt = `calc(${v['rangeEnd']}${v['rangeUnit']} ${offsetTxt})`;
         let divideTxt = '';
         if (data['type'] === GRADIENT_TYPE.CONIC || data['type'] === GRADIENT_TYPE.REPEAT_CONIC) divideTxt = v['useDivide'] ? `,${v['colorEnd']} calc(${v['range']}${v['rangeUnit']} ${offsetTxt})` : '';
         else divideTxt = v['useDivide'] ? `,${v['colorEnd']} calc(${v['range']}${v['rangeUnit']} + 1px ${offsetTxt})` : '';
         let divideEndTxt = '';
         if (data['type'] === GRADIENT_TYPE.CONIC || data['type'] === GRADIENT_TYPE.REPEAT_CONIC) divideEndTxt = v['useDivideEnd'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['rangeEnd']}${v['rangeUnit']} ${offsetTxt})` : '';
         else divideEndTxt = v['useDivideEnd'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['rangeEnd']}${v['rangeUnit']} + 1px ${offsetTxt})` : '';
-        return `${v['color']} ${v['range']}${v['rangeUnit']} ${divideTxt}, ${v['colorEnd']} ${v['rangeEnd']}${v['rangeUnit']} ${divideEndTxt}`;
+        return `${v['color']} ${colorRangeTxt} ${divideTxt}, ${v['colorEnd']} ${colorRangeEndTxt} ${divideEndTxt}`;
       } else {
         colorRangeTxt = `calc(${v['range']}${v['rangeUnit']} ${offsetTxt})`;
         let divideTxt = '';
