@@ -127,7 +127,7 @@ class RedGradientColorItem extends React.Component {
         onMouseDown={() => this.props.HD_active(this.getIndex())}
       >
 
-        <div style={{display: 'flex', padding: '4px 4px 0px',}}>
+        <div style={{display: 'flex', padding: '4px 4px 0px'}}>
           <div>
             <div style={{whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row'}}>
               <div
@@ -226,7 +226,7 @@ class RedGradientColorItem extends React.Component {
             {/* TODO - 단위모델 변경 처리*/}
 
             <RedNumber
-              width={colorData['useRange'] ? '80px' : 'auto'}
+              width={colorData['useRange'] ? '75px' : 'auto'}
               value={colorData['range'] || 0}
               HD_onInput={e => {
                 colorData['range'] = +e.target.value;
@@ -243,7 +243,7 @@ class RedGradientColorItem extends React.Component {
             />
             {
               colorData['useRange'] ? <RedNumber
-                width={'80px'}
+                width={'75px'}
                 value={colorData['rangeEnd'] || 0}
                 HD_onInput={e => {
                   colorData['rangeEnd'] = +e.target.value;
