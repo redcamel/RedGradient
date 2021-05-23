@@ -20,7 +20,7 @@ const CALC_GRADIENT = {
     if (checkVisible && !data['visible']) return 'linear-gradient(45deg, transparent,transparent )';
     if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
     const offset = data['offset'] || 0
-    const offsetUnit = data['type'] === GRADIENT_TYPE.CONIC|| data['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (data['offsetUnit'] || '%')
+    const offsetUnit = data['type'] === GRADIENT_TYPE.CONIC|| data['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (data['offsetUnit'] === 'deg'? '%' : (data['offsetUnit'] || '%'))
     const offsetTxt = `${offset<0 ? '-' : '+'} ${Math.abs(offset) + offsetUnit}`
     const gradients = data['colorList'].map((v, index) => {
       //TODO - divideTxt 이거 좀더 보강해야함

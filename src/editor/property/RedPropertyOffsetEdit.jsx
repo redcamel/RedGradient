@@ -21,12 +21,14 @@ class RedPropertyOffsetEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     if(activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC){
-      activeSubData['offsetUnit'] = '%'
+      activeSubData['offsetUnit'] = 'deg'
     }else{
-      if(activeSubData['offsetUnit']==='%') activeSubData['offsetUnit'] = '%'
+      if(activeSubData['offsetUnit']==='deg') activeSubData['offsetUnit'] = '%'
     }
-
     const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['deg'] : ['px', '%']
+    {
+      activeSubData['offsetUnit'] = activeSubData['type'] === GRADIENT_TYPE.CONIC|| activeSubData['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (activeSubData['offsetUnit'] === 'deg'? '%' : (activeSubData['offsetUnit'] || '%'))
+    }
     return <div>
 
       start offset
@@ -38,7 +40,7 @@ class RedPropertyOffsetEdit extends React.Component {
             activeSubData['offset'] = e.target.value;
             rootComponent.updateRootState({});
           }}/>
-        <RedSelect value={activeSubData['offsetUnit']} options={[unitList]} HD_change={e => {
+        <RedSelect value={activeSubData['offsetUnit']} options={unitList} HD_change={e => {
           activeSubData['offsetUnit'] = e.target.value;
           rootComponent.updateRootState({});
         }}/>
