@@ -12,6 +12,7 @@ import {faExchangeAlt, faSave} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RedPreset from "./preset/RedPreset.jsx";
 import RedPresetBorder from "../canvas/edit/preset/RedPresetBorder.jsx";
+import RedPropertyOffsetEdit from "./RedPropertyOffsetEdit.jsx";
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
 class RedGradientColorEdit extends React.Component {
@@ -146,11 +147,12 @@ class RedGradientColorEdit extends React.Component {
         ref={this.refBar}
         className={'transparent_checker'}
         style={{border: '1px solid rgba(0,0,0,1)'}}
-
       >
         {this.renderGradientColorList(activeSubData)}
       </div>
-
+      <div style={{marginTop: '20px'}}>
+        <RedPropertyOffsetEdit rootComponent={rootComponent}/>
+      </div>
       <div style={{marginTop: '20px'}}>
 
         {
