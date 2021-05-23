@@ -99,7 +99,8 @@ class RedAddLayerSet extends React.Component {
               console.log(tSTween)
               tS = tSTween.ratio * 100
               tE = tETween.ratio * 100
-              tempColorList.push(new DataColor(`rgba(255,0,0,${index / rangeList.length /2 +0.5})`, tS, '%', false, false, true, tE))
+              let t0 = index / rangeList.length /2 +0.5
+              tempColorList.push(new DataColor(`rgba(255,${255 * t0},${255-255 * t0},${t0})`, tS, '%', false, false, true, tE))
               return <div style={{padding: '5px', border: '1px solid red'}}>
                 <div>{tS.toFixed()}% ~</div>
                 <div>{tE.toFixed()}%</div>
