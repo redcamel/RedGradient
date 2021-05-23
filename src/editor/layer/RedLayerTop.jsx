@@ -58,7 +58,7 @@ class RedLayerTop extends React.Component {
         HD_apply={v => {
           let t0 = new DataLayer()
           t0.items[0].colorList = v
-          layers.push(t0)
+          layers.splice(0,0,t0)
           this.setState({openPanel: false})
           rootComponent.updateRootState({layers : rootComponentState.layers})
         }}
