@@ -264,18 +264,35 @@ class RedGradientColorItem extends React.Component {
               let tUnit = e.target.value;
               if (colorData['rangeUnit'] !== tUnit) {
                 if(colorData['rangeUnit']==='px'){
-                  if(tUnit==='%') colorData['range'] =  colorData['range'] / canvasInfo['width'] * 100;
-                  else if(tUnit==='deg') colorData['range'] = 360 *  colorData['range'] / canvasInfo['width'];
+                  if(tUnit==='%') {
+                    colorData['range'] =  colorData['range'] / canvasInfo['width'] * 100;
+                    colorData['rangeEnd'] =  colorData['rangeEnd'] / canvasInfo['width'] * 100;
+                  }
+                  else if(tUnit==='deg') {
+                    colorData['range'] = 360 *  colorData['range'] / canvasInfo['width'];
+                    colorData['rangeEnd'] = 360 *  colorData['rangeEnd'] / canvasInfo['width'];
+                  }
                 }else if(colorData['rangeUnit']==='%'){
-                  if(tUnit==='px') colorData['range'] =  canvasInfo['width'] * colorData['range'] / 100;
-                  else if(tUnit==='deg') colorData['range'] = 360 *  colorData['range'] / 100;
+                  if(tUnit==='px') {
+                    colorData['range'] =  canvasInfo['width'] * colorData['range'] / 100;
+                    colorData['rangeEnd'] =  canvasInfo['width'] * colorData['rangeEnd'] / 100;
+                  }
+                  else if(tUnit==='deg') {
+                    colorData['range'] = 360 *  colorData['range'] / 100;
+                    colorData['rangeEnd'] = 360 *  colorData['rangeEnd'] / 100;
+                  }
                 }else if(colorData['rangeUnit']==='deg'){
-                  if(tUnit==='px') colorData['range'] =  canvasInfo['width'] * colorData['range'] / 360
-                  else if(tUnit==='%') colorData['range'] = colorData['range'] / 360 * 100;
+                  if(tUnit==='px') {
+                    colorData['range'] =  canvasInfo['width'] * colorData['range'] / 360
+                    colorData['rangeEnd'] =  canvasInfo['width'] * colorData['rangeEnd'] / 360
+
+                  }
+                  else if(tUnit==='%') {
+                    colorData['range'] = colorData['range'] / 360 * 100;
+                    colorData['rangeEnd'] = colorData['rangeEnd'] / 360 * 100;
+                  }
                 }
-                // if (colorData['rangeUnit'] === 'deg') colorData['range'] = 360 * colorData['range'] / 100;
-                // else if (colorData['rangeUnit'] === '%') colorData['range'] = canvasInfo['width'] * colorData['range'] / 100;
-                // else colorData['range'] = colorData['range'] / canvasInfo['width'] * 100;
+
               }
               colorData['rangeUnit'] = tUnit;
               rootComponent.updateRootState({});
