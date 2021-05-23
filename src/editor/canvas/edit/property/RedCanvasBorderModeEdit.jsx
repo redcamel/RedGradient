@@ -7,7 +7,6 @@
  */
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
-import RedNumber from "../../../../core/RedNumber.jsx";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedCanvasBorderRadiusEdit from "./RedCanvasBorderRadiusEdit.jsx";
 import RedCanvasBorderWidthEdit from "./RedCanvasBorderWidthEdit.jsx";

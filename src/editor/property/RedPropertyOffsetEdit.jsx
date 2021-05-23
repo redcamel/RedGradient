@@ -20,20 +20,19 @@ class RedPropertyOffsetEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    if(activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC){
+    if (activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC) {
       activeSubData['offsetUnit'] = 'deg'
-    }else{
-      if(activeSubData['offsetUnit']==='deg') activeSubData['offsetUnit'] = '%'
+    } else {
+      if (activeSubData['offsetUnit'] === 'deg') activeSubData['offsetUnit'] = '%'
     }
     const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['deg'] : ['px', '%']
     {
-      activeSubData['offsetUnit'] = activeSubData['type'] === GRADIENT_TYPE.CONIC|| activeSubData['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (activeSubData['offsetUnit'] === 'deg'? '%' : (activeSubData['offsetUnit'] || '%'))
+      activeSubData['offsetUnit'] = activeSubData['type'] === GRADIENT_TYPE.CONIC || activeSubData['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (activeSubData['offsetUnit'] === 'deg' ? '%' : (activeSubData['offsetUnit'] || '%'))
     }
     return <div>
-
-      start offset
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <RedNumber
+          title={'start offset'}
           width={'80px'}
           value={activeSubData['offset'] || 0}
           HD_onInput={e => {

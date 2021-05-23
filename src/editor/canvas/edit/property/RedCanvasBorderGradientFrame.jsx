@@ -29,7 +29,6 @@ class RedCanvasBorderGradientFrame extends React.Component {
 
   render() {
     return <>
-      {/*<RedLayer rootComponent={this}/>*/}
       <RedCanvasBorderModeGradientEdit
         rootComponent={this}/>
       {this.state.activeSubData ? <RedPropertyBorderGradientEdit rootComponent={this}/> : ''}

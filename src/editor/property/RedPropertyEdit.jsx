@@ -35,6 +35,7 @@ class RedPropertyEdit extends React.Component {
           <div style={{...style.itemContainer}}>
             <div>
               <RedTextField
+                title={'name'}
                 width={'calc(100% - 4px)'}
                 value={data['title']} HD_onInput={e => {
                 data['title'] = e.target.value;
@@ -57,7 +58,7 @@ class RedPropertyEdit extends React.Component {
                 </> : ''}
               <div style={style.divide}/>
               <RedPropertySizeEdit rootComponent={rootComponent}/>
-              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC || data.type === GRADIENT_TYPE.REPEAT_CONIC? <>
+              {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC || data.type === GRADIENT_TYPE.REPEAT_CONIC ? <>
                 <div style={style.divide}/>
                 <RedPropertyAtEdit rootComponent={rootComponent}/>
               </> : ''}

@@ -21,10 +21,10 @@ class RedPropertySizeEdit extends React.Component {
     const activeSubData = rootComponentState.activeSubData;
     return <div>
 
-      Size
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <RedNumber
-          width={'80px'}
+          title={'SizeW'}
+          width={'75px'}
           value={activeSubData['size']['w'] || 0}
           HD_onInput={e => {
             activeSubData['size']['w'] = e.target.value;
@@ -34,8 +34,10 @@ class RedPropertySizeEdit extends React.Component {
           activeSubData['size']['wUnit'] = e.target.value;
           rootComponent.updateRootState({});
         }}/>
+        <div style={{width: '5px'}}/>
         <RedNumber
-          width={'80px'}
+          title={'SizeH'}
+          width={'75px'}
           value={activeSubData['size']['h'] || 0}
           HD_onInput={e => {
             activeSubData['size']['h'] = e.target.value;

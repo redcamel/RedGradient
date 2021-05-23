@@ -47,13 +47,14 @@ class RedPropertyDegreeEdit extends React.Component {
     return <div style={{display: 'flex', alignItems: 'center'}}>
       {
         <>
-          Deg <RedNumber
-          width={'71px'}
-          value={deg || 0}
-          HD_onInput={e => {
-            activeSubData['deg'] = e.target.value;
-            rootComponent.updateRootState({});
-          }}/>
+          <RedNumber
+            title={'Deg'}
+            width={'71px'}
+            value={deg || 0}
+            HD_onInput={e => {
+              activeSubData['deg'] = e.target.value;
+              rootComponent.updateRootState({});
+            }}/>
           <div style={{textAlign: 'center', marginLeft: '10px '}}>
             <div
               style={style.box}

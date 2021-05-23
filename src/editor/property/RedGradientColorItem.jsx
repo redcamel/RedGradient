@@ -25,7 +25,6 @@ const HD_move = e => {
     //TODO - FIXME 사이즈 자동으로 결정되게 변경해야함
     let percentX = (tX / (targetRefBar.current.clientWidth + 16) * 100);
     percentX = Math.max(Math.min(100, percentX), 0);
-
     if (targetColorData.rangeUnit === '%') {
       targetColorData[targetRange] = percentX;
     } else if (targetColorData.rangeUnit === 'px') {
@@ -90,7 +89,7 @@ class RedGradientColorItem extends React.Component {
     const activeYn = this.props.activeYn;
     const colorInfo = colorData['color'];
     if (!colorData['useRange']) colorData['rangeEnd'] = colorData['range'];
-    const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? [ '%','deg'] : ['px', '%']
+    const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['%', 'deg'] : ['px', '%']
     return <div>
       <button
         style={style.add}
@@ -222,7 +221,7 @@ class RedGradientColorItem extends React.Component {
               </div>
             </div>
           </div>
-          <div >
+          <div>
             {/* TODO - 단위모델 변경 처리*/}
 
             <RedNumber
@@ -263,36 +262,31 @@ class RedGradientColorItem extends React.Component {
             <RedSelect value={colorData['rangeUnit']} options={unitList} HD_change={e => {
               let tUnit = e.target.value;
               if (colorData['rangeUnit'] !== tUnit) {
-                if(colorData['rangeUnit']==='px'){
-                  if(tUnit==='%') {
-                    colorData['range'] =  colorData['range'] / canvasInfo['width'] * 100;
-                    colorData['rangeEnd'] =  colorData['rangeEnd'] / canvasInfo['width'] * 100;
+                if (colorData['rangeUnit'] === 'px') {
+                  if (tUnit === '%') {
+                    colorData['range'] = colorData['range'] / canvasInfo['width'] * 100;
+                    colorData['rangeEnd'] = colorData['rangeEnd'] / canvasInfo['width'] * 100;
+                  } else if (tUnit === 'deg') {
+                    colorData['range'] = 360 * colorData['range'] / canvasInfo['width'];
+                    colorData['rangeEnd'] = 360 * colorData['rangeEnd'] / canvasInfo['width'];
                   }
-                  else if(tUnit==='deg') {
-                    colorData['range'] = 360 *  colorData['range'] / canvasInfo['width'];
-                    colorData['rangeEnd'] = 360 *  colorData['rangeEnd'] / canvasInfo['width'];
+                } else if (colorData['rangeUnit'] === '%') {
+                  if (tUnit === 'px') {
+                    colorData['range'] = canvasInfo['width'] * colorData['range'] / 100;
+                    colorData['rangeEnd'] = canvasInfo['width'] * colorData['rangeEnd'] / 100;
+                  } else if (tUnit === 'deg') {
+                    colorData['range'] = 360 * colorData['range'] / 100;
+                    colorData['rangeEnd'] = 360 * colorData['rangeEnd'] / 100;
                   }
-                }else if(colorData['rangeUnit']==='%'){
-                  if(tUnit==='px') {
-                    colorData['range'] =  canvasInfo['width'] * colorData['range'] / 100;
-                    colorData['rangeEnd'] =  canvasInfo['width'] * colorData['rangeEnd'] / 100;
-                  }
-                  else if(tUnit==='deg') {
-                    colorData['range'] = 360 *  colorData['range'] / 100;
-                    colorData['rangeEnd'] = 360 *  colorData['rangeEnd'] / 100;
-                  }
-                }else if(colorData['rangeUnit']==='deg'){
-                  if(tUnit==='px') {
-                    colorData['range'] =  canvasInfo['width'] * colorData['range'] / 360
-                    colorData['rangeEnd'] =  canvasInfo['width'] * colorData['rangeEnd'] / 360
-
-                  }
-                  else if(tUnit==='%') {
+                } else if (colorData['rangeUnit'] === 'deg') {
+                  if (tUnit === 'px') {
+                    colorData['range'] = canvasInfo['width'] * colorData['range'] / 360
+                    colorData['rangeEnd'] = canvasInfo['width'] * colorData['rangeEnd'] / 360
+                  } else if (tUnit === '%') {
                     colorData['range'] = colorData['range'] / 360 * 100;
                     colorData['rangeEnd'] = colorData['rangeEnd'] / 360 * 100;
                   }
                 }
-
               }
               colorData['rangeUnit'] = tUnit;
               rootComponent.updateRootState({});
@@ -305,7 +299,7 @@ class RedGradientColorItem extends React.Component {
               }}
             >Del
             </button>
-            <div style={{display: 'flex', alignItems: 'center',margin : '5px 0px',justifyContent: 'space-between'}}>
+            <div style={{display: 'flex', alignItems: 'center', margin: '5px 0px', justifyContent: 'space-between'}}>
               {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
                                             onClick={e => {
                                               colorData['colorEnd'] = colorData['color']
@@ -341,7 +335,7 @@ class RedGradientColorItem extends React.Component {
           <div style={style.line} ref={this.refBar}/>
           <div style={{
             ...style.ball,
-            left: `${colorData['rangeUnit'] === 'deg' ? colorData['range']/360 * 100 : colorData['rangeUnit'] === 'px' ? colorData['range'] / canvasInfo['width'] * 100 : colorData['range']}%`,
+            left: `${colorData['rangeUnit'] === 'deg' ? colorData['range'] / 360 * 100 : colorData['rangeUnit'] === 'px' ? colorData['range'] / canvasInfo['width'] * 100 : colorData['range']}%`,
             background: activeYn ? '#5e7ade' : '#fff'
           }}
                onMouseDown={() => {
@@ -357,7 +351,7 @@ class RedGradientColorItem extends React.Component {
           {
             colorData.useRange ? <div style={{
               ...style.ball,
-              left: `${colorData['rangeUnit'] === 'deg' ? colorData['rangeEnd']/360 * 100 : colorData['rangeUnit'] === 'px' ? colorData['rangeEnd'] / canvasInfo['width'] * 100 : colorData['rangeEnd']}%`,
+              left: `${colorData['rangeUnit'] === 'deg' ? colorData['rangeEnd'] / 360 * 100 : colorData['rangeUnit'] === 'px' ? colorData['rangeEnd'] / canvasInfo['width'] * 100 : colorData['rangeEnd']}%`,
               background: activeYn ? '#5e7ade' : '#fff'
             }}
                                       onMouseDown={() => {

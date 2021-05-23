@@ -25,14 +25,14 @@ class RedCanvasBoxSizingEdit extends React.Component {
         alignItems: 'center'
       }}>
         <div className={'ui_subTitle'}>boxSizing</div>
-         <RedSelect
-        width={'90'}
-        value={canvasInfo['box_sizing']}
-        options={['border-box', 'content-box']}
-        HD_change={e => {
-          canvasInfo['box_sizing'] = e.target.value;
-          rootComponent.updateRootState({});
-        }}/>
+        <RedSelect
+          width={'90'}
+          value={canvasInfo['box_sizing']}
+          options={['border-box', 'content-box']}
+          HD_change={e => {
+            canvasInfo['box_sizing'] = e.target.value;
+            rootComponent.updateRootState({});
+          }}/>
 
       </div>
     </div>;

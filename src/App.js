@@ -21,6 +21,7 @@ import RedPreset from "./editor/property/preset/RedPreset.jsx";
 import DataLayer from "./editor/data/DataLayer.js";
 import BORDER_REPEAT_TYPE from "./editor/BORDER_REPEAT_TYPE.js";
 import CleanCSS from "clean-css"
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -45,8 +46,8 @@ class App extends React.Component {
       let targetState = this.history.pop()
       if (targetState) {
         this.historyRedo.push(JSON.parse(JSON.stringify(targetState)))
-        targetState = this.history[this.history.length-1]
-        if(targetState){
+        targetState = this.history[this.history.length - 1]
+        if (targetState) {
           this.state = JSON.parse(JSON.stringify(targetState))
           this.state.activeLayer = this.state.layers[0];
           this.state.activeSubData = this.state.activeLayer['items'][0];
@@ -148,11 +149,10 @@ class App extends React.Component {
       });
       containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
       containerCssText = `.result {
-          background : ${JSON.stringify(CALC_GRADIENT.calcGradients(this.state.layers,true,this.state.bgColor), null, 2).replace(/"/g, '')};
+          background : ${JSON.stringify(CALC_GRADIENT.calcGradients(this.state.layers, true, this.state.bgColor), null, 2).replace(/"/g, '')};
           background-blend-mode : ${CALC_GRADIENT.calcBlendMode(this.state.layers)};
           ${containerCssText}
           }`.replace(/\s\s+/g, ' ')
-
       containerCssText = new CleanCSS({}).minify(containerCssText).styles;
     }
     this.checkUnloadEvent()

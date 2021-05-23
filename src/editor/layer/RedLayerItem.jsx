@@ -20,13 +20,14 @@ import CALC_GRADIENT from "../CALC_GRADIENT";
 import RedLayerSubItem from "./RedLayerSubItem.jsx";
 
 let startDragLayer
+
 //TODO - 여기 정리해야함
 class RedLayerItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       SIZE: props.size || 100,
-      dragOverYn  :false
+      dragOverYn: false
     };
   }
 
@@ -34,58 +35,52 @@ class RedLayerItem extends React.Component {
     data.visible = !data.visible;
     this.props.rootComponent.updateRootState({});
   }
+
   handleDragStart(e) {
     console.log('start ///////////////////')
     console.log(this)
     console.log(this.props.layer)
-
     RedLayerItem.clearDragInfo()
     RedLayerSubItem.clearDragInfo()
     startDragLayer = this.props.layer
-
-
   }
+
   handleDragEnter(e) {
     e.preventDefault();
     e.stopPropagation();
-
   }
 
   handleDragLeave(e) {
     e.preventDefault();
     e.stopPropagation();
-    if(startDragLayer) this.setState({dragOverYn : false})
+    if (startDragLayer) this.setState({dragOverYn: false})
   }
-
 
   handleDragOver(e) {
     e.preventDefault();
     e.stopPropagation();
-    if(startDragLayer) this.setState({dragOverYn : true})
+    if (startDragLayer) this.setState({dragOverYn: true})
   }
 
   handleDrop(e) {
     e.preventDefault();
     e.stopPropagation();
-    if(startDragLayer){
+    if (startDragLayer) {
       console.log('drop ///////////////////')
       console.log(this)
-      this.setState({dragOverYn : false})
-
+      this.setState({dragOverYn: false})
       const layers = this.props.rootComponent.state.layers
       const dropAreaLayer = this.props.layer
-      const dstIDX  = layers.indexOf(dropAreaLayer)
-      const startIDX  = layers.indexOf(startDragLayer)
-      layers.splice(startIDX,1)
-      layers.splice(dstIDX,0,startDragLayer)
-
+      const dstIDX = layers.indexOf(dropAreaLayer)
+      const startIDX = layers.indexOf(startDragLayer)
+      layers.splice(startIDX, 1)
+      layers.splice(dstIDX, 0, startDragLayer)
       RedLayerItem.clearDragInfo()
       RedLayerSubItem.clearDragInfo()
       this.props.rootComponent.updateRootState({})
     }
-
-
   }
+
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
@@ -99,97 +94,98 @@ class RedLayerItem extends React.Component {
         margin: '4px', padding: '0px 4px'
       }}
     >
-     <div
+      <div
 
-       draggable={true}
-       onDragStart={e => this.handleDragStart(e)}
-       onDrop={e => this.handleDrop(e)}
-       onDragOver={e => this.handleDragOver(e)}
-       onDragEnter={e => this.handleDragEnter(e)}
-       onDragLeave={e => this.handleDragLeave(e)}
-     >
-       {this.state.dragOverYn ? <div style={{
-         background : 'red',
-         padding : '4px',
-         margin : '4px 0px',
-         borderRadius: '4px'
-       }}>drop here</div> : ''}
-       <div
-         className={'layerItemTitle'}
-         style={{
-           cursor: 'pointer',
-           textOverflow: 'ellipsis',
-           width: '123px',
-           overflow: 'hidden',
-           whiteSpace: 'nowrap'
-         }}
-         onClick={() => {
-           layer.openYn = !layer.openYn;
-           rootComponent.updateRootState({});
-         }}
-       >
+        draggable={true}
+        onDragStart={e => this.handleDragStart(e)}
+        onDrop={e => this.handleDrop(e)}
+        onDragOver={e => this.handleDragOver(e)}
+        onDragEnter={e => this.handleDragEnter(e)}
+        onDragLeave={e => this.handleDragLeave(e)}
+      >
+        {this.state.dragOverYn ? <div style={{
+          background: 'red',
+          padding: '4px',
+          margin: '4px 0px',
+          borderRadius: '4px'
+        }}>drop here</div> : ''}
+        <div
+          className={'layerItemTitle'}
+          style={{
+            cursor: 'pointer',
+            textOverflow: 'ellipsis',
+            width: '123px',
+            overflow: 'hidden',
+            whiteSpace: 'nowrap'
+          }}
+          onClick={() => {
+            layer.openYn = !layer.openYn;
+            rootComponent.updateRootState({});
+          }}
+        >
 
-         <FontAwesomeIcon
-           icon={layer.openYn ? faFolderOpen : faFolder}
-           style={{fontSize: '11px', marginRight: '5px',}}
-         />
-         {layer.title}
-       </div>
-       <div>
-         <button className={'layerVisible'} onClick={() => this._toggleVisible(layer)}>
-           <FontAwesomeIcon icon={layer.visible ? faEye : faEyeSlash}/>
-         </button>
-         <button className={'layerDel'}
-                 style={{opacity: layers.length > 1 ? 1 : 0.25}}
-                 onClick={e => {
-                   e.stopPropagation();
-                   if (layers.length > 1) {
-                     let idx = layers.indexOf(layer);
-                     layers.splice(idx, 1);
-                     let targetLayer;
-                     if (layers[idx]) targetLayer = layers[idx];
-                     else targetLayer = layers[0];
-                     rootComponent.updateRootState({
-                       activeLayer: targetLayer,
-                       activeSubData: targetLayer['items'][0]
-                     });
-                   }
-                 }}
-         ><FontAwesomeIcon icon={faMinusCircle}/>
-         </button>
-         <button className={'layerAdd'}
-                 onClick={e => {
-                   e.stopPropagation();
-                   layer.items.splice(0, 0, new DataItem());
-                   rootComponent.updateRootState({activeSubData: layer.items[0]});
-                 }}
-         ><FontAwesomeIcon icon={faPlusCircle}/>
-         </button>
-       </div>
-       <div
-         className={'transparent_checker'}
-         style={{
-           width: `${this.state.SIZE}px`,
-           height: `${this.state.SIZE}px`,
-           cursor: 'pointer',
-           borderRadius: '4px',
-           overflow: 'hidden',
-           transition: 'height 0.2s'
-         }}
-         onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: layer.items[0]})}
+          <FontAwesomeIcon
+            icon={layer.openYn ? faFolderOpen : faFolder}
+            style={{fontSize: '11px', marginRight: '5px',}}
+          />
+          {layer.title}
+        </div>
+        <div>
+          <button className={'layerVisible'} onClick={() => this._toggleVisible(layer)}>
+            <FontAwesomeIcon icon={layer.visible ? faEye : faEyeSlash}/>
+          </button>
+          <button className={'layerDel'}
+                  style={{opacity: layers.length > 1 ? 1 : 0.25}}
+                  onClick={e => {
+                    e.stopPropagation();
+                    if (layers.length > 1) {
+                      let idx = layers.indexOf(layer);
+                      layers.splice(idx, 1);
+                      let targetLayer;
+                      if (layers[idx]) targetLayer = layers[idx];
+                      else targetLayer = layers[0];
+                      rootComponent.updateRootState({
+                        activeLayer: targetLayer,
+                        activeSubData: targetLayer['items'][0]
+                      });
+                    }
+                  }}
+          ><FontAwesomeIcon icon={faMinusCircle}/>
+          </button>
+          <button className={'layerAdd'}
+                  onClick={e => {
+                    e.stopPropagation();
+                    layer.items.splice(0, 0, new DataItem());
+                    rootComponent.updateRootState({activeSubData: layer.items[0]});
+                  }}
+          ><FontAwesomeIcon icon={faPlusCircle}/>
+          </button>
+        </div>
+        <div
+          className={'transparent_checker'}
+          style={{
+            width: `${this.state.SIZE}px`,
+            height: `${this.state.SIZE}px`,
+            cursor: 'pointer',
+            borderRadius: '4px',
+            overflow: 'hidden',
+            transition: 'height 0.2s'
+          }}
+          onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: layer.items[0]})}
 
-       >
-         <div className={'layerItem'}
-              style={{background: `${CALC_GRADIENT.calcGradientItems(layer['items'], false, layer)},${this.props.layerBgColor}`}}/>
-       </div>
-     </div>
+        >
+          <div className={'layerItem'}
+               style={{background: `${CALC_GRADIENT.calcGradientItems(layer['items'], false, layer)},${this.props.layerBgColor}`}}/>
+        </div>
+      </div>
       <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem
         layer={layer} item={item}
-                                                                    rootComponent={rootComponent}
-                                                                    size={this.state.SIZE}/>) : ''}</div>
+        rootComponent={rootComponent}
+        size={this.state.SIZE}/>) : ''}</div>
     </div>;
   }
 }
+
 RedLayerItem.clearDragInfo = () => {
   startDragLayer = null
 }

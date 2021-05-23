@@ -52,12 +52,12 @@ class RedCanvasBorderWidthEdit extends React.Component {
           </div>
         </div>
       </div>
-      <div style={{marginTop:'6px'}}/>
+      <div style={{marginTop: '6px'}}/>
       {
         canvasInfo['border_width_mergeMode']
           ? <div style={style.container}>
-            width
             <RedNumber
+              title={'width'}
               width={'51px'}
               value={canvasInfo['border_width'] || 0}
               HD_onInput={e => {
@@ -74,8 +74,8 @@ class RedCanvasBorderWidthEdit extends React.Component {
             {
               canvasInfo['border_width_split'].map((v, index) => {
                 return <div>
-                  {names[index]}
                   <RedNumber
+                    title={names[index]}
                     width={'101px'}
                     value={v || 0}
                     HD_onInput={e => {

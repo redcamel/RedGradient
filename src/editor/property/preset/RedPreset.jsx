@@ -137,7 +137,7 @@ RedPreset.exportPreset = () => {
   a.click();
   URL.revokeObjectURL(a.href);
 }
-RedPreset.checkValidate=(v)=> {
+RedPreset.checkValidate = (v) => {
   /**
    * JSON 파싱이 되어야하고..
    * 빈배열은 그냥 통과
@@ -147,11 +147,10 @@ RedPreset.checkValidate=(v)=> {
   let result = true;
   try {
     let t0 = JSON.parse(v);
-    if(t0 instanceof Array) {
-      if(t0.length===0) result = true
+    if (t0 instanceof Array) {
+      if (t0.length === 0) result = true
       else if (!t0[0].hasOwnProperty('data') || !t0[0]['data'].hasOwnProperty('colorList')) result = false;
-    }
-    else result = false
+    } else result = false
   } catch (e) {
     result = false;
   }
@@ -164,13 +163,11 @@ RedPreset.importPreset = (context) => {
   a.click();
   a.onchange = e => {
     let fileReader = new FileReader();
-
     fileReader.onload = evt => {
-      if(RedPresetBorder.checkValidate(evt.target.result)) {
+      if (RedPresetBorder.checkValidate(evt.target.result)) {
         localStorage.setItem('userPresetList', evt.target.result)
         context.setState({})
-      }
-      else alert('RedGradient Preset 형식의 파일이 아닙니다.')
+      } else alert('RedGradient Preset 형식의 파일이 아닙니다.')
     }
     fileReader.readAsText(e.target.files[0]);
   };

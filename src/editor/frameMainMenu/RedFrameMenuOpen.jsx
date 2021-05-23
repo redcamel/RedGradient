@@ -31,7 +31,6 @@ class RedFrameMenuOpen extends React.Component {
       result = false;
     }
     return result;
-
   }
 
   render() {
@@ -54,14 +53,14 @@ class RedFrameMenuOpen extends React.Component {
                fileReader.onload = evt => {
                  rootComponent.setNewCanvas(new DataCanvas());
                  requestAnimationFrame(e => {
-                   if(this.checkValidate(evt.target.result)) rootComponent.setNewCanvas(JSON.parse(evt.target.result));
+                   if (this.checkValidate(evt.target.result)) rootComponent.setNewCanvas(JSON.parse(evt.target.result));
                    else alert('RedGradient 형식의 파일이 아닙니다.')
                  });
                };
                fileReader.readAsText(e.target.files[0]);
              };
            }}
-      ><FontAwesomeIcon icon={faFolderOpen} />
+      ><FontAwesomeIcon icon={faFolderOpen}/>
       </div>
     </div>;
   }

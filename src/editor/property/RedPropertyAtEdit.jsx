@@ -20,9 +20,10 @@ class RedPropertyAtEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     return <div>
-      Center
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div className={'ui_subTitle'}>Center</div>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0px 10px'}}>
         <RedNumber
+          title={'cX'}
           width={'80px'}
           value={activeSubData['at']['x'] || 0}
           HD_onInput={e => {
@@ -33,7 +34,9 @@ class RedPropertyAtEdit extends React.Component {
           activeSubData['at']['xUnit'] = e.target.value;
           rootComponent.updateRootState({});
         }}/>
+        <div style={{width: '5px'}}/>
         <RedNumber
+          title={'cY'}
           width={'80px'}
           value={activeSubData['at']['y'] || 0}
           HD_onInput={e => {

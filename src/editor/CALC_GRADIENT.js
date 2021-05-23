@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import GRADIENT_TYPE from "./GRADIENT_TYPE";
 import REPEAT_TYPE from "./REPEAT_TYPE";
 import ENDING_SHAPE_TYPE from "./ENDING_SHAPE_TYPE";
@@ -20,8 +19,8 @@ const CALC_GRADIENT = {
     if (checkVisible && !data['visible']) return 'linear-gradient(45deg, transparent,transparent )';
     if (layer && !layer['visible']) return 'linear-gradient(45deg, transparent,transparent )';
     const offset = data['offset'] || 0
-    const offsetUnit = data['type'] === GRADIENT_TYPE.CONIC|| data['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (data['offsetUnit'] === 'deg'? '%' : (data['offsetUnit'] || '%'))
-    const offsetTxt = `${offset<0 ? '-' : '+'} ${Math.abs(offset) + offsetUnit}`
+    const offsetUnit = data['type'] === GRADIENT_TYPE.CONIC || data['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (data['offsetUnit'] === 'deg' ? '%' : (data['offsetUnit'] || '%'))
+    const offsetTxt = `${offset < 0 ? '-' : '+'} ${Math.abs(offset) + offsetUnit}`
     const gradients = data['colorList'].map((v, index) => {
       //TODO - divideTxt 이거 좀더 보강해야함
       let colorRangeTxt = '';
@@ -32,7 +31,6 @@ const CALC_GRADIENT = {
         let divideEndTxt = '';
         if (data['type'] === GRADIENT_TYPE.CONIC || data['type'] === GRADIENT_TYPE.REPEAT_CONIC) divideEndTxt = v['useDivideEnd'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['rangeEnd']}${v['rangeUnit']} ${offsetTxt})` : '';
         else divideEndTxt = v['useDivideEnd'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['rangeEnd']}${v['rangeUnit']} + 1px ${offsetTxt})` : '';
-
         return `${v['color']} ${v['range']}${v['rangeUnit']} ${divideTxt}, ${v['colorEnd']} ${v['rangeEnd']}${v['rangeUnit']} ${divideEndTxt}`;
       } else {
         colorRangeTxt = `calc(${v['range']}${v['rangeUnit']} ${offsetTxt})`;

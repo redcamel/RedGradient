@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 const GRADIENT_TYPE = {
   LINEAR: 'linear-gradient',
   REPEAT_LINEAR: 'repeating-linear-gradient',

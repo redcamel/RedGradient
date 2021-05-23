@@ -20,9 +20,10 @@ class RedPropertyPositionEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     return <div>
-      Position
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div className={'ui_subTitle'}>Position</div>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0px 10px'}}>
         <RedNumber
+          title={'x'}
           width={'80px'}
           value={activeSubData['position']['x'] || 0}
           HD_onInput={e => {
@@ -33,7 +34,9 @@ class RedPropertyPositionEdit extends React.Component {
           activeSubData['position']['xUnit'] = e.target.value;
           rootComponent.updateRootState({});
         }}/>
+        <div style={{width: '5px'}}/>
         <RedNumber
+          title={'y'}
           width={'80px'}
           value={activeSubData['position']['y'] || 0}
           HD_onInput={e => {

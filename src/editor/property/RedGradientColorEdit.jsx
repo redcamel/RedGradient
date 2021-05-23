@@ -94,7 +94,7 @@ class RedGradientColorEdit extends React.Component {
     const activeSubData = rootComponentState.activeSubData;
     return <div style={style.container}>
       <div style={{display: 'flex', margin: '4px 0px', justifyContent: 'space-between'}}>
-        <div style={{flexGrow: 10}}>Preview</div>
+        <div className={'ui_subTitle'}>Preview</div>
         <button
           style={{...style.preset}}
           onClick={e => {
@@ -153,7 +153,7 @@ class RedGradientColorEdit extends React.Component {
       <div style={{marginTop: '20px'}}>
         <RedPropertyOffsetEdit rootComponent={rootComponent}/>
       </div>
-      <div style={{marginTop: '20px'}}>
+      <div style={{marginTop: '15px'}}>
 
         {
           activeSubData['colorList'].map((v, index) => {

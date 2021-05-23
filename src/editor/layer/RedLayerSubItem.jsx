@@ -74,12 +74,10 @@ class RedLayerSubItem extends React.Component {
       const startIDX = startDragLayer.items.indexOf(startDragItem)
       startDragLayer.items.splice(startIDX, 1)
       dropAreaLayer.items.splice(dstIDX, 0, startDragItem)
-
       RedLayerItem.clearDragInfo()
       RedLayerSubItem.clearDragInfo()
       this.props.rootComponent.updateRootState({})
     }
-
   }
 
   render() {

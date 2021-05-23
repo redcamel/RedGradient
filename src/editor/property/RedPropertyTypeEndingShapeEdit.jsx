@@ -19,8 +19,9 @@ class RedPropertyTypeEndingShapeEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    return <div>
-      EndingShape
+    return <div style={{display: 'flex', alignItems: 'center'}}>
+
+      <div className={'ui_subTitle'}>EndingShape</div>
       <RedSelect
         value={activeSubData['typeEndingShape']}
         options={Object.entries(ENDING_SHAPE_TYPE)}

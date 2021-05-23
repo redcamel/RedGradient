@@ -9,15 +9,18 @@ import React from "react";
 
 class RedNumber extends React.Component {
   render() {
-    return <input
-      style={{width: `${this.props.width || ''}`, flexGrow: 1}}
-      type={'number'}
-      step={this.props.step || 1}
-      max={this.props.maxValue}
-      value={this.props.value}
-      onInput={this.props.HD_onInput}
-      onBlur={this.props.HD_blur}
-    />;
+    return <>
+      {this.props.title ? <span className={'ui_item_title'}>{this.props.title}</span> : ''}
+      <input
+        style={{width: `${this.props.width || ''}`, flexGrow: 1}}
+        type={'number'}
+        step={this.props.step || 1}
+        max={this.props.maxValue}
+        value={this.props.value}
+        onInput={this.props.HD_onInput}
+        onBlur={this.props.HD_blur}
+      />
+    </>;
   }
 }
 

@@ -27,33 +27,38 @@ class RedCanvasOutlineEdit extends React.Component {
 
       <div className={'ui_subTitle'}>outline</div>
       <div style={{
-        marginTop:'6px',
+        marginTop: '6px',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: '0px 10px'
       }}>
-        width <RedNumber
-        width={'41px'}
-        value={canvasInfo['outline_width'] || 0}
-        HD_onInput={e => {
-          canvasInfo['outline_width'] = e.target.value;
-          rootComponent.updateRootState({});
-        }}/>
-        offset <RedNumber
-        width={'41px'}
-        value={canvasInfo['outline_offset'] || 0}
-        HD_onInput={e => {
-          canvasInfo['outline_offset'] = e.target.value;
-          rootComponent.updateRootState({});
-        }}/>
-
-        style <RedSelect
-        width={'90'}
-        value={canvasInfo['outline_type']}
-        options={['dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'none', 'hidden']}
-        HD_change={e => {
-          canvasInfo['outline_type'] = e.target.value;
-          rootComponent.updateRootState({});
-        }}/>
+        <RedNumber
+          title={'width'}
+          width={'41px'}
+          value={canvasInfo['outline_width'] || 0}
+          HD_onInput={e => {
+            canvasInfo['outline_width'] = e.target.value;
+            rootComponent.updateRootState({});
+          }}/>
+        <div style={{width: '5px'}}/>
+        <RedNumber
+          title={'offset'}
+          width={'41px'}
+          value={canvasInfo['outline_offset'] || 0}
+          HD_onInput={e => {
+            canvasInfo['outline_offset'] = e.target.value;
+            rootComponent.updateRootState({});
+          }}/>
+        <div style={{width: '5px'}}/>
+        <RedSelect
+          title={'style'}
+          width={'50'}
+          value={canvasInfo['outline_type']}
+          options={['dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'none', 'hidden']}
+          HD_change={e => {
+            canvasInfo['outline_type'] = e.target.value;
+            rootComponent.updateRootState({});
+          }}/>
 
         <div
           className={rootComponentState.outline_color === 'transparent' ? 'transparent_checker' : ''}

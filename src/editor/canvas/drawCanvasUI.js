@@ -6,14 +6,12 @@
  *
  */
 import '@easylogic/colorpicker/dist/colorpicker.css';
-import RED_CANVAS_PRESET from "../../RED_CANVAS_PRESET.js";
 import React from "react";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faDesktop, faMobileAlt} from '@fortawesome/free-solid-svg-icons';
 import RedTitle from "../../core/RedTitle";
 import RedCanvasSizeEdit from "./edit/property/RedCanvasSizeEdit";
-
-let colorPicker;
+import RED_CANVAS_PRESET from "../../RED_CANVAS_PRESET.js";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faDesktop, faMobileAlt} from "@fortawesome/free-solid-svg-icons";
 
 function drawCanvasUI() {
   const rootComponent = this.props.rootComponent;
@@ -21,7 +19,52 @@ function drawCanvasUI() {
   const canvasInfo = rootComponentState.canvasInfo;
   return <div style={style.container}>
     <RedTitle title={'Container Information'}/>
-    <div style={{display: 'inline-block', marginLeft: '5px'}}>
+
+
+    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div style={style.canvasResizer}>
+        <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
+        <div>
+          <label style={{
+            marginLeft: '5px',
+            background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
+            display: 'flex',
+            borderRadius: '6px',
+            padding: '5px 10px',
+            whiteSpace: 'nowrap',
+            cursor: 'pointer'
+          }}>
+            View Gradient Edit Area
+            <input type={'checkbox'}
+                   checked={this.state.layerSizeView}
+                   style={{
+                     display: 'inline-block',
+                     width: '15px',
+                     height: '15px',
+                     background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
+                     borderRadius: '4px',
+                     marginRight: '10px',
+                     border: '1px solid #000',
+                     cursor: 'pointer',
+                     marginLeft: '5px'
+                   }}
+                   onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
+            />
+          </label>
+        </div>
+
+      </div>
+      <div style={style.canvasViewInfo}>
+        <div style={{marginRight: '5px',color:'#696969'}}>Center : {this.state.canvasViewOffsetX},{this.state.canvasViewOffsetY} /
+          ViewScale : {this.state.canvasViewScale}</div>
+        <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
+          Center
+        </div>
+        <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
+        <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
+      </div>
+    </div>
+    <div style={{display: 'inline-block', margin: '0px 10px 8px 10px'}}>
       {
         RED_CANVAS_PRESET.map(v => {
           return <button
@@ -32,50 +75,12 @@ function drawCanvasUI() {
               rootComponent.updateRootState({});
             }}
           >
-            <div><FontAwesomeIcon
-              icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
+            <div><FontAwesomeIcon icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
             </div>
           </button>;
         })
       }
     </div>
-
-    <div style={{display: 'flex', justifyContent: 'space-between'}}>
-
-      <div style={style.canvasResizer}>
-        Container Size
-        <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
-        <div>
-          그라데이션 영역 보기
-          <input type={'checkbox'}
-                 checked={this.state.layerSizeView}
-                 style={{
-                   display: 'inline-block',
-                   width: '15px',
-                   height: '15px',
-                   background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
-                   borderRadius: '4px',
-                   marginRight: '10px',
-                   border: '1px solid #000',
-                   cursor: 'pointer'
-                 }}
-                 onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
-          />
-        </div>
-
-      </div>
-      <div style={style.canvasViewInfo}>
-        <div>Center : {this.state.canvasViewOffsetX},{this.state.canvasViewOffsetY} <br/> ViewScale
-          : {this.state.canvasViewScale}</div>
-        <button style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
-          Center
-        </button>
-        <button style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1</button>
-        <button style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5</button>
-
-      </div>
-    </div>
-
   </div>;
 }
 
@@ -91,35 +96,39 @@ const style = {
     borderBottom: '1px solid #111'
   },
   canvasResizer: {
-    padding: '4px',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '8px',
   },
   canvasViewInfo: {
-    padding: '4px',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '8px',
     fontSize: '12px',
     textAlign: 'right'
   },
   toCenter: {
-    padding: '3px 5px',
     background: '#5e7ade',
-    color: '#fff',
-    marginTop: '4px',
-    borderRadius: '4px',
-    border: 0,
-    fontSize: '12px',
+    display: 'flex',
+    borderRadius: '6px',
+    padding: '5px 10px',
+    whiteSpace: 'nowrap',
+    cursor: 'pointer',
     outline: 'none',
-    cursor: 'pointer'
+    border:0,
+    color : '#fff'
   },
   toScale: {
     marginLeft: '4px',
-    padding: '3px 5px',
     background: '#7235d4',
-    color: '#fff',
-    marginTop: '4px',
-    borderRadius: '4px',
-    border: 0,
-    fontSize: '12px',
+    display: 'flex',
+    borderRadius: '6px',
+    padding: '5px 10px',
+    whiteSpace: 'nowrap',
+    cursor: 'pointer',
     outline: 'none',
-    cursor: 'pointer'
+    border:0,
+    color : '#fff'
   },
   presetButton: {
     background: 'linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63))',

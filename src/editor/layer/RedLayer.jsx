@@ -6,20 +6,9 @@
  *
  */
 import React from "react";
-import DataItem from "../data/DataItem.js";
-import RedLayerSubItem from "./RedLayerSubItem.jsx";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {
-  faEye,
-  faEyeSlash,
-  faFolder,
-  faFolderOpen,
-  faMinusCircle,
-  faPlusCircle
-} from '@fortawesome/free-solid-svg-icons';
 import RedLayerTop from "./RedLayerTop.jsx";
-import CALC_GRADIENT from "../CALC_GRADIENT";
 import RedLayerItem from "./RedLayerItem.jsx";
+
 //TODO - 여기 정리해야함
 class RedLayer extends React.Component {
   constructor(props) {

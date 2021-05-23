@@ -62,11 +62,12 @@ class RedPresetBorder extends React.Component {
     console.log('presetList', presetList)
     console.log('userPresetBorder', userPresetBorder)
     return <div>
-      Preset Border Gradient
+      <div className={'ui_subTitle'}>Preset Border Gradient</div>
       <div style={style.container}>{this.renderList(presetList)}</div>
       <div style={style.divide}/>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        User Preset Border Gradient
+
+        <div className={'ui_subTitle'}>User Preset Border Gradient</div>
         <div style={{
           display: 'flex',
           borderRadius: '4px',
@@ -124,7 +125,7 @@ RedPresetBorder.exportPreset = () => {
   a.click();
   URL.revokeObjectURL(a.href);
 }
-RedPresetBorder.checkValidate=(v)=> {
+RedPresetBorder.checkValidate = (v) => {
   /**
    * JSON 파싱이 되어야하고..
    * 빈배열은 그냥 통과
@@ -134,11 +135,10 @@ RedPresetBorder.checkValidate=(v)=> {
   let result = true;
   try {
     let t0 = JSON.parse(v);
-    if(t0 instanceof Array) {
-      if(t0.length===0) result = true
+    if (t0 instanceof Array) {
+      if (t0.length === 0) result = true
       else if (!t0[0].hasOwnProperty('data') || !t0[0]['data'].hasOwnProperty('colorList')) result = false;
-    }
-    else result = false
+    } else result = false
   } catch (e) {
     result = false;
   }
@@ -153,12 +153,10 @@ RedPresetBorder.importPreset = (context) => {
     let fileReader = new FileReader();
     fileReader.onload = evt => {
       console.log(evt.target.result)
-      if(RedPresetBorder.checkValidate(evt.target.result)) {
+      if (RedPresetBorder.checkValidate(evt.target.result)) {
         localStorage.setItem('userPresetBorder', evt.target.result)
         context.setState({})
-      }
-      else alert('RedGradient Preset 형식의 파일이 아닙니다.')
-
+      } else alert('RedGradient Preset 형식의 파일이 아닙니다.')
     }
     fileReader.readAsText(e.target.files[0]);
   };

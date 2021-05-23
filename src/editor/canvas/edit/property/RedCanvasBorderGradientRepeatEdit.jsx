@@ -20,8 +20,8 @@ class RedCanvasBorderGradientRepeatEdit extends React.Component {
     const borderGradientInfo = rootComponentState;
     return <div>
       <div style={{display: 'flex', marginTop: '3px', alignItems: 'center'}}>
-        Repeat
         <RedSelect
+          title={'Repeat'}
           value={borderGradientInfo['border_image_repeat']}
           options={Object.entries(BORDER_REPEAT_TYPE)}
           HD_change={e => {

@@ -166,7 +166,7 @@ RedCanvas.getContainerCss = (canvasInfo, borderGradientInfo) => {
       borderImageSlice: `${borderGradientInfo['border_image_sliceT']} ${borderGradientInfo['border_image_sliceR']} ${borderGradientInfo['border_image_sliceB']} ${borderGradientInfo['border_image_sliceL']}`,
       borderImageSource: gradient,
       borderImageRepeat: borderGradientInfo['border_image_repeat'],
-      borderImageOutset: borderGradientInfo['border_image_outset'],
+      borderImageOutset: borderGradientInfo['border_image_outset'] + 'px',
     }
   } else {
     borderData = {
