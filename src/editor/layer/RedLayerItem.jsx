@@ -30,7 +30,8 @@ class RedLayerItem extends React.Component {
     this.state = {
       SIZE: props.size || 100,
       dragOverYn: false,
-      openPanel : false
+      openPanel : false,
+      draggable : true
     };
   }
 
@@ -98,8 +99,7 @@ class RedLayerItem extends React.Component {
       }}
     >
       <div
-
-        draggable={true}
+        draggable={this.state.draggable}
         onDragStart={e => this.handleDragStart(e)}
         onDrop={e => this.handleDrop(e)}
         onDragOver={e => this.handleDragOver(e)}
@@ -166,18 +166,19 @@ class RedLayerItem extends React.Component {
         </div>
         <div style={style.addGradientLayerItem}
              onClick={() => {
-               this.setState({openPanel: true})
+               this.setState({openPanel: true,draggable:false})
              }}
         >Add Gradient Layer
         </div>
         {this.state.openPanel ? <RedAddGradientLayerSet
-          HD_cancel={e => this.setState({openPanel: false})}
+          rootComponent = {this}
+          HD_cancel={e => this.setState({openPanel: false,draggable:true})}
           HD_apply={(v,type) => {
             let t0 = new DataItem()
             t0.colorList = v
             t0.type = type
             layer.items.splice(0,0,t0)
-            this.setState({openPanel: false})
+            this.setState({openPanel: false,draggable:true})
             rootComponent.updateRootState({
               layers : rootComponentState.layers,
               activeSubData : t0

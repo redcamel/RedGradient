@@ -92,9 +92,11 @@ class RedAddGradientLayerSet extends React.Component {
     let rangeList = new Array(this.state.division);
     rangeList.fill(1);
     const tempColorList = this.state.tempColorList;
-    return <div style={style.bg}>
+    return <div style={style.bg}
 
-      <div style={style.container}>
+    >
+
+      <div style={style.container} >
         <div style={{width: '100%'}}><RedTitle title={"Add Layer Set"} /></div>
         <div style={{
           display: 'flex',
@@ -265,6 +267,7 @@ const style = {
     top: 0, left: 0, right: 0, bottom: 0,
     background: 'rgba(0,0,0,0.46)',
     zIndex: 2
+
   },
   container: {
     position: 'fixed',
