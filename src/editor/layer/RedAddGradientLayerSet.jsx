@@ -105,6 +105,7 @@ class RedAddGradientLayerSet extends React.Component {
         <div style={{width: '100%'}}><RedTitle title={"add with template"} /></div>
         <div style={{
           display: 'flex',
+          flexWrap: 'wrap',
           width: '1024px',
           justiceContent: 'space-between',
           margin: '10px',
@@ -138,15 +139,17 @@ class RedAddGradientLayerSet extends React.Component {
               const tColorData = tempColorList[index];
               return <div style={{
                 position: 'relative',
-
                 padding: '5px',
-                borderLeft: index ? '1px solid #777' : 0,
+                background : (index+Math.floor(index/10))%2 ?  'rgba(0,0,0,0.25)' : '',
+                // borderLeft: index ? '1px solid #777' : 0,
                 width: `${100 / rangeList.length}%`,
+                minWidth : '10%'
               }}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  fontSize: '9px'
+                  fontSize: '9px',
+                  width : '100px'
                 }}>
                   <RedNumber
                     fontSize={'11px'}
@@ -158,8 +161,7 @@ class RedAddGradientLayerSet extends React.Component {
                       tempColorList[index]['range'] = e.target.value;
                       this.setState({});
                     }}
-                  />
-                  %
+                  /> <div style={{margin : '0px 2px 0px 2px'}}>%</div>
                 </div>
                 {/*<div>{tE.toFixed()}%</div>*/}
                 <div
@@ -219,7 +221,7 @@ class RedAddGradientLayerSet extends React.Component {
             <div style={{display: 'flex', flexDirection: 'column'}}>
               <RedNumber
                 title={'division'}
-                maxValue={15}
+                maxValue={100}
                 value={this.state['division'] || 2}
                 HD_onInput={e => {
                   let t0 = Math.max(e.target.value, 2);
@@ -420,8 +422,9 @@ const
       top: '50%',
       left: '50%',
       transform: 'translate(-50%,-50%)',
-
-      height: '600px',
+      overflowY : 'auto',
+      minHeight: '600px',
+      maxHeight: '800px',
       background: '#333',
       borderRadius: '8px',
       border: '1px solid #000',
