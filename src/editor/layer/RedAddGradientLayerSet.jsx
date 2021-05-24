@@ -37,7 +37,7 @@ const gradientTypes = {
 };
 let targetColorData;
 
-class RedAddLayerSet extends React.Component {
+class RedAddGradientLayerSet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -258,7 +258,7 @@ class RedAddLayerSet extends React.Component {
   }
 }
 
-export default RedAddLayerSet;
+export default RedAddGradientLayerSet;
 const style = {
   bg: {
     position: 'fixed',

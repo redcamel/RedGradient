@@ -18,6 +18,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import CALC_GRADIENT from "../CALC_GRADIENT";
 import RedLayerSubItem from "./RedLayerSubItem.jsx";
+import RedAddGradientLayerSet from "./RedAddGradientLayerSet";
+import DataLayer from "../data/DataLayer";
 
 let startDragLayer
 
@@ -27,7 +29,8 @@ class RedLayerItem extends React.Component {
     super(props);
     this.state = {
       SIZE: props.size || 100,
-      dragOverYn: false
+      dragOverYn: false,
+      openPanel : false
     };
   }
 
@@ -161,6 +164,26 @@ class RedLayerItem extends React.Component {
           ><FontAwesomeIcon icon={faPlusCircle}/>
           </button>
         </div>
+        <div style={style.addGradientLayerItem}
+             onClick={() => {
+               this.setState({openPanel: true})
+             }}
+        >Add Gradient Layer
+        </div>
+        {this.state.openPanel ? <RedAddGradientLayerSet
+          HD_cancel={e => this.setState({openPanel: false})}
+          HD_apply={(v,type) => {
+            let t0 = new DataItem()
+            t0.colorList = v
+            t0.type = type
+            layer.items.splice(0,0,t0)
+            this.setState({openPanel: false})
+            rootComponent.updateRootState({
+              layers : rootComponentState.layers,
+              activeSubData : t0
+            })
+          }}
+        /> : ''}
         <div
           className={'transparent_checker'}
           style={{
@@ -208,5 +231,14 @@ const style = {
   },
   deActiveLine: {
     border: '2px solid transparent',
-  }
+  },
+  addGradientLayerItem: {
+    marginTop : '2px',
+    background: '#5e7ade',
+    padding: '3px 5px',
+    fontSize: '11px',
+    borderRadius: '4px',
+    marginBottom: '2px',
+    cursor: 'pointer'
+  },
 };
