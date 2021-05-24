@@ -227,16 +227,16 @@ class RedAddGradientLayerSet extends React.Component {
                 }} />
               <div />
               <RedSelect title={'ease'} value={this.state['easeName']} options={easeNameList} HD_change={e => {
-                this.setState({easeName: e.target.value});
+                this.setState({easeName: e.target.value,tempColorList : []});
               }} />
               <div />
               <RedSelect title={'easeType'} value={this.state['easeType']} options={easeTypeList} HD_change={e => {
-                this.setState({easeType: e.target.value});
+                this.setState({easeType: e.target.value,tempColorList : []});
               }} />
               <div />
               <RedSelect title={'gradient type'} value={this.state['type']} options={Object.entries(gradientTypes)}
                          HD_change={e => {
-                           this.setState({type: e.target.value});
+                           this.setState({type: e.target.value,tempColorList : []});
                          }} />
               {/*             */}
               <div style={{display: 'flex', alignItems: 'center'}}>
