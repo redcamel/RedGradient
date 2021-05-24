@@ -37,6 +37,7 @@ const gradientTypes = {
 };
 let targetColorData;
 
+// TODO - 여기정리
 class RedAddGradientLayerSet extends React.Component {
   constructor(props) {
     super(props);
@@ -47,10 +48,12 @@ class RedAddGradientLayerSet extends React.Component {
       tempColorList: [],
       colorPicker: [],
       openColorPicker: [],
-      type: gradientTypes.LINEAR
+      type: gradientTypes.LINEAR,
+      startColor: new DataColor('yellow'),
+      endColor: new DataColor('red')
     };
     this.refColorPickerContainer = [];
-    let i = 20;
+    let i = 32;
     while (i--) {
       this.refColorPickerContainer[i] = React.createRef();
     }
@@ -92,11 +95,13 @@ class RedAddGradientLayerSet extends React.Component {
     let rangeList = new Array(this.state.division);
     rangeList.fill(1);
     const tempColorList = this.state.tempColorList;
+    const startIndex = 30;
+    const lastIndex = 31;
     return <div style={style.bg}
 
     >
 
-      <div style={style.container} >
+      <div style={style.container}>
         <div style={{width: '100%'}}><RedTitle title={"Add Layer Set"} /></div>
         <div style={{
           display: 'flex',
@@ -121,7 +126,8 @@ class RedAddGradientLayerSet extends React.Component {
               tS = tSTween.ratio * 100;
               tE = tETween.ratio * 100;
               let t0 = index / rangeList.length / 2 + 0.5;
-              let tColor = tempColorList[index] ? tempColorList[index]['color'] : `rgba(255,${255 * t0},${255 - 255 * t0},1)`;
+              let tColor = tempColorList[index] ? tempColorList[index]['color'] : gsap.utils.interpolate(this.state.startColor['color'], this.state.endColor['color'], index / rangeList.length);
+              ;
               tempColorList[index] = tempColorList[index] || (new DataColor(tColor, tS, '%', false, false, true, tE));
               tempColorList[index]['range'] = tS;
               tempColorList[index]['rangeEnd'] = tE;
@@ -145,7 +151,7 @@ class RedAddGradientLayerSet extends React.Component {
                   <div style={{
                     background: tColor,
                     width: '28px', height: '28px',
-                    cursor:'pointer',
+                    cursor: 'pointer',
                     borderRadius: '4px', border: '1px solid #000',
                     marginRight: '10px',
                     textAlign: 'center',
@@ -192,12 +198,11 @@ class RedAddGradientLayerSet extends React.Component {
             <div style={{display: 'flex', flexDirection: 'column'}}>
               <RedNumber
                 title={'division'}
-
                 maxValue={15}
                 value={this.state['division'] || 2}
                 HD_onInput={e => {
                   let t0 = Math.max(e.target.value, 2);
-                  this.setState({division: t0});
+                  this.setState({division: t0, tempColorList: []});
                 }} />
               <div />
               <RedSelect title={'ease'} value={this.state['easeName']} options={easeNameList} HD_change={e => {
@@ -212,6 +217,109 @@ class RedAddGradientLayerSet extends React.Component {
                          HD_change={e => {
                            this.setState({type: e.target.value});
                          }} />
+              {/*             */}
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                start color
+                <div
+                  style={{
+                    width: '28px', height: '28px', margin: '1px',
+                    textAlign: 'center',
+                  }}
+                  className={'transparent_checker'}
+                >
+                  <div style={{
+                    background: this.state.startColor['color'],
+                    width: '28px', height: '28px',
+                    cursor: 'pointer',
+                    borderRadius: '4px', border: '1px solid #000',
+                    marginRight: '10px',
+                    textAlign: 'center',
+                  }}
+                       onClick={() => {
+                         if (!this.state.colorPicker[startIndex]) {
+                           this.state.colorPicker[startIndex] = new ColorPicker({
+                             type: "sketch",
+                             position: 'inline',
+                             color: this.state.startColor['color'],
+                             container: this.refColorPickerContainer[startIndex].current,
+                             onChange: color => {
+                               this.state.startColor['color'] = color;
+                               this.setState({});
+                             }
+                           });
+                         }
+                         // this.state.colorPicker[index].setOption({color: tColor});
+                         this.state.colorPicker[startIndex].initColorWithoutChangeEvent(this.state.startColor['color']);
+                         this.state.openColorPicker = [];
+                         this.state.openColorPicker[startIndex] = true;
+                         this.setState({});
+                       }}
+                  />
+                  <div style={{
+                    ...style.colorPicker,
+                    transform: 'translate(-50% , 40px)',
+                    display: this.state.openColorPicker[startIndex] ? 'block' : 'none'
+                  }}>
+                    <div ref={this.refColorPickerContainer[startIndex]} />
+                    <div style={style.complete} onClick={() => {
+                      this.state.openColorPicker[startIndex] = false;
+                      this.setState({tempColorList: []});
+                    }}>완료
+                    </div>
+                  </div>
+                </div>
+                {/* */}
+                end Color
+                <div
+                  style={{
+                    width: '28px', height: '28px', margin: '1px',
+                    textAlign: 'center',
+                  }}
+                  className={'transparent_checker'}
+                >
+                  <div style={{
+                    background: this.state.endColor['color'],
+                    width: '28px', height: '28px',
+                    cursor: 'pointer',
+                    borderRadius: '4px', border: '1px solid #000',
+                    marginRight: '10px',
+                    textAlign: 'center',
+                  }}
+                       onClick={() => {
+                         if (!this.state.colorPicker[lastIndex]) {
+                           this.state.colorPicker[lastIndex] = new ColorPicker({
+                             type: "sketch",
+                             position: 'inline',
+                             color: this.state.endColor['color'],
+                             container: this.refColorPickerContainer[lastIndex].current,
+                             onChange: color => {
+                               this.state.endColor['color'] = color;
+                               this.setState({});
+                             }
+                           });
+                         }
+                         // this.state.colorPicker[index].setOption({color: tColor});
+                         this.state.colorPicker[lastIndex].initColorWithoutChangeEvent(this.state.endColor['color']);
+                         this.state.openColorPicker = [];
+                         this.state.openColorPicker[lastIndex] = true;
+                         this.setState({});
+                       }}
+                  />
+                  <div style={{
+                    ...style.colorPicker,
+                    transform: 'translate(-50% , 40px)',
+                    display: this.state.openColorPicker[lastIndex] ? 'block' : 'none'
+                  }}>
+                    <div ref={this.refColorPickerContainer[lastIndex]} />
+                    <div style={style.complete} onClick={() => {
+                      this.state.openColorPicker[lastIndex] = false;
+                      this.setState({tempColorList: []});
+                    }}>완료
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/**/}
             </div>
           </div>
 
@@ -230,7 +338,6 @@ class RedAddGradientLayerSet extends React.Component {
                 if (index >= rangeList.length) return '';
                 return <div style={{
                   position: 'absolute',
-                  // borderRight : '1px dashed rgba(0,0,0,1)',
                   top: 0,
                   left: v['range'] + '%',
                   width: (v['rangeEnd'] - v['range']) + '%',
@@ -242,15 +349,32 @@ class RedAddGradientLayerSet extends React.Component {
         </div>
         <div style={{margin: '16px 0px'}}>
           <button
-            style={{color:'#fff',background : '#666',padding: '8px 16px', borderRadius: '8px', outline: 'none', border: 0,cursor:'pointer'}}
+            style={{
+              color: '#fff',
+              background: '#666',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              outline: 'none',
+              border: 0,
+              cursor: 'pointer'
+            }}
             onClick={e => this.props.HD_cancel()}
           >Cancel
           </button>
           <button
-            style={{color:'#fff',background : 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',padding: '8px 16px', borderRadius: '8px', outline: 'none', border: 0,marginLeft:'10px',cursor:'pointer'}}
+            style={{
+              color: '#fff',
+              background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              outline: 'none',
+              border: 0,
+              marginLeft: '10px',
+              cursor: 'pointer'
+            }}
             onClick={v => {
-              let t0 = JSON.parse(JSON.stringify(tempColorList))
-              this.props.HD_apply(t0,this.state.type)
+              let t0 = tempColorList;
+              this.props.HD_apply(t0, this.state.type);
             }}
           >Apply
           </button>
@@ -271,7 +395,6 @@ const style = {
   },
   container: {
     position: 'fixed',
-    overflow: 'hidden',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%,-50%)',
