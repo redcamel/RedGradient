@@ -53,7 +53,7 @@ class RedAddGradientLayerSet extends React.Component {
       endColor: new DataColor('red')
     };
     this.refColorPickerContainer = [];
-    let i = 32;
+    let i = 500;
     while (i--) {
       this.refColorPickerContainer[i] = React.createRef();
     }
@@ -95,8 +95,8 @@ class RedAddGradientLayerSet extends React.Component {
     let rangeList = new Array(this.state.division);
     rangeList.fill(1);
     const tempColorList = this.state.tempColorList;
-    const startIndex = 30;
-    const lastIndex = 31;
+    const startIndex = 498;
+    const lastIndex = 499;
     return <div style={style.bg}
 
     >
@@ -204,7 +204,7 @@ class RedAddGradientLayerSet extends React.Component {
                 </div>
 
 
-                <div style={{...style.colorPicker, display: this.state.openColorPicker[index] ? 'block' : 'none'}}>
+                <div style={{...style.colorPicker,   transform: Math.floor(index/10)===index/10 ? 'translate(-25% , 40px)' : index%10===9 ? 'translate(-75% , 40px)' : 'translate(-50% , 40px)', display: this.state.openColorPicker[index] ? 'block' : 'none'}}>
                   <div ref={this.refColorPickerContainer[index]} />
                   <div style={style.complete} onClick={() => {
                     this.state.openColorPicker[index] = false;
@@ -221,7 +221,7 @@ class RedAddGradientLayerSet extends React.Component {
             <div style={{display: 'flex', flexDirection: 'column'}}>
               <RedNumber
                 title={'division'}
-                maxValue={100}
+                maxValue={450}
                 value={this.state['division'] || 2}
                 HD_onInput={e => {
                   let t0 = Math.max(e.target.value, 2);
@@ -280,7 +280,7 @@ class RedAddGradientLayerSet extends React.Component {
                   />
                   <div style={{
                     ...style.colorPicker,
-                    transform: 'translate(-50% , 40px)',
+                    transform: 'translate(0% , 40px)',
                     display: this.state.openColorPicker[startIndex] ? 'block' : 'none'
                   }}>
                     <div ref={this.refColorPickerContainer[startIndex]} />
@@ -436,7 +436,7 @@ const
       flexDirection: 'column'
     },
     colorPicker: {
-      zIndex: 1, position: 'absolute', top: 0, left: '50%', transform: 'translate(-50% , 150px)',
+      zIndex: 1, position: 'absolute', top: 0, left: '50%', transform: 'translate(-50% , 50px)',
       boxShadow: '0px 0px 16px rgba(0,0,0,0.5)',
       background: '#fff',
       borderRadius: '8px',
