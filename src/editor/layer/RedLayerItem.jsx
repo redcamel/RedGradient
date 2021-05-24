@@ -168,7 +168,7 @@ class RedLayerItem extends React.Component {
              onClick={() => {
                this.setState({openPanel: true,draggable:false})
              }}
-        >Add Gradient Layer
+        >add with template
         </div>
         {this.state.openPanel ? <RedAddGradientLayerSet
           rootComponent = {this}

@@ -8,11 +8,11 @@
 import React from "react";
 import RedNumber from "../../core/RedNumber.jsx";
 import gsap from "gsap";
-import RedSelect from "../../core/RedSelect.jsx";
 import GRADIENT_TYPE from "../GRADIENT_TYPE.js";
 import DataColor from "../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedTitle from "../../core/RedTitle";
+import RedSelect from "../../core/RedSelect";
 
 const easeNameList = [
   'none',
@@ -102,10 +102,10 @@ class RedAddGradientLayerSet extends React.Component {
     >
 
       <div style={style.container}>
-        <div style={{width: '100%'}}><RedTitle title={"Add Layer Set"} /></div>
+        <div style={{width: '100%'}}><RedTitle title={"add with template"} /></div>
         <div style={{
           display: 'flex',
-          width: '700px',
+          width: '1024px',
           justiceContent: 'space-between',
           margin: '10px',
           border: '1px solid #777',
@@ -127,20 +127,41 @@ class RedAddGradientLayerSet extends React.Component {
               tE = tETween.ratio * 100;
               let t0 = index / rangeList.length / 2 + 0.5;
               let tColor = tempColorList[index] ? tempColorList[index]['color'] : gsap.utils.interpolate(this.state.startColor['color'], this.state.endColor['color'], index / rangeList.length);
-              ;
-              tempColorList[index] = tempColorList[index] || (new DataColor(tColor, tS, '%', false, false, true, tE));
-              tempColorList[index]['range'] = tS;
-              tempColorList[index]['rangeEnd'] = tE;
-              tempColorList[index]['colorEnd'] = tempColorList[index]['color'];
+              if (!tempColorList[index]) {
+                tempColorList[index] = tempColorList[index] || (new DataColor(tColor, tS, '%', false, false, true, tE));
+                tempColorList[index]['range'] = tS;
+                tempColorList[index]['rangeEnd'] = tE;
+
+              }
+              tempColorList[index]['rangeEnd'] = tempColorList[index + 1] ? tempColorList[index + 1]['range'] : tempColorList[index]['rangeEnd'];
+
               const tColorData = tempColorList[index];
               return <div style={{
                 position: 'relative',
+
                 padding: '5px',
                 borderLeft: index ? '1px solid #777' : 0,
                 width: `${100 / rangeList.length}%`,
               }}>
-                <div>{tS.toFixed()}% ~</div>
-                <div>{tE.toFixed()}%</div>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontSize: '9px'
+                }}>
+                  <RedNumber
+                    fontSize={'11px'}
+                    width={'100%'}
+                    minValue={0}
+                    maxValue={tempColorList[index + 1] ? tempColorList[index + 1]['range'] : 100}
+                    value={tempColorList[index]['range']}
+                    HD_onInput={e => {
+                      tempColorList[index]['range'] = e.target.value;
+                      this.setState({});
+                    }}
+                  />
+                  %
+                </div>
+                {/*<div>{tE.toFixed()}%</div>*/}
                 <div
                   style={{
                     width: '28px', height: '28px', margin: '1px',
@@ -329,7 +350,7 @@ class RedAddGradientLayerSet extends React.Component {
           }}>
             Preview
             <div style={{
-              width: '470px',
+              width: '800px',
               height: '400px',
               borderRadius: '16px',
               background: this.renderGradientColorList(tempColorList)
@@ -385,37 +406,38 @@ class RedAddGradientLayerSet extends React.Component {
 }
 
 export default RedAddGradientLayerSet;
-const style = {
-  bg: {
-    position: 'fixed',
-    top: 0, left: 0, right: 0, bottom: 0,
-    background: 'rgba(0,0,0,0.46)',
-    zIndex: 2
+const
+  style = {
+    bg: {
+      position: 'fixed',
+      top: 0, left: 0, right: 0, bottom: 0,
+      background: 'rgba(0,0,0,0.46)',
+      zIndex: 2
 
-  },
-  container: {
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%,-50%)',
+    },
+    container: {
+      position: 'fixed',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%,-50%)',
 
-    height: '600px',
-    background: '#333',
-    borderRadius: '8px',
-    border: '1px solid #000',
-    boxShadow: '0 0 16px rgba(0,0,0,0.16)',
-    zIndex: 1,
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    flexDirection: 'column'
-  },
-  colorPicker: {
-    zIndex: 1, position: 'absolute', top: 0, left: '50%', transform: 'translate(-50% , 150px)',
-    boxShadow: '0px 0px 16px rgba(0,0,0,0.5)',
-    background: '#fff',
-    borderRadius: '8px',
-    overflow: 'hidden'
-  },
-  complete: {padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'},
-};
+      height: '600px',
+      background: '#333',
+      borderRadius: '8px',
+      border: '1px solid #000',
+      boxShadow: '0 0 16px rgba(0,0,0,0.16)',
+      zIndex: 1,
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      flexDirection: 'column'
+    },
+    colorPicker: {
+      zIndex: 1, position: 'absolute', top: 0, left: '50%', transform: 'translate(-50% , 150px)',
+      boxShadow: '0px 0px 16px rgba(0,0,0,0.5)',
+      background: '#fff',
+      borderRadius: '8px',
+      overflow: 'hidden'
+    },
+    complete: {padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'},
+  };
