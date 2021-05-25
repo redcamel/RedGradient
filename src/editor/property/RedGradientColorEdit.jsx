@@ -13,6 +13,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RedPreset from "./preset/RedPreset.jsx";
 import RedPresetBorder from "../canvas/edit/preset/RedPresetBorder.jsx";
 import RedPropertyOffsetEdit from "./RedPropertyOffsetEdit.jsx";
+import {AutoSizer, List} from "react-virtualized";
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
 class RedGradientColorEdit extends React.Component {
@@ -20,9 +21,36 @@ class RedGradientColorEdit extends React.Component {
     super(props);
     this.state = {
       activeIDX: 0,
-      layerBgColor: 'transparent'
+      layerBgColor: 'transparent',
+      //
+
+
     };
     this.refBar = React.createRef();
+  }
+
+  _rowRender(v){
+    console.log(v)
+    let idx = v['index']
+    let key = v['key']
+    let style = v['style']
+    const rootComponent = this.props.rootComponent;
+    const rootComponentState = rootComponent.state;
+    const activeSubData = rootComponentState.activeSubData;
+    return <div style={{...style,padding:'10px 0px'}}     key = {key}>
+      <RedGradientColorItem
+
+        rootComponent={rootComponent}
+        colorData={activeSubData['colorList'][idx]}
+        activeYn={this.state.activeIDX === idx}
+        HD_active={index => {
+          this.setState({activeIDX: index});
+        }}
+        HD_sort={() => {
+          this.sortColorList();
+        }}
+      />
+    </div>
   }
 
   renderGradientColorList(data) {
@@ -92,6 +120,8 @@ class RedGradientColorEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
+
+
     return <div style={style.container}>
       <div style={{display: 'flex', margin: '4px 0px', justifyContent: 'space-between'}}>
         <div className={'ui_subTitle'}>Preview</div>
@@ -153,23 +183,37 @@ class RedGradientColorEdit extends React.Component {
       <div style={{marginTop: '20px'}}>
         <RedPropertyOffsetEdit rootComponent={rootComponent}/>
       </div>
-      <div style={{marginTop: '15px'}}>
-
-        {
-          activeSubData['colorList'].map((v, index) => {
-            return <RedGradientColorItem
-              rootComponent={rootComponent}
-              colorData={v}
-              activeYn={this.state.activeIDX === index}
-              HD_active={index => {
-                this.setState({activeIDX: index});
-              }}
-              HD_sort={() => {
-                this.sortColorList();
-              }}
-            />;
-          })
-        }
+      <div style={{marginTop: '15px'}} >
+        <AutoSizer disableHeight>
+          {({width}) => (
+            <List
+              ref="List"
+              height={600}
+              overscanRowCount={10}
+              rowCount={activeSubData['colorList'].length}
+              rowHeight={110}
+              rowRenderer={v=>this._rowRender(v)}
+              width={width}
+            />
+          )}
+        </AutoSizer>
+        {/*{*/}
+        {/*  activeSubData['colorList'].map((v, index) => {*/}
+        {/*    // const height=97*/}
+        {/*    // if(height * index)*/}
+        {/*    return <RedGradientColorItem*/}
+        {/*      rootComponent={rootComponent}*/}
+        {/*      colorData={v}*/}
+        {/*      activeYn={this.state.activeIDX === index}*/}
+        {/*      HD_active={index => {*/}
+        {/*        this.setState({activeIDX: index});*/}
+        {/*      }}*/}
+        {/*      HD_sort={() => {*/}
+        {/*        this.sortColorList();*/}
+        {/*      }}*/}
+        {/*    />;*/}
+        {/*  })*/}
+        {/*}*/}
       </div>
 
     </div>;
@@ -178,7 +222,8 @@ class RedGradientColorEdit extends React.Component {
 
 export default RedGradientColorEdit;
 const style = {
-  container: {},
+  container: {
+  },
   bgItem: {
     padding: '2px',
     marginRight: '1px',

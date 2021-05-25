@@ -87,8 +87,8 @@ class RedPropertyEdit extends React.Component {
         <div style={style.itemContainer}>
           <RedGradientColorEdit rootComponent={rootComponent}/>
         </div>
-        <div style={style.itemContainer}>
-          <div>Current Gradient Css</div>
+        {/*<div style={style.itemContainer}>*/}
+        {/*  <div>Current Gradient Css</div>*/}
           {/*{CALC_GRADIENT.calcGradientItem(data, false, activeLayer)}*/}
           {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>*/}
           {/*  {*/}
@@ -99,7 +99,7 @@ class RedPropertyEdit extends React.Component {
           {/*<SyntaxHighlighter language="javascript" wrapLongLines={'pre'} style={dracula}>*/}
           {/*  {JSON.stringify(data, null, 2)}*/}
           {/*</SyntaxHighlighter>*/}
-        </div>
+        {/*</div>*/}
       </div>
     </div>;
   }

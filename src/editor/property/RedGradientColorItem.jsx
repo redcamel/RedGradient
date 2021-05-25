@@ -420,10 +420,10 @@ const style = {
   },
   ball: {
     position: 'absolute',
-    height: '25px',
+    height: '20px',
     top: '50%',
     borderRadius: '50%',
-    width: '25px',
+    width: '20px',
     border: '1px solid #000',
     transform: `translate(-50%,-50%)`,
     textAlign: 'center',
