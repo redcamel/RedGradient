@@ -153,7 +153,7 @@ class App extends React.Component {
           background-blend-mode : ${CALC_GRADIENT.calcBlendMode(this.state.layers)};
           ${containerCssText}
           }`.replace(/\s\s+/g, ' ')
-      containerCssText = new CleanCSS({}).minify(containerCssText).styles;
+      // containerCssText = new CleanCSS({}).minify(containerCssText).styles;
     }
     this.checkUnloadEvent()
     return <div className={'frame'}>
