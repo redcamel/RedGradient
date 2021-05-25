@@ -34,7 +34,7 @@ class RedCanvas extends React.Component {
     const activeSubDataPosition = activeSubData['position'];
     const activeSubDataAt = activeSubData['at'];
     const activeSubDataSize = activeSubData['size'];
-    const borderGradientInfo = rootComponentState.borderGradientInfo
+    const borderGradientInfo = rootComponentState.borderGradientInfo;
     const layoutSize = {
       w: activeSubDataSize['wUnit'] === '%' ? canvasInfo['width'] * activeSubDataSize['w'] / 100 : activeSubDataSize['w'],
       h: activeSubDataSize['hUnit'] === '%' ? canvasInfo['height'] * activeSubDataSize['h'] / 100 : activeSubDataSize['h'],
@@ -133,7 +133,7 @@ class RedCanvas extends React.Component {
       onMouseLeave={() => this.state.useMove ? this.setState({useMove: false}) : 0}
       onMouseUp={() => this.state.useMove ? (this.setState({useMove: false}), document.body.style.cursor = 'default') : 0}
       onMouseDown={e => {
-        this.setState({useMove: true})
+        this.setState({useMove: true});
       }}
       onWheel={e => {
         let t0 = this.state.canvasViewScale - e.nativeEvent.deltaY / 1000;
@@ -154,45 +154,47 @@ RedCanvas.getFilterCss = (filterList) => {
   return filterList.map(v => RedCanvasFilter.FILTER_COMPONENT_MAP[v['type']].getCss(v)).join(' ');
 };
 RedCanvas.getContainerCss = (canvasInfo, borderGradientInfo) => {
-  let borderData = {}
+  let borderData = {};
   // console.log('borderGradientInfo', borderGradientInfo)
   if (canvasInfo.borderIsGradientMode && borderGradientInfo) {
-    let gradient = CALC_GRADIENT.calcGradients(borderGradientInfo['layers'])
-    gradient = gradient.split(')')
-    gradient.pop()
-    gradient = gradient.join(')') + ')'
+    let gradient = CALC_GRADIENT.calcGradients(borderGradientInfo['layers']);
+    gradient = gradient.split(')');
+    gradient.pop();
+    gradient = gradient.join(')') + ')';
     borderData = {
       borderStyle: canvasInfo['border_type'],
       borderImageSlice: `${borderGradientInfo['border_image_sliceT']} ${borderGradientInfo['border_image_sliceR']} ${borderGradientInfo['border_image_sliceB']} ${borderGradientInfo['border_image_sliceL']}`,
       borderImageSource: gradient,
       borderImageRepeat: borderGradientInfo['border_image_repeat'],
       borderImageOutset: borderGradientInfo['border_image_outset'] + 'px',
-    }
+    };
   } else {
     borderData = {
       borderStyle: `${canvasInfo['border_type']}`,
       borderColor: `${canvasInfo['border_color']}`
-    }
+    };
   }
   if (canvasInfo['border_radius_mergeMode']) {
-    borderData['borderRadius'] = `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`
+    borderData['borderRadius'] = `${canvasInfo['border_radius']}${canvasInfo['border_radius_unit']}`;
   } else {
-    borderData['borderTopLeftRadius'] = `${canvasInfo['border_radius_split'][0]}${canvasInfo['border_radius_unit_split'][0]}`
-    borderData['borderBottomLeftRadius'] = `${canvasInfo['border_radius_split'][1]}${canvasInfo['border_radius_unit_split'][1]}`
-    borderData['borderTopRightRadius'] = `${canvasInfo['border_radius_split'][2]}${canvasInfo['border_radius_unit_split'][2]}`
-    borderData['borderBottomRightRadius'] = `${canvasInfo['border_radius_split'][3]}${canvasInfo['border_radius_unit_split'][3]}`
+    borderData['borderTopLeftRadius'] = `${canvasInfo['border_radius_split'][0]}${canvasInfo['border_radius_unit_split'][0]}`;
+    borderData['borderBottomLeftRadius'] = `${canvasInfo['border_radius_split'][1]}${canvasInfo['border_radius_unit_split'][1]}`;
+    borderData['borderTopRightRadius'] = `${canvasInfo['border_radius_split'][2]}${canvasInfo['border_radius_unit_split'][2]}`;
+    borderData['borderBottomRightRadius'] = `${canvasInfo['border_radius_split'][3]}${canvasInfo['border_radius_unit_split'][3]}`;
   }
   if (canvasInfo['border_width_mergeMode']) {
-    borderData['borderWidth'] = `${canvasInfo['border_width']}px`
+    borderData['borderWidth'] = `${canvasInfo['border_width']}px`;
   } else {
-    borderData['borderWidth'] = `${canvasInfo['border_width_split'][0]}px ${canvasInfo['border_width_split'][1]}px ${canvasInfo['border_width_split'][2]}px ${canvasInfo['border_width_split'][3]}px`
+    borderData['borderWidth'] = `${canvasInfo['border_width_split'][0]}px ${canvasInfo['border_width_split'][1]}px ${canvasInfo['border_width_split'][2]}px ${canvasInfo['border_width_split'][3]}px`;
   }
   // console.log(borderData)
   return {
-    boxSizing: canvasInfo['box_sizing'],
     ...borderData,
+    boxSizing: canvasInfo['box_sizing'],
     outline: `${canvasInfo['outline_width']}${canvasInfo['outline_width_unit']} ${canvasInfo['outline_type']} ${canvasInfo['outline_color']}`,
-    outlineOffset: `${canvasInfo['outline_offset']}${canvasInfo['outline_offset_unit']}`
+    outlineOffset: `${canvasInfo['outline_offset']}${canvasInfo['outline_offset_unit']}`,
+    width: canvasInfo['width'] + 'px',
+    height: canvasInfo['height'] + 'px'
   };
 };
 const style = {
