@@ -6,7 +6,6 @@
  *
  */
 import React from "react";
-import RedSelect from "../../../../core/RedSelect.jsx";
 import RedNumber from "../../../../core/RedNumber.jsx";
 
 const names = ['T', 'R', 'B', 'L']

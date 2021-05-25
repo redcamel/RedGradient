@@ -225,9 +225,9 @@ class RedAddGradientLayerSet extends React.Component {
               <RedNumber
                 title={'division'}
                 maxValue={450}
-                value={this.state['division'] || 2}
+                value={this.state['division'] || 1}
                 HD_onInput={e => {
-                  let t0 = Math.max(e.target.value, 2);
+                  let t0 = Math.max(e.target.value, 1);
                   this.setState({division: t0, tempColorList: []});
                 }} />
               <div />

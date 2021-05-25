@@ -8,7 +8,6 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFolderOpen} from "@fortawesome/free-solid-svg-icons";
-import DataCanvas from "../data/DataCanvas.js";
 
 class RedFrameMenuOpen extends React.Component {
   checkValidate(v) {

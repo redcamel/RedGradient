@@ -8,7 +8,6 @@
 import React from "react";
 import DataLayer from "../data/DataLayer.js";
 import RedTitle from "../../core/RedTitle.jsx";
-import RedAddGradientLayerSet from "./RedAddGradientLayerSet.jsx";
 
 const options = [
   'black',

@@ -19,7 +19,6 @@ import {
 import CALC_GRADIENT from "../CALC_GRADIENT";
 import RedLayerSubItem from "./RedLayerSubItem.jsx";
 import RedAddGradientLayerSet from "./RedAddGradientLayerSet";
-import DataLayer from "../data/DataLayer";
 
 let startDragLayer
 
