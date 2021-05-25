@@ -53,15 +53,17 @@ function drawCanvasUI() {
         </div>
 
       </div>
-      <div style={style.canvasViewInfo}>
-        <div style={{marginRight: '5px',color:'#696969'}}>Center : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY} /
-          ViewScale : {this.state.canvasViewScale.toFixed(2)}</div>
-        <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
-          Center
-        </div>
-        <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
-        <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
+
+    </div>
+    <div style={style.canvasViewInfo}>
+      <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
+        Center
       </div>
+      <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
+      <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
+      <div style={{marginLeft: '5px',color:'#696969'}}>Center : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY} /
+        ViewScale : {this.state.canvasViewScale.toFixed(2)}</div>
+
     </div>
     <div style={{display: 'inline-block', margin: '0px 10px 8px 10px'}}>
       {
@@ -97,12 +99,12 @@ const style = {
   canvasResizer: {
     display: 'flex',
     alignItems: 'center',
-    padding: '8px',
+    padding: '8px 8px 4px',
   },
   canvasViewInfo: {
     display: 'flex',
     alignItems: 'center',
-    padding: '8px',
+    padding: '0px 8px 5px 12px',
     fontSize: '12px',
     textAlign: 'right'
   },
@@ -110,7 +112,7 @@ const style = {
     background: '#5e7ade',
     display: 'flex',
     borderRadius: '6px',
-    padding: '5px 10px',
+    padding: '3px 8px',
     whiteSpace: 'nowrap',
     cursor: 'pointer',
     outline: 'none',
@@ -122,7 +124,7 @@ const style = {
     background: '#7235d4',
     display: 'flex',
     borderRadius: '6px',
-    padding: '5px 10px',
+    padding: '3px 8px',
     whiteSpace: 'nowrap',
     cursor: 'pointer',
     outline: 'none',
