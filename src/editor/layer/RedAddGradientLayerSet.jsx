@@ -21,8 +21,11 @@ const easeNameList = [
   'power3',
   'power4',
   'circ',
-  'expo',
+  // 'back',
+  // 'bounce',
+  // 'elastic',
   'sine',
+  'expo',
   'step'
 ];
 const easeTypeList = [
@@ -354,6 +357,7 @@ class RedAddGradientLayerSet extends React.Component {
             <div style={{
               width: '800px',
               height: '400px',
+              overflow:'hidden',
               borderRadius: '16px',
               background: this.renderGradientColorList(tempColorList)
             }}>

@@ -75,7 +75,7 @@ class App extends React.Component {
   }
 
   updateRootState(v = {}) {
-    console.log(v)
+    // console.log(v)
     this.setState(v)
     if (this.history.length > 50) this.history.shift()
     this.history.push(JSON.parse(JSON.stringify(this.state)))

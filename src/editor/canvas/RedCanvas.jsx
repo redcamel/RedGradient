@@ -155,7 +155,7 @@ RedCanvas.getFilterCss = (filterList) => {
 };
 RedCanvas.getContainerCss = (canvasInfo, borderGradientInfo) => {
   let borderData = {}
-  console.log('borderGradientInfo', borderGradientInfo)
+  // console.log('borderGradientInfo', borderGradientInfo)
   if (canvasInfo.borderIsGradientMode && borderGradientInfo) {
     let gradient = CALC_GRADIENT.calcGradients(borderGradientInfo['layers'])
     gradient = gradient.split(')')
@@ -187,7 +187,7 @@ RedCanvas.getContainerCss = (canvasInfo, borderGradientInfo) => {
   } else {
     borderData['borderWidth'] = `${canvasInfo['border_width_split'][0]}${canvasInfo['border_width_unit_split'][0]} ${canvasInfo['border_width_split'][1]}${canvasInfo['border_width_unit_split'][1]} ${canvasInfo['border_width_split'][2]}${canvasInfo['border_width_unit_split'][2]} ${canvasInfo['border_width_split'][3]}${canvasInfo['border_width_unit_split'][3]}`
   }
-  console.log(borderData)
+  // console.log(borderData)
   return {
     boxSizing: canvasInfo['box_sizing'],
     ...borderData,
