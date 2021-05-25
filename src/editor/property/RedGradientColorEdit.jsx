@@ -184,10 +184,11 @@ class RedGradientColorEdit extends React.Component {
         <RedPropertyOffsetEdit rootComponent={rootComponent}/>
       </div>
       <div style={{marginTop: '15px'}} >
-        <AutoSizer disableHeight>
+        <AutoSizer disableHeight >
           {({width}) => (
             <List
               ref="List"
+              minHeight={600}
               height={600}
               overscanRowCount={10}
               rowCount={activeSubData['colorList'].length}

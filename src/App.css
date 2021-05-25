@@ -324,3 +324,7 @@ option {
     color: #696969;
     margin-right: 5px;
 }
+
+.ReactVirtualized__Grid__innerScrollContainer {
+    overflow: hidden hidden !important;
+}

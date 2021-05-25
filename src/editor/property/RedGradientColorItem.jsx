@@ -387,7 +387,7 @@ const style = {
     paddingTop: '10px',
   },
   colorPicker: {
-    zIndex: 1, position: 'absolute', top: 0, left: '50%', transform: 'translate(-50% , -50%)',
+    zIndex: 1, position: 'absolute', top: 0, left: '50%', transform: 'translate(-50% , 0%)',
     boxShadow: '0px 0px 16px rgba(0,0,0,0.5)',
     background: '#fff',
     borderRadius: '8px',
