@@ -195,27 +195,29 @@ class App extends React.Component {
                   <div style={{height: '400px', overflowY: 'auto', padding: '4px'}}>
                     <RedPreset rootComponent={this}/>
                   </div>
-                  <RedTitle title={'Result'}/>
-                  <button
-                    style={style.copyClass}
-                    onClick={e => {
-                      var tempElem = document.createElement('textarea');
-                      tempElem.value = containerCssText;
-                      document.body.appendChild(tempElem);
-                      tempElem.select();
-                      document.execCommand("copy");
-                      document.body.removeChild(tempElem);
-                      alert('Copy Class!')
-                    }}
-                  >Copy Class
-                  </button>
-                  <SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>
-                    {containerCssText}
-                  </SyntaxHighlighter>
-                  {/*optimized*/}
-                  {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'}>*/}
-                  {/*  {containerCssTextOptimize}*/}
-                  {/*</SyntaxHighlighter>*/}
+                  <div style={{maxHeight : '400px',overflowY:'auto'}}>
+                    <RedTitle title={'Result'}/>
+                    <button
+                      style={style.copyClass}
+                      onClick={e => {
+                        var tempElem = document.createElement('textarea');
+                        tempElem.value = containerCssText;
+                        document.body.appendChild(tempElem);
+                        tempElem.select();
+                        document.execCommand("copy");
+                        document.body.removeChild(tempElem);
+                        alert('Copy Class!')
+                      }}
+                    >Copy Class
+                    </button>
+                    <SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>
+                      {containerCssText}
+                    </SyntaxHighlighter>
+                    {/*optimized*/}
+                    {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'}>*/}
+                    {/*  {containerCssTextOptimize}*/}
+                    {/*</SyntaxHighlighter>*/}
+                  </div>
 
                 </div>
                 <div>TODO - 애드센스자리</div>
