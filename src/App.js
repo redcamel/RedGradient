@@ -121,7 +121,6 @@ class App extends React.Component {
     if (!canvasInfo.hasOwnProperty('border_width_mergeMode')) {
       canvasInfo['border_width_mergeMode'] = 1
       canvasInfo['border_width_split'] = [0, 0, 0, 0];
-      canvasInfo['border_width_unit_split'] = ['px', 'px', 'px', 'px'];
     }
     if (!canvasInfo.hasOwnProperty('outline_width')) {
       canvasInfo['outline_width'] = 0;

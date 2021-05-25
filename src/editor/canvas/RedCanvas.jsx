@@ -183,9 +183,9 @@ RedCanvas.getContainerCss = (canvasInfo, borderGradientInfo) => {
     borderData['borderBottomRightRadius'] = `${canvasInfo['border_radius_split'][3]}${canvasInfo['border_radius_unit_split'][3]}`
   }
   if (canvasInfo['border_width_mergeMode']) {
-    borderData['borderWidth'] = `${canvasInfo['border_width']}${canvasInfo['border_width_unit']}`
+    borderData['borderWidth'] = `${canvasInfo['border_width']}px`
   } else {
-    borderData['borderWidth'] = `${canvasInfo['border_width_split'][0]}${canvasInfo['border_width_unit_split'][0]} ${canvasInfo['border_width_split'][1]}${canvasInfo['border_width_unit_split'][1]} ${canvasInfo['border_width_split'][2]}${canvasInfo['border_width_unit_split'][2]} ${canvasInfo['border_width_split'][3]}${canvasInfo['border_width_unit_split'][3]}`
+    borderData['borderWidth'] = `${canvasInfo['border_width_split'][0]}px ${canvasInfo['border_width_split'][1]}px ${canvasInfo['border_width_split'][2]}px ${canvasInfo['border_width_split'][3]}px`
   }
   // console.log(borderData)
   return {

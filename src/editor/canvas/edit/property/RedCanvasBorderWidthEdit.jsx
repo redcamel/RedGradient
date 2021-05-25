@@ -64,10 +64,7 @@ class RedCanvasBorderWidthEdit extends React.Component {
                 canvasInfo['border_width'] = e.target.value;
                 rootComponent.updateRootState({});
               }}/>
-            <RedSelect value={canvasInfo['border_width_unit']} options={['px', '%']} HD_change={e => {
-              canvasInfo['border_width_unit'] = e.target.value;
-              rootComponent.updateRootState({});
-            }}/>
+            <span style={{marginLeft:'3px'}}>px</span>
           </div>
           :
           <div style={style.container}>
@@ -76,18 +73,13 @@ class RedCanvasBorderWidthEdit extends React.Component {
                 return <div>
                   <RedNumber
                     title={names[index]}
-                    width={'101px'}
+                    width={'50px'}
                     value={v || 0}
                     HD_onInput={e => {
                       canvasInfo['border_width_split'][index] = e.target.value;
                       rootComponent.updateRootState({});
                     }}/>
-                  <RedSelect
-                    value={canvasInfo['border_width_unit_split'][index]}
-                    options={['px', '%']} HD_change={e => {
-                    canvasInfo['border_width_unit_split'][index] = e.target.value;
-                    rootComponent.updateRootState({});
-                  }}/>
+                 <span style={{marginLeft:'3px'}}>px</span>
                 </div>
               })
             }
