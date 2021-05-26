@@ -147,6 +147,14 @@ class RedLayerSubItem extends React.Component {
         </button>
         <button className={'layerType'}>{item.type.charAt(0).toUpperCase()}</button>
       </div>
+      <div style={style.addGradientLayerItem}
+        onClick={e=>{
+          const idx = layer.items.indexOf(item)
+          const t0 = JSON.parse(JSON.stringify(item))
+          layer.items.splice(idx,0,t0);
+          rootComponent.updateRootState({activeSubData: t0});
+        }}
+      >duplicate</div>
       <div
         className={'transparent_checker'}
         style={{
@@ -195,5 +203,13 @@ const style = {
     cursor: 'pointer',
     border: 0,
     fontWeight: 'bold'
-  }
+  },addGradientLayerItem: {
+    marginTop : '2px',
+    background: '#5e7ade',
+    padding: '3px 5px',
+    fontSize: '11px',
+    borderRadius: '4px',
+    marginBottom: '2px',
+    cursor: 'pointer'
+  },
 };
