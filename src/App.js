@@ -138,7 +138,19 @@ class App extends React.Component {
     // console.log(this.state);
     if (!this.state) return <RedStart rootComponent={this}/>
     const canvasInfo = this.state.canvasInfo
-
+    let containerCssText = ''
+    {
+      containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo, this.state.borderGradientInfo))
+      containerCssText = containerCssText.map(v => {
+        return `${v[0]} : ${v[1]}`
+      });
+      containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
+      containerCssText = `.result {
+          background : ${(CALC_GRADIENT.calcGradients(this.state.layers, true, this.state.bgColor))};
+          background-blend-mode : ${CALC_GRADIENT.calcBlendMode(this.state.layers)};
+          ${containerCssText}
+          }`
+    }
     this.checkUnloadEvent()
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
@@ -183,19 +195,7 @@ class App extends React.Component {
                     <button
                       style={style.copyClass}
                       onClick={e => {
-                        let containerCssText = ''
-                        {
-                          containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo, this.state.borderGradientInfo))
-                          containerCssText = containerCssText.map(v => {
-                            return `${v[0]} : ${v[1]}`
-                          });
-                          containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
-                          containerCssText = `.result {
-          background : ${(CALC_GRADIENT.calcGradients(this.state.layers, true, this.state.bgColor))};
-          background-blend-mode : ${CALC_GRADIENT.calcBlendMode(this.state.layers)};
-          ${containerCssText}
-          }`
-                        }
+
                         var tempElem = document.createElement('textarea');
                         tempElem.value = containerCssText;
                         document.body.appendChild(tempElem);
@@ -207,9 +207,8 @@ class App extends React.Component {
                     >Copy Class
                     </button>
                     {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>*/}
-                    {/*  {containerCssText}*/}
+                      {containerCssText}
                     {/*</SyntaxHighlighter>*/}
-                    {/*optimized*/}
                   </div>
 
                 </div>
