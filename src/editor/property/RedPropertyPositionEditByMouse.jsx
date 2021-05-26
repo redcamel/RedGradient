@@ -31,7 +31,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const activeSubData = rootComponentState.activeSubData;
     const layerSize = rootComponentState.activeLayer.size;
     const canvasInfo = rootComponentState.canvasInfo;
-    const targetKey = this.props.targetKey
+    const targetKey = this.props.targetKey;
     const rect = targetContext.refRect.current.getBoundingClientRect();
     let tX = (e.pageX - (rect.x));
     let tY = (e.pageY - (rect.y));
@@ -48,7 +48,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    const targetKey = this.props.targetKey
+    const targetKey = this.props.targetKey;
     activeSubData[targetKey]['x'] = x;
     activeSubData[targetKey]['y'] = y;
     rootComponent.updateRootState({});
@@ -63,8 +63,8 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const canvasInfo = rootComponentState.canvasInfo;
     let layerPixelW = canvasInfo.width;
     let layerPixelH = canvasInfo.height;
-    let tPercentX = targetData['xUnit'] === '%' ? (targetData.x) % 100 : ((targetData.x / layerPixelW * 100) % 100);
-    let tPercentY = targetData['yUnit'] === '%' ? (targetData.y) % 100 : ((targetData.y / layerPixelH * 100) % 100);
+    let tPercentX = targetData['xUnit'] === '%' ? (targetData.x===100 ? targetData.x : (targetData.x) % 100) : (targetData.x === layerPixelW ? (targetData.x / layerPixelW * 100) : (targetData.x / layerPixelW * 100) % 100);
+    let tPercentY = targetData['yUnit'] === '%' ? (targetData.y===100 ? targetData.y : (targetData.y) % 100) : (targetData.y === layerPixelH ? (targetData.y / layerPixelH * 100) :(targetData.y / layerPixelH * 100) % 100);
     if (tPercentX < 0) tPercentX = 100 + tPercentX;
     if (tPercentY < 0) tPercentY = 100 + tPercentY;
     return <div>
@@ -86,7 +86,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
           ...style.degreeItem,
           top: `${tPercentY}%`,
           left: `${tPercentX}%`
-        }}/>
+        }} />
       </div>
       <div
         className={'grid3_3'}
@@ -98,7 +98,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(0, 0);
           }}
           style={{...style.location, top: 0, left: 0}}><FontAwesomeIcon
-          icon={faArrowDown} style={{transform: 'rotate(135deg)'}}/></button>
+          icon={faArrowDown} style={{transform: 'rotate(135deg)'}} /></button>
         <button
           onClick={e => {
             let tX = 50;
@@ -106,7 +106,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(tX, 0);
           }}
           style={{...style.location, top: 0, left: '50%', transform: 'translate(-50%,0)'}}><FontAwesomeIcon
-          icon={faArrowDown} style={{transform: 'rotate(180deg)'}}/></button>
+          icon={faArrowDown} style={{transform: 'rotate(180deg)'}} /></button>
         <button
           onClick={e => {
             let tX = 100;
@@ -114,7 +114,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(tX, 0);
           }}
           style={{...style.location, top: 0, right: 0}}><FontAwesomeIcon icon={faArrowDown}
-                                                                         style={{transform: 'rotate(225deg)'}}/>
+                                                                         style={{transform: 'rotate(225deg)'}} />
         </button>
         {/**/}
         <button
@@ -126,7 +126,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
             }
           }}
           style={{...style.location, top: '50%', left: 0, transform: 'translate(0%,-50%)'}}><FontAwesomeIcon
-          icon={faArrowDown} style={{transform: 'rotate(90deg)'}}/></button>
+          icon={faArrowDown} style={{transform: 'rotate(90deg)'}} /></button>
         <button
           onClick={e => {
             let tX = 50;
@@ -136,7 +136,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(tX, tY);
           }}
           style={{...style.location, top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}><FontAwesomeIcon
-          icon={faCircle} style={{transform: 'rotate(135deg)'}}/></button>
+          icon={faCircle} style={{transform: 'rotate(135deg)'}} /></button>
         <button
           onClick={e => {
             let tX = 100;
@@ -146,7 +146,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(tX, tY);
           }}
           style={{...style.location, top: '50%', right: 0, transform: 'translate(0%,-50%)'}}><FontAwesomeIcon
-          icon={faArrowDown} style={{transform: 'rotate(270deg)'}}/></button>
+          icon={faArrowDown} style={{transform: 'rotate(270deg)'}} /></button>
         {/**/}
         <button
           onClick={e => {
@@ -155,7 +155,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(0, tY);
           }}
           style={{...style.location, bottom: 0, left: 0}}><FontAwesomeIcon icon={faArrowDown}
-                                                                           style={{transform: 'rotate(45deg)'}}/>
+                                                                           style={{transform: 'rotate(45deg)'}} />
         </button>
         <button
           onClick={e => {
@@ -166,7 +166,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(tX, tY);
           }}
           style={{...style.location, bottom: 0, left: '50%', transform: 'translate(-50%,0)'}}><FontAwesomeIcon
-          icon={faArrowDown} style={{transform: 'rotate(0deg)'}}/></button>
+          icon={faArrowDown} style={{transform: 'rotate(0deg)'}} /></button>
         <button
           onClick={e => {
             let tX = 100;
@@ -176,9 +176,33 @@ class RedPropertyPositionEditByMouse extends React.Component {
             this.setPosition(tX, tY);
           }}
           style={{...style.location, bottom: 0, right: 0}}><FontAwesomeIcon icon={faArrowDown}
-                                                                            style={{transform: 'rotate(315deg)'}}/>
+                                                                            style={{transform: 'rotate(315deg)'}} />
         </button>
+      </div>
 
+      <div style={{display: 'flex'}}>
+        <div style={style.mirrorItem}
+             onClick={e => {
+               const targetKey = this.props.targetKey;
+               let tX = activeSubData[targetKey]['x'];
+               let tY = activeSubData[targetKey]['y'];
+               if (targetData['xUnit'] === 'px') tX = canvasInfo['width'] - tX;
+               else tX = 100 - tX;
+               this.setPosition(tX, tY);
+             }}
+        >Mirror H
+        </div>
+        <div style={style.mirrorItem}
+             onClick={e => {
+               const targetKey = this.props.targetKey;
+               let tX = activeSubData[targetKey]['x'];
+               let tY = activeSubData[targetKey]['y'];
+               if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] - tY;
+               else tY = 100 - tY;
+               this.setPosition(tX, tY);
+             }}
+        >Mirror V
+        </div>
       </div>
     </div>;
   }
@@ -186,9 +210,19 @@ class RedPropertyPositionEditByMouse extends React.Component {
 
 export default RedPropertyPositionEditByMouse;
 const style = {
+  mirrorItem: {
+    width: `${SIZE}px`,
+    margin: '0 3px',
+    background: '#5e7ade',
+    padding: '3px 5px',
+    fontSize: '11px',
+    borderRadius: '4px',
+    marginRight: '2px',
+    cursor: 'pointer'
+  },
   box: {
     display: 'inline-block',
-    margin: '5px',
+    margin: '5px 3px',
     width: `${SIZE}px`, height: `${SIZE}px`,
     border: '1px solid #5e7ade',
     borderRadius: '4px',
