@@ -63,8 +63,8 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const canvasInfo = rootComponentState.canvasInfo;
     let layerPixelW = canvasInfo.width;
     let layerPixelH = canvasInfo.height;
-    let tPercentX = targetData['xUnit'] === '%' ? (targetData.x===100 ? targetData.x : (targetData.x) % 100) : (targetData.x === layerPixelW ? (targetData.x / layerPixelW * 100) : (targetData.x / layerPixelW * 100) % 100);
-    let tPercentY = targetData['yUnit'] === '%' ? (targetData.y===100 ? targetData.y : (targetData.y) % 100) : (targetData.y === layerPixelH ? (targetData.y / layerPixelH * 100) :(targetData.y / layerPixelH * 100) % 100);
+    let tPercentX = targetData['xUnit'] === '%' ? (targetData.x === 100 ? targetData.x : (targetData.x) % 100) : (targetData.x === layerPixelW ? (targetData.x / layerPixelW * 100) : (targetData.x / layerPixelW * 100) % 100);
+    let tPercentY = targetData['yUnit'] === '%' ? (targetData.y === 100 ? targetData.y : (targetData.y) % 100) : (targetData.y === layerPixelH ? (targetData.y / layerPixelH * 100) : (targetData.y / layerPixelH * 100) % 100);
     if (tPercentX < 0) tPercentX = 100 + tPercentX;
     if (tPercentY < 0) tPercentY = 100 + tPercentY;
     return <div>
@@ -186,8 +186,22 @@ class RedPropertyPositionEditByMouse extends React.Component {
                const targetKey = this.props.targetKey;
                let tX = activeSubData[targetKey]['x'];
                let tY = activeSubData[targetKey]['y'];
-               if (targetData['xUnit'] === 'px') tX = canvasInfo['width'] - tX;
-               else tX = 100 - tX;
+               if (targetKey === 'at') {
+                 if (targetData['xUnit'] === 'px') tX = canvasInfo['width'] - tX;
+                 else tX = 100 - tX;
+               } else {
+
+                 if (targetData['xUnit'] === 'px') {
+                   let tW = activeSubData['size']['w'];
+                   tW = activeSubData['size']['wUnit'] === '%' ? tW / 100 * canvasInfo['width'] : tW;
+                   tX = canvasInfo['width'] - tX - tW;
+                 } else {
+                   let tW = activeSubData['size']['w'];
+                   tW = activeSubData['size']['wUnit'] === '%' ? tW : tW * canvasInfo['width'] * 100;
+                   tX = 100 - tX - tW;
+                 }
+               }
+
                this.setPosition(tX, tY);
              }}
         >Mirror H
@@ -197,8 +211,20 @@ class RedPropertyPositionEditByMouse extends React.Component {
                const targetKey = this.props.targetKey;
                let tX = activeSubData[targetKey]['x'];
                let tY = activeSubData[targetKey]['y'];
-               if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] - tY;
-               else tY = 100 - tY;
+               if (targetKey === 'at') {
+                 if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] - tY;
+                 else tY = 100 - tY;
+               } else {
+                 if (targetData['yUnit'] === 'px') {
+                   let tH = activeSubData['size']['h'];
+                   tH = activeSubData['size']['hUnit'] === '%' ? tH / 100 * canvasInfo['height'] : tH;
+                   tY = canvasInfo['height'] - tY - tH;
+                 } else {
+                   let tH = activeSubData['size']['h'];
+                   tH = activeSubData['size']['hUnit'] === '%' ? tH : tH * canvasInfo['height'] * 100;
+                   tY = 100 - tY - tH;
+                 }
+               }
                this.setPosition(tX, tY);
              }}
         >Mirror V
