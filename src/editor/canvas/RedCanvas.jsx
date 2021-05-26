@@ -84,7 +84,7 @@ class RedCanvas extends React.Component {
                     top: lY,
                     width: `50px`,
                     height: `50px`,
-                    border: '1px dashed rgba(0,0,0,0.25)',
+                    border: '1px dashed rgba(0,0,0,0.5)',
                     borderRadius : '50%',
                     transform: 'translate(-50%,-50%)',
                     color: '#000'
