@@ -24,17 +24,16 @@ const CALC_GRADIENT = {
     const gradients = []
     {
       let index = data['colorList'].length
-      while(index--){
+      while (index--) {
         //TODO - divideTxt 이거 좀더 보강해야함
-        let v =data['colorList'][index]
+        let v = data['colorList'][index]
         offsetTxt = `${offset < 0 ? '-' : '+'} ${Math.abs(offset) + offsetUnit}`
         // 코닉일떄는 단위를 맞춘다.
-        if (data['type'] === GRADIENT_TYPE.CONIC || data['type'] === GRADIENT_TYPE.REPEAT_CONIC){
-          if(v['rangeUnit']==='%') offsetTxt = `${offset < 0 ? '-' : '+'} ${Math.abs(offset / 360 * 100)}%`
+        if (data['type'] === GRADIENT_TYPE.CONIC || data['type'] === GRADIENT_TYPE.REPEAT_CONIC) {
+          if (v['rangeUnit'] === '%') offsetTxt = `${offset < 0 ? '-' : '+'} ${Math.abs(offset / 360 * 100)}%`
         }
         let colorRangeTxt = '';
         if (v['useRange']) {
-
           colorRangeTxt = `calc(${v['range']}${v['rangeUnit']} ${offsetTxt})`;
           let colorRangeEndTxt = `calc(${v['rangeEnd']}${v['rangeUnit']} ${offsetTxt})`;
           let divideTxt = '';
@@ -45,8 +44,6 @@ const CALC_GRADIENT = {
           else divideEndTxt = v['useDivideEnd'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['rangeEnd']}${v['rangeUnit']} + 1px ${offsetTxt})` : '';
           gradients[index] = `${v['color']} ${colorRangeTxt} ${divideTxt}, ${v['colorEnd']} ${colorRangeEndTxt} ${divideEndTxt}`;
         } else {
-
-
           colorRangeTxt = `calc(${v['range']}${v['rangeUnit']} ${offsetTxt})`;
           let divideTxt = '';
           if (data['type'] === GRADIENT_TYPE.CONIC || data['type'] === GRADIENT_TYPE.REPEAT_CONIC) divideTxt = v['useDivide'] && data['colorList'][index + 1] ? `,${data['colorList'][index + 1]['color']} calc(${v['range']}${v['rangeUnit']} ${offsetTxt})` : '';

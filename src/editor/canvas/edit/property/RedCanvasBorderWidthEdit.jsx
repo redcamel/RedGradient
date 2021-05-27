@@ -63,7 +63,7 @@ class RedCanvasBorderWidthEdit extends React.Component {
                 canvasInfo['border_width'] = e.target.value;
                 rootComponent.updateRootState({});
               }}/>
-            <span style={{marginLeft:'3px'}}>px</span>
+            <span style={{marginLeft: '3px'}}>px</span>
           </div>
           :
           <div style={style.container}>
@@ -78,7 +78,7 @@ class RedCanvasBorderWidthEdit extends React.Component {
                       canvasInfo['border_width_split'][index] = e.target.value;
                       rootComponent.updateRootState({});
                     }}/>
-                 <span style={{marginLeft:'3px'}}>px</span>
+                  <span style={{marginLeft: '3px'}}>px</span>
                 </div>
               })
             }

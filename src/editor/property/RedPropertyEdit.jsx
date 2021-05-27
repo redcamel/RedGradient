@@ -19,7 +19,6 @@ import RedPropertyAtEdit from "./RedPropertyAtEdit";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedPropertySizeEdit from "./RedPropertySizeEdit";
 import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
-import CALC_GRADIENT from "../CALC_GRADIENT";
 
 class RedPropertyEdit extends React.Component {
   render() {
@@ -89,16 +88,16 @@ class RedPropertyEdit extends React.Component {
         </div>
         {/*<div style={style.itemContainer}>*/}
         {/*  <div>Current Gradient Css</div>*/}
-          {/*{CALC_GRADIENT.calcGradientItem(data, false, activeLayer)}*/}
-          {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>*/}
-          {/*  {*/}
-          {/*    JSON.stringify(CALC_GRADIENT.calcGradientItem(data, false, activeLayer))*/}
-          {/*  }*/}
-          {/*</SyntaxHighlighter>*/}
-          {/*<div>Current Gradient Data</div>*/}
-          {/*<SyntaxHighlighter language="javascript" wrapLongLines={'pre'} style={dracula}>*/}
-          {/*  {JSON.stringify(data, null, 2)}*/}
-          {/*</SyntaxHighlighter>*/}
+        {/*{CALC_GRADIENT.calcGradientItem(data, false, activeLayer)}*/}
+        {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>*/}
+        {/*  {*/}
+        {/*    JSON.stringify(CALC_GRADIENT.calcGradientItem(data, false, activeLayer))*/}
+        {/*  }*/}
+        {/*</SyntaxHighlighter>*/}
+        {/*<div>Current Gradient Data</div>*/}
+        {/*<SyntaxHighlighter language="javascript" wrapLongLines={'pre'} style={dracula}>*/}
+        {/*  {JSON.stringify(data, null, 2)}*/}
+        {/*</SyntaxHighlighter>*/}
         {/*</div>*/}
       </div>
     </div>;

@@ -90,7 +90,6 @@ class RedAddGradientLayerSet extends React.Component {
         code = `${GRADIENT_TYPE.CONIC}(${gradients})`;
         break;
     }
-
     return code;
   };
 
@@ -105,7 +104,7 @@ class RedAddGradientLayerSet extends React.Component {
     >
 
       <div style={style.container}>
-        <div style={{width: '100%'}}><RedTitle title={"add with template"} /></div>
+        <div style={{width: '100%'}}><RedTitle title={"add with template"}/></div>
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -135,24 +134,22 @@ class RedAddGradientLayerSet extends React.Component {
                 tempColorList[index] = tempColorList[index] || (new DataColor(tColor, tS, '%', false, false, true, tE));
                 tempColorList[index]['range'] = tS;
                 tempColorList[index]['rangeEnd'] = tE;
-
               }
               tempColorList[index]['rangeEnd'] = tempColorList[index + 1] ? tempColorList[index + 1]['range'] : tempColorList[index]['rangeEnd'];
-
               const tColorData = tempColorList[index];
               return <div style={{
                 position: 'relative',
                 padding: '5px',
-                background : (index+Math.floor(index/10))%2 ?  'rgba(0,0,0,0.25)' : '',
+                background: (index + Math.floor(index / 10)) % 2 ? 'rgba(0,0,0,0.25)' : '',
                 // borderLeft: index ? '1px solid #777' : 0,
                 width: `${100 / rangeList.length}%`,
-                minWidth : '10%'
+                minWidth: '10%'
               }}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
                   fontSize: '9px',
-                  width : '100px'
+                  width: '100px'
                 }}>
                   <RedNumber
                     fontSize={'11px'}
@@ -164,7 +161,8 @@ class RedAddGradientLayerSet extends React.Component {
                       tempColorList[index]['range'] = e.target.value;
                       this.setState({});
                     }}
-                  /> <div style={{margin : '0px 2px 0px 2px'}}>%</div>
+                  />
+                  <div style={{margin: '0px 2px 0px 2px'}}>%</div>
                 </div>
                 {/*<div>{tE.toFixed()}%</div>*/}
                 <div
@@ -207,8 +205,12 @@ class RedAddGradientLayerSet extends React.Component {
                 </div>
 
 
-                <div style={{...style.colorPicker,   transform: Math.floor(index/10)===index/10 ? 'translate(-25% , 40px)' : index%10===9 ? 'translate(-75% , 40px)' : 'translate(-50% , 40px)', display: this.state.openColorPicker[index] ? 'block' : 'none'}}>
-                  <div ref={this.refColorPickerContainer[index]} />
+                <div style={{
+                  ...style.colorPicker,
+                  transform: Math.floor(index / 10) === index / 10 ? 'translate(-25% , 40px)' : index % 10 === 9 ? 'translate(-75% , 40px)' : 'translate(-50% , 40px)',
+                  display: this.state.openColorPicker[index] ? 'block' : 'none'
+                }}>
+                  <div ref={this.refColorPickerContainer[index]}/>
                   <div style={style.complete} onClick={() => {
                     this.state.openColorPicker[index] = false;
                     this.setState({});
@@ -229,20 +231,20 @@ class RedAddGradientLayerSet extends React.Component {
                 HD_onInput={e => {
                   let t0 = Math.max(e.target.value, 1);
                   this.setState({division: t0, tempColorList: []});
-                }} />
-              <div />
+                }}/>
+              <div/>
               <RedSelect title={'ease'} value={this.state['easeName']} options={easeNameList} HD_change={e => {
-                this.setState({easeName: e.target.value,tempColorList : []});
-              }} />
-              <div />
+                this.setState({easeName: e.target.value, tempColorList: []});
+              }}/>
+              <div/>
               <RedSelect title={'easeType'} value={this.state['easeType']} options={easeTypeList} HD_change={e => {
-                this.setState({easeType: e.target.value,tempColorList : []});
-              }} />
-              <div />
+                this.setState({easeType: e.target.value, tempColorList: []});
+              }}/>
+              <div/>
               <RedSelect title={'gradient type'} value={this.state['type']} options={Object.entries(gradientTypes)}
                          HD_change={e => {
-                           this.setState({type: e.target.value,tempColorList : []});
-                         }} />
+                           this.setState({type: e.target.value, tempColorList: []});
+                         }}/>
               {/*             */}
               <div style={{display: 'flex', alignItems: 'center'}}>
                 start color
@@ -286,7 +288,7 @@ class RedAddGradientLayerSet extends React.Component {
                     transform: 'translate(0% , 40px)',
                     display: this.state.openColorPicker[startIndex] ? 'block' : 'none'
                   }}>
-                    <div ref={this.refColorPickerContainer[startIndex]} />
+                    <div ref={this.refColorPickerContainer[startIndex]}/>
                     <div style={style.complete} onClick={() => {
                       this.state.openColorPicker[startIndex] = false;
                       this.setState({tempColorList: []});
@@ -336,7 +338,7 @@ class RedAddGradientLayerSet extends React.Component {
                     transform: 'translate(-50% , 40px)',
                     display: this.state.openColorPicker[lastIndex] ? 'block' : 'none'
                   }}>
-                    <div ref={this.refColorPickerContainer[lastIndex]} />
+                    <div ref={this.refColorPickerContainer[lastIndex]}/>
                     <div style={style.complete} onClick={() => {
                       this.state.openColorPicker[lastIndex] = false;
                       this.setState({tempColorList: []});
@@ -357,7 +359,7 @@ class RedAddGradientLayerSet extends React.Component {
             <div style={{
               width: '800px',
               height: '400px',
-              overflow:'hidden',
+              overflow: 'hidden',
               borderRadius: '16px',
               background: this.renderGradientColorList(tempColorList)
             }}>
@@ -369,7 +371,7 @@ class RedAddGradientLayerSet extends React.Component {
                   left: v['range'] + '%',
                   width: (v['rangeEnd'] - v['range']) + '%',
                   bottom: 0
-                }} />;
+                }}/>;
               })}
             </div>
           </div>
@@ -419,14 +421,13 @@ const
       top: 0, left: 0, right: 0, bottom: 0,
       background: 'rgba(0,0,0,0.46)',
       zIndex: 2
-
     },
     container: {
       position: 'fixed',
       top: '50%',
       left: '50%',
       transform: 'translate(-50%,-50%)',
-      overflowY : 'auto',
+      overflowY: 'auto',
       minHeight: '600px',
       maxHeight: '800px',
       background: '#333',

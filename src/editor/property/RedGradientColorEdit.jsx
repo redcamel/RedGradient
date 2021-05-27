@@ -23,13 +23,11 @@ class RedGradientColorEdit extends React.Component {
       activeIDX: 0,
       layerBgColor: 'transparent',
       //
-
-
     };
     this.refBar = React.createRef();
   }
 
-  _rowRender(v){
+  _rowRender(v) {
     console.log(v)
     let idx = v['index']
     let key = v['key']
@@ -37,7 +35,7 @@ class RedGradientColorEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    return <div style={{...style,padding:'10px 0px'}}     key = {key}>
+    return <div style={{...style, padding: '10px 0px'}} key={key}>
       <RedGradientColorItem
 
         rootComponent={rootComponent}
@@ -120,8 +118,6 @@ class RedGradientColorEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-
-
     return <div style={style.container}>
       <div style={{display: 'flex', margin: '4px 0px', justifyContent: 'space-between'}}>
         <div className={'ui_subTitle'}>Preview</div>
@@ -183,8 +179,8 @@ class RedGradientColorEdit extends React.Component {
       <div style={{marginTop: '20px'}}>
         <RedPropertyOffsetEdit rootComponent={rootComponent}/>
       </div>
-      <div style={{marginTop: '15px'}} >
-        <AutoSizer disableHeight >
+      <div style={{marginTop: '15px'}}>
+        <AutoSizer disableHeight>
           {({width}) => (
             <List
               ref="List"
@@ -193,7 +189,7 @@ class RedGradientColorEdit extends React.Component {
               overscanRowCount={10}
               rowCount={activeSubData['colorList'].length}
               rowHeight={110}
-              rowRenderer={v=>this._rowRender(v)}
+              rowRenderer={v => this._rowRender(v)}
               width={width}
             />
           )}
@@ -223,8 +219,7 @@ class RedGradientColorEdit extends React.Component {
 
 export default RedGradientColorEdit;
 const style = {
-  container: {
-  },
+  container: {},
   bgItem: {
     padding: '2px',
     marginRight: '1px',

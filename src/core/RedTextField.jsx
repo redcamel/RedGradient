@@ -5,12 +5,11 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
 
 class RedTextField extends React.Component {
   render() {
-    return <div style={{display:'flex',alignItems:'center'}}>
+    return <div style={{display: 'flex', alignItems: 'center'}}>
       {this.props.title ? <span className={'ui_item_title'}>{this.props.title}</span> : ''}
       <input
         style={{width: `${this.props.width || ''}`}}

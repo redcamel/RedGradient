@@ -162,17 +162,16 @@ class RedGradientColorItem extends React.Component {
                        targetColorData = colorData
                        // this.state.colorPicker.setOption({color: colorData['color']});
                        this.state.colorPicker.initColorWithoutChangeEvent(colorData['color']);
-                       this.setState({openColorPicker: true,openColorEndPicker:false});
-                       requestAnimationFrame(e=>{
+                       this.setState({openColorPicker: true, openColorEndPicker: false});
+                       requestAnimationFrame(e => {
                          const pickerContainerNode = this.refColorPickerContainer.current.parentNode
                          const itemNode = pickerContainerNode.parentNode.parentNode
                          const pickerContainerRect = pickerContainerNode.getBoundingClientRect()
                          const itemRect = itemNode.getBoundingClientRect()
                          const t0 = itemRect.bottom - pickerContainerRect.height - pickerContainerRect.top
                          console.log(t0)
-                         pickerContainerNode.style.transform = (t0)>0 ? `translate(-50% , ${t0}px)` : 'translate(-50% , 0%)'
+                         pickerContainerNode.style.transform = (t0) > 0 ? `translate(-50% , ${t0}px)` : 'translate(-50% , 0%)'
                        })
-
                      }}
                 />
                 <FontAwesomeIcon
@@ -217,15 +216,15 @@ class RedGradientColorItem extends React.Component {
                        targetContext = this;
                        targetColorData = colorData
                        this.state.colorEndPicker.setOption({color: colorData['colorEnd']});
-                       this.setState({openColorEndPicker: true,openColorPicker:false});
-                       requestAnimationFrame(e=>{
+                       this.setState({openColorEndPicker: true, openColorPicker: false});
+                       requestAnimationFrame(e => {
                          const pickerContainerNode = this.refColorEndPickerContainer.current.parentNode
                          const itemNode = pickerContainerNode.parentNode.parentNode
                          const pickerContainerRect = pickerContainerNode.getBoundingClientRect()
                          const itemRect = itemNode.getBoundingClientRect()
                          const t0 = itemRect.bottom - pickerContainerRect.height - pickerContainerRect.top
                          console.log(t0)
-                         pickerContainerNode.style.transform = (t0)>0 ? `translate(-50% , ${t0}px)` : 'translate(-50% , 0%)'
+                         pickerContainerNode.style.transform = (t0) > 0 ? `translate(-50% , ${t0}px)` : 'translate(-50% , 0%)'
                        })
                      }}
                 />

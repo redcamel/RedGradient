@@ -29,8 +29,8 @@ class RedLayerItem extends React.Component {
     this.state = {
       SIZE: props.size || 100,
       dragOverYn: false,
-      openPanel : false,
-      draggable : true
+      openPanel: false,
+      draggable: true
     };
   }
 
@@ -165,22 +165,22 @@ class RedLayerItem extends React.Component {
         </div>
         <div style={style.addGradientLayerItem}
              onClick={() => {
-               this.setState({openPanel: true,draggable:false})
+               this.setState({openPanel: true, draggable: false})
              }}
         >add with template
         </div>
         {this.state.openPanel ? <RedAddGradientLayerSet
-          rootComponent = {this}
-          HD_cancel={e => this.setState({openPanel: false,draggable:true})}
-          HD_apply={(v,type) => {
+          rootComponent={this}
+          HD_cancel={e => this.setState({openPanel: false, draggable: true})}
+          HD_apply={(v, type) => {
             let t0 = new DataItem()
             t0.colorList = v
             t0.type = type
-            layer.items.splice(0,0,t0)
-            this.setState({openPanel: false,draggable:true})
+            layer.items.splice(0, 0, t0)
+            this.setState({openPanel: false, draggable: true})
             rootComponent.updateRootState({
-              layers : rootComponentState.layers,
-              activeSubData : t0
+              layers: rootComponentState.layers,
+              activeSubData: t0
             })
           }}
         /> : ''}
@@ -233,7 +233,7 @@ const style = {
     border: '2px solid transparent',
   },
   addGradientLayerItem: {
-    marginTop : '2px',
+    marginTop: '2px',
     background: '#5e7ade',
     padding: '3px 5px',
     fontSize: '11px',

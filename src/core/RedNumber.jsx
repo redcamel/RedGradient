@@ -12,7 +12,7 @@ class RedNumber extends React.Component {
     return <>
       {this.props.title ? <span className={'ui_item_title'}>{this.props.title}</span> : ''}
       <input
-        style={{width: `${this.props.width || ''}`, flexGrow: 1,fontSize : this.props.fontSize}}
+        style={{width: `${this.props.width || ''}`, flexGrow: 1, fontSize: this.props.fontSize}}
         type={'number'}
         step={this.props.step || 1}
         max={this.props.maxValue}

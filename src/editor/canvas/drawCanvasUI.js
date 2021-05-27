@@ -61,7 +61,8 @@ function drawCanvasUI() {
       </div>
       <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
       <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
-      <div style={{marginLeft: '5px',color:'#696969'}}>Center : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY} /
+      <div style={{marginLeft: '5px', color: '#696969'}}>Center
+        : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY} /
         ViewScale : {this.state.canvasViewScale.toFixed(2)}</div>
 
     </div>
@@ -76,7 +77,8 @@ function drawCanvasUI() {
               rootComponent.updateRootState({});
             }}
           >
-            <div><FontAwesomeIcon icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
+            <div><FontAwesomeIcon
+              icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
             </div>
           </button>;
         })
@@ -116,8 +118,8 @@ const style = {
     whiteSpace: 'nowrap',
     cursor: 'pointer',
     outline: 'none',
-    border:0,
-    color : '#fff'
+    border: 0,
+    color: '#fff'
   },
   toScale: {
     marginLeft: '4px',
@@ -128,8 +130,8 @@ const style = {
     whiteSpace: 'nowrap',
     cursor: 'pointer',
     outline: 'none',
-    border:0,
-    color : '#fff'
+    border: 0,
+    color: '#fff'
   },
   presetButton: {
     background: 'linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63))',

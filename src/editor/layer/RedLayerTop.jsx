@@ -18,7 +18,6 @@ const options = [
 class RedLayerTop extends React.Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {

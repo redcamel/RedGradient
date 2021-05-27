@@ -13,6 +13,10 @@ import RedCanvasFilter from "./edit/filter/RedCanvasFlterItem.jsx";
 import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
 import {faArrowsAlt, faExpandAlt, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import RedCanvas_checkResize from "./visualEdit/RedCanvas_checkResize.js";
+import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree.js";
+import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt.js";
+import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition.js";
 
 // TODO - 정리필요
 class RedCanvas extends React.Component {
@@ -445,88 +449,10 @@ class RedCanvas extends React.Component {
     this.setState(v);
   }
 
-  checkResize(e) {
-    const rootComponent = this.props.rootComponent;
-    const rootComponentState = rootComponent.state;
-    const canvasInfo = rootComponentState.canvasInfo;
-    const activeSubData = rootComponentState.activeSubData;
-    if (this.state.resizeMode) {
-      e = e.nativeEvent;
-      style.canvas.transition = '';
-      const gapX = e.pageX - this.state.resizeMode['startX'];
-      const gapY = e.pageY - this.state.resizeMode['startY'];
-      this.state.resizeMode['startX'] = e.pageX;
-      this.state.resizeMode['startY'] = e.pageY;
-      const sizeInfo = activeSubData['size'];
-      const positionInfo = activeSubData['position'];
-      const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
-      const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
-      const tPx = positionInfo['xUnit'] === '%' ? canvasInfo.width * positionInfo['x'] / 100 : positionInfo['x'];
-      const tPy = positionInfo['yUnit'] === '%' ? canvasInfo.height * positionInfo['y'] / 100 : positionInfo['y'];
-      const mode = this.state.resizeMode['mode'];
-      //
-      const cW = (canvasInfo.width);
-      const cH = (canvasInfo.height);
-      switch (mode) {
-        case "nw":
-          if (sizeInfo['wUnit'] === '%') {
-            sizeInfo['w'] = (tW - gapX) / cW * 100;
-            if (positionInfo['xUnit'] === '%') {
-              positionInfo['x'] = (tPx + gapX) / cW * 100;
-            } else positionInfo['x'] = tPx + gapX;
-          } else {
-            sizeInfo['w'] = tW - gapX;
-            if (positionInfo['xUnit'] === '%') positionInfo['x'] = (tPx + gapX) / cW * 100;
-            else positionInfo['x'] = tPx + gapX;
-          }
-          if (sizeInfo['hUnit'] === '%') {
-            sizeInfo['h'] = (tH - gapY) / cH * 100;
-            if (positionInfo['yUnit'] === '%') positionInfo['y'] = (tPy + gapY) / cH * 100;
-            else positionInfo['y'] = tPy + gapY;
-          } else {
-            sizeInfo['h'] = tH - gapY;
-            if (positionInfo['yUnit'] === '%') positionInfo['y'] = (tPy + gapY) / cH * 100;
-            else positionInfo['y'] = tPy + gapY;
-          }
-          break;
-        case "ne":
-          if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = (tW + gapX) / cW * 100;
-          else sizeInfo['w'] = tW + gapX;
-          if (sizeInfo['hUnit'] === '%') {
-            sizeInfo['h'] = (tH - gapY) / cH * 100;
-            if (positionInfo['yUnit'] === '%') positionInfo['y'] = (tPy + gapY) / cH * 100;
-            else positionInfo['y'] = tPy + gapY;
-          } else {
-            sizeInfo['h'] = tH - gapY;
-            if (positionInfo['yUnit'] === '%') positionInfo['y'] = (tPy + gapY) / cH * 100;
-            else positionInfo['y'] = tPy + gapY;
-          }
-          break;
-        case "sw":
-          if (sizeInfo['wUnit'] === '%') {
-            sizeInfo['w'] = (tW - gapX) / cW * 100;
-            if (positionInfo['xUnit'] === '%') positionInfo['x'] = (tPx + gapX) / cW * 100;
-            else positionInfo['x'] = tPx + gapX;
-          } else {
-            sizeInfo['w'] = tW - gapX;
-            if (positionInfo['xUnit'] === '%') positionInfo['x'] = (tPx + gapX) / cW * 100;
-            else positionInfo['x'] = tPx + gapX;
-          }
-          if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = (tH + gapY) / cH * 100;
-          else sizeInfo['h'] = tH + gapY;
-          break;
-        case "se":
-          if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = (tW + gapX) / cW * 100;
-          else sizeInfo['w'] = tW + gapX;
-          if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = (tH + gapY) / cH * 100;
-          else sizeInfo['h'] = tH + gapY;
-          break;
-      }
-      document.body.style.cursor = `${mode}-resize`;
-      rootComponent.updateRootState({});
-      console.log(e);
-    }
-  }
+  checkResize = RedCanvas_checkResize
+  checkDegree = RedCanvas_checkDegree
+  checkAt = RedCanvas_checkAt
+  checkPosition = RedCanvas_checkPosition
 
   checkCanvasMove(e) {
     if (this.state.useMove) {
@@ -536,73 +462,6 @@ class RedCanvas extends React.Component {
         canvasViewOffsetX: this.state.canvasViewOffsetX + e.movementX,
         canvasViewOffsetY: this.state.canvasViewOffsetY + e.movementY
       });
-      document.body.style.cursor = 'move';
-      console.log(e);
-    }
-  }
-
-  checkDegree(e) {
-    if (this.state.degreeMode) {
-      e = e.nativeEvent;
-      style.canvas.transition = '';
-      const rootComponent = this.props.rootComponent;
-      const rootComponentState = rootComponent.state;
-      const canvasInfo = rootComponentState.canvasInfo;
-      const activeSubData = rootComponentState.activeSubData;
-      const tX = e.pageX - this.state.degreeMode.startX;
-      const tY = e.pageY - this.state.degreeMode.startY;
-      const deg = Math.atan2(tY, tX);
-      activeSubData['deg'] = deg * 180 / Math.PI;
-      activeSubData['deg'] += 90;
-      if (activeSubData['deg'] < 0) activeSubData['deg'] += 360;
-      activeSubData['deg'] = activeSubData['deg'] % 360;
-      rootComponent.updateRootState({activeSubData});
-      document.body.style.cursor = 'move';
-      console.log(e);
-    }
-  }
-
-  checkAt(e) {
-    if (this.state.atMode) {
-      e = e.nativeEvent;
-      style.canvas.transition = '';
-      const rootComponent = this.props.rootComponent;
-      const rootComponentState = rootComponent.state;
-      const canvasInfo = rootComponentState.canvasInfo;
-      const activeSubData = rootComponentState.activeSubData;
-      const tX = e.pageX - this.state.atMode.startX;
-      const tY = e.pageY - this.state.atMode.startY;
-      const atInfo = activeSubData['at'];
-      const sizeInfo = activeSubData['size'];
-      const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
-      const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
-      atInfo['x'] = +this.state.atMode.startValueX + (atInfo['xUnit'] === '%' ? tX / tW * 100 : tX);
-      atInfo['y'] = +this.state.atMode.startValueY + (atInfo['yUnit'] === '%' ? tY / tH * 100 : tY);
-      console.log(tX, tY);
-      rootComponent.updateRootState({activeSubData});
-      document.body.style.cursor = 'move';
-      console.log(e);
-    }
-  }
-
-  checkPosition(e) {
-    if (this.state.positionMode) {
-      e = e.nativeEvent;
-      style.canvas.transition = '';
-      const rootComponent = this.props.rootComponent;
-      const rootComponentState = rootComponent.state;
-      const canvasInfo = rootComponentState.canvasInfo;
-      const activeSubData = rootComponentState.activeSubData;
-      const tX = e.pageX - this.state.positionMode.startX;
-      const tY = e.pageY - this.state.positionMode.startY;
-      const positionInfo = activeSubData['position'];
-      const sizeInfo = activeSubData['size'];
-      const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
-      const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
-      positionInfo['x'] = +this.state.positionMode.startValueX + (positionInfo['xUnit'] === '%' ? tX / tW * 100 : tX) * 1 / this.state.canvasViewScale;
-      positionInfo['y'] = +this.state.positionMode.startValueY + (positionInfo['yUnit'] === '%' ? tY / tH * 100 : tY) * 1 / this.state.canvasViewScale;
-      console.log(tX, tY);
-      rootComponent.updateRootState({activeSubData});
       document.body.style.cursor = 'move';
       console.log(e);
     }
