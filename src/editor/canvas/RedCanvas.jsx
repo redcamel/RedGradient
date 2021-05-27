@@ -10,6 +10,7 @@ import drawCanvasUI from "./drawCanvasUI.js";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 import RedCanvasFilter from "./edit/filter/RedCanvasFlterItem.jsx";
+import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
 
 // TODO - 정리필요
 class RedCanvas extends React.Component {
@@ -72,10 +73,90 @@ class RedCanvas extends React.Component {
             color: '#000'
           }}
         >
-          <div style={{top: 0, left: '50%', transform: 'translate(-50%, -36px)', position: 'absolute', width: '20px', height: '20px', cursor: 'move', border: '6px solid #5e7ade', boxShadow : '0px 0px 10px rgba(0,0,0,0.3)'}} onMouseDown={e => {e.stopPropagation();this.setModes({positionMode: {startValueX: activeSubData['position']['x'], startValueY: activeSubData['position']['y'], startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});}} />
-          <div style={{bottom: 0, left: '50%', transform: 'translate(-50%, 36px)', position: 'absolute', width: '20px', height: '20px', cursor: 'move', border: '6px solid #5e7ade', boxShadow : '0px 0px 10px rgba(0,0,0,0.3)'}} onMouseDown={e => {e.stopPropagation();this.setModes({positionMode: {startValueX: activeSubData['position']['x'], startValueY: activeSubData['position']['y'], startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});}} />
-          <div style={{bottom: '50%', left:0, transform: 'translate(-36px, 50%)', position: 'absolute', width: '20px', height: '20px', cursor: 'move', border: '6px solid #5e7ade', boxShadow : '0px 0px 10px rgba(0,0,0,0.3)'}} onMouseDown={e => {e.stopPropagation();this.setModes({positionMode: {startValueX: activeSubData['position']['x'], startValueY: activeSubData['position']['y'], startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});}} />
-          <div style={{bottom: '50%', right: 0, transform: 'translate(36px, 50%)', position: 'absolute', width: '20px', height: '20px', cursor: 'move', border: '6px solid #5e7ade', boxShadow : '0px 0px 10px rgba(0,0,0,0.3)'}} onMouseDown={e => {e.stopPropagation();this.setModes({positionMode: {startValueX: activeSubData['position']['x'], startValueY: activeSubData['position']['y'], startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});}} />
+          <div style={{
+            top: 0,
+            left: '50%',
+            transform: 'translate(-50%, -36px)',
+            position: 'absolute',
+            width: '20px',
+            height: '20px',
+            cursor: 'move',
+            border: '6px solid #5e7ade',
+            boxShadow: '0px 0px 10px rgba(0,0,0,0.3)'
+          }} onMouseDown={e => {
+            e.stopPropagation();
+            this.setModes({
+              positionMode: {
+                startValueX: activeSubData['position']['x'],
+                startValueY: activeSubData['position']['y'],
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }} />
+          <div style={{
+            bottom: 0,
+            left: '50%',
+            transform: 'translate(-50%, 36px)',
+            position: 'absolute',
+            width: '20px',
+            height: '20px',
+            cursor: 'move',
+            border: '6px solid #5e7ade',
+            boxShadow: '0px 0px 10px rgba(0,0,0,0.3)'
+          }} onMouseDown={e => {
+            e.stopPropagation();
+            this.setModes({
+              positionMode: {
+                startValueX: activeSubData['position']['x'],
+                startValueY: activeSubData['position']['y'],
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }} />
+          <div style={{
+            bottom: '50%',
+            left: 0,
+            transform: 'translate(-36px, 50%)',
+            position: 'absolute',
+            width: '20px',
+            height: '20px',
+            cursor: 'move',
+            border: '6px solid #5e7ade',
+            boxShadow: '0px 0px 10px rgba(0,0,0,0.3)'
+          }} onMouseDown={e => {
+            e.stopPropagation();
+            this.setModes({
+              positionMode: {
+                startValueX: activeSubData['position']['x'],
+                startValueY: activeSubData['position']['y'],
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }} />
+          <div style={{
+            bottom: '50%',
+            right: 0,
+            transform: 'translate(36px, 50%)',
+            position: 'absolute',
+            width: '20px',
+            height: '20px',
+            cursor: 'move',
+            border: '6px solid #5e7ade',
+            boxShadow: '0px 0px 10px rgba(0,0,0,0.3)'
+          }} onMouseDown={e => {
+            e.stopPropagation();
+            this.setModes({
+              positionMode: {
+                startValueX: activeSubData['position']['x'],
+                startValueY: activeSubData['position']['y'],
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }} />
 
           <>
             <div
@@ -85,7 +166,7 @@ class RedCanvas extends React.Component {
                 cursor: 'nw-resize',
                 borderTop: '6px solid #5e7ade',
                 borderLeft: '6px solid #5e7ade',
-                filter : 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
+                filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
               }}
               onMouseDown={e => {
                 e.stopPropagation();
@@ -106,7 +187,7 @@ class RedCanvas extends React.Component {
                 cursor: 'ne-resize',
                 borderTop: '6px solid #5e7ade',
                 borderRight: '6px solid #5e7ade',
-                filter : 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
+                filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
               }}
               onMouseDown={e => {
                 e.stopPropagation();
@@ -126,7 +207,7 @@ class RedCanvas extends React.Component {
                 cursor: 'sw-resize',
                 borderBottom: '6px solid #5e7ade',
                 borderLeft: '6px solid #5e7ade',
-                filter : 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
+                filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
               }}
               onMouseDown={e => {
                 e.stopPropagation();
@@ -146,7 +227,7 @@ class RedCanvas extends React.Component {
                 cursor: 'se-resize',
                 borderBottom: '6px solid #5e7ade',
                 borderRight: '6px solid #5e7ade',
-                filter : 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
+                filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
               }}
               onMouseDown={e => {
                 e.stopPropagation();
@@ -174,7 +255,7 @@ class RedCanvas extends React.Component {
                     left: lX,
                     top: lY,
                     width: `50px`,
-                    height: `50px`,
+                    height: activeSubData['typeEndingShape'] === ENDING_SHAPE_TYPE.CIRCLE ? '50px' : `${50 * layoutSize['h'] / layoutSize['w']}px`,
                     border: '2px dashed rgba(0,0,0,0.5)',
                     borderRadius: '50%',
                     transform: 'translate(-50%,-50%)',
@@ -201,8 +282,8 @@ class RedCanvas extends React.Component {
                       height: `10px`,
                       borderRadius: '50%',
                       background: '#fff',
-                      border : '2px solid red',
-                      filter : 'drop-shadow(0px 0px 5px rgba(0,0,0,5)',
+                      border: '2px solid red',
+                      filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,5)',
                       transform: 'translate(-50%,-50%)',
                       color: '#000'
                     }}
@@ -270,7 +351,6 @@ class RedCanvas extends React.Component {
           }
         </div> : ''
       }
-
 
 
     </div>;
@@ -422,8 +502,8 @@ class RedCanvas extends React.Component {
       const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
       const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
 
-      atInfo['x'] = +this.state.atMode.startValueX+(atInfo['xUnit'] === '%' ? tX / tW * 100 : tX);
-      atInfo['y'] = +this.state.atMode.startValueY+(atInfo['yUnit'] === '%' ? tY / tH * 100 : tY);
+      atInfo['x'] = +this.state.atMode.startValueX + (atInfo['xUnit'] === '%' ? tX / tW * 100 : tX);
+      atInfo['y'] = +this.state.atMode.startValueY + (atInfo['yUnit'] === '%' ? tY / tH * 100 : tY);
 
       console.log(tX, tY);
       rootComponent.updateRootState({activeSubData});
@@ -431,6 +511,7 @@ class RedCanvas extends React.Component {
       console.log(e);
     }
   }
+
   checkPosition(e) {
     if (this.state.positionMode) {
       e = e.nativeEvent;
@@ -448,8 +529,8 @@ class RedCanvas extends React.Component {
       const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
       const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
 
-      positionInfo['x'] = +this.state.positionMode.startValueX+(positionInfo['xUnit'] === '%' ? tX / tW * 100 : tX) * 1/this.state.canvasViewScale;
-      positionInfo['y'] = +this.state.positionMode.startValueY+(positionInfo['yUnit'] === '%' ? tY / tH * 100 : tY)* 1/this.state.canvasViewScale;
+      positionInfo['x'] = +this.state.positionMode.startValueX + (positionInfo['xUnit'] === '%' ? tX / tW * 100 : tX) * 1 / this.state.canvasViewScale;
+      positionInfo['y'] = +this.state.positionMode.startValueY + (positionInfo['yUnit'] === '%' ? tY / tH * 100 : tY) * 1 / this.state.canvasViewScale;
 
       console.log(tX, tY);
       rootComponent.updateRootState({activeSubData});
