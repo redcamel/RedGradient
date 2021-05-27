@@ -297,6 +297,40 @@ class RedCanvas extends React.Component {
               ? '' : <>
                 <div
                   style={{
+                    top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(0deg)',
+                    width: `${50}px`, height: `${50}px`,
+                    position: 'absolute',borderRadius : '50%',lineHeight : 1,
+                    display : this.state.degreeMode ? 'block' : 'none',
+                    background: 'rgba(255,255,255,0.4)'
+                  }}
+                >
+                  <button
+                    style={{
+                      display: 'inline-block',
+                      lineHeight : 1,
+                      width: `${50}px`, height: `${50}px`,
+                      border: '1px solid #5e7ade',
+                      borderRadius: '50%',
+                      outline:'none',
+                      cursor: 'pointer',
+                      fontSize : '11px'
+                    }}
+                  >
+                    <div>{activeSubData['deg'].toFixed(1)}<br/><span style={{fontSize : '10px'}}>deg</span></div>
+                    <div style={{
+                      lineHeight : 1,
+                      width: '10px', height: '10px',
+                      border: '1px solid #5e7ade',
+                      borderRadius: '50%',
+                      position: 'absolute',
+                      transform : 'translate(-50%,-50%)',
+                      top: `calc(50% + ${Math.sin(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`,
+                      left: `calc(50% + ${Math.cos(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`
+                    }}/>
+                  </button>
+                </div>
+                <div
+                  style={{
                     top: 0, left: 0, transform: 'translate(-150%, -150%) rotate(0deg)',
                     position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
                     cursor: 'pointer',
