@@ -173,11 +173,13 @@ class RedCanvas extends React.Component {
                   }}
                   onMouseDown={e => {
                     e.stopPropagation();
-                    this.setModes({atMode: {
-                      startValueX : activeSubData['at']['x'],
-                      startValueY : activeSubData['at']['y'],
-                      startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY
-                    }});
+                    this.setModes({
+                      atMode: {
+                        startValueX: activeSubData['at']['x'],
+                        startValueY: activeSubData['at']['y'],
+                        startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY
+                      }
+                    });
                   }}
                 >
                   <div
@@ -194,8 +196,12 @@ class RedCanvas extends React.Component {
                     }}
                   />
                 </div>
-              </> :
-              <>
+              </> : ''
+          }
+          {
+            activeSubData['type'] === GRADIENT_TYPE.RADIAL ||
+            activeSubData['type'] === GRADIENT_TYPE.REPEAT_RADIAL
+              ? '' : <>
                 <div
                   style={{
                     top: 0, left: 0, transform: 'translate(-150%, -150%) rotate(0deg)',
