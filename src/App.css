@@ -333,3 +333,16 @@ option {
 .test {
 
 }
+
+.redgradient_canvas::before{
+    content:"비포가 될지어다 이게 0뎁스";
+    position : absolute;
+    top : -100px;
+    left : 0
+}
+.redgradient_canvas::after{
+    content:"에프터가 될지어다 이것이 2뎁스 메인이 1뎁스로 보면될듯";
+    position : absolute;
+    bottom : -100px;
+    left : 0
+}

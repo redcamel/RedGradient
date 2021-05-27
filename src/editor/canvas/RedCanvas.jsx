@@ -49,10 +49,11 @@ class RedCanvas extends React.Component {
     };
     const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x']}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
     const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y']}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
-    return <div style={{
+    return <div
+      style={{
       ...style.canvas,
       transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
-    }} className={'transparent_checker'}>
+    }} className={'transparent_checker redgradient_canvas'}>
       <div
         className={'transparent_checker'}
         style={{

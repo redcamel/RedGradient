@@ -242,6 +242,7 @@ class RedGradientColorItem extends React.Component {
           </div>
           <div>
             {/* TODO - 단위모델 변경 처리*/}
+          <div style={{whiteSpace:'nowrap'}}>
 
             <RedNumber
               width={colorData['useRange'] ? '80px' : 'auto'}
@@ -318,6 +319,7 @@ class RedGradientColorItem extends React.Component {
               }}
             >Del
             </button>
+          </div>
             <div style={{display: 'flex', alignItems: 'center', margin: '5px 0px', justifyContent: 'space-between'}}>
               {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
                                             onClick={e => {
