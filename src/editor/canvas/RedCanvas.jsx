@@ -62,14 +62,89 @@ class RedCanvas extends React.Component {
         this.state.layerSizeView ? <div
           style={{
             position: 'absolute',
-            left: `${activeSubDataPosition['x']}${activeSubDataPosition['xUnit']}`,
-            top: `${activeSubDataPosition['y']}${activeSubDataPosition['yUnit']}`,
+            left: activeSubDataPosition['xUnit'] === '%' ? (canvasInfo.width - layoutSize.w) * (activeSubDataPosition['x'] / 100) + 'px' : `${activeSubDataPosition['x']}${activeSubDataPosition['xUnit']}`,
+            top: activeSubDataPosition['yUnit'] === '%' ? (canvasInfo.height - layoutSize.h) * (activeSubDataPosition['y'] / 100) + 'px' : `${activeSubDataPosition['y']}${activeSubDataPosition['yUnit']}`,
             width: `${layoutSize['w']}px`,
             height: `${layoutSize['h']}px`,
             border: '1px dashed #000',
             color: '#000'
           }}
         >
+          <>
+            <div
+              style={{
+                top: 0, left: 0, transform: 'translate(-100%, -100%)',
+                position: 'absolute', width: '20px', height: '20px',
+                cursor: 'nw-resize',
+                borderTop: '6px solid #5e7ade',
+                borderLeft: '6px solid #5e7ade'
+              }}
+              onMouseDown={e => {
+                e.stopPropagation();
+                this.state.useMove = false;
+                this.state.resizeMode = {
+                  mode: 'nw',
+                  startX: e.nativeEvent.pageX,
+                  startY: e.nativeEvent.pageY
+                };
+              }}
+            />
+            <div
+              style={{
+                top: 0, right: 0, transform: 'translate(100%, -100%)',
+                position: 'absolute', width: '20px', height: '20px',
+                cursor: 'ne-resize',
+                borderTop: '6px solid #5e7ade',
+                borderRight: '6px solid #5e7ade'
+              }}
+              onMouseDown={e => {
+                e.stopPropagation();
+                this.state.useMove = false;
+                this.state.resizeMode = {
+                  mode: 'ne',
+                  startX: e.nativeEvent.pageX,
+                  startY: e.nativeEvent.pageY
+                };
+              }}
+            />
+            <div
+              style={{
+                bottom: 0, left: 0, transform: 'translate(-100%, 100%)',
+                position: 'absolute', width: '20px', height: '20px',
+                cursor: 'sw-resize',
+                borderBottom: '6px solid #5e7ade',
+                borderLeft: '6px solid #5e7ade'
+              }}
+              onMouseDown={e => {
+                e.stopPropagation();
+                this.state.useMove = false;
+                this.state.resizeMode = {
+                  mode: 'sw',
+                  startX: e.nativeEvent.pageX,
+                  startY: e.nativeEvent.pageY
+                };
+              }}
+            />
+            <div
+              style={{
+                bottom: 0, right: 0, transform: 'translate(100%, 100%)',
+                position: 'absolute', width: '20px', height: '20px',
+                cursor: 'se-resize',
+                borderBottom: '6px solid #5e7ade',
+                borderRight: '6px solid #5e7ade'
+              }}
+              onMouseDown={e => {
+                e.stopPropagation();
+                this.state.useMove = false;
+                this.state.resizeMode = {
+                  mode: 'se',
+                  startX: e.nativeEvent.pageX,
+                  startY: e.nativeEvent.pageY
+                };
+              }}
+            />
+          </>
+
           {activeSubData['title']}
           {
             activeSubData['type'] === GRADIENT_TYPE.RADIAL ||
@@ -85,7 +160,7 @@ class RedCanvas extends React.Component {
                     width: `50px`,
                     height: `50px`,
                     border: '1px dashed rgba(0,0,0,0.5)',
-                    borderRadius : '50%',
+                    borderRadius: '50%',
                     transform: 'translate(-50%,-50%)',
                     color: '#000'
                   }}
@@ -118,6 +193,7 @@ class RedCanvas extends React.Component {
     const canvasInfo = rootComponentState.canvasInfo;
     const layers = rootComponentState.layers;
     const activeLayer = rootComponentState.activeLayer;
+    const activeSubData = rootComponentState.activeSubData;
     return <div
       style={style.container}
       onMouseMove={e => {
@@ -131,9 +207,91 @@ class RedCanvas extends React.Component {
           document.body.style.cursor = 'move';
           console.log(e);
         }
+        if (this.state.resizeMode) {
+          e = e.nativeEvent;
+          style.canvas.transition = '';
+          const gapX = e.pageX - this.state.resizeMode['startX'];
+          const gapY = e.pageY - this.state.resizeMode['startY'];
+          this.state.resizeMode['startX'] = e.pageX;
+          this.state.resizeMode['startY'] = e.pageY;
+          const sizeInfo = activeSubData['size'];
+          const positionInfo = activeSubData['position'];
+          const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
+          const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
+          const tPx = positionInfo['xUnit'] === '%' ? canvasInfo.width * positionInfo['x'] / 100 : positionInfo['x'];
+          const tPy = positionInfo['yUnit'] === '%' ? canvasInfo.height * positionInfo['y'] / 100 : positionInfo['y'];
+          const mode = this.state.resizeMode['mode'];
+          //
+         const activeSubDataSize = activeSubData['size'];
+
+          const cW = (canvasInfo.width);
+          const cH = (canvasInfo.height);
+          switch (mode) {
+            case "nw":
+              if (sizeInfo['wUnit'] === '%') {
+                let prevSize = sizeInfo['w']
+                sizeInfo['w'] = (tW - gapX) / cW * 100;
+                if (positionInfo['xUnit'] === '%') {
+                  positionInfo['x'] = (tPx + gapX) / cW * 100;
+                } else positionInfo['x'] = tPx + gapX;
+              } else {
+                sizeInfo['w'] = tW - gapX;
+                if (positionInfo['xUnit'] === '%') positionInfo['x'] = (tPx + gapX) / cW * 100;
+                else positionInfo['x'] = tPx + gapX;
+              }
+              if (sizeInfo['hUnit'] === '%') {
+                sizeInfo['h'] = (tH - gapY) / cH * 100;
+                if (positionInfo['yUnit'] === '%') positionInfo['y'] = (tPy + gapY) / cH * 100;
+                else positionInfo['y'] = tPy + gapY;
+              } else {
+                sizeInfo['h'] = tH - gapY;
+                if (positionInfo['yUnit'] === '%') positionInfo['y'] = (tPy + gapY) / cH * 100;
+                else positionInfo['y'] = tPy + gapY;
+              }
+              break;
+            case "ne":
+              if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = (tW + gapX) / cW * 100;
+              else sizeInfo['w'] = tW + gapX;
+              if (sizeInfo['hUnit'] === '%') {
+                sizeInfo['h'] = (tH - gapY) / cH * 100;
+                if (positionInfo['yUnit'] === '%') positionInfo['y'] = (tPy + gapY) / cH * 100;
+                else positionInfo['y'] = tPy + gapY;
+              } else {
+                sizeInfo['h'] = tH - gapY;
+                if (positionInfo['yUnit'] === '%') positionInfo['y'] = (tPy + gapY) / cH * 100;
+                else positionInfo['y'] = tPy + gapY;
+              }
+              break;
+            case "sw":
+              if (sizeInfo['wUnit'] === '%') {
+                sizeInfo['w'] = (tW - gapX) / cW * 100;
+                if (positionInfo['xUnit'] === '%') positionInfo['x'] = (tPx + gapX) / cW * 100;
+                else positionInfo['x'] = tPx + gapX;
+              } else {
+                sizeInfo['w'] = tW - gapX;
+                if (positionInfo['xUnit'] === '%') positionInfo['x'] = (tPx + gapX) / cW * 100;
+                else positionInfo['x'] = tPx + gapX;
+              }
+              if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = (tH + gapY) / cH * 100;
+              else sizeInfo['h'] = tH - gapY;
+              break;
+            case "se":
+              if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = (tW + gapX) / cW * 100;
+              else sizeInfo['w'] = tW + gapX;
+              if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = (tH + gapY) / cH * 100;
+              else sizeInfo['h'] = tH + gapY;
+              break;
+          }
+          document.body.style.cursor = `${mode}-resize`;
+          rootComponent.updateRootState({});
+          console.log(e);
+        }
       }}
-      onMouseLeave={() => this.state.useMove ? this.setState({useMove: false}) : 0}
-      onMouseUp={() => this.state.useMove ? (this.setState({useMove: false}), document.body.style.cursor = 'default') : 0}
+      onMouseLeave={() => this.setState({useMove: false, resizeMode: false})}
+      onMouseUp={() => {
+        this.setState({useMove: false, resizeMode: false});
+        document.body.style.cursor = 'default';
+      }}
       onMouseDown={e => {
         this.setState({useMove: true});
       }}
