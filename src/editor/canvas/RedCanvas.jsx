@@ -72,26 +72,11 @@ class RedCanvas extends React.Component {
             color: '#000'
           }}
         >
-          <div
-            style={{
-              bottom: 0, left: '50%', transform: 'translate(-50%, 36px)',
-              position: 'absolute', width: '20px', height: '20px',
-              cursor: 'move',
-              border: '6px solid #5e7ade'
-            }}
-            onMouseDown={e => {
-              e.stopPropagation();
-              this.setModes({
-                positionMode: {
-                  startValueX: activeSubData['position']['x'],
-                  startValueY: activeSubData['position']['y'],
-                  startX: e.nativeEvent.pageX,
-                  startY: e.nativeEvent.pageY
-                }
-              });
+          <div style={{top: 0, left: '50%', transform: 'translate(-50%, -36px)', position: 'absolute', width: '20px', height: '20px', cursor: 'move', border: '6px solid #5e7ade', boxShadow : '0px 0px 10px rgba(0,0,0,0.3)'}} onMouseDown={e => {e.stopPropagation();this.setModes({positionMode: {startValueX: activeSubData['position']['x'], startValueY: activeSubData['position']['y'], startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});}} />
+          <div style={{bottom: 0, left: '50%', transform: 'translate(-50%, 36px)', position: 'absolute', width: '20px', height: '20px', cursor: 'move', border: '6px solid #5e7ade', boxShadow : '0px 0px 10px rgba(0,0,0,0.3)'}} onMouseDown={e => {e.stopPropagation();this.setModes({positionMode: {startValueX: activeSubData['position']['x'], startValueY: activeSubData['position']['y'], startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});}} />
+          <div style={{bottom: '50%', left:0, transform: 'translate(-36px, 50%)', position: 'absolute', width: '20px', height: '20px', cursor: 'move', border: '6px solid #5e7ade', boxShadow : '0px 0px 10px rgba(0,0,0,0.3)'}} onMouseDown={e => {e.stopPropagation();this.setModes({positionMode: {startValueX: activeSubData['position']['x'], startValueY: activeSubData['position']['y'], startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});}} />
+          <div style={{bottom: '50%', right: 0, transform: 'translate(36px, 50%)', position: 'absolute', width: '20px', height: '20px', cursor: 'move', border: '6px solid #5e7ade', boxShadow : '0px 0px 10px rgba(0,0,0,0.3)'}} onMouseDown={e => {e.stopPropagation();this.setModes({positionMode: {startValueX: activeSubData['position']['x'], startValueY: activeSubData['position']['y'], startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});}} />
 
-            }}
-          />
           <>
             <div
               style={{
@@ -99,7 +84,8 @@ class RedCanvas extends React.Component {
                 position: 'absolute', width: '20px', height: '20px',
                 cursor: 'nw-resize',
                 borderTop: '6px solid #5e7ade',
-                borderLeft: '6px solid #5e7ade'
+                borderLeft: '6px solid #5e7ade',
+                filter : 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
               }}
               onMouseDown={e => {
                 e.stopPropagation();
@@ -119,7 +105,8 @@ class RedCanvas extends React.Component {
                 position: 'absolute', width: '20px', height: '20px',
                 cursor: 'ne-resize',
                 borderTop: '6px solid #5e7ade',
-                borderRight: '6px solid #5e7ade'
+                borderRight: '6px solid #5e7ade',
+                filter : 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
               }}
               onMouseDown={e => {
                 e.stopPropagation();
@@ -138,7 +125,8 @@ class RedCanvas extends React.Component {
                 position: 'absolute', width: '20px', height: '20px',
                 cursor: 'sw-resize',
                 borderBottom: '6px solid #5e7ade',
-                borderLeft: '6px solid #5e7ade'
+                borderLeft: '6px solid #5e7ade',
+                filter : 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
               }}
               onMouseDown={e => {
                 e.stopPropagation();
@@ -157,7 +145,8 @@ class RedCanvas extends React.Component {
                 position: 'absolute', width: '20px', height: '20px',
                 cursor: 'se-resize',
                 borderBottom: '6px solid #5e7ade',
-                borderRight: '6px solid #5e7ade'
+                borderRight: '6px solid #5e7ade',
+                filter : 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)'
               }}
               onMouseDown={e => {
                 e.stopPropagation();
@@ -186,7 +175,7 @@ class RedCanvas extends React.Component {
                     top: lY,
                     width: `50px`,
                     height: `50px`,
-                    border: '1px dashed rgba(0,0,0,0.5)',
+                    border: '2px dashed rgba(0,0,0,0.5)',
                     borderRadius: '50%',
                     transform: 'translate(-50%,-50%)',
                     color: '#000',
@@ -211,7 +200,9 @@ class RedCanvas extends React.Component {
                       width: `10px`,
                       height: `10px`,
                       borderRadius: '50%',
-                      background: 'red',
+                      background: '#fff',
+                      border : '2px solid red',
+                      filter : 'drop-shadow(0px 0px 5px rgba(0,0,0,5)',
                       transform: 'translate(-50%,-50%)',
                       color: '#000'
                     }}
