@@ -72,7 +72,7 @@ class RedCanvas extends React.Component {
             width: `${layoutSize['w']}px`,
             height: `${layoutSize['h']}px`,
             border: '1px dashed #000',
-            outline : '1px dashed rgba(255,255,255,0.75)',
+            outline: '1px dashed rgba(255,255,255,0.75)',
             color: '#000'
           }}
         >
@@ -192,7 +192,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px',transform:'scale(-1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}}/>
             </div>
             <div
               style={{
@@ -216,7 +216,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px',transform:'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
@@ -240,7 +240,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px',transform:'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
@@ -264,7 +264,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px',transform:'scale(-1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}}/>
             </div>
           </>
 
