@@ -58,6 +58,7 @@ class RedCanvas extends React.Component {
           overflow: 'hidden',
         }}
       />
+
       {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
       {
         this.state.layerSizeView ? <div
@@ -71,6 +72,26 @@ class RedCanvas extends React.Component {
             color: '#000'
           }}
         >
+          <div
+            style={{
+              bottom: 0, left: '50%', transform: 'translate(-50%, 36px)',
+              position: 'absolute', width: '20px', height: '20px',
+              cursor: 'move',
+              border: '6px solid #5e7ade'
+            }}
+            onMouseDown={e => {
+              e.stopPropagation();
+              this.setModes({
+                positionMode: {
+                  startValueX: activeSubData['position']['x'],
+                  startValueY: activeSubData['position']['y'],
+                  startX: e.nativeEvent.pageX,
+                  startY: e.nativeEvent.pageY
+                }
+              });
+
+            }}
+          />
           <>
             <div
               style={{
@@ -260,6 +281,7 @@ class RedCanvas extends React.Component {
       }
 
 
+
     </div>;
   }
 
@@ -268,6 +290,7 @@ class RedCanvas extends React.Component {
     this.state.resizeMode = false;
     this.state.degreeMode = false;
     this.state.atMode = false;
+    this.state.positionMode = false;
     this.setState(v);
   }
 
@@ -356,7 +379,7 @@ class RedCanvas extends React.Component {
     }
   }
 
-  checkMove(e) {
+  checkCanvasMove(e) {
     if (this.state.useMove) {
       e = e.nativeEvent;
       style.canvas.transition = '';
@@ -417,6 +440,33 @@ class RedCanvas extends React.Component {
       console.log(e);
     }
   }
+  checkPosition(e) {
+    if (this.state.positionMode) {
+      e = e.nativeEvent;
+      style.canvas.transition = '';
+      const rootComponent = this.props.rootComponent;
+      const rootComponentState = rootComponent.state;
+      const canvasInfo = rootComponentState.canvasInfo;
+      const activeSubData = rootComponentState.activeSubData;
+
+      const tX = e.pageX - this.state.positionMode.startX;
+      const tY = e.pageY - this.state.positionMode.startY;
+      const positionInfo = activeSubData['position'];
+
+      const sizeInfo = activeSubData['size'];
+      const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
+      const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
+
+      positionInfo['x'] = +this.state.positionMode.startValueX+(positionInfo['xUnit'] === '%' ? tX / tW * 100 : tX) * 1/this.state.canvasViewScale;
+      positionInfo['y'] = +this.state.positionMode.startValueY+(positionInfo['yUnit'] === '%' ? tY / tH * 100 : tY)* 1/this.state.canvasViewScale;
+
+      console.log(tX, tY);
+      rootComponent.updateRootState({activeSubData});
+      document.body.style.cursor = 'move';
+      console.log(e);
+    }
+  }
+
 
   render() {
     const rootComponent = this.props.rootComponent;
@@ -427,7 +477,8 @@ class RedCanvas extends React.Component {
     return <div
       style={style.container}
       onMouseMove={e => {
-        this.checkMove(e);
+        this.checkCanvasMove(e);
+        this.checkPosition(e);
         this.checkResize(e);
         this.checkDegree(e);
         this.checkAt(e);
