@@ -19,6 +19,7 @@ import RedFrameMenuSave from "./editor/frameMainMenu/RedFrameMenuSave.jsx";
 import RedPreset from "./editor/property/preset/RedPreset.jsx";
 import DataLayer from "./editor/data/DataLayer.js";
 import BORDER_REPEAT_TYPE from "./editor/BORDER_REPEAT_TYPE.js";
+import DataCanvas from "./editor/data/DataCanvas.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -82,6 +83,17 @@ class App extends React.Component {
     this.state = newState
     this.state.activeLayer = this.state.layers[0];
     this.state.activeSubData = this.state.activeLayer['items'][0];
+    //
+    if (!this.state.beforeInfo) {
+      this.state.beforeInfo = new DataCanvas()
+      this.state.beforeInfo.activeLayer = this.state.beforeInfo.layers[0];
+      this.state.beforeInfo.activeSubData = this.state.beforeInfo.activeLayer['items'][0];
+    }
+    if (!this.state.afterInfo) {
+      this.state.afterInfo = new DataCanvas()
+      this.state.afterInfo.activeLayer = this.state.afterInfo.layers[0];
+      this.state.afterInfo.activeSubData = this.state.afterInfo.activeLayer['items'][0];
+    }
     //
     if (!this.state.borderGradientInfo) {
       this.state.borderGradientInfo = {
