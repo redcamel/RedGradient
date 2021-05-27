@@ -222,7 +222,7 @@ class RedCanvas extends React.Component {
               style={{
                 bottom: 0, left: 0, transform: 'translate(-100%, 100%)',
                 position: 'absolute', width: '23px', height: '23px',
-                cursor: 'ne-resize',
+                cursor: 'sw-resize',
                 background: 'rgba(255,255,255,0.75)',
                 display: 'flex',
                 alignItems: 'center', justifyContent: 'center',
@@ -246,7 +246,7 @@ class RedCanvas extends React.Component {
               style={{
                 bottom: 0, right: 0, transform: 'translate(100%, 100%)',
                 position: 'absolute', width: '23px', height: '23px',
-                cursor: 'ne-resize',
+                cursor: 'se-resize',
                 background: 'rgba(255,255,255,0.75)',
                 display: 'flex',
                 alignItems: 'center', justifyContent: 'center',
@@ -513,7 +513,7 @@ class RedCanvas extends React.Component {
             else positionInfo['x'] = tPx + gapX;
           }
           if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = (tH + gapY) / cH * 100;
-          else sizeInfo['h'] = tH - gapY;
+          else sizeInfo['h'] = tH + gapY;
           break;
         case "se":
           if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = (tW + gapX) / cW * 100;

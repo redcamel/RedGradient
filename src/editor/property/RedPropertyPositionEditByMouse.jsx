@@ -190,7 +190,6 @@ class RedPropertyPositionEditByMouse extends React.Component {
                  if (targetData['xUnit'] === 'px') tX = canvasInfo['width'] - tX;
                  else tX = 100 - tX;
                } else {
-
                  if (targetData['xUnit'] === 'px') {
                    let tW = activeSubData['size']['w'];
                    tW = activeSubData['size']['wUnit'] === '%' ? tW / 100 * canvasInfo['width'] : tW;
@@ -198,7 +197,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
                  } else {
                    let tW = activeSubData['size']['w'];
                    tW = activeSubData['size']['wUnit'] === '%' ? tW : tW * canvasInfo['width'] * 100;
-                   tX = 100 - tX - tW;
+                   tX = 100 - tX ;
                  }
                }
 
@@ -222,7 +221,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
                  } else {
                    let tH = activeSubData['size']['h'];
                    tH = activeSubData['size']['hUnit'] === '%' ? tH : tH * canvasInfo['height'] * 100;
-                   tY = 100 - tY - tH;
+                   tY = 100 - tY ;
                  }
                }
                this.setPosition(tX, tY);
