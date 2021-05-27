@@ -36,7 +36,7 @@
     ]
   },
   "devDependencies": {
-    "@easylogic/colorpicker": "~1.10.2",
+    "@easylogic/colorpicker": "^1.10.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
