@@ -10,8 +10,9 @@ const calcWE = (info) => {
   const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH,gapX,gapY} = info;
   if (positionInfo['xUnit'] === '%') {
     let targetPixelSize = tW;
-    let newTargetPercentPosition = (originX + gapX) / (cW - targetPixelSize) * 100;
-    positionInfo['x'] = newTargetPercentPosition;
+    let size = (cW - targetPixelSize) || cW
+    let newTargetPercentPosition = (originX + gapX) / size * 100;
+    positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;;
   } else {
     if (sizeInfo['wUnit'] === '%') {
       positionInfo['x'] = originX + gapX;
@@ -24,8 +25,10 @@ const calcSN = (info) => {
   const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH,gapX,gapY} = info;
   if (positionInfo['yUnit'] === '%') {
     let targetPixelSize = tH;
-    let newTargetPercentPosition = (originY+ gapY) / (cH - targetPixelSize) * 100;
-    positionInfo['y'] = newTargetPercentPosition;
+    let size = (cH - targetPixelSize) || cH
+    let newTargetPercentPosition = (originY+ gapY) / size * 100;
+    console.log('newTargetPercentPosition',newTargetPercentPosition)
+    positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
   } else {
     if (sizeInfo['hUnit'] === '%') {
       positionInfo['y'] = originY + gapY;
