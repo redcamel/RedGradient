@@ -347,7 +347,7 @@ class RedCanvas extends React.Component {
                       fontSize: '11px'
                     }}
                   >
-                    <div>{activeSubData['deg'].toFixed(1)}<br/><span style={{fontSize: '10px'}}>deg</span></div>
+                    <div>{(+activeSubData['deg']).toFixed(1)}<br/><span style={{fontSize: '10px'}}>deg</span></div>
                     <div style={{
                       lineHeight: 1,
                       width: '10px', height: '10px',
