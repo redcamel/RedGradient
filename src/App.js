@@ -150,19 +150,7 @@ class App extends React.Component {
     // console.log(this.state);
     if (!this.state) return <RedStart rootComponent={this}/>
     const canvasInfo = this.state.canvasInfo
-    let containerCssText = ''
-    {
-      containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo, this.state.borderGradientInfo))
-      containerCssText = containerCssText.map(v => {
-        return `${v[0]} : ${v[1]}`
-      });
-      containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
-      containerCssText = `.result {
-          background : ${(CALC_GRADIENT.calcGradients(this.state.layers, true, this.state.bgColor))};
-          background-blend-mode : ${CALC_GRADIENT.calcBlendMode(this.state.layers)};
-          ${containerCssText}
-          }`
-    }
+
     this.checkUnloadEvent()
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
@@ -184,47 +172,23 @@ class App extends React.Component {
             {/*frame Left*/}
             <div style={{display: "flex", height: '100%', overflowY: 'auto'}}>
               <RedCanvasEdit rootComponent={this}/>
-
             </div>
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
             <RedCanvas rootComponent={this}/>
+            <div style={{position : 'absolute', bottom : 0,left: 0,right : 0,height: '200px', overflowY: 'auto'}}>
+              <RedTitle title={'Gradient Preset - 이거 접기 기능도있어야할듯'}/>
+              <div style={{padding : '4px'}}>
+                <RedPreset rootComponent={this}/>
+              </div>
+            </div>
           </div>
           <div className={'frame_right'}>
             {/*frame_right Right*/}
             <div style={{display: "flex", height: '100%'}}>
               <RedLayer rootComponent={this}/>
               {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
-              <div style={{display: "flex", height: '100%', alignContent: 'space-between', flexDirection: 'column'}}>
-                <div style={{width: '225px'}}>
-                  <RedTitle title={'Gradient Preset'}/>
-                  <div style={{height: '400px', overflowY: 'auto', padding: '4px'}}>
-                    <RedPreset rootComponent={this}/>
-                  </div>
-                  <div style={{maxHeight: '400px', overflowY: 'auto'}}>
-                    <RedTitle title={'Result'}/>
-                    <button
-                      style={style.copyClass}
-                      onClick={e => {
-                        var tempElem = document.createElement('textarea');
-                        tempElem.value = containerCssText;
-                        document.body.appendChild(tempElem);
-                        tempElem.select();
-                        document.execCommand("copy");
-                        document.body.removeChild(tempElem);
-                        alert('Copy Class!')
-                      }}
-                    >Copy Class
-                    </button>
-                    {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>*/}
-                    {containerCssText}
-                    {/*</SyntaxHighlighter>*/}
-                  </div>
-
-                </div>
-                <div>TODO - 애드센스자리</div>
-              </div>
             </div>
 
           </div>
@@ -248,16 +212,5 @@ const style = {
     background: '#5e7ade',
     margin: '1px'
   },
-  copyClass: {
-    cursor: 'pointer',
-    margin: '4px 4px 0px',
-    padding: '4px',
-    width: 'calc(100% - 8px)',
-    fontSize: '12px',
-    color: '#fff',
-    outline: 'none',
-    border: '1px solid #111',
-    background: 'linear-gradient(#5e7ade, #2c3565)',
-    borderRadius: '4px'
-  }
+
 };

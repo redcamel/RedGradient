@@ -21,32 +21,36 @@ class RedPropertySizeEdit extends React.Component {
     const activeSubData = rootComponentState.activeSubData;
     return <div>
 
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <RedNumber
-          title={'SizeW'}
-          width={'75px'}
-          value={activeSubData['size']['w'] || 0}
-          HD_onInput={e => {
-            activeSubData['size']['w'] = e.target.value;
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center',flexDirection:'column'}}>
+        <div>
+          <RedNumber
+            title={'SizeW'}
+            width={'208px'}
+            value={activeSubData['size']['w'] || 0}
+            HD_onInput={e => {
+              activeSubData['size']['w'] = e.target.value;
+              rootComponent.updateRootState({});
+            }}/>
+          <RedSelect value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
+            activeSubData['size']['wUnit'] = e.target.value;
             rootComponent.updateRootState({});
           }}/>
-        <RedSelect value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
-          activeSubData['size']['wUnit'] = e.target.value;
-          rootComponent.updateRootState({});
-        }}/>
+        </div>
         <div style={{width: '5px'}}/>
-        <RedNumber
-          title={'SizeH'}
-          width={'75px'}
-          value={activeSubData['size']['h'] || 0}
-          HD_onInput={e => {
-            activeSubData['size']['h'] = e.target.value;
-            rootComponent.updateRootState({});
-          }}/>
-        <RedSelect value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {
-          activeSubData['size']['hUnit'] = e.target.value;
-          rootComponent.updateRootState({});
-        }}/>
+       <div>
+         <RedNumber
+           title={'SizeH'}
+           width={'208px'}
+           value={activeSubData['size']['h'] || 0}
+           HD_onInput={e => {
+             activeSubData['size']['h'] = e.target.value;
+             rootComponent.updateRootState({});
+           }}/>
+         <RedSelect value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {
+           activeSubData['size']['hUnit'] = e.target.value;
+           rootComponent.updateRootState({});
+         }}/>
+       </div>
       </div>
     </div>;
   }

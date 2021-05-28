@@ -184,8 +184,8 @@ class RedGradientColorEdit extends React.Component {
           {({width}) => (
             <List
               ref="List"
-              minHeight={600}
-              height={600}
+              minHeight={window.innerHeight - 280}
+              height={window.innerHeight - 280}
               overscanRowCount={10}
               rowCount={activeSubData['colorList'].length}
               rowHeight={110}
