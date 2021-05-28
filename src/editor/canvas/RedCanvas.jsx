@@ -11,7 +11,14 @@ import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 import RedCanvasFilter from "./edit/filter/RedCanvasFlterItem.jsx";
 import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
-import {faArrowLeft, faArrowRight, faArrowsAlt, faExpandAlt, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faArrowsAlt, faArrowsAltH,
+  faArrowsAltV,
+  faExpandAlt,
+  faSyncAlt
+} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RedCanvas_checkResize from "./visualEdit/RedCanvas_checkResize.js";
 import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree.js";
@@ -95,6 +102,7 @@ class RedCanvas extends React.Component {
             e.stopPropagation();
             this.setModes({
               positionMode: {
+                mode: 'n',
                 startValueX: activeSubData['position']['x'],
                 startValueY: activeSubData['position']['y'],
                 startX: e.nativeEvent.pageX,
@@ -102,7 +110,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(90deg)'}} />
           </div>
           <div style={{
             bottom: 0,
@@ -118,6 +126,7 @@ class RedCanvas extends React.Component {
             e.stopPropagation();
             this.setModes({
               positionMode: {
+                mode: 's',
                 startValueX: activeSubData['position']['x'],
                 startValueY: activeSubData['position']['y'],
                 startX: e.nativeEvent.pageX,
@@ -125,7 +134,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
           </div>
           <div style={{
             bottom: '50%',
@@ -141,6 +150,7 @@ class RedCanvas extends React.Component {
             e.stopPropagation();
             this.setModes({
               positionMode: {
+                mode: 'w',
                 startValueX: activeSubData['position']['x'],
                 startValueY: activeSubData['position']['y'],
                 startX: e.nativeEvent.pageX,
@@ -148,7 +158,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px'}} />
           </div>
           <div style={{
             bottom: '50%',
@@ -164,6 +174,7 @@ class RedCanvas extends React.Component {
             e.stopPropagation();
             this.setModes({
               positionMode: {
+                mode: 'e',
                 startValueX: activeSubData['position']['x'],
                 startValueY: activeSubData['position']['y'],
                 startX: e.nativeEvent.pageX,
@@ -171,7 +182,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px',transform : 'rotate(180deg)'}} />
           </div>
 
           <>
@@ -294,7 +305,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -318,7 +329,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowRight} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -342,7 +353,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowRight} style={{fontSize: '17px', transform: 'scale(1,1) rotate(-90deg)'}} />
+              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -366,7 +377,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowRight} style={{fontSize: '17px', transform: 'scale(1,1) rotate(90deg)'}} />
+              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
           </>
 
