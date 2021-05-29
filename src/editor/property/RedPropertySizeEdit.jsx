@@ -25,7 +25,7 @@ class RedPropertySizeEdit extends React.Component {
         <div>
           <RedNumber
             title={'SizeW'}
-            width={'190px'}
+            width={'145px'}
             value={activeSubData['size']['w'] || 0}
             HD_onInput={e => {
               activeSubData['size']['w'] = e.target.value;
@@ -40,7 +40,7 @@ class RedPropertySizeEdit extends React.Component {
        <div>
          <RedNumber
            title={'SizeH'}
-           width={'190px'}
+           width={'145px'}
            value={activeSubData['size']['h'] || 0}
            HD_onInput={e => {
              activeSubData['size']['h'] = e.target.value;

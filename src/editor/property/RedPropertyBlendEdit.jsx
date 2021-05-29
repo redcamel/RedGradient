@@ -20,7 +20,7 @@ class RedPropertyBlendEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     return <div style={{display: 'flex', alignItems: 'center'}}>
-      <div className={'ui_subTitle'}>Gradient Blend Mode</div>
+      <div className={'ui_subTitle'}>Blend Mode</div>
       <RedSelect
         value={activeSubData['blendMode']}
         options={Object.entries(BLEND_MODE_TYPE)}

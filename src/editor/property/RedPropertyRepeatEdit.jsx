@@ -20,7 +20,16 @@ class RedPropertyRepeatEdit extends React.Component {
     const activeSubData = rootComponentState.activeSubData;
     const gradient = 'radial-gradient(at 50% 50%, rgba(255, 255, 0, 0.9) 1.5px, rgba(255, 0, 0, 0.5) 5px, transparent 10px)';
     return <div>
+      <div style={{display: 'flex', alignItems: 'center'}}>
       <div className={'ui_subTitle'}>Repeat Mode</div>
+      <RedSelect
+        value={activeSubData['typeRepeat']}
+        options={Object.entries(REPEAT_TYPE)}
+        HD_change={e => {
+          activeSubData['typeRepeat'] = e.target.value;
+          rootComponent.updateRootState({});
+        }}/>
+      </div>
       <div style={{display: 'flex', marginTop: '6px', padding: '0px 8px'}}>
         <div style={{display: 'flex'}}>
           <div style={{...style.icon}}
@@ -108,14 +117,8 @@ class RedPropertyRepeatEdit extends React.Component {
             />
           </div>
         </div>
-        <RedSelect
-          value={activeSubData['typeRepeat']}
-          options={Object.entries(REPEAT_TYPE)}
-          HD_change={e => {
-            activeSubData['typeRepeat'] = e.target.value;
-            rootComponent.updateRootState({});
-          }}/>
       </div>
+
     </div>;
   }
 }
@@ -123,12 +126,12 @@ class RedPropertyRepeatEdit extends React.Component {
 export default RedPropertyRepeatEdit;
 const style = {
   icon: {
-    width: '30px',
-    height: '30px',
+    width: '36px',
+    height: '36px',
     borderRadius: '5px',
     border: '1px solid #000',
     overflow: 'hidden',
-    marginRight: '5px',
+    marginRight: '3px',
     cursor: 'pointer'
   },
   baseBg: {

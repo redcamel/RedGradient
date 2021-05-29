@@ -31,7 +31,7 @@ class RedPropertyPositionEdit extends React.Component {
         <div >
           <RedNumber
             title={'x'}
-            width={'215px'}
+            width={'166px'}
             value={activeSubData['position']['x'] || 0}
             HD_onInput={e => {
               activeSubData['position']['x'] = e.target.value;
@@ -46,7 +46,7 @@ class RedPropertyPositionEdit extends React.Component {
         <div>
           <RedNumber
             title={'y'}
-            width={'215px'}
+            width={'166px'}
             value={activeSubData['position']['y'] || 0}
             HD_onInput={e => {
               activeSubData['position']['y'] = e.target.value;

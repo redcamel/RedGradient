@@ -49,13 +49,13 @@ class RedPropertyDegreeEdit extends React.Component {
         <>
           <RedNumber
             title={'Deg'}
-            width={'71px'}
+            width={'61px'}
             value={deg || 0}
             HD_onInput={e => {
               activeSubData['deg'] = e.target.value;
               rootComponent.updateRootState({});
             }}/>
-          <div style={{textAlign: 'center', marginLeft: '10px '}}>
+          <div style={{textAlign: 'center', marginLeft: '10px',marginRight : '10px'}}>
             <div
               style={style.box}
               onMouseDown={() => {

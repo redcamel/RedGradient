@@ -50,7 +50,7 @@ class RedPropertyEdit extends React.Component {
         <div style={style.contentWrap}>
 
           <div style={{overflowY : 'auto',paddingRight : '5px',marginRight : '15px',borderRight: '1px solid #0c0b0b'}}>
-            <div style={{...style.itemContainer,width: '300px'}}>
+            <div style={{...style.itemContainer,width: '250px'}}>
               <div>
                 <RedTextField
                   title={'name'}
