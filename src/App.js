@@ -177,7 +177,7 @@ class App extends React.Component {
           <div className={'frame_center'}>
             {/*frame_center*/}
             <RedCanvas rootComponent={this}/>
-            <div style={{position : 'absolute', bottom : 0,left: 0,right : 0,height: '200px', overflowY: 'auto'}}>
+            <div style={{position : 'absolute', bottom : 0,left: 0,right : 0,height: '200px', overflowY: 'auto',background :'#2d2d2d'}}>
               <RedTitle title={'Gradient Preset - 이거 접기 기능도있어야할듯'}/>
               <div style={{padding : '4px'}}>
                 <RedPreset rootComponent={this}/>

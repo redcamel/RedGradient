@@ -93,7 +93,7 @@ function RedCanvas_checkPosition(e) {
         break;
     }
 
-    rootComponent.updateRootState({activeSubData});
+    rootComponent.updateRootState({});
     document.body.style.cursor = 'move';
     console.log(e);
   }

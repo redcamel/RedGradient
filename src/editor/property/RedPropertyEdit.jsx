@@ -48,10 +48,8 @@ class RedPropertyEdit extends React.Component {
       <RedTitle title={'Gradient Edit'}/>
       <div style={style.container}>
         <div style={style.contentWrap}>
-          <div style={{...style.itemContainer,width: '360px',paddingRight : '5px',marginRight : '15px',borderRight: '1px solid #0c0b0b'}}>
-            <RedGradientColorEdit rootComponent={rootComponent}/>
-          </div>
-          <div style={{paddingRight : '10px',overflowY : 'auto'}}>
+
+          <div style={{overflowY : 'auto',paddingRight : '5px',marginRight : '15px',borderRight: '1px solid #0c0b0b'}}>
             <div style={{...style.itemContainer,width: '300px'}}>
               <div>
                 <RedTextField
@@ -131,7 +129,9 @@ class RedPropertyEdit extends React.Component {
               </div>
             </div>
           </div>
-
+          <div style={{...style.itemContainer,width: '360px'}}>
+            <RedGradientColorEdit rootComponent={rootComponent}/>
+          </div>
 
           {/*<div style={style.itemContainer}>*/}
           {/*  <div>Current Gradient Css</div>*/}

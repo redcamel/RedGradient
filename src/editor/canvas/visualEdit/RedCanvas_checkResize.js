@@ -13,7 +13,7 @@ const calcE = (info) => {
     if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
     else sizeInfo['w'] = targetPixelSize;
     let newTargetPercentPosition = (originX) / (cW - targetPixelSize) * 100;
-    positionInfo['x'] = newTargetPercentPosition;
+    positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
   } else {
     let targetPixelSize = tW + gapX;
     let targetPercentSize = targetPixelSize / cW * 100;
@@ -29,7 +29,7 @@ const calcW = (info) => {
     if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
     else sizeInfo['w'] = targetPixelSize;
     let newTargetPercentPosition = (originX + gapX) / (cW - targetPixelSize) * 100;
-    positionInfo['x'] = newTargetPercentPosition;
+    positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
   } else {
     let targetPixelSize = tW - gapX;
     let targetPercentSize = targetPixelSize / cW * 100;
@@ -50,7 +50,7 @@ const calcS = (info) => {
     if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
     else sizeInfo['h'] = targetPixelSize;
     let newTargetPercentPosition = (originY) / (cH - targetPixelSize) * 100;
-    positionInfo['y'] = newTargetPercentPosition;
+    positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
   } else {
     let targetPixelSize = tH + gapY;
     let targetPercentSize = targetPixelSize / cH * 100;
@@ -66,7 +66,7 @@ const calcN = (info) => {
     if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
     else sizeInfo['h'] = targetPixelSize;
     let newTargetPercentPosition = (originY + gapY) / (cH - targetPixelSize) * 100;
-    positionInfo['y'] = newTargetPercentPosition;
+    positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
   } else {
     let targetPixelSize = tH - gapY;
     let targetPercentSize = targetPixelSize / cH * 100;

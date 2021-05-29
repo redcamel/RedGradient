@@ -19,7 +19,7 @@ function RedCanvas_checkDegree(e) {
     activeSubData['deg'] += 90;
     if (activeSubData['deg'] < 0) activeSubData['deg'] += 360;
     activeSubData['deg'] = activeSubData['deg'] % 360;
-    rootComponent.updateRootState({activeSubData});
+    rootComponent.updateRootState({});
     document.body.style.cursor = 'move';
     console.log(e);
   }

@@ -21,7 +21,7 @@ function RedCanvas_checkAt(e) {
     atInfo['x'] = +this.state.atMode.startValueX + (atInfo['xUnit'] === '%' ? tX / tW * 100 : tX);
     atInfo['y'] = +this.state.atMode.startValueY + (atInfo['yUnit'] === '%' ? tY / tH * 100 : tY);
     console.log(tX, tY);
-    rootComponent.updateRootState({activeSubData});
+    rootComponent.updateRootState({});
     document.body.style.cursor = 'move';
     console.log(e);
   }
