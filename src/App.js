@@ -177,18 +177,21 @@ class App extends React.Component {
           <div className={'frame_center'}>
             {/*frame_center*/}
             <RedCanvas rootComponent={this}/>
-            <div style={{position : 'absolute', bottom : 0,left: 0,right : 0,height: '200px', overflowY: 'auto',background :'#2d2d2d'}}>
-              <RedTitle title={'Gradient Preset - 이거 접기 기능도있어야할듯'}/>
-              <div style={{padding : '4px'}}>
-                <RedPreset rootComponent={this}/>
-              </div>
-            </div>
+
           </div>
           <div className={'frame_right'}>
             {/*frame_right Right*/}
-            <div style={{display: "flex", height: '100%'}}>
-              <RedLayer rootComponent={this}/>
-              {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
+            <div style={{height: '100%'}}>
+              <div style={{height: '200px', overflowY: 'auto',background :'#2d2d2d'}}>
+                <RedTitle title={'Gradient Preset - 이거 접기 기능도있어야할듯'}/>
+                <div style={{padding : '4px'}}>
+                  <RedPreset rootComponent={this}/>
+                </div>
+              </div>
+              <div style={{display: "flex", height: '100%'}}>
+                <RedLayer rootComponent={this}/>
+                {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
+              </div>
             </div>
 
           </div>
