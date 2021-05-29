@@ -84,16 +84,7 @@ class App extends React.Component {
     this.state.activeLayer = this.state.layers[0];
     this.state.activeSubData = this.state.activeLayer['items'][0];
     //
-    if (!this.state.beforeInfo) {
-      this.state.beforeInfo = new DataCanvas()
-      this.state.beforeInfo.activeLayer = this.state.beforeInfo.layers[0];
-      this.state.beforeInfo.activeSubData = this.state.beforeInfo.activeLayer['items'][0];
-    }
-    if (!this.state.afterInfo) {
-      this.state.afterInfo = new DataCanvas()
-      this.state.afterInfo.activeLayer = this.state.afterInfo.layers[0];
-      this.state.afterInfo.activeSubData = this.state.afterInfo.activeLayer['items'][0];
-    }
+
     //
     if (!this.state.borderGradientInfo) {
       this.state.borderGradientInfo = {
@@ -183,7 +174,7 @@ class App extends React.Component {
             {/*frame_right Right*/}
             <div style={{height: '100%'}}>
               <div style={{height: '200px', overflowY: 'auto',background :'#2d2d2d'}}>
-                <RedTitle title={'Gradient Preset - 이거 접기 기능도있어야할듯'}/>
+                <RedTitle title={'Gradient Preset'}/>
                 <div style={{padding : '4px'}}>
                   <RedPreset rootComponent={this}/>
                 </div>
