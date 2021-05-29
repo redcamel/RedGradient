@@ -8,10 +8,12 @@
 
 const calcWE = (info) => {
   const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH,gapX,gapY} = info;
+  if(tW === cW) positionInfo['xUnit'] = 'px'
   if (positionInfo['xUnit'] === '%') {
     let targetPixelSize = tW;
     let size = (cW - targetPixelSize) || cW
     let newTargetPercentPosition = (originX + gapX) / size * 100;
+
     positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;;
   } else {
     if (sizeInfo['wUnit'] === '%') {
@@ -23,6 +25,7 @@ const calcWE = (info) => {
 };
 const calcSN = (info) => {
   const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH,gapX,gapY} = info;
+  if(tH === cH) positionInfo['yUnit'] = 'px'
   if (positionInfo['yUnit'] === '%') {
     let targetPixelSize = tH;
     let size = (cH - targetPixelSize) || cH
