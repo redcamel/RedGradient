@@ -91,6 +91,10 @@ function RedCanvas_checkPosition(e) {
       case "n" :
         calcSN(info);
         break;
+      case "all" :
+        calcWE(info);
+        calcSN(info);
+        break;
     }
 
     rootComponent.updateRootState({});

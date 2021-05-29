@@ -91,7 +91,7 @@ class RedCanvas extends React.Component {
           <div style={{
             top: 0,
             left: '50%',
-            transform: 'translate(-50%, -76px)',
+            transform: 'translate(-50%, -56px)',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -115,7 +115,7 @@ class RedCanvas extends React.Component {
           <div style={{
             bottom: 0,
             left: '50%',
-            transform: 'translate(-50%, 76px)',
+            transform: 'translate(-50%, 56px)',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -139,7 +139,7 @@ class RedCanvas extends React.Component {
           <div style={{
             bottom: '50%',
             left: 0,
-            transform: 'translate(-76px, 50%)',
+            transform: 'translate(-56px, 50%)',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -163,7 +163,7 @@ class RedCanvas extends React.Component {
           <div style={{
             bottom: '50%',
             right: 0,
-            transform: 'translate(76px, 50%)',
+            transform: 'translate(56px, 50%)',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -184,7 +184,30 @@ class RedCanvas extends React.Component {
           }}>
             <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px',transform : 'rotate(180deg)'}} />
           </div>
-
+          <div style={{
+            bottom: 0,
+            left: '50%',
+            transform: 'translate(-50%, 96px)',
+            position: 'absolute', width: '30px', height: '30px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'move',
+            border: '1px solid #5e7ade', borderRadius: '50%',
+            boxShadow: '0px 0px 10px rgba(0,0,0,0.3)',
+            background: '#fff'
+          }} onMouseDown={e => {
+            e.stopPropagation();
+            this.setModes({
+              positionMode: {
+                mode: 'all',
+                startValueX: activeSubData['position']['x'],
+                startValueY: activeSubData['position']['y'],
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }}>
+            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
+          </div>
           <>
             <div
               style={{
