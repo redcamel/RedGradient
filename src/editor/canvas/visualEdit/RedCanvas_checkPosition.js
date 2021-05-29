@@ -72,11 +72,11 @@ function RedCanvas_checkPosition(e) {
     const activeSubDataSize = activeSubData['size'];
     const activeSubDataPosition = activeSubData['position'];
     const layoutSize = {
-      w: activeSubDataSize['wUnit'] === '%' ? cW * activeSubDataSize['w'] / 100 : activeSubDataSize['w'],
-      h: activeSubDataSize['hUnit'] === '%' ? cH * activeSubDataSize['h'] / 100 : activeSubDataSize['h'],
+      w: activeSubDataSize['wUnit'] === '%' ? cW * activeSubDataSize['w'] / 100 : +activeSubDataSize['w'],
+      h: activeSubDataSize['hUnit'] === '%' ? cH * activeSubDataSize['h'] / 100 : +activeSubDataSize['h'],
     };
-    const originX = activeSubDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubDataPosition['x'] / 100) : activeSubDataPosition['x'];
-    const originY = activeSubDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubDataPosition['y'] / 100) : activeSubDataPosition['y'];
+    const originX = activeSubDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubDataPosition['x'] / 100) : +activeSubDataPosition['x'];
+    const originY = activeSubDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubDataPosition['y'] / 100) : +activeSubDataPosition['y'];
     const info = {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH,gapX,gapY};
     switch (mode) {
       case "e" :

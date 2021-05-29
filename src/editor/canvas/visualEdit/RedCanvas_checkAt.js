@@ -18,8 +18,8 @@ function RedCanvas_checkAt(e) {
     const sizeInfo = activeSubData['size'];
     const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
     const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
-    atInfo['x'] = +this.state.atMode.startValueX + (atInfo['xUnit'] === '%' ? tX / tW * 100 : tX);
-    atInfo['y'] = +this.state.atMode.startValueY + (atInfo['yUnit'] === '%' ? tY / tH * 100 : tY);
+    atInfo['x'] = +this.state.atMode.startValueX + (atInfo['xUnit'] === '%' ? tX / tW * 100 : +tX);
+    atInfo['y'] = +this.state.atMode.startValueY + (atInfo['yUnit'] === '%' ? tY / tH * 100 : +tY);
     console.log(tX, tY);
     rootComponent.updateRootState({});
     document.body.style.cursor = 'move';
