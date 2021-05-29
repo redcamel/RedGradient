@@ -20,70 +20,77 @@ function drawCanvasUI() {
   return <div style={style.container}>
     <RedTitle title={'Container Information'}/>
 
+    {
+      rootComponentState.activeContainerLayer === 'mainLayer' || !rootComponentState.activeContainerLayer
+        ? <>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <div style={style.canvasResizer}>
+              <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
+              <div>
+                <label style={{
+                  marginLeft: '5px',
+                  background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
+                  display: 'flex',
+                  borderRadius: '6px',
+                  padding: '5px 10px',
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer'
+                }}>
+                  View Gradient Edit Area
+                  <input type={'checkbox'}
+                         checked={this.state.layerSizeView}
+                         style={{
+                           display: 'inline-block',
+                           width: '15px',
+                           height: '15px',
+                           background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
+                           borderRadius: '4px',
+                           border: '1px solid #000',
+                           cursor: 'pointer',
+                           marginLeft: '5px'
+                         }}
+                         onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
+                  />
+                </label>
+              </div>
 
-    <div style={{display: 'flex', justifyContent: 'space-between'}}>
-      <div style={style.canvasResizer}>
-        <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
-        <div>
-          <label style={{
-            marginLeft: '5px',
-            background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
-            display: 'flex',
-            borderRadius: '6px',
-            padding: '5px 10px',
-            whiteSpace: 'nowrap',
-            cursor: 'pointer'
-          }}>
-            View Gradient Edit Area
-            <input type={'checkbox'}
-                   checked={this.state.layerSizeView}
-                   style={{
-                     display: 'inline-block',
-                     width: '15px',
-                     height: '15px',
-                     background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
-                     borderRadius: '4px',
-                     border: '1px solid #000',
-                     cursor: 'pointer',
-                     marginLeft: '5px'
-                   }}
-                   onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
-            />
-          </label>
-        </div>
-
-      </div>
-
-    </div>
-    <div style={style.canvasViewInfo}>
-      <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
-        Center
-      </div>
-      <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
-      <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
-      <div style={{marginLeft: '5px', color: '#696969'}}>Center
-        : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY} /
-        ViewScale : {this.state.canvasViewScale.toFixed(2)}</div>
-
-    </div>
-    <div style={{display: 'inline-block', margin: '0px 10px 8px 10px'}}>
-      {
-        RED_CANVAS_PRESET.map(v => {
-          return <button
-            style={style.presetButton}
-            onClick={() => {
-              canvasInfo.width = v.width;
-              canvasInfo.height = v.height;
-              rootComponent.updateRootState({});
-            }}
-          >
-            <div><FontAwesomeIcon
-              icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
             </div>
-          </button>;
-        })
-      }
-    </div>
+
+          </div>
+          <div style={style.canvasViewInfo}>
+            <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
+              Center
+            </div>
+            <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
+            <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
+            <div style={{marginLeft: '5px', color: '#696969'}}>Center
+              : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY} /
+              ViewScale : {this.state.canvasViewScale.toFixed(2)}</div>
+
+          </div>
+          <div style={{display: 'inline-block', margin: '0px 10px 8px 10px'}}>
+            {
+              RED_CANVAS_PRESET.map(v => {
+                return <button
+                  style={style.presetButton}
+                  onClick={() => {
+                    canvasInfo.width = v.width;
+                    canvasInfo.height = v.height;
+                    rootComponent.updateRootState({});
+                  }}
+                >
+                  <div><FontAwesomeIcon
+                    icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
+                  </div>
+                </button>;
+              })
+            }
+          </div>
+        </>
+        : <div>{this.state.activeContainerLayer} 콘테이너 정보 에디터 창</div>
+    }
+
+
   </div>;
 }
 

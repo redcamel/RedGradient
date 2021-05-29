@@ -106,7 +106,7 @@ option {
 
 .frame_toolbar {
     border-bottom: 1px solid #0c0b0b;
-    min-height: 28px;
+    /*min-height: 28px;*/
     display: flex;
     align-items: center;
 }

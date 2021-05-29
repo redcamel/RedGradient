@@ -10,7 +10,6 @@ import React from 'react';
 import RedCanvas from "./editor/canvas/RedCanvas.jsx";
 import RedLayer from "./editor/layer/RedLayer.jsx";
 import RedPropertyEdit from "./editor/property/RedPropertyEdit.jsx";
-import CALC_GRADIENT from "./editor/CALC_GRADIENT";
 import RedCanvasEdit from "./editor/canvas/edit/RedCanvasEdit";
 import RedTitle from "./core/RedTitle";
 import RedStart from "./start/RedStart.jsx";
@@ -84,7 +83,16 @@ class App extends React.Component {
     this.state.activeLayer = this.state.layers[0];
     this.state.activeSubData = this.state.activeLayer['items'][0];
     //
-
+    if (!this.state.beforeInfo) {
+      this.state.beforeInfo = new DataCanvas()
+      this.state.beforeInfo.activeLayer = this.state.beforeInfo.layers[0];
+      this.state.beforeInfo.activeSubData = this.state.beforeInfo.activeLayer['items'][0];
+    }
+    if (!this.state.afterInfo) {
+      this.state.afterInfo = new DataCanvas()
+      this.state.afterInfo.activeLayer = this.state.afterInfo.layers[0];
+      this.state.afterInfo.activeSubData = this.state.afterInfo.activeLayer['items'][0];
+    }
     //
     if (!this.state.borderGradientInfo) {
       this.state.borderGradientInfo = {
@@ -140,8 +148,6 @@ class App extends React.Component {
   render() {
     // console.log(this.state);
     if (!this.state) return <RedStart rootComponent={this}/>
-    const canvasInfo = this.state.canvasInfo
-
     this.checkUnloadEvent()
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
@@ -151,37 +157,84 @@ class App extends React.Component {
         </div>
         <RedFrameMenuOpen rootComponent={this}/>
         <RedFrameMenuSave rootComponent={this}/>
-
-        {/*<div style={style.test}>언두/리두</div>*/}
       </div>
-      {/*<div className={'frame_toolbar'}>frame ToolBar*/}
-
-      {/*</div>*/}
+      <div className={'frame_toolbar'}>
+        <div style={{display: 'flex', height: '100%', alignItem: 'center'}}>
+          <div style={{width: '360px'}}/>
+          <div style={{
+            cursor: 'pointer',
+            padding: '10px',
+            borderLeft: '1px solid #000',
+            transition: 'all 0.2s',
+            background: this.state.activeContainerLayer === 'beforeLayer' ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
+          }} onClick={e => {
+            this.state.activeContainerLayer = 'beforeLayer'
+            this.setState({})
+          }}>Todo -
+            ::before
+          </div>
+          <div style={{
+            cursor: 'pointer',
+            padding: '10px',
+            borderLeft: '1px solid #000',
+            transition: 'all 0.2s',
+            background: this.state.activeContainerLayer === 'mainLayer' || !this.state.activeContainerLayer ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
+          }} onClick={e => {
+            this.state.activeContainerLayer = 'mainLayer'
+            this.setState({})
+          }}>Todo - main
+          </div>
+          <div style={{
+            cursor: 'pointer',
+            padding: '10px',
+            borderLeft: '1px solid #000',
+            borderRight: '1px solid #000',
+            transition: 'all 0.2s',
+            background: this.state.activeContainerLayer === 'afterLayer' ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
+          }} onClick={e => {
+            this.state.activeContainerLayer = 'afterLayer'
+            this.setState({})
+          }}>Todo - ::after
+          </div>
+        </div>
+      </div>
       <div className={'frame_middle'}>
         <div className={'frame_middle_container'}>
           <div className={'frame_left'}>
             {/*frame Left*/}
             <div style={{display: "flex", height: '100%', overflowY: 'auto'}}>
-              <RedCanvasEdit rootComponent={this}/>
+              {
+                this.state.activeContainerLayer === 'mainLayer' || !this.state.activeContainerLayer
+                  ? <RedCanvasEdit rootComponent={this}/>
+                  : <div>{this.state.activeContainerLayer} 콘테이너 프로퍼티 에디터 창</div>
+              }
+
             </div>
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
             <RedCanvas rootComponent={this}/>
-
           </div>
           <div className={'frame_right'}>
             {/*frame_right Right*/}
+
             <div style={{height: '100%'}}>
-              <div style={{height: '200px', overflowY: 'auto',background :'#2d2d2d'}}>
+              <div style={{height: '200px', overflowY: 'auto', background: '#2d2d2d'}}>
                 <RedTitle title={'Gradient Preset'}/>
-                <div style={{padding : '4px'}}>
+                <div style={{padding: '4px'}}>
                   <RedPreset rootComponent={this}/>
                 </div>
               </div>
               <div style={{display: "flex", height: '100%'}}>
-                <RedLayer rootComponent={this}/>
-                {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
+                {
+                  this.state.activeContainerLayer === 'mainLayer' || !this.state.activeContainerLayer
+                    ? <>
+                      <RedLayer rootComponent={this}/>
+                      {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
+                    </>
+                    : <div>{this.state.activeContainerLayer} 그라디언트 에디터 창</div>
+                }
+
               </div>
             </div>
 
@@ -206,5 +259,4 @@ const style = {
     background: '#5e7ade',
     margin: '1px'
   },
-
 };
