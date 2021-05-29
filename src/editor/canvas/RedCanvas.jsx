@@ -404,6 +404,7 @@ class RedCanvas extends React.Component {
             </div>
           </>
 
+
           {activeSubData['title']}
           {
             activeSubData['type'] === GRADIENT_TYPE.RADIAL ||
@@ -565,6 +566,20 @@ class RedCanvas extends React.Component {
                 </div>
               </>
           }
+          <div style={{
+            position :'absolute',
+            top : '50%',left : '50%',
+            transform : 'translate(-50%,-50%)',
+            display : this.state.positionMode || this.state.resizeMode ? 'block' :'none',
+            background : 'rgba(255,255,255,0.8)',
+            padding : '10px',
+            borderRadius:'8px',
+            whiteSpace:'nowrap',
+            border: '1px solid rgba(0,0,0,0.5)'
+          }}>
+            <div>w : {(+activeSubData['size']['w']).toFixed(1)}{activeSubData['size']['wUnit']} / h : {(+activeSubData['size']['h']).toFixed(1)}{activeSubData['size']['hUnit']}</div>
+            <div>x : {(+activeSubData['position']['x']).toFixed(1)}{activeSubData['position']['xUnit']} / y : {(+activeSubData['position']['y']).toFixed(1)}{activeSubData['position']['yUnit']}</div>
+          </div>
         </div> : ''
       }
 
