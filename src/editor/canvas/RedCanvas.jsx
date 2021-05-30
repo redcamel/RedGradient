@@ -13,8 +13,8 @@ import RedCanvasFilter from "./edit/filter/RedCanvasFlterItem.jsx";
 import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
 import {
   faArrowLeft,
-  faArrowRight,
-  faArrowsAlt, faArrowsAltH,
+  faArrowsAlt,
+  faArrowsAltH,
   faArrowsAltV,
   faExpandAlt,
   faSyncAlt
@@ -110,7 +110,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(90deg)'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(90deg)'}}/>
           </div>
           <div style={{
             bottom: 0,
@@ -134,7 +134,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(-90deg)'}}/>
           </div>
           <div style={{
             bottom: '50%',
@@ -158,7 +158,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px'}}/>
           </div>
           <div style={{
             bottom: '50%',
@@ -182,7 +182,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px',transform : 'rotate(180deg)'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(180deg)'}}/>
           </div>
           <div style={{
             bottom: 0,
@@ -206,7 +206,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
+            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px', transform: 'rotate(-90deg)'}}/>
           </div>
           <>
             <div
@@ -231,7 +231,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}} />
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}}/>
             </div>
             <div
               style={{
@@ -255,7 +255,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
@@ -279,7 +279,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
@@ -303,7 +303,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}} />
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}}/>
             </div>
             {/*  */}
             <div
@@ -328,7 +328,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
@@ -352,7 +352,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
@@ -376,7 +376,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
@@ -400,7 +400,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
           </>
 
@@ -479,7 +479,7 @@ class RedCanvas extends React.Component {
                       fontSize: '11px'
                     }}
                   >
-                    <div>{(+activeSubData['deg']).toFixed(1)}<br /><span style={{fontSize: '10px'}}>deg</span></div>
+                    <div>{(+activeSubData['deg']).toFixed(1)}<br/><span style={{fontSize: '10px'}}>deg</span></div>
                     <div style={{
                       lineHeight: 1,
                       width: '10px', height: '10px',
@@ -489,7 +489,7 @@ class RedCanvas extends React.Component {
                       transform: 'translate(-50%,-50%)',
                       top: `calc(50% + ${Math.sin(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`,
                       left: `calc(50% + ${Math.cos(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`
-                    }} />
+                    }}/>
                   </button>
                 </div>
                 <div
@@ -508,7 +508,7 @@ class RedCanvas extends React.Component {
                     this.setModes({degreeMode: {startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
                 </div>
                 <div
                   style={{
@@ -526,7 +526,7 @@ class RedCanvas extends React.Component {
                     this.setModes({degreeMode: {startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
                 </div>
                 <div
                   style={{
@@ -544,7 +544,7 @@ class RedCanvas extends React.Component {
                     this.setModes({degreeMode: {startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
                 </div>
                 <div
                   style={{
@@ -562,23 +562,25 @@ class RedCanvas extends React.Component {
                     this.setModes({degreeMode: {startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
                 </div>
               </>
           }
           <div style={{
-            position :'absolute',
-            top : '50%',left : '50%',
-            transform : 'translate(-50%,-50%)',
-            display : this.state.positionMode || this.state.resizeMode ? 'block' :'none',
-            background : 'rgba(255,255,255,0.8)',
-            padding : '10px',
-            borderRadius:'8px',
-            whiteSpace:'nowrap',
+            position: 'absolute',
+            top: '50%', left: '50%',
+            transform: 'translate(-50%,-50%)',
+            display: this.state.positionMode || this.state.resizeMode ? 'block' : 'none',
+            background: 'rgba(255,255,255,0.8)',
+            padding: '10px',
+            borderRadius: '8px',
+            whiteSpace: 'nowrap',
             border: '1px solid rgba(0,0,0,0.5)'
           }}>
-            <div>w : {(+activeSubData['size']['w']).toFixed(1)}{activeSubData['size']['wUnit']} / h : {(+activeSubData['size']['h']).toFixed(1)}{activeSubData['size']['hUnit']}</div>
-            <div>x : {(+activeSubData['position']['x']).toFixed(1)}{activeSubData['position']['xUnit']} / y : {(+activeSubData['position']['y']).toFixed(1)}{activeSubData['position']['yUnit']}</div>
+            <div>w : {(+activeSubData['size']['w']).toFixed(1)}{activeSubData['size']['wUnit']} / h
+              : {(+activeSubData['size']['h']).toFixed(1)}{activeSubData['size']['hUnit']}</div>
+            <div>x : {(+activeSubData['position']['x']).toFixed(1)}{activeSubData['position']['xUnit']} / y
+              : {(+activeSubData['position']['y']).toFixed(1)}{activeSubData['position']['yUnit']}</div>
           </div>
         </div> : ''
       }

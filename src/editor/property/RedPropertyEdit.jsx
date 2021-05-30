@@ -19,13 +19,11 @@ import RedPropertyAtEdit from "./RedPropertyAtEdit";
 import GRADIENT_TYPE from "../GRADIENT_TYPE";
 import RedPropertySizeEdit from "./RedPropertySizeEdit";
 import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
-import RedPreset from "./preset/RedPreset";
 import RedCanvas from "../canvas/RedCanvas";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 
 class RedPropertyEdit extends React.Component {
   render() {
-
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeLayer = rootComponentState.activeLayer;
@@ -49,8 +47,8 @@ class RedPropertyEdit extends React.Component {
       <div style={style.container}>
         <div style={style.contentWrap}>
 
-          <div style={{overflowY : 'auto',paddingRight : '5px',marginRight : '15px',borderRight: '1px solid #0c0b0b'}}>
-            <div style={{...style.itemContainer,width: '250px'}}>
+          <div style={{overflowY: 'auto', paddingRight: '5px', marginRight: '15px', borderRight: '1px solid #0c0b0b'}}>
+            <div style={{...style.itemContainer, width: '250px'}}>
               <div>
                 <RedTextField
                   title={'name'}
@@ -102,8 +100,14 @@ class RedPropertyEdit extends React.Component {
               </div>
 
               {/*  */}
-              <div style={{display: "flex", height: '100%', alignContent: 'space-between', flexDirection: 'column',marginBottom : '20px'}}>
-                <div style={{marginTop:'10px'}}>
+              <div style={{
+                display: "flex",
+                height: '100%',
+                alignContent: 'space-between',
+                flexDirection: 'column',
+                marginBottom: '20px'
+              }}>
+                <div style={{marginTop: '10px'}}>
                   <div style={{maxHeight: '400px', overflowY: 'auto'}}>
                     <RedTitle title={'Result'}/>
                     <button
@@ -129,7 +133,7 @@ class RedPropertyEdit extends React.Component {
               </div>
             </div>
           </div>
-          <div style={{...style.itemContainer,width: '360px'}}>
+          <div style={{...style.itemContainer, width: '360px'}}>
             <RedGradientColorEdit rootComponent={rootComponent}/>
           </div>
 
@@ -163,7 +167,7 @@ const style = {
   },
   contentWrap: {
     padding: '5px 10px 10px',
-    display:'flex'
+    display: 'flex'
   },
   layer: {
     height: '30px'

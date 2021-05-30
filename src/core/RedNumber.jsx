@@ -201,8 +201,8 @@ class RedNumber extends React.Component {
   }
 
   update(v) {
-    if(this.props.hasOwnProperty('minValue')) if(v<this.props.minValue) v= this.props.minValue
-    if(this.props.hasOwnProperty('maxValue')) if(v>this.props.maxValue) v= this.props.maxValue
+    if (this.props.hasOwnProperty('minValue')) if (v < this.props.minValue) v = this.props.minValue
+    if (this.props.hasOwnProperty('maxValue')) if (v > this.props.maxValue) v = this.props.maxValue
     this.props.HD_onInput({
       target: {
         value: v
@@ -253,7 +253,7 @@ class RedNumber extends React.Component {
         cursor: 'pointer'
       }}
            onClick={e => {
-             this.update( +this.props.value+step)
+             this.update(+this.props.value + step)
            }}
       >+
       </div>
@@ -271,7 +271,7 @@ class RedNumber extends React.Component {
       }}
 
            onClick={e => {
-             this.update( +this.props.value-step)
+             this.update(+this.props.value - step)
            }}
       >-
       </div>

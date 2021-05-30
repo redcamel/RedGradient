@@ -6,7 +6,7 @@
  *
  */
 const calcE = (info) => {
-  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH,gapX,gapY} = info;
+  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH, gapX, gapY} = info;
   if (positionInfo['xUnit'] === '%') {
     let targetPixelSize = tW + gapX;
     let targetPercentSize = targetPixelSize / cW * 100;
@@ -22,7 +22,7 @@ const calcE = (info) => {
   }
 };
 const calcW = (info) => {
-  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH,gapX,gapY} = info;
+  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH, gapX, gapY} = info;
   if (positionInfo['xUnit'] === '%') {
     let targetPixelSize = tW - gapX;
     let targetPercentSize = targetPixelSize / cW * 100;
@@ -43,7 +43,7 @@ const calcW = (info) => {
   }
 };
 const calcS = (info) => {
-  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH,gapX,gapY} = info;
+  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH, gapX, gapY} = info;
   if (positionInfo['yUnit'] === '%') {
     let targetPixelSize = tH + gapY;
     let targetPercentSize = targetPixelSize / cH * 100;
@@ -59,7 +59,7 @@ const calcS = (info) => {
   }
 };
 const calcN = (info) => {
-  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH,gapX,gapY} = info;
+  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH, gapX, gapY} = info;
   if (positionInfo['yUnit'] === '%') {
     let targetPixelSize = tH - gapY;
     let targetPercentSize = targetPixelSize / cH * 100;
@@ -79,6 +79,7 @@ const calcN = (info) => {
     }
   }
 };
+
 function RedCanvas_checkResize(e) {
   const rootComponent = this.props.rootComponent;
   const rootComponentState = rootComponent.state;
@@ -108,7 +109,20 @@ function RedCanvas_checkResize(e) {
     };
     const originX = activeSubDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubDataPosition['x'] / 100) : +activeSubDataPosition['x'];
     const originY = activeSubDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubDataPosition['y'] / 100) : +activeSubDataPosition['y'];
-    const info = {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH,gapX,gapY};
+    const info = {
+      positionInfo,
+      sizeInfo,
+      activeSubDataSize,
+      activeSubDataPosition,
+      originX,
+      originY,
+      tW,
+      tH,
+      cW,
+      cH,
+      gapX,
+      gapY
+    };
     switch (mode) {
       case "e" :
         calcE(info);

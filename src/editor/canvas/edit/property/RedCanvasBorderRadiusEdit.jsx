@@ -8,7 +8,6 @@
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
 import RedNumber from "../../../../core/RedNumber.jsx";
-import getUUID from "../../../../getUUID.js";
 
 const names = ['TL', 'BL', 'TR', 'BR']
 

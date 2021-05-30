@@ -13,7 +13,6 @@ import RedSelect from "../../core/RedSelect";
 import {faPlus, faThumbtack} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GRADIENT_TYPE from "../GRADIENT_TYPE.js";
-import getUUID from "../../getUUID.js";
 
 let targetContext;
 let targetColorData;
@@ -243,30 +242,13 @@ class RedGradientColorItem extends React.Component {
           </div>
           <div>
             {/* TODO - 단위모델 변경 처리*/}
-          <div style={{whiteSpace:'nowrap'}}>
+            <div style={{whiteSpace: 'nowrap'}}>
 
-            <RedNumber
-              width={colorData['useRange'] ? '100px' : '230px'}
-              value={colorData['range'] || 0}
-              HD_onInput={e => {
-                colorData['range'] = +e.target.value;
-                let i = activeSubData.colorList.length;
-                while (i--) {
-                  if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
-                }
-                rootComponent.updateRootState({});
-              }}
-              HD_blur={e => {
-                this.props.HD_sort(e);
-                this.props.HD_active(this.getIndex());
-              }}
-            />
-            {
-              colorData['useRange'] ? <RedNumber
-                width={'100px'}
-                value={colorData['rangeEnd'] || 0}
+              <RedNumber
+                width={colorData['useRange'] ? '100px' : '230px'}
+                value={colorData['range'] || 0}
                 HD_onInput={e => {
-                  colorData['rangeEnd'] = +e.target.value;
+                  colorData['range'] = +e.target.value;
                   let i = activeSubData.colorList.length;
                   while (i--) {
                     if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
@@ -277,50 +259,67 @@ class RedGradientColorItem extends React.Component {
                   this.props.HD_sort(e);
                   this.props.HD_active(this.getIndex());
                 }}
-              /> : ''
-            }
+              />
+              {
+                colorData['useRange'] ? <RedNumber
+                  width={'100px'}
+                  value={colorData['rangeEnd'] || 0}
+                  HD_onInput={e => {
+                    colorData['rangeEnd'] = +e.target.value;
+                    let i = activeSubData.colorList.length;
+                    while (i--) {
+                      if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
+                    }
+                    rootComponent.updateRootState({});
+                  }}
+                  HD_blur={e => {
+                    this.props.HD_sort(e);
+                    this.props.HD_active(this.getIndex());
+                  }}
+                /> : ''
+              }
 
-            <RedSelect value={colorData['rangeUnit']} options={unitList} HD_change={e => {
-              let tUnit = e.target.value;
-              if (colorData['rangeUnit'] !== tUnit) {
-                if (colorData['rangeUnit'] === 'px') {
-                  if (tUnit === '%') {
-                    colorData['range'] = colorData['range'] / canvasInfo['width'] * 100;
-                    colorData['rangeEnd'] = colorData['rangeEnd'] / canvasInfo['width'] * 100;
-                  } else if (tUnit === 'deg') {
-                    colorData['range'] = 360 * colorData['range'] / canvasInfo['width'];
-                    colorData['rangeEnd'] = 360 * colorData['rangeEnd'] / canvasInfo['width'];
-                  }
-                } else if (colorData['rangeUnit'] === '%') {
-                  if (tUnit === 'px') {
-                    colorData['range'] = canvasInfo['width'] * colorData['range'] / 100;
-                    colorData['rangeEnd'] = canvasInfo['width'] * colorData['rangeEnd'] / 100;
-                  } else if (tUnit === 'deg') {
-                    colorData['range'] = 360 * colorData['range'] / 100;
-                    colorData['rangeEnd'] = 360 * colorData['rangeEnd'] / 100;
-                  }
-                } else if (colorData['rangeUnit'] === 'deg') {
-                  if (tUnit === 'px') {
-                    colorData['range'] = canvasInfo['width'] * colorData['range'] / 360
-                    colorData['rangeEnd'] = canvasInfo['width'] * colorData['rangeEnd'] / 360
-                  } else if (tUnit === '%') {
-                    colorData['range'] = colorData['range'] / 360 * 100;
-                    colorData['rangeEnd'] = colorData['rangeEnd'] / 360 * 100;
+              <RedSelect value={colorData['rangeUnit']} options={unitList} HD_change={e => {
+                let tUnit = e.target.value;
+                if (colorData['rangeUnit'] !== tUnit) {
+                  if (colorData['rangeUnit'] === 'px') {
+                    if (tUnit === '%') {
+                      colorData['range'] = colorData['range'] / canvasInfo['width'] * 100;
+                      colorData['rangeEnd'] = colorData['rangeEnd'] / canvasInfo['width'] * 100;
+                    } else if (tUnit === 'deg') {
+                      colorData['range'] = 360 * colorData['range'] / canvasInfo['width'];
+                      colorData['rangeEnd'] = 360 * colorData['rangeEnd'] / canvasInfo['width'];
+                    }
+                  } else if (colorData['rangeUnit'] === '%') {
+                    if (tUnit === 'px') {
+                      colorData['range'] = canvasInfo['width'] * colorData['range'] / 100;
+                      colorData['rangeEnd'] = canvasInfo['width'] * colorData['rangeEnd'] / 100;
+                    } else if (tUnit === 'deg') {
+                      colorData['range'] = 360 * colorData['range'] / 100;
+                      colorData['rangeEnd'] = 360 * colorData['rangeEnd'] / 100;
+                    }
+                  } else if (colorData['rangeUnit'] === 'deg') {
+                    if (tUnit === 'px') {
+                      colorData['range'] = canvasInfo['width'] * colorData['range'] / 360
+                      colorData['rangeEnd'] = canvasInfo['width'] * colorData['rangeEnd'] / 360
+                    } else if (tUnit === '%') {
+                      colorData['range'] = colorData['range'] / 360 * 100;
+                      colorData['rangeEnd'] = colorData['rangeEnd'] / 360 * 100;
+                    }
                   }
                 }
-              }
-              colorData['rangeUnit'] = tUnit;
-              rootComponent.updateRootState({});
-            }}/>
-            <button
-              style={{...style.del, display: activeSubData.colorList.length < 2 ? 'none' : 'inline-block'}}
-              onClick={() => {
-                activeSubData.colorList.splice(this.getIndex(), 1);
+                colorData['rangeUnit'] = tUnit;
                 rootComponent.updateRootState({});
-              }}
-            >Del
-            </button>
-          </div>
+              }}/>
+              <button
+                style={{...style.del, display: activeSubData.colorList.length < 2 ? 'none' : 'inline-block'}}
+                onClick={() => {
+                  activeSubData.colorList.splice(this.getIndex(), 1);
+                  rootComponent.updateRootState({});
+                }}
+              >Del
+              </button>
+            </div>
             <div style={{display: 'flex', alignItems: 'center', margin: '5px 0px'}}>
               {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
                                             onClick={e => {

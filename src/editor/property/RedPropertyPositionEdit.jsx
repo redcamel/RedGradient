@@ -8,7 +8,6 @@
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
 import RedNumber from "../../core/RedNumber.jsx";
-import getUUID from "../../getUUID.js";
 
 class RedPropertyPositionEdit extends React.Component {
   constructor(props) {
@@ -29,7 +28,7 @@ class RedPropertyPositionEdit extends React.Component {
         padding: '0px 10px',
         flexDirection: 'column'
       }}>
-        <div >
+        <div>
           <RedNumber
             title={'x'}
             width={'179px'}

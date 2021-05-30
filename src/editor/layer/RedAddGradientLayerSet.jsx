@@ -13,7 +13,6 @@ import DataColor from "../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedTitle from "../../core/RedTitle";
 import RedSelect from "../../core/RedSelect";
-import getUUID from "../../getUUID.js";
 
 const easeNameList = [
   'none',

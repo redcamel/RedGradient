@@ -10,7 +10,6 @@ import RedNumber from "../../../../core/RedNumber.jsx";
 import RedCanvasBorderGradientRepeatEdit from "./RedCanvasBorderGradientRepeatEdit.jsx";
 import RedCanvasBorderRadiusEdit from "./RedCanvasBorderRadiusEdit.jsx";
 import RedCanvasBorderWidthEdit from "./RedCanvasBorderWidthEdit.jsx";
-import getUUID from "../../../../getUUID.js";
 
 class RedCanvasBorderModeGradientEdit extends React.Component {
   constructor(props) {
@@ -46,14 +45,14 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
       <div style={style.container}>
         <div>
           <RedNumber
-          title={'sliceT'}
-          width={'165px'}
-          step={1}
-          value={borderGradientInfo['border_image_sliceT'] || 0}
-          HD_onInput={e => {
-            borderGradientInfo['border_image_sliceT'] = +e.target.value;
-            rootComponent.updateRootState({});
-          }}/>
+            title={'sliceT'}
+            width={'165px'}
+            step={1}
+            value={borderGradientInfo['border_image_sliceT'] || 0}
+            HD_onInput={e => {
+              borderGradientInfo['border_image_sliceT'] = +e.target.value;
+              rootComponent.updateRootState({});
+            }}/>
 
           <RedNumber
             title={'sliceR'}

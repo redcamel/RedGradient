@@ -21,14 +21,14 @@ class RedPropertyRepeatEdit extends React.Component {
     const gradient = 'radial-gradient(at 50% 50%, rgba(255, 255, 0, 0.9) 1.5px, rgba(255, 0, 0, 0.5) 5px, transparent 10px)';
     return <div>
       <div style={{display: 'flex', alignItems: 'center'}}>
-      <div className={'ui_subTitle'}>Repeat Mode</div>
-      <RedSelect
-        value={activeSubData['typeRepeat']}
-        options={Object.entries(REPEAT_TYPE)}
-        HD_change={e => {
-          activeSubData['typeRepeat'] = e.target.value;
-          rootComponent.updateRootState({});
-        }}/>
+        <div className={'ui_subTitle'}>Repeat Mode</div>
+        <RedSelect
+          value={activeSubData['typeRepeat']}
+          options={Object.entries(REPEAT_TYPE)}
+          HD_change={e => {
+            activeSubData['typeRepeat'] = e.target.value;
+            rootComponent.updateRootState({});
+          }}/>
       </div>
       <div style={{display: 'flex', marginTop: '6px', padding: '0px 8px'}}>
         <div style={{display: 'flex'}}>

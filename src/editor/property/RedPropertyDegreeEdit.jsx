@@ -7,7 +7,6 @@
  */
 import React from "react";
 import RedNumber from "../../core/RedNumber.jsx";
-import getUUID from "../../getUUID.js";
 
 const SIZE = 37;
 let targetContext;
@@ -56,7 +55,7 @@ class RedPropertyDegreeEdit extends React.Component {
               activeSubData['deg'] = +e.target.value;
               rootComponent.updateRootState({});
             }}/>
-          <div style={{textAlign: 'center', marginLeft: '10px',marginRight : '10px'}}>
+          <div style={{textAlign: 'center', marginLeft: '10px', marginRight: '10px'}}>
             <div
               style={style.box}
               onMouseDown={() => {

@@ -9,7 +9,6 @@ import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
 import RedNumber from "../../../../core/RedNumber.jsx";
 import {ColorPicker} from "@easylogic/colorpicker";
-import getUUID from "../../../../getUUID.js";
 
 let colorPicker;
 
@@ -32,7 +31,7 @@ class RedCanvasOutlineEdit extends React.Component {
         display: 'flex',
         alignItems: 'center',
         padding: '0px 10px',
-        justifyContent : 'space-between'
+        justifyContent: 'space-between'
       }}>
         <RedNumber
           title={'width'}

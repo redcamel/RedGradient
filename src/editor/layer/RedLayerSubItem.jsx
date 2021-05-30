@@ -88,7 +88,7 @@ class RedLayerSubItem extends React.Component {
     const activeSubDataYn = rootComponentState.activeSubData === item;
     const dragAble = layer.items.length > 1
     let layerType = item.type.split('-')
-    layerType = layerType[0].charAt(0).toUpperCase() + (layerType.length===3 ? layerType[1].charAt(0).toUpperCase() : '')
+    layerType = layerType[0].charAt(0).toUpperCase() + (layerType.length === 3 ? layerType[1].charAt(0).toUpperCase() : '')
     return <div
       style={{
         opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s', padding: '0px 5px 5px 5px',

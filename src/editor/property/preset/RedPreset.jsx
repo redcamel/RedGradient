@@ -176,7 +176,7 @@ const style = {
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    maxWidth : '800px'
+    maxWidth: '800px'
   },
   mode: {
     padding: '2px 5px',

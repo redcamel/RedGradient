@@ -8,7 +8,6 @@
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
 import {ColorPicker} from "@easylogic/colorpicker";
-import getUUID from "../../../../getUUID.js";
 
 let colorPicker
 

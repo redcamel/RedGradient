@@ -7,7 +7,6 @@
  */
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
-import getUUID from "../../../../getUUID.js";
 
 class RedCanvasFilterSaturate extends React.Component {
   constructor(props) {
