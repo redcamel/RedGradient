@@ -245,7 +245,7 @@ class RedGradientColorItem extends React.Component {
             <div style={{whiteSpace: 'nowrap'}}>
 
               <RedNumber
-                width={colorData['useRange'] ? '100px' : '230px'}
+                width={colorData['useRange'] ? '90px' : '210px'}
                 value={colorData['range'] || 0}
                 HD_onInput={e => {
                   colorData['range'] = +e.target.value;
@@ -262,7 +262,7 @@ class RedGradientColorItem extends React.Component {
               />
               {
                 colorData['useRange'] ? <RedNumber
-                  width={'100px'}
+                  width={'90px'}
                   value={colorData['rangeEnd'] || 0}
                   HD_onInput={e => {
                     colorData['rangeEnd'] = +e.target.value;
