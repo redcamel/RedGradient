@@ -60,6 +60,7 @@ class RedCanvasBorderRadiusEdit extends React.Component {
             <RedNumber
               title={'radius'}
               width={'125px'}
+              minValue={0}
               value={canvasInfo['border_radius'] || 0}
               HD_onInput={e => {
                 canvasInfo['border_radius'] = +e.target.value;
@@ -79,6 +80,7 @@ class RedCanvasBorderRadiusEdit extends React.Component {
                     title={names[index]}
                     width={'115px'}
                     value={v || 0}
+                    minValue={0}
                     HD_onInput={e => {
                       canvasInfo['border_radius_split'][index] = +e.target.value;
                       rootComponent.updateRootState({});

@@ -50,8 +50,9 @@ class RedCanvas extends React.Component {
     const activeSubDataAt = activeSubData['at'];
     const activeSubDataSize = activeSubData['size'];
     const borderGradientInfo = rootComponentState.borderGradientInfo;
+    const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3] : canvasInfo['border_width']*2
     const layoutSize = {
-      w: activeSubDataSize['wUnit'] === '%' ? canvasInfo['width'] * activeSubDataSize['w'] / 100 : activeSubDataSize['w'],
+      w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width']) * activeSubDataSize['w'] / 100 : (activeSubDataSize['w']),
       h: activeSubDataSize['hUnit'] === '%' ? canvasInfo['height'] * activeSubDataSize['h'] / 100 : activeSubDataSize['h'],
     };
     const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x']}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;

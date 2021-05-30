@@ -35,6 +35,7 @@ class RedCanvasOutlineEdit extends React.Component {
       }}>
         <RedNumber
           title={'width'}
+          minValue={0}
           width={'41px'}
           value={canvasInfo['outline_width'] || 0}
           HD_onInput={e => {

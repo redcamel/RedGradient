@@ -58,6 +58,7 @@ class RedCanvasBorderWidthEdit extends React.Component {
             <RedNumber
               title={'width'}
               width={'51px'}
+              minValue={0}
               value={canvasInfo['border_width'] || 0}
               HD_onInput={e => {
                 canvasInfo['border_width'] = +e.target.value;
@@ -73,6 +74,7 @@ class RedCanvasBorderWidthEdit extends React.Component {
                   <RedNumber
                     title={names[index]}
                     width={'150px'}
+                    minValue={0}
                     value={v || 0}
                     HD_onInput={e => {
                       canvasInfo['border_width_split'][index] = +e.target.value;
