@@ -49,12 +49,25 @@ class RedCanvas extends React.Component {
     const activeSubDataPosition = activeSubData['position'];
     const activeSubDataAt = activeSubData['at'];
     const activeSubDataSize = activeSubData['size'];
+    {
+      activeSubData['position']['x'] = +activeSubData['position']['x']
+      activeSubData['position']['y'] = +activeSubData['position']['y']
+      activeSubData['size']['w'] = +activeSubData['size']['w']
+      activeSubData['size']['h'] = +activeSubData['size']['h']
+      activeSubData['at']['x'] = +activeSubData['at']['x']
+      activeSubData['at']['y'] = +activeSubData['at']['y']
+    }
     const borderGradientInfo = rootComponentState.borderGradientInfo;
-    const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3] : canvasInfo['border_width']*2
+    const borderW = canvasInfo['border_width_mergeMode'] ?  canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3])
+    const borderH = canvasInfo['border_width_mergeMode'] ?  canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2])
+    const borderX = canvasInfo['border_width_mergeMode'] ?  canvasInfo['border_width']  : canvasInfo['border_width_split'][3]
+    const borderY = canvasInfo['border_width_mergeMode'] ?  canvasInfo['border_width']  : canvasInfo['border_width_split'][0]
     const layoutSize = {
-      w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width']) * activeSubDataSize['w'] / 100 : (activeSubDataSize['w']),
-      h: activeSubDataSize['hUnit'] === '%' ? canvasInfo['height'] * activeSubDataSize['h'] / 100 : activeSubDataSize['h'],
+      w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width']-borderW) * activeSubDataSize['w'] / 100 : activeSubDataSize['w']-borderW,
+      h: activeSubDataSize['hUnit'] === '%' ? (canvasInfo['height']-borderH) * activeSubDataSize['h'] / 100 : activeSubDataSize['h']-borderH,
     };
+    layoutSize['x'] = (activeSubDataPosition['xUnit'] === '%' ? (canvasInfo.width - layoutSize.w-borderW) * (activeSubDataPosition['x'] / 100) : activeSubDataPosition['x']) + borderX
+    layoutSize['y'] = (activeSubDataPosition['yUnit'] === '%' ? (canvasInfo.height - layoutSize.h-borderH) * (activeSubDataPosition['y'] / 100) : activeSubDataPosition['y']) + borderY
     const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x']}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
     const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y']}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
     return <div
@@ -76,12 +89,13 @@ class RedCanvas extends React.Component {
       />
 
       {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
+      <div>{borderW}/{borderH}</div>
       {
         this.state.layerSizeView ? <div
           style={{
             position: 'absolute',
-            left: activeSubDataPosition['xUnit'] === '%' ? (canvasInfo.width - layoutSize.w) * (activeSubDataPosition['x'] / 100) + 'px' : `${activeSubDataPosition['x']}${activeSubDataPosition['xUnit']}`,
-            top: activeSubDataPosition['yUnit'] === '%' ? (canvasInfo.height - layoutSize.h) * (activeSubDataPosition['y'] / 100) + 'px' : `${activeSubDataPosition['y']}${activeSubDataPosition['yUnit']}`,
+            left: `${layoutSize['x']}px`,
+            top: `${layoutSize['y']}px`,
             width: `${layoutSize['w']}px`,
             height: `${layoutSize['h']}px`,
             border: '1px dashed #000',
