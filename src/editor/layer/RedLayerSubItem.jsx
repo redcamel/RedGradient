@@ -87,6 +87,8 @@ class RedLayerSubItem extends React.Component {
     const layer = this.props.layer;
     const activeSubDataYn = rootComponentState.activeSubData === item;
     const dragAble = layer.items.length > 1
+    let layerType = item.type.split('-')
+    layerType = layerType[0].charAt(0).toUpperCase() + (layerType.length===3 ? layerType[1].charAt(0).toUpperCase() : '')
     return <div
       style={{
         opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s', padding: '0px 5px 5px 5px',
@@ -145,7 +147,7 @@ class RedLayerSubItem extends React.Component {
                 }}
         ><FontAwesomeIcon icon={faMinusCircle}/>
         </button>
-        <button className={'layerType'}>{item.type.charAt(0).toUpperCase()}</button>
+        <button className={'layerType'}>{layerType}</button>
       </div>
       <div style={style.addGradientLayerItem}
            onClick={e => {
