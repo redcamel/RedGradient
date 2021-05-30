@@ -13,7 +13,7 @@ const calcWE = (info) => {
     let size = (cW - targetPixelSize) || cW
     let newTargetPercentPosition = (originX + gapX) / size * 100;
     positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
-    ;
+
   } else {
     if (sizeInfo['wUnit'] === '%') {
       positionInfo['x'] = originX + gapX;

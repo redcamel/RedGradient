@@ -113,7 +113,7 @@ class RedPropertyEdit extends React.Component {
                     <button
                       style={style.copyClass}
                       onClick={e => {
-                        var tempElem = document.createElement('textarea');
+                        const tempElem = document.createElement('textarea');
                         tempElem.value = containerCssText;
                         document.body.appendChild(tempElem);
                         tempElem.select();

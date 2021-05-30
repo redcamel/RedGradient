@@ -256,4 +256,4 @@ const style = {
     cursor: 'pointer'
   }
 };
-;
+

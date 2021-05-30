@@ -36,7 +36,7 @@ input, select {
     font-size: 12px;
     background: rgb(49, 49, 49);
     border: 1px solid rgb(31, 31, 31);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 10px inset;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 0 10px inset;
 }
 
 
@@ -285,7 +285,7 @@ option {
 }
 
 .layerItemSubTitle {
-    margin: 4px 0 2px 0px;
+    margin: 4px 0 2px 0;
     border-radius: 4px;
     background: linear-gradient(#3c4e9a, #2c3565);
     border: 1px solid rgb(31, 31, 31);
@@ -315,7 +315,7 @@ option {
 .ui_subTitle {
     padding: 3px 7px;
     background: linear-gradient(180deg, #272727, rgba(0, 0, 0, 0));
-    border-radius: 6px 10px 0px 0px;
+    border-radius: 6px 10px 0 0;
     color: #efb26a;
     margin-right: 5px;
 }
