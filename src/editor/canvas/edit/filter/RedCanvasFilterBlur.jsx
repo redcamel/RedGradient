@@ -7,6 +7,7 @@
  */
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
+import getUUID from "../../../../getUUID.js";
 
 class RedCanvasFilterBlur extends React.Component {
   constructor(props) {
@@ -23,9 +24,10 @@ class RedCanvasFilterBlur extends React.Component {
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         size <RedNumber
+        step={0.01}
         value={filterData['values']['amount'] || 0}
         HD_onInput={e => {
-          filterData['values']['amount'] = e.target.value;
+          filterData['values']['amount'] = +e.target.value;
           filterData['css'] = this.getCss(filterData)
           rootComponent.updateRootState({});
         }}/>

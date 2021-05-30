@@ -7,6 +7,7 @@
  */
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
+import getUUID from "../../../../getUUID.js";
 
 const names = ['T', 'R', 'B', 'L']
 
@@ -60,7 +61,7 @@ class RedCanvasBorderWidthEdit extends React.Component {
               width={'51px'}
               value={canvasInfo['border_width'] || 0}
               HD_onInput={e => {
-                canvasInfo['border_width'] = e.target.value;
+                canvasInfo['border_width'] = +e.target.value;
                 rootComponent.updateRootState({});
               }}/>
             <span style={{marginLeft: '3px'}}>px</span>
@@ -72,10 +73,10 @@ class RedCanvasBorderWidthEdit extends React.Component {
                 return <div>
                   <RedNumber
                     title={names[index]}
-                    width={'50px'}
+                    width={'150px'}
                     value={v || 0}
                     HD_onInput={e => {
-                      canvasInfo['border_width_split'][index] = e.target.value;
+                      canvasInfo['border_width_split'][index] = +e.target.value;
                       rootComponent.updateRootState({});
                     }}/>
                   <span style={{marginLeft: '3px'}}>px</span>

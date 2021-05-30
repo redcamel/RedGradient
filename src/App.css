@@ -323,6 +323,7 @@ option {
 .ui_item_title {
     color: #696969;
     margin-right: 5px;
+    white-space: nowrap;
 }
 
 .ReactVirtualized__Grid__innerScrollContainer {
@@ -352,3 +353,11 @@ option {
 /*    width : 200px;*/
 /*    height: 50px*/
 /*}*/
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+    -webkit-appearance: none;
+    margin: 0;
+}

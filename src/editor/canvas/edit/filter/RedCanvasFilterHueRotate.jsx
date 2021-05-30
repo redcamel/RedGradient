@@ -7,6 +7,7 @@
  */
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
+import getUUID from "../../../../getUUID.js";
 
 class RedCanvasFilterHueRotate extends React.Component {
   constructor(props) {
@@ -23,10 +24,10 @@ class RedCanvasFilterHueRotate extends React.Component {
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         deg <RedNumber
-        step={1}
+        step={0.1}
         value={filterData['values']['deg'] || 0}
         HD_onInput={e => {
-          filterData['values']['deg'] = e.target.value;
+          filterData['values']['deg'] = +e.target.value;
           filterData['css'] = this.getCss(filterData)
           rootComponent.updateRootState({});
         }}/>

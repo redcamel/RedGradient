@@ -9,6 +9,7 @@ import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
 import RedNumber from "../../core/RedNumber.jsx";
 import GRADIENT_TYPE from "../GRADIENT_TYPE.js";
+import getUUID from "../../getUUID.js";
 
 class RedPropertyOffsetEdit extends React.Component {
   constructor(props) {
@@ -31,15 +32,17 @@ class RedPropertyOffsetEdit extends React.Component {
     }
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <div className={'ui_item_title'}>start offset</div>
         <RedNumber
-          title={'start offset'}
-          width={'80px'}
+          width={'calc(100% - 80px)'}
           value={activeSubData['offset'] || 0}
           HD_onInput={e => {
-            activeSubData['offset'] = e.target.value;
+            activeSubData['offset'] = +e.target.value;
             rootComponent.updateRootState({});
           }}/>
-        <RedSelect value={activeSubData['offsetUnit']} options={unitList} HD_change={e => {
+        <RedSelect
+          width ={80}
+          value={activeSubData['offsetUnit']} options={unitList} HD_change={e => {
           activeSubData['offsetUnit'] = e.target.value;
           rootComponent.updateRootState({});
         }}/>

@@ -8,6 +8,7 @@
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
 import {ColorPicker} from "@easylogic/colorpicker";
+import getUUID from "../../../../getUUID.js";
 
 let colorPicker
 
@@ -33,7 +34,7 @@ class RedCanvasFilterDropShadow extends React.Component {
         width={'50px'}
         value={filterData['values']['offsetX'] || 0}
         HD_onInput={e => {
-          filterData['values']['offsetX'] = e.target.value;
+          filterData['values']['offsetX'] = +e.target.value;
           filterData['css'] = this.getCss(filterData)
           rootComponent.updateRootState({});
         }}/>
@@ -41,7 +42,7 @@ class RedCanvasFilterDropShadow extends React.Component {
         width={'50px'}
         value={filterData['values']['offsetY'] || 0}
         HD_onInput={e => {
-          filterData['values']['offsetY'] = e.target.value;
+          filterData['values']['offsetY'] = +e.target.value;
           filterData['css'] = this.getCss(filterData)
           rootComponent.updateRootState({});
         }}/>
@@ -52,7 +53,7 @@ class RedCanvasFilterDropShadow extends React.Component {
         width={'100px'}
         value={filterData['values']['radius'] || 0}
         HD_onInput={e => {
-          filterData['values']['radius'] = e.target.value;
+          filterData['values']['radius'] = +e.target.value;
           filterData['css'] = this.getCss(filterData)
           rootComponent.updateRootState({});
         }}/>

@@ -28,7 +28,7 @@ class RedGradientColorEdit extends React.Component {
   }
 
   _rowRender(v) {
-    console.log(v)
+    // console.log(v)
     let idx = v['index']
     let key = v['key']
     let style = v['style']

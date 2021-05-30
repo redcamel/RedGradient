@@ -13,6 +13,7 @@ import DataColor from "../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedTitle from "../../core/RedTitle";
 import RedSelect from "../../core/RedSelect";
+import getUUID from "../../getUUID.js";
 
 const easeNameList = [
   'none',
@@ -158,7 +159,7 @@ class RedAddGradientLayerSet extends React.Component {
                     maxValue={tempColorList[index + 1] ? tempColorList[index + 1]['range'] : 100}
                     value={tempColorList[index]['range']}
                     HD_onInput={e => {
-                      tempColorList[index]['range'] = e.target.value;
+                      tempColorList[index]['range'] = +e.target.value;
                       this.setState({});
                     }}
                   />
@@ -224,12 +225,14 @@ class RedAddGradientLayerSet extends React.Component {
         <div style={{display: 'flex',}}>
           <div style={{alignItems: 'center', flexDirection: 'column', width: '200px'}}>
             <div style={{display: 'flex', flexDirection: 'column'}}>
+              <div className={'ui_item_title'}>division</div>
               <RedNumber
-                title={'division'}
+                minValue={1}
                 maxValue={450}
+                step={1}
                 value={this.state['division'] || 1}
                 HD_onInput={e => {
-                  let t0 = Math.max(e.target.value, 1);
+                  let t0 = Math.max(+e.target.value, 1);
                   this.setState({division: t0, tempColorList: []});
                 }}/>
               <div/>

@@ -9,6 +9,7 @@ import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
 import RedNumber from "../../../../core/RedNumber.jsx";
 import {ColorPicker} from "@easylogic/colorpicker";
+import getUUID from "../../../../getUUID.js";
 
 let colorPicker;
 
@@ -30,14 +31,15 @@ class RedCanvasOutlineEdit extends React.Component {
         marginTop: '6px',
         display: 'flex',
         alignItems: 'center',
-        padding: '0px 10px'
+        padding: '0px 10px',
+        justifyContent : 'space-between'
       }}>
         <RedNumber
           title={'width'}
           width={'41px'}
           value={canvasInfo['outline_width'] || 0}
           HD_onInput={e => {
-            canvasInfo['outline_width'] = e.target.value;
+            canvasInfo['outline_width'] = +e.target.value;
             rootComponent.updateRootState({});
           }}/>
         <div style={{width: '5px'}}/>
@@ -46,13 +48,18 @@ class RedCanvasOutlineEdit extends React.Component {
           width={'41px'}
           value={canvasInfo['outline_offset'] || 0}
           HD_onInput={e => {
-            canvasInfo['outline_offset'] = e.target.value;
+            canvasInfo['outline_offset'] = +e.target.value;
             rootComponent.updateRootState({});
           }}/>
         <div style={{width: '5px'}}/>
+      </div>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0px 10px'
+      }}>
         <RedSelect
           title={'style'}
-          width={'50'}
           value={canvasInfo['outline_type']}
           options={['dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'none', 'hidden']}
           HD_change={e => {

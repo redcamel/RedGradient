@@ -7,6 +7,7 @@
  */
 import React from "react";
 import RedNumber from "../../core/RedNumber.jsx";
+import getUUID from "../../getUUID.js";
 
 const SIZE = 37;
 let targetContext;
@@ -52,7 +53,7 @@ class RedPropertyDegreeEdit extends React.Component {
             width={'61px'}
             value={deg || 0}
             HD_onInput={e => {
-              activeSubData['deg'] = e.target.value;
+              activeSubData['deg'] = +e.target.value;
               rootComponent.updateRootState({});
             }}/>
           <div style={{textAlign: 'center', marginLeft: '10px',marginRight : '10px'}}>

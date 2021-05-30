@@ -10,6 +10,7 @@ import RedNumber from "../../../../core/RedNumber.jsx";
 import RedCanvasBorderGradientRepeatEdit from "./RedCanvasBorderGradientRepeatEdit.jsx";
 import RedCanvasBorderRadiusEdit from "./RedCanvasBorderRadiusEdit.jsx";
 import RedCanvasBorderWidthEdit from "./RedCanvasBorderWidthEdit.jsx";
+import getUUID from "../../../../getUUID.js";
 
 class RedCanvasBorderModeGradientEdit extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
         <RedNumber
           title={'outset'}
           width={'61px'}
+          minValue={0}
           value={borderGradientInfo['border_image_outset'] || 0}
           HD_onInput={e => {
             console.log(borderGradientInfo)
@@ -42,41 +44,49 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
       </div>
       <div style={{height: '5px'}}/>
       <div style={style.container}>
-        <RedNumber
+        <div>
+          <RedNumber
           title={'sliceT'}
-          width={'41px'}
+          width={'165px'}
+          step={1}
           value={borderGradientInfo['border_image_sliceT'] || 0}
           HD_onInput={e => {
             borderGradientInfo['border_image_sliceT'] = +e.target.value;
             rootComponent.updateRootState({});
           }}/>
 
-        <RedNumber
-          title={'sliceR'}
-          width={'41px'}
-          value={borderGradientInfo['border_image_sliceR'] || 0}
-          HD_onInput={e => {
-            borderGradientInfo['border_image_sliceR'] = +e.target.value;
-            rootComponent.updateRootState({});
-          }}/>
+          <RedNumber
+            title={'sliceR'}
+            width={'165px'}
+            step={1}
+            value={borderGradientInfo['border_image_sliceR'] || 0}
+            HD_onInput={e => {
+              borderGradientInfo['border_image_sliceR'] = +e.target.value;
+              rootComponent.updateRootState({});
+            }}/>
+        </div>
 
-        <RedNumber
-          title={'sliceB'}
-          width={'41px'}
-          value={borderGradientInfo['border_image_sliceB'] || 0}
-          HD_onInput={e => {
-            borderGradientInfo['border_image_sliceB'] = +e.target.value;
-            rootComponent.updateRootState({});
-          }}/>
+        <div>
+          <RedNumber
+            title={'sliceB'}
+            width={'165px'}
+            step={1}
+            value={borderGradientInfo['border_image_sliceB'] || 0}
+            HD_onInput={e => {
+              borderGradientInfo['border_image_sliceB'] = +e.target.value;
+              rootComponent.updateRootState({});
+            }}/>
 
-        <RedNumber
-          title={'sliceL'}
-          width={'41px'}
-          value={borderGradientInfo['border_image_sliceL'] || 0}
-          HD_onInput={e => {
-            borderGradientInfo['border_image_sliceL'] = +e.target.value;
-            rootComponent.updateRootState({});
-          }}/>
+          <RedNumber
+            title={'sliceL'}
+            width={'165px'}
+            step={1}
+            value={borderGradientInfo['border_image_sliceL'] || 0}
+            HD_onInput={e => {
+              borderGradientInfo['border_image_sliceL'] = +e.target.value;
+              rootComponent.updateRootState({});
+            }}/>
+        </div>
       </div>
       <RedCanvasBorderGradientRepeatEdit rootComponent={rootComponent}/>
     </div>

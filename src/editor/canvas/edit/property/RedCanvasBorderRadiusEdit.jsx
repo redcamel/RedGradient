@@ -8,6 +8,7 @@
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
 import RedNumber from "../../../../core/RedNumber.jsx";
+import getUUID from "../../../../getUUID.js";
 
 const names = ['TL', 'BL', 'TR', 'BR']
 
@@ -59,10 +60,10 @@ class RedCanvasBorderRadiusEdit extends React.Component {
 
             <RedNumber
               title={'radius'}
-              width={'51px'}
+              width={'125px'}
               value={canvasInfo['border_radius'] || 0}
               HD_onInput={e => {
-                canvasInfo['border_radius'] = e.target.value;
+                canvasInfo['border_radius'] = +e.target.value;
                 rootComponent.updateRootState({});
               }}/>
             <RedSelect value={canvasInfo['border_radius_unit']} options={['px', '%']} HD_change={e => {
@@ -77,10 +78,10 @@ class RedCanvasBorderRadiusEdit extends React.Component {
                 return <div>
                   <RedNumber
                     title={names[index]}
-                    width={'95px'}
+                    width={'115px'}
                     value={v || 0}
                     HD_onInput={e => {
-                      canvasInfo['border_radius_split'][index] = e.target.value;
+                      canvasInfo['border_radius_split'][index] = +e.target.value;
                       rootComponent.updateRootState({});
                     }}/>
                   <RedSelect

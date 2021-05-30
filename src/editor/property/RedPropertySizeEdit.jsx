@@ -8,6 +8,7 @@
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
 import RedNumber from "../../core/RedNumber.jsx";
+import getUUID from "../../getUUID.js";
 
 class RedPropertySizeEdit extends React.Component {
   constructor(props) {
@@ -25,10 +26,10 @@ class RedPropertySizeEdit extends React.Component {
         <div>
           <RedNumber
             title={'SizeW'}
-            width={'145px'}
+            width={'185px'}
             value={activeSubData['size']['w'] || 0}
             HD_onInput={e => {
-              activeSubData['size']['w'] = e.target.value;
+              activeSubData['size']['w'] = +e.target.value;
               rootComponent.updateRootState({});
             }}/>
           <RedSelect value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
@@ -40,10 +41,10 @@ class RedPropertySizeEdit extends React.Component {
        <div>
          <RedNumber
            title={'SizeH'}
-           width={'145px'}
+           width={'185px'}
            value={activeSubData['size']['h'] || 0}
            HD_onInput={e => {
-             activeSubData['size']['h'] = e.target.value;
+             activeSubData['size']['h'] = +e.target.value;
              rootComponent.updateRootState({});
            }}/>
          <RedSelect value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {

@@ -8,6 +8,7 @@
 import React from "react";
 import RedSelect from "../../core/RedSelect.jsx";
 import RedNumber from "../../core/RedNumber.jsx";
+import getUUID from "../../getUUID.js";
 
 class RedPropertyPositionEdit extends React.Component {
   constructor(props) {
@@ -31,10 +32,10 @@ class RedPropertyPositionEdit extends React.Component {
         <div >
           <RedNumber
             title={'x'}
-            width={'166px'}
+            width={'179px'}
             value={activeSubData['position']['x'] || 0}
             HD_onInput={e => {
-              activeSubData['position']['x'] = e.target.value;
+              activeSubData['position']['x'] = +e.target.value;
               rootComponent.updateRootState({});
             }}/>
           <RedSelect value={activeSubData['position']['xUnit']} options={['px', '%']} HD_change={e => {
@@ -46,10 +47,10 @@ class RedPropertyPositionEdit extends React.Component {
         <div>
           <RedNumber
             title={'y'}
-            width={'166px'}
+            width={'179px'}
             value={activeSubData['position']['y'] || 0}
             HD_onInput={e => {
-              activeSubData['position']['y'] = e.target.value;
+              activeSubData['position']['y'] = +e.target.value;
               rootComponent.updateRootState({});
             }}/>
           <RedSelect value={activeSubData['position']['yUnit']} options={['px', '%']} HD_change={e => {

@@ -13,6 +13,7 @@ import RedSelect from "../../core/RedSelect";
 import {faPlus, faThumbtack} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GRADIENT_TYPE from "../GRADIENT_TYPE.js";
+import getUUID from "../../getUUID.js";
 
 let targetContext;
 let targetColorData;

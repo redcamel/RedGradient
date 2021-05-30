@@ -7,6 +7,7 @@
  */
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
+import getUUID from "../../../../getUUID.js";
 
 let colorPicker
 
@@ -22,13 +23,14 @@ class RedCanvasSizeEdit extends React.Component {
     return <div style={style.container}>
 
       <div className={'ui_subTitle'}>Container Size</div>
-      <RedNumber title={'width'} width={'60px'} value={canvasInfo.width} HD_onInput={e => {
-        canvasInfo.width = e.target.value;
+      <RedNumber  title={'width'} width={'160px'} value={canvasInfo.width} HD_onInput={e => {
+        canvasInfo.width = +e.target.value;
         this.props.canvasComponent.state.useMove = false
         rootComponent.updateRootState({});
       }}/>
-      <RedNumber title={'height'} width={'60px'} value={canvasInfo.height} HD_onInput={e => {
-        canvasInfo.height = e.target.value;
+      <div style={{width : '5px'}}/>
+      <RedNumber  title={'height'} width={'160px'} value={canvasInfo.height} HD_onInput={e => {
+        canvasInfo.height = +e.target.value;
         this.props.canvasComponent.state.useMove = false
         rootComponent.updateRootState({});
       }}/>

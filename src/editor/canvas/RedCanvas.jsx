@@ -67,7 +67,7 @@ class RedCanvas extends React.Component {
           width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
           background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
           backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
-          transition: 'width 0.2s, height 0.2s',
+          // transition: 'width 0.2s, height 0.2s',
           ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
           filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
           overflow: 'hidden',
