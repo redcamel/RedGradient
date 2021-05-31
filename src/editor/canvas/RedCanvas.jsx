@@ -38,6 +38,8 @@ class RedCanvas extends React.Component {
       canvasBgColorPickerOpenYn: false
     };
     this.refColorPickerContainer = React.createRef();
+    this.refDegree = React.createRef();
+    this.refDegreeCanvas = React.createRef();
   }
 
   draw_canvasUI = drawCanvasUI;
@@ -58,16 +60,16 @@ class RedCanvas extends React.Component {
       activeSubData['at']['y'] = +activeSubData['at']['y']
     }
     const borderGradientInfo = rootComponentState.borderGradientInfo;
-    const borderW = canvasInfo['border_width_mergeMode'] ?  canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3])
-    const borderH = canvasInfo['border_width_mergeMode'] ?  canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2])
-    const borderX = canvasInfo['border_width_mergeMode'] ?  canvasInfo['border_width']  : canvasInfo['border_width_split'][3]
-    const borderY = canvasInfo['border_width_mergeMode'] ?  canvasInfo['border_width']  : canvasInfo['border_width_split'][0]
+    const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3])
+    const borderH = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2])
+    const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3]
+    const borderY = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][0]
     const layoutSize = {
-      w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width']-borderW) * activeSubDataSize['w'] / 100 : activeSubDataSize['w']-borderW,
-      h: activeSubDataSize['hUnit'] === '%' ? (canvasInfo['height']-borderH) * activeSubDataSize['h'] / 100 : activeSubDataSize['h']-borderH,
+      w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width'] - borderW) * activeSubDataSize['w'] / 100 : activeSubDataSize['w'] - borderW,
+      h: activeSubDataSize['hUnit'] === '%' ? (canvasInfo['height'] - borderH) * activeSubDataSize['h'] / 100 : activeSubDataSize['h'] - borderH,
     };
-    layoutSize['x'] = (activeSubDataPosition['xUnit'] === '%' ? (canvasInfo.width - layoutSize.w-borderW) * (activeSubDataPosition['x'] / 100) : activeSubDataPosition['x']) + borderX
-    layoutSize['y'] = (activeSubDataPosition['yUnit'] === '%' ? (canvasInfo.height - layoutSize.h-borderH) * (activeSubDataPosition['y'] / 100) : activeSubDataPosition['y']) + borderY
+    layoutSize['x'] = (activeSubDataPosition['xUnit'] === '%' ? (canvasInfo.width - layoutSize.w - borderW) * (activeSubDataPosition['x'] / 100) : activeSubDataPosition['x']) + borderX
+    layoutSize['y'] = (activeSubDataPosition['yUnit'] === '%' ? (canvasInfo.height - layoutSize.h - borderH) * (activeSubDataPosition['y'] / 100) : activeSubDataPosition['y']) + borderY
     const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x']}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
     const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y']}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
     return <div
@@ -473,7 +475,20 @@ class RedCanvas extends React.Component {
             activeSubData['type'] === GRADIENT_TYPE.RADIAL ||
             activeSubData['type'] === GRADIENT_TYPE.REPEAT_RADIAL
               ? '' : <>
+                <canvas
+                  ref={this.refDegreeCanvas}
+                  width={'250px'}
+                  height={'250px'}
+                  style={{
+                    top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(0deg)',
+                    width: `${250}px`, height: `${250}px`,
+                    position: 'absolute', borderRadius: '50%', lineHeight: 1,
+                    background: 'rgba(255,255,255,0.25)',
+                    display: this.state.degreeMode ? 'block' : 'none',
+                  }}
+                />
                 <div
+                  ref={this.refDegree}
                   style={{
                     top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(0deg)',
                     width: `${50}px`, height: `${50}px`,
@@ -482,6 +497,7 @@ class RedCanvas extends React.Component {
                     background: 'rgba(255,255,255,0.4)'
                   }}
                 >
+
                   <button
                     style={{
                       display: 'inline-block',
@@ -520,7 +536,19 @@ class RedCanvas extends React.Component {
                   }}
                   onMouseDown={e => {
                     e.stopPropagation();
-                    this.setModes({degreeMode: {startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});
+                    const rect = this.refDegree.current.getBoundingClientRect()
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0,0,500,500)
+                    this.setModes({
+                      degreeMode: {
+                        ref : this.refDegreeCanvas.current,
+                        startX: e.nativeEvent.pageX,
+                        startY: e.nativeEvent.pageY,
+                        startDegX : rect.x +rect.width/2,
+                        startDegY : rect.x +rect.height/2,
+                        startDeg: activeSubData['deg'],
+                        mode : 'nw'
+                      }
+                    });
                   }}
                 >
                   <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
@@ -538,7 +566,19 @@ class RedCanvas extends React.Component {
                   }}
                   onMouseDown={e => {
                     e.stopPropagation();
-                    this.setModes({degreeMode: {startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});
+                    const rect = this.refDegree.current.getBoundingClientRect()
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0,0,500,500)
+                    this.setModes({
+                      degreeMode: {
+                        ref : this.refDegreeCanvas.current,
+                        startX: e.nativeEvent.pageX,
+                        startY: e.nativeEvent.pageY,
+                        startDegX : rect.x +rect.width/2,
+                        startDegY : rect.x +rect.height/2,
+                        startDeg: activeSubData['deg'],
+                        mode : 'ne'
+                      }
+                    });
                   }}
                 >
                   <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
@@ -556,7 +596,19 @@ class RedCanvas extends React.Component {
                   }}
                   onMouseDown={e => {
                     e.stopPropagation();
-                    this.setModes({degreeMode: {startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});
+                    const rect = this.refDegree.current.getBoundingClientRect()
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0,0,500,500)
+                    this.setModes({
+                      degreeMode: {
+                        ref : this.refDegreeCanvas.current,
+                        startX: e.nativeEvent.pageX,
+                        startY: e.nativeEvent.pageY,
+                        startDegX : rect.x +rect.width/2,
+                        startDegY : rect.x +rect.height/2,
+                        startDeg: activeSubData['deg'],
+                        mode : 'se'
+                      }
+                    });
                   }}
                 >
                   <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
@@ -574,7 +626,19 @@ class RedCanvas extends React.Component {
                   }}
                   onMouseDown={e => {
                     e.stopPropagation();
-                    this.setModes({degreeMode: {startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY}});
+                    const rect = this.refDegree.current.getBoundingClientRect()
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0,0,500,500)
+                    this.setModes({
+                      degreeMode: {
+                        ref : this.refDegreeCanvas.current,
+                        startX: e.nativeEvent.pageX,
+                        startY: e.nativeEvent.pageY,
+                        startDegX : rect.x +rect.width/2,
+                        startDegY : rect.x +rect.height/2,
+                        startDeg: activeSubData['deg'],
+                        mode : 'sw'
+                      }
+                    });
                   }}
                 >
                   <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
