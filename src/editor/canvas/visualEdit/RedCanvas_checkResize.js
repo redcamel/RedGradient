@@ -87,15 +87,28 @@ function RedCanvas_checkResize(e) {
   const activeSubData = rootComponentState.activeSubData;
   if (this.state.resizeMode) {
     e = e.nativeEvent;
-    const gapX = (e.pageX - +this.state.resizeMode['startX'])/ this.state.canvasViewScale;
-    const gapY = (e.pageY - +this.state.resizeMode['startY'])/ this.state.canvasViewScale;
+    const mode = this.state.resizeMode['mode'];
+    let gapX = (e.pageX - +this.state.resizeMode['startX'])/ this.state.canvasViewScale;
+    let gapY = (e.pageY - +this.state.resizeMode['startY'])/ this.state.canvasViewScale;
+
+    switch (mode) {
+      case 'sw':
+      case 'ne':
+        gapY = e.shiftKey ? -gapX :gapY
+        break
+      case 'nw':
+      case 'se':
+        gapY = e.shiftKey ? gapX :gapY
+        break
+    }
+
     this.state.resizeMode['startX'] = e.pageX;
     this.state.resizeMode['startY'] = e.pageY;
     const sizeInfo = activeSubData['size'];
     const positionInfo = activeSubData['position'];
     const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
     const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
-    const mode = this.state.resizeMode['mode'];
+
     //
     const cW = (canvasInfo.width);
     const cH = (canvasInfo.height);
