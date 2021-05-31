@@ -195,10 +195,13 @@ class RedAddGradientLayerSet extends React.Component {
                          }
                          targetColorData = tColorData;
                          // this.state.colorPicker[index].setOption({color: tColor});
-                         this.state.colorPicker[index].initColorWithoutChangeEvent(tColor);
+
                          this.state.openColorPicker = [];
                          this.state.openColorPicker[index] = true;
                          this.setState({});
+                         requestAnimationFrame(e=>{
+                           this.state.colorPicker[index].initColorWithoutChangeEvent(tColor);
+                         })
                        }}
                   />
 
@@ -279,10 +282,13 @@ class RedAddGradientLayerSet extends React.Component {
                            });
                          }
                          // this.state.colorPicker[index].setOption({color: tColor});
-                         this.state.colorPicker[startIndex].initColorWithoutChangeEvent(this.state.startColor['color']);
+
                          this.state.openColorPicker = [];
                          this.state.openColorPicker[startIndex] = true;
                          this.setState({});
+                         requestAnimationFrame(e=>{
+                           this.state.colorPicker[startIndex].initColorWithoutChangeEvent(this.state.startColor['color']);
+                         })
                        }}
                   />
                   <div style={{
@@ -329,10 +335,12 @@ class RedAddGradientLayerSet extends React.Component {
                            });
                          }
                          // this.state.colorPicker[index].setOption({color: tColor});
-                         this.state.colorPicker[lastIndex].initColorWithoutChangeEvent(this.state.endColor['color']);
                          this.state.openColorPicker = [];
                          this.state.openColorPicker[lastIndex] = true;
                          this.setState({});
+                         requestAnimationFrame(e=>{
+                           this.state.colorPicker[lastIndex].initColorWithoutChangeEvent(this.state.endColor['color']);
+                         })
                        }}
                   />
                   <div style={{

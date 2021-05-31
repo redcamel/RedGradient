@@ -161,9 +161,10 @@ class RedGradientColorItem extends React.Component {
                        targetContext = this;
                        targetColorData = colorData
                        // this.state.colorPicker.setOption({color: colorData['color']});
-                       this.state.colorPicker.initColorWithoutChangeEvent(colorData['color']);
                        this.setState({openColorPicker: true, openColorEndPicker: false});
                        requestAnimationFrame(e => {
+
+                         this.state.colorPicker.initColorWithoutChangeEvent(colorData['color']);
                          const pickerContainerNode = this.refColorPickerContainer.current.parentNode
                          const itemNode = pickerContainerNode.parentNode.parentNode
                          const pickerContainerRect = pickerContainerNode.getBoundingClientRect()
@@ -215,9 +216,10 @@ class RedGradientColorItem extends React.Component {
                        }
                        targetContext = this;
                        targetColorData = colorData
-                       this.state.colorEndPicker.setOption({color: colorData['colorEnd']});
+                       // this.state.colorEndPicker.setOption({color: colorData['colorEnd']});
                        this.setState({openColorEndPicker: true, openColorPicker: false});
                        requestAnimationFrame(e => {
+                         this.state.colorEndPicker.initColorWithoutChangeEvent(colorData['colorEnd']);
                          const pickerContainerNode = this.refColorEndPickerContainer.current.parentNode
                          const itemNode = pickerContainerNode.parentNode.parentNode
                          const pickerContainerRect = pickerContainerNode.getBoundingClientRect()
