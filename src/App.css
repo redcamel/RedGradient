@@ -39,7 +39,6 @@ input, select {
     box-shadow: rgba(0, 0, 0, 0.25) 0 0 10px inset;
 }
 
-
 select {
     background: linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63));
     color: #fff;
@@ -47,6 +46,11 @@ select {
     box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
     cursor: pointer;
     font-size: 12px;
+}
+
+input:focus,input:hover{
+    border : 1px solid #715739;
+    transition: border 0.2s;
 }
 
 option {
