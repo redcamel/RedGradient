@@ -56,8 +56,8 @@ function RedCanvas_checkPosition(e) {
     // positionInfo['x'] = +this.state.positionMode.startValueX + (positionInfo['xUnit'] === '%' ? tX / tW * 100 : tX) * 1 / this.state.canvasViewScale;
     // positionInfo['y'] = +this.state.positionMode.startValueY + (positionInfo['yUnit'] === '%' ? tY / tH * 100 : tY) * 1 / this.state.canvasViewScale;
     // console.log(tX, tY);
-    const gapX = e.pageX - +this.state.positionMode['startX'];
-    const gapY = e.pageY - +this.state.positionMode['startY'];
+    const gapX = (e.pageX - +this.state.positionMode['startX']) / this.state.canvasViewScale;
+    const gapY = (e.pageY - +this.state.positionMode['startY'])/ this.state.canvasViewScale;
     this.state.positionMode['startX'] = e.pageX;
     this.state.positionMode['startY'] = e.pageY;
     const sizeInfo = activeSubData['size'];
