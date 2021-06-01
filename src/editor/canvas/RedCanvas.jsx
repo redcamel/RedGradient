@@ -26,6 +26,8 @@ import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt.js";
 import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition.js";
 
 // TODO - 정리필요
+let ghostSize, ghostMode;
+
 class RedCanvas extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +37,7 @@ class RedCanvas extends React.Component {
       canvasViewOffsetY: 0,
       canvasViewScale: 1,
       layerSizeView: true,
-      canvasBgColorPickerOpenYn: false
+      canvasBgColorPickerOpenYn: false,
     };
     this.refColorPickerContainer = React.createRef();
     this.refDegree = React.createRef();
@@ -52,26 +54,27 @@ class RedCanvas extends React.Component {
     const activeSubDataAt = activeSubData['at'];
     const activeSubDataSize = activeSubData['size'];
     {
-      activeSubData['position']['x'] = +activeSubData['position']['x']
-      activeSubData['position']['y'] = +activeSubData['position']['y']
-      activeSubData['size']['w'] = +activeSubData['size']['w']
-      activeSubData['size']['h'] = +activeSubData['size']['h']
-      activeSubData['at']['x'] = +activeSubData['at']['x']
-      activeSubData['at']['y'] = +activeSubData['at']['y']
+      activeSubData['position']['x'] = +activeSubData['position']['x'];
+      activeSubData['position']['y'] = +activeSubData['position']['y'];
+      activeSubData['size']['w'] = +activeSubData['size']['w'];
+      activeSubData['size']['h'] = +activeSubData['size']['h'];
+      activeSubData['at']['x'] = +activeSubData['at']['x'];
+      activeSubData['at']['y'] = +activeSubData['at']['y'];
     }
     const borderGradientInfo = rootComponentState.borderGradientInfo;
-    const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3])
-    const borderH = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2])
-    const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3]
-    const borderY = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][0]
+    const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3]);
+    const borderH = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2]);
+    const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3];
+    const borderY = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][0];
     const layoutSize = {
       w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width'] - borderW) * activeSubDataSize['w'] / 100 : activeSubDataSize['w'] - borderW,
       h: activeSubDataSize['hUnit'] === '%' ? (canvasInfo['height'] - borderH) * activeSubDataSize['h'] / 100 : activeSubDataSize['h'] - borderH,
     };
-    layoutSize['x'] = (activeSubDataPosition['xUnit'] === '%' ? (canvasInfo.width - layoutSize.w - borderW) * (activeSubDataPosition['x'] / 100) : activeSubDataPosition['x']) + borderX
-    layoutSize['y'] = (activeSubDataPosition['yUnit'] === '%' ? (canvasInfo.height - layoutSize.h - borderH) * (activeSubDataPosition['y'] / 100) : activeSubDataPosition['y']) + borderY
-    const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x']-borderX}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
-    const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y']-borderY}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
+    layoutSize['x'] = (activeSubDataPosition['xUnit'] === '%' ? (canvasInfo.width - layoutSize.w - borderW) * (activeSubDataPosition['x'] / 100) : activeSubDataPosition['x']) + borderX;
+    layoutSize['y'] = (activeSubDataPosition['yUnit'] === '%' ? (canvasInfo.height - layoutSize.h - borderH) * (activeSubDataPosition['y'] / 100) : activeSubDataPosition['y']) + borderY;
+    const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x'] - borderX}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
+    const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y'] - borderY}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
+    if (ghostMode && !ghostSize) ghostSize = {...layoutSize};
     return <div
       style={{
         ...style.canvas,
@@ -93,6 +96,25 @@ class RedCanvas extends React.Component {
       {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
       {/*<div>{borderW}/{borderH}</div>*/}
       {
+        <div
+          style={{
+            position: 'absolute',
+            left: `${ghostSize ? ghostSize['x'] : 0}px`,
+            top: `${ghostSize ? ghostSize['y'] : 0}px`,
+            width: `${ghostSize ? ghostSize['w'] : 0}px`,
+            height: `${ghostSize ? ghostSize['h'] : 0}px`,
+            border: '1px dashed #ff0000',
+            outline: '1px dashed rgba(255,255,255,0.75)',
+            background: 'linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%), linear-gradient(-45deg, rgba(0,0,0,0.1) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.1) 75%), linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.1) 75%),rgba(255,0,0,0.2)',
+            backgroundSize: '20px 20px',
+            backgroundPosition: '0 0, 0 z0px, 10px -10px, -10px 0',
+            opacity: ghostMode ? 1 : 0,
+            transition: 'opacity 0.2s',
+            color: '#000'
+          }}
+        />
+      }
+      {
         this.state.layerSizeView ? <div
           style={{
             position: 'absolute',
@@ -102,6 +124,7 @@ class RedCanvas extends React.Component {
             height: `${layoutSize['h']}px`,
             border: '1px dashed #000',
             outline: '1px dashed rgba(255,255,255,0.75)',
+            background: ghostMode ? 'rgba(255,255,255,0.2)' : '',
             color: '#000'
           }}
         >
@@ -117,6 +140,7 @@ class RedCanvas extends React.Component {
             background: '#fff'
           }} onMouseDown={e => {
             e.stopPropagation();
+            ghostMode = true;
             this.setModes({
               positionMode: {
                 mode: 'n',
@@ -127,7 +151,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(90deg)'}}/>
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(90deg)'}} />
           </div>
           <div style={{
             bottom: 0,
@@ -141,6 +165,7 @@ class RedCanvas extends React.Component {
             background: '#fff'
           }} onMouseDown={e => {
             e.stopPropagation();
+            ghostMode = true;
             this.setModes({
               positionMode: {
                 mode: 's',
@@ -151,7 +176,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(-90deg)'}}/>
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
           </div>
           <div style={{
             bottom: '50%',
@@ -165,6 +190,7 @@ class RedCanvas extends React.Component {
             background: '#fff'
           }} onMouseDown={e => {
             e.stopPropagation();
+            ghostMode = true;
             this.setModes({
               positionMode: {
                 mode: 'w',
@@ -175,7 +201,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px'}}/>
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px'}} />
           </div>
           <div style={{
             bottom: '50%',
@@ -189,6 +215,7 @@ class RedCanvas extends React.Component {
             background: '#fff'
           }} onMouseDown={e => {
             e.stopPropagation();
+            ghostMode = true;
             this.setModes({
               positionMode: {
                 mode: 'e',
@@ -199,7 +226,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(180deg)'}}/>
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(180deg)'}} />
           </div>
           <div style={{
             bottom: 0,
@@ -213,6 +240,7 @@ class RedCanvas extends React.Component {
             background: '#fff'
           }} onMouseDown={e => {
             e.stopPropagation();
+            ghostMode = true;
             this.setModes({
               positionMode: {
                 mode: 'all',
@@ -223,7 +251,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px', transform: 'rotate(-90deg)'}}/>
+            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
           </div>
           <>
             <div
@@ -239,6 +267,7 @@ class RedCanvas extends React.Component {
               }}
               onMouseDown={e => {
                 e.stopPropagation();
+                ghostMode = true;
                 this.setModes({
                   resizeMode: {
                     mode: 'nw',
@@ -248,7 +277,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}} />
             </div>
             <div
               style={{
@@ -263,6 +292,7 @@ class RedCanvas extends React.Component {
               }}
               onMouseDown={e => {
                 e.stopPropagation();
+                ghostMode = true;
                 this.setModes({
                   resizeMode: {
                     mode: 'ne',
@@ -272,7 +302,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -287,6 +317,7 @@ class RedCanvas extends React.Component {
               }}
               onMouseDown={e => {
                 e.stopPropagation();
+                ghostMode = true;
                 this.setModes({
                   resizeMode: {
                     mode: 'sw',
@@ -296,7 +327,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -311,6 +342,7 @@ class RedCanvas extends React.Component {
               }}
               onMouseDown={e => {
                 e.stopPropagation();
+                ghostMode = true;
                 this.setModes({
                   resizeMode: {
                     mode: 'se',
@@ -320,7 +352,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}} />
             </div>
             {/*  */}
             <div
@@ -336,6 +368,7 @@ class RedCanvas extends React.Component {
               }}
               onMouseDown={e => {
                 e.stopPropagation();
+                ghostMode = true;
                 this.setModes({
                   resizeMode: {
                     mode: 'w',
@@ -345,7 +378,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -360,6 +393,7 @@ class RedCanvas extends React.Component {
               }}
               onMouseDown={e => {
                 e.stopPropagation();
+                ghostMode = true;
                 this.setModes({
                   resizeMode: {
                     mode: 'e',
@@ -369,7 +403,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -384,6 +418,7 @@ class RedCanvas extends React.Component {
               }}
               onMouseDown={e => {
                 e.stopPropagation();
+                ghostMode = true;
                 this.setModes({
                   resizeMode: {
                     mode: 'n',
@@ -393,7 +428,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -408,6 +443,7 @@ class RedCanvas extends React.Component {
               }}
               onMouseDown={e => {
                 e.stopPropagation();
+                ghostMode = true;
                 this.setModes({
                   resizeMode: {
                     mode: 's',
@@ -417,7 +453,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
           </>
 
@@ -510,7 +546,7 @@ class RedCanvas extends React.Component {
                       fontSize: '11px'
                     }}
                   >
-                    <div>{(+activeSubData['deg']).toFixed(1)}<br/><span style={{fontSize: '10px'}}>deg</span></div>
+                    <div>{(+activeSubData['deg']).toFixed(1)}<br /><span style={{fontSize: '10px'}}>deg</span></div>
                     <div style={{
                       lineHeight: 1,
                       width: '10px', height: '10px',
@@ -520,7 +556,7 @@ class RedCanvas extends React.Component {
                       transform: 'translate(-50%,-50%)',
                       top: `calc(50% + ${Math.sin(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`,
                       left: `calc(50% + ${Math.cos(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`
-                    }}/>
+                    }} />
                   </button>
                 </div>
                 <div
@@ -536,22 +572,22 @@ class RedCanvas extends React.Component {
                   }}
                   onMouseDown={e => {
                     e.stopPropagation();
-                    const rect = this.refDegree.current.getBoundingClientRect()
-                    this.refDegreeCanvas.current.getContext('2d').clearRect(0,0,500,500)
+                    const rect = this.refDegree.current.getBoundingClientRect();
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500, 500);
                     this.setModes({
                       degreeMode: {
-                        ref : this.refDegreeCanvas.current,
+                        ref: this.refDegreeCanvas.current,
                         startX: e.nativeEvent.pageX,
                         startY: e.nativeEvent.pageY,
-                        startDegX : rect.x +rect.width/2,
-                        startDegY : rect.x +rect.height/2,
+                        startDegX: rect.x + rect.width / 2,
+                        startDegY: rect.x + rect.height / 2,
                         startDeg: activeSubData['deg'],
-                        mode : 'nw'
+                        mode: 'nw'
                       }
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
                 </div>
                 <div
                   style={{
@@ -566,22 +602,22 @@ class RedCanvas extends React.Component {
                   }}
                   onMouseDown={e => {
                     e.stopPropagation();
-                    const rect = this.refDegree.current.getBoundingClientRect()
-                    this.refDegreeCanvas.current.getContext('2d').clearRect(0,0,500,500)
+                    const rect = this.refDegree.current.getBoundingClientRect();
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500, 500);
                     this.setModes({
                       degreeMode: {
-                        ref : this.refDegreeCanvas.current,
+                        ref: this.refDegreeCanvas.current,
                         startX: e.nativeEvent.pageX,
                         startY: e.nativeEvent.pageY,
-                        startDegX : rect.x +rect.width/2,
-                        startDegY : rect.x +rect.height/2,
+                        startDegX: rect.x + rect.width / 2,
+                        startDegY: rect.x + rect.height / 2,
                         startDeg: activeSubData['deg'],
-                        mode : 'ne'
+                        mode: 'ne'
                       }
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
                 </div>
                 <div
                   style={{
@@ -596,22 +632,22 @@ class RedCanvas extends React.Component {
                   }}
                   onMouseDown={e => {
                     e.stopPropagation();
-                    const rect = this.refDegree.current.getBoundingClientRect()
-                    this.refDegreeCanvas.current.getContext('2d').clearRect(0,0,500,500)
+                    const rect = this.refDegree.current.getBoundingClientRect();
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500, 500);
                     this.setModes({
                       degreeMode: {
-                        ref : this.refDegreeCanvas.current,
+                        ref: this.refDegreeCanvas.current,
                         startX: e.nativeEvent.pageX,
                         startY: e.nativeEvent.pageY,
-                        startDegX : rect.x +rect.width/2,
-                        startDegY : rect.x +rect.height/2,
+                        startDegX: rect.x + rect.width / 2,
+                        startDegY: rect.x + rect.height / 2,
                         startDeg: activeSubData['deg'],
-                        mode : 'se'
+                        mode: 'se'
                       }
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
                 </div>
                 <div
                   style={{
@@ -626,22 +662,22 @@ class RedCanvas extends React.Component {
                   }}
                   onMouseDown={e => {
                     e.stopPropagation();
-                    const rect = this.refDegree.current.getBoundingClientRect()
-                    this.refDegreeCanvas.current.getContext('2d').clearRect(0,0,500,500)
+                    const rect = this.refDegree.current.getBoundingClientRect();
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500, 500);
                     this.setModes({
                       degreeMode: {
-                        ref : this.refDegreeCanvas.current,
+                        ref: this.refDegreeCanvas.current,
                         startX: e.nativeEvent.pageX,
                         startY: e.nativeEvent.pageY,
-                        startDegX : rect.x +rect.width/2,
-                        startDegY : rect.x +rect.height/2,
+                        startDegX: rect.x + rect.width / 2,
+                        startDegY: rect.x + rect.height / 2,
                         startDeg: activeSubData['deg'],
-                        mode : 'sw'
+                        mode: 'sw'
                       }
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
                 </div>
               </>
           }
@@ -713,6 +749,8 @@ class RedCanvas extends React.Component {
       onMouseLeave={() => this.setModes()}
       onMouseUp={() => {
         this.setModes();
+        ghostMode = false;
+        ghostSize = null;
         document.body.style.cursor = 'default';
       }}
       onMouseDown={e => {
