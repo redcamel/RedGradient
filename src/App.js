@@ -225,7 +225,7 @@ class App extends React.Component {
                   <RedPreset rootComponent={this}/>
                 </div>
               </div>
-              <div style={{display: "flex", height: '100%'}}>
+              <div style={{display: "flex", height: 'calc(100% - 230px)'}}>
                 {
                   this.state.activeContainerLayer === 'mainLayer' || !this.state.activeContainerLayer
                     ? <>

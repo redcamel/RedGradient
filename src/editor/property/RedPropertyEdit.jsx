@@ -108,7 +108,7 @@ class RedPropertyEdit extends React.Component {
                 marginBottom: '20px'
               }}>
                 <div style={{marginTop: '10px'}}>
-                  <div style={{maxHeight: '400px', overflowY: 'auto'}}>
+                  <div style={{overflowY: 'auto'}}>
                     <RedTitle title={'Result'}/>
                     <button
                       style={style.copyClass}

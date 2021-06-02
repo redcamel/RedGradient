@@ -75,6 +75,7 @@ class RedCanvas extends React.Component {
     const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x'] - borderX}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
     const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y'] - borderY}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
     if (ghostMode && !ghostSize) ghostSize = {...layoutSize};
+    const iconScale = Math.min(1,1/this.state.canvasViewScale)
     return <div
       style={{
         ...style.canvas,
@@ -131,8 +132,8 @@ class RedCanvas extends React.Component {
           <div style={{
             top: 0,
             left: '50%',
-            transform: 'translate(-50%, -56px)',
-            position: 'absolute', width: '30px', height: '30px',
+            transform: `translate(-50%, -${20 + 36* iconScale}px) scale(${iconScale})`,
+            position: 'absolute', width: `30px`, height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
             border: '1px solid #5e7ade', borderRadius: '50%',
@@ -151,12 +152,12 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(90deg)'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: `rotate(90deg)`}} />
           </div>
           <div style={{
             bottom: 0,
             left: '50%',
-            transform: 'translate(-50%, 56px)',
+            transform: `translate(-50%, ${20 + 36* iconScale}px) scale(${iconScale})`,
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -181,7 +182,7 @@ class RedCanvas extends React.Component {
           <div style={{
             bottom: '50%',
             left: 0,
-            transform: 'translate(-56px, 50%)',
+            transform: `translate(-${20 + 36* iconScale}px, 50%) scale(${iconScale})`,
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -206,7 +207,7 @@ class RedCanvas extends React.Component {
           <div style={{
             bottom: '50%',
             right: 0,
-            transform: 'translate(56px, 50%)',
+            transform: `translate(${20 + 36* iconScale}px, 50%) scale(${iconScale})`,
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -231,7 +232,7 @@ class RedCanvas extends React.Component {
           <div style={{
             bottom: 0,
             left: '50%',
-            transform: 'translate(-50%, 96px)',
+            transform: `translate(-50%, ${20 + 76* iconScale}px) scale(${iconScale})`,
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -256,7 +257,7 @@ class RedCanvas extends React.Component {
           <>
             <div
               style={{
-                top: 0, left: 0, transform: 'translate(-100%, -100%)',
+                top: 0, left: 0, transform: `translate(-${16 + 7*iconScale}px, -${16 + 7*iconScale}px) scale(${iconScale})`,
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'nw-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -281,7 +282,7 @@ class RedCanvas extends React.Component {
             </div>
             <div
               style={{
-                top: 0, right: 0, transform: 'translate(100%, -100%)',
+                top: 0, right: 0, transform: `translate(${16 + 7*iconScale}px, -${16 + 7*iconScale}px) scale(${iconScale})`,
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'ne-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -306,7 +307,7 @@ class RedCanvas extends React.Component {
             </div>
             <div
               style={{
-                bottom: 0, left: 0, transform: 'translate(-100%, 100%)',
+                bottom: 0, left: 0, transform: `translate(-${16 + 7*iconScale}px, ${16 + 7*iconScale}px) scale(${iconScale})`,
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'sw-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -331,7 +332,7 @@ class RedCanvas extends React.Component {
             </div>
             <div
               style={{
-                bottom: 0, right: 0, transform: 'translate(100%, 100%)',
+                bottom: 0, right: 0, transform: `translate(${16 + 7*iconScale}px, ${16 + 7*iconScale}px) scale(${iconScale})`,
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'se-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -357,7 +358,7 @@ class RedCanvas extends React.Component {
             {/*  */}
             <div
               style={{
-                top: '50%', left: 0, transform: 'translate(-100%, -50%)',
+                top: '50%', left: 0, transform: `translate(-${16 + 7*iconScale}px, -50%) scale(${iconScale})`,
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'w-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -382,7 +383,7 @@ class RedCanvas extends React.Component {
             </div>
             <div
               style={{
-                top: '50%', right: 0, transform: 'translate(100%, -50%)',
+                top: '50%', right: 0, transform: `translate(${16 + 7*iconScale}px, -50%) scale(${iconScale})`,
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'e-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -407,7 +408,7 @@ class RedCanvas extends React.Component {
             </div>
             <div
               style={{
-                top: 0, left: '50%', transform: 'translate(-50%, -100%)',
+                top: 0, left: '50%', transform: `translate(-50%, -${16 + 7*iconScale}px) scale(${iconScale})`,
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'n-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -432,7 +433,7 @@ class RedCanvas extends React.Component {
             </div>
             <div
               style={{
-                bottom: 0, left: '50%', transform: 'translate(-50%, 100%)',
+                bottom: 0, left: '50%', transform: `translate(-50%, ${16 + 7*iconScale}px) scale(${iconScale})`,
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 's-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -516,7 +517,7 @@ class RedCanvas extends React.Component {
                   width={'250px'}
                   height={'250px'}
                   style={{
-                    top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(0deg)',
+                    top: '50%', left: '50%', transform: `translate(-50%, -50%) rotate(0deg) scale(${iconScale})`,
                     width: `${250}px`, height: `${250}px`,
                     position: 'absolute', borderRadius: '50%', lineHeight: 1,
                     background: 'rgba(255,255,255,0.25)',
@@ -526,7 +527,7 @@ class RedCanvas extends React.Component {
                 <div
                   ref={this.refDegree}
                   style={{
-                    top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(0deg)',
+                    top: '50%', left: '50%', transform: `translate(-50%, -50%) rotate(0deg) scale(${iconScale})`,
                     width: `${50}px`, height: `${50}px`,
                     position: 'absolute', borderRadius: '50%', lineHeight: 1,
                     display: this.state.degreeMode ? 'block' : 'none',
@@ -561,7 +562,7 @@ class RedCanvas extends React.Component {
                 </div>
                 <div
                   style={{
-                    top: 0, left: 0, transform: 'translate(-175%, -175%) ',
+                    top: 0, left: 0, transform: `translate(-${20+32*iconScale}px, -${20+32*iconScale}px) scale(${iconScale})`,
                     position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
@@ -591,7 +592,7 @@ class RedCanvas extends React.Component {
                 </div>
                 <div
                   style={{
-                    top: 0, right: 0, transform: 'translate(175%, -175%) ',
+                    top: 0, right: 0, transform: `translate(${20+32*iconScale}px, -${20+32*iconScale}px) scale(${iconScale})`,
                     position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
@@ -621,7 +622,7 @@ class RedCanvas extends React.Component {
                 </div>
                 <div
                   style={{
-                    bottom: 0, right: 0, transform: 'translate(175%, 175%) ',
+                    bottom: 0, right: 0, transform: `translate(${20+32*iconScale}px, ${20+32*iconScale}px) scale(${iconScale})`,
                     position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
@@ -651,7 +652,7 @@ class RedCanvas extends React.Component {
                 </div>
                 <div
                   style={{
-                    bottom: 0, left: 0, transform: 'translate(-175%, 175%) ',
+                    bottom: 0, left: 0, transform: `translate(-${20+32*iconScale}px, ${20+32*iconScale}px) scale(${iconScale})`,
                     position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
