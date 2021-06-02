@@ -21,6 +21,7 @@ import RedLayerSubItem from "./RedLayerSubItem.jsx";
 import RedAddGradientLayerSet from "./RedAddGradientLayerSet";
 
 let startDragLayer
+let emptyImage
 
 //TODO - 여기 정리해야함
 class RedLayerItem extends React.Component {
@@ -43,11 +44,15 @@ class RedLayerItem extends React.Component {
     console.log('start ///////////////////')
     console.log(this)
     console.log(this.props.layer)
-    RedLayerItem.clearDragInfo()
     if (!RedLayerSubItem.getDragInfo()) {
       RedLayerSubItem.clearDragInfo()
+      RedLayerItem.clearDragInfo()
       startDragLayer = this.props.layer
+    } else {
+      RedLayerItem.clearDragInfo()
     }
+    if (!emptyImage) emptyImage = new Image()
+    e.nativeEvent.dataTransfer.setDragImage(emptyImage, 0, 0);
   }
 
   handleDragEnter(e) {
@@ -104,7 +109,12 @@ class RedLayerItem extends React.Component {
       onDragOver={e => this.handleDragOver(e)}
       onDragEnter={e => this.handleDragEnter(e)}
       onDragLeave={e => this.handleDragLeave(e)}
-
+      onDragEnd={e => {
+        RedLayerItem.clearDragInfo();
+        RedLayerSubItem.clearDragInfo();
+        this.setState({dragOverYn: false})
+        this.props.rootComponent.updateRootState({});
+      }}
     >
       <
 
@@ -205,7 +215,7 @@ class RedLayerItem extends React.Component {
         rootComponent={rootComponent}
         size={this.state.SIZE}/>) : ''}</div>
       <div
-        className={'droparea_title2'}
+
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -213,12 +223,28 @@ class RedLayerItem extends React.Component {
           position: 'absolute',
           top: 0, left: 0, right: 0, overflow: 'hidden',
           height: this.state.dragOverYn ? '100%' : 0,
-          opacity: this.state.dragOverYn ? 0.75 : 0,
+          opacity: this.state.dragOverYn ? 1 : 0,
           transition: 'opacity 0.2s',
-          background: 'rgb(255, 122, 222)',
-          fontSize: '16px',
+          background: 'rgb(39,133,196,0.75)',
           borderRadius: '4px'
-        }}>drop here
+        }}>
+        <div
+          style={{
+            background: '#fff', color: '#000',
+            fontSize: '12px', borderRadius: '5px', padding: '3px 12px',
+          }}>
+          drop here
+        </div>
+        <div
+          className={'droparea_title2'}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'absolute',
+            top: 0, left: 0, right: 0,
+            height: '100%',
+          }}/>
       </div>
     </div>;
   }
