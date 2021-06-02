@@ -10,7 +10,6 @@ import RedSelect from "../../core/RedSelect.jsx";
 import RedNumber from "../../core/RedNumber.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLink} from "@fortawesome/free-solid-svg-icons";
-import {brightness} from "@easylogic/colorpicker/src/util/functions/fromRGB.js";
 
 class RedPropertySizeEdit extends React.Component {
   constructor(props) {
@@ -25,13 +24,43 @@ class RedPropertySizeEdit extends React.Component {
     return <div>
       <div className={'ui_subTitle'}>Size</div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',height : '100%'}}>
-          <div style={{opacity: 0.1, position: 'absolute', top: '50%', left : 'calc(50% + 4px)',height : '30px',transform : 'translate(0,-50%)', borderRight: '1px solid #fff'}}/>
-          <div style={{opacity: 0.1, position: 'absolute', top: '-10px', left : 'calc(50% + 4px)',width : '12px',borderTop: '1px solid #fff'}}/>
-          <div style={{opacity: 0.1, position: 'absolute', bottom: '-10px', left : 'calc(50% + 4px)',width : '12px', borderTop: '1px solid #fff'}}/>
-          <FontAwesomeIcon icon={faLink} style={{filter : 'brightness(0.5)',marginLeft: '10px', opacity: 1, cursor: 'pointer'}}
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+          <div style={{
+            opacity: activeSubData['fixRatioYn'] ? 0.1 : 0.01,
+            position: 'absolute',
+            top: '50%',
+            left: 'calc(50% + 4px)',
+            height: '30px',
+            transform: 'translate(0,-50%)',
+            borderRight: '1px solid #fff'
+          }}/>
+          <div style={{
+            opacity: activeSubData['fixRatioYn'] ? 0.1 : 0.01,
+            position: 'absolute',
+            top: '-10px',
+            left: 'calc(50% + 4px)',
+            width: '12px',
+            borderTop: '1px solid #fff'
+          }}/>
+          <div style={{
+            opacity: activeSubData['fixRatioYn'] ? 0.1 : 0.01,
+            position: 'absolute',
+            bottom: '-10px',
+            left: 'calc(50% + 4px)',
+            width: '12px',
+            borderTop: '1px solid #fff'
+          }}/>
+          <FontAwesomeIcon icon={faLink}
+                           style={{filter: activeSubData['fixRatioYn'] ? '' :'brightness(0.5)', marginLeft: '10px', opacity: 1, cursor: 'pointer',transition:'filter 0.2s'}}
                            onClick={e => {
-                             alert('todo - 비율픽스처리, 같은 단위일경우 그냥고정, 다른 단위일경우 큰놈을 기준으로 단위 변환 고정')
+                             activeSubData['fixRatioYn'] = !activeSubData['fixRatioYn'];
+                             rootComponent.updateRootState({});
+                             alert(`
+todo - 비율픽스처리
+- 같은 단위일경우 그냥고정 다른 단위일경우 큰놈을 기준으로 단위 변환 고정
+- 픽스된경우 우측 w,h 변환시 고정비율로 늘려줌
+- 픽스된경우 비쥬얼 에디터의 리사이즈도 모양과 동작이 변화되어야함
+                             `)
                            }}
           />
 
