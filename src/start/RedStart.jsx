@@ -9,8 +9,23 @@ import React from "react";
 import DataCanvas from "../editor/data/DataCanvas.js";
 
 class RedStart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      logoLoaded : false
+    }
+  }
+  componentDidMount() {
+    let t0 = new Image()
+    t0.src = './tempLogo.svg'
+    t0.onload=e=>{
+      this.setState({logoLoaded : true})
+    }
+  }
+
   render() {
     const rootComponent = this.props.rootComponent
+    if(!this.state.logoLoaded) return ''
     return <div>
       <div style={{
         position: 'fixed',
