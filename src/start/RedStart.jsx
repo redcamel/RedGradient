@@ -11,15 +11,16 @@ import DataCanvas from "../editor/data/DataCanvas.js";
 class RedStart extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-      logoLoaded : false
+    this.state = {
+      logoLoaded: false
     }
   }
+
   componentDidMount() {
     let t0 = new Image()
     t0.src = './tempLogo.svg'
-    t0.onload=e=>{
-      this.setState({logoLoaded : true})
+    t0.onload = e => {
+      this.setState({logoLoaded: true})
     }
   }
 
@@ -41,12 +42,12 @@ class RedStart extends React.Component {
         border: '1px solid rgba(0,0,0,0.5)',
         boxShadow: '0px 0px 36px rgba(0,0,0,0.36)',
         color: '#fff',
-        opacity : this.state.logoLoaded ? 1 : 0,
-        transition : 'opacity 0.5s'
+        opacity: this.state.logoLoaded ? 1 : 0,
+        transition: 'opacity 0.5s'
       }}>
 
         <div style={{textAlign: 'center'}}>
-          <img src={'./tempLogo.svg'} style={{height : '512px'}}/>
+          <img src={'./tempLogo.svg'} style={{height: '512px'}}/>
           <div style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '30px'}}>RedGradient</div>
         </div>
 
@@ -79,8 +80,8 @@ class RedStart extends React.Component {
             boxShadow: '0px 0px 6px rgba(0,0,0,0.16)'
           }}
           onChange={e => {
-            console.log(e);
-            console.log(e.target.files);
+            // console.log(e);
+            // console.log(e.target.files);
             let fileReader = new FileReader();
             fileReader.onload = evt => rootComponent.setNewCanvas(JSON.parse(evt.target.result))
             fileReader.readAsText(e.target.files[0]);

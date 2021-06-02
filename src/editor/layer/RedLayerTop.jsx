@@ -56,7 +56,7 @@ const style = {
     background: '#000'
   },
   addLayerItem: {
-    background: '#5e7ade',
+    background: 'linear-gradient(#7235d4, #4d1d93)',
     padding: '4px 8px',
     fontSize: '11px',
     borderRadius: '4px',

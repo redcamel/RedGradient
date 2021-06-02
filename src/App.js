@@ -25,7 +25,7 @@ class App extends React.Component {
     super(props);
     this.history = []
     this.historyRedo = []
-    window.addEventListener('resize',e=>{
+    window.addEventListener('resize', e => {
       this.updateRootState()
     })
   }
@@ -228,7 +228,7 @@ class App extends React.Component {
                   <RedPreset rootComponent={this}/>
                 </div>
               </div>
-              <div style={{display: "flex", height: 'calc(100% - 230px)'}}>
+              <div style={{display: "flex", height: 'calc(100% - 190px)'}}>
                 {
                   this.state.activeContainerLayer === 'mainLayer' || !this.state.activeContainerLayer
                     ? <>

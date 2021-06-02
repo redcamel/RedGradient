@@ -43,8 +43,8 @@ function drawCanvasEditUI() {
               onChange: color => rootComponent.updateRootState({bgColor: color})
             });
           }
-          requestAnimationFrame(e=>{
-            colorPicker.initColorWithoutChangeEvent( rootComponentState.bgColor);
+          requestAnimationFrame(e => {
+            colorPicker.initColorWithoutChangeEvent(rootComponentState.bgColor);
           })
         }}
       />

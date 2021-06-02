@@ -195,11 +195,10 @@ class RedAddGradientLayerSet extends React.Component {
                          }
                          targetColorData = tColorData;
                          // this.state.colorPicker[index].setOption({color: tColor});
-
                          this.state.openColorPicker = [];
                          this.state.openColorPicker[index] = true;
                          this.setState({});
-                         requestAnimationFrame(e=>{
+                         requestAnimationFrame(e => {
                            this.state.colorPicker[index].initColorWithoutChangeEvent(tColor);
                          })
                        }}
@@ -282,11 +281,10 @@ class RedAddGradientLayerSet extends React.Component {
                            });
                          }
                          // this.state.colorPicker[index].setOption({color: tColor});
-
                          this.state.openColorPicker = [];
                          this.state.openColorPicker[startIndex] = true;
                          this.setState({});
-                         requestAnimationFrame(e=>{
+                         requestAnimationFrame(e => {
                            this.state.colorPicker[startIndex].initColorWithoutChangeEvent(this.state.startColor['color']);
                          })
                        }}
@@ -338,7 +336,7 @@ class RedAddGradientLayerSet extends React.Component {
                          this.state.openColorPicker = [];
                          this.state.openColorPicker[lastIndex] = true;
                          this.setState({});
-                         requestAnimationFrame(e=>{
+                         requestAnimationFrame(e => {
                            this.state.colorPicker[lastIndex].initColorWithoutChangeEvent(this.state.endColor['color']);
                          })
                        }}

@@ -10,5 +10,4 @@ const BLEND_MODE_TYPE = modes.reduce((acc, cur) => {
   acc[cur.toUpperCase()] = cur;
   return acc;
 }, {});
-console.log(BLEND_MODE_TYPE);
 export default BLEND_MODE_TYPE;

@@ -45,8 +45,8 @@ function RedCanvas_checkDegree(e) {
       ctx.clearRect(0, 0, 400, 400)
       ctx.beginPath();
       ctx.moveTo(w / 2, h / 2)
-      if (direction) ctx.arc(w / 2, h / 2, w / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI/2, activeSubData['deg'] * Math.PI / 180- Math.PI/2);
-      else ctx.arc(w / 2, h / 2, w / 2, activeSubData['deg'] * Math.PI / 180-Math.PI/2, degreeInfo.startDeg * Math.PI / 180- Math.PI/2);
+      if (direction) ctx.arc(w / 2, h / 2, w / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2);
+      else ctx.arc(w / 2, h / 2, w / 2, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2);
       ctx.strokeStyle = 'rgba(0, 0, 0,1)'
       ctx.fillStyle = direction ? 'rgba(94, 122, 222,0.85)' : 'rgb(222,94,113)'
       ctx.lineTo(w / 2, h / 2)
@@ -57,8 +57,8 @@ function RedCanvas_checkDegree(e) {
       ctx.moveTo(w / 2, h / 2)
       ctx.strokeStyle = 'rgba(0, 0, 0,1)'
       ctx.fillStyle = 'rgba(255, 255, 255,1)'
-      if (direction) ctx.arc(w / 2, h / 2, w / 5, degreeInfo.startDeg * Math.PI / 180- Math.PI/2, activeSubData['deg'] * Math.PI / 180- Math.PI/2);
-      else ctx.arc(w / 2, h / 2, w / 5, activeSubData['deg'] * Math.PI / 180- Math.PI/2, degreeInfo.startDeg * Math.PI / 180- Math.PI/2);
+      if (direction) ctx.arc(w / 2, h / 2, w / 5, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2);
+      else ctx.arc(w / 2, h / 2, w / 5, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2);
       ctx.lineTo(w / 2, h / 2)
       ctx.fill();
       ctx.stroke();
@@ -69,7 +69,7 @@ function RedCanvas_checkDegree(e) {
     // activeSubData['deg'] = activeSubData['deg'] % 360;
     rootComponent.updateRootState({});
     document.body.style.cursor = 'move';
-    console.log(e);
+    // console.log(e);
   }
 }
 

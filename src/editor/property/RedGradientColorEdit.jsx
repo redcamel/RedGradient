@@ -131,7 +131,7 @@ class RedGradientColorEdit extends React.Component {
         <button
           style={style.reverse}
           onClick={e => {
-            console.log('원본', JSON.parse(JSON.stringify(activeSubData['colorList'])));
+            // console.log('원본', JSON.parse(JSON.stringify(activeSubData['colorList'])));
             let t0 = JSON.parse(JSON.stringify(activeSubData['colorList']));
             t0 = t0.reverse();
             t0.forEach(v => {
@@ -153,7 +153,7 @@ class RedGradientColorEdit extends React.Component {
             });
             activeSubData['colorList'] = t0;
             rootComponent.updateRootState({});
-            console.log('결과', t0);
+            // console.log('결과', t0);
           }}
         ><FontAwesomeIcon icon={faExchangeAlt} style={{marginRight: '5px'}}/> Reverse
         </button>

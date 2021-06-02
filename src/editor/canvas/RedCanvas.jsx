@@ -24,7 +24,6 @@ import RedCanvas_checkResize from "./visualEdit/RedCanvas_checkResize.js";
 import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree.js";
 import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt.js";
 import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition.js";
-
 // TODO - 정리필요
 let ghostSize, ghostMode;
 
@@ -75,7 +74,7 @@ class RedCanvas extends React.Component {
     const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x'] - borderX}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
     const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y'] - borderY}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
     if (ghostMode && !ghostSize) ghostSize = {...layoutSize};
-    const iconScale = Math.min(1,1/this.state.canvasViewScale)
+    const iconScale = Math.min(1, 1 / this.state.canvasViewScale)
     return <div
       style={{
         ...style.canvas,
@@ -132,8 +131,8 @@ class RedCanvas extends React.Component {
           <div style={{
             top: 0,
             left: '50%',
-            transform: `translate(-50%, -${20 + 36* iconScale}px) scale(${iconScale})`,
-            transition : 'transform 0.2s',
+            transform: `translate(-50%, -${20 + 36 * iconScale}px) scale(${iconScale})`,
+            transition: 'transform 0.2s',
             position: 'absolute', width: `30px`, height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -153,13 +152,13 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: `rotate(90deg)`}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: `rotate(90deg)`}}/>
           </div>
           <div style={{
             bottom: 0,
             left: '50%',
-            transform: `translate(-50%, ${20 + 36* iconScale}px) scale(${iconScale})`,
-            transition : 'transform 0.2s',
+            transform: `translate(-50%, ${20 + 36 * iconScale}px) scale(${iconScale})`,
+            transition: 'transform 0.2s',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -179,13 +178,13 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(-90deg)'}}/>
           </div>
           <div style={{
             bottom: '50%',
             left: 0,
-            transform: `translate(-${20 + 36* iconScale}px, 50%) scale(${iconScale})`,
-            transition : 'transform 0.2s',
+            transform: `translate(-${20 + 36 * iconScale}px, 50%) scale(${iconScale})`,
+            transition: 'transform 0.2s',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -205,13 +204,13 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px'}}/>
           </div>
           <div style={{
             bottom: '50%',
             right: 0,
-            transform: `translate(${20 + 36* iconScale}px, 50%) scale(${iconScale})`,
-            transition : 'transform 0.2s',
+            transform: `translate(${20 + 36 * iconScale}px, 50%) scale(${iconScale})`,
+            transition: 'transform 0.2s',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -231,13 +230,13 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(180deg)'}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(180deg)'}}/>
           </div>
           <div style={{
             bottom: 0,
             left: '50%',
-            transform: `translate(-50%, ${20 + 76* iconScale}px) scale(${iconScale})`,
-            transition : 'transform 0.2s',
+            transform: `translate(-50%, ${20 + 76 * iconScale}px) scale(${iconScale})`,
+            transition: 'transform 0.2s',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -257,18 +256,23 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
+            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px', transform: 'rotate(-90deg)'}}/>
           </div>
           <>
             <div
               style={{
-                top: 0, left: 0, transform: `translate(-${16 + 7*iconScale}px, -${16 + 7*iconScale}px) scale(${iconScale})`,
-                transition : 'transform 0.2s',
-                position: 'absolute', width: '23px', height: '23px',
+                top: 0,
+                left: 0,
+                transform: `translate(-${16 + 7 * iconScale}px, -${16 + 7 * iconScale}px) scale(${iconScale})`,
+                transition: 'transform 0.2s',
+                position: 'absolute',
+                width: '23px',
+                height: '23px',
                 cursor: 'nw-resize',
                 background: 'rgba(255,255,255,0.75)',
                 display: 'flex',
-                alignItems: 'center', justifyContent: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 border: '1px solid rgba(0,0,0,0.8)',
                 filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
               }}
@@ -284,17 +288,22 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}} />
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}}/>
             </div>
             <div
               style={{
-                top: 0, right: 0, transform: `translate(${16 + 7*iconScale}px, -${16 + 7*iconScale}px) scale(${iconScale})`,
-                transition : 'transform 0.2s',
-                position: 'absolute', width: '23px', height: '23px',
+                top: 0,
+                right: 0,
+                transform: `translate(${16 + 7 * iconScale}px, -${16 + 7 * iconScale}px) scale(${iconScale})`,
+                transition: 'transform 0.2s',
+                position: 'absolute',
+                width: '23px',
+                height: '23px',
                 cursor: 'ne-resize',
                 background: 'rgba(255,255,255,0.75)',
                 display: 'flex',
-                alignItems: 'center', justifyContent: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 border: '1px solid rgba(0,0,0,0.8)',
                 filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
               }}
@@ -310,17 +319,22 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
-                bottom: 0, left: 0, transform: `translate(-${16 + 7*iconScale}px, ${16 + 7*iconScale}px) scale(${iconScale})`,
-                transition : 'transform 0.2s',
-                position: 'absolute', width: '23px', height: '23px',
+                bottom: 0,
+                left: 0,
+                transform: `translate(-${16 + 7 * iconScale}px, ${16 + 7 * iconScale}px) scale(${iconScale})`,
+                transition: 'transform 0.2s',
+                position: 'absolute',
+                width: '23px',
+                height: '23px',
                 cursor: 'sw-resize',
                 background: 'rgba(255,255,255,0.75)',
                 display: 'flex',
-                alignItems: 'center', justifyContent: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 border: '1px solid rgba(0,0,0,0.8)',
                 filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
               }}
@@ -336,17 +350,22 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
-                bottom: 0, right: 0, transform: `translate(${16 + 7*iconScale}px, ${16 + 7*iconScale}px) scale(${iconScale})`,
-                transition : 'transform 0.2s',
-                position: 'absolute', width: '23px', height: '23px',
+                bottom: 0,
+                right: 0,
+                transform: `translate(${16 + 7 * iconScale}px, ${16 + 7 * iconScale}px) scale(${iconScale})`,
+                transition: 'transform 0.2s',
+                position: 'absolute',
+                width: '23px',
+                height: '23px',
                 cursor: 'se-resize',
                 background: 'rgba(255,255,255,0.75)',
                 display: 'flex',
-                alignItems: 'center', justifyContent: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 border: '1px solid rgba(0,0,0,0.8)',
                 filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
               }}
@@ -362,13 +381,13 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}} />
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}}/>
             </div>
             {/*  */}
             <div
               style={{
-                top: '50%', left: 0, transform: `translate(-${16 + 7*iconScale}px, -50%) scale(${iconScale})`,
-                transition : 'transform 0.2s',
+                top: '50%', left: 0, transform: `translate(-${16 + 7 * iconScale}px, -50%) scale(${iconScale})`,
+                transition: 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'w-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -389,12 +408,12 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
-                top: '50%', right: 0, transform: `translate(${16 + 7*iconScale}px, -50%) scale(${iconScale})`,
-                transition : 'transform 0.2s',
+                top: '50%', right: 0, transform: `translate(${16 + 7 * iconScale}px, -50%) scale(${iconScale})`,
+                transition: 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'e-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -415,12 +434,12 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
-                top: 0, left: '50%', transform: `translate(-50%, -${16 + 7*iconScale}px) scale(${iconScale})`,
-                transition : 'transform 0.2s',
+                top: 0, left: '50%', transform: `translate(-50%, -${16 + 7 * iconScale}px) scale(${iconScale})`,
+                transition: 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'n-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -441,12 +460,12 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
             <div
               style={{
-                bottom: 0, left: '50%', transform: `translate(-50%, ${16 + 7*iconScale}px) scale(${iconScale})`,
-                transition : 'transform 0.2s',
+                bottom: 0, left: '50%', transform: `translate(-50%, ${16 + 7 * iconScale}px) scale(${iconScale})`,
+                transition: 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 's-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -467,7 +486,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
+              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
             </div>
           </>
 
@@ -560,7 +579,7 @@ class RedCanvas extends React.Component {
                       fontSize: '11px'
                     }}
                   >
-                    <div>{(+activeSubData['deg']).toFixed(1)}<br /><span style={{fontSize: '10px'}}>deg</span></div>
+                    <div>{(+activeSubData['deg']).toFixed(1)}<br/><span style={{fontSize: '10px'}}>deg</span></div>
                     <div style={{
                       lineHeight: 1,
                       width: '10px', height: '10px',
@@ -570,17 +589,23 @@ class RedCanvas extends React.Component {
                       transform: 'translate(-50%,-50%)',
                       top: `calc(50% + ${Math.sin(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`,
                       left: `calc(50% + ${Math.cos(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`
-                    }} />
+                    }}/>
                   </button>
                 </div>
                 <div
                   style={{
-                    top: 0, left: 0, transform: `translate(-${20+32*iconScale}px, -${20+32*iconScale}px) scale(${iconScale})`,
-                    transition : 'transform 0.2s',
-                    position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
+                    top: 0,
+                    left: 0,
+                    transform: `translate(-${20 + 32 * iconScale}px, -${20 + 32 * iconScale}px) scale(${iconScale})`,
+                    transition: 'transform 0.2s',
+                    position: 'absolute',
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
-                    alignItems: 'center', justifyContent: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     border: '1px solid rgba(0,0,0,0.8)',
                     filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
                     cursor: 'pointer',
@@ -602,16 +627,22 @@ class RedCanvas extends React.Component {
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
                 </div>
                 <div
                   style={{
-                    top: 0, right: 0, transform: `translate(${20+32*iconScale}px, -${20+32*iconScale}px) scale(${iconScale})`,
-                    transition : 'transform 0.2s',
-                    position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
+                    top: 0,
+                    right: 0,
+                    transform: `translate(${20 + 32 * iconScale}px, -${20 + 32 * iconScale}px) scale(${iconScale})`,
+                    transition: 'transform 0.2s',
+                    position: 'absolute',
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
-                    alignItems: 'center', justifyContent: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     border: '1px solid rgba(0,0,0,0.8)',
                     filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
                     cursor: 'pointer',
@@ -633,16 +664,22 @@ class RedCanvas extends React.Component {
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
                 </div>
                 <div
                   style={{
-                    bottom: 0, right: 0, transform: `translate(${20+32*iconScale}px, ${20+32*iconScale}px) scale(${iconScale})`,
-                    transition : 'transform 0.2s',
-                    position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
+                    bottom: 0,
+                    right: 0,
+                    transform: `translate(${20 + 32 * iconScale}px, ${20 + 32 * iconScale}px) scale(${iconScale})`,
+                    transition: 'transform 0.2s',
+                    position: 'absolute',
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
-                    alignItems: 'center', justifyContent: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     border: '1px solid rgba(0,0,0,0.8)',
                     filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
                     cursor: 'pointer',
@@ -664,16 +701,22 @@ class RedCanvas extends React.Component {
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
                 </div>
                 <div
                   style={{
-                    bottom: 0, left: 0, transform: `translate(-${20+32*iconScale}px, ${20+32*iconScale}px) scale(${iconScale})`,
-                    transition : 'transform 0.2s',
-                    position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
+                    bottom: 0,
+                    left: 0,
+                    transform: `translate(-${20 + 32 * iconScale}px, ${20 + 32 * iconScale}px) scale(${iconScale})`,
+                    transition: 'transform 0.2s',
+                    position: 'absolute',
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
-                    alignItems: 'center', justifyContent: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     border: '1px solid rgba(0,0,0,0.8)',
                     filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
                     cursor: 'pointer',
@@ -695,7 +738,7 @@ class RedCanvas extends React.Component {
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
                 </div>
               </>
           }
@@ -745,7 +788,6 @@ class RedCanvas extends React.Component {
         canvasViewOffsetY: this.state.canvasViewOffsetY + e.movementY
       });
       document.body.style.cursor = 'move';
-      console.log(e);
     }
   }
 

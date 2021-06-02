@@ -41,9 +41,6 @@ class RedLayerItem extends React.Component {
   }
 
   handleDragStart(e) {
-    console.log('start ///////////////////')
-    console.log(this)
-    console.log(this.props.layer)
     if (!RedLayerSubItem.getDragInfo()) {
       RedLayerSubItem.clearDragInfo()
       RedLayerItem.clearDragInfo()
@@ -76,8 +73,6 @@ class RedLayerItem extends React.Component {
     e.preventDefault();
     e.stopPropagation();
     if (startDragLayer) {
-      console.log('drop ///////////////////')
-      console.log(this)
       this.setState({dragOverYn: false})
       const layers = this.props.rootComponent.state.layers
       const dropAreaLayer = this.props.layer
@@ -141,7 +136,7 @@ class RedLayerItem extends React.Component {
           />
           {layer.title}
         </div>
-        <div>
+        <div style={{display:'flex'}}>
           <button className={'layerVisible'} onClick={() => this._toggleVisible(layer)}>
             <FontAwesomeIcon icon={layer.visible ? faEye : faEyeSlash}/>
           </button>
@@ -275,10 +270,10 @@ const style = {
   },
   addGradientLayerItem: {
     marginTop: '2px',
-    background: '#5e7ade',
+    background: 'linear-gradient(#5e7ade, #2c3565)',
     padding: '3px 5px',
     fontSize: '11px',
-    borderRadius: '4px',
+    borderRadius: '3px',
     marginBottom: '2px',
     cursor: 'pointer'
   },

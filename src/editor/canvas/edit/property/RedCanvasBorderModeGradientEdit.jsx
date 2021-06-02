@@ -35,7 +35,7 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
           minValue={0}
           value={borderGradientInfo['border_image_outset'] || 0}
           HD_onInput={e => {
-            console.log(borderGradientInfo)
+            // console.log(borderGradientInfo)
             borderGradientInfo['border_image_outset'] = +e.target.value;
             rootComponent.updateRootState(borderGradientInfo);
           }}/>

@@ -59,8 +59,8 @@ class RedPresetBorder extends React.Component {
 
   render() {
     const userPresetBorder = RedPresetBorder.getUserPreset()
-    console.log('presetList', presetList)
-    console.log('userPresetBorder', userPresetBorder)
+    // console.log('presetList', presetList)
+    // console.log('userPresetBorder', userPresetBorder)
     return <div>
       <div className={'ui_subTitle'}>Preset Border Gradient</div>
       <div style={style.container}>{this.renderList(presetList)}</div>
@@ -152,7 +152,7 @@ RedPresetBorder.importPreset = (context) => {
   a.onchange = e => {
     let fileReader = new FileReader();
     fileReader.onload = evt => {
-      console.log(evt.target.result)
+      // console.log(evt.target.result)
       if (RedPresetBorder.checkValidate(evt.target.result)) {
         localStorage.setItem('userPresetBorder', evt.target.result)
         context.setState({})

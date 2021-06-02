@@ -46,8 +46,8 @@ class RedFrameMenuOpen extends React.Component {
              a.setAttribute('type', 'file');
              a.click();
              a.onchange = e => {
-               console.log(e);
-               console.log(e.target.files);
+               // console.log(e);
+               // console.log(e.target.files);
                let fileReader = new FileReader();
                fileReader.onload = evt => {
                  requestAnimationFrame(e => {

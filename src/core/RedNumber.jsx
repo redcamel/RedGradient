@@ -6,8 +6,9 @@
  *
  */
 import React from "react";
+
 let targetContext;
-let startX, startY, startValue,startTime
+let startX, startY, startValue, startTime
 let requestAni
 const HD_move = e => {
   targetContext.calc(e);
@@ -20,6 +21,7 @@ const HD_up2 = () => {
   cancelAnimationFrame(requestAni)
   window.removeEventListener('mouseup', HD_up2);
 };
+
 class RedNumber extends React.Component {
   calc(e) {
     const step = this.props.step || 0.1
@@ -83,26 +85,25 @@ class RedNumber extends React.Component {
            onMouseDown={e => {
              targetContext = this;
              startValue = +this.props.value
-             const tick = time=>{
-               if(time-startTime>100) {
+             const tick = time => {
+               if (time - startTime > 100) {
                  this.update(+this.props.value + step)
                }
-               requestAni =  requestAnimationFrame(tick)
+               requestAni = requestAnimationFrame(tick)
              }
              requestAni = tick()
              startTime = performance.now()
              this.update(+this.props.value + step)
              window.addEventListener('mouseup', HD_up2);
            }}
-           onClick={e=>{
-             if(this.props.HD_blur){
+           onClick={e => {
+             if (this.props.HD_blur) {
                this.props.HD_blur({
                  target: {
                    value: +this.props.value
                  }
                })
              }
-
            }}
       >+
       </div>
@@ -121,26 +122,25 @@ class RedNumber extends React.Component {
            onMouseDown={e => {
              targetContext = this;
              startValue = +this.props.value
-             const tick = time=>{
-               if(time-startTime>100) {
+             const tick = time => {
+               if (time - startTime > 100) {
                  this.update(+this.props.value - step)
                }
-               requestAni =  requestAnimationFrame(tick)
+               requestAni = requestAnimationFrame(tick)
              }
              requestAni = tick()
              startTime = performance.now()
              this.update(+this.props.value - step)
              window.addEventListener('mouseup', HD_up2);
            }}
-           onClick={e=>{
-             if(this.props.HD_blur){
+           onClick={e => {
+             if (this.props.HD_blur) {
                this.props.HD_blur({
                  target: {
                    value: +this.props.value
                  }
                })
              }
-
            }}
       >-
       </div>

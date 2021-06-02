@@ -92,7 +92,7 @@ class RedCanvasOutlineEdit extends React.Component {
                 }
               });
             }
-            requestAnimationFrame(e=>{
+            requestAnimationFrame(e => {
               colorPicker.initColorWithoutChangeEvent(canvasInfo.outline_color);
             })
           }}

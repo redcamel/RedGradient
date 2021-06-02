@@ -6,7 +6,20 @@
  *
  */
 const calcE = (info) => {
-  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH, gapX, gapY} = info;
+  const {
+    positionInfo,
+    sizeInfo,
+    activeSubDataSize,
+    activeSubDataPosition,
+    originX,
+    originY,
+    tW,
+    tH,
+    cW,
+    cH,
+    gapX,
+    gapY
+  } = info;
   if (positionInfo['xUnit'] === '%') {
     let targetPixelSize = tW + gapX;
     let targetPercentSize = targetPixelSize / cW * 100;
@@ -22,7 +35,20 @@ const calcE = (info) => {
   }
 };
 const calcW = (info) => {
-  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH, gapX, gapY} = info;
+  const {
+    positionInfo,
+    sizeInfo,
+    activeSubDataSize,
+    activeSubDataPosition,
+    originX,
+    originY,
+    tW,
+    tH,
+    cW,
+    cH,
+    gapX,
+    gapY
+  } = info;
   if (positionInfo['xUnit'] === '%') {
     let targetPixelSize = tW - gapX;
     let targetPercentSize = targetPixelSize / cW * 100;
@@ -43,7 +69,20 @@ const calcW = (info) => {
   }
 };
 const calcS = (info) => {
-  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH, gapX, gapY} = info;
+  const {
+    positionInfo,
+    sizeInfo,
+    activeSubDataSize,
+    activeSubDataPosition,
+    originX,
+    originY,
+    tW,
+    tH,
+    cW,
+    cH,
+    gapX,
+    gapY
+  } = info;
   if (positionInfo['yUnit'] === '%') {
     let targetPixelSize = tH + gapY;
     let targetPercentSize = targetPixelSize / cH * 100;
@@ -59,7 +98,20 @@ const calcS = (info) => {
   }
 };
 const calcN = (info) => {
-  const {positionInfo, sizeInfo, activeSubDataSize, activeSubDataPosition, originX, originY, tW, tH, cW, cH, gapX, gapY} = info;
+  const {
+    positionInfo,
+    sizeInfo,
+    activeSubDataSize,
+    activeSubDataPosition,
+    originX,
+    originY,
+    tW,
+    tH,
+    cW,
+    cH,
+    gapX,
+    gapY
+  } = info;
   if (positionInfo['yUnit'] === '%') {
     let targetPixelSize = tH - gapY;
     let targetPercentSize = targetPixelSize / cH * 100;
@@ -88,27 +140,24 @@ function RedCanvas_checkResize(e) {
   if (this.state.resizeMode) {
     e = e.nativeEvent;
     const mode = this.state.resizeMode['mode'];
-    let gapX = (e.pageX - +this.state.resizeMode['startX'])/ this.state.canvasViewScale;
-    let gapY = (e.pageY - +this.state.resizeMode['startY'])/ this.state.canvasViewScale;
-
+    let gapX = (e.pageX - +this.state.resizeMode['startX']) / this.state.canvasViewScale;
+    let gapY = (e.pageY - +this.state.resizeMode['startY']) / this.state.canvasViewScale;
     switch (mode) {
       case 'sw':
       case 'ne':
-        gapY = e.shiftKey ? -gapX :gapY
+        gapY = e.shiftKey ? -gapX : gapY
         break
       case 'nw':
       case 'se':
-        gapY = e.shiftKey ? gapX :gapY
+        gapY = e.shiftKey ? gapX : gapY
         break
     }
-
     this.state.resizeMode['startX'] = e.pageX;
     this.state.resizeMode['startY'] = e.pageY;
     const sizeInfo = activeSubData['size'];
     const positionInfo = activeSubData['position'];
     const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
     const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
-
     //
     const cW = (canvasInfo.width);
     const cH = (canvasInfo.height);
@@ -168,7 +217,7 @@ function RedCanvas_checkResize(e) {
     }
     document.body.style.cursor = `${mode}-resize`;
     rootComponent.updateRootState({});
-    console.log(e);
+    // console.log(e);
   }
 }
 

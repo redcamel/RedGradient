@@ -32,10 +32,10 @@ class RedLayerSubItem extends React.Component {
   }
 
   handleDragStart(e) {
-    console.log('start ///////////////////');
-    console.log(this);
-    console.log(this.props.layer);
-    console.log(this.props.item);
+    // console.log('start ///////////////////');
+    // console.log(this);
+    // console.log(this.props.layer);
+    // console.log(this.props.item);
     RedLayerItem.clearDragInfo();
     RedLayerSubItem.clearDragInfo();
     startDragLayer = this.props.layer;
@@ -65,11 +65,11 @@ class RedLayerSubItem extends React.Component {
     e.preventDefault();
     e.stopPropagation();
     if (startDragLayer) {
-      console.log('drop ///////////////////');
-      console.log(this);
-      console.log(this.props.layer);
-      console.log(this.props.item);
-      console.log(e.nativeEvent);
+      // console.log('drop ///////////////////');
+      // console.log(this);
+      // console.log(this.props.layer);
+      // console.log(this.props.item);
+      // console.log(e.nativeEvent);
       this.setState({dragOverYn: false});
       const dropAreaLayer = this.props.layer;
       const dropAreaItem = this.props.item;
@@ -132,10 +132,10 @@ class RedLayerSubItem extends React.Component {
         </button>
       </div>
       <div style={{margin: '2px 2px 2px 0px'}}>
-        <button className={'layerVisible'}
+        <button className={'layerVisible2'}
                 onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash}/>
         </button>
-        <button className={'layerDel'}
+        <button className={'layerDel2'}
                 style={{opacity: layer.items.length > 1 ? 1 : 0.25}}
                 onClick={e => {
                   e.stopPropagation();
@@ -236,16 +236,17 @@ const style = {
   },
   bgItem: {
     padding: '2px',
-    marginRight: '1px',
-    width: '30px',
+    width: 'calc(100%/3)',
+    border: 0,
+    borderRight: '1px solid #000',
     height: '20px',
     fontSize: '10px',
     cursor: 'pointer',
-    border: 0,
     fontWeight: 'bold'
-  }, addGradientLayerItem: {
+  },
+  addGradientLayerItem: {
     marginTop: '2px',
-    background: '#5e7ade',
+    background: 'linear-gradient(#5e7ade, #2c3565)',
     padding: '3px 5px',
     fontSize: '11px',
     borderRadius: '4px',
