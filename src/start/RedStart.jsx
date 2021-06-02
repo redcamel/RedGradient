@@ -25,7 +25,6 @@ class RedStart extends React.Component {
 
   render() {
     const rootComponent = this.props.rootComponent
-    if(!this.state.logoLoaded) return ''
     return <div>
       <div style={{
         position: 'fixed',
@@ -41,7 +40,9 @@ class RedStart extends React.Component {
         borderRadius: '10px',
         border: '1px solid rgba(0,0,0,0.5)',
         boxShadow: '0px 0px 36px rgba(0,0,0,0.36)',
-        color: '#fff'
+        color: '#fff',
+        opacity : this.state.logoLoaded ? 1 : 0,
+        transition : 'opacity 0.5s'
       }}>
 
         <div style={{textAlign: 'center'}}>
