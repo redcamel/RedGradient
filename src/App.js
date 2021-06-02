@@ -25,6 +25,9 @@ class App extends React.Component {
     super(props);
     this.history = []
     this.historyRedo = []
+    window.addEventListener('resize',e=>{
+      this.updateRootState()
+    })
   }
 
   HD_keydown(e) {
