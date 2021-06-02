@@ -49,7 +49,7 @@ class RedLayerSubItem extends React.Component {
   handleDragLeave(e) {
     e.preventDefault();
     e.stopPropagation();
-    if (startDragLayer && e.nativeEvent.target.className === 'droparea_title') this.setState({dragOverYn: false});
+    if (startDragLayer !==this.props.layer) this.setState({dragOverYn: false});
   }
 
   handleDragOver(e) {
@@ -104,7 +104,7 @@ class RedLayerSubItem extends React.Component {
       onDragOver={e => this.handleDragOver(e)}
       onDragEnter={e => this.handleDragEnter(e)}
       onDragLeave={e => this.handleDragLeave(e)}
-      onDragEnd={e => e=>{
+      onDragEnd={e=>{
         RedLayerItem.clearDragInfo();
         RedLayerSubItem.clearDragInfo();
         this.setState({dragOverYn: false})
