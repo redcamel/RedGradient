@@ -49,7 +49,7 @@ class RedLayerSubItem extends React.Component {
   handleDragLeave(e) {
     e.preventDefault();
     e.stopPropagation();
-    if (startDragLayer !==this.props.layer) this.setState({dragOverYn: false});
+    if (startDragLayer && e.target.className==='droparea_title') this.setState({dragOverYn: false});
   }
 
   handleDragOver(e) {

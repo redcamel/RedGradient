@@ -56,7 +56,7 @@ class RedLayerItem extends React.Component {
   handleDragLeave(e) {
     e.preventDefault();
     e.stopPropagation();
-    if (startDragLayer) this.setState({dragOverYn: false})
+    if (startDragLayer&& e.target.className==='droparea_title2') this.setState({dragOverYn: false})
   }
 
   handleDragOver(e) {
@@ -78,10 +78,11 @@ class RedLayerItem extends React.Component {
       const startIDX = layers.indexOf(startDragLayer)
       layers.splice(startIDX, 1)
       layers.splice(dstIDX, 0, startDragLayer)
-      RedLayerItem.clearDragInfo()
-      RedLayerSubItem.clearDragInfo()
-      this.props.rootComponent.updateRootState({})
+
     }
+    RedLayerItem.clearDragInfo()
+    RedLayerSubItem.clearDragInfo()
+    this.props.rootComponent.updateRootState({})
   }
 
   render() {
@@ -96,21 +97,18 @@ class RedLayerItem extends React.Component {
         background: '#0e0d0d',
         margin: '4px', padding: '0px 4px'
       }}
+      draggable={this.state.draggable}
+      onDragStart={e => this.handleDragStart(e)}
+      onDrop={e => this.handleDrop(e)}
+      onDragOver={e => this.handleDragOver(e)}
+      onDragEnter={e => this.handleDragEnter(e)}
+      onDragLeave={e => this.handleDragLeave(e)}
+
     >
       <div
-        draggable={this.state.draggable}
-        onDragStart={e => this.handleDragStart(e)}
-        onDrop={e => this.handleDrop(e)}
-        onDragOver={e => this.handleDragOver(e)}
-        onDragEnter={e => this.handleDragEnter(e)}
-        onDragLeave={e => this.handleDragLeave(e)}
+
       >
-        {this.state.dragOverYn ? <div style={{
-          background: 'red',
-          padding: '4px',
-          margin: '4px 0px',
-          borderRadius: '4px'
-        }}>drop here</div> : ''}
+
         <div
           className={'layerItemTitle'}
           style={{
@@ -205,6 +203,22 @@ class RedLayerItem extends React.Component {
         layer={layer} item={item}
         rootComponent={rootComponent}
         size={this.state.SIZE}/>) : ''}</div>
+      <div
+        className={'droparea_title2'}
+        style={{
+          display : 'flex',
+          alignItems:'center',
+          justifyContent :'center',
+          position: 'absolute',
+          top: 0, left: 0, right: 0, overflow: 'hidden',
+          height: this.state.dragOverYn ? '100%' : 0,
+          opacity: this.state.dragOverYn ? 0.75 : 0,
+          transition : 'opacity 0.2s',
+          background: 'rgb(255, 122, 222)',
+          fontSize  :'16px',
+          borderRadius: '4px'
+        }}>drop here
+      </div>
     </div>;
   }
 }
