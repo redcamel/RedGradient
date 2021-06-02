@@ -21,19 +21,19 @@ function RedCanvas_checkDegree(e) {
     switch (degreeInfo.mode) {
       case "nw":
         deg = Math.atan2(tY, tX) - Math.atan2(tY2, tX2);
-        activeSubData['deg'] = degreeInfo.startDeg + (deg * 180 / Math.PI) * 3;
+        activeSubData['deg'] = +degreeInfo.startDeg + (deg * 180 / Math.PI) * 3;
         break
       case "ne":
         deg = Math.atan2(tY2, tX) - Math.atan2(tY, tX2);
-        activeSubData['deg'] = degreeInfo.startDeg + (deg * 180 / Math.PI) * 3;
+        activeSubData['deg'] = +degreeInfo.startDeg + (deg * 180 / Math.PI) * 3;
         break
       case "sw":
         deg = Math.atan2(tY2, tX) - Math.atan2(tY, tX2);
-        activeSubData['deg'] = degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
+        activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
         break
       case "se":
         deg = Math.atan2(tY, tX) - Math.atan2(tY2, tX2);
-        activeSubData['deg'] = degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
+        activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
         break
     }
     {
