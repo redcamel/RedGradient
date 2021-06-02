@@ -255,13 +255,14 @@ option {
 }
 
 .layerVisible:hover, .layerDel:hover, .layerAdd:hover {
-    background: #5e7ade;
+    filter : contrast(1.25);
+    transition: filter 0.2s;
 }
 .layerAdd {
     width: calc(100%/3);
     border: 0;
     height: 20px;
-    background: linear-gradient(#5e7ade, #2c3565);
+    background: linear-gradient(#7235d4, #4d1d93);
     font-size: 11px;
     color: #fff;
     outline: none;
@@ -301,6 +302,9 @@ option {
     background: #5e7ade;
 }
 .layerItemTitle {
+    display:  flex;
+    align-items: center;
+    justify-content: space-between;
     margin: 4px 0 2px;
     border-radius: 4px;
     background: linear-gradient(#7235d4, #4d1d93);
@@ -363,6 +367,13 @@ option {
     min-height: 500px;
 }
 
+.hoverItem_opacity1{
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+.hoverItem_opacity1:hover{
+    opacity: 1;
+}
 .test {
 
 }

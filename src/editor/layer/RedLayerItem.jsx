@@ -9,6 +9,8 @@ import React from "react";
 import DataItem from "../data/DataItem.js";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
+  faArrowDown,
+  faArrowUp,
   faEye,
   faEyeSlash,
   faFolder,
@@ -90,7 +92,7 @@ class RedLayerItem extends React.Component {
     const rootComponentState = rootComponent.state;
     const layers = rootComponentState.layers;
     const layer = this.props.layer;
-    const SIZE = this.props.layerViewSizeMode === 0 ? 100 : this.props.layerViewSizeMode===1 ? 50 : 0
+    const SIZE = this.props.layerViewSizeMode === 0 ? 100 : this.props.layerViewSizeMode === 1 ? 50 : 0
     return <div
       style={{
         opacity: layer.visible ? 1 : 0.5, transition: 'opacity 0.2s',
@@ -129,13 +131,53 @@ class RedLayerItem extends React.Component {
           }}
         >
 
-          <FontAwesomeIcon
-            icon={layer.openYn ? faFolderOpen : faFolder}
-            style={{fontSize: '11px', marginRight: '5px',}}
-          />
-          {layer.title}
+          <div style={{display: 'flex', alignItems: 'center'}}>
+            <FontAwesomeIcon
+              icon={layer.openYn ? faFolderOpen : faFolder}
+              style={{fontSize: '16px', marginRight: '5px',}}
+            />
+            {layer.title}
+          </div>
+          <div style={{display: layers.length > 1 ? '' : 'none'}}>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              className={'hoverItem_opacity1'}
+              style={{
+                fontSize: '11px',
+                marginRight: '5px',
+                display: layers.indexOf(this.props.layer) === 0 ? 'none' : 'inline-block'
+              }}
+              onClick={e => {
+                e.stopPropagation()
+                e.preventDefault()
+                const layers = this.props.rootComponent.state.layers
+                const idx = layers.indexOf(this.props.layer)
+                let temp = layers[idx];
+                layers[idx] = layers[idx-1];
+                layers[idx-1] = temp;
+                rootComponent.updateRootState({})
+              }}
+            />
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              className={'hoverItem_opacity1'}
+              style={{
+                fontSize: '11px',
+                display: layers.indexOf(this.props.layer) === this.props.rootComponent.state.layers.length-1 ? 'none' : 'inline-block'}}
+              onClick={e => {
+                e.stopPropagation()
+                e.preventDefault()
+                const layers = this.props.rootComponent.state.layers
+                const idx = layers.indexOf(this.props.layer)
+                let temp = layers[idx];
+                layers[idx] = layers[idx+1];
+                layers[idx+1] = temp;
+                rootComponent.updateRootState({})
+              }}
+            />
+          </div>
         </div>
-        <div style={{display:'flex'}}>
+        <div style={{display: 'flex'}}>
           <button className={'layerVisible'} onClick={() => this._toggleVisible(layer)}>
             <FontAwesomeIcon icon={layer.visible ? faEye : faEyeSlash}/>
           </button>
@@ -170,7 +212,8 @@ class RedLayerItem extends React.Component {
              onClick={() => {
                this.setState({openPanel: true, draggable: false})
              }}
-        ><FontAwesomeIcon icon={faPlusCircle}/> <div style={{marginLeft : '5px'}}>add with template</div>
+        ><FontAwesomeIcon icon={faPlusCircle}/>
+          <div style={{marginLeft: '5px'}}>add with template</div>
         </div>
         {this.state.openPanel ? <RedAddGradientLayerSet
           rootComponent={this}
@@ -206,7 +249,7 @@ class RedLayerItem extends React.Component {
       </>
       <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem
         layer={layer} item={item}
-        layerViewSizeMode = {this.props.layerViewSizeMode}
+        layerViewSizeMode={this.props.layerViewSizeMode}
         rootComponent={rootComponent}
         size={SIZE}/>) : ''}</div>
       <div
@@ -269,8 +312,8 @@ const style = {
     border: '2px solid transparent',
   },
   addGradientLayerItem: {
-    display : 'flex',
-    alignItems:'center',
+    display: 'flex',
+    alignItems: 'center',
     marginTop: '2px',
     background: 'linear-gradient(#5e7ade, #2c3565)',
     padding: '3px 5px',
