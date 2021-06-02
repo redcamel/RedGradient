@@ -44,8 +44,10 @@ class RedLayerItem extends React.Component {
     console.log(this)
     console.log(this.props.layer)
     RedLayerItem.clearDragInfo()
-    RedLayerSubItem.clearDragInfo()
-    startDragLayer = this.props.layer
+    if (!RedLayerSubItem.getDragInfo()) {
+      RedLayerSubItem.clearDragInfo()
+      startDragLayer = this.props.layer
+    }
   }
 
   handleDragEnter(e) {
@@ -56,7 +58,7 @@ class RedLayerItem extends React.Component {
   handleDragLeave(e) {
     e.preventDefault();
     e.stopPropagation();
-    if (startDragLayer&& e.target.className==='droparea_title2') this.setState({dragOverYn: false})
+    if (startDragLayer && e.target.className === 'droparea_title2') this.setState({dragOverYn: false})
   }
 
   handleDragOver(e) {
@@ -78,7 +80,6 @@ class RedLayerItem extends React.Component {
       const startIDX = layers.indexOf(startDragLayer)
       layers.splice(startIDX, 1)
       layers.splice(dstIDX, 0, startDragLayer)
-
     }
     RedLayerItem.clearDragInfo()
     RedLayerSubItem.clearDragInfo()
@@ -105,7 +106,7 @@ class RedLayerItem extends React.Component {
       onDragLeave={e => this.handleDragLeave(e)}
 
     >
-      <div
+      <
 
       >
 
@@ -198,7 +199,7 @@ class RedLayerItem extends React.Component {
           <div className={'layerItem'}
                style={{background: `${CALC_GRADIENT.calcGradientItems(layer['items'], false, layer)},${this.props.layerBgColor}`}}/>
         </div>
-      </div>
+      </>
       <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem
         layer={layer} item={item}
         rootComponent={rootComponent}
@@ -206,16 +207,16 @@ class RedLayerItem extends React.Component {
       <div
         className={'droparea_title2'}
         style={{
-          display : 'flex',
-          alignItems:'center',
-          justifyContent :'center',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           position: 'absolute',
           top: 0, left: 0, right: 0, overflow: 'hidden',
           height: this.state.dragOverYn ? '100%' : 0,
           opacity: this.state.dragOverYn ? 0.75 : 0,
-          transition : 'opacity 0.2s',
+          transition: 'opacity 0.2s',
           background: 'rgb(255, 122, 222)',
-          fontSize  :'16px',
+          fontSize: '16px',
           borderRadius: '4px'
         }}>drop here
       </div>

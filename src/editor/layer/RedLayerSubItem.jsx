@@ -204,6 +204,7 @@ RedLayerSubItem.clearDragInfo = () => {
   startDragLayer = null;
   startDragItem = null;
 };
+RedLayerSubItem.getDragInfo = ()=> startDragLayer
 export default RedLayerSubItem;
 const style = {
   activeLine: {
