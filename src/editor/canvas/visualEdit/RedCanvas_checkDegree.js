@@ -39,10 +39,11 @@ function RedCanvas_checkDegree(e) {
     {
       const ctx = degreeInfo.ref.getContext('2d')
       const rect = degreeInfo.ref.getBoundingClientRect()
-      const w = rect.width
-      const h = rect.height
+      const w = rect.width / this.state.canvasViewScale
+      const h = rect.height / this.state.canvasViewScale
       const direction = degreeInfo.startDeg < activeSubData['deg']
-      ctx.clearRect(0, 0, 400, 400)
+      ctx.resetTransform()
+      ctx.clearRect(0, 0, 500 * this.state.canvasViewScale, 500 * this.state.canvasViewScale)
       ctx.beginPath();
       ctx.moveTo(w / 2, h / 2)
       if (direction) ctx.arc(w / 2, h / 2, w / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2);

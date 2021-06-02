@@ -28,7 +28,7 @@ class RedLayerItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      SIZE: props.size || 100,
+      SIZE: props.size || 50,
       dragOverYn: false,
       openPanel: false,
       draggable: true
@@ -120,7 +120,6 @@ class RedLayerItem extends React.Component {
           style={{
             cursor: 'pointer',
             textOverflow: 'ellipsis',
-            width: '123px',
             overflow: 'hidden',
             whiteSpace: 'nowrap'
           }}
@@ -191,9 +190,10 @@ class RedLayerItem extends React.Component {
         <div
           className={'transparent_checker'}
           style={{
-            width: `${this.state.SIZE}px`,
+            width: `100%`,
+            // width: `${this.state.SIZE*2}px`,
             height: `${this.state.SIZE}px`,
-            cursor: 'pointer',
+            cursor: 'grab',
             borderRadius: '4px',
             overflow: 'hidden',
             transition: 'height 0.2s'
@@ -207,6 +207,7 @@ class RedLayerItem extends React.Component {
       </>
       <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem
         layer={layer} item={item}
+        viewScaleMode = {this.props.viewScaleMode}
         rootComponent={rootComponent}
         size={this.state.SIZE}/>) : ''}</div>
       <div

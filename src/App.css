@@ -219,26 +219,12 @@ option {
 .layerType {
     width: calc(100%/3);
     border: 0;
-    border-right: 1px solid #000;
+    /*border-right: 1px solid #000;*/
     height: 20px;
     background: #7f86a0;
     font-size: 11px;
     color: #fff;
     outline: none;
-}
-
-.layerAdd {
-    margin-right: 1px;
-    width: 30px;
-    height: 20px;
-    background: linear-gradient(#5e7ade, #2c3565);
-    font-size: 11px;
-    color: #fff;
-    outline: none;
-    border: 0;
-    cursor: pointer;
-    z-index: 1;
-    transition: background 0.2s;
 }
 
 .layerDel {
@@ -264,7 +250,6 @@ option {
     font-size: 11px;
     color: #fff;
     outline: none;
-    z-index: 1;
     cursor: pointer;
     transition: background 0.2s;
 }
@@ -275,14 +260,12 @@ option {
 .layerAdd {
     width: calc(100%/3);
     border: 0;
-    border-right: 1px solid #000;
     height: 20px;
     background: linear-gradient(#5e7ade, #2c3565);
     font-size: 11px;
     color: #fff;
     outline: none;
     cursor: pointer;
-    z-index: 1;
     transition: background 0.2s;
 }
 
@@ -341,6 +324,7 @@ option {
     padding: 4px 8px;
     font-size: 11px;
     color: #fff;
+    cursor : grab;
     text-shadow: 0 0 rgba(0, 0, 0, 1);
     word-break: break-all;
 }
@@ -350,10 +334,10 @@ option {
     position: sticky;
     top: 0;
     z-index: 1;
-    background: linear-gradient(rgb(60, 60, 60), rgb(55, 55, 55));
+    background: linear-gradient(rgb(60, 60, 60), rgb(36, 36, 36));
     height: 26px;
     display: flex;
-    padding-left: 4px;
+    padding-left: 8px;
     font-size: 12px;
     align-items: center;
     border-top: 1px solid rgb(71, 71, 71);

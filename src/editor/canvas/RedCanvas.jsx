@@ -546,11 +546,11 @@ class RedCanvas extends React.Component {
               ? '' : <>
                 <canvas
                   ref={this.refDegreeCanvas}
-                  width={'250px'}
-                  height={'250px'}
+                  width={250 * this.state.canvasViewScale}
+                  height={250 * this.state.canvasViewScale}
                   style={{
-                    top: '50%', left: '50%', transform: `translate(-50%, -50%) rotate(0deg) `,
-                    width: `${250}px`, height: `${250}px`,
+                    top: '50%', left: '50%', transform: `translate(-50%, -50%)  rotate(0deg) `,
+                    width: `${250 * this.state.canvasViewScale}px`, height: `${250 * this.state.canvasViewScale}px`,
                     position: 'absolute', borderRadius: '50%', lineHeight: 1,
                     background: 'rgba(255,255,255,0.25)',
                     display: this.state.degreeMode ? 'block' : 'none',
@@ -613,7 +613,7 @@ class RedCanvas extends React.Component {
                   onMouseDown={e => {
                     e.stopPropagation();
                     const rect = this.refDegree.current.getBoundingClientRect();
-                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500, 500);
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500*this.state.canvasViewScale, 500*this.state.canvasViewScale);
                     this.setModes({
                       degreeMode: {
                         ref: this.refDegreeCanvas.current,
@@ -650,7 +650,7 @@ class RedCanvas extends React.Component {
                   onMouseDown={e => {
                     e.stopPropagation();
                     const rect = this.refDegree.current.getBoundingClientRect();
-                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500, 500);
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500*this.state.canvasViewScale, 500*this.state.canvasViewScale);
                     this.setModes({
                       degreeMode: {
                         ref: this.refDegreeCanvas.current,
@@ -687,7 +687,7 @@ class RedCanvas extends React.Component {
                   onMouseDown={e => {
                     e.stopPropagation();
                     const rect = this.refDegree.current.getBoundingClientRect();
-                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500, 500);
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500*this.state.canvasViewScale, 500*this.state.canvasViewScale);
                     this.setModes({
                       degreeMode: {
                         ref: this.refDegreeCanvas.current,
@@ -724,7 +724,7 @@ class RedCanvas extends React.Component {
                   onMouseDown={e => {
                     e.stopPropagation();
                     const rect = this.refDegree.current.getBoundingClientRect();
-                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500, 500);
+                    this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500*this.state.canvasViewScale, 500*this.state.canvasViewScale);
                     this.setModes({
                       degreeMode: {
                         ref: this.refDegreeCanvas.current,

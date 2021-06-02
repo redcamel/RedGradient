@@ -94,10 +94,10 @@ class RedLayerSubItem extends React.Component {
     layerType = layerType[0].charAt(0).toUpperCase() + (layerType.length === 3 ? layerType[1].charAt(0).toUpperCase() : '');
     return <div
       style={{
-        opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s', padding: '0px 5px 5px 5px',
+        opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s, border 0.2s', padding: '0px 5px 5px 5px',
         background: '#232323',
-        boxShadow: activeSubDataYn ? '0px 0px 5px rgba(255,0,0,0.5)' : '',
-        border: '1px solid #333',
+        boxShadow: activeSubDataYn ? '0px 0px 15px rgba(94, 122, 222,0.25)' : '',
+        border: activeSubDataYn ? '1px solid rgba(58, 78, 150,1)' : '1px solid #333',
         borderRadius: '8px',
         margin: '4px 0px 4px 10px',
       }}
@@ -113,21 +113,22 @@ class RedLayerSubItem extends React.Component {
         this.setState({dragOverYn: false})
         this.props.rootComponent.updateRootState({});
       }}
+      onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: item})}
 
     >
 
       <div
         className={'layerItemSubTitle'}
-        style={{textOverflow: 'ellipsis', width: '100px', overflow: 'hidden', whiteSpace: 'nowrap'}}>
+        style={{textOverflow: 'ellipsis',  overflow: 'hidden', whiteSpace: 'nowrap'}}>
         {item.title}</div>
-      <div style={{margin: '2px 2px 2px 0px'}}>
+      <div style={{margin: '2px 2px 2px 0px',display : this.props.viewScaleMode? 'none' : ''}}>
         <button style={{...style.bgItem, background: '#000', color: '#fff'}}
                 onClick={() => this.setState({layerBgColor: 'black'})}>B
         </button>
         <button style={{...style.bgItem, background: '#fff', color: '#000'}}
                 onClick={() => this.setState({layerBgColor: 'white'})}>W
         </button>
-        <button style={{...style.bgItem}} className={'transparent_checker'}
+        <button style={{...style.bgItem,borderRight : 0}} className={'transparent_checker'}
                 onClick={() => this.setState({layerBgColor: 'transparent'})}>T
         </button>
       </div>
@@ -163,17 +164,19 @@ class RedLayerSubItem extends React.Component {
            }}
       >duplicate
       </div>
+
       <div
         className={'transparent_checker'}
         style={{
-          width: `${this.state.SIZE}px`,
+          display : this.props.viewScaleMode? 'none' : '',
+          width: `100%`,
+          // width: `${this.state.SIZE}px`,
           height: `${this.state.SIZE}px`,
-          cursor: 'pointer',
+          cursor: 'move',
           borderRadius: '4px',
           overflow: 'hidden',
           transition: 'height 0.2s'
         }}
-        onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: item})}
       >
         <div className={'layerItem'}
              style={{
@@ -205,6 +208,7 @@ class RedLayerSubItem extends React.Component {
           }}>
           drop here
         </div>
+
         <div
           className={'droparea_title'}
           style={{
@@ -228,7 +232,7 @@ const style = {
   activeLine: {
     position: 'absolute',
     top: 0, left: 0, right: 0, bottom: 0,
-    border: '2px solid #5e7ade',
+    border: '2px solid transparent',
     transition: 'border 0.2s'
   },
   deActiveLine: {

@@ -42,7 +42,7 @@ class RedPropertyEdit extends React.Component {
           ${containerCssText}
           }`
     }
-    return <div>
+    return <div style={{borderLeft : '1px solid rgb(0, 0, 0)'}}>
       <RedTitle title={'Gradient Edit'}/>
       <div style={style.container}>
         <div style={style.contentWrap}>
@@ -161,7 +161,6 @@ const style = {
   container: {
     display: "flex", height: '100%',
     borderRight: '1px solid #000',
-    borderLeft: '1px solid #000',
     overflowX: 'hidden',
     overflowY: 'hidden'
   },
