@@ -133,6 +133,7 @@ class RedCanvas extends React.Component {
             top: 0,
             left: '50%',
             transform: `translate(-50%, -${20 + 36* iconScale}px) scale(${iconScale})`,
+            transition : 'transform 0.2s',
             position: 'absolute', width: `30px`, height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -158,6 +159,7 @@ class RedCanvas extends React.Component {
             bottom: 0,
             left: '50%',
             transform: `translate(-50%, ${20 + 36* iconScale}px) scale(${iconScale})`,
+            transition : 'transform 0.2s',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -183,6 +185,7 @@ class RedCanvas extends React.Component {
             bottom: '50%',
             left: 0,
             transform: `translate(-${20 + 36* iconScale}px, 50%) scale(${iconScale})`,
+            transition : 'transform 0.2s',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -208,6 +211,7 @@ class RedCanvas extends React.Component {
             bottom: '50%',
             right: 0,
             transform: `translate(${20 + 36* iconScale}px, 50%) scale(${iconScale})`,
+            transition : 'transform 0.2s',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -233,6 +237,7 @@ class RedCanvas extends React.Component {
             bottom: 0,
             left: '50%',
             transform: `translate(-50%, ${20 + 76* iconScale}px) scale(${iconScale})`,
+            transition : 'transform 0.2s',
             position: 'absolute', width: '30px', height: '30px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'move',
@@ -258,6 +263,7 @@ class RedCanvas extends React.Component {
             <div
               style={{
                 top: 0, left: 0, transform: `translate(-${16 + 7*iconScale}px, -${16 + 7*iconScale}px) scale(${iconScale})`,
+                transition : 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'nw-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -283,6 +289,7 @@ class RedCanvas extends React.Component {
             <div
               style={{
                 top: 0, right: 0, transform: `translate(${16 + 7*iconScale}px, -${16 + 7*iconScale}px) scale(${iconScale})`,
+                transition : 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'ne-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -308,6 +315,7 @@ class RedCanvas extends React.Component {
             <div
               style={{
                 bottom: 0, left: 0, transform: `translate(-${16 + 7*iconScale}px, ${16 + 7*iconScale}px) scale(${iconScale})`,
+                transition : 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'sw-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -333,6 +341,7 @@ class RedCanvas extends React.Component {
             <div
               style={{
                 bottom: 0, right: 0, transform: `translate(${16 + 7*iconScale}px, ${16 + 7*iconScale}px) scale(${iconScale})`,
+                transition : 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'se-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -359,6 +368,7 @@ class RedCanvas extends React.Component {
             <div
               style={{
                 top: '50%', left: 0, transform: `translate(-${16 + 7*iconScale}px, -50%) scale(${iconScale})`,
+                transition : 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'w-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -384,6 +394,7 @@ class RedCanvas extends React.Component {
             <div
               style={{
                 top: '50%', right: 0, transform: `translate(${16 + 7*iconScale}px, -50%) scale(${iconScale})`,
+                transition : 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'e-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -409,6 +420,7 @@ class RedCanvas extends React.Component {
             <div
               style={{
                 top: 0, left: '50%', transform: `translate(-50%, -${16 + 7*iconScale}px) scale(${iconScale})`,
+                transition : 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'n-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -434,6 +446,7 @@ class RedCanvas extends React.Component {
             <div
               style={{
                 bottom: 0, left: '50%', transform: `translate(-50%, ${16 + 7*iconScale}px) scale(${iconScale})`,
+                transition : 'transform 0.2s',
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 's-resize',
                 background: 'rgba(255,255,255,0.75)',
@@ -517,7 +530,7 @@ class RedCanvas extends React.Component {
                   width={'250px'}
                   height={'250px'}
                   style={{
-                    top: '50%', left: '50%', transform: `translate(-50%, -50%) rotate(0deg) scale(${iconScale})`,
+                    top: '50%', left: '50%', transform: `translate(-50%, -50%) rotate(0deg) `,
                     width: `${250}px`, height: `${250}px`,
                     position: 'absolute', borderRadius: '50%', lineHeight: 1,
                     background: 'rgba(255,255,255,0.25)',
@@ -527,7 +540,7 @@ class RedCanvas extends React.Component {
                 <div
                   ref={this.refDegree}
                   style={{
-                    top: '50%', left: '50%', transform: `translate(-50%, -50%) rotate(0deg) scale(${iconScale})`,
+                    top: '50%', left: '50%', transform: `translate(-50%, -50%) rotate(0deg) `,
                     width: `${50}px`, height: `${50}px`,
                     position: 'absolute', borderRadius: '50%', lineHeight: 1,
                     display: this.state.degreeMode ? 'block' : 'none',
@@ -563,6 +576,7 @@ class RedCanvas extends React.Component {
                 <div
                   style={{
                     top: 0, left: 0, transform: `translate(-${20+32*iconScale}px, -${20+32*iconScale}px) scale(${iconScale})`,
+                    transition : 'transform 0.2s',
                     position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
@@ -593,6 +607,7 @@ class RedCanvas extends React.Component {
                 <div
                   style={{
                     top: 0, right: 0, transform: `translate(${20+32*iconScale}px, -${20+32*iconScale}px) scale(${iconScale})`,
+                    transition : 'transform 0.2s',
                     position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
@@ -623,6 +638,7 @@ class RedCanvas extends React.Component {
                 <div
                   style={{
                     bottom: 0, right: 0, transform: `translate(${20+32*iconScale}px, ${20+32*iconScale}px) scale(${iconScale})`,
+                    transition : 'transform 0.2s',
                     position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
@@ -653,6 +669,7 @@ class RedCanvas extends React.Component {
                 <div
                   style={{
                     bottom: 0, left: 0, transform: `translate(-${20+32*iconScale}px, ${20+32*iconScale}px) scale(${iconScale})`,
+                    transition : 'transform 0.2s',
                     position: 'absolute', width: '30px', height: '30px', borderRadius: '50%',
                     background: 'rgba(255,255,255,0.75)',
                     display: 'flex',
