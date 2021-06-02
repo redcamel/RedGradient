@@ -7,7 +7,7 @@
  */
 import React from "react";
 import DataItem from "../data/DataItem.js";
-import {faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
+import {faCopy, faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 import RedLayerItem from "./RedLayerItem.jsx";
@@ -21,7 +21,6 @@ class RedLayerSubItem extends React.Component {
     super(props);
     this.state = {
       layerBgColor: 'transparent',
-      SIZE: props.size || 100,
       dragOverYn: false
     };
   }
@@ -90,6 +89,8 @@ class RedLayerSubItem extends React.Component {
     const layer = this.props.layer;
     const activeSubDataYn = rootComponentState.activeSubData === item;
     const dragAble = layer.items.length > 1;
+    const SIZE = this.props.layerViewSizeMode === 0 ? 100 : this.props.layerViewSizeMode===1 ? 50 : 0
+
     let layerType = item.type.split('-');
     layerType = layerType[0].charAt(0).toUpperCase() + (layerType.length === 3 ? layerType[1].charAt(0).toUpperCase() : '');
     return <div
@@ -119,16 +120,16 @@ class RedLayerSubItem extends React.Component {
 
       <div
         className={'layerItemSubTitle'}
-        style={{textOverflow: 'ellipsis',  overflow: 'hidden', whiteSpace: 'nowrap'}}>
+        style={{textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap'}}>
         {item.title}</div>
-      <div style={{margin: '2px 2px 2px 0px',display : this.props.viewScaleMode? 'none' : ''}}>
+      <div style={{margin: '2px 2px 2px 0px', display: this.props.layerViewSizeMode === 2 ? 'none' : ''}}>
         <button style={{...style.bgItem, background: '#000', color: '#fff'}}
                 onClick={() => this.setState({layerBgColor: 'black'})}>B
         </button>
         <button style={{...style.bgItem, background: '#fff', color: '#000'}}
                 onClick={() => this.setState({layerBgColor: 'white'})}>W
         </button>
-        <button style={{...style.bgItem,borderRight : 0}} className={'transparent_checker'}
+        <button style={{...style.bgItem, borderRight: 0}} className={'transparent_checker'}
                 onClick={() => this.setState({layerBgColor: 'transparent'})}>T
         </button>
       </div>
@@ -162,16 +163,16 @@ class RedLayerSubItem extends React.Component {
              layer.items.splice(idx, 0, t0);
              rootComponent.updateRootState({activeSubData: t0});
            }}
-      >duplicate
+      ><FontAwesomeIcon icon={faCopy}/>
+        <div style={{marginLeft: '5px'}}>duplicate</div>
       </div>
 
       <div
         className={'transparent_checker'}
         style={{
-          display : this.props.viewScaleMode? 'none' : '',
+          display: this.props.layerViewSizeMode === 2 ? 'none' : '',
           width: `100%`,
-          // width: `${this.state.SIZE}px`,
-          height: `${this.state.SIZE}px`,
+          height: `${SIZE}px`,
           cursor: 'move',
           borderRadius: '4px',
           overflow: 'hidden',
@@ -249,6 +250,8 @@ const style = {
     fontWeight: 'bold'
   },
   addGradientLayerItem: {
+    display: 'flex',
+    alignItems: 'center',
     marginTop: '2px',
     background: 'linear-gradient(#5e7ade, #2c3565)',
     padding: '3px 5px',

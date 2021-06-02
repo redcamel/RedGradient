@@ -28,7 +28,6 @@ class RedLayerItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      SIZE: props.size || 50,
       dragOverYn: false,
       openPanel: false,
       draggable: true
@@ -91,6 +90,7 @@ class RedLayerItem extends React.Component {
     const rootComponentState = rootComponent.state;
     const layers = rootComponentState.layers;
     const layer = this.props.layer;
+    const SIZE = this.props.layerViewSizeMode === 0 ? 100 : this.props.layerViewSizeMode===1 ? 50 : 0
     return <div
       style={{
         opacity: layer.visible ? 1 : 0.5, transition: 'opacity 0.2s',
@@ -170,7 +170,7 @@ class RedLayerItem extends React.Component {
              onClick={() => {
                this.setState({openPanel: true, draggable: false})
              }}
-        >add with template
+        ><FontAwesomeIcon icon={faPlusCircle}/> <div style={{marginLeft : '5px'}}>add with template</div>
         </div>
         {this.state.openPanel ? <RedAddGradientLayerSet
           rootComponent={this}
@@ -191,8 +191,7 @@ class RedLayerItem extends React.Component {
           className={'transparent_checker'}
           style={{
             width: `100%`,
-            // width: `${this.state.SIZE*2}px`,
-            height: `${this.state.SIZE}px`,
+            height: `${SIZE}px`,
             cursor: 'grab',
             borderRadius: '4px',
             overflow: 'hidden',
@@ -207,9 +206,9 @@ class RedLayerItem extends React.Component {
       </>
       <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem
         layer={layer} item={item}
-        viewScaleMode = {this.props.viewScaleMode}
+        layerViewSizeMode = {this.props.layerViewSizeMode}
         rootComponent={rootComponent}
-        size={this.state.SIZE}/>) : ''}</div>
+        size={SIZE}/>) : ''}</div>
       <div
 
         style={{
@@ -270,6 +269,8 @@ const style = {
     border: '2px solid transparent',
   },
   addGradientLayerItem: {
+    display : 'flex',
+    alignItems:'center',
     marginTop: '2px',
     background: 'linear-gradient(#5e7ade, #2c3565)',
     padding: '3px 5px',

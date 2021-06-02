@@ -49,20 +49,30 @@ class RedLayerTop extends React.Component {
           <div
             style={{
               ...style.viewScaleItem,
-              opacity: layersComponent.state.viewScaleMode ? 0.25 : 1
+              opacity: layersComponent.state.layerViewSizeMode===0 ? 1 : 0.25
             }}
             onClick={e => {
-              layersComponent.setState({viewScaleMode: 0})
+              layersComponent.setState({layerViewSizeMode: 0})
             }}
           >big
           </div>
           <div
             style={{
               ...style.viewScaleItem,
-              opacity: layersComponent.state.viewScaleMode ? 1 : 0.25
+              opacity: layersComponent.state.layerViewSizeMode ===1? 1 : 0.25
             }}
             onClick={e => {
-              layersComponent.setState({viewScaleMode: 1})
+              layersComponent.setState({layerViewSizeMode: 1})
+            }}
+          >wide
+          </div>
+          <div
+            style={{
+              ...style.viewScaleItem,
+              opacity: layersComponent.state.layerViewSizeMode===2 ? 1 : 0.25
+            }}
+            onClick={e => {
+              layersComponent.setState({layerViewSizeMode: 2})
             }}
           >small
           </div>
@@ -101,10 +111,12 @@ const style = {
   viewScaleItem: {
     background: 'linear-gradient(rgb(114, 53, 212), rgb(77, 29, 147))',
     cursor: 'pointer',
-    width: '50%',
+    width: 'calc(100%/3)',
     height: '100%',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderRight : '1px solid rgba(0,0,0,0.5)',
+    transition : 'opacity 0.2s'
   }
 };

@@ -14,7 +14,8 @@ class RedLayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      layerBgColor: 'transparent'
+      layerBgColor: 'transparent',
+      layerViewSizeMode : 0
     };
   }
 
@@ -28,7 +29,7 @@ class RedLayer extends React.Component {
         {
           layers.map((layer) => {
             return <RedLayerItem
-              viewScaleMode = {this.state.viewScaleMode}
+              layerViewSizeMode = {this.state.layerViewSizeMode}
               layerBgColor={this.state.layerBgColor}
               layer={layer}
               rootComponent={rootComponent}
