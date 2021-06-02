@@ -12,8 +12,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 import RedLayerItem from "./RedLayerItem.jsx";
 
-let startDragLayer
-let startDragItem
+let startDragLayer;
+let startDragItem;
 
 class RedLayerSubItem extends React.Component {
   constructor(props) {
@@ -31,14 +31,14 @@ class RedLayerSubItem extends React.Component {
   }
 
   handleDragStart(e) {
-    console.log('start ///////////////////')
-    console.log(this)
-    console.log(this.props.layer)
-    console.log(this.props.item)
-    RedLayerItem.clearDragInfo()
-    RedLayerSubItem.clearDragInfo()
-    startDragLayer = this.props.layer
-    startDragItem = this.props.item
+    console.log('start ///////////////////');
+    console.log(this);
+    console.log(this.props.layer);
+    console.log(this.props.item);
+    RedLayerItem.clearDragInfo();
+    RedLayerSubItem.clearDragInfo();
+    startDragLayer = this.props.layer;
+    startDragItem = this.props.item;
   }
 
   handleDragEnter(e) {
@@ -49,35 +49,35 @@ class RedLayerSubItem extends React.Component {
   handleDragLeave(e) {
     e.preventDefault();
     e.stopPropagation();
-    if (startDragLayer) this.setState({dragOverYn: false})
+    if (startDragLayer && e.nativeEvent.target.className === 'droparea_title') this.setState({dragOverYn: false});
   }
 
   handleDragOver(e) {
     e.preventDefault();
     e.stopPropagation();
-    if (startDragLayer) this.setState({dragOverYn: true})
+    if (startDragLayer) this.setState({dragOverYn: true});
   }
 
   handleDrop(e) {
     e.preventDefault();
     e.stopPropagation();
     if (startDragLayer) {
-      console.log('drop ///////////////////')
-      console.log(this)
-      console.log(this.props.layer)
-      console.log(this.props.item)
-      console.log(e.nativeEvent)
-      this.setState({dragOverYn: false})
-      const dropAreaLayer = this.props.layer
-      const dropAreaItem = this.props.item
-      const dstIDX = dropAreaLayer.items.indexOf(dropAreaItem)
-      const startIDX = startDragLayer.items.indexOf(startDragItem)
-      startDragLayer.items.splice(startIDX, 1)
-      dropAreaLayer.items.splice(dstIDX, 0, startDragItem)
-      RedLayerItem.clearDragInfo()
-      RedLayerSubItem.clearDragInfo()
-      this.props.rootComponent.updateRootState({})
+      console.log('drop ///////////////////');
+      console.log(this);
+      console.log(this.props.layer);
+      console.log(this.props.item);
+      console.log(e.nativeEvent);
+      this.setState({dragOverYn: false});
+      const dropAreaLayer = this.props.layer;
+      const dropAreaItem = this.props.item;
+      const dstIDX = dropAreaLayer.items.indexOf(dropAreaItem);
+      const startIDX = startDragLayer.items.indexOf(startDragItem);
+      startDragLayer.items.splice(startIDX, 1);
+      dropAreaLayer.items.splice(dstIDX, 0, startDragItem);
     }
+    RedLayerItem.clearDragInfo();
+    RedLayerSubItem.clearDragInfo();
+    this.props.rootComponent.updateRootState({});
   }
 
   render() {
@@ -86,9 +86,9 @@ class RedLayerSubItem extends React.Component {
     const item = this.props.item;
     const layer = this.props.layer;
     const activeSubDataYn = rootComponentState.activeSubData === item;
-    const dragAble = layer.items.length > 1
-    let layerType = item.type.split('-')
-    layerType = layerType[0].charAt(0).toUpperCase() + (layerType.length === 3 ? layerType[1].charAt(0).toUpperCase() : '')
+    const dragAble = layer.items.length > 1;
+    let layerType = item.type.split('-');
+    layerType = layerType[0].charAt(0).toUpperCase() + (layerType.length === 3 ? layerType[1].charAt(0).toUpperCase() : '');
     return <div
       style={{
         opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s', padding: '0px 5px 5px 5px',
@@ -104,13 +104,15 @@ class RedLayerSubItem extends React.Component {
       onDragOver={e => this.handleDragOver(e)}
       onDragEnter={e => this.handleDragEnter(e)}
       onDragLeave={e => this.handleDragLeave(e)}
+      onDragEnd={e => e=>{
+        RedLayerItem.clearDragInfo();
+        RedLayerSubItem.clearDragInfo();
+        this.setState({dragOverYn: false})
+        this.props.rootComponent.updateRootState({});
+      }}
+
     >
-      {this.state.dragOverYn ? <div style={{
-        background: 'red',
-        padding: '4px',
-        margin: '4px 0px',
-        borderRadius: '4px'
-      }}>drop here</div> : ''}
+
       <div
         className={'layerItemSubTitle'}
         style={{textOverflow: 'ellipsis', width: '100px', overflow: 'hidden', whiteSpace: 'nowrap'}}>
@@ -128,7 +130,7 @@ class RedLayerSubItem extends React.Component {
       </div>
       <div style={{margin: '2px 2px 2px 0px'}}>
         <button className={'layerVisible'}
-                onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash}/>
+                onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash} />
         </button>
         <button className={'layerDel'}
                 style={{opacity: layer.items.length > 1 ? 1 : 0.25}}
@@ -145,14 +147,14 @@ class RedLayerSubItem extends React.Component {
                     rootComponent.updateRootState({activeSubData: layer.items[idx]});
                   }
                 }}
-        ><FontAwesomeIcon icon={faMinusCircle}/>
+        ><FontAwesomeIcon icon={faMinusCircle} />
         </button>
         <button className={'layerType'}>{layerType}</button>
       </div>
       <div style={style.addGradientLayerItem}
            onClick={e => {
-             const idx = layer.items.indexOf(item)
-             const t0 = JSON.parse(JSON.stringify(item))
+             const idx = layer.items.indexOf(item);
+             const t0 = JSON.parse(JSON.stringify(item));
              layer.items.splice(idx, 0, t0);
              rootComponent.updateRootState({activeSubData: t0});
            }}
@@ -176,16 +178,32 @@ class RedLayerSubItem extends React.Component {
              }}
         />
 
-        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine}/>
+        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
+      </div>
+      <div
+        className={'droparea_title'}
+        style={{
+          display : 'flex',
+          alignItems:'center',
+          justifyContent :'center',
+          position: 'absolute',
+          top: 0, left: 0, right: 0, overflow: 'hidden',
+          height: this.state.dragOverYn ? '100%' : 0,
+          opacity: this.state.dragOverYn ? 0.75 : 0,
+          transition : 'opacity 0.2s',
+          background: 'rgb(255, 122, 222)',
+          fontSize  :'16px',
+          borderRadius: '4px'
+        }}>drop here
       </div>
     </div>;
   }
 }
 
 RedLayerSubItem.clearDragInfo = () => {
-  startDragLayer = null
-  startDragItem = null
-}
+  startDragLayer = null;
+  startDragItem = null;
+};
 export default RedLayerSubItem;
 const style = {
   activeLine: {
