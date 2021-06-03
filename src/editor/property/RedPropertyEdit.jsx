@@ -120,7 +120,9 @@ class RedPropertyEdit extends React.Component {
                         tempElem.select();
                         document.execCommand("copy");
                         document.body.removeChild(tempElem);
-                        toast.dark("Copy Class!")
+                        toast.dark("Copy Class!",{
+                          position : 'bottom-left'
+                        })
                       }}
                     >Copy Class
                     </button>
