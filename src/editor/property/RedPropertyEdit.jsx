@@ -21,6 +21,7 @@ import RedPropertySizeEdit from "./RedPropertySizeEdit";
 import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
 import RedCanvas from "../canvas/RedCanvas";
 import CALC_GRADIENT from "../CALC_GRADIENT";
+import {toast} from "react-toastify";
 
 class RedPropertyEdit extends React.Component {
   render() {
@@ -119,7 +120,7 @@ class RedPropertyEdit extends React.Component {
                         tempElem.select();
                         document.execCommand("copy");
                         document.body.removeChild(tempElem);
-                        alert('Copy Class!')
+                        toast.dark("Copy Class!")
                       }}
                     >Copy Class
                     </button>

@@ -19,7 +19,8 @@ import RedPreset from "./editor/property/preset/RedPreset.jsx";
 import DataLayer from "./editor/data/DataLayer.js";
 import BORDER_REPEAT_TYPE from "./editor/BORDER_REPEAT_TYPE.js";
 import DataCanvas from "./editor/data/DataCanvas.js";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -252,6 +253,9 @@ class App extends React.Component {
           https://github.com/redcamel/RedGradient</a>
         <div>This project is maintained by <a href={'mailto:webseon@gmail.com'}>RedCamel</a></div>
       </div>
+      <ToastContainer
+        hideProgressBar={true}
+      />
     </div>;
   }
 }
