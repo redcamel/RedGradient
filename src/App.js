@@ -31,6 +31,7 @@ class App extends React.Component {
     this.history = []
     this.historyRedo = []
     window.addEventListener('resize', e => {
+
       this.updateRootState()
     })
   }
@@ -81,6 +82,8 @@ class App extends React.Component {
 
   updateRootState(v = {}) {
     // console.log(v)
+
+    if(!this.state || !this.state.canvasInfo) return
     this.setState(v)
     if (this.history.length > 50) this.history.shift()
     this.history.push(JSON.parse(JSON.stringify(this.state)))
