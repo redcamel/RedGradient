@@ -6,6 +6,7 @@
  *
  */
 import React from "react";
+import drawCanvasEditUI from "./drawCanvasEditUI";
 import RedTitle from "../../../core/RedTitle";
 import RedCanvasFilterList from "./filter/RedCanvasFilterList.jsx";
 import RedCanvasBorderModeEdit from "./property/RedCanvasBorderModeEdit.jsx";
@@ -22,28 +23,21 @@ class RedCanvasEdit extends React.Component {
     };
     this.refColorPickerContainer = React.createRef();
   }
-  updateRootState(v) {
-    this.props.rootComponent.updateRootState(v)
-    const rootComponent = this.props.rootComponent
-    const rootComponentState = rootComponent.state
-  }
+
+  drawCanvasEditUI = drawCanvasEditUI;
 
   render() {
     const rootComponent = this.props.rootComponent
-    const rootComponentState = rootComponent.state
-    this.state = {
-      layerSizeView : this.state.layerSizeView,
-      canvasBgColorPickerOpenYn : this.state.canvasBgColorPickerOpenYn,
-      ...rootComponentState[rootComponentState.activeEditKey]
-    }
-    const canvasInfo =  this.state.canvasInfo
+    const canvasInfo = rootComponent.state.canvasInfo
 
     return <div>
       <RedTitle title={'Container Property'}/>
       <div style={style.container}>
-        <RedCanvasBoxSizingEdit rootComponent={this}/>
+        {this.drawCanvasEditUI()}
         <div style={style.divide}/>
-        <RedCanvasOutlineEdit rootComponent={this}/>
+        <RedCanvasBoxSizingEdit rootComponent={rootComponent}/>
+        <div style={style.divide}/>
+        <RedCanvasOutlineEdit rootComponent={rootComponent}/>
         <div style={style.divide}/>
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <div className={'ui_subTitle'}>border</div>
@@ -59,14 +53,14 @@ class RedCanvasEdit extends React.Component {
             <div
               onClick={e => {
                 canvasInfo.borderIsGradientMode = false
-                this.updateRootState()
+                rootComponent.updateRootState()
               }}
               style={{...style.mode, background: canvasInfo.borderIsGradientMode ? '#2f2f2f' : '#5e7ade'}}>basic
             </div>
             <div
               onClick={e => {
                 canvasInfo.borderIsGradientMode = true
-                this.updateRootState()
+                rootComponent.updateRootState()
               }}
               style={{
                 ...style.mode,
@@ -83,15 +77,15 @@ class RedCanvasEdit extends React.Component {
           padding: '10px 6px',
         }}>
           <div style={{display: canvasInfo.borderIsGradientMode ? 'none' : 'block'}}><RedCanvasBorderModeEdit
-            rootComponent={this}/></div>
+            rootComponent={rootComponent}/></div>
 
-          {canvasInfo.borderIsGradientMode ? <RedCanvasBorderGradientFrame rootComponent={this}/> : ''}
+          {canvasInfo.borderIsGradientMode ? <RedCanvasBorderGradientFrame rootComponent={rootComponent}/> : ''}
 
         </div>
 
 
         <div style={style.divide}/>
-        <RedCanvasFilterList rootComponent={this}/>
+        <RedCanvasFilterList rootComponent={rootComponent}/>
         <div style={style.divide}/>
       </div>
     </div>;

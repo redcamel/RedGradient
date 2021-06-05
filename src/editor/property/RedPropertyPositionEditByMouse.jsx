@@ -62,7 +62,6 @@ class RedPropertyPositionEditByMouse extends React.Component {
     const targetData = activeSubData[this.props.targetKey];
     const canvasInfo = rootComponentState.canvasInfo;
     const activeSubDataSize = activeSubData['size']
-    const activeSubDataPosition = activeSubData['position']
     const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3])
     const borderH = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2])
     const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3]
@@ -71,7 +70,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
       w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width'] - borderW) * activeSubDataSize['w'] / 100 : activeSubDataSize['w'] - borderW,
       h: activeSubDataSize['hUnit'] === '%' ? (canvasInfo['height'] - borderH) * activeSubDataSize['h'] / 100 : activeSubDataSize['h'] - borderH,
     };
-     let layerPixelW = layoutSize.w;
+    let layerPixelW = layoutSize.w;
     let layerPixelH = layoutSize.h;
     let tPercentX = targetData['xUnit'] === '%' ? (targetData.x === 100 ? targetData.x : (targetData.x) % 100) : (targetData.x === layerPixelW ? (targetData.x / layerPixelW * 100) : (targetData.x / layerPixelW * 100) % 100);
     let tPercentY = targetData['yUnit'] === '%' ? (targetData.y === 100 ? targetData.y : (targetData.y) % 100) : (targetData.y === layerPixelH ? (targetData.y / layerPixelH * 100) : (targetData.y / layerPixelH * 100) % 100);
@@ -228,16 +227,16 @@ class RedPropertyPositionEditByMouse extends React.Component {
                let tX = activeSubData[targetKey]['x'];
                let tY = activeSubData[targetKey]['y'];
                if (targetKey === 'at') {
-                 if (targetData['xUnit'] === 'px') tX = (canvasInfo['width']-borderW) - tX;
+                 if (targetData['xUnit'] === 'px') tX = canvasInfo['width'] - tX;
                  else tX = 100 - tX;
                } else {
                  if (targetData['xUnit'] === 'px') {
                    let tW = activeSubData['size']['w'];
-                   tW = activeSubData['size']['wUnit'] === '%' ? tW / 100 * (canvasInfo['width']-borderW) : tW;
-                   tX = (canvasInfo['width']-borderW) - tX - tW;
+                   tW = activeSubData['size']['wUnit'] === '%' ? tW / 100 * canvasInfo['width'] : tW;
+                   tX = canvasInfo['width'] - tX - tW;
                  } else {
                    let tW = activeSubData['size']['w'];
-                   tW = activeSubData['size']['wUnit'] === '%' ? tW : tW * (canvasInfo['width']-borderW) * 100;
+                   tW = activeSubData['size']['wUnit'] === '%' ? tW : tW * canvasInfo['width'] * 100;
                    tX = 100 - tX;
                  }
                }
@@ -251,16 +250,16 @@ class RedPropertyPositionEditByMouse extends React.Component {
                let tX = activeSubData[targetKey]['x'];
                let tY = activeSubData[targetKey]['y'];
                if (targetKey === 'at') {
-                 if (targetData['yUnit'] === 'px') tY = (canvasInfo['height']-borderH) - tY;
+                 if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] - tY;
                  else tY = 100 - tY;
                } else {
                  if (targetData['yUnit'] === 'px') {
                    let tH = activeSubData['size']['h'];
-                   tH = activeSubData['size']['hUnit'] === '%' ? tH / 100 * (canvasInfo['height']-borderH) : tH;
-                   tY = (canvasInfo['height']-borderH) - tY - tH;
+                   tH = activeSubData['size']['hUnit'] === '%' ? tH / 100 * canvasInfo['height'] : tH;
+                   tY = canvasInfo['height'] - tY - tH;
                  } else {
                    let tH = activeSubData['size']['h'];
-                   tH = activeSubData['size']['hUnit'] === '%' ? tH : tH * (canvasInfo['height']-borderH) * 100;
+                   tH = activeSubData['size']['hUnit'] === '%' ? tH : tH * canvasInfo['height'] * 100;
                    tY = 100 - tY;
                  }
                }

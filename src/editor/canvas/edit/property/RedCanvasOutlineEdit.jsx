@@ -79,23 +79,22 @@ class RedCanvasOutlineEdit extends React.Component {
             cursor: 'pointer'
           }}
           onClick={() => {
-            this.refColorPickerContainer.current.innerHTML = ''
-            colorPicker = new ColorPicker({
-              type: "sketch",
-              position: 'inline',
-              color: canvasInfo.outline_color,
-              container: this.refColorPickerContainer.current,
-              onChange: color => {
-                console.log(color)
-                canvasInfo['outline_color'] = color;
-                rootComponent.updateRootState({});
-              }
-            });
+            this.setState({canvasBgColorPickerOpenYn: true});
+            if (!colorPicker) {
+              colorPicker = new ColorPicker({
+                type: "sketch",
+                position: 'inline',
+                color: canvasInfo.outline_color,
+                container: this.refColorPickerContainer.current,
+                onChange: color => {
+                  canvasInfo['outline_color'] = color;
+                  rootComponent.updateRootState({canvasInfo});
+                }
+              });
+            }
             requestAnimationFrame(e => {
-              console.log(colorPicker)
               colorPicker.initColorWithoutChangeEvent(canvasInfo.outline_color);
             })
-            this.setState({canvasBgColorPickerOpenYn: true});
           }}
         />
 

@@ -24,8 +24,8 @@ function DataItem() {
     at: {x: 0, xUnit: '%', y: 0, yUnit: '%'},
     size: {w: 100, wUnit: '%', h: 100, hUnit: '%'},
     colorList: [
-      new DataColor(`rgba(255, 255, 255, 0)`, 0, '%'),
-      new DataColor(`rgba(255, 255, 255, 0)`, 100, '%')
+      new DataColor(`rgba(255, 255, 255, 1)`, 0, '%'),
+      new DataColor(`rgba(255, 255, 255, 0.1)`, 100, '%')
     ]
   };
 }
