@@ -22,7 +22,7 @@ class FrameCenter extends React.Component {
 
     return <div className={'frame_center'}>
       {/*frame_center*/}
-      <RedCanvas rootComponent={this} rootComponent2={rootComponent}/>
+      <RedCanvas rootComponent={this} appComponent={rootComponent}/>
     </div>
   }
 }

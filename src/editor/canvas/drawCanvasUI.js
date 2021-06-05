@@ -16,16 +16,16 @@ import ACTIVE_EDIT_KEY from "../ACTIVE_EDIT_KEY.js";
 
 function drawCanvasUI() {
   const rootComponent = this.props.rootComponent;
-  const rootComponent2 = this.props.rootComponent2;
+  const appComponent = this.props.appComponent;
   const rootComponentState = this.props.rootComponent;
-  const rootComponent2State = rootComponent2.state;
+  const appComponentState = appComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
   return <div style={style.container}>
     <RedTitle title={'Container Information'}/>
     <>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <div style={style.canvasResizer}>
-          <RedCanvasSizeEdit rootComponent={rootComponent} rootComponent2={rootComponent2}canvasComponent={this}/>
+          <RedCanvasSizeEdit rootComponent={rootComponent} appComponent={appComponent}canvasComponent={this}/>
           <div>
             <label style={{
               marginLeft: '5px',
@@ -76,12 +76,12 @@ function drawCanvasUI() {
             return <button
               style={style.presetButton}
               onClick={() => {
-                rootComponent2State[ACTIVE_EDIT_KEY.BEFORE]['canvasInfo']['width'] = v.width
-                rootComponent2State[ACTIVE_EDIT_KEY.MAIN]['canvasInfo']['width'] = v.width
-                rootComponent2State[ACTIVE_EDIT_KEY.AFTER]['canvasInfo']['width'] = v.width
-                rootComponent2State[ACTIVE_EDIT_KEY.BEFORE]['canvasInfo']['height'] = v.height
-                rootComponent2State[ACTIVE_EDIT_KEY.MAIN]['canvasInfo']['height'] = v.height
-                rootComponent2State[ACTIVE_EDIT_KEY.AFTER]['canvasInfo']['height'] = v.height
+                appComponentState[ACTIVE_EDIT_KEY.BEFORE]['canvasInfo']['width'] = v.width
+                appComponentState[ACTIVE_EDIT_KEY.MAIN]['canvasInfo']['width'] = v.width
+                appComponentState[ACTIVE_EDIT_KEY.AFTER]['canvasInfo']['width'] = v.width
+                appComponentState[ACTIVE_EDIT_KEY.BEFORE]['canvasInfo']['height'] = v.height
+                appComponentState[ACTIVE_EDIT_KEY.MAIN]['canvasInfo']['height'] = v.height
+                appComponentState[ACTIVE_EDIT_KEY.AFTER]['canvasInfo']['height'] = v.height
 
                 rootComponent.updateRootState({});
               }}
@@ -108,11 +108,11 @@ function drawCanvasUI() {
         border: '1px solid #000',
         borderRadius: '6px',
         transition: 'all 0.2s',
-        background: !rootComponent2.state.previewMode && rootComponent2.state.activeEditKey === ACTIVE_EDIT_KEY.BEFORE ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
+        background:  appComponent.state.activeEditKey === ACTIVE_EDIT_KEY.BEFORE ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
       }} onClick={e => {
-        rootComponent2.state.previewMode = false
-        rootComponent2.state.activeEditKey = ACTIVE_EDIT_KEY.BEFORE
-        rootComponent2.setState({})
+        
+        appComponent.state.activeEditKey = ACTIVE_EDIT_KEY.BEFORE
+        appComponent.setState({})
       }}>
         ::Before onTop
       </div>
@@ -123,11 +123,11 @@ function drawCanvasUI() {
         border: '1px solid #000',
         borderRadius: '6px',
         transition: 'all 0.2s',
-        background:  !rootComponent2.state.previewMode && rootComponent2.state.activeEditKey === ACTIVE_EDIT_KEY.MAIN || !rootComponent2.state.activeEditKey ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
+        background:   appComponent.state.activeEditKey === ACTIVE_EDIT_KEY.MAIN || !appComponent.state.activeEditKey ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
       }} onClick={e => {
-        rootComponent2.state.previewMode = false
-        rootComponent2.state.activeEditKey = ACTIVE_EDIT_KEY.MAIN
-        rootComponent2.setState({})
+        
+        appComponent.state.activeEditKey = ACTIVE_EDIT_KEY.MAIN
+        appComponent.setState({})
       }}>Main onTop
       </div>
       <div style={{
@@ -137,25 +137,12 @@ function drawCanvasUI() {
         border: '1px solid #000',
         borderRadius: '6px',
         transition: 'all 0.2s',
-        background:  !rootComponent2.state.previewMode && rootComponent2.state.activeEditKey === ACTIVE_EDIT_KEY.AFTER ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
+        background:   appComponent.state.activeEditKey === ACTIVE_EDIT_KEY.AFTER ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
       }} onClick={e => {
-        rootComponent2.state.previewMode = false
-        rootComponent2.state.activeEditKey = ACTIVE_EDIT_KEY.AFTER
-        rootComponent2.setState({})
+        
+        appComponent.state.activeEditKey = ACTIVE_EDIT_KEY.AFTER
+        appComponent.setState({})
       }}>::After onTop
-      </div>
-      <div style={{
-        cursor: 'pointer',
-        padding: '10px',
-        margin: '2px',
-        border: '1px solid #000',
-        borderRadius: '6px',
-        transition: 'all 0.2s',
-        background: rootComponent2.state.previewMode  ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
-      }} onClick={e => {
-        rootComponent2.state.previewMode = true
-        rootComponent2.setState({})
-      }}>Main Base MergeView
       </div>
     </div>
 

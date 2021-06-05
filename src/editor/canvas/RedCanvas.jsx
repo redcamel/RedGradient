@@ -56,7 +56,7 @@ class RedCanvas extends React.Component {
     const activeSubDataPosition = activeSubData['position'];
     const activeSubDataAt = activeSubData['at'];
     const activeSubDataSize = activeSubData['size'];
-    const bgColor = index ? 'transparent' : this.props.rootComponent2.state['bgColor']
+    const bgColor = index ? 'transparent' : this.props.appComponent.state['bgColor']
     {
       activeSubData['position']['x'] = +activeSubData['position']['x'];
       activeSubData['position']['y'] = +activeSubData['position']['y'];
@@ -810,25 +810,23 @@ class RedCanvas extends React.Component {
       renderList = [
         {
           name: ACTIVE_EDIT_KEY.BEFORE,
-          activeYn: this.props.rootComponent2.state.activeEditKey === ACTIVE_EDIT_KEY.BEFORE
+          activeYn: this.props.appComponent.state.activeEditKey === ACTIVE_EDIT_KEY.BEFORE
+        },
+
+        {
+          name: ACTIVE_EDIT_KEY.AFTER,
+          activeYn: this.props.appComponent.state.activeEditKey === ACTIVE_EDIT_KEY.AFTER
         },
         {
           name: ACTIVE_EDIT_KEY.MAIN,
-          activeYn: this.props.rootComponent2.state.activeEditKey === ACTIVE_EDIT_KEY.MAIN
-        },
-        {
-          name: ACTIVE_EDIT_KEY.AFTER,
-          activeYn: this.props.rootComponent2.state.activeEditKey === ACTIVE_EDIT_KEY.AFTER
+          activeYn: this.props.appComponent.state.activeEditKey === ACTIVE_EDIT_KEY.MAIN
         }
       ]
-      if (this.props.rootComponent2.state.previewMode) {
-      } else {
-        renderList = renderList.sort((a, b) => {
-          if (a['activeYn'] > b['activeYn']) return 1
-          if (a['activeYn'] < b['activeYn']) return -1
-          return 0
-        })
-      }
+      renderList = renderList.sort((a, b) => {
+        if (a['activeYn'] > b['activeYn']) return 1
+        if (a['activeYn'] < b['activeYn']) return -1
+        return 0
+      })
     }
     return <div
       style={style.container}
@@ -859,7 +857,7 @@ class RedCanvas extends React.Component {
       {this.draw_canvasUI()}
       {
         renderList.map((v, index) => {
-          return this.drawCall(this.props.rootComponent2.state[v['name']], v['activeYn'], index)
+          return this.drawCall(this.props.appComponent.state[v['name']], v['activeYn'], index)
         })
       }
     </div>;

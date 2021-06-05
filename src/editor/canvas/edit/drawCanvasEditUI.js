@@ -13,8 +13,8 @@ let colorPicker;
 
 function drawCanvasEditUI() {
   const rootComponent = this.props.rootComponent;
-  const rootComponent2 = this.props.rootComponent2;
-  const rootComponentState2 = rootComponent2.state;
+  const appComponent = this.props.appComponent;
+  const rootComponentState2 = appComponent.state;
   return <div>
     <div style={{display: 'flex', justifyContent: 'space-between'}}>
       <div className={'ui_subTitle'}>background</div>
@@ -39,7 +39,7 @@ function drawCanvasEditUI() {
               container: this.refColorPickerContainer.current,
               onChange: color => {
                 this.state.useMove = false
-                this.props.rootComponent2.updateRootState({bgColor: color})
+                this.props.appComponent.updateRootState({bgColor: color})
               }
             });
           }
