@@ -19,12 +19,16 @@ class RedFrameMenuOpen extends React.Component {
     let result = true;
     try {
       let t0 = JSON.parse(v);
-      if (
-        !t0.hasOwnProperty('activeLayer')
-        || !t0.hasOwnProperty('activeSubData')
-        || !t0.hasOwnProperty('layers')
-      ) {
-        result = false;
+      if(t0.hasOwnProperty('activeEditKey')){
+
+      }else{
+        if (
+          !t0.hasOwnProperty('activeLayer')
+          || !t0.hasOwnProperty('activeSubData')
+          || !t0.hasOwnProperty('layers')
+        ) {
+          result = false;
+        }
       }
     } catch (e) {
       result = false;

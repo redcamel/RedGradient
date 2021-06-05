@@ -12,84 +12,146 @@ import RedCanvasSizeEdit from "./edit/property/RedCanvasSizeEdit";
 import RED_CANVAS_PRESET from "../../RED_CANVAS_PRESET.js";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDesktop, faMobileAlt} from "@fortawesome/free-solid-svg-icons";
+import ACTIVE_EDIT_KEY from "../ACTIVE_EDIT_KEY.js";
 
 function drawCanvasUI() {
   const rootComponent = this.props.rootComponent;
+  const rootComponent2 = this.props.rootComponent2;
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
   return <div style={style.container}>
     <RedTitle title={'Container Information'}/>
+    <>
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <div style={style.canvasResizer}>
+          <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
+          <div>
+            <label style={{
+              marginLeft: '5px',
+              background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
+              display: 'flex',
+              borderRadius: '6px',
+              padding: '5px 10px',
+              whiteSpace: 'nowrap',
+              cursor: 'pointer'
+            }}>
+              View Gradient Edit Area
+              <input type={'checkbox'}
+                     checked={this.state.layerSizeView}
+                     style={{
+                       display: 'inline-block',
+                       width: '15px',
+                       height: '15px',
+                       background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
+                       borderRadius: '4px',
+                       border: '1px solid #000',
+                       cursor: 'pointer',
+                       marginLeft: '5px'
+                     }}
+                     onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
+              />
+            </label>
+          </div>
 
-    {
-      rootComponentState.activeContainerLayer === 'mainLayer' || !rootComponentState.activeContainerLayer
-        ? <>
-          <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <div style={style.canvasResizer}>
-              <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
-              <div>
-                <label style={{
-                  marginLeft: '5px',
-                  background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
-                  display: 'flex',
-                  borderRadius: '6px',
-                  padding: '5px 10px',
-                  whiteSpace: 'nowrap',
-                  cursor: 'pointer'
-                }}>
-                  View Gradient Edit Area
-                  <input type={'checkbox'}
-                         checked={this.state.layerSizeView}
-                         style={{
-                           display: 'inline-block',
-                           width: '15px',
-                           height: '15px',
-                           background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
-                           borderRadius: '4px',
-                           border: '1px solid #000',
-                           cursor: 'pointer',
-                           marginLeft: '5px'
-                         }}
-                         onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
-                  />
-                </label>
+        </div>
+
+      </div>
+      <div style={style.canvasViewInfo}>
+
+        {this.drawCanvasEditUI()}
+        <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
+          Center
+        </div>
+        <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
+        <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
+        <div style={{marginLeft: '5px', color: '#696969'}}>Center
+          : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY} /
+          ViewScale : {this.state.canvasViewScale.toFixed(2)}</div>
+
+      </div>
+      <div style={{display: 'inline-block', margin: '0px 10px 8px 10px'}}>
+        {
+          RED_CANVAS_PRESET.map(v => {
+            return <button
+              style={style.presetButton}
+              onClick={() => {
+                canvasInfo.width = v.width;
+                canvasInfo.height = v.height;
+                rootComponent.updateRootState({});
+              }}
+            >
+              <div><FontAwesomeIcon
+                icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
               </div>
+            </button>;
+          })
+        }
+      </div>
 
-            </div>
-
-          </div>
-          <div style={style.canvasViewInfo}>
-            <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
-              Center
-            </div>
-            <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
-            <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
-            <div style={{marginLeft: '5px', color: '#696969'}}>Center
-              : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY} /
-              ViewScale : {this.state.canvasViewScale.toFixed(2)}</div>
-
-          </div>
-          <div style={{display: 'inline-block', margin: '0px 10px 8px 10px'}}>
-            {
-              RED_CANVAS_PRESET.map(v => {
-                return <button
-                  style={style.presetButton}
-                  onClick={() => {
-                    canvasInfo.width = v.width;
-                    canvasInfo.height = v.height;
-                    rootComponent.updateRootState({});
-                  }}
-                >
-                  <div><FontAwesomeIcon
-                    icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
-                  </div>
-                </button>;
-              })
-            }
-          </div>
-        </>
-        : <div>{this.state.activeContainerLayer} 콘테이너 정보 에디터 창</div>
-    }
-
+    </>
+    <div style={{
+      position: 'absolute',
+      top: 'calc(100% + 3px)',
+      display: 'flex', alignItem: 'center', flexDirection: 'column',
+      padding: '10px'
+    }}>
+      <div style={{
+        cursor: 'pointer',
+        padding: '10px',
+        margin: '2px',
+        border: '1px solid #000',
+        borderRadius: '6px',
+        transition: 'all 0.2s',
+        background: !rootComponent2.state.previewMode && rootComponent2.state.activeEditKey === ACTIVE_EDIT_KEY.BEFORE ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
+      }} onClick={e => {
+        rootComponent2.state.previewMode = false
+        rootComponent2.state.activeEditKey = ACTIVE_EDIT_KEY.BEFORE
+        rootComponent2.setState({})
+      }}>
+        ::Before onTop
+      </div>
+      <div style={{
+        cursor: 'pointer',
+        padding: '10px',
+        margin: '2px',
+        border: '1px solid #000',
+        borderRadius: '6px',
+        transition: 'all 0.2s',
+        background:  !rootComponent2.state.previewMode && rootComponent2.state.activeEditKey === ACTIVE_EDIT_KEY.MAIN || !rootComponent2.state.activeEditKey ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
+      }} onClick={e => {
+        rootComponent2.state.previewMode = false
+        rootComponent2.state.activeEditKey = ACTIVE_EDIT_KEY.MAIN
+        rootComponent2.setState({})
+      }}>Main onTop
+      </div>
+      <div style={{
+        cursor: 'pointer',
+        padding: '10px',
+        margin: '2px',
+        border: '1px solid #000',
+        borderRadius: '6px',
+        transition: 'all 0.2s',
+        background:  !rootComponent2.state.previewMode && rootComponent2.state.activeEditKey === ACTIVE_EDIT_KEY.AFTER ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
+      }} onClick={e => {
+        rootComponent2.state.previewMode = false
+        rootComponent2.state.activeEditKey = ACTIVE_EDIT_KEY.AFTER
+        rootComponent2.setState({})
+      }}>::After onTop
+      </div>
+      <div style={{
+        cursor: 'pointer',
+        padding: '10px',
+        margin: '2px',
+        border: '1px solid #000',
+        borderRadius: '6px',
+        transition: 'all 0.2s',
+        background: rootComponent2.state.previewMode  ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
+      }} onClick={e => {
+        rootComponent2.state.previewMode = true
+        rootComponent2.setState({})
+      }}>Main Base MergeView
+      </div>
+    </div>
 
   </div>;
 }

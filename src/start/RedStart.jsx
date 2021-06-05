@@ -7,6 +7,7 @@
  */
 import React from "react";
 import DataCanvas from "../editor/data/DataCanvas.js";
+import DataRedGradient from "../editor/data/DataRedGradient.js";
 
 class RedStart extends React.Component {
   constructor(props) {
@@ -63,7 +64,7 @@ class RedStart extends React.Component {
             boxShadow: '0px 0px 6px rgba(0,0,0,0.16)',
             marginBottom: '5px',
           }}
-          onClick={e => rootComponent.setNewCanvas(new DataCanvas())}
+          onClick={e => rootComponent.setNewCanvas(new DataRedGradient())}
         >새 프로젝트
         </button>
         <input

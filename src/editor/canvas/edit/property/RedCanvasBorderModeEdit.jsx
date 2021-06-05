@@ -47,22 +47,22 @@ class RedCanvasBorderModeEdit extends React.Component {
             cursor: 'pointer'
           }}
           onClick={() => {
-            this.setState({canvasBgColorPickerOpenYn: true});
-            if (!colorPicker) {
-              colorPicker = new ColorPicker({
-                type: "sketch",
-                position: 'inline',
-                color: canvasInfo.border_color,
-                container: this.refColorPickerContainer.current,
-                onChange: color => {
-                  canvasInfo['border_color'] = color
-                  rootComponent.updateRootState({canvasInfo})
-                }
-              });
-            }
+            this.refColorPickerContainer.current.innerHTML = ''
+            colorPicker = new ColorPicker({
+              type: "sketch",
+              position: 'inline',
+              color: canvasInfo.border_color,
+              container: this.refColorPickerContainer.current,
+              onChange: color => {
+                canvasInfo['border_color'] = color
+                rootComponent.updateRootState({canvasInfo})
+              }
+            });
             requestAnimationFrame(e => {
               colorPicker.initColorWithoutChangeEvent(canvasInfo.border_color);
             })
+
+            this.setState({canvasBgColorPickerOpenYn: true});
           }}
         />
 

@@ -23,14 +23,12 @@ class RedCanvasBorderGradientFrame extends React.Component {
   }
 
   updateRootState(v = {}) {
-    this.setState(v)
-    this.props.rootComponent.setState({borderGradientInfo: this.state})
+    this.props.rootComponent.updateRootState({borderGradientInfo: this.state})
   }
 
   render() {
     return <>
-      <RedCanvasBorderModeGradientEdit
-        rootComponent={this}/>
+      <RedCanvasBorderModeGradientEdit rootComponent={this}/>
       {this.state.activeSubData ? <RedPropertyBorderGradientEdit rootComponent={this}/> : ''}
     </>;
   }
