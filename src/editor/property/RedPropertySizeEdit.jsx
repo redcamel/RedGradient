@@ -104,6 +104,7 @@ class RedPropertySizeEdit extends React.Component {
               }}/>
             <RedSelect value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
               activeSubData['size']['wUnit'] = e.target.value;
+              if(activeSubData['fixRatioYn'] ) activeSubData['size']['hUnit'] = activeSubData['size']['wUnit']
               rootComponent.updateRootState({});
             }}/>
           </div>
@@ -120,6 +121,7 @@ class RedPropertySizeEdit extends React.Component {
               }}/>
             <RedSelect value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {
               activeSubData['size']['hUnit'] = e.target.value;
+              if(activeSubData['fixRatioYn'] ) activeSubData['size']['wUnit'] = activeSubData['size']['hUnit']
               rootComponent.updateRootState({});
             }}/>
           </div>
