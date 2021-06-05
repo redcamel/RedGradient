@@ -145,11 +145,11 @@ function RedCanvas_checkResize(e) {
     switch (mode) {
       case 'sw':
       case 'ne':
-        gapY = e.shiftKey ? -gapX : gapY
+        gapY = (e.shiftKey || activeSubData['fixRatioYn']) ? -gapX : gapY
         break
       case 'nw':
       case 'se':
-        gapY = e.shiftKey ? gapX : gapY
+        gapY = (e.shiftKey || activeSubData['fixRatioYn']) ? gapX : gapY
         break
     }
     this.state.resizeMode['startX'] = e.pageX;

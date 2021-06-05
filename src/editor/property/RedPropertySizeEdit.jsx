@@ -21,6 +21,7 @@ class RedPropertySizeEdit extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
+    const canvasInfo = rootComponentState.canvasInfo;
     return <div>
       <div className={'ui_subTitle'}>Size</div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -54,13 +55,38 @@ class RedPropertySizeEdit extends React.Component {
                            style={{filter: activeSubData['fixRatioYn'] ? '' :'brightness(0.5)', marginLeft: '10px', opacity: 1, cursor: 'pointer',transition:'filter 0.2s'}}
                            onClick={e => {
                              activeSubData['fixRatioYn'] = !activeSubData['fixRatioYn'];
+                             if(activeSubData['fixRatioYn']){
+                               // - 픽스된경우 비쥬얼 에디터의 리사이즈도 모양과 동작이 변화되어야함
+                               const sizeInfo = activeSubData['size']
+                               if(sizeInfo['wUnit'] === sizeInfo['hUnit']){
+
+                               }else{
+                                 const cW = (canvasInfo.width);
+                                 const cH = (canvasInfo.height);
+                                 const layoutSize = {
+                                   w: sizeInfo['wUnit'] === '%' ? cW * sizeInfo['w'] / 100 : +sizeInfo['w'],
+                                   h: sizeInfo['hUnit'] === '%' ? cH * sizeInfo['h'] / 100 : +sizeInfo['h'],
+                                 };
+                                 let t0,t1
+                                 if(layoutSize['w']>layoutSize['h'] ){
+                                   t0 = 'w'
+                                   t1= 'h'
+                                 }else{
+                                   t0 = 'h'
+                                   t1 = 'w'
+                                 }
+                                 if(sizeInfo[`${t0}Unit`] === 'px'){
+                                   sizeInfo[`${t1}Unit`] = 'px'
+                                   sizeInfo[`${t1}`] = layoutSize[t1]
+                                 }else{
+                                   sizeInfo[`${t1}Unit`] = '%'
+                                   sizeInfo[`${t1}`] = layoutSize[t1]/(t1==='w' ? cW : cH) * 100
+                                 }
+
+                               }
+                             }
                              rootComponent.updateRootState({});
-                             alert(`
-todo - 비율픽스처리
-- 같은 단위일경우 그냥고정 다른 단위일경우 큰놈을 기준으로 단위 변환 고정
-- 픽스된경우 우측 w,h 변환시 고정비율로 늘려줌
-- 픽스된경우 비쥬얼 에디터의 리사이즈도 모양과 동작이 변화되어야함
-                             `)
+
                            }}
           />
 
@@ -73,6 +99,7 @@ todo - 비율픽스처리
               value={activeSubData['size']['w'] || 0}
               HD_onInput={e => {
                 activeSubData['size']['w'] = +e.target.value;
+                if(activeSubData['fixRatioYn'] ) activeSubData['size']['h'] = activeSubData['size']['w']
                 rootComponent.updateRootState({});
               }}/>
             <RedSelect value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
@@ -88,6 +115,7 @@ todo - 비율픽스처리
               value={activeSubData['size']['h'] || 0}
               HD_onInput={e => {
                 activeSubData['size']['h'] = +e.target.value;
+                if(activeSubData['fixRatioYn'] ) activeSubData['size']['w'] = activeSubData['size']['h']
                 rootComponent.updateRootState({});
               }}/>
             <RedSelect value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {
