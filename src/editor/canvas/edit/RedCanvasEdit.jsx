@@ -26,8 +26,6 @@ class RedCanvasEdit extends React.Component {
     this.props.rootComponent.updateRootState(v)
     const rootComponent = this.props.rootComponent
     const rootComponentState = rootComponent.state
-    console.log(rootComponentState[rootComponentState.activeEditKey]['borderGradientInfo'])
-    console.log('오긴온다2')
   }
 
   render() {

@@ -24,7 +24,7 @@ function drawCanvasUI() {
     <>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <div style={style.canvasResizer}>
-          <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
+          <RedCanvasSizeEdit rootComponent={rootComponent} rootComponent2={rootComponent2}canvasComponent={this}/>
           <div>
             <label style={{
               marginLeft: '5px',

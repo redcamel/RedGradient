@@ -7,6 +7,7 @@
  */
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
+import ACTIVE_EDIT_KEY from "../../../ACTIVE_EDIT_KEY.js";
 
 let colorPicker
 
@@ -17,19 +18,27 @@ class RedCanvasSizeEdit extends React.Component {
 
   render() {
     const rootComponent = this.props.rootComponent;
+    const rootComponent2 = this.props.rootComponent2;
     const rootComponentState = rootComponent.state;
+    const rootComponent2State = rootComponent2.state;
     const canvasInfo = rootComponentState.canvasInfo;
     return <div style={style.container}>
 
       <div className={'ui_subTitle'}>Container Size</div>
       <RedNumber title={'width'} width={'160px'} value={canvasInfo.width} HD_onInput={e => {
         canvasInfo.width = +e.target.value;
+        rootComponent2State[ACTIVE_EDIT_KEY.BEFORE]['canvasInfo']['width'] = canvasInfo.width
+        rootComponent2State[ACTIVE_EDIT_KEY.MAIN]['canvasInfo']['width'] = canvasInfo.width
+        rootComponent2State[ACTIVE_EDIT_KEY.AFTER]['canvasInfo']['width'] = canvasInfo.width
         this.props.canvasComponent.state.useMove = false
         rootComponent.updateRootState({});
       }}/>
       <div style={{width: '5px'}}/>
       <RedNumber title={'height'} width={'160px'} value={canvasInfo.height} HD_onInput={e => {
         canvasInfo.height = +e.target.value;
+        rootComponent2State[ACTIVE_EDIT_KEY.BEFORE]['canvasInfo']['height'] = canvasInfo.height
+        rootComponent2State[ACTIVE_EDIT_KEY.MAIN]['canvasInfo']['height'] = canvasInfo.height
+        rootComponent2State[ACTIVE_EDIT_KEY.AFTER]['canvasInfo']['height'] = canvasInfo.height
         this.props.canvasComponent.state.useMove = false
         rootComponent.updateRootState({});
       }}/>
