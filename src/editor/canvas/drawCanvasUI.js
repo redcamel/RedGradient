@@ -17,7 +17,8 @@ import ACTIVE_EDIT_KEY from "../ACTIVE_EDIT_KEY.js";
 function drawCanvasUI() {
   const rootComponent = this.props.rootComponent;
   const rootComponent2 = this.props.rootComponent2;
-  const rootComponentState = rootComponent.state;
+  const rootComponentState = this.props.rootComponent;
+  const rootComponent2State = rootComponent2.state;
   const canvasInfo = rootComponentState.canvasInfo;
   return <div style={style.container}>
     <RedTitle title={'Container Information'}/>
@@ -75,8 +76,13 @@ function drawCanvasUI() {
             return <button
               style={style.presetButton}
               onClick={() => {
-                canvasInfo.width = v.width;
-                canvasInfo.height = v.height;
+                rootComponent2State[ACTIVE_EDIT_KEY.BEFORE]['canvasInfo']['width'] = v.width
+                rootComponent2State[ACTIVE_EDIT_KEY.MAIN]['canvasInfo']['width'] = v.width
+                rootComponent2State[ACTIVE_EDIT_KEY.AFTER]['canvasInfo']['width'] = v.width
+                rootComponent2State[ACTIVE_EDIT_KEY.BEFORE]['canvasInfo']['height'] = v.height
+                rootComponent2State[ACTIVE_EDIT_KEY.MAIN]['canvasInfo']['height'] = v.height
+                rootComponent2State[ACTIVE_EDIT_KEY.AFTER]['canvasInfo']['height'] = v.height
+
                 rootComponent.updateRootState({});
               }}
             >
