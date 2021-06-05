@@ -19,8 +19,12 @@ import RedPreset from "./editor/property/preset/RedPreset.jsx";
 import DataLayer from "./editor/data/DataLayer.js";
 import BORDER_REPEAT_TYPE from "./editor/BORDER_REPEAT_TYPE.js";
 import DataCanvas from "./editor/data/DataCanvas.js";
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import RedTitleTB from "./core/RedTitleTB.jsx";
+import LOCAL_STORAGE_MANAGER from "./editor/LOCAL_STORAGE_MANAGER.js";
+import {faFolder, faFolderOpen} from "@fortawesome/free-solid-svg-icons";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -206,11 +210,33 @@ class App extends React.Component {
         <div className={'frame_middle_container'}>
           <div className={'frame_left'}>
             {/*frame Left*/}
-            <div style={{display: "flex", height: '100%', overflowY: 'auto'}}>
+            <div style={{display: "flex", height: '100%'}}>
+              <div
+                style={{background: 'rgb(60, 60, 60)'}}
+                onClick={e => {
+                  LOCAL_STORAGE_MANAGER.toggleTabOpenYn('containerProperty')
+                  this.setState({})
+                }}
+              >
+                <RedTitleTB
+                  icon={LOCAL_STORAGE_MANAGER.getTabOpenYn('containerProperty') ? faFolderOpen : faFolder}
+                  title={'Container Property'}
+                  writingMode={'tb'}
+                  background={LOCAL_STORAGE_MANAGER.getTabOpenYn('containerProperty') ? 'rgb(32, 32, 32)' : ''}
+                />
+              </div>
               {
-                this.state.activeContainerLayer === 'mainLayer' || !this.state.activeContainerLayer
-                  ? <RedCanvasEdit rootComponent={this}/>
-                  : <div>{this.state.activeContainerLayer} 콘테이너 프로퍼티 에디터 창</div>
+                LOCAL_STORAGE_MANAGER.getTabOpenYn('containerProperty') ?
+                  <div style={{
+                    display: "flex", height: '100%', overflowY: 'auto',
+                    borderLeft: '1px solid rgb(26, 26, 26)',
+                  }}>
+                    {
+                      this.state.activeContainerLayer === 'mainLayer' || !this.state.activeContainerLayer
+                        ? <RedCanvasEdit rootComponent={this}/>
+                        : <div>{this.state.activeContainerLayer} 콘테이너 프로퍼티 에디터 창</div>
+                    }
+                  </div> : ''
               }
 
             </div>

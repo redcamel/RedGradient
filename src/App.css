@@ -347,7 +347,18 @@ option {
     border-top: 1px solid rgb(71, 71, 71);
     border-bottom: 1px solid rgb(26, 26, 26);
 }
-
+.ui_title_tb {
+    z-index: 1;
+    background: rgb(60, 60, 60);
+    width: 26px;
+    display: flex;
+    padding: 8px 0px;
+    font-size: 12px;
+    align-items: center;
+    border-top: 1px solid rgb(26, 26, 26);
+    transform: rotate(180deg);
+    cursor: pointer;
+}
 .ui_subTitle {
     padding: 3px 7px;
     background: linear-gradient(180deg, #272727, rgba(0, 0, 0, 0));
