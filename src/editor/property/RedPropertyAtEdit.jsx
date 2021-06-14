@@ -18,7 +18,7 @@ class RedPropertyAtEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const activeSubData = rootComponentState.activeSubData;
     return <div>
       <div className={'ui_subTitle'}>Center</div>
       <div style={{
@@ -32,13 +32,13 @@ class RedPropertyAtEdit extends React.Component {
           <RedNumber
             title={'cX'}
             width={'179px'}
-            value={activeSubLayerData['at']['x'] || 0}
+            value={activeSubData['at']['x'] || 0}
             HD_onInput={e => {
-              activeSubLayerData['at']['x'] = +e.target.value;
+              activeSubData['at']['x'] = +e.target.value;
               rootComponent.updateRootState({});
             }}/>
-          <RedSelect value={activeSubLayerData['at']['xUnit']} options={['px', '%']} HD_change={e => {
-            activeSubLayerData['at']['xUnit'] = e.target.value;
+          <RedSelect value={activeSubData['at']['xUnit']} options={['px', '%']} HD_change={e => {
+            activeSubData['at']['xUnit'] = e.target.value;
             rootComponent.updateRootState({});
           }}/>
         </div>
@@ -47,13 +47,13 @@ class RedPropertyAtEdit extends React.Component {
           <RedNumber
             title={'cY'}
             width={'179px'}
-            value={activeSubLayerData['at']['y'] || 0}
+            value={activeSubData['at']['y'] || 0}
             HD_onInput={e => {
-              activeSubLayerData['at']['y'] = +e.target.value;
+              activeSubData['at']['y'] = +e.target.value;
               rootComponent.updateRootState({});
             }}/>
-          <RedSelect value={activeSubLayerData['at']['yUnit']} options={['px', '%']} HD_change={e => {
-            activeSubLayerData['at']['yUnit'] = e.target.value;
+          <RedSelect value={activeSubData['at']['yUnit']} options={['px', '%']} HD_change={e => {
+            activeSubData['at']['yUnit'] = e.target.value;
             rootComponent.updateRootState({});
           }}/>
         </div>

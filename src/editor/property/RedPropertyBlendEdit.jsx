@@ -18,14 +18,14 @@ class RedPropertyBlendEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const activeSubData = rootComponentState.activeSubData;
     return <div style={{display: 'flex', alignItems: 'center'}}>
       <div className={'ui_subTitle'}>Blend Mode</div>
       <RedSelect
-        value={activeSubLayerData['blendMode']}
+        value={activeSubData['blendMode']}
         options={Object.entries(BLEND_MODE_TYPE)}
         HD_change={e => {
-          activeSubLayerData['blendMode'] = e.target.value;
+          activeSubData['blendMode'] = e.target.value;
           rootComponent.updateRootState({});
         }}/>
     </div>;

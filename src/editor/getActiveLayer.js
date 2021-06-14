@@ -6,7 +6,7 @@
  *
  */
 
-const getActiveLayerData = (state) => {
-  return state.layers[state.activeLayerDataIndex || 0]
+const getActiveLayer = (state) => {
+  return state.layers[state.activeLayerIndex || 0]
 }
-export default getActiveLayerData
+export default getActiveLayer

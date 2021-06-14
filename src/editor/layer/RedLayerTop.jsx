@@ -35,8 +35,8 @@ class RedLayerTop extends React.Component {
                let targetLayer;
                layers.splice(0, 0, targetLayer = new DataLayer());
                rootComponent.updateRootState({
-                 activeLayerData: targetLayer,
-                 activeSubLayerData: targetLayer['items'][0]
+                 activeLayer: targetLayer,
+                 activeSubData: targetLayer['items'][0]
                });
              }}
         ><FontAwesomeIcon icon={faPlusCircle}/> Add Layer

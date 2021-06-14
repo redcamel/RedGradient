@@ -23,8 +23,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import RedTitleTB from "./core/RedTitleTB.jsx";
 import LOCAL_STORAGE_MANAGER from "./editor/LOCAL_STORAGE_MANAGER.js";
 import {faFolder, faFolderOpen} from "@fortawesome/free-solid-svg-icons";
-import getActiveLayerData from "./editor/getActiveLayerData.js";
-import getActiveSubLayerData from "./editor/getActiveSubLayerData.js";
+import getActiveLayer from "./editor/getActiveLayer.js";
+import getActiveSubData from "./editor/getActiveSubData.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -42,8 +42,8 @@ class App extends React.Component {
       let targetState = this.historyRedo.pop()
       if (targetState) {
         this.state = JSON.parse(JSON.stringify(targetState))
-        this.state.activeLayerData = getActiveLayerData(this.state);
-        this.state.activeSubLayerData = getActiveSubLayerData(this.state);
+        this.state.activeLayer = getActiveLayer(this.state);
+        this.state.activeSubData = getActiveSubData(this.state);
         this.updateRootState(this.state)
       }
       // console.log('history',this.history)
@@ -56,8 +56,8 @@ class App extends React.Component {
         targetState = this.history[this.history.length - 1]
         if (targetState) {
           this.state = JSON.parse(JSON.stringify(targetState))
-          this.state.activeLayerData = getActiveLayerData(this.state);
-          this.state.activeSubLayerData = getActiveSubLayerData(this.state);
+          this.state.activeLayer = getActiveLayer(this.state);
+          this.state.activeSubData = getActiveSubData(this.state);
           this.setState(this.state)
         }
       }
@@ -90,8 +90,8 @@ class App extends React.Component {
 
   setNewCanvas(newState) {
     this.state = newState
-    this.state.activeLayerData = getActiveLayerData(this.state);
-    this.state.activeSubLayerData = getActiveSubLayerData(this.state);
+    this.state.activeLayer = getActiveLayer(this.state);
+    this.state.activeSubData = getActiveSubData(this.state);
     //
     if (!this.state.borderGradientInfo) {
       this.state.borderGradientInfo = {
@@ -101,8 +101,8 @@ class App extends React.Component {
         'border_image_sliceB': 1,
         'border_image_repeat': BORDER_REPEAT_TYPE.STRETCH,
         'border_image_outset': 0,
-        "activeLayerData": null,
-        "activeSubLayerData": null,
+        "activeLayer": null,
+        "activeSubData": null,
         "bgColor": "#ffffff",
         "layers": [
           new DataLayer()
@@ -138,8 +138,8 @@ class App extends React.Component {
       canvasInfo['outline_offset_unit'] = 'px';
     }
     this.state.borderGradientInfo.canvasInfo = this.state.canvasInfo
-    this.state.borderGradientInfo.activeLayerData = getActiveLayerData(this.state.borderGradientInfo);
-    this.state.borderGradientInfo.activeSubLayerData = getActiveSubLayerData(this.state.borderGradientInfo);
+    this.state.borderGradientInfo.activeLayer = getActiveLayer(this.state.borderGradientInfo);
+    this.state.borderGradientInfo.activeSubData = getActiveSubData(this.state.borderGradientInfo);
     //
     this.updateRootState(this.state);
   }
@@ -209,7 +209,7 @@ class App extends React.Component {
               </div>
               <div style={{display: "flex", height: 'calc(100% - 190px)'}}>
                 <RedLayer rootComponent={this}/>
-                {this.state.activeSubLayerData ? <RedPropertyEdit rootComponent={this}/> : ''}
+                {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
 
               </div>
             </div>

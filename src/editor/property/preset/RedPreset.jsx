@@ -45,7 +45,7 @@ class RedPreset extends React.Component {
   renderList(list, delMode) {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const activeSubData = rootComponentState.activeSubData;
     return list.map((v, index) => {
       return <div
         style={style.iconContainer}
@@ -54,9 +54,9 @@ class RedPreset extends React.Component {
             RedPreset.delUserPreset(rootComponent, index)
           } else {
             const newData = JSON.parse(JSON.stringify(v['data']))
-            const idx = rootComponentState.activeLayerData.items.indexOf(activeSubLayerData)
-            rootComponentState.activeLayerData.items.splice(idx, 1, newData)
-            rootComponentState.activeSubLayerData = newData
+            const idx = rootComponentState.activeLayer.items.indexOf(activeSubData)
+            rootComponentState.activeLayer.items.splice(idx, 1, newData)
+            rootComponentState.activeSubData = newData
           }
           rootComponent.updateRootState({});
         }}

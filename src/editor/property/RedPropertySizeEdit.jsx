@@ -20,14 +20,14 @@ class RedPropertySizeEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const activeSubData = rootComponentState.activeSubData;
     const canvasInfo = rootComponentState.canvasInfo;
     return <div>
       <div className={'ui_subTitle'}>Size</div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
           <div style={{
-            opacity: activeSubLayerData['fixRatioYn'] ? 0.1 : 0.01,
+            opacity: activeSubData['fixRatioYn'] ? 0.1 : 0.01,
             position: 'absolute',
             top: '50%',
             left: 'calc(50% + 4px)',
@@ -36,7 +36,7 @@ class RedPropertySizeEdit extends React.Component {
             borderRight: '1px solid #fff'
           }}/>
           <div style={{
-            opacity: activeSubLayerData['fixRatioYn'] ? 0.1 : 0.01,
+            opacity: activeSubData['fixRatioYn'] ? 0.1 : 0.01,
             position: 'absolute',
             top: '-10px',
             left: 'calc(50% + 4px)',
@@ -44,7 +44,7 @@ class RedPropertySizeEdit extends React.Component {
             borderTop: '1px solid #fff'
           }}/>
           <div style={{
-            opacity: activeSubLayerData['fixRatioYn'] ? 0.1 : 0.01,
+            opacity: activeSubData['fixRatioYn'] ? 0.1 : 0.01,
             position: 'absolute',
             bottom: '-10px',
             left: 'calc(50% + 4px)',
@@ -53,17 +53,17 @@ class RedPropertySizeEdit extends React.Component {
           }}/>
           <FontAwesomeIcon icon={faLink}
                            style={{
-                             filter: activeSubLayerData['fixRatioYn'] ? '' : 'brightness(0.5)',
+                             filter: activeSubData['fixRatioYn'] ? '' : 'brightness(0.5)',
                              marginLeft: '10px',
                              opacity: 1,
                              cursor: 'pointer',
                              transition: 'filter 0.2s'
                            }}
                            onClick={() => {
-                             activeSubLayerData['fixRatioYn'] = !activeSubLayerData['fixRatioYn'];
-                             if (activeSubLayerData['fixRatioYn']) {
+                             activeSubData['fixRatioYn'] = !activeSubData['fixRatioYn'];
+                             if (activeSubData['fixRatioYn']) {
                                // - 픽스된경우 비쥬얼 에디터의 리사이즈도 모양과 동작이 변화되어야함
-                               const sizeInfo = activeSubLayerData['size']
+                               const sizeInfo = activeSubData['size']
                                if (sizeInfo['wUnit'] === sizeInfo['hUnit']) {
                                } else {
                                  const cW = (canvasInfo.width);
@@ -99,15 +99,15 @@ class RedPropertySizeEdit extends React.Component {
             <RedNumber
               title={'SizeW'}
               width={'165px'}
-              value={activeSubLayerData['size']['w'] || 0}
+              value={activeSubData['size']['w'] || 0}
               HD_onInput={e => {
-                activeSubLayerData['size']['w'] = +e.target.value;
-                if (activeSubLayerData['fixRatioYn']) activeSubLayerData['size']['h'] = activeSubLayerData['size']['w']
+                activeSubData['size']['w'] = +e.target.value;
+                if (activeSubData['fixRatioYn']) activeSubData['size']['h'] = activeSubData['size']['w']
                 rootComponent.updateRootState({});
               }}/>
-            <RedSelect value={activeSubLayerData['size']['wUnit']} options={['px', '%']} HD_change={e => {
-              activeSubLayerData['size']['wUnit'] = e.target.value;
-              if (activeSubLayerData['fixRatioYn']) activeSubLayerData['size']['hUnit'] = activeSubLayerData['size']['wUnit']
+            <RedSelect value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
+              activeSubData['size']['wUnit'] = e.target.value;
+              if (activeSubData['fixRatioYn']) activeSubData['size']['hUnit'] = activeSubData['size']['wUnit']
               rootComponent.updateRootState({});
             }}/>
           </div>
@@ -116,15 +116,15 @@ class RedPropertySizeEdit extends React.Component {
             <RedNumber
               title={'SizeH'}
               width={'165px'}
-              value={activeSubLayerData['size']['h'] || 0}
+              value={activeSubData['size']['h'] || 0}
               HD_onInput={e => {
-                activeSubLayerData['size']['h'] = +e.target.value;
-                if (activeSubLayerData['fixRatioYn']) activeSubLayerData['size']['w'] = activeSubLayerData['size']['h']
+                activeSubData['size']['h'] = +e.target.value;
+                if (activeSubData['fixRatioYn']) activeSubData['size']['w'] = activeSubData['size']['h']
                 rootComponent.updateRootState({});
               }}/>
-            <RedSelect value={activeSubLayerData['size']['hUnit']} options={['px', '%']} HD_change={e => {
-              activeSubLayerData['size']['hUnit'] = e.target.value;
-              if (activeSubLayerData['fixRatioYn']) activeSubLayerData['size']['wUnit'] = activeSubLayerData['size']['hUnit']
+            <RedSelect value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {
+              activeSubData['size']['hUnit'] = e.target.value;
+              if (activeSubData['fixRatioYn']) activeSubData['size']['wUnit'] = activeSubData['size']['hUnit']
               rootComponent.updateRootState({});
             }}/>
           </div>

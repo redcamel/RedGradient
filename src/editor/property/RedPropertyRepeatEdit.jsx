@@ -17,16 +17,16 @@ class RedPropertyRepeatEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const activeSubData = rootComponentState.activeSubData;
     const gradient = 'radial-gradient(at 50% 50%, rgba(255, 255, 0, 0.9) 1.5px, rgba(255, 0, 0, 0.5) 5px, transparent 10px)';
     return <div>
       <div style={{display: 'flex', alignItems: 'center'}}>
         <div className={'ui_subTitle'}>Repeat Mode</div>
         <RedSelect
-          value={activeSubLayerData['typeRepeat']}
+          value={activeSubData['typeRepeat']}
           options={Object.entries(REPEAT_TYPE)}
           HD_change={e => {
-            activeSubLayerData['typeRepeat'] = e.target.value;
+            activeSubData['typeRepeat'] = e.target.value;
             rootComponent.updateRootState({});
           }}/>
       </div>
@@ -34,7 +34,7 @@ class RedPropertyRepeatEdit extends React.Component {
         <div style={{display: 'flex'}}>
           <div style={{...style.icon}}
                onClick={() => {
-                 activeSubLayerData['typeRepeat'] = 'no-repeat';
+                 activeSubData['typeRepeat'] = 'no-repeat';
                  rootComponent.updateRootState({});
                }}
           >
@@ -48,7 +48,7 @@ class RedPropertyRepeatEdit extends React.Component {
           </div>
           <div style={{...style.icon}}
                onClick={() => {
-                 activeSubLayerData['typeRepeat'] = 'repeat-x';
+                 activeSubData['typeRepeat'] = 'repeat-x';
                  rootComponent.updateRootState({});
                }}
           >
@@ -62,7 +62,7 @@ class RedPropertyRepeatEdit extends React.Component {
           </div>
           <div style={{...style.icon}}
                onClick={() => {
-                 activeSubLayerData['typeRepeat'] = 'repeat-y';
+                 activeSubData['typeRepeat'] = 'repeat-y';
                  rootComponent.updateRootState({});
                }}
           >
@@ -76,7 +76,7 @@ class RedPropertyRepeatEdit extends React.Component {
           </div>
           <div style={{...style.icon}}
                onClick={() => {
-                 activeSubLayerData['typeRepeat'] = 'repeat';
+                 activeSubData['typeRepeat'] = 'repeat';
                  rootComponent.updateRootState({});
                }}
           >
@@ -90,7 +90,7 @@ class RedPropertyRepeatEdit extends React.Component {
           </div>
           <div style={{...style.icon}}
                onClick={() => {
-                 activeSubLayerData['typeRepeat'] = 'space';
+                 activeSubData['typeRepeat'] = 'space';
                  rootComponent.updateRootState({});
                }}
           >
@@ -104,7 +104,7 @@ class RedPropertyRepeatEdit extends React.Component {
           </div>
           <div style={{...style.icon}}
                onClick={() => {
-                 activeSubLayerData['typeRepeat'] = 'round';
+                 activeSubData['typeRepeat'] = 'round';
                  rootComponent.updateRootState({});
                }}
           >

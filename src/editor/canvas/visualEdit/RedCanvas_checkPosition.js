@@ -57,11 +57,11 @@ function RedCanvas_checkPosition(e) {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
-    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const activeSubData = rootComponentState.activeSubData;
     // const tX = e.pageX - this.state.positionMode.startX;
     // const tY = e.pageY - this.state.positionMode.startY;
-    // const positionInfo = activeSubLayerData['position'];
-    // const sizeInfo = activeSubLayerData['size'];
+    // const positionInfo = activeSubData['position'];
+    // const sizeInfo = activeSubData['size'];
     // const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
     // const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
     // positionInfo['x'] = +this.state.positionMode.startValueX + (positionInfo['xUnit'] === '%' ? tX / tW * 100 : tX) * 1 / this.state.canvasViewScale;
@@ -71,8 +71,8 @@ function RedCanvas_checkPosition(e) {
     const gapY = (e.pageY - +this.state.positionMode['startY']) / this.state.canvasViewScale;
     this.state.positionMode['startX'] = e.pageX;
     this.state.positionMode['startY'] = e.pageY;
-    const sizeInfo = activeSubLayerData['size'];
-    const positionInfo = activeSubLayerData['position'];
+    const sizeInfo = activeSubData['size'];
+    const positionInfo = activeSubData['position'];
     const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
     const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
     const mode = this.state.positionMode['mode'];
@@ -81,19 +81,19 @@ function RedCanvas_checkPosition(e) {
     const cH = (canvasInfo.height);
     //
     // 오리지날 포지션 찾기
-    const activeSubLayerDataSize = activeSubLayerData['size'];
-    const activeSubLayerDataPosition = activeSubLayerData['position'];
+    const activeSubDataSize = activeSubData['size'];
+    const activeSubDataPosition = activeSubData['position'];
     const layoutSize = {
-      w: activeSubLayerDataSize['wUnit'] === '%' ? cW * activeSubLayerDataSize['w'] / 100 : +activeSubLayerDataSize['w'],
-      h: activeSubLayerDataSize['hUnit'] === '%' ? cH * activeSubLayerDataSize['h'] / 100 : +activeSubLayerDataSize['h'],
+      w: activeSubDataSize['wUnit'] === '%' ? cW * activeSubDataSize['w'] / 100 : +activeSubDataSize['w'],
+      h: activeSubDataSize['hUnit'] === '%' ? cH * activeSubDataSize['h'] / 100 : +activeSubDataSize['h'],
     };
-    const originX = activeSubLayerDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubLayerDataPosition['x'] / 100) : +activeSubLayerDataPosition['x'];
-    const originY = activeSubLayerDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubLayerDataPosition['y'] / 100) : +activeSubLayerDataPosition['y'];
+    const originX = activeSubDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubDataPosition['x'] / 100) : +activeSubDataPosition['x'];
+    const originY = activeSubDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubDataPosition['y'] / 100) : +activeSubDataPosition['y'];
     const info = {
       positionInfo,
       sizeInfo,
-      activeSubLayerDataSize,
-      activeSubLayerDataPosition,
+      activeSubDataSize,
+      activeSubDataPosition,
       originX,
       originY,
       tW,

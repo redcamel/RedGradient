@@ -11,7 +11,7 @@ function RedCanvas_checkDegree(e) {
     const degreeInfo = this.state.degreeMode
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const activeSubData = rootComponentState.activeSubData;
     const tX = degreeInfo.startX - degreeInfo.startDegX;
     const tY = degreeInfo.startY - degreeInfo.startDegY;
     const tX2 = e.pageX - degreeInfo.startDegX;
@@ -20,19 +20,19 @@ function RedCanvas_checkDegree(e) {
     switch (degreeInfo.mode) {
       case "nw":
         deg = Math.atan2(tY, tX) - Math.atan2(tY2, tX2);
-        activeSubLayerData['deg'] = +degreeInfo.startDeg + (deg * 180 / Math.PI) * 3;
+        activeSubData['deg'] = +degreeInfo.startDeg + (deg * 180 / Math.PI) * 3;
         break
       case "ne":
         deg = Math.atan2(tY2, tX) - Math.atan2(tY, tX2);
-        activeSubLayerData['deg'] = +degreeInfo.startDeg + (deg * 180 / Math.PI) * 3;
+        activeSubData['deg'] = +degreeInfo.startDeg + (deg * 180 / Math.PI) * 3;
         break
       case "sw":
         deg = Math.atan2(tY2, tX) - Math.atan2(tY, tX2);
-        activeSubLayerData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
+        activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
         break
       case "se":
         deg = Math.atan2(tY, tX) - Math.atan2(tY2, tX2);
-        activeSubLayerData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
+        activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
         break
     }
     {
@@ -40,13 +40,13 @@ function RedCanvas_checkDegree(e) {
       const rect = degreeInfo.ref.getBoundingClientRect()
       const w = rect.width / this.state.canvasViewScale
       const h = rect.height / this.state.canvasViewScale
-      const direction = degreeInfo.startDeg < activeSubLayerData['deg']
+      const direction = degreeInfo.startDeg < activeSubData['deg']
       ctx.resetTransform()
       ctx.clearRect(0, 0, 500 * this.state.canvasViewScale, 500 * this.state.canvasViewScale)
       ctx.beginPath();
       ctx.moveTo(w / 2, h / 2)
-      if (direction) ctx.arc(w / 2, h / 2, w / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2, activeSubLayerData['deg'] * Math.PI / 180 - Math.PI / 2);
-      else ctx.arc(w / 2, h / 2, w / 2, activeSubLayerData['deg'] * Math.PI / 180 - Math.PI / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2);
+      if (direction) ctx.arc(w / 2, h / 2, w / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2);
+      else ctx.arc(w / 2, h / 2, w / 2, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2);
       ctx.strokeStyle = 'rgba(0, 0, 0,1)'
       ctx.fillStyle = direction ? 'rgba(94, 122, 222,0.85)' : 'rgb(222,94,113)'
       ctx.lineTo(w / 2, h / 2)
@@ -57,16 +57,16 @@ function RedCanvas_checkDegree(e) {
       ctx.moveTo(w / 2, h / 2)
       ctx.strokeStyle = 'rgba(0, 0, 0,1)'
       ctx.fillStyle = 'rgba(255, 255, 255,1)'
-      if (direction) ctx.arc(w / 2, h / 2, w / 5, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2, activeSubLayerData['deg'] * Math.PI / 180 - Math.PI / 2);
-      else ctx.arc(w / 2, h / 2, w / 5, activeSubLayerData['deg'] * Math.PI / 180 - Math.PI / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2);
+      if (direction) ctx.arc(w / 2, h / 2, w / 5, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2);
+      else ctx.arc(w / 2, h / 2, w / 5, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2);
       ctx.lineTo(w / 2, h / 2)
       ctx.fill();
       ctx.stroke();
       // ctx.closePath()
     }
-    // activeSubLayerData['deg'] += 90;
-    // if (activeSubLayerData['deg'] < 0) activeSubLayerData['deg'] += 360;
-    // activeSubLayerData['deg'] = activeSubLayerData['deg'] % 360;
+    // activeSubData['deg'] += 90;
+    // if (activeSubData['deg'] < 0) activeSubData['deg'] += 360;
+    // activeSubData['deg'] = activeSubData['deg'] % 360;
     rootComponent.updateRootState({});
     document.body.style.cursor = 'move';
     // console.log(e);

@@ -75,26 +75,26 @@ class RedGradientColorItem extends React.Component {
   getIndex() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const activeSubData = rootComponentState.activeSubData;
     const colorData = this.props.colorData;
-    return activeSubLayerData.colorList.indexOf(colorData);
+    return activeSubData.colorList.indexOf(colorData);
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const activeSubData = rootComponentState.activeSubData;
     const canvasInfo = rootComponentState.canvasInfo;
     const colorData = this.props.colorData;
     const activeYn = this.props.activeYn;
     const colorInfo = colorData['color'];
     if (!colorData['useRange']) colorData['rangeEnd'] = colorData['range'];
-    const unitList = activeSubLayerData.type === GRADIENT_TYPE.CONIC || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['%', 'deg'] : ['px', '%']
+    const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['%', 'deg'] : ['px', '%']
     return <div>
       <button
         style={style.add}
         onClick={() => {
-          let prevColorData = activeSubLayerData['colorList'][this.getIndex() - 1];
+          let prevColorData = activeSubData['colorList'][this.getIndex() - 1];
           let currentRange = colorData['range'];
           let newRange = currentRange;
           let newRangeEnd = currentRange;
@@ -108,7 +108,7 @@ class RedGradientColorItem extends React.Component {
             colorData['useRange'],
             newRangeEnd
           );
-          activeSubLayerData['colorList'].splice(this.getIndex(), 0, newColorData);
+          activeSubData['colorList'].splice(this.getIndex(), 0, newColorData);
           this.props.HD_active(this.getIndex())
         }}
       >
@@ -153,7 +153,7 @@ class RedGradientColorItem extends React.Component {
                            onChange: color => {
                              targetColorData['color'] = color;
                              targetContext.props.rootComponent.updateRootState({
-                               activeSubLayerData: targetContext.props.rootComponent.state.activeSubLayerData
+                               activeSubData: targetContext.props.rootComponent.state.activeSubData
                              });
                            }
                          });
@@ -208,7 +208,7 @@ class RedGradientColorItem extends React.Component {
                            onChange: color => {
                              targetColorData['colorEnd'] = color;
                              targetContext.props.rootComponent.updateRootState({
-                               activeSubLayerData: targetContext.props.rootComponent.state.activeSubLayerData
+                               activeSubData: targetContext.props.rootComponent.state.activeSubData
                              });
                            }
                          });
@@ -250,9 +250,9 @@ class RedGradientColorItem extends React.Component {
                 value={colorData['range'] || 0}
                 HD_onInput={e => {
                   colorData['range'] = +e.target.value;
-                  let i = activeSubLayerData.colorList.length;
+                  let i = activeSubData.colorList.length;
                   while (i--) {
-                    if (activeSubLayerData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
+                    if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
                   }
                   rootComponent.updateRootState({});
                 }}
@@ -267,9 +267,9 @@ class RedGradientColorItem extends React.Component {
                   value={colorData['rangeEnd'] || 0}
                   HD_onInput={e => {
                     colorData['rangeEnd'] = +e.target.value;
-                    let i = activeSubLayerData.colorList.length;
+                    let i = activeSubData.colorList.length;
                     while (i--) {
-                      if (activeSubLayerData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
+                      if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
                     }
                     rootComponent.updateRootState({});
                   }}
@@ -313,9 +313,9 @@ class RedGradientColorItem extends React.Component {
                 rootComponent.updateRootState({});
               }}/>
               <button
-                style={{...style.del, display: activeSubLayerData.colorList.length < 2 ? 'none' : 'inline-block'}}
+                style={{...style.del, display: activeSubData.colorList.length < 2 ? 'none' : 'inline-block'}}
                 onClick={() => {
-                  activeSubLayerData.colorList.splice(this.getIndex(), 1);
+                  activeSubData.colorList.splice(this.getIndex(), 1);
                   rootComponent.updateRootState({});
                 }}
               >Del

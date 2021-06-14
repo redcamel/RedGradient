@@ -193,8 +193,8 @@ class RedLayerItem extends React.Component {
                       if (layers[idx]) targetLayer = layers[idx];
                       else targetLayer = layers[0];
                       rootComponent.updateRootState({
-                        activeLayerData: targetLayer,
-                        activeSubLayerData: targetLayer['items'][0]
+                        activeLayer: targetLayer,
+                        activeSubData: targetLayer['items'][0]
                       });
                     }
                   }}
@@ -204,7 +204,7 @@ class RedLayerItem extends React.Component {
                   onClick={e => {
                     e.stopPropagation();
                     layer.items.splice(0, 0, new DataItem());
-                    rootComponent.updateRootState({activeSubLayerData: layer.items[0]});
+                    rootComponent.updateRootState({activeSubData: layer.items[0]});
                   }}
           ><FontAwesomeIcon icon={faPlusCircle}/>
           </button>
@@ -227,7 +227,7 @@ class RedLayerItem extends React.Component {
             this.setState({openPanel: false, draggable: true})
             rootComponent.updateRootState({
               layers: rootComponentState.layers,
-              activeSubLayerData: t0
+              activeSubData: t0
             })
           }}
         /> : ''}
@@ -241,7 +241,7 @@ class RedLayerItem extends React.Component {
             overflow: 'hidden',
             transition: 'height 0.2s'
           }}
-          onClick={() => rootComponent.updateRootState({activeLayerData: layer, activeSubLayerData: layer.items[0]})}
+          onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: layer.items[0]})}
 
         >
           <div className={'layerItem'}

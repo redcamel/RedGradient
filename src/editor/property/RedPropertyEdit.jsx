@@ -27,7 +27,7 @@ class RedPropertyEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const data = rootComponentState.activeSubLayerData;
+    const data = rootComponentState.activeSubData;
     const canvasInfo = rootComponentState.canvasInfo
     let containerCssText = ''
     {
@@ -141,10 +141,10 @@ class RedPropertyEdit extends React.Component {
 
           {/*<div style={style.itemContainer}>*/}
           {/*  <div>Current Gradient Css</div>*/}
-          {/*{CALC_GRADIENT.calcGradientItem(data, false, activeLayerData)}*/}
+          {/*{CALC_GRADIENT.calcGradientItem(data, false, activeLayer)}*/}
           {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>*/}
           {/*  {*/}
-          {/*    JSON.stringify(CALC_GRADIENT.calcGradientItem(data, false, activeLayerData))*/}
+          {/*    JSON.stringify(CALC_GRADIENT.calcGradientItem(data, false, activeLayer))*/}
           {/*  }*/}
           {/*</SyntaxHighlighter>*/}
           {/*<div>Current Gradient Data</div>*/}
