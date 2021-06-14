@@ -52,41 +52,44 @@ class RedPropertySizeEdit extends React.Component {
             borderTop: '1px solid #fff'
           }}/>
           <FontAwesomeIcon icon={faLink}
-                           style={{filter: activeSubData['fixRatioYn'] ? '' :'brightness(0.5)', marginLeft: '10px', opacity: 1, cursor: 'pointer',transition:'filter 0.2s'}}
+                           style={{
+                             filter: activeSubData['fixRatioYn'] ? '' : 'brightness(0.5)',
+                             marginLeft: '10px',
+                             opacity: 1,
+                             cursor: 'pointer',
+                             transition: 'filter 0.2s'
+                           }}
                            onClick={e => {
                              activeSubData['fixRatioYn'] = !activeSubData['fixRatioYn'];
-                             if(activeSubData['fixRatioYn']){
+                             if (activeSubData['fixRatioYn']) {
                                // - 픽스된경우 비쥬얼 에디터의 리사이즈도 모양과 동작이 변화되어야함
                                const sizeInfo = activeSubData['size']
-                               if(sizeInfo['wUnit'] === sizeInfo['hUnit']){
-
-                               }else{
+                               if (sizeInfo['wUnit'] === sizeInfo['hUnit']) {
+                               } else {
                                  const cW = (canvasInfo.width);
                                  const cH = (canvasInfo.height);
                                  const layoutSize = {
                                    w: sizeInfo['wUnit'] === '%' ? cW * sizeInfo['w'] / 100 : +sizeInfo['w'],
                                    h: sizeInfo['hUnit'] === '%' ? cH * sizeInfo['h'] / 100 : +sizeInfo['h'],
                                  };
-                                 let t0,t1
-                                 if(layoutSize['w']>layoutSize['h'] ){
+                                 let t0, t1
+                                 if (layoutSize['w'] > layoutSize['h']) {
                                    t0 = 'w'
-                                   t1= 'h'
-                                 }else{
+                                   t1 = 'h'
+                                 } else {
                                    t0 = 'h'
                                    t1 = 'w'
                                  }
-                                 if(sizeInfo[`${t0}Unit`] === 'px'){
+                                 if (sizeInfo[`${t0}Unit`] === 'px') {
                                    sizeInfo[`${t1}Unit`] = 'px'
                                    sizeInfo[`${t1}`] = layoutSize[t1]
-                                 }else{
+                                 } else {
                                    sizeInfo[`${t1}Unit`] = '%'
-                                   sizeInfo[`${t1}`] = layoutSize[t1]/(t1==='w' ? cW : cH) * 100
+                                   sizeInfo[`${t1}`] = layoutSize[t1] / (t1 === 'w' ? cW : cH) * 100
                                  }
-
                                }
                              }
                              rootComponent.updateRootState({});
-
                            }}
           />
 
@@ -99,12 +102,12 @@ class RedPropertySizeEdit extends React.Component {
               value={activeSubData['size']['w'] || 0}
               HD_onInput={e => {
                 activeSubData['size']['w'] = +e.target.value;
-                if(activeSubData['fixRatioYn'] ) activeSubData['size']['h'] = activeSubData['size']['w']
+                if (activeSubData['fixRatioYn']) activeSubData['size']['h'] = activeSubData['size']['w']
                 rootComponent.updateRootState({});
               }}/>
             <RedSelect value={activeSubData['size']['wUnit']} options={['px', '%']} HD_change={e => {
               activeSubData['size']['wUnit'] = e.target.value;
-              if(activeSubData['fixRatioYn'] ) activeSubData['size']['hUnit'] = activeSubData['size']['wUnit']
+              if (activeSubData['fixRatioYn']) activeSubData['size']['hUnit'] = activeSubData['size']['wUnit']
               rootComponent.updateRootState({});
             }}/>
           </div>
@@ -116,12 +119,12 @@ class RedPropertySizeEdit extends React.Component {
               value={activeSubData['size']['h'] || 0}
               HD_onInput={e => {
                 activeSubData['size']['h'] = +e.target.value;
-                if(activeSubData['fixRatioYn'] ) activeSubData['size']['w'] = activeSubData['size']['h']
+                if (activeSubData['fixRatioYn']) activeSubData['size']['w'] = activeSubData['size']['h']
                 rootComponent.updateRootState({});
               }}/>
             <RedSelect value={activeSubData['size']['hUnit']} options={['px', '%']} HD_change={e => {
               activeSubData['size']['hUnit'] = e.target.value;
-              if(activeSubData['fixRatioYn'] ) activeSubData['size']['wUnit'] = activeSubData['size']['hUnit']
+              if (activeSubData['fixRatioYn']) activeSubData['size']['wUnit'] = activeSubData['size']['hUnit']
               rootComponent.updateRootState({});
             }}/>
           </div>

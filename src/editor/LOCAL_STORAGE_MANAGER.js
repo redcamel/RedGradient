@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 const LOCAL_STORAGE_MANAGER = {
   getTabOpenYn: (key) => {
     let searchkey = 'redGradient_openYn_' + key

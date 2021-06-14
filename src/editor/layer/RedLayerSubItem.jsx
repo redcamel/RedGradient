@@ -89,8 +89,7 @@ class RedLayerSubItem extends React.Component {
     const layer = this.props.layer;
     const activeSubDataYn = rootComponentState.activeSubData === item;
     const dragAble = layer.items.length > 1;
-    const SIZE = this.props.layerViewSizeMode === 0 ? 100 : this.props.layerViewSizeMode===1 ? 50 : 0
-
+    const SIZE = this.props.layerViewSizeMode === 0 ? 100 : this.props.layerViewSizeMode === 1 ? 50 : 0
     let layerType = item.type.split('-');
     layerType = layerType[0].charAt(0).toUpperCase() + (layerType.length === 3 ? layerType[1].charAt(0).toUpperCase() : '');
     return <div

@@ -217,7 +217,7 @@ option {
 }
 
 .layerType {
-    width: calc(100%/3);
+    width: calc(100% / 3);
     border: 0;
     /*border-right: 1px solid #000;*/
     height: 20px;
@@ -228,7 +228,7 @@ option {
 }
 
 .layerDel {
-    width: calc(100%/3);
+    width: calc(100% / 3);
     border: 0;
     border-right: 1px solid #000;
     height: 20px;
@@ -242,7 +242,7 @@ option {
 }
 
 .layerVisible {
-    width: calc(100%/3);
+    width: calc(100% / 3);
     border: 0;
     border-right: 1px solid #000;
     height: 20px;
@@ -255,11 +255,12 @@ option {
 }
 
 .layerVisible:hover, .layerDel:hover, .layerAdd:hover {
-    filter : contrast(1.25);
+    filter: contrast(1.25);
     transition: filter 0.2s;
 }
+
 .layerAdd {
-    width: calc(100%/3);
+    width: calc(100% / 3);
     border: 0;
     height: 20px;
     background: linear-gradient(#7235d4, #4d1d93);
@@ -271,7 +272,7 @@ option {
 }
 
 .layerDel2 {
-    width: calc(100%/3);
+    width: calc(100% / 3);
     border: 0;
     border-right: 1px solid #000;
     height: 20px;
@@ -284,8 +285,8 @@ option {
     transition: background 0.2s;
 }
 
-.layerVisible2{
-    width: calc(100%/3);
+.layerVisible2 {
+    width: calc(100% / 3);
     border: 0;
     border-right: 1px solid #000;
     height: 20px;
@@ -301,8 +302,9 @@ option {
 .layerVisible2:hover, .layerDel2:hover {
     background: #5e7ade;
 }
+
 .layerItemTitle {
-    display:  flex;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 4px 0 2px;
@@ -328,7 +330,7 @@ option {
     padding: 4px 8px;
     font-size: 11px;
     color: #fff;
-    cursor : grab;
+    cursor: grab;
     text-shadow: 0 0 rgba(0, 0, 0, 1);
     word-break: break-all;
 }
@@ -347,6 +349,7 @@ option {
     border-top: 1px solid rgb(71, 71, 71);
     border-bottom: 1px solid rgb(26, 26, 26);
 }
+
 .ui_title_tb {
     z-index: 1;
     background: rgb(60, 60, 60);
@@ -359,6 +362,7 @@ option {
     transform: rotate(180deg);
     cursor: pointer;
 }
+
 .ui_subTitle {
     padding: 3px 7px;
     background: linear-gradient(180deg, #272727, rgba(0, 0, 0, 0));
@@ -378,13 +382,15 @@ option {
     min-height: 500px;
 }
 
-.hoverItem_opacity1{
+.hoverItem_opacity1 {
     opacity: 0.5;
     transition: opacity 0.2s;
 }
-.hoverItem_opacity1:hover{
+
+.hoverItem_opacity1:hover {
     opacity: 1;
 }
+
 .test {
 
 }

@@ -29,7 +29,6 @@ class RedCanvasEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent
     const canvasInfo = rootComponent.state.canvasInfo
-
     return <div>
       <RedTitle title={'Container Property'}/>
       <div style={style.container}>

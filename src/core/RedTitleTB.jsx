@@ -5,17 +5,17 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 import React from "react";
-
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
 class RedTitleTB extends React.Component {
   render() {
     return <div className={'ui_title_tb'} style={{
       writingMode: this.props.writingMode, whiteSpace: 'nowrap',
       background: this.props.background
     }}>
-      {this.props.icon ? <FontAwesomeIcon  icon={this.props.icon} style={{  transform : 'rotate(90deg)',marginBottom : '6px'}}/> : ''}
+      {this.props.icon ?
+        <FontAwesomeIcon icon={this.props.icon} style={{transform: 'rotate(90deg)', marginBottom: '6px'}}/> : ''}
       {this.props.title}
     </div>;
   }

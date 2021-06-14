@@ -39,7 +39,7 @@ class RedLayerTop extends React.Component {
         ><FontAwesomeIcon icon={faPlusCircle}/> Add Layer
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          <div style={{width: '40%', textAlign: 'center',color:'rgba(255,255,255,0.5)'}}>layer Bg</div>
+          <div style={{width: '40%', textAlign: 'center', color: 'rgba(255,255,255,0.5)'}}>layer Bg</div>
           <select style={{width: '60%', border: 0, outline: 'none', margin: 0}}
                   onChange={e => layersComponent.setState({layerBgColor: e.target.value})}>
             {options.map(v => <option value={v}>{v}</option>)}
@@ -49,7 +49,7 @@ class RedLayerTop extends React.Component {
           <div
             style={{
               ...style.viewScaleItem,
-              opacity: layersComponent.state.layerViewSizeMode===0 ? 1 : 0.25
+              opacity: layersComponent.state.layerViewSizeMode === 0 ? 1 : 0.25
             }}
             onClick={e => {
               layersComponent.setState({layerViewSizeMode: 0})
@@ -59,7 +59,7 @@ class RedLayerTop extends React.Component {
           <div
             style={{
               ...style.viewScaleItem,
-              opacity: layersComponent.state.layerViewSizeMode ===1? 1 : 0.25
+              opacity: layersComponent.state.layerViewSizeMode === 1 ? 1 : 0.25
             }}
             onClick={e => {
               layersComponent.setState({layerViewSizeMode: 1})
@@ -69,7 +69,7 @@ class RedLayerTop extends React.Component {
           <div
             style={{
               ...style.viewScaleItem,
-              opacity: layersComponent.state.layerViewSizeMode===2 ? 1 : 0.25
+              opacity: layersComponent.state.layerViewSizeMode === 2 ? 1 : 0.25
             }}
             onClick={e => {
               layersComponent.setState({layerViewSizeMode: 2})
@@ -116,7 +116,7 @@ const style = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRight : '1px solid rgba(0,0,0,0.5)',
-    transition : 'opacity 0.2s'
+    borderRight: '1px solid rgba(0,0,0,0.5)',
+    transition: 'opacity 0.2s'
   }
 };

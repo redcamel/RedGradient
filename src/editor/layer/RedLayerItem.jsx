@@ -153,8 +153,8 @@ class RedLayerItem extends React.Component {
                 const layers = this.props.rootComponent.state.layers
                 const idx = layers.indexOf(this.props.layer)
                 let temp = layers[idx];
-                layers[idx] = layers[idx-1];
-                layers[idx-1] = temp;
+                layers[idx] = layers[idx - 1];
+                layers[idx - 1] = temp;
                 rootComponent.updateRootState({})
               }}
             />
@@ -163,15 +163,16 @@ class RedLayerItem extends React.Component {
               className={'hoverItem_opacity1'}
               style={{
                 fontSize: '11px',
-                display: layers.indexOf(this.props.layer) === this.props.rootComponent.state.layers.length-1 ? 'none' : 'inline-block'}}
+                display: layers.indexOf(this.props.layer) === this.props.rootComponent.state.layers.length - 1 ? 'none' : 'inline-block'
+              }}
               onClick={e => {
                 e.stopPropagation()
                 e.preventDefault()
                 const layers = this.props.rootComponent.state.layers
                 const idx = layers.indexOf(this.props.layer)
                 let temp = layers[idx];
-                layers[idx] = layers[idx+1];
-                layers[idx+1] = temp;
+                layers[idx] = layers[idx + 1];
+                layers[idx + 1] = temp;
                 rootComponent.updateRootState({})
               }}
             />
