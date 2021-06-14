@@ -34,12 +34,12 @@ class RedGradientColorEdit extends React.Component {
     let style = v['style']
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     return <div style={{...style, padding: '10px 0px'}} key={key}>
       <RedGradientColorItem
 
         rootComponent={rootComponent}
-        colorData={activeSubData['colorList'][idx]}
+        colorData={activeSubLayerData['colorList'][idx]}
         activeYn={this.state.activeIDX === idx}
         HD_active={index => {
           this.setState({activeIDX: index});
@@ -105,7 +105,7 @@ class RedGradientColorEdit extends React.Component {
 
   sortColorList() {
     const canvasInfo = this.props.rootComponent.state.canvasInfo;
-    this.props.rootComponent.state.activeSubData.colorList.sort((a, b) => {
+    this.props.rootComponent.state.activeSubLayerData.colorList.sort((a, b) => {
       const aX = a['rangeUnit'] === '%' ? a['range'] : (a['range'] / canvasInfo['width'] * 100);
       const bX = b['rangeUnit'] === '%' ? b['range'] : (b['range'] / canvasInfo['width'] * 100);
       if (aX > bX) return 1;
@@ -117,22 +117,22 @@ class RedGradientColorEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     return <div style={style.container}>
       <div style={{display: 'flex', margin: '4px 0px', justifyContent: 'space-between'}}>
         <div className={'ui_subTitle'}>Preview</div>
         <button
           style={{...style.preset}}
-          onClick={e => {
-            this.props.borderMode ? RedPresetBorder.addUserPreset(rootComponent, activeSubData) : RedPreset.addUserPreset(rootComponent, activeSubData)
+          onClick={() => {
+            this.props.borderMode ? RedPresetBorder.addUserPreset(rootComponent, activeSubLayerData) : RedPreset.addUserPreset(rootComponent, activeSubLayerData)
           }}
         ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}}/> Add Preset
         </button>
         <button
           style={style.reverse}
-          onClick={e => {
-            // console.log('원본', JSON.parse(JSON.stringify(activeSubData['colorList'])));
-            let t0 = JSON.parse(JSON.stringify(activeSubData['colorList']));
+          onClick={() => {
+            // console.log('원본', JSON.parse(JSON.stringify(activeSubLayerData['colorList'])));
+            let t0 = JSON.parse(JSON.stringify(activeSubLayerData['colorList']));
             t0 = t0.reverse();
             t0.forEach(v => {
               let base = 100;
@@ -151,7 +151,7 @@ class RedGradientColorEdit extends React.Component {
                 v['rangeEnd'] = base - v['rangeEnd'];
               }
             });
-            activeSubData['colorList'] = t0;
+            activeSubLayerData['colorList'] = t0;
             rootComponent.updateRootState({});
             // console.log('결과', t0);
           }}
@@ -174,7 +174,7 @@ class RedGradientColorEdit extends React.Component {
         className={'transparent_checker'}
         style={{border: '1px solid rgba(0,0,0,1)'}}
       >
-        {this.renderGradientColorList(activeSubData)}
+        {this.renderGradientColorList(activeSubLayerData)}
       </div>
       <div style={{marginTop: '20px'}}>
         <RedPropertyOffsetEdit rootComponent={rootComponent}/>
@@ -187,7 +187,7 @@ class RedGradientColorEdit extends React.Component {
               minHeight={window.innerHeight - 500}
               height={window.innerHeight - 500}
               overscanRowCount={10}
-              rowCount={activeSubData['colorList'].length}
+              rowCount={activeSubLayerData['colorList'].length}
               rowHeight={110}
               rowRenderer={v => this._rowRender(v)}
               width={width}
@@ -195,7 +195,7 @@ class RedGradientColorEdit extends React.Component {
           )}
         </AutoSizer>
         {/*{*/}
-        {/*  activeSubData['colorList'].map((v, index) => {*/}
+        {/*  activeSubLayerData['colorList'].map((v, index) => {*/}
         {/*    // const height=97*/}
         {/*    // if(height * index)*/}
         {/*    return <RedGradientColorItem*/}

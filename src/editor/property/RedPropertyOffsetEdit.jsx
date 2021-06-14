@@ -19,30 +19,30 @@ class RedPropertyOffsetEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
-    if (activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC) {
-      activeSubData['offsetUnit'] = 'deg'
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    if (activeSubLayerData.type === GRADIENT_TYPE.CONIC || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_CONIC) {
+      activeSubLayerData['offsetUnit'] = 'deg'
     } else {
-      if (activeSubData['offsetUnit'] === 'deg') activeSubData['offsetUnit'] = '%'
+      if (activeSubLayerData['offsetUnit'] === 'deg') activeSubLayerData['offsetUnit'] = '%'
     }
-    const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['deg'] : ['px', '%']
+    const unitList = activeSubLayerData.type === GRADIENT_TYPE.CONIC || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['deg'] : ['px', '%']
     {
-      activeSubData['offsetUnit'] = activeSubData['type'] === GRADIENT_TYPE.CONIC || activeSubData['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (activeSubData['offsetUnit'] === 'deg' ? '%' : (activeSubData['offsetUnit'] || '%'))
+      activeSubLayerData['offsetUnit'] = activeSubLayerData['type'] === GRADIENT_TYPE.CONIC || activeSubLayerData['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (activeSubLayerData['offsetUnit'] === 'deg' ? '%' : (activeSubLayerData['offsetUnit'] || '%'))
     }
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <div className={'ui_item_title'}>start offset</div>
         <RedNumber
           width={'calc(100% - 80px)'}
-          value={activeSubData['offset'] || 0}
+          value={activeSubLayerData['offset'] || 0}
           HD_onInput={e => {
-            activeSubData['offset'] = +e.target.value;
+            activeSubLayerData['offset'] = +e.target.value;
             rootComponent.updateRootState({});
           }}/>
         <RedSelect
           width={80}
-          value={activeSubData['offsetUnit']} options={unitList} HD_change={e => {
-          activeSubData['offsetUnit'] = e.target.value;
+          value={activeSubLayerData['offsetUnit']} options={unitList} HD_change={e => {
+          activeSubLayerData['offsetUnit'] = e.target.value;
           rootComponent.updateRootState({});
         }}/>
       </div>

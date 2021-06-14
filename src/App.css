@@ -355,7 +355,7 @@ option {
     background: rgb(60, 60, 60);
     width: 26px;
     display: flex;
-    padding: 8px 0px;
+    padding: 8px 0;
     font-size: 12px;
     align-items: center;
     border-top: 1px solid rgb(26, 26, 26);
@@ -395,24 +395,6 @@ option {
 
 }
 
-/*.redgradient_canvas::before{*/
-/*    content:"비포가 될지어다 이게 0뎁스<br/>.redgradient_canvas::before css를 직접갈아치는걸로 해결";*/
-/*    position : absolute;*/
-/*    top : -300px;*/
-/*    left : 0;*/
-/*    background: radial-gradient(at 50% 50%, rgba(255, 255, 0, 0.9) calc(25%), rgba(255, 0, 0, 0.5) calc(55%), transparent calc(75%), transparent calc(100%)) 0px 0px / 50px 100% repeat;*/
-/*    width : 200px;*/
-/*    height: 50px*/
-/*}*/
-/*.redgradient_canvas::after{*/
-/*    content:"에프터가 될지어다 이것이 2뎁스 메인이 1뎁스로 보면될듯 .redgradient_canvas::after css를 직접갈아치는걸로 해결";*/
-/*    position : absolute;*/
-/*    bottom : -300px;*/
-/*    left : 0;*/
-/*    background: radial-gradient(at 50% 50%, rgba(255, 255, 0, 0.9) calc(25%), rgba(255, 0, 0, 0.5) calc(55%), transparent calc(75%), transparent calc(100%)) 0px 0px / 100% 100% no-repeat;*/
-/*    width : 200px;*/
-/*    height: 50px*/
-/*}*/
 
 
 input[type=number]::-webkit-inner-spin-button,

@@ -33,14 +33,14 @@ class RedCanvasBorderRadiusEdit extends React.Component {
         }}>
 
           <div
-            onClick={e => {
+            onClick={() => {
               canvasInfo.border_radius_mergeMode = false
               rootComponent.updateRootState()
             }}
             style={{...style.mode, background: canvasInfo.border_radius_mergeMode ? '#2f2f2f' : '#5e7ade'}}>solo
           </div>
           <div
-            onClick={e => {
+            onClick={()=> {
               canvasInfo.border_radius_mergeMode = true
               rootComponent.updateRootState()
             }}

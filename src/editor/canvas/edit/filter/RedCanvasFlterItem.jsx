@@ -53,7 +53,7 @@ class RedCanvasFilter extends React.Component {
         }}/>
         <button
           style={style.buttonIcon}
-          onClick={e => {
+          onClick={() => {
             const filterList = rootComponent.state.canvasInfo.filterList
             filterList.splice(filterList.indexOf(filterData), 1)
             rootComponent.updateRootState({})
@@ -62,7 +62,7 @@ class RedCanvasFilter extends React.Component {
         </button>
         <button
           style={style.buttonIcon}
-          onClick={e => {
+          onClick={() => {
             const filterList = rootComponent.state.canvasInfo.filterList
             filterList.splice(filterList.indexOf(filterData), 0, JSON.parse(JSON.stringify(filterData)))
             rootComponent.updateRootState({})

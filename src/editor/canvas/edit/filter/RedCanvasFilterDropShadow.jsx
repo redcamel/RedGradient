@@ -81,7 +81,7 @@ class RedCanvasFilterDropShadow extends React.Component {
                 }
               });
             }
-            requestAnimationFrame(e => {
+            requestAnimationFrame(() => {
               colorPicker.initColorWithoutChangeEvent(filterData['values']['color']);
             })
           }}

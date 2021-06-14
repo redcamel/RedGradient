@@ -60,7 +60,7 @@ class RedCanvasBorderModeEdit extends React.Component {
                 }
               });
             }
-            requestAnimationFrame(e => {
+            requestAnimationFrame(() => {
               colorPicker.initColorWithoutChangeEvent(canvasInfo.border_color);
             })
           }}

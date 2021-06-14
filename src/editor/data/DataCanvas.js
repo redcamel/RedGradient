@@ -33,8 +33,10 @@ function DataCanvas() {
       /////////////////////////////////////////////////
       filterList: []
     },
-    activeLayer: null,
-    activeSubData: null,
+    activeLayerDataIndex: 0,
+    activeSubLayerDataIndex: 0,
+    activeLayerData: null,
+    activeSubLayerData: null,
     bgColor: "#fff",
     layers: [
       new DataLayer()

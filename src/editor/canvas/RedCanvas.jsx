@@ -48,17 +48,17 @@ class RedCanvas extends React.Component {
   drawCall(canvasInfo, layers, bgColor) {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
-    const activeSubDataPosition = activeSubData['position'];
-    const activeSubDataAt = activeSubData['at'];
-    const activeSubDataSize = activeSubData['size'];
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const activeSubLayerDataPosition = activeSubLayerData['position'];
+    const activeSubLayerDataAt = activeSubLayerData['at'];
+    const activeSubLayerDataSize = activeSubLayerData['size'];
     {
-      activeSubData['position']['x'] = +activeSubData['position']['x'];
-      activeSubData['position']['y'] = +activeSubData['position']['y'];
-      activeSubData['size']['w'] = +activeSubData['size']['w'];
-      activeSubData['size']['h'] = +activeSubData['size']['h'];
-      activeSubData['at']['x'] = +activeSubData['at']['x'];
-      activeSubData['at']['y'] = +activeSubData['at']['y'];
+      activeSubLayerData['position']['x'] = +activeSubLayerData['position']['x'];
+      activeSubLayerData['position']['y'] = +activeSubLayerData['position']['y'];
+      activeSubLayerData['size']['w'] = +activeSubLayerData['size']['w'];
+      activeSubLayerData['size']['h'] = +activeSubLayerData['size']['h'];
+      activeSubLayerData['at']['x'] = +activeSubLayerData['at']['x'];
+      activeSubLayerData['at']['y'] = +activeSubLayerData['at']['y'];
     }
     const borderGradientInfo = rootComponentState.borderGradientInfo;
     const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3]);
@@ -66,20 +66,20 @@ class RedCanvas extends React.Component {
     const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3];
     const borderY = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][0];
     const layoutSize = {
-      w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width'] - borderW) * activeSubDataSize['w'] / 100 : activeSubDataSize['w'] - borderW,
-      h: activeSubDataSize['hUnit'] === '%' ? (canvasInfo['height'] - borderH) * activeSubDataSize['h'] / 100 : activeSubDataSize['h'] - borderH,
+      w: activeSubLayerDataSize['wUnit'] === '%' ? (canvasInfo['width'] - borderW) * activeSubLayerDataSize['w'] / 100 : activeSubLayerDataSize['w'] - borderW,
+      h: activeSubLayerDataSize['hUnit'] === '%' ? (canvasInfo['height'] - borderH) * activeSubLayerDataSize['h'] / 100 : activeSubLayerDataSize['h'] - borderH,
     };
-    layoutSize['x'] = (activeSubDataPosition['xUnit'] === '%' ? (canvasInfo.width - layoutSize.w - borderW) * (activeSubDataPosition['x'] / 100) : activeSubDataPosition['x']) + borderX;
-    layoutSize['y'] = (activeSubDataPosition['yUnit'] === '%' ? (canvasInfo.height - layoutSize.h - borderH) * (activeSubDataPosition['y'] / 100) : activeSubDataPosition['y']) + borderY;
-    const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x'] - borderX}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
-    const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y'] - borderY}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
+    layoutSize['x'] = (activeSubLayerDataPosition['xUnit'] === '%' ? (canvasInfo.width - layoutSize.w - borderW) * (activeSubLayerDataPosition['x'] / 100) : activeSubLayerDataPosition['x']) + borderX;
+    layoutSize['y'] = (activeSubLayerDataPosition['yUnit'] === '%' ? (canvasInfo.height - layoutSize.h - borderH) * (activeSubLayerDataPosition['y'] / 100) : activeSubLayerDataPosition['y']) + borderY;
+    const lX = activeSubLayerDataAt['xUnit'] === 'px' ? `${activeSubLayerDataAt['x'] - borderX}${activeSubLayerDataAt['xUnit']}` : `${layoutSize['w'] * activeSubLayerDataAt['x'] / 100}px`;
+    const lY = activeSubLayerDataAt['yUnit'] === 'px' ? `${activeSubLayerDataAt['y'] - borderY}${activeSubLayerDataAt['yUnit']}` : `${layoutSize['h'] * activeSubLayerDataAt['y'] / 100}px`;
     if (ghostMode && !ghostSize) ghostSize = {...layoutSize};
     const iconScale = Math.min(1, 1 / this.state.canvasViewScale)
     return <div
       style={{
         ...style.canvas,
         transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
-      }} className={'transparent_checker redgradient_canvas'}>
+      }} className={'transparent_checker redGradient_canvas'}>
       <div
         className={'transparent_checker'}
         style={{
@@ -145,8 +145,8 @@ class RedCanvas extends React.Component {
             this.setModes({
               positionMode: {
                 mode: 'n',
-                startValueX: activeSubData['position']['x'],
-                startValueY: activeSubData['position']['y'],
+                startValueX: activeSubLayerData['position']['x'],
+                startValueY: activeSubLayerData['position']['y'],
                 startX: e.nativeEvent.pageX,
                 startY: e.nativeEvent.pageY
               }
@@ -171,8 +171,8 @@ class RedCanvas extends React.Component {
             this.setModes({
               positionMode: {
                 mode: 's',
-                startValueX: activeSubData['position']['x'],
-                startValueY: activeSubData['position']['y'],
+                startValueX: activeSubLayerData['position']['x'],
+                startValueY: activeSubLayerData['position']['y'],
                 startX: e.nativeEvent.pageX,
                 startY: e.nativeEvent.pageY
               }
@@ -197,8 +197,8 @@ class RedCanvas extends React.Component {
             this.setModes({
               positionMode: {
                 mode: 'w',
-                startValueX: activeSubData['position']['x'],
-                startValueY: activeSubData['position']['y'],
+                startValueX: activeSubLayerData['position']['x'],
+                startValueY: activeSubLayerData['position']['y'],
                 startX: e.nativeEvent.pageX,
                 startY: e.nativeEvent.pageY
               }
@@ -223,8 +223,8 @@ class RedCanvas extends React.Component {
             this.setModes({
               positionMode: {
                 mode: 'e',
-                startValueX: activeSubData['position']['x'],
-                startValueY: activeSubData['position']['y'],
+                startValueX: activeSubLayerData['position']['x'],
+                startValueY: activeSubLayerData['position']['y'],
                 startX: e.nativeEvent.pageX,
                 startY: e.nativeEvent.pageY
               }
@@ -249,8 +249,8 @@ class RedCanvas extends React.Component {
             this.setModes({
               positionMode: {
                 mode: 'all',
-                startValueX: activeSubData['position']['x'],
-                startValueY: activeSubData['position']['y'],
+                startValueX: activeSubLayerData['position']['x'],
+                startValueY: activeSubLayerData['position']['y'],
                 startX: e.nativeEvent.pageX,
                 startY: e.nativeEvent.pageY
               }
@@ -391,7 +391,7 @@ class RedCanvas extends React.Component {
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'w-resize',
                 background: 'rgba(255,255,255,0.75)',
-                display: activeSubData['fixRatioYn'] ? 'none' : 'flex',
+                display: activeSubLayerData['fixRatioYn'] ? 'none' : 'flex',
                 alignItems: 'center', justifyContent: 'center',
                 border: '1px solid rgba(0,0,0,0.8)',
                 filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
@@ -417,7 +417,7 @@ class RedCanvas extends React.Component {
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'e-resize',
                 background: 'rgba(255,255,255,0.75)',
-                display: activeSubData['fixRatioYn'] ? 'none' : 'flex',
+                display: activeSubLayerData['fixRatioYn'] ? 'none' : 'flex',
                 alignItems: 'center', justifyContent: 'center',
                 border: '1px solid rgba(0,0,0,0.8)',
                 filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
@@ -443,7 +443,7 @@ class RedCanvas extends React.Component {
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 'n-resize',
                 background: 'rgba(255,255,255,0.75)',
-                display: activeSubData['fixRatioYn'] ? 'none' : 'flex',
+                display: activeSubLayerData['fixRatioYn'] ? 'none' : 'flex',
                 alignItems: 'center', justifyContent: 'center',
                 border: '1px solid rgba(0,0,0,0.8)',
                 filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
@@ -469,7 +469,7 @@ class RedCanvas extends React.Component {
                 position: 'absolute', width: '23px', height: '23px',
                 cursor: 's-resize',
                 background: 'rgba(255,255,255,0.75)',
-                display: activeSubData['fixRatioYn'] ? 'none' : 'flex',
+                display: activeSubLayerData['fixRatioYn'] ? 'none' : 'flex',
                 alignItems: 'center', justifyContent: 'center',
                 border: '1px solid rgba(0,0,0,0.8)',
                 filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
@@ -491,12 +491,12 @@ class RedCanvas extends React.Component {
           </>
 
 
-          {activeSubData['title']}
+          {activeSubLayerData['title']}
           {
-            activeSubData['type'] === GRADIENT_TYPE.RADIAL ||
-            activeSubData['type'] === GRADIENT_TYPE.REPEAT_RADIAL ||
-            activeSubData['type'] === GRADIENT_TYPE.CONIC ||
-            activeSubData['type'] === GRADIENT_TYPE.REPEAT_CONIC
+            activeSubLayerData['type'] === GRADIENT_TYPE.RADIAL ||
+            activeSubLayerData['type'] === GRADIENT_TYPE.REPEAT_RADIAL ||
+            activeSubLayerData['type'] === GRADIENT_TYPE.CONIC ||
+            activeSubLayerData['type'] === GRADIENT_TYPE.REPEAT_CONIC
               ? <>
                 <div
                   style={{
@@ -504,7 +504,7 @@ class RedCanvas extends React.Component {
                     left: lX,
                     top: lY,
                     width: `50px`,
-                    height: activeSubData['typeEndingShape'] === ENDING_SHAPE_TYPE.CIRCLE ? '50px' : `${50 * layoutSize['h'] / layoutSize['w']}px`,
+                    height: activeSubLayerData['typeEndingShape'] === ENDING_SHAPE_TYPE.CIRCLE ? '50px' : `${50 * layoutSize['h'] / layoutSize['w']}px`,
                     border: '2px dashed rgba(0,0,0,0.5)',
                     borderRadius: '50%',
                     transform: 'translate(-50%,-50%)',
@@ -515,8 +515,8 @@ class RedCanvas extends React.Component {
                     e.stopPropagation();
                     this.setModes({
                       atMode: {
-                        startValueX: activeSubData['at']['x'],
-                        startValueY: activeSubData['at']['y'],
+                        startValueX: activeSubLayerData['at']['x'],
+                        startValueY: activeSubLayerData['at']['y'],
                         startX: e.nativeEvent.pageX, startY: e.nativeEvent.pageY
                       }
                     });
@@ -541,8 +541,8 @@ class RedCanvas extends React.Component {
               </> : ''
           }
           {
-            activeSubData['type'] === GRADIENT_TYPE.RADIAL ||
-            activeSubData['type'] === GRADIENT_TYPE.REPEAT_RADIAL
+            activeSubLayerData['type'] === GRADIENT_TYPE.RADIAL ||
+            activeSubLayerData['type'] === GRADIENT_TYPE.REPEAT_RADIAL
               ? '' : <>
                 <canvas
                   ref={this.refDegreeCanvas}
@@ -579,7 +579,7 @@ class RedCanvas extends React.Component {
                       fontSize: '11px'
                     }}
                   >
-                    <div>{(+activeSubData['deg']).toFixed(1)}<br/><span style={{fontSize: '10px'}}>deg</span></div>
+                    <div>{(+activeSubLayerData['deg']).toFixed(1)}<br/><span style={{fontSize: '10px'}}>deg</span></div>
                     <div style={{
                       lineHeight: 1,
                       width: '10px', height: '10px',
@@ -587,8 +587,8 @@ class RedCanvas extends React.Component {
                       borderRadius: '50%',
                       position: 'absolute',
                       transform: 'translate(-50%,-50%)',
-                      top: `calc(50% + ${Math.sin(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`,
-                      left: `calc(50% + ${Math.cos(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`
+                      top: `calc(50% + ${Math.sin(Math.PI / 180 * (activeSubLayerData['deg'] - 90)) * 20}px)`,
+                      left: `calc(50% + ${Math.cos(Math.PI / 180 * (activeSubLayerData['deg'] - 90)) * 20}px)`
                     }}/>
                   </button>
                 </div>
@@ -621,7 +621,7 @@ class RedCanvas extends React.Component {
                         startY: e.nativeEvent.pageY,
                         startDegX: rect.x + rect.width / 2,
                         startDegY: rect.x + rect.height / 2,
-                        startDeg: activeSubData['deg'],
+                        startDeg: activeSubLayerData['deg'],
                         mode: 'nw'
                       }
                     });
@@ -658,7 +658,7 @@ class RedCanvas extends React.Component {
                         startY: e.nativeEvent.pageY,
                         startDegX: rect.x + rect.width / 2,
                         startDegY: rect.x + rect.height / 2,
-                        startDeg: activeSubData['deg'],
+                        startDeg: activeSubLayerData['deg'],
                         mode: 'ne'
                       }
                     });
@@ -695,7 +695,7 @@ class RedCanvas extends React.Component {
                         startY: e.nativeEvent.pageY,
                         startDegX: rect.x + rect.width / 2,
                         startDegY: rect.x + rect.height / 2,
-                        startDeg: activeSubData['deg'],
+                        startDeg: activeSubLayerData['deg'],
                         mode: 'se'
                       }
                     });
@@ -732,7 +732,7 @@ class RedCanvas extends React.Component {
                         startY: e.nativeEvent.pageY,
                         startDegX: rect.x + rect.width / 2,
                         startDegY: rect.x + rect.height / 2,
-                        startDeg: activeSubData['deg'],
+                        startDeg: activeSubLayerData['deg'],
                         mode: 'sw'
                       }
                     });
@@ -753,10 +753,10 @@ class RedCanvas extends React.Component {
             whiteSpace: 'nowrap',
             border: '1px solid rgba(0,0,0,0.5)'
           }}>
-            <div>w : {(+activeSubData['size']['w']).toFixed(1)}{activeSubData['size']['wUnit']} / h
-              : {(+activeSubData['size']['h']).toFixed(1)}{activeSubData['size']['hUnit']}</div>
-            <div>x : {(+activeSubData['position']['x']).toFixed(1)}{activeSubData['position']['xUnit']} / y
-              : {(+activeSubData['position']['y']).toFixed(1)}{activeSubData['position']['yUnit']}</div>
+            <div>w : {(+activeSubLayerData['size']['w']).toFixed(1)}{activeSubLayerData['size']['wUnit']} / h
+              : {(+activeSubLayerData['size']['h']).toFixed(1)}{activeSubLayerData['size']['hUnit']}</div>
+            <div>x : {(+activeSubLayerData['position']['x']).toFixed(1)}{activeSubLayerData['position']['xUnit']} / y
+              : {(+activeSubLayerData['position']['y']).toFixed(1)}{activeSubLayerData['position']['yUnit']}</div>
           </div>
         </div> : ''
       }
@@ -796,7 +796,7 @@ class RedCanvas extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     const layers = rootComponentState.layers;
-    const activeLayer = rootComponentState.activeLayer;
+    const activeLayerData = rootComponentState.activeLayerData;
     return <div
       style={style.container}
       onMouseMove={e => {
@@ -813,7 +813,7 @@ class RedCanvas extends React.Component {
         ghostSize = null;
         document.body.style.cursor = 'default';
       }}
-      onMouseDown={e => {
+      onMouseDown={() => {
         this.setModes({useMove: true});
       }}
       onWheel={e => {
@@ -824,7 +824,7 @@ class RedCanvas extends React.Component {
       }}
     >
       {this.draw_canvasUI()}
-      {this.drawCall(canvasInfo, layers, rootComponentState.bgColor, activeLayer)}
+      {this.drawCall(canvasInfo, layers, rootComponentState.bgColor, activeLayerData)}
     </div>;
   }
 }

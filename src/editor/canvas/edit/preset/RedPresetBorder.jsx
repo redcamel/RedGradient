@@ -29,18 +29,18 @@ class RedPresetBorder extends React.Component {
   renderList(list, delMode) {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     return list.map((v, index) => {
       return <div
         style={style.iconContainer}
-        onClick={e => {
+        onClick={() => {
           if (delMode) {
             RedPresetBorder.delUserPreset(rootComponent, index)
           } else {
             const newData = JSON.parse(JSON.stringify(v['data']))
-            const idx = rootComponentState.activeLayer.items.indexOf(activeSubData)
-            rootComponentState.activeLayer.items.splice(idx, 1, newData)
-            rootComponentState.activeSubData = newData
+            const idx = rootComponentState.activeLayerData.items.indexOf(activeSubLayerData)
+            rootComponentState.activeLayerData.items.splice(idx, 1, newData)
+            rootComponentState.activeSubLayerData = newData
           }
           rootComponent.updateRootState({});
         }}
@@ -77,11 +77,11 @@ class RedPresetBorder extends React.Component {
           overflow: 'hidden'
         }}>
           <div
-            onClick={e => this.setState({mode: 0})}
+            onClick={() => this.setState({mode: 0})}
             style={{...style.mode, background: this.state.mode === 0 ? '#5e7ade' : '#2f2f2f'}}>view
           </div>
           <div
-            onClick={e => this.setState({mode: 1})}
+            onClick={() => this.setState({mode: 1})}
             style={{
               ...style.mode,
               borderLeft: '1px solid #000',
@@ -89,11 +89,11 @@ class RedPresetBorder extends React.Component {
             }}>del
           </div>
           <div
-            onClick={e => RedPresetBorder.exportPreset()}
+            onClick={() => RedPresetBorder.exportPreset()}
             style={{...style.mode, borderLeft: '1px solid #000', background: '#2f2f2f'}}>export
           </div>
           <div
-            onClick={e => RedPresetBorder.importPreset(this.props.rootComponent)}
+            onClick={() => RedPresetBorder.importPreset(this.props.rootComponent)}
             style={{...style.mode, borderLeft: '1px solid #000', background: '#2f2f2f'}}>import
           </div>
         </div>

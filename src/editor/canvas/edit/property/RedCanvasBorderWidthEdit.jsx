@@ -32,14 +32,14 @@ class RedCanvasBorderWidthEdit extends React.Component {
         }}>
 
           <div
-            onClick={e => {
+            onClick={() => {
               canvasInfo.border_width_mergeMode = false
               rootComponent.updateRootState()
             }}
             style={{...style.mode, background: canvasInfo.border_width_mergeMode ? '#2f2f2f' : '#5e7ade'}}>solo
           </div>
           <div
-            onClick={e => {
+            onClick={() => {
               canvasInfo.border_width_mergeMode = true
               rootComponent.updateRootState()
             }}

@@ -50,14 +50,14 @@ class RedCanvasEdit extends React.Component {
           }}>
 
             <div
-              onClick={e => {
+              onClick={() => {
                 canvasInfo.borderIsGradientMode = false
                 rootComponent.updateRootState()
               }}
               style={{...style.mode, background: canvasInfo.borderIsGradientMode ? '#2f2f2f' : '#5e7ade'}}>basic
             </div>
             <div
-              onClick={e => {
+              onClick={() => {
                 canvasInfo.borderIsGradientMode = true
                 rootComponent.updateRootState()
               }}

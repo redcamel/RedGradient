@@ -61,7 +61,7 @@ class RedLayerItem extends React.Component {
   handleDragLeave(e) {
     e.preventDefault();
     e.stopPropagation();
-    if (startDragLayer && e.target.className === 'droparea_title2') this.setState({dragOverYn: false})
+    if (startDragLayer && e.target.className === 'drop_area_title2') this.setState({dragOverYn: false})
   }
 
   handleDragOver(e) {
@@ -106,7 +106,7 @@ class RedLayerItem extends React.Component {
       onDragOver={e => this.handleDragOver(e)}
       onDragEnter={e => this.handleDragEnter(e)}
       onDragLeave={e => this.handleDragLeave(e)}
-      onDragEnd={e => {
+      onDragEnd={() => {
         RedLayerItem.clearDragInfo();
         RedLayerSubItem.clearDragInfo();
         this.setState({dragOverYn: false})
@@ -193,8 +193,8 @@ class RedLayerItem extends React.Component {
                       if (layers[idx]) targetLayer = layers[idx];
                       else targetLayer = layers[0];
                       rootComponent.updateRootState({
-                        activeLayer: targetLayer,
-                        activeSubData: targetLayer['items'][0]
+                        activeLayerData: targetLayer,
+                        activeSubLayerData: targetLayer['items'][0]
                       });
                     }
                   }}
@@ -204,7 +204,7 @@ class RedLayerItem extends React.Component {
                   onClick={e => {
                     e.stopPropagation();
                     layer.items.splice(0, 0, new DataItem());
-                    rootComponent.updateRootState({activeSubData: layer.items[0]});
+                    rootComponent.updateRootState({activeSubLayerData: layer.items[0]});
                   }}
           ><FontAwesomeIcon icon={faPlusCircle}/>
           </button>
@@ -218,7 +218,7 @@ class RedLayerItem extends React.Component {
         </div>
         {this.state.openPanel ? <RedAddGradientLayerSet
           rootComponent={this}
-          HD_cancel={e => this.setState({openPanel: false, draggable: true})}
+          HD_cancel={() => this.setState({openPanel: false, draggable: true})}
           HD_apply={(v, type) => {
             let t0 = new DataItem()
             t0.colorList = v
@@ -227,7 +227,7 @@ class RedLayerItem extends React.Component {
             this.setState({openPanel: false, draggable: true})
             rootComponent.updateRootState({
               layers: rootComponentState.layers,
-              activeSubData: t0
+              activeSubLayerData: t0
             })
           }}
         /> : ''}
@@ -241,7 +241,7 @@ class RedLayerItem extends React.Component {
             overflow: 'hidden',
             transition: 'height 0.2s'
           }}
-          onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: layer.items[0]})}
+          onClick={() => rootComponent.updateRootState({activeLayerData: layer, activeSubLayerData: layer.items[0]})}
 
         >
           <div className={'layerItem'}
@@ -275,7 +275,7 @@ class RedLayerItem extends React.Component {
           drop here
         </div>
         <div
-          className={'droparea_title2'}
+          className={'drop_area_title2'}
           style={{
             display: 'flex',
             alignItems: 'center',

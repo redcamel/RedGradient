@@ -18,15 +18,15 @@ class RedPropertyTypeEndingShapeEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     return <div style={{display: 'flex', alignItems: 'center'}}>
 
       <div className={'ui_subTitle'}>EndingShape</div>
       <RedSelect
-        value={activeSubData['typeEndingShape']}
+        value={activeSubLayerData['typeEndingShape']}
         options={Object.entries(ENDING_SHAPE_TYPE)}
         HD_change={e => {
-          activeSubData['typeEndingShape'] = e.target.value;
+          activeSubLayerData['typeEndingShape'] = e.target.value;
           rootComponent.updateRootState({});
         }}/>
     </div>;

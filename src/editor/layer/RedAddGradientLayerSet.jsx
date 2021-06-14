@@ -128,7 +128,6 @@ class RedAddGradientLayerSet extends React.Component {
               // console.log(tSTween)
               tS = tSTween.ratio * 100;
               tE = tETween.ratio * 100;
-              let t0 = index / rangeList.length / 2 + 0.5;
               let tColor = tempColorList[index] ? tempColorList[index]['color'] : gsap.utils.interpolate(this.state.startColor['color'], this.state.endColor['color'], index / rangeList.length);
               if (!tempColorList[index]) {
                 tempColorList[index] = tempColorList[index] || (new DataColor(tColor, tS, '%', false, false, true, tE));
@@ -198,7 +197,7 @@ class RedAddGradientLayerSet extends React.Component {
                          this.state.openColorPicker = [];
                          this.state.openColorPicker[index] = true;
                          this.setState({});
-                         requestAnimationFrame(e => {
+                         requestAnimationFrame(() => {
                            this.state.colorPicker[index].initColorWithoutChangeEvent(tColor);
                          })
                        }}
@@ -284,7 +283,7 @@ class RedAddGradientLayerSet extends React.Component {
                          this.state.openColorPicker = [];
                          this.state.openColorPicker[startIndex] = true;
                          this.setState({});
-                         requestAnimationFrame(e => {
+                         requestAnimationFrame(() => {
                            this.state.colorPicker[startIndex].initColorWithoutChangeEvent(this.state.startColor['color']);
                          })
                        }}
@@ -336,7 +335,7 @@ class RedAddGradientLayerSet extends React.Component {
                          this.state.openColorPicker = [];
                          this.state.openColorPicker[lastIndex] = true;
                          this.setState({});
-                         requestAnimationFrame(e => {
+                         requestAnimationFrame(() => {
                            this.state.colorPicker[lastIndex].initColorWithoutChangeEvent(this.state.endColor['color']);
                          })
                        }}
@@ -395,7 +394,7 @@ class RedAddGradientLayerSet extends React.Component {
               border: 0,
               cursor: 'pointer'
             }}
-            onClick={e => this.props.HD_cancel()}
+            onClick={() => this.props.HD_cancel()}
           >Cancel
           </button>
           <button
@@ -409,9 +408,8 @@ class RedAddGradientLayerSet extends React.Component {
               marginLeft: '10px',
               cursor: 'pointer'
             }}
-            onClick={v => {
-              let t0 = tempColorList;
-              this.props.HD_apply(t0, this.state.type);
+            onClick={() => {
+              this.props.HD_apply(tempColorList, this.state.type);
             }}
           >Apply
           </button>

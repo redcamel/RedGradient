@@ -45,7 +45,7 @@ const HD_move = e => {
     // console.log(tX);
   }
 };
-const HD_up = e => {
+const HD_up = () => {
   targetContext.props.HD_sort(targetColorData);
   window.removeEventListener('mousemove', HD_move);
   window.removeEventListener('mouseup', HD_up);
@@ -75,26 +75,26 @@ class RedGradientColorItem extends React.Component {
   getIndex() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     const colorData = this.props.colorData;
-    return activeSubData.colorList.indexOf(colorData);
+    return activeSubLayerData.colorList.indexOf(colorData);
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     const canvasInfo = rootComponentState.canvasInfo;
     const colorData = this.props.colorData;
     const activeYn = this.props.activeYn;
     const colorInfo = colorData['color'];
     if (!colorData['useRange']) colorData['rangeEnd'] = colorData['range'];
-    const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['%', 'deg'] : ['px', '%']
+    const unitList = activeSubLayerData.type === GRADIENT_TYPE.CONIC || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['%', 'deg'] : ['px', '%']
     return <div>
       <button
         style={style.add}
-        onClick={(e) => {
-          let prevColorData = activeSubData['colorList'][this.getIndex() - 1];
+        onClick={() => {
+          let prevColorData = activeSubLayerData['colorList'][this.getIndex() - 1];
           let currentRange = colorData['range'];
           let newRange = currentRange;
           let newRangeEnd = currentRange;
@@ -108,7 +108,7 @@ class RedGradientColorItem extends React.Component {
             colorData['useRange'],
             newRangeEnd
           );
-          activeSubData['colorList'].splice(this.getIndex(), 0, newColorData);
+          activeSubLayerData['colorList'].splice(this.getIndex(), 0, newColorData);
           this.props.HD_active(this.getIndex())
         }}
       >
@@ -153,7 +153,7 @@ class RedGradientColorItem extends React.Component {
                            onChange: color => {
                              targetColorData['color'] = color;
                              targetContext.props.rootComponent.updateRootState({
-                               activeSubData: targetContext.props.rootComponent.state.activeSubData
+                               activeSubLayerData: targetContext.props.rootComponent.state.activeSubLayerData
                              });
                            }
                          });
@@ -162,7 +162,7 @@ class RedGradientColorItem extends React.Component {
                        targetColorData = colorData
                        // this.state.colorPicker.setOption({color: colorData['color']});
                        this.setState({openColorPicker: true, openColorEndPicker: false});
-                       requestAnimationFrame(e => {
+                       requestAnimationFrame(() => {
                          this.state.colorPicker.initColorWithoutChangeEvent(colorData['color']);
                          const pickerContainerNode = this.refColorPickerContainer.current.parentNode
                          const itemNode = pickerContainerNode.parentNode.parentNode
@@ -178,7 +178,7 @@ class RedGradientColorItem extends React.Component {
                   icon={faThumbtack} style={{
                   filter: colorData.useDivide ? '' : 'invert(1.0)'
                 }}
-                  onClick={e => {
+                  onClick={() => {
                     colorData['useDivide'] = !colorData['useDivide'];
                     rootComponent.updateRootState({});
                   }}
@@ -208,7 +208,7 @@ class RedGradientColorItem extends React.Component {
                            onChange: color => {
                              targetColorData['colorEnd'] = color;
                              targetContext.props.rootComponent.updateRootState({
-                               activeSubData: targetContext.props.rootComponent.state.activeSubData
+                               activeSubLayerData: targetContext.props.rootComponent.state.activeSubLayerData
                              });
                            }
                          });
@@ -217,7 +217,7 @@ class RedGradientColorItem extends React.Component {
                        targetColorData = colorData
                        // this.state.colorEndPicker.setOption({color: colorData['colorEnd']});
                        this.setState({openColorEndPicker: true, openColorPicker: false});
-                       requestAnimationFrame(e => {
+                       requestAnimationFrame(() => {
                          this.state.colorEndPicker.initColorWithoutChangeEvent(colorData['colorEnd']);
                          const pickerContainerNode = this.refColorEndPickerContainer.current.parentNode
                          const itemNode = pickerContainerNode.parentNode.parentNode
@@ -233,7 +233,7 @@ class RedGradientColorItem extends React.Component {
                   icon={faThumbtack} style={{
                   filter: colorData.useDivideEnd ? '' : 'invert(1.0)'
                 }}
-                  onClick={e => {
+                  onClick={() => {
                     colorData['useDivideEnd'] = !colorData['useDivideEnd'];
                     rootComponent.updateRootState({});
                   }}
@@ -250,9 +250,9 @@ class RedGradientColorItem extends React.Component {
                 value={colorData['range'] || 0}
                 HD_onInput={e => {
                   colorData['range'] = +e.target.value;
-                  let i = activeSubData.colorList.length;
+                  let i = activeSubLayerData.colorList.length;
                   while (i--) {
-                    if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
+                    if (activeSubLayerData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
                   }
                   rootComponent.updateRootState({});
                 }}
@@ -267,9 +267,9 @@ class RedGradientColorItem extends React.Component {
                   value={colorData['rangeEnd'] || 0}
                   HD_onInput={e => {
                     colorData['rangeEnd'] = +e.target.value;
-                    let i = activeSubData.colorList.length;
+                    let i = activeSubLayerData.colorList.length;
                     while (i--) {
-                      if (activeSubData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
+                      if (activeSubLayerData.colorList[i] === colorData) this.props.HD_active(this.getIndex());
                     }
                     rootComponent.updateRootState({});
                   }}
@@ -313,9 +313,9 @@ class RedGradientColorItem extends React.Component {
                 rootComponent.updateRootState({});
               }}/>
               <button
-                style={{...style.del, display: activeSubData.colorList.length < 2 ? 'none' : 'inline-block'}}
+                style={{...style.del, display: activeSubLayerData.colorList.length < 2 ? 'none' : 'inline-block'}}
                 onClick={() => {
-                  activeSubData.colorList.splice(this.getIndex(), 1);
+                  activeSubLayerData.colorList.splice(this.getIndex(), 1);
                   rootComponent.updateRootState({});
                 }}
               >Del
@@ -323,13 +323,13 @@ class RedGradientColorItem extends React.Component {
             </div>
             <div style={{display: 'flex', alignItems: 'center', margin: '5px 0px'}}>
               {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
-                                            onClick={e => {
+                                            onClick={() => {
                                               colorData['colorEnd'] = colorData['color']
                                               rootComponent.updateRootState({});
                                             }}
               >Copy L to R</div> : ''}
               {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
-                                            onClick={e => {
+                                            onClick={() => {
                                               colorData['color'] = colorData['colorEnd']
                                               rootComponent.updateRootState({});
                                             }}
@@ -337,7 +337,7 @@ class RedGradientColorItem extends React.Component {
               <label
                 style={style.lock}
                 onClick={(e) => {
-                  if (e.target.type == 'checkbox') {
+                  if (e.target.type === 'checkbox') {
                     colorData['useRange'] = !colorData['useRange'];
                     if (colorData['colorEnd'] === undefined) colorData['colorEnd'] = colorData['color'];
                     rootComponent.updateRootState({});

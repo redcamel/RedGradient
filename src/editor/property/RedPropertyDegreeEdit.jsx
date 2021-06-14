@@ -27,23 +27,23 @@ class RedPropertyDegreeEdit extends React.Component {
   calcDegree(e) {
     const rootComponent = targetContext.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     const rect = targetContext.refCenter.current.getBoundingClientRect();
     const tX = e.pageX - (rect.x + rect.width / 2);
     const tY = e.pageY - (rect.y + rect.height / 2);
     const deg = Math.atan2(tY, tX);
-    activeSubData['deg'] = deg * 180 / Math.PI;
-    activeSubData['deg'] += 90;
-    if (activeSubData['deg'] < 0) activeSubData['deg'] += 360;
-    activeSubData['deg'] = activeSubData['deg'] % 360;
+    activeSubLayerData['deg'] = deg * 180 / Math.PI;
+    activeSubLayerData['deg'] += 90;
+    if (activeSubLayerData['deg'] < 0) activeSubLayerData['deg'] += 360;
+    activeSubLayerData['deg'] = activeSubLayerData['deg'] % 360;
     rootComponent.updateRootState({});
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
-    const deg = activeSubData['deg'];
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const deg = activeSubLayerData['deg'];
     return <div style={{display: 'flex', alignItems: 'center'}}>
       {
         <>
@@ -52,7 +52,7 @@ class RedPropertyDegreeEdit extends React.Component {
             width={'61px'}
             value={deg || 0}
             HD_onInput={e => {
-              activeSubData['deg'] = +e.target.value;
+              activeSubLayerData['deg'] = +e.target.value;
               rootComponent.updateRootState({});
             }}/>
           <div style={{textAlign: 'center', marginLeft: '10px', marginRight: '10px'}}>

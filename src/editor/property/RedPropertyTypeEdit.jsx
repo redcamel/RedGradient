@@ -18,17 +18,17 @@ class RedPropertyTypeEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     const canvasInfo = rootComponentState.canvasInfo
     return <div>
       <div className={'ui_subTitle'}>Gradient Type</div>
       <div style={{lineHeight: 1.6}}>
         <RedRadio
-          value={activeSubData['type']}
+          value={activeSubLayerData['type']}
           options={Object.entries(GRADIENT_TYPE)}
           HD_change={e => {
             if (e.target.value === GRADIENT_TYPE.CONIC || e.target.value === GRADIENT_TYPE.REPEAT_CONIC) {
-              activeSubData.colorList.map(colorData => {
+              activeSubLayerData.colorList.map(colorData => {
                 let tUnit = 'deg';
                 if (colorData['rangeUnit'] !== tUnit) {
                   if (colorData['rangeUnit'] === 'px') {
@@ -45,13 +45,13 @@ class RedPropertyTypeEdit extends React.Component {
                 colorData['rangeUnit'] = tUnit;
               })
             } else {
-              activeSubData.colorList.map(colorData => {
+              activeSubLayerData.colorList.map(colorData => {
                 let tUnit = '%';
                 if (colorData['rangeUnit'] === 'deg') colorData['range'] = colorData['range'] / 360 * 100;
                 colorData['rangeUnit'] = tUnit;
               })
             }
-            activeSubData['type'] = e.target.value;
+            activeSubLayerData['type'] = e.target.value;
             rootComponent.updateRootState({});
           }}/>
       </div>

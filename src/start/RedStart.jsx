@@ -19,7 +19,7 @@ class RedStart extends React.Component {
   componentDidMount() {
     let t0 = new Image()
     t0.src = './tempLogo.svg'
-    t0.onload = e => {
+    t0.onload = () => {
       this.setState({logoLoaded: true})
     }
   }
@@ -47,7 +47,7 @@ class RedStart extends React.Component {
       }}>
 
         <div style={{textAlign: 'center'}}>
-          <img src={'./tempLogo.svg'} style={{height: '512px'}}/>
+          <img alt={'logo'} src={'./tempLogo.svg'} style={{height: '512px'}}/>
           <div style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '30px'}}>RedGradient</div>
         </div>
 
@@ -63,7 +63,7 @@ class RedStart extends React.Component {
             boxShadow: '0px 0px 6px rgba(0,0,0,0.16)',
             marginBottom: '5px',
           }}
-          onClick={e => rootComponent.setNewCanvas(new DataCanvas())}
+          onClick={() => rootComponent.setNewCanvas(new DataCanvas())}
         >새 프로젝트
         </button>
         <input

@@ -34,7 +34,10 @@ class RedLayerTop extends React.Component {
              onClick={() => {
                let targetLayer;
                layers.splice(0, 0, targetLayer = new DataLayer());
-               rootComponent.updateRootState({activeLayer: targetLayer, activeSubData: targetLayer['items'][0]});
+               rootComponent.updateRootState({
+                 activeLayerData: targetLayer,
+                 activeSubLayerData: targetLayer['items'][0]
+               });
              }}
         ><FontAwesomeIcon icon={faPlusCircle}/> Add Layer
         </div>
@@ -51,7 +54,7 @@ class RedLayerTop extends React.Component {
               ...style.viewScaleItem,
               opacity: layersComponent.state.layerViewSizeMode === 0 ? 1 : 0.25
             }}
-            onClick={e => {
+            onClick={() => {
               layersComponent.setState({layerViewSizeMode: 0})
             }}
           >big
@@ -61,7 +64,7 @@ class RedLayerTop extends React.Component {
               ...style.viewScaleItem,
               opacity: layersComponent.state.layerViewSizeMode === 1 ? 1 : 0.25
             }}
-            onClick={e => {
+            onClick={() => {
               layersComponent.setState({layerViewSizeMode: 1})
             }}
           >wide
@@ -71,7 +74,7 @@ class RedLayerTop extends React.Component {
               ...style.viewScaleItem,
               opacity: layersComponent.state.layerViewSizeMode === 2 ? 1 : 0.25
             }}
-            onClick={e => {
+            onClick={() => {
               layersComponent.setState({layerViewSizeMode: 2})
             }}
           >small

@@ -14,7 +14,6 @@ let colorPicker;
 function drawCanvasEditUI() {
   const rootComponent = this.props.rootComponent;
   const rootComponentState = rootComponent.state;
-  const canvasInfo = rootComponentState.canvasInfo;
   return <div>
     <div style={style.canvasResizer}>
 
@@ -43,7 +42,7 @@ function drawCanvasEditUI() {
               onChange: color => rootComponent.updateRootState({bgColor: color})
             });
           }
-          requestAnimationFrame(e => {
+          requestAnimationFrame(() => {
             colorPicker.initColorWithoutChangeEvent(rootComponentState.bgColor);
           })
         }}

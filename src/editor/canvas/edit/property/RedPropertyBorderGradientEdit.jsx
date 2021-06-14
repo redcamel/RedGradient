@@ -20,7 +20,7 @@ class RedPropertyBorderGradientEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     return <div style={style.container}>
 
       <div style={style.divide}/>
@@ -34,22 +34,22 @@ class RedPropertyBorderGradientEdit extends React.Component {
               <RedTextField
                 title={'name'}
                 width={'calc(100% - 4px)'}
-                value={activeSubData['title']} HD_onInput={e => {
-                activeSubData['title'] = e.target.value;
+                value={activeSubLayerData['title']} HD_onInput={e => {
+                activeSubLayerData['title'] = e.target.value;
                 rootComponent.updateRootState({});
               }}/>
               <div style={style.divide}/>
               <RedPropertyTypeEdit rootComponent={rootComponent}/>
 
-              {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL ? <>
+              {activeSubLayerData.type === GRADIENT_TYPE.RADIAL || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_RADIAL ? <>
                 <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent}/>
               </> : ''}
-              {activeSubData.type === GRADIENT_TYPE.LINEAR || activeSubData.type === GRADIENT_TYPE.REPEAT_LINEAR || activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ?
+              {activeSubLayerData.type === GRADIENT_TYPE.LINEAR || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_LINEAR || activeSubLayerData.type === GRADIENT_TYPE.CONIC || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_CONIC ?
                 <>
                   <div style={style.divide}/>
                   <RedPropertyDegreeEdit rootComponent={rootComponent}/>
                 </> : ''}
-              {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL || activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? <>
+              {activeSubLayerData.type === GRADIENT_TYPE.RADIAL || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_RADIAL || activeSubLayerData.type === GRADIENT_TYPE.CONIC || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_CONIC ? <>
                 <div style={style.divide}/>
                 <RedPropertyAtEdit rootComponent={rootComponent}/>
               </> : ''}
@@ -60,7 +60,7 @@ class RedPropertyBorderGradientEdit extends React.Component {
 
 
             <div style={{display: 'flex'}}>
-              {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL || activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ?
+              {activeSubLayerData.type === GRADIENT_TYPE.RADIAL || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_RADIAL || activeSubLayerData.type === GRADIENT_TYPE.CONIC || activeSubLayerData.type === GRADIENT_TYPE.REPEAT_CONIC ?
                 <div>
                   center
                   <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'at'}/>

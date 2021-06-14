@@ -27,8 +27,7 @@ class RedPropertyEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeLayer = rootComponentState.activeLayer;
-    const data = rootComponentState.activeSubData;
+    const data = rootComponentState.activeSubLayerData;
     const canvasInfo = rootComponentState.canvasInfo
     let containerCssText = ''
     {
@@ -113,7 +112,7 @@ class RedPropertyEdit extends React.Component {
                     <RedTitle title={'Result'}/>
                     <button
                       style={style.copyClass}
-                      onClick={e => {
+                      onClick={() => {
                         const tempElem = document.createElement('textarea');
                         tempElem.value = containerCssText;
                         document.body.appendChild(tempElem);
@@ -142,10 +141,10 @@ class RedPropertyEdit extends React.Component {
 
           {/*<div style={style.itemContainer}>*/}
           {/*  <div>Current Gradient Css</div>*/}
-          {/*{CALC_GRADIENT.calcGradientItem(data, false, activeLayer)}*/}
+          {/*{CALC_GRADIENT.calcGradientItem(data, false, activeLayerData)}*/}
           {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>*/}
           {/*  {*/}
-          {/*    JSON.stringify(CALC_GRADIENT.calcGradientItem(data, false, activeLayer))*/}
+          {/*    JSON.stringify(CALC_GRADIENT.calcGradientItem(data, false, activeLayerData))*/}
           {/*  }*/}
           {/*</SyntaxHighlighter>*/}
           {/*<div>Current Gradient Data</div>*/}

@@ -82,7 +82,7 @@ class RedNumber extends React.Component {
         borderRight: '1px solid #222',
         cursor: 'pointer'
       }}
-           onMouseDown={e => {
+           onMouseDown={() => {
              targetContext = this;
              startValue = +this.props.value
              const tick = time => {
@@ -96,7 +96,7 @@ class RedNumber extends React.Component {
              this.update(+this.props.value + step)
              window.addEventListener('mouseup', HD_up2);
            }}
-           onClick={e => {
+           onClick={() => {
              if (this.props.HD_blur) {
                this.props.HD_blur({
                  target: {
@@ -119,7 +119,7 @@ class RedNumber extends React.Component {
         justifyContent: 'center',
         cursor: 'pointer'
       }}
-           onMouseDown={e => {
+           onMouseDown={() => {
              targetContext = this;
              startValue = +this.props.value
              const tick = time => {
@@ -133,7 +133,7 @@ class RedNumber extends React.Component {
              this.update(+this.props.value - step)
              window.addEventListener('mouseup', HD_up2);
            }}
-           onClick={e => {
+           onClick={() => {
              if (this.props.HD_blur) {
                this.props.HD_blur({
                  target: {

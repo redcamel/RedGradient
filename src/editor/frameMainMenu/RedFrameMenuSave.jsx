@@ -19,7 +19,7 @@ class RedFrameMenuSave extends React.Component {
         margin: '5px',
         cursor: 'pointer'
       }}
-      onClick={e => {
+      onClick={() => {
         const a = document.createElement('a');
         const file = new Blob([JSON.stringify(rootComponentState)], {type: 'application/json'});
         a.href = URL.createObjectURL(file);

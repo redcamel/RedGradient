@@ -18,7 +18,7 @@ class RedPropertyPositionEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     return <div>
       <div className={'ui_subTitle'}>Position</div>
       <div style={{
@@ -32,13 +32,13 @@ class RedPropertyPositionEdit extends React.Component {
           <RedNumber
             title={'x'}
             width={'179px'}
-            value={activeSubData['position']['x'] || 0}
+            value={activeSubLayerData['position']['x'] || 0}
             HD_onInput={e => {
-              activeSubData['position']['x'] = +e.target.value;
+              activeSubLayerData['position']['x'] = +e.target.value;
               rootComponent.updateRootState({});
             }}/>
-          <RedSelect value={activeSubData['position']['xUnit']} options={['px', '%']} HD_change={e => {
-            activeSubData['position']['xUnit'] = e.target.value;
+          <RedSelect value={activeSubLayerData['position']['xUnit']} options={['px', '%']} HD_change={e => {
+            activeSubLayerData['position']['xUnit'] = e.target.value;
             rootComponent.updateRootState({});
           }}/>
         </div>
@@ -47,13 +47,13 @@ class RedPropertyPositionEdit extends React.Component {
           <RedNumber
             title={'y'}
             width={'179px'}
-            value={activeSubData['position']['y'] || 0}
+            value={activeSubLayerData['position']['y'] || 0}
             HD_onInput={e => {
-              activeSubData['position']['y'] = +e.target.value;
+              activeSubLayerData['position']['y'] = +e.target.value;
               rootComponent.updateRootState({});
             }}/>
-          <RedSelect value={activeSubData['position']['yUnit']} options={['px', '%']} HD_change={e => {
-            activeSubData['position']['yUnit'] = e.target.value;
+          <RedSelect value={activeSubLayerData['position']['yUnit']} options={['px', '%']} HD_change={e => {
+            activeSubLayerData['position']['yUnit'] = e.target.value;
             rootComponent.updateRootState({});
           }}/>
         </div>

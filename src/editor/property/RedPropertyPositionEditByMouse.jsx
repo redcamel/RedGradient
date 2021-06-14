@@ -28,8 +28,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
   calcSize(e) {
     const rootComponent = targetContext.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
-    const layerSize = rootComponentState.activeLayer.size;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     const canvasInfo = rootComponentState.canvasInfo;
     const targetKey = this.props.targetKey;
     const rect = targetContext.refRect.current.getBoundingClientRect();
@@ -37,38 +36,37 @@ class RedPropertyPositionEditByMouse extends React.Component {
     let tY = (e.pageY - (rect.y));
     let layerPixelW = canvasInfo.width;
     let layerPixelH = canvasInfo.height;
-    let tPercentX = activeSubData[targetKey]['xUnit'] === '%' ? tX / SIZE * 100 : tX * layerPixelW / SIZE;
-    let tPercentY = activeSubData[targetKey]['yUnit'] === '%' ? tY / SIZE * 100 : tY * layerPixelH / SIZE;
-    activeSubData[targetKey]['x'] = tPercentX;
-    activeSubData[targetKey]['y'] = tPercentY;
+    let tPercentX = activeSubLayerData[targetKey]['xUnit'] === '%' ? tX / SIZE * 100 : tX * layerPixelW / SIZE;
+    let tPercentY = activeSubLayerData[targetKey]['yUnit'] === '%' ? tY / SIZE * 100 : tY * layerPixelH / SIZE;
+    activeSubLayerData[targetKey]['x'] = tPercentX;
+    activeSubLayerData[targetKey]['y'] = tPercentY;
     rootComponent.updateRootState({});
   }
 
   setPosition(x, y) {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
     const targetKey = this.props.targetKey;
-    activeSubData[targetKey]['x'] = x;
-    activeSubData[targetKey]['y'] = y;
+    activeSubLayerData[targetKey]['x'] = x;
+    activeSubLayerData[targetKey]['y'] = y;
     rootComponent.updateRootState({});
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
-    const layerSize = rootComponentState.activeLayer.size;
-    const targetData = activeSubData[this.props.targetKey];
+    const activeSubLayerData = rootComponentState.activeSubLayerData;
+    const targetData = activeSubLayerData[this.props.targetKey];
     const canvasInfo = rootComponentState.canvasInfo;
-    const activeSubDataSize = activeSubData['size']
+    const activeSubLayerDataSize = activeSubLayerData['size']
     const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3])
     const borderH = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2])
-    const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3]
-    const borderY = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][0]
+    // const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3]
+    // const borderY = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][0]
     const layoutSize = {
-      w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width'] - borderW) * activeSubDataSize['w'] / 100 : activeSubDataSize['w'] - borderW,
-      h: activeSubDataSize['hUnit'] === '%' ? (canvasInfo['height'] - borderH) * activeSubDataSize['h'] / 100 : activeSubDataSize['h'] - borderH,
+      w: activeSubLayerDataSize['wUnit'] === '%' ? (canvasInfo['width'] - borderW) * activeSubLayerDataSize['w'] / 100 : activeSubLayerDataSize['w'] - borderW,
+      h: activeSubLayerDataSize['hUnit'] === '%' ? (canvasInfo['height'] - borderH) * activeSubLayerDataSize['h'] / 100 : activeSubLayerDataSize['h'] - borderH,
     };
     let layerPixelW = layoutSize.w;
     let layerPixelH = layoutSize.h;
@@ -103,7 +101,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
       >
         {/**/}
         <button
-          onClick={e => {
+          onClick={() => {
             this.setPosition(0, 0);
           }}
           style={{...style.location, top: 0, left: 0}}><FontAwesomeIcon
@@ -111,7 +109,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
           style={{transform: 'translate(-50%,-50%) rotate(135deg)', position: 'absolute', top: '50%', left: '50%'}}/>
         </button>
         <button
-          onClick={e => {
+          onClick={() => {
             let tX = 50;
             if (targetData['xUnit'] === 'px') tX = (canvasInfo['width'] - borderW) * 0.5;
             this.setPosition(tX, 0);
@@ -121,7 +119,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
           style={{transform: 'translate(-50%,-50%) rotate(180deg)', position: 'absolute', top: '50%', left: '50%'}}/>
         </button>
         <button
-          onClick={e => {
+          onClick={() => {
             let tX = 100;
             if (targetData['xUnit'] === 'px') tX = (canvasInfo['width'] - borderW);
             this.setPosition(tX, 0);
@@ -136,7 +134,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
         </button>
         {/**/}
         <button
-          onClick={e => {
+          onClick={() => {
             {
               let tY = 50;
               if (targetData['yUnit'] === 'px') tY = (canvasInfo['height'] - borderH) * 0.5;
@@ -149,7 +147,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
           style={{transform: 'translate(-50%,-50%) rotate(90deg)', position: 'absolute', top: '50%', left: '50%'}}/>
         </button>
         <button
-          onClick={e => {
+          onClick={() => {
             let tX = 50;
             let tY = 50;
             if (targetData['xUnit'] === 'px') tX = (canvasInfo['width'] - borderW) * 0.5;
@@ -162,7 +160,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
 
         </button>
         <button
-          onClick={e => {
+          onClick={() => {
             let tX = 100;
             let tY = 50;
             if (targetData['xUnit'] === 'px') tX = (canvasInfo['width'] - borderW);
@@ -175,7 +173,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
         </button>
         {/**/}
         <button
-          onClick={e => {
+          onClick={() => {
             let tY = 100;
             if (targetData['yUnit'] === 'px') tY = (canvasInfo['height'] - borderH);
             this.setPosition(0, tY);
@@ -189,7 +187,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
                                                                            }}/>
         </button>
         <button
-          onClick={e => {
+          onClick={() => {
             let tX = 50;
             let tY = 100;
             if (targetData['xUnit'] === 'px') tX = (canvasInfo['width'] - borderW) * 0.5;
@@ -201,7 +199,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
           style={{transform: 'translate(-50%,-50%) rotate(0deg)', position: 'absolute', top: '50%', left: '50%'}}/>
         </button>
         <button
-          onClick={e => {
+          onClick={() => {
             let tX = 100;
             let tY = 100;
             if (targetData['xUnit'] === 'px') tX = (canvasInfo['width'] - borderW);
@@ -222,21 +220,20 @@ class RedPropertyPositionEditByMouse extends React.Component {
 
       <div style={{display: 'flex'}}>
         <div style={style.mirrorItem}
-             onClick={e => {
+             onClick={() => {
                const targetKey = this.props.targetKey;
-               let tX = activeSubData[targetKey]['x'];
-               let tY = activeSubData[targetKey]['y'];
+               let tX = activeSubLayerData[targetKey]['x'];
+               let tY = activeSubLayerData[targetKey]['y'];
                if (targetKey === 'at') {
                  if (targetData['xUnit'] === 'px') tX = canvasInfo['width'] - tX;
                  else tX = 100 - tX;
                } else {
                  if (targetData['xUnit'] === 'px') {
-                   let tW = activeSubData['size']['w'];
-                   tW = activeSubData['size']['wUnit'] === '%' ? tW / 100 * canvasInfo['width'] : tW;
+                   let tW = activeSubLayerData['size']['w'];
+                   tW = activeSubLayerData['size']['wUnit'] === '%' ? tW / 100 * canvasInfo['width'] : tW;
                    tX = canvasInfo['width'] - tX - tW;
                  } else {
-                   let tW = activeSubData['size']['w'];
-                   tW = activeSubData['size']['wUnit'] === '%' ? tW : tW * canvasInfo['width'] * 100;
+                   let tW = activeSubLayerData['size']['w'];
                    tX = 100 - tX;
                  }
                }
@@ -245,21 +242,20 @@ class RedPropertyPositionEditByMouse extends React.Component {
         >Mirror H
         </div>
         <div style={style.mirrorItem}
-             onClick={e => {
+             onClick={() => {
                const targetKey = this.props.targetKey;
-               let tX = activeSubData[targetKey]['x'];
-               let tY = activeSubData[targetKey]['y'];
+               let tX = activeSubLayerData[targetKey]['x'];
+               let tY = activeSubLayerData[targetKey]['y'];
                if (targetKey === 'at') {
                  if (targetData['yUnit'] === 'px') tY = canvasInfo['height'] - tY;
                  else tY = 100 - tY;
                } else {
                  if (targetData['yUnit'] === 'px') {
-                   let tH = activeSubData['size']['h'];
-                   tH = activeSubData['size']['hUnit'] === '%' ? tH / 100 * canvasInfo['height'] : tH;
+                   let tH = activeSubLayerData['size']['h'];
+                   tH = activeSubLayerData['size']['hUnit'] === '%' ? tH / 100 * canvasInfo['height'] : tH;
                    tY = canvasInfo['height'] - tY - tH;
                  } else {
-                   let tH = activeSubData['size']['h'];
-                   tH = activeSubData['size']['hUnit'] === '%' ? tH : tH * canvasInfo['height'] * 100;
+                   let tH = activeSubLayerData['size']['h'];
                    tY = 100 - tY;
                  }
                }

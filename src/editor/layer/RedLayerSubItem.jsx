@@ -87,7 +87,7 @@ class RedLayerSubItem extends React.Component {
     const rootComponentState = rootComponent.state;
     const item = this.props.item;
     const layer = this.props.layer;
-    const activeSubDataYn = rootComponentState.activeSubData === item;
+    const activeSubLayerDataYn = rootComponentState.activeSubLayerData === item;
     const dragAble = layer.items.length > 1;
     const SIZE = this.props.layerViewSizeMode === 0 ? 100 : this.props.layerViewSizeMode === 1 ? 50 : 0
     let layerType = item.type.split('-');
@@ -96,8 +96,8 @@ class RedLayerSubItem extends React.Component {
       style={{
         opacity: item.visible ? 1 : 0.5, transition: 'opacity 0.2s, border 0.2s', padding: '0px 5px 5px 5px',
         background: '#232323',
-        boxShadow: activeSubDataYn ? '0px 0px 15px rgba(94, 122, 222,0.25)' : '',
-        border: activeSubDataYn ? '1px solid rgba(58, 78, 150,1)' : '1px solid #333',
+        boxShadow: activeSubLayerDataYn ? '0px 0px 15px rgba(94, 122, 222,0.25)' : '',
+        border: activeSubLayerDataYn ? '1px solid rgba(58, 78, 150,1)' : '1px solid #333',
         borderRadius: '8px',
         margin: '4px 0px 4px 10px',
       }}
@@ -107,13 +107,13 @@ class RedLayerSubItem extends React.Component {
       onDragOver={e => this.handleDragOver(e)}
       onDragEnter={e => this.handleDragEnter(e)}
       onDragLeave={e => this.handleDragLeave(e)}
-      onDragEnd={e => {
+      onDragEnd={() => {
         RedLayerItem.clearDragInfo();
         RedLayerSubItem.clearDragInfo();
         this.setState({dragOverYn: false})
         this.props.rootComponent.updateRootState({});
       }}
-      onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: item})}
+      onClick={() => rootComponent.updateRootState({activeLayerData: layer, activeSubLayerData: item})}
 
     >
 
@@ -148,7 +148,7 @@ class RedLayerSubItem extends React.Component {
                       idx = 0;
                     }
                     if (!layer.items[idx]) idx = idx - 1;
-                    rootComponent.updateRootState({activeSubData: layer.items[idx]});
+                    rootComponent.updateRootState({activeSubLayerData: layer.items[idx]});
                   }
                 }}
         ><FontAwesomeIcon icon={faMinusCircle}/>
@@ -156,11 +156,11 @@ class RedLayerSubItem extends React.Component {
         <button className={'layerType'}>{layerType}</button>
       </div>
       <div style={style.addGradientLayerItem}
-           onClick={e => {
+           onClick={() => {
              const idx = layer.items.indexOf(item);
              const t0 = JSON.parse(JSON.stringify(item));
              layer.items.splice(idx, 0, t0);
-             rootComponent.updateRootState({activeSubData: t0});
+             rootComponent.updateRootState({activeSubLayerData: t0});
            }}
       ><FontAwesomeIcon icon={faCopy}/>
         <div style={{marginLeft: '5px'}}>duplicate</div>
@@ -184,7 +184,7 @@ class RedLayerSubItem extends React.Component {
              }}
         />
 
-        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine}/>
+        <div style={activeSubLayerDataYn ? style.activeLine : style.deActiveLine}/>
       </div>
       <div
         style={{

@@ -59,26 +59,26 @@ const CALC_GRADIENT = {
     const sizeTxt = TEMP ? ` ${TEMP['w']}${TEMP['wUnit']} ${TEMP['h']}${TEMP['hUnit']}` : '100% 100%';
     const repeatTxt = data['typeRepeat'] === REPEAT_TYPE.REPEAT ? '' : data['typeRepeat'];
     // const blendTxt = data['blendMode'] === BLEND_MODE_TYPE.NORMAL ? '' : data['blendMode'];
-    const etcs = ` ${sizeTxt} ${repeatTxt}`;
+    const etcText = ` ${sizeTxt} ${repeatTxt}`;
     let result;
     let atTxt = '';
     switch (data['type']) {
       case  GRADIENT_TYPE.LINEAR:
       case  GRADIENT_TYPE.REPEAT_LINEAR:
-        result = `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${etcs}`;
+        result = `${data['type']}(${data['deg']}deg, ${gradients}) ${positionTxt} / ${etcText}`;
         break;
       case GRADIENT_TYPE.RADIAL :
       case GRADIENT_TYPE.REPEAT_RADIAL :
         const endingShape = data['typeEndingShape'] === ENDING_SHAPE_TYPE.NONE ? '' : (data['typeEndingShape']);
         TEMP = data['at'];
         atTxt = TEMP ? ` ${endingShape} at ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']}` : '';
-        result = `${data['type']}(${[atTxt, gradients].join(',')}) ${positionTxt} / ${etcs}`;
+        result = `${data['type']}(${[atTxt, gradients].join(',')}) ${positionTxt} / ${etcText}`;
         break;
       case GRADIENT_TYPE.CONIC :
       case GRADIENT_TYPE.REPEAT_CONIC :
         TEMP = data['at'];
         atTxt = TEMP ? `${data['deg']}deg at ${TEMP['x']}${TEMP['xUnit']} ${TEMP['y']}${TEMP['yUnit']}` : '';
-        result = `${data['type']}(from ${[atTxt, gradients].join(',')}) ${positionTxt} / ${etcs}`;
+        result = `${data['type']}(from ${[atTxt, gradients].join(',')}) ${positionTxt} / ${etcText}`;
         break;
     }
     return result;

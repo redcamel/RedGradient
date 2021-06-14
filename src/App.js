@@ -18,19 +18,20 @@ import RedFrameMenuSave from "./editor/frameMainMenu/RedFrameMenuSave.jsx";
 import RedPreset from "./editor/property/preset/RedPreset.jsx";
 import DataLayer from "./editor/data/DataLayer.js";
 import BORDER_REPEAT_TYPE from "./editor/BORDER_REPEAT_TYPE.js";
-import DataCanvas from "./editor/data/DataCanvas.js";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RedTitleTB from "./core/RedTitleTB.jsx";
 import LOCAL_STORAGE_MANAGER from "./editor/LOCAL_STORAGE_MANAGER.js";
 import {faFolder, faFolderOpen} from "@fortawesome/free-solid-svg-icons";
+import getActiveLayerData from "./editor/getActiveLayerData.js";
+import getActiveSubLayerData from "./editor/getActiveSubLayerData.js";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.history = []
     this.historyRedo = []
-    window.addEventListener('resize', e => {
+    window.addEventListener('resize', () => {
       this.updateRootState()
     })
   }
@@ -41,8 +42,8 @@ class App extends React.Component {
       let targetState = this.historyRedo.pop()
       if (targetState) {
         this.state = JSON.parse(JSON.stringify(targetState))
-        this.state.activeLayer = this.state.layers[0];
-        this.state.activeSubData = this.state.activeLayer['items'][0];
+        this.state.activeLayerData = getActiveLayerData(this.state);
+        this.state.activeSubLayerData = getActiveSubLayerData(this.state);
         this.updateRootState(this.state)
       }
       // console.log('history',this.history)
@@ -55,8 +56,8 @@ class App extends React.Component {
         targetState = this.history[this.history.length - 1]
         if (targetState) {
           this.state = JSON.parse(JSON.stringify(targetState))
-          this.state.activeLayer = this.state.layers[0];
-          this.state.activeSubData = this.state.activeLayer['items'][0];
+          this.state.activeLayerData = getActiveLayerData(this.state);
+          this.state.activeSubLayerData = getActiveSubLayerData(this.state);
           this.setState(this.state)
         }
       }
@@ -73,8 +74,8 @@ class App extends React.Component {
 
   checkUnloadEvent() {
     if (this.state && !window.onbeforeunload) {
-      window.onbeforeunload = e => {
-        return "레알 나감????????????";
+      window.onbeforeunload = () => {
+        return "~";
       }
     }
   }
@@ -89,19 +90,8 @@ class App extends React.Component {
 
   setNewCanvas(newState) {
     this.state = newState
-    this.state.activeLayer = this.state.layers[0];
-    this.state.activeSubData = this.state.activeLayer['items'][0];
-    //
-    if (!this.state.beforeInfo) {
-      this.state.beforeInfo = new DataCanvas()
-      this.state.beforeInfo.activeLayer = this.state.beforeInfo.layers[0];
-      this.state.beforeInfo.activeSubData = this.state.beforeInfo.activeLayer['items'][0];
-    }
-    if (!this.state.afterInfo) {
-      this.state.afterInfo = new DataCanvas()
-      this.state.afterInfo.activeLayer = this.state.afterInfo.layers[0];
-      this.state.afterInfo.activeSubData = this.state.afterInfo.activeLayer['items'][0];
-    }
+    this.state.activeLayerData = getActiveLayerData(this.state);
+    this.state.activeSubLayerData = getActiveSubLayerData(this.state);
     //
     if (!this.state.borderGradientInfo) {
       this.state.borderGradientInfo = {
@@ -111,8 +101,8 @@ class App extends React.Component {
         'border_image_sliceB': 1,
         'border_image_repeat': BORDER_REPEAT_TYPE.STRETCH,
         'border_image_outset': 0,
-        "activeLayer": null,
-        "activeSubData": null,
+        "activeLayerData": null,
+        "activeSubLayerData": null,
         "bgColor": "#ffffff",
         "layers": [
           new DataLayer()
@@ -148,8 +138,8 @@ class App extends React.Component {
       canvasInfo['outline_offset_unit'] = 'px';
     }
     this.state.borderGradientInfo.canvasInfo = this.state.canvasInfo
-    this.state.borderGradientInfo.activeLayer = this.state.borderGradientInfo.layers[0];
-    this.state.borderGradientInfo.activeSubData = this.state.borderGradientInfo.activeLayer['items'][0];
+    this.state.borderGradientInfo.activeLayerData = getActiveLayerData(this.state.borderGradientInfo);
+    this.state.borderGradientInfo.activeSubLayerData = getActiveSubLayerData(this.state.borderGradientInfo);
     //
     this.updateRootState(this.state);
   }
@@ -161,7 +151,7 @@ class App extends React.Component {
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
         <div style={{display: 'flex', alignItems: 'center', fontSize: '16px', fontWeight: 'bold', margin: '0px 8px'}}>
-          <img src={'./tempLogo.svg'} height={'26px'} style={{marginRight: '7px'}}/>
+          <img alt={'logo'} src={'./tempLogo.svg'} height={'26px'} style={{marginRight: '7px'}}/>
           RedGradient
         </div>
         <RedFrameMenuOpen rootComponent={this}/>
@@ -170,41 +160,6 @@ class App extends React.Component {
       <div className={'frame_toolbar'}>
         <div style={{display: 'flex', height: '100%', alignItem: 'center'}}>
           <div style={{width: '360px'}}/>
-          <div style={{
-            cursor: 'pointer',
-            padding: '10px',
-            borderLeft: '1px solid #000',
-            transition: 'all 0.2s',
-            background: this.state.activeContainerLayer === 'beforeLayer' ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
-          }} onClick={e => {
-            this.state.activeContainerLayer = 'beforeLayer'
-            this.setState({})
-          }}>Todo -
-            ::before
-          </div>
-          <div style={{
-            cursor: 'pointer',
-            padding: '10px',
-            borderLeft: '1px solid #000',
-            transition: 'all 0.2s',
-            background: this.state.activeContainerLayer === 'mainLayer' || !this.state.activeContainerLayer ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
-          }} onClick={e => {
-            this.state.activeContainerLayer = 'mainLayer'
-            this.setState({})
-          }}>Todo - main
-          </div>
-          <div style={{
-            cursor: 'pointer',
-            padding: '10px',
-            borderLeft: '1px solid #000',
-            borderRight: '1px solid #000',
-            transition: 'all 0.2s',
-            background: this.state.activeContainerLayer === 'afterLayer' ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : ''
-          }} onClick={e => {
-            this.state.activeContainerLayer = 'afterLayer'
-            this.setState({})
-          }}>Todo - ::after
-          </div>
         </div>
       </div>
       <div className={'frame_middle'}>
@@ -214,7 +169,7 @@ class App extends React.Component {
             <div style={{display: "flex", height: '100%'}}>
               <div
                 style={{background: 'rgb(60, 60, 60)'}}
-                onClick={e => {
+                onClick={() => {
                   LOCAL_STORAGE_MANAGER.toggleTabOpenYn('containerProperty')
                   this.setState({})
                 }}
@@ -232,11 +187,7 @@ class App extends React.Component {
                     display: "flex", height: '100%', overflowY: 'auto',
                     borderLeft: '1px solid rgb(26, 26, 26)',
                   }}>
-                    {
-                      this.state.activeContainerLayer === 'mainLayer' || !this.state.activeContainerLayer
-                        ? <RedCanvasEdit rootComponent={this}/>
-                        : <div>{this.state.activeContainerLayer} 콘테이너 프로퍼티 에디터 창</div>
-                    }
+                    <RedCanvasEdit rootComponent={this}/>
                   </div> : ''
               }
 
@@ -257,14 +208,8 @@ class App extends React.Component {
                 </div>
               </div>
               <div style={{display: "flex", height: 'calc(100% - 190px)'}}>
-                {
-                  this.state.activeContainerLayer === 'mainLayer' || !this.state.activeContainerLayer
-                    ? <>
-                      <RedLayer rootComponent={this}/>
-                      {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
-                    </>
-                    : <div>{this.state.activeContainerLayer} 그라디언트 에디터 창</div>
-                }
+                <RedLayer rootComponent={this}/>
+                {this.state.activeSubLayerData ? <RedPropertyEdit rootComponent={this}/> : ''}
 
               </div>
             </div>
@@ -288,9 +233,3 @@ class App extends React.Component {
 }
 
 export default App;
-const style = {
-  test: {
-    background: '#5e7ade',
-    margin: '1px'
-  },
-};

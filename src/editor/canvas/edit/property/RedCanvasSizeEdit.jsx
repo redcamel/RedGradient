@@ -8,8 +8,6 @@
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
 
-let colorPicker
-
 class RedCanvasSizeEdit extends React.Component {
   constructor(props) {
     super(props);
