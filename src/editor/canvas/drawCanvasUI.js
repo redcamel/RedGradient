@@ -8,10 +8,6 @@
 import '@easylogic/colorpicker/dist/colorpicker.css';
 import React from "react";
 import RedTitle from "../../core/RedTitle";
-import RedCanvasSizeEdit from "./edit/property/RedCanvasSizeEdit";
-import RED_CANVAS_PRESET from "../../RED_CANVAS_PRESET.js";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faDesktop, faMobileAlt} from "@fortawesome/free-solid-svg-icons";
 
 function drawCanvasUI() {
   const rootComponent = this.props.rootComponent;
@@ -23,7 +19,6 @@ function drawCanvasUI() {
     <>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <div style={style.canvasResizer}>
-          <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
           <div>
             <label style={{
               marginLeft: '5px',
@@ -66,24 +61,7 @@ function drawCanvasUI() {
           ViewScale : {this.state.canvasViewScale.toFixed(2)}</div>
 
       </div>
-      <div style={{display: 'inline-block', margin: '0px 10px 8px 10px'}}>
-        {
-          RED_CANVAS_PRESET.map(v => {
-            return <button
-              style={style.presetButton}
-              onClick={() => {
-                canvasInfo.width = v.width;
-                canvasInfo.height = v.height;
-                rootComponent.updateRootState({});
-              }}
-            >
-              <div><FontAwesomeIcon
-                icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
-              </div>
-            </button>;
-          })
-        }
-      </div>
+
     </>
 
 
@@ -135,17 +113,5 @@ const style = {
     outline: 'none',
     border: 0,
     color: '#fff'
-  },
-  presetButton: {
-    background: 'linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63))',
-    border: '1px solid rgb(31, 31, 31)',
-    outline: 'none',
-    color: '#fff',
-    fontSize: '11px',
-    padding: '4px 8px',
-    borderRadius: '4px',
-    margin: '1px',
-    cursor: 'pointer',
-    boxShadow: `rgba(0, 0, 0, 0.25) 1px 1px 1px`
   }
 };
