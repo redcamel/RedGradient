@@ -5,7 +5,6 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-
 const getActiveLayer = (state) => {
   return state.layers[state.activeLayerIndex || 0]
 }
