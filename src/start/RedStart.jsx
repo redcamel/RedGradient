@@ -6,26 +6,27 @@
  *
  */
 import React from "react";
-import DataCanvas from "../editor/data/DataCanvas.js";
+import DataGradient from "../editor/data/DataGradient";
+import RedFrameMenuOpen from "../editor/frameMainMenu/RedFrameMenuOpen";
 
 class RedStart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       logoLoaded: false
-    }
+    };
   }
 
   componentDidMount() {
-    let t0 = new Image()
-    t0.src = './tempLogo.svg'
+    let t0 = new Image();
+    t0.src = './tempLogo.svg';
     t0.onload = () => {
-      this.setState({logoLoaded: true})
-    }
+      this.setState({logoLoaded: true});
+    };
   }
 
   render() {
-    const rootComponent = this.props.rootComponent
+    const rootComponent = this.props.rootComponent;
     return <div>
       <div style={{
         position: 'fixed',
@@ -47,7 +48,7 @@ class RedStart extends React.Component {
       }}>
 
         <div style={{textAlign: 'center'}}>
-          <img alt={'logo'} src={'./tempLogo.svg'} style={{height: '512px'}}/>
+          <img alt={'logo'} src={'./tempLogo.svg'} style={{height: '512px'}} />
           <div style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '30px'}}>RedGradient</div>
         </div>
 
@@ -63,7 +64,7 @@ class RedStart extends React.Component {
             boxShadow: '0px 0px 6px rgba(0,0,0,0.16)',
             marginBottom: '5px',
           }}
-          onClick={() => rootComponent.setNewCanvas(new DataCanvas())}
+          onClick={() => rootComponent.setNewCanvas(new DataGradient())}
         >새 프로젝트
         </button>
         <input
@@ -83,7 +84,11 @@ class RedStart extends React.Component {
             // console.log(e);
             // console.log(e.target.files);
             let fileReader = new FileReader();
-            fileReader.onload = evt => rootComponent.setNewCanvas(JSON.parse(evt.target.result))
+            fileReader.onload = evt => {
+              let t0  = RedFrameMenuOpen.prototype.checkValidate(evt.target.result)
+              if (t0) rootComponent.setNewCanvas(t0);
+              else alert('RedGradient 형식의 파일이 아닙니다.');
+            };
             fileReader.readAsText(e.target.files[0]);
           }}
         />

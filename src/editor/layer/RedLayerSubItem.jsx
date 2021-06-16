@@ -14,7 +14,7 @@ import RedLayerItem from "./RedLayerItem.jsx";
 
 let startDragLayer;
 let startDragItem;
-let emptyImage
+let emptyImage;
 
 class RedLayerSubItem extends React.Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class RedLayerSubItem extends React.Component {
     RedLayerSubItem.clearDragInfo();
     startDragLayer = this.props.layer;
     startDragItem = this.props.item;
-    if (!emptyImage) emptyImage = new Image()
+    if (!emptyImage) emptyImage = new Image();
     e.nativeEvent.dataTransfer.setDragImage(emptyImage, 0, 0);
   }
 
@@ -63,6 +63,7 @@ class RedLayerSubItem extends React.Component {
   handleDrop(e) {
     e.preventDefault();
     e.stopPropagation();
+    let t0 = {};
     if (startDragLayer) {
       // console.log('drop ///////////////////');
       // console.log(this);
@@ -76,20 +77,27 @@ class RedLayerSubItem extends React.Component {
       const startIDX = startDragLayer.items.indexOf(startDragItem);
       startDragLayer.items.splice(startIDX, 1);
       dropAreaLayer.items.splice(dstIDX, 0, startDragItem);
+
+      t0.activeLayer = dropAreaLayer
+      t0.activeSubData = dropAreaItem
+      t0.activeLayerIndex = this.props.layers.indexOf(dropAreaLayer);
+      t0.activeSubDataIndex = this.props.layer['items'].indexOf(dropAreaItem);
+
     }
     RedLayerItem.clearDragInfo();
     RedLayerSubItem.clearDragInfo();
-    this.props.rootComponent.updateRootState({});
+    this.props.rootComponent.updateRootState(t0);
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const item = this.props.item;
+    const layers = this.props.layers;
     const layer = this.props.layer;
     const activeSubDataYn = rootComponentState.activeSubData === item;
     const dragAble = layer.items.length > 1;
-    const SIZE = this.props.layerViewSizeMode === 0 ? 100 : this.props.layerViewSizeMode === 1 ? 50 : 0
+    const SIZE = this.props.layerViewSizeMode === 0 ? 100 : this.props.layerViewSizeMode === 1 ? 50 : 0;
     let layerType = item.type.split('-');
     layerType = layerType[0].charAt(0).toUpperCase() + (layerType.length === 3 ? layerType[1].charAt(0).toUpperCase() : '');
     return <div
@@ -110,10 +118,17 @@ class RedLayerSubItem extends React.Component {
       onDragEnd={() => {
         RedLayerItem.clearDragInfo();
         RedLayerSubItem.clearDragInfo();
-        this.setState({dragOverYn: false})
+        this.setState({dragOverYn: false});
         this.props.rootComponent.updateRootState({});
       }}
-      onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: item})}
+      onClick={() => {
+        rootComponent.updateRootState({
+          activeLayerIndex: layers.indexOf(layer),
+          activeSubDataIndex: layer['items'].indexOf(item),
+          activeLayer: layer, activeSubData: item
+        });
+      }
+      }
 
     >
 
@@ -134,7 +149,7 @@ class RedLayerSubItem extends React.Component {
       </div>
       <div style={{margin: '2px 2px 2px 0px'}}>
         <button className={'layerVisible2'}
-                onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash}/>
+                onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash} />
         </button>
         <button className={'layerDel2'}
                 style={{opacity: layer.items.length > 1 ? 1 : 0.25}}
@@ -151,7 +166,7 @@ class RedLayerSubItem extends React.Component {
                     rootComponent.updateRootState({activeSubData: layer.items[idx]});
                   }
                 }}
-        ><FontAwesomeIcon icon={faMinusCircle}/>
+        ><FontAwesomeIcon icon={faMinusCircle} />
         </button>
         <button className={'layerType'}>{layerType}</button>
       </div>
@@ -162,7 +177,7 @@ class RedLayerSubItem extends React.Component {
              layer.items.splice(idx, 0, t0);
              rootComponent.updateRootState({activeSubData: t0});
            }}
-      ><FontAwesomeIcon icon={faCopy}/>
+      ><FontAwesomeIcon icon={faCopy} />
         <div style={{marginLeft: '5px'}}>duplicate</div>
       </div>
 
@@ -184,7 +199,7 @@ class RedLayerSubItem extends React.Component {
              }}
         />
 
-        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine}/>
+        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
       </div>
       <div
         style={{
@@ -226,7 +241,7 @@ RedLayerSubItem.clearDragInfo = () => {
   startDragLayer = null;
   startDragItem = null;
 };
-RedLayerSubItem.getDragInfo = () => startDragLayer
+RedLayerSubItem.getDragInfo = () => startDragLayer;
 export default RedLayerSubItem;
 const style = {
   activeLine: {

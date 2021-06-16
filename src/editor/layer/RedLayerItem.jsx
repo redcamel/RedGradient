@@ -73,6 +73,7 @@ class RedLayerItem extends React.Component {
   handleDrop(e) {
     e.preventDefault();
     e.stopPropagation();
+    let t0 = {};
     if (startDragLayer) {
       this.setState({dragOverYn: false})
       const layers = this.props.rootComponent.state.layers
@@ -81,10 +82,12 @@ class RedLayerItem extends React.Component {
       const startIDX = layers.indexOf(startDragLayer)
       layers.splice(startIDX, 1)
       layers.splice(dstIDX, 0, startDragLayer)
+      t0.activeLayer = dropAreaLayer
+      t0.activeLayerIndex = layers.indexOf(dropAreaLayer);
     }
     RedLayerItem.clearDragInfo()
     RedLayerSubItem.clearDragInfo()
-    this.props.rootComponent.updateRootState({})
+    this.props.rootComponent.updateRootState(t0)
   }
 
   render() {
@@ -189,12 +192,14 @@ class RedLayerItem extends React.Component {
                     if (layers.length > 1) {
                       let idx = layers.indexOf(layer);
                       layers.splice(idx, 1);
-                      let targetLayer;
-                      if (layers[idx]) targetLayer = layers[idx];
-                      else targetLayer = layers[0];
+                      let activeLayerIndex
+                      if (layers[idx]) activeLayerIndex = idx;
+                      else activeLayerIndex = 0;
                       rootComponent.updateRootState({
-                        activeLayer: targetLayer,
-                        activeSubData: targetLayer['items'][0]
+                        activeLayerIndex,
+                        activeSubDataIndex: 0,
+                        activeLayer: layers[activeLayerIndex],
+                        activeSubData: layers[activeLayerIndex]['items'][0]
                       });
                     }
                   }}
@@ -204,7 +209,7 @@ class RedLayerItem extends React.Component {
                   onClick={e => {
                     e.stopPropagation();
                     layer.items.splice(0, 0, new DataItem());
-                    rootComponent.updateRootState({activeSubData: layer.items[0]});
+                    rootComponent.updateRootState({activeSubDataIndex: 0,activeSubData: layer.items[0]});
                   }}
           ><FontAwesomeIcon icon={faPlusCircle}/>
           </button>
@@ -241,7 +246,16 @@ class RedLayerItem extends React.Component {
             overflow: 'hidden',
             transition: 'height 0.2s'
           }}
-          onClick={() => rootComponent.updateRootState({activeLayer: layer, activeSubData: layer.items[0]})}
+          onClick={() => {
+            let activeLayerIndex = layers.indexOf(layer);
+            console.log('activeLayerIndex',activeLayerIndex)
+            rootComponent.updateRootState({
+              activeLayerIndex : activeLayerIndex,
+              activeSubDataIndex: 0,
+              activeLayer: layers[activeLayerIndex],
+              activeSubData: layers[activeLayerIndex]['items'][0]
+            });
+          }}
 
         >
           <div className={'layerItem'}
@@ -249,6 +263,7 @@ class RedLayerItem extends React.Component {
         </div>
       </>
       <div>{layer.openYn ? layer.items.map(item => <RedLayerSubItem
+        layers={layers}
         layer={layer} item={item}
         layerViewSizeMode={this.props.layerViewSizeMode}
         rootComponent={rootComponent}

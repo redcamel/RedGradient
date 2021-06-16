@@ -8,29 +8,37 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFolderOpen} from "@fortawesome/free-solid-svg-icons";
+import DataGradient from "../data/DataGradient";
 
 class RedFrameMenuOpen extends React.Component {
   checkValidate(v) {
     /**
      * JSON 파싱이 되어야하고..
-     * activeLayer,activeSubData,layers 키를 가지고있는 경우만 통과
+     * activeFrameKey 키를 가지고있는 경우만 통과
      *
      */
     let result = true;
+    let loadData
     try {
-      let t0 = JSON.parse(v);
-      console.log(t0)
+       loadData = JSON.parse(v);
+      if(!loadData.hasOwnProperty('activeFrameKey')) {
+        let newData = new DataGradient()
+        newData.main =loadData
+        loadData = newData
+      }
+      console.log(loadData)
       if (
-        !t0.hasOwnProperty('activeLayer')
-        || !t0.hasOwnProperty('activeSubData')
-        || !t0.hasOwnProperty('layers')
+        !loadData.hasOwnProperty('activeFrameKey')
+        || !loadData.hasOwnProperty('main')
+        || !loadData.hasOwnProperty('before')
+        || !loadData.hasOwnProperty('after')
       ) {
         result = false;
       }
     } catch (e) {
       result = false;
     }
-    return result;
+    return loadData;
   }
 
   render() {
@@ -52,7 +60,8 @@ class RedFrameMenuOpen extends React.Component {
                let fileReader = new FileReader();
                fileReader.onload = evt => {
                  requestAnimationFrame(() => {
-                   if (this.checkValidate(evt.target.result)) rootComponent.setNewCanvas(JSON.parse(evt.target.result));
+                   let t0 = this.checkValidate(evt.target.result)
+                   if (t0) rootComponent.setNewCanvas(t0);
                    else alert('RedGradient 형식의 파일이 아닙니다.')
                  });
                };
