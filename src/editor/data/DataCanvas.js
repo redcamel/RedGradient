@@ -37,7 +37,7 @@ function DataCanvas() {
     activeSubDataIndex: 0,
     activeLayer: null,
     activeSubData: null,
-    bgColor: "#fff",
+    bgColor: "transparent",
     layers: [
       new DataLayer()
     ]
