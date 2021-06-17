@@ -20,7 +20,7 @@ import {ColorPicker} from "@easylogic/colorpicker";
 
 let colorPicker
 
-class RedCanvasEdit extends React.Component {
+class RedContainerBorderEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,79 +35,8 @@ class RedCanvasEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo
     return <div>
-      <RedTitle title={'Container Property'}/>
+      <RedTitle title={'Container Border Property'}/>
       <div style={style.container}>
-        <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
-        <div style={{display: 'inline-block', margin: '8px 10px 8px 10px'}}>
-          {
-            RED_CANVAS_PRESET.map(v => {
-              return <button
-                style={style.presetButton}
-                onClick={() => {
-                  canvasInfo.width = v.width;
-                  canvasInfo.height = v.height;
-                  rootComponent.updateRootState({});
-                }}
-              >
-                <div><FontAwesomeIcon
-                  icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
-                </div>
-              </button>;
-            })
-          }
-        </div>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <div className={'ui_subTitle'}>background</div>
-          <div
-            className={rootComponentState.bgColor === 'transparent' ? 'transparent_checker' : ''}
-            style={{
-              display: 'inline-block',
-              width: '25px',
-              height: '25px',
-              background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
-              borderRadius: '4px',
-              border: '1px solid #000',
-              cursor: 'pointer'
-            }}
-            onClick={() => {
-              this.setState({canvasBgColorPickerOpenYn: true});
-              if (!colorPicker) {
-                colorPicker = new ColorPicker({
-                  type: "sketch",
-                  position: 'inline',
-                  color: rootComponentState.bgColor,
-                  container: this.refColorPickerContainer.current,
-                  onChange: color => rootComponent.updateRootState({bgColor: color})
-                });
-              }
-              requestAnimationFrame(() => {
-                colorPicker.initColorWithoutChangeEvent(rootComponentState.bgColor);
-              })
-            }}
-          />
-
-          <div style={{
-            zIndex: 2, position: 'absolute', top: 0, right: 0, transform: 'translate(-32px , 0px)',
-            boxShadow: '0px 0px 16px rgba(0,0,0,0.16)',
-            background: '#fff',
-            borderRadius: '8px',
-            overflow: 'hidden',
-            display: this.state.canvasBgColorPickerOpenYn ? 'block' : 'none'
-          }}>
-            <div ref={this.refColorPickerContainer}/>
-            <div
-              style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
-              onClick={() => {
-                this.setState({canvasBgColorPickerOpenYn: null});
-              }}
-            >완료
-            </div>
-          </div>
-
-        </div>
-        <div style={style.divide}/>
-        <RedCanvasBoxSizingEdit rootComponent={rootComponent}/>
-        <div style={style.divide}/>
         <RedCanvasOutlineEdit rootComponent={rootComponent}/>
         <div style={style.divide}/>
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -153,17 +82,12 @@ class RedCanvasEdit extends React.Component {
           {canvasInfo.borderIsGradientMode ? <RedCanvasBorderGradientFrame rootComponent={rootComponent}/> : ''}
 
         </div>
-
-
-        <div style={style.divide}/>
-        <RedCanvasFilterList rootComponent={rootComponent}/>
-        <div style={style.divide}/>
       </div>
     </div>;
   }
 }
 
-export default RedCanvasEdit;
+export default RedContainerBorderEdit;
 const style = {
   container: {
     width: '360px',

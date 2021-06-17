@@ -10,7 +10,7 @@ import React from 'react';
 import RedCanvas from "./canvas/RedCanvas.jsx";
 import RedLayer from "./layer/RedLayer.jsx";
 import RedPropertyEdit from "./property/RedPropertyEdit.jsx";
-import RedCanvasEdit from "./canvas/edit/RedCanvasEdit";
+import RedContainerEdit from "./canvas/edit/RedContainerEdit";
 import RedTitle from "../core/RedTitle";
 import RedFrameMenuOpen from "./frameMainMenu/RedFrameMenuOpen.jsx";
 import RedFrameMenuSave from "./frameMainMenu/RedFrameMenuSave.jsx";
@@ -24,6 +24,7 @@ import getActiveLayer from "./getActiveLayer";
 import getActiveSubData from "./getActiveSubData";
 import BORDER_REPEAT_TYPE from "./BORDER_REPEAT_TYPE";
 import DataLayer from "./data/DataLayer";
+import RedContainerBorderEdit from "./canvas/edit/RedContainerBorderEdit";
 
 class AppFrame extends React.Component {
   constructor(props) {
@@ -35,20 +36,22 @@ class AppFrame extends React.Component {
   updateRootState(v = {}) {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    for(const k in v) this.state[k] = v[k]
-    this.setState({})
+    for (const k in v) this.state[k] = v[k];
+    this.setState({});
     rootComponent.updateRootState({
-      [rootComponentState.activeFrameKey] : this.state
+      [rootComponentState.activeFrameKey]: this.state
     });
   }
 
   render() {
+
+    LOCAL_STORAGE_MANAGER.check();
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     this.state = rootComponentState[rootComponentState.activeFrameKey];
     {
-      console.log(rootComponentState)
-      const activeFrameState =  this.state;
+      console.log(rootComponentState);
+      const activeFrameState = this.state;
       activeFrameState.activeLayer = getActiveLayer(activeFrameState);
       activeFrameState.activeSubData = getActiveSubData(activeFrameState);
       //
@@ -112,7 +115,7 @@ class AppFrame extends React.Component {
       <div className={'frame_toolbar'}>
         <div style={{display: 'flex', height: '100%', alignItem: 'center'}}>
           <div style={{
-            marginLeft: LOCAL_STORAGE_MANAGER.getTabOpenYn('containerProperty') ? '395px' : '30px',
+            marginLeft: LOCAL_STORAGE_MANAGER.checkAllClose() ? '26px' : '387px',
             width: '360px',
             display: 'flex'
           }}>
@@ -131,7 +134,7 @@ class AppFrame extends React.Component {
                     background: rootComponentState.activeFrameKey === key ? 'linear-gradient(#5e7ade, #2c3565)' : '#333'
                   }}
                   onClick={e => {
-                    rootComponentState.activeFrameKey = key
+                    rootComponentState.activeFrameKey = key;
                     console.log(rootComponentState);
                     rootComponent.updateRootState({});
                   }}
@@ -146,27 +149,44 @@ class AppFrame extends React.Component {
           <div className={'frame_left'}>
             {/*frame Left*/}
             <div style={{display: "flex", height: '100%'}}>
-              <div
-                style={{background: 'rgb(60, 60, 60)'}}
-                onClick={() => {
-                  LOCAL_STORAGE_MANAGER.toggleTabOpenYn('containerProperty');
-                  this.setState({});
-                }}
-              >
-                <RedTitleTB
-                  icon={LOCAL_STORAGE_MANAGER.getTabOpenYn('containerProperty') ? faFolderOpen : faFolder}
-                  title={'Container Property'}
-                  writingMode={'tb'}
-                  background={LOCAL_STORAGE_MANAGER.getTabOpenYn('containerProperty') ? 'rgb(32, 32, 32)' : ''}
-                />
+              <div style={{display: "flex", flexDirection: 'column', height: '100%'}}>
+                {
+                  RedTitleTB.TAB_LIST.map(key => {
+                    return <div
+                      style={{background: 'rgb(60, 60, 60)'}}
+                      onClick={() => {
+                        LOCAL_STORAGE_MANAGER.toggleTabOpenYn(key);
+                        this.setState({});
+                      }}
+                    >
+                      <RedTitleTB
+                        icon={LOCAL_STORAGE_MANAGER.getTabOpenYn(key) ? faFolderOpen : faFolder}
+                        title={key}
+                        writingMode={'tb'}
+                        background={LOCAL_STORAGE_MANAGER.getTabOpenYn(key) ? 'rgb(32, 32, 32)' : ''}
+                      />
+
+                    </div>;
+                  })
+                }
               </div>
+
               {
-                LOCAL_STORAGE_MANAGER.getTabOpenYn('containerProperty') ?
+                LOCAL_STORAGE_MANAGER.getTabOpenYn('Container') ?
                   <div style={{
                     display: "flex", height: '100%', overflowY: 'auto',
                     borderLeft: '1px solid rgb(26, 26, 26)',
                   }}>
-                    <RedCanvasEdit rootComponent={this} />
+                    <RedContainerEdit rootComponent={this} />
+                  </div> : ''
+              }
+              {
+                LOCAL_STORAGE_MANAGER.getTabOpenYn('Border') ?
+                  <div style={{
+                    display: "flex", height: '100%', overflowY: 'auto',
+                    borderLeft: '1px solid rgb(26, 26, 26)',
+                  }}>
+                    <RedContainerBorderEdit rootComponent={this} />
                   </div> : ''
               }
 

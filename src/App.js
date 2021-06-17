@@ -72,13 +72,12 @@ class App extends React.Component {
   }
 
   updateRootState(v = {}) {
-
-    this.setState(v)
-    console.log('App updateRootState',this.state)
     if(this.state){
+      this.setState(v)
+      console.log('App updateRootState',this.state)
       console.log(this.state)
       const activeFrameState = this.state[this.state.activeFrameKey]
-      if (!activeFrameState || !activeFrameState.canvasInfo) return
+      if (!activeFrameState  ||  !activeFrameState.canvasInfo) return
 
       if (this.history.length > 50) this.history.shift()
       this.history.push(JSON.parse(JSON.stringify(this.state)))
