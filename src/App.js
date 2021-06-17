@@ -78,6 +78,7 @@ class App extends React.Component {
       console.log(this.state)
       const activeFrameState = this.state[this.state.activeFrameKey]
       if (!activeFrameState  ||  !activeFrameState.canvasInfo) return
+      activeFrameState['key'] = this.state.activeFrameKey
 
       if (this.history.length > 50) this.history.shift()
       this.history.push(JSON.parse(JSON.stringify(this.state)))

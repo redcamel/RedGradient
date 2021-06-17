@@ -17,6 +17,8 @@ import RED_CANVAS_PRESET from "../../../RED_CANVAS_PRESET.js";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDesktop, faMobileAlt} from "@fortawesome/free-solid-svg-icons";
 import {ColorPicker} from "@easylogic/colorpicker";
+import RedCanvasBoxPositionEdit from "./property/RedCanvasBoxPositionEdit";
+import ACTIVE_FRAME_KEY from "../../ACTIVE_FRAME_KEY";
 
 let colorPicker
 
@@ -38,6 +40,8 @@ class RedContainerEdit extends React.Component {
       <RedTitle title={'Container Property'}/>
       <div style={style.container}>
         <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
+        {rootComponentState.key===ACTIVE_FRAME_KEY.MAIN ? '' : <RedCanvasBoxPositionEdit rootComponent={rootComponent} canvasComponent={this}/>}
+        <div style={style.divide}/>
         <div style={{display: 'inline-block', margin: '8px 10px 8px 10px'}}>
           {
             RED_CANVAS_PRESET.map(v => {

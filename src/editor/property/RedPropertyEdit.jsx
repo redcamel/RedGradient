@@ -37,6 +37,7 @@ class RedPropertyEdit extends React.Component {
       });
       containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
       containerCssText = `.result {
+          position :  relative;
           background : ${(CALC_GRADIENT.calcGradients(rootComponentState.layers, true, rootComponentState.bgColor))};
           background-blend-mode : ${CALC_GRADIENT.calcBlendMode(rootComponentState.layers)};
           ${containerCssText}
