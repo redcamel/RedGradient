@@ -38,74 +38,58 @@ class RedPreview extends React.Component {
       <div style={style.container}>
         <div style={{display: 'flex', flex: 1, width: '100%'}}>
           <div style={{display: 'flex', flexDirection: 'column', width: '360px'}}>
-            <div style={{padding: '10px', border: '1px solid red'}}>
-              <h3>before</h3>
-              {/*<div>{beforeText2}</div>*/}
-              <div style={{display: 'flex'}}>
-                <RedNumber title={'width'} width={'160px'} value={beforeCanvasInfo.width} HD_onInput={e => {
-                  beforeCanvasInfo.width = +e.target.value;
-                  this.setState({})
-                }}/>
-                <div style={{width: '5px'}}/>
-                <RedNumber title={'height'} width={'160px'} value={beforeCanvasInfo.height} HD_onInput={e => {
-                  beforeCanvasInfo.height = +e.target.value;
-                  this.setState({})
-                }}/>
-              </div>
-              <div style={{display: 'flex'}}>
-                <RedNumber title={'left'} width={'160px'} value={beforeCanvasInfo.left} HD_onInput={e => {
-                  beforeCanvasInfo.left = +e.target.value;
-                  this.setState({})
-                }}/>
-                <div style={{width: '5px'}}/>
-                <RedNumber title={'top'} width={'160px'} value={beforeCanvasInfo.top} HD_onInput={e => {
-                  beforeCanvasInfo.top = +e.target.value;
-                  this.setState({})
-                }}/>
-              </div>
-            </div>
-            <div style={{padding: '10px', border: '1px solid red'}}>
-              <h3>main</h3>
-              {/*<div>{mainText2}</div>*/}
-              <div style={{display: 'flex'}}>
-                <RedNumber title={'width'} width={'160px'} value={mainCanvasInfo.width} HD_onInput={e => {
-                  mainCanvasInfo.width = +e.target.value;
-                  this.setState({})
-                }}/>
-                <div style={{width: '5px'}}/>
-                <RedNumber title={'height'} width={'160px'} value={mainCanvasInfo.height} HD_onInput={e => {
-                  mainCanvasInfo.height = +e.target.value;
-                  this.setState({})
-                }}/>
-              </div>
+            {
+              [
+                {
+                  title: 'before',
+                  targetCanvasInfo: beforeCanvasInfo,
+                  itemList: [
+                    [{key: 'width'}, {key: 'height'},],
+                    [{key: 'left'}, {key: 'top'},]
+                  ]
+                },
+                {
+                  title: 'main',
+                  targetCanvasInfo: mainCanvasInfo,
+                  itemList: [
+                    [{key: 'width'}, {key: 'height'},]
+                  ]
+                },
+                {
+                  title: 'after',
+                  targetCanvasInfo: afterCanvasInfo,
+                  itemList: [
+                    [{key: 'width'}, {key: 'height'},],
+                    [{key: 'left'}, {key: 'top'},]
+                  ]
+                }
+              ].map(v => {
+                return <div style={{padding: '10px', border: '1px solid red'}}>
+                  <h3>{v['title']}</h3>
+                  {
+                    v.itemList.map(tList => {
+                      return <div style={{display: 'flex'}}>
+                        {
+                          tList.map((tData, index) => {
+                            const key = tData['key']
+                            const targetCanvasInfo = v['targetCanvasInfo']
+                            return <>
+                              {index ? <div style={{width: '5px'}}/> : ''}
+                              <RedNumber title={key} width={'160px'} value={targetCanvasInfo[key]}
+                                         HD_onInput={e => {
+                                           targetCanvasInfo[key] = +e.target.value;
+                                           this.setState({})
+                                         }}/>
+                            </>
+                          })
+                        }
+                      </div>
+                    })
+                  }
+                </div>
+              })
+            }
 
-            </div>
-            <div style={{padding: '10px', border: '1px solid red'}}>
-              <h3>after</h3>
-              {/*<div>{afterText2}</div>*/}
-              <div style={{display: 'flex'}}>
-                <RedNumber title={'width'} width={'160px'} value={afterCanvasInfo.width} HD_onInput={e => {
-                  afterCanvasInfo.width = +e.target.value;
-                  this.setState({})
-                }}/>
-                <div style={{width: '5px'}}/>
-                <RedNumber title={'height'} width={'160px'} value={afterCanvasInfo.height} HD_onInput={e => {
-                  afterCanvasInfo.height = +e.target.value;
-                  this.setState({})
-                }}/>
-              </div>
-              <div style={{display: 'flex'}}>
-                <RedNumber title={'left'} width={'160px'} value={afterCanvasInfo.left} HD_onInput={e => {
-                  afterCanvasInfo.left = +e.target.value;
-                  this.setState({})
-                }}/>
-                <div style={{width: '5px'}}/>
-                <RedNumber title={'top'} width={'160px'} value={afterCanvasInfo.top} HD_onInput={e => {
-                  afterCanvasInfo.top = +e.target.value;
-                  this.setState({})
-                }}/>
-              </div>
-            </div>
             <h3>
               TODO
               <li>아마 여기서 위치조정은 해야할듯한데?</li>
