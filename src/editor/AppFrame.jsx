@@ -141,6 +141,27 @@ class AppFrame extends React.Component {
                 >{key}</div>;
               })
             }
+            <div
+              style={{
+                display: 'flex',
+                width: '100px',
+                height: '30px',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                borderRight: '1px solid #000',
+                background: '#333'
+              }}
+              onClick={e => {
+                alert(`
+                1. 일단은 프리뷰창으로 결과를 확인하고
+                2. 편집창에서 녹여보는걸로
+                3. main은 relative 모델이며
+                4. before,after는 absolute 기반으로 확인
+                
+                `)
+              }}
+            >Preview</div>
           </div>
         </div>
       </div>
@@ -202,7 +223,7 @@ class AppFrame extends React.Component {
               <div style={{height: '200px', overflowY: 'auto', background: '#2d2d2d'}}>
                 <RedTitle title={'Gradient Preset'} />
                 <div style={{padding: '4px'}}>
-                  <RedPreset rootComponent={this} />
+                  <RedPreset rootComponent={this}/>
                 </div>
               </div>
               <div style={{display: "flex", height: 'calc(100% - 190px)'}}>
