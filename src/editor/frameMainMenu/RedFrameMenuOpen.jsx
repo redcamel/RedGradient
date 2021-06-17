@@ -17,7 +17,6 @@ class RedFrameMenuOpen extends React.Component {
      * activeFrameKey 키를 가지고있는 경우만 통과
      *
      */
-    let result = true;
     let loadData
     try {
        loadData = JSON.parse(v);
@@ -26,17 +25,19 @@ class RedFrameMenuOpen extends React.Component {
         newData.main =loadData
         loadData = newData
       }
+      let mainData = loadData['main']
+
       console.log(loadData)
       if (
         !loadData.hasOwnProperty('activeFrameKey')
-        || !loadData.hasOwnProperty('main')
-        || !loadData.hasOwnProperty('before')
-        || !loadData.hasOwnProperty('after')
+        || !mainData.hasOwnProperty('activeLayer')
+        || !mainData.hasOwnProperty('activeSubData')
+        || !mainData.hasOwnProperty('layers')
       ) {
-        result = false;
+        return false;
       }
     } catch (e) {
-      result = false;
+      return  false;
     }
     return loadData;
   }
