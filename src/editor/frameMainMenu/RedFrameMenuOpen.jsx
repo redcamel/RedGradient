@@ -19,14 +19,13 @@ class RedFrameMenuOpen extends React.Component {
      */
     let loadData
     try {
-       loadData = JSON.parse(v);
-      if(!loadData.hasOwnProperty('activeFrameKey')) {
+      loadData = JSON.parse(v);
+      if (!loadData.hasOwnProperty('activeFrameKey')) {
         let newData = new DataGradient()
-        newData.main =loadData
+        newData.main = loadData
         loadData = newData
       }
       let mainData = loadData['main']
-
       console.log(loadData)
       if (
         !loadData.hasOwnProperty('activeFrameKey')
@@ -37,7 +36,7 @@ class RedFrameMenuOpen extends React.Component {
         return false;
       }
     } catch (e) {
-      return  false;
+      return false;
     }
     return loadData;
   }

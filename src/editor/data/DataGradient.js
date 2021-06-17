@@ -10,10 +10,10 @@ import DataCanvas from "./DataCanvas";
 
 function DataGradient() {
   return {
-    before : new DataCanvas(),
-    main : new DataCanvas(),
-    after : new DataCanvas(),
-    activeFrameKey : ACTIVE_FRAME_KEY.MAIN
+    before: new DataCanvas(),
+    main: new DataCanvas(),
+    after: new DataCanvas(),
+    activeFrameKey: ACTIVE_FRAME_KEY.MAIN
   };
 }
 

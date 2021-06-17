@@ -159,7 +159,7 @@ RedPropertyEdit.getContainerCssText = (rootComponentState) => {
     let position = ''
     switch (rootComponentState['key']) {
       case ACTIVE_FRAME_KEY.BEFORE:
-        className = `.result::before;`
+        className = `.result::before`
         position = `content: ""; position : absolute; top : ${canvasInfo['top'] || 0}px; left : ${canvasInfo['left'] || 0}px; `
         break
       case ACTIVE_FRAME_KEY.MAIN:

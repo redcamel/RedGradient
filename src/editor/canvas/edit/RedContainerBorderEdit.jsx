@@ -7,16 +7,9 @@
  */
 import React from "react";
 import RedTitle from "../../../core/RedTitle";
-import RedCanvasFilterList from "./filter/RedCanvasFilterList.jsx";
 import RedCanvasBorderModeEdit from "./property/RedCanvasBorderModeEdit.jsx";
 import RedCanvasOutlineEdit from "./property/RedCanvasOutlineEdit";
 import RedCanvasBorderGradientFrame from "./property/RedCanvasBorderGradientFrame.jsx";
-import RedCanvasBoxSizingEdit from "./property/RedCanvasBoxSizingEdit.jsx";
-import RedCanvasSizeEdit from "./property/RedCanvasSizeEdit.jsx";
-import RED_CANVAS_PRESET from "../../../RED_CANVAS_PRESET.js";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faDesktop, faMobileAlt} from "@fortawesome/free-solid-svg-icons";
-import {ColorPicker} from "@easylogic/colorpicker";
 
 let colorPicker
 

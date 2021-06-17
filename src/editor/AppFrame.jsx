@@ -26,16 +26,17 @@ import BORDER_REPEAT_TYPE from "./BORDER_REPEAT_TYPE";
 import DataLayer from "./data/DataLayer";
 import RedContainerBorderEdit from "./canvas/edit/RedContainerBorderEdit";
 import RedPreview from "./RedPreview.jsx";
+import getUUID from "../getUUID.js";
 
 class AppFrame extends React.Component {
   constructor(props) {
     super(props);
-
   }
-  checkData(){
+
+  checkData() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    Object.values(ACTIVE_FRAME_KEY).forEach(key=>{
+    Object.values(ACTIVE_FRAME_KEY).forEach(key => {
       {
         const activeFrameState = rootComponentState[key];
         activeFrameState['key'] = key
@@ -91,9 +92,7 @@ class AppFrame extends React.Component {
         activeFrameState.borderGradientInfo.activeSubData = getActiveSubData(activeFrameState.borderGradientInfo);
       }
     })
-
   }
-
 
   updateRootState(v = {}) {
     const rootComponent = this.props.rootComponent;
@@ -111,15 +110,14 @@ class AppFrame extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     this.state = rootComponentState[rootComponentState.activeFrameKey];
-
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
         <div style={{display: 'flex', alignItems: 'center', fontSize: '16px', fontWeight: 'bold', margin: '0px 8px'}}>
-          <img alt={'logo'} src={'./tempLogo.svg'} height={'26px'} style={{marginRight: '7px'}} />
+          <img alt={'logo'} src={'./tempLogo.svg'} height={'26px'} style={{marginRight: '7px'}}/>
           RedGradient
         </div>
-        <RedFrameMenuOpen rootComponent={rootComponent} />
-        <RedFrameMenuSave rootComponent={rootComponent} />
+        <RedFrameMenuOpen rootComponent={rootComponent}/>
+        <RedFrameMenuSave rootComponent={rootComponent}/>
       </div>
       <div className={'frame_toolbar'}>
         <div style={{display: 'flex', height: '100%', alignItem: 'center'}}>
@@ -163,15 +161,18 @@ class AppFrame extends React.Component {
               }}
               onClick={e => {
                 this.previewModeYn = true
+                this.previewModeKey = getUUID()
                 this.setState({})
               }}
-            >Preview</div>
-            {this.previewModeYn  ?<RedPreview
-              rootComponentState={rootComponentState}
-              HD_Close={e=>{
-              this.previewModeYn = false
-              this.setState({})
-            }}/> : ''}
+            >Preview
+            </div>
+            {this.previewModeYn ? <RedPreview
+              key={this.previewModeKey}
+              rootComponent={rootComponent}
+              HD_Close={e => {
+                this.previewModeYn = false
+                this.setState({})
+              }}/> : ''}
           </div>
         </div>
       </div>
@@ -208,7 +209,7 @@ class AppFrame extends React.Component {
                     display: "flex", height: '100%', overflowY: 'auto',
                     borderLeft: '1px solid rgb(26, 26, 26)',
                   }}>
-                    <RedContainerEdit rootComponent={this} />
+                    <RedContainerEdit rootComponent={this}/>
                   </div> : ''
               }
               {
@@ -217,7 +218,7 @@ class AppFrame extends React.Component {
                     display: "flex", height: '100%', overflowY: 'auto',
                     borderLeft: '1px solid rgb(26, 26, 26)',
                   }}>
-                    <RedContainerBorderEdit rootComponent={this} />
+                    <RedContainerBorderEdit rootComponent={this}/>
                   </div> : ''
               }
 
@@ -225,20 +226,20 @@ class AppFrame extends React.Component {
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
-            <RedCanvas rootComponent={this} />
+            <RedCanvas rootComponent={this}/>
           </div>
           <div className={'frame_right'}>
             {/*frame_right Right*/}
             <div style={{height: '100%'}}>
               <div style={{height: '200px', overflowY: 'auto', background: '#2d2d2d'}}>
-                <RedTitle title={'Gradient Preset'} />
+                <RedTitle title={'Gradient Preset'}/>
                 <div style={{padding: '4px'}}>
                   <RedPreset rootComponent={this}/>
                 </div>
               </div>
               <div style={{display: "flex", height: 'calc(100% - 190px)'}}>
-                <RedLayer rootComponent={this} />
-                {this.state.activeSubData ? <RedPropertyEdit rootComponent={this} /> : ''}
+                <RedLayer rootComponent={this}/>
+                {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
               </div>
             </div>
 

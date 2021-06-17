@@ -23,6 +23,17 @@ const HD_up2 = () => {
 };
 
 class RedNumber extends React.Component {
+  constructor(props) {
+    super(props);
+    HD_up()
+    HD_up2()
+  }
+
+  componentWillUnmount() {
+    HD_up()
+    HD_up2()
+  }
+
   calc(e) {
     const step = this.props.step || 0.1
     const tX = e.pageX - startX;
@@ -89,6 +100,7 @@ class RedNumber extends React.Component {
                if (time - startTime > 100) {
                  this.update(+this.props.value + step)
                }
+               console.log('여기냐')
                requestAni = requestAnimationFrame(tick)
              }
              requestAni = tick()

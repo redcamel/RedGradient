@@ -77,12 +77,10 @@ class RedLayerSubItem extends React.Component {
       const startIDX = startDragLayer.items.indexOf(startDragItem);
       startDragLayer.items.splice(startIDX, 1);
       dropAreaLayer.items.splice(dstIDX, 0, startDragItem);
-
       t0.activeLayer = dropAreaLayer
       t0.activeSubData = dropAreaItem
       t0.activeLayerIndex = this.props.layers.indexOf(dropAreaLayer);
       t0.activeSubDataIndex = this.props.layer['items'].indexOf(dropAreaItem);
-
     }
     RedLayerItem.clearDragInfo();
     RedLayerSubItem.clearDragInfo();
@@ -149,7 +147,7 @@ class RedLayerSubItem extends React.Component {
       </div>
       <div style={{margin: '2px 2px 2px 0px'}}>
         <button className={'layerVisible2'}
-                onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash} />
+                onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash}/>
         </button>
         <button className={'layerDel2'}
                 style={{opacity: layer.items.length > 1 ? 1 : 0.25}}
@@ -166,7 +164,7 @@ class RedLayerSubItem extends React.Component {
                     rootComponent.updateRootState({activeSubData: layer.items[idx]});
                   }
                 }}
-        ><FontAwesomeIcon icon={faMinusCircle} />
+        ><FontAwesomeIcon icon={faMinusCircle}/>
         </button>
         <button className={'layerType'}>{layerType}</button>
       </div>
@@ -177,7 +175,7 @@ class RedLayerSubItem extends React.Component {
              layer.items.splice(idx, 0, t0);
              rootComponent.updateRootState({activeSubData: t0});
            }}
-      ><FontAwesomeIcon icon={faCopy} />
+      ><FontAwesomeIcon icon={faCopy}/>
         <div style={{marginLeft: '5px'}}>duplicate</div>
       </div>
 
@@ -199,7 +197,7 @@ class RedLayerSubItem extends React.Component {
              }}
         />
 
-        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
+        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine}/>
       </div>
       <div
         style={{

@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import getActiveLayer from "./editor/getActiveLayer.js";
 import getActiveSubData from "./editor/getActiveSubData.js";
 import AppFrame from "./editor/AppFrame";
-import ACTIVE_FRAME_KEY from "./editor/ACTIVE_FRAME_KEY";
 
 class App extends React.Component {
   constructor(props) {
@@ -72,18 +71,15 @@ class App extends React.Component {
   }
 
   updateRootState(v = {}) {
-    if(this.state){
+    if (this.state) {
       this.setState(v)
-      console.log('App updateRootState',this.state)
+      console.log('App updateRootState', this.state)
       console.log(this.state)
       const activeFrameState = this.state[this.state.activeFrameKey]
-      if (!activeFrameState  ||  !activeFrameState.canvasInfo) return
-
-
+      if (!activeFrameState || !activeFrameState.canvasInfo) return
       if (this.history.length > 50) this.history.shift()
       this.history.push(JSON.parse(JSON.stringify(this.state)))
     }
-
   }
 
   setNewCanvas(newState) {
@@ -98,7 +94,7 @@ class App extends React.Component {
     if (!this.state) return <RedStart rootComponent={this}/>
     this.checkUnloadEvent()
     return <div className={'frame'}>
-      <AppFrame  rootComponent={this} />
+      <AppFrame rootComponent={this}/>
       <ToastContainer
         hideProgressBar={true}
       />

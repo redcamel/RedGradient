@@ -6,8 +6,8 @@
  *
  */
 const ACTIVE_FRAME_KEY = {
-  BEFORE : 'before',
-  MAIN : 'main',
-  AFTER : 'after'
+  BEFORE: 'before',
+  MAIN: 'main',
+  AFTER: 'after'
 }
 export default ACTIVE_FRAME_KEY;

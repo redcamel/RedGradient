@@ -20,5 +20,6 @@ class RedTitleTB extends React.Component {
     </div>;
   }
 }
+
 RedTitleTB.TAB_LIST = ['Container', 'Border']
 export default RedTitleTB;

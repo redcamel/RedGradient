@@ -48,7 +48,7 @@ class RedStart extends React.Component {
       }}>
 
         <div style={{textAlign: 'center'}}>
-          <img alt={'logo'} src={'./tempLogo.svg'} style={{height: '512px'}} />
+          <img alt={'logo'} src={'./tempLogo.svg'} style={{height: '512px'}}/>
           <div style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '30px'}}>RedGradient</div>
         </div>
 
@@ -85,7 +85,7 @@ class RedStart extends React.Component {
             // console.log(e.target.files);
             let fileReader = new FileReader();
             fileReader.onload = evt => {
-              let t0  = RedFrameMenuOpen.prototype.checkValidate(evt.target.result)
+              let t0 = RedFrameMenuOpen.prototype.checkValidate(evt.target.result)
               if (t0) rootComponent.setNewCanvas(t0);
               else alert('RedGradient 형식의 파일이 아닙니다.');
             };

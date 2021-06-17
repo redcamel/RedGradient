@@ -15,15 +15,15 @@ const LOCAL_STORAGE_MANAGER = {
       let t0 = localStorage.getItem(searchKey);
       if (t0 === null) test++;
     });
-    if(test===RedTitleTB.TAB_LIST.length){
+    if (test === RedTitleTB.TAB_LIST.length) {
       console.log('도냐')
-      RedTitleTB.TAB_LIST.forEach((v,index) => {
+      RedTitleTB.TAB_LIST.forEach((v, index) => {
         let searchKey = 'redGradient_openYn_' + v;
-        localStorage.setItem(searchKey,index === RedTitleTB.TAB_LIST.length-1);
+        localStorage.setItem(searchKey, index === RedTitleTB.TAB_LIST.length - 1);
       });
     }
   },
-  checkAllClose: ()=>{
+  checkAllClose: () => {
     let test = true;
     RedTitleTB.TAB_LIST.forEach(v => {
       let searchKey = 'redGradient_openYn_' + v;

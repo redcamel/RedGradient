@@ -209,7 +209,7 @@ class RedLayerItem extends React.Component {
                   onClick={e => {
                     e.stopPropagation();
                     layer.items.splice(0, 0, new DataItem());
-                    rootComponent.updateRootState({activeSubDataIndex: 0,activeSubData: layer.items[0]});
+                    rootComponent.updateRootState({activeSubDataIndex: 0, activeSubData: layer.items[0]});
                   }}
           ><FontAwesomeIcon icon={faPlusCircle}/>
           </button>
@@ -248,9 +248,9 @@ class RedLayerItem extends React.Component {
           }}
           onClick={() => {
             let activeLayerIndex = layers.indexOf(layer);
-            console.log('activeLayerIndex',activeLayerIndex)
+            console.log('activeLayerIndex', activeLayerIndex)
             rootComponent.updateRootState({
-              activeLayerIndex : activeLayerIndex,
+              activeLayerIndex: activeLayerIndex,
               activeSubDataIndex: 0,
               activeLayer: layers[activeLayerIndex],
               activeSubData: layers[activeLayerIndex]['items'][0]

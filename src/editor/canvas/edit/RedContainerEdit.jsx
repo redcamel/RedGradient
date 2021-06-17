@@ -37,7 +37,8 @@ class RedContainerEdit extends React.Component {
       <RedTitle title={'Container Property'}/>
       <div style={style.container}>
         <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
-        {rootComponentState.key===ACTIVE_FRAME_KEY.MAIN ? '' : <RedCanvasBoxPositionEdit rootComponent={rootComponent} canvasComponent={this}/>}
+        {rootComponentState.key === ACTIVE_FRAME_KEY.MAIN ? '' :
+          <RedCanvasBoxPositionEdit rootComponent={rootComponent} canvasComponent={this}/>}
         <div style={style.divide}/>
         <div style={{display: 'inline-block', margin: '8px 10px 8px 10px'}}>
           {
