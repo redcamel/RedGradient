@@ -25,10 +25,72 @@ import getActiveSubData from "./getActiveSubData";
 import BORDER_REPEAT_TYPE from "./BORDER_REPEAT_TYPE";
 import DataLayer from "./data/DataLayer";
 import RedContainerBorderEdit from "./canvas/edit/RedContainerBorderEdit";
+import RedPreview from "./RedPreview.jsx";
 
 class AppFrame extends React.Component {
   constructor(props) {
     super(props);
+
+  }
+  checkData(){
+    const rootComponent = this.props.rootComponent;
+    const rootComponentState = rootComponent.state;
+    Object.values(ACTIVE_FRAME_KEY).forEach(key=>{
+      {
+        const activeFrameState = rootComponentState[key];
+        activeFrameState['key'] = key
+        activeFrameState.activeLayer = getActiveLayer(activeFrameState);
+        activeFrameState.activeSubData = getActiveSubData(activeFrameState);
+        //
+        if (!activeFrameState.borderGradientInfo) {
+          activeFrameState.borderGradientInfo = {
+            'border_image_sliceT': 1,
+            'border_image_sliceR': 1,
+            'border_image_sliceL': 1,
+            'border_image_sliceB': 1,
+            'border_image_repeat': BORDER_REPEAT_TYPE.STRETCH,
+            'border_image_outset': 0,
+            "activeLayer": null,
+            "activeSubData": null,
+            "bgColor": "#ffffff",
+            "layers": [
+              new DataLayer()
+            ]
+          };
+        }
+        const canvasInfo = activeFrameState.canvasInfo;
+        if (!canvasInfo.hasOwnProperty('border_radius')) {
+          canvasInfo['border_radius'] = 0;
+          canvasInfo['border_radius_unit'] = 'px';
+        }
+        if (!canvasInfo.hasOwnProperty('border_radius_mergeMode')) {
+          canvasInfo['border_radius_mergeMode'] = 1;
+          canvasInfo['border_radius_split'] = [0, 0, 0, 0];
+          canvasInfo['border_radius_unit_split'] = ['px', 'px', 'px', 'px'];
+        }
+        if (!canvasInfo.hasOwnProperty('border_width')) {
+          canvasInfo['border_width'] = 0;
+          canvasInfo['border_width_unit'] = 'px';
+          canvasInfo['border_type'] = 'solid';
+          canvasInfo['border_color'] = '#000';
+        }
+        if (!canvasInfo.hasOwnProperty('border_width_mergeMode')) {
+          canvasInfo['border_width_mergeMode'] = 1;
+          canvasInfo['border_width_split'] = [0, 0, 0, 0];
+        }
+        if (!canvasInfo.hasOwnProperty('outline_width')) {
+          canvasInfo['outline_width'] = 0;
+          canvasInfo['outline_width_unit'] = 'px';
+          canvasInfo['outline_type'] = 'solid';
+          canvasInfo['outline_color'] = '#000';
+          canvasInfo['outline_offset'] = 0;
+          canvasInfo['outline_offset_unit'] = 'px';
+        }
+        activeFrameState.borderGradientInfo.canvasInfo = activeFrameState.canvasInfo;
+        activeFrameState.borderGradientInfo.activeLayer = getActiveLayer(activeFrameState.borderGradientInfo);
+        activeFrameState.borderGradientInfo.activeSubData = getActiveSubData(activeFrameState.borderGradientInfo);
+      }
+    })
 
   }
 
@@ -44,65 +106,12 @@ class AppFrame extends React.Component {
   }
 
   render() {
-
     LOCAL_STORAGE_MANAGER.check();
+    this.checkData()
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     this.state = rootComponentState[rootComponentState.activeFrameKey];
-    {
-      console.log(rootComponentState);
-      const activeFrameState = this.state;
-      activeFrameState.activeLayer = getActiveLayer(activeFrameState);
-      activeFrameState.activeSubData = getActiveSubData(activeFrameState);
-      //
-      if (!activeFrameState.borderGradientInfo) {
-        activeFrameState.borderGradientInfo = {
-          'border_image_sliceT': 1,
-          'border_image_sliceR': 1,
-          'border_image_sliceL': 1,
-          'border_image_sliceB': 1,
-          'border_image_repeat': BORDER_REPEAT_TYPE.STRETCH,
-          'border_image_outset': 0,
-          "activeLayer": null,
-          "activeSubData": null,
-          "bgColor": "#ffffff",
-          "layers": [
-            new DataLayer()
-          ]
-        };
-      }
-      const canvasInfo = activeFrameState.canvasInfo;
-      if (!canvasInfo.hasOwnProperty('border_radius')) {
-        canvasInfo['border_radius'] = 0;
-        canvasInfo['border_radius_unit'] = 'px';
-      }
-      if (!canvasInfo.hasOwnProperty('border_radius_mergeMode')) {
-        canvasInfo['border_radius_mergeMode'] = 1;
-        canvasInfo['border_radius_split'] = [0, 0, 0, 0];
-        canvasInfo['border_radius_unit_split'] = ['px', 'px', 'px', 'px'];
-      }
-      if (!canvasInfo.hasOwnProperty('border_width')) {
-        canvasInfo['border_width'] = 0;
-        canvasInfo['border_width_unit'] = 'px';
-        canvasInfo['border_type'] = 'solid';
-        canvasInfo['border_color'] = '#000';
-      }
-      if (!canvasInfo.hasOwnProperty('border_width_mergeMode')) {
-        canvasInfo['border_width_mergeMode'] = 1;
-        canvasInfo['border_width_split'] = [0, 0, 0, 0];
-      }
-      if (!canvasInfo.hasOwnProperty('outline_width')) {
-        canvasInfo['outline_width'] = 0;
-        canvasInfo['outline_width_unit'] = 'px';
-        canvasInfo['outline_type'] = 'solid';
-        canvasInfo['outline_color'] = '#000';
-        canvasInfo['outline_offset'] = 0;
-        canvasInfo['outline_offset_unit'] = 'px';
-      }
-      activeFrameState.borderGradientInfo.canvasInfo = activeFrameState.canvasInfo;
-      activeFrameState.borderGradientInfo.activeLayer = getActiveLayer(activeFrameState.borderGradientInfo);
-      activeFrameState.borderGradientInfo.activeSubData = getActiveSubData(activeFrameState.borderGradientInfo);
-    }
+
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
         <div style={{display: 'flex', alignItems: 'center', fontSize: '16px', fontWeight: 'bold', margin: '0px 8px'}}>
@@ -153,15 +162,16 @@ class AppFrame extends React.Component {
                 background: '#333'
               }}
               onClick={e => {
-                alert(`
-                1. 일단은 프리뷰창으로 결과를 확인하고
-                2. 편집창에서 녹여보는걸로
-                3. main은 relative 모델이며
-                4. before,after는 absolute 기반으로 확인
-                
-                `)
+                this.previewModeYn = true
+                this.setState({})
               }}
             >Preview</div>
+            {this.previewModeYn  ?<RedPreview
+              rootComponentState={rootComponentState}
+              HD_Close={e=>{
+              this.previewModeYn = false
+              this.setState({})
+            }}/> : ''}
           </div>
         </div>
       </div>

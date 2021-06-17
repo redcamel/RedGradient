@@ -22,27 +22,14 @@ import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
 import RedCanvas from "../canvas/RedCanvas";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 import {toast} from "react-toastify";
+import ACTIVE_FRAME_KEY from "../ACTIVE_FRAME_KEY.js";
 
 class RedPropertyEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const data = rootComponentState.activeSubData;
-    const canvasInfo = rootComponentState.canvasInfo
-    let containerCssText = ''
-    {
-      containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo, rootComponentState.borderGradientInfo))
-      containerCssText = containerCssText.map(v => {
-        return `${v[0]} : ${v[1]}`
-      });
-      containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
-      containerCssText = `.result {
-          position :  relative;
-          background : ${(CALC_GRADIENT.calcGradients(rootComponentState.layers, true, rootComponentState.bgColor))};
-          background-blend-mode : ${CALC_GRADIENT.calcBlendMode(rootComponentState.layers)};
-          ${containerCssText}
-          }`
-    }
+    let containerCssText = RedPropertyEdit.getContainerCssText(rootComponentState)
     return <div style={{borderLeft: '1px solid rgb(0, 0, 0)'}}>
       <RedTitle title={'Gradient Edit'}/>
       <div style={style.container}>
@@ -159,6 +146,41 @@ class RedPropertyEdit extends React.Component {
   }
 }
 
+RedPropertyEdit.getContainerCssText = (rootComponentState) => {
+  const canvasInfo = rootComponentState.canvasInfo
+  let containerCssText = ''
+  {
+    containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo, rootComponentState.borderGradientInfo))
+    containerCssText = containerCssText.map(v => {
+      return `${v[0]} : ${v[1]}`
+    });
+    containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
+    let className = ''
+    let position = ''
+    switch (rootComponentState['key']) {
+      case ACTIVE_FRAME_KEY.BEFORE:
+        className = `.result::before;`
+        position = `content: ""; position : absolute; top : ${canvasInfo['top'] || 0}px; left : ${canvasInfo['left'] || 0}px; `
+        break
+      case ACTIVE_FRAME_KEY.MAIN:
+        className = '.result'
+        position = 'position : relative;'
+        break
+      case ACTIVE_FRAME_KEY.AFTER:
+        className = `.result::after`
+        position = `content: ""; position : absolute; top : ${canvasInfo['top'] || 0}px; left : ${canvasInfo['left'] || 0}px; `
+        break
+    }
+    console.log('className', className)
+    containerCssText = `${className} {
+          ${position}
+          background : ${(CALC_GRADIENT.calcGradients(rootComponentState.layers, true, rootComponentState.bgColor))};
+          background-blend-mode : ${CALC_GRADIENT.calcBlendMode(rootComponentState.layers)};
+          ${containerCssText}
+          }`
+  }
+  return containerCssText
+}
 export default RedPropertyEdit;
 const style = {
   container: {
