@@ -39,6 +39,7 @@ class RedCanvas extends React.Component {
       canvasViewScale: 1,
       layerSizeView: true,
       canvasBgColorPickerOpenYn: false,
+      editCanvasOnly : false
     };
     this.refColorPickerContainer = React.createRef();
     this.refDegree = React.createRef();
@@ -95,24 +96,29 @@ class RedCanvas extends React.Component {
     `
     document.getElementById('red_gradient_result_css').textContent = ResultPreview
 
+    const cX = this.state.editCanvasOnly ? 0 : canvasInfo['left']
+    const cY =  this.state.editCanvasOnly ? 0 : canvasInfo['top']
     return <div
       style={{
         ...style.canvas,
         transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
       }} className={'transparent_checker redGradient_canvas '}>
-      {/*<div*/}
-      {/*  className={'transparent_checker'}*/}
-      {/*  style={{*/}
-      {/*    width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,*/}
-      {/*    background: CALC_GRADIENT.calcGradients(layers, true, bgColor),*/}
-      {/*    backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),*/}
-      {/*    // transition: 'width 0.2s, height 0.2s',*/}
-      {/*    ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),*/}
-      {/*    filter: RedCanvas.getFilterCss(canvasInfo['filterList']),*/}
-      {/*    overflow: 'hidden',*/}
-      {/*  }}*/}
-      {/*/>*/}
-      <div className={"red_gradient_result"}/>
+      {
+        this.state.editCanvasOnly ?  <div
+          className={'transparent_checker'}
+          style={{
+            width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
+            background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
+            backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
+            // transition: 'width 0.2s, height 0.2s',
+            ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
+            filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
+            overflow: 'hidden',
+          }}
+        /> :       <div className={"red_gradient_result"}/>
+      }
+
+
 
       {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
       {/*<div>{borderW}/{borderH}</div>*/}
@@ -120,8 +126,8 @@ class RedCanvas extends React.Component {
         <div
           style={{
             position: 'absolute',
-            left: `${ghostSize ? ghostSize['x']+canvasInfo['left'] : 0}px`,
-            top: `${ghostSize ? ghostSize['y']+canvasInfo['top'] : 0}px`,
+            left: `${ghostSize ? ghostSize['x']+cX : 0}px`,
+            top: `${ghostSize ? ghostSize['y']+cY : 0}px`,
             width: `${ghostSize ? ghostSize['w'] : 0}px`,
             height: `${ghostSize ? ghostSize['h'] : 0}px`,
             border: '1px dashed #ff0000',
@@ -140,8 +146,8 @@ class RedCanvas extends React.Component {
           style={{
             zIndex : 1,
             position: 'absolute',
-            left: `${layoutSize['x']+canvasInfo['left']}px`,
-            top: `${layoutSize['y']+canvasInfo['top']}px`,
+            left: `${layoutSize['x']+cX}px`,
+            top: `${layoutSize['y']+cY}px`,
             width: `${layoutSize['w']}px`,
             height: `${layoutSize['h']}px`,
             border: '1px dashed #000',

@@ -46,7 +46,33 @@ function drawCanvasUI() {
               />
             </label>
           </div>
-
+          <div>
+            <label style={{
+              marginLeft: '5px',
+              background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
+              display: 'flex',
+              borderRadius: '6px',
+              padding: '5px 10px',
+              whiteSpace: 'nowrap',
+              cursor: 'pointer'
+            }}>
+              View Edit Canvas Only
+              <input type={'checkbox'}
+                     checked={this.state.editCanvasOnly}
+                     style={{
+                       display: 'inline-block',
+                       width: '15px',
+                       height: '15px',
+                       background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
+                       borderRadius: '4px',
+                       border: '1px solid #000',
+                       cursor: 'pointer',
+                       marginLeft: '5px'
+                     }}
+                     onClick={() => this.setState({editCanvasOnly: !this.state.editCanvasOnly})}
+              />
+            </label>
+          </div>
         </div>
 
       </div>
