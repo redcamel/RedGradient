@@ -10,7 +10,10 @@ import RedSelect from "../../../../core/RedSelect.jsx";
 import RedNumber from "../../../../core/RedNumber.jsx";
 import {ColorPicker} from "@easylogic/colorpicker";
 
-let colorPicker;
+
+let rootComponent;
+let rootComponentState;
+let canvasInfo;
 
 class RedCanvasOutlineEdit extends React.Component {
   constructor(props) {
@@ -20,9 +23,9 @@ class RedCanvasOutlineEdit extends React.Component {
   }
 
   render() {
-    const rootComponent = this.props.rootComponent;
-    const rootComponentState = rootComponent.state;
-    const canvasInfo = rootComponentState.canvasInfo;
+    rootComponent = this.props.rootComponent;
+    rootComponentState = rootComponent.state;
+    canvasInfo = rootComponentState.canvasInfo;
     return <div style={style.container}>
 
       <div className={'ui_subTitle'}>outline</div>
@@ -41,8 +44,8 @@ class RedCanvasOutlineEdit extends React.Component {
           HD_onInput={e => {
             canvasInfo['outline_width'] = +e.target.value;
             rootComponent.updateRootState({});
-          }}/>
-        <div style={{width: '5px'}}/>
+          }} />
+        <div style={{width: '5px'}} />
         <RedNumber
           title={'offset'}
           width={'41px'}
@@ -50,8 +53,8 @@ class RedCanvasOutlineEdit extends React.Component {
           HD_onInput={e => {
             canvasInfo['outline_offset'] = +e.target.value;
             rootComponent.updateRootState({});
-          }}/>
-        <div style={{width: '5px'}}/>
+          }} />
+        <div style={{width: '5px'}} />
       </div>
       <div style={{
         display: 'flex',
@@ -65,7 +68,7 @@ class RedCanvasOutlineEdit extends React.Component {
           HD_change={e => {
             canvasInfo['outline_type'] = e.target.value;
             rootComponent.updateRootState({});
-          }}/>
+          }} />
 
         <div
           className={rootComponentState.outline_color === 'transparent' ? 'transparent_checker' : ''}
@@ -80,8 +83,8 @@ class RedCanvasOutlineEdit extends React.Component {
           }}
           onClick={() => {
             this.setState({canvasBgColorPickerOpenYn: true});
-            if (!colorPicker) {
-              colorPicker = new ColorPicker({
+            if (!this.state.colorPicker) {
+              this.state.colorPicker = new ColorPicker({
                 type: "sketch",
                 position: 'inline',
                 color: canvasInfo.outline_color,
@@ -93,8 +96,8 @@ class RedCanvasOutlineEdit extends React.Component {
               });
             }
             requestAnimationFrame(() => {
-              colorPicker.initColorWithoutChangeEvent(canvasInfo.outline_color);
-            })
+              this.state.colorPicker.initColorWithoutChangeEvent(canvasInfo.outline_color);
+            });
           }}
         />
 
@@ -106,7 +109,7 @@ class RedCanvasOutlineEdit extends React.Component {
           overflow: 'hidden',
           display: this.state.canvasBgColorPickerOpenYn ? 'block' : 'none'
         }}>
-          <div ref={this.refColorPickerContainer}/>
+          <div ref={this.refColorPickerContainer} />
           <div
             style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
             onClick={() => {

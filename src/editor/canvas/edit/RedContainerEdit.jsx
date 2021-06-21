@@ -17,7 +17,9 @@ import {ColorPicker} from "@easylogic/colorpicker";
 import RedCanvasBoxPositionEdit from "./property/RedCanvasBoxPositionEdit";
 import ACTIVE_FRAME_KEY from "../../ACTIVE_FRAME_KEY";
 
-let colorPicker
+let rootComponent;
+let rootComponentState;
+let canvasInfo;
 
 class RedContainerEdit extends React.Component {
   constructor(props) {
@@ -30,16 +32,16 @@ class RedContainerEdit extends React.Component {
   }
 
   render() {
-    const rootComponent = this.props.rootComponent;
-    const rootComponentState = rootComponent.state;
-    const canvasInfo = rootComponentState.canvasInfo
+    rootComponent = this.props.rootComponent;
+    rootComponentState = rootComponent.state;
+    canvasInfo = rootComponentState.canvasInfo;
     return <div>
-      <RedTitle title={'Container Property'}/>
+      <RedTitle title={'Container Property'} />
       <div style={style.container}>
-        <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this}/>
+        <RedCanvasSizeEdit rootComponent={rootComponent} canvasComponent={this} />
         {rootComponentState.key === ACTIVE_FRAME_KEY.MAIN ? '' :
-          <RedCanvasBoxPositionEdit rootComponent={rootComponent} canvasComponent={this}/>}
-        <div style={style.divide}/>
+          <RedCanvasBoxPositionEdit rootComponent={rootComponent} canvasComponent={this} />}
+        <div style={style.divide} />
         <div style={{display: 'inline-block', margin: '8px 10px 8px 10px'}}>
           {
             RED_CANVAS_PRESET.map(v => {
@@ -52,13 +54,13 @@ class RedContainerEdit extends React.Component {
                 }}
               >
                 <div><FontAwesomeIcon
-                  icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}/> {v['title']}({v['width']}x{v['height']})
+                  icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop} /> {v['title']}({v['width']}x{v['height']})
                 </div>
               </button>;
             })
           }
         </div>
-        <div style={style.divide}/>
+        <div style={style.divide} />
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <div className={'ui_subTitle'}>background</div>
           <div
@@ -74,8 +76,8 @@ class RedContainerEdit extends React.Component {
             }}
             onClick={() => {
               this.setState({canvasBgColorPickerOpenYn: true});
-              if (!colorPicker) {
-                colorPicker = new ColorPicker({
+              if (!this.state.colorPicker) {
+                this.state.colorPicker = new ColorPicker({
                   type: "sketch",
                   position: 'inline',
                   color: rootComponentState.bgColor,
@@ -84,8 +86,8 @@ class RedContainerEdit extends React.Component {
                 });
               }
               requestAnimationFrame(() => {
-                colorPicker.initColorWithoutChangeEvent(rootComponentState.bgColor);
-              })
+                this.state.colorPicker.initColorWithoutChangeEvent(rootComponentState.bgColor);
+              });
             }}
           />
 
@@ -97,7 +99,7 @@ class RedContainerEdit extends React.Component {
             overflow: 'hidden',
             display: this.state.canvasBgColorPickerOpenYn ? 'block' : 'none'
           }}>
-            <div ref={this.refColorPickerContainer}/>
+            <div ref={this.refColorPickerContainer} />
             <div
               style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
               onClick={() => {
@@ -108,11 +110,11 @@ class RedContainerEdit extends React.Component {
           </div>
 
         </div>
-        <div style={style.divide}/>
-        <RedCanvasBoxSizingEdit rootComponent={rootComponent}/>
-        <div style={style.divide}/>
-        <RedCanvasFilterList rootComponent={rootComponent}/>
-        <div style={style.divide}/>
+        <div style={style.divide} />
+        <RedCanvasBoxSizingEdit rootComponent={rootComponent} />
+        <div style={style.divide} />
+        <RedCanvasFilterList rootComponent={rootComponent} />
+        <div style={style.divide} />
       </div>
     </div>;
   }

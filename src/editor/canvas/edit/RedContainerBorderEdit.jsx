@@ -11,7 +11,6 @@ import RedCanvasBorderModeEdit from "./property/RedCanvasBorderModeEdit.jsx";
 import RedCanvasOutlineEdit from "./property/RedCanvasOutlineEdit";
 import RedCanvasBorderGradientFrame from "./property/RedCanvasBorderGradientFrame.jsx";
 
-let colorPicker
 
 class RedContainerBorderEdit extends React.Component {
   constructor(props) {

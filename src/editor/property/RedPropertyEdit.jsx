@@ -152,9 +152,9 @@ RedPropertyEdit.getContainerCssText = (rootComponentState) => {
   {
     containerCssText = Object.entries(RedCanvas.getContainerCss(canvasInfo, rootComponentState.borderGradientInfo))
     containerCssText = containerCssText.map(v => {
-      return `${v[0]} : ${v[1]}`
+      return `${v[0].replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)} : ${v[1]}`
     });
-    containerCssText = containerCssText.join(';\n').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
+    containerCssText = containerCssText.join(';\n')
     let className = ''
     let position = ''
     switch (rootComponentState['key']) {
@@ -172,10 +172,12 @@ RedPropertyEdit.getContainerCssText = (rootComponentState) => {
         break
     }
     console.log('className', className)
+    let filter = RedCanvas.getFilterCss(canvasInfo['filterList'])
     containerCssText = `${className} {
           ${position}
           background : ${(CALC_GRADIENT.calcGradients(rootComponentState.layers, true, rootComponentState.bgColor))};
           background-blend-mode : ${CALC_GRADIENT.calcBlendMode(rootComponentState.layers)};
+          ${filter ? `filter : ${filter};` : ''}
           ${containerCssText}
           }`
   }

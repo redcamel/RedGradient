@@ -226,7 +226,7 @@ class AppFrame extends React.Component {
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
-            <RedCanvas rootComponent={this}/>
+            <RedCanvas rootComponent={this} appState={rootComponentState}/>
           </div>
           <div className={'frame_right'}>
             {/*frame_right Right*/}

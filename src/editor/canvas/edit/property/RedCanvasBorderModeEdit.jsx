@@ -11,30 +11,33 @@ import {ColorPicker} from "@easylogic/colorpicker";
 import RedCanvasBorderRadiusEdit from "./RedCanvasBorderRadiusEdit.jsx";
 import RedCanvasBorderWidthEdit from "./RedCanvasBorderWidthEdit.jsx";
 
-let colorPicker
+let rootComponentState;
+let rootComponent;
+let canvasInfo;
 
 class RedCanvasBorderModeEdit extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {canvasBgColorPickerOpenYn: false}
-    this.refColorPickerContainer = React.createRef()
+    this.state = {canvasBgColorPickerOpenYn: false};
+
+    this.refColorPickerContainer = React.createRef();
   }
 
   render() {
-    const rootComponent = this.props.rootComponent;
-    const rootComponentState = rootComponent.state;
-    const canvasInfo = rootComponentState.canvasInfo;
+    rootComponent = this.props.rootComponent;
+    rootComponentState = rootComponent.state;
+    canvasInfo = rootComponentState.canvasInfo;
     return <div>
-      <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
-      <div style={style.divide}/>
-      <RedCanvasBorderWidthEdit rootComponent={rootComponent}/>
+      <RedCanvasBorderRadiusEdit rootComponent={rootComponent} />
+      <div style={style.divide} />
+      <RedCanvasBorderWidthEdit rootComponent={rootComponent} />
       <div style={style.container}>
         <RedSelect value={canvasInfo['border_type']}
                    options={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']}
                    HD_change={e => {
                      canvasInfo['border_type'] = e.target.value;
                      rootComponent.updateRootState({});
-                   }}/>
+                   }} />
         <div
           className={rootComponentState.border_color === 'transparent' ? 'transparent_checker' : ''}
           style={{
@@ -48,23 +51,25 @@ class RedCanvasBorderModeEdit extends React.Component {
           }}
           onClick={() => {
             this.setState({canvasBgColorPickerOpenYn: true});
-            if (!colorPicker) {
-              colorPicker = new ColorPicker({
+            if (!this.state.colorPicker) {
+              this.state.colorPicker = new ColorPicker({
                 type: "sketch",
                 position: 'inline',
                 color: canvasInfo.border_color,
                 container: this.refColorPickerContainer.current,
                 onChange: color => {
-                  canvasInfo['border_color'] = color
-                  rootComponent.updateRootState({canvasInfo})
+                  console.log('rootComponentState.key', rootComponentState.key, color, canvasInfo);
+                  canvasInfo['border_color'] = color;
+                  rootComponent.updateRootState({canvasInfo});
                 }
               });
             }
             requestAnimationFrame(() => {
-              colorPicker.initColorWithoutChangeEvent(canvasInfo.border_color);
-            })
+              this.state.colorPicker.initColorWithoutChangeEvent(canvasInfo.border_color);
+            });
           }}
         />
+        {canvasInfo['border_color']}
 
         <div style={{
           zIndex: 2, position: 'absolute', top: 0, right: 0, transform: 'translate(-32px , 0px)',
@@ -74,7 +79,7 @@ class RedCanvasBorderModeEdit extends React.Component {
           overflow: 'hidden',
           display: this.state.canvasBgColorPickerOpenYn ? 'block' : 'none'
         }}>
-          <div ref={this.refColorPickerContainer}/>
+          <div ref={this.refColorPickerContainer} />
           <div
             style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
             onClick={() => {
@@ -100,4 +105,4 @@ const style = {
     background: '#4e4e4e',
     borderTop: '1px solid #000'
   }
-}
+};

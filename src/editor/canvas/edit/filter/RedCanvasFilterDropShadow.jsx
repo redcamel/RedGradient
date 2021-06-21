@@ -9,24 +9,25 @@ import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
 import {ColorPicker} from "@easylogic/colorpicker";
 
-let colorPicker
+let rootComponent;
+let filterData;
 
 class RedCanvasFilterDropShadow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       colorPickerOpenYn: false
-    }
-    this.refColorPickerContainer = React.createRef()
+    };
+    this.refColorPickerContainer = React.createRef();
   }
 
   getCss(filterData) {
-    return RedCanvasFilterDropShadow.getCss(filterData)
+    return RedCanvasFilterDropShadow.getCss(filterData);
   }
 
   render() {
-    const rootComponent = this.props.rootComponent;
-    const filterData = this.props.filterData
+    rootComponent = this.props.rootComponent;
+    filterData = this.props.filterData;
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         offsetX <RedNumber
@@ -34,17 +35,17 @@ class RedCanvasFilterDropShadow extends React.Component {
         value={filterData['values']['offsetX'] || 0}
         HD_onInput={e => {
           filterData['values']['offsetX'] = +e.target.value;
-          filterData['css'] = this.getCss(filterData)
+          filterData['css'] = this.getCss(filterData);
           rootComponent.updateRootState({});
-        }}/>
+        }} />
         offsetY <RedNumber
         width={'50px'}
         value={filterData['values']['offsetY'] || 0}
         HD_onInput={e => {
           filterData['values']['offsetY'] = +e.target.value;
-          filterData['css'] = this.getCss(filterData)
+          filterData['css'] = this.getCss(filterData);
           rootComponent.updateRootState({});
-        }}/>
+        }} />
       </div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         radius <RedNumber
@@ -53,9 +54,9 @@ class RedCanvasFilterDropShadow extends React.Component {
         value={filterData['values']['radius'] || 0}
         HD_onInput={e => {
           filterData['values']['radius'] = +e.target.value;
-          filterData['css'] = this.getCss(filterData)
+          filterData['css'] = this.getCss(filterData);
           rootComponent.updateRootState({});
-        }}/>
+        }} />
         <div
           className={filterData['values']['color'] === 'transparent' ? 'transparent_checker' : ''}
           style={{
@@ -69,21 +70,21 @@ class RedCanvasFilterDropShadow extends React.Component {
           }}
           onClick={() => {
             this.setState({colorPickerOpenYn: true});
-            if (!colorPicker) {
-              colorPicker = new ColorPicker({
+            if (!this.state.colorPicker) {
+              this.state.colorPicker = new ColorPicker({
                 type: "sketch",
                 position: 'inline',
                 color: filterData['values']['color'],
                 container: this.refColorPickerContainer.current,
                 onChange: color => {
-                  filterData['values']['color'] = color
-                  rootComponent.updateRootState({filterData})
+                  filterData['values']['color'] = color;
+                  rootComponent.updateRootState({filterData});
                 }
               });
             }
             requestAnimationFrame(() => {
-              colorPicker.initColorWithoutChangeEvent(filterData['values']['color']);
-            })
+              this.state.colorPicker.initColorWithoutChangeEvent(filterData['values']['color']);
+            });
           }}
         />
 
@@ -95,7 +96,7 @@ class RedCanvasFilterDropShadow extends React.Component {
           overflow: 'hidden',
           display: this.state.colorPickerOpenYn ? 'block' : 'none'
         }}>
-          <div ref={this.refColorPickerContainer}/>
+          <div ref={this.refColorPickerContainer} />
           <div
             style={{padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'}}
             onClick={() => {
@@ -111,14 +112,14 @@ class RedCanvasFilterDropShadow extends React.Component {
 }
 
 RedCanvasFilterDropShadow.getCss = filterData => {
-  return `drop-shadow(${filterData['values']['offsetX']}px ${filterData['values']['offsetY']}px ${filterData['values']['radius']}px ${filterData['values']['color']})`
-}
+  return `drop-shadow(${filterData['values']['offsetX']}px ${filterData['values']['offsetY']}px ${filterData['values']['radius']}px ${filterData['values']['color']})`;
+};
 RedCanvasFilterDropShadow.getNewDataValues = () => {
   return {
     offsetX: 2,
     offsetY: 4,
     radius: 6,
     color: '#000'
-  }
-}
+  };
+};
 export default RedCanvasFilterDropShadow;

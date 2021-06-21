@@ -24,6 +24,8 @@ import RedCanvas_checkResize from "./visualEdit/RedCanvas_checkResize.js";
 import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree.js";
 import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt.js";
 import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition.js";
+import RedPropertyEdit from "../property/RedPropertyEdit";
+import ACTIVE_FRAME_KEY from "../ACTIVE_FRAME_KEY";
 // TODO - 정리필요
 let ghostSize, ghostMode;
 
@@ -72,27 +74,45 @@ class RedCanvas extends React.Component {
     };
     layoutSize['x'] = (activeSubDataPosition['xUnit'] === '%' ? (canvasInfo.width - layoutSize.w - borderW) * (activeSubDataPosition['x'] / 100) : activeSubDataPosition['x']) + borderX;
     layoutSize['y'] = (activeSubDataPosition['yUnit'] === '%' ? (canvasInfo.height - layoutSize.h - borderH) * (activeSubDataPosition['y'] / 100) : activeSubDataPosition['y']) + borderY;
+
     const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x'] - borderX}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
     const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y'] - borderY}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
     if (ghostMode && !ghostSize) ghostSize = {...layoutSize};
     const iconScale = Math.min(1, 1 / this.state.canvasViewScale)
+    ////////////////////
+    /////////
+    const appState = this.props.appState
+    let beforeText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.BEFORE])
+    let mainText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN])
+    let afterText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.AFTER])
+    let beforeText2 = beforeText.replace('.result', '.red_gradient_result')
+    let mainText2 = mainText.replace('.result', '.red_gradient_result')
+    let afterText2 = afterText.replace('.result', '.red_gradient_result')
+    let ResultPreview = `
+    ${beforeText2}
+    ${mainText2}
+    ${afterText2}
+    `
+    document.getElementById('red_gradient_result_css').textContent = ResultPreview
+
     return <div
       style={{
         ...style.canvas,
         transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
-      }} className={'transparent_checker redGradient_canvas'}>
-      <div
-        className={'transparent_checker'}
-        style={{
-          width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
-          background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
-          backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
-          // transition: 'width 0.2s, height 0.2s',
-          ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
-          filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
-          overflow: 'hidden',
-        }}
-      />
+      }} className={'transparent_checker redGradient_canvas '}>
+      {/*<div*/}
+      {/*  className={'transparent_checker'}*/}
+      {/*  style={{*/}
+      {/*    width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,*/}
+      {/*    background: CALC_GRADIENT.calcGradients(layers, true, bgColor),*/}
+      {/*    backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),*/}
+      {/*    // transition: 'width 0.2s, height 0.2s',*/}
+      {/*    ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),*/}
+      {/*    filter: RedCanvas.getFilterCss(canvasInfo['filterList']),*/}
+      {/*    overflow: 'hidden',*/}
+      {/*  }}*/}
+      {/*/>*/}
+      <div className={"red_gradient_result"}/>
 
       {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
       {/*<div>{borderW}/{borderH}</div>*/}
@@ -100,8 +120,8 @@ class RedCanvas extends React.Component {
         <div
           style={{
             position: 'absolute',
-            left: `${ghostSize ? ghostSize['x'] : 0}px`,
-            top: `${ghostSize ? ghostSize['y'] : 0}px`,
+            left: `${ghostSize ? ghostSize['x']+canvasInfo['left'] : 0}px`,
+            top: `${ghostSize ? ghostSize['y']+canvasInfo['top'] : 0}px`,
             width: `${ghostSize ? ghostSize['w'] : 0}px`,
             height: `${ghostSize ? ghostSize['h'] : 0}px`,
             border: '1px dashed #ff0000',
@@ -118,9 +138,10 @@ class RedCanvas extends React.Component {
       {
         this.state.layerSizeView ? <div
           style={{
+            zIndex : 1,
             position: 'absolute',
-            left: `${layoutSize['x']}px`,
-            top: `${layoutSize['y']}px`,
+            left: `${layoutSize['x']+canvasInfo['left']}px`,
+            top: `${layoutSize['y']+canvasInfo['top']}px`,
             width: `${layoutSize['w']}px`,
             height: `${layoutSize['h']}px`,
             border: '1px dashed #000',
