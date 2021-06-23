@@ -16,6 +16,7 @@ import {faDesktop, faMobileAlt} from "@fortawesome/free-solid-svg-icons";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedCanvasBoxPositionEdit from "./property/RedCanvasBoxPositionEdit";
 import ACTIVE_FRAME_KEY from "../../ACTIVE_FRAME_KEY";
+import RedCanvasAddCustomCss from "./property/RedCanvasAddCustomCss";
 
 let rootComponent;
 let rootComponentState;
@@ -115,6 +116,7 @@ class RedContainerEdit extends React.Component {
         <div style={style.divide} />
         <RedCanvasFilterList rootComponent={rootComponent} />
         <div style={style.divide} />
+        <RedCanvasAddCustomCss rootComponent={rootComponent} />
       </div>
     </div>;
   }

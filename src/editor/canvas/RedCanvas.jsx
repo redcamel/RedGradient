@@ -113,6 +113,7 @@ class RedCanvas extends React.Component {
             // transition: 'width 0.2s, height 0.2s',
             ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
             filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
+            cssText : canvasInfo['addCss'] || '',
             overflow: 'hidden',
           }}
         /> :       <div className={"red_gradient_result"}/>

@@ -19,7 +19,7 @@ class RedCanvasBoxPositionEdit extends React.Component {
     const canvasInfo = rootComponentState.canvasInfo;
     return <div>
       <div style={style.divide}/>
-      <div className={'ui_subTitle'}>TODO - Container Position</div>
+      <div className={'ui_subTitle'}>Container Position</div>
       <div style={style.container}>
         <RedNumber title={'top'} width={'160px'} value={canvasInfo.top || 0} HD_onInput={e => {
           canvasInfo.top = +e.target.value;

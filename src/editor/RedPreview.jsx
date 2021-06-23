@@ -43,6 +43,7 @@ class RedPreview extends React.Component {
                 {
                   title: 'before',
                   targetCanvasInfo: beforeCanvasInfo,
+                  text : beforeText,
                   itemList: [
                     [{key: 'width'}, {key: 'height'},],
                     [{key: 'left'}, {key: 'top'},]
@@ -50,6 +51,7 @@ class RedPreview extends React.Component {
                 },
                 {
                   title: 'main',
+                  text : mainText,
                   targetCanvasInfo: mainCanvasInfo,
                   itemList: [
                     [{key: 'width'}, {key: 'height'},]
@@ -57,6 +59,7 @@ class RedPreview extends React.Component {
                 },
                 {
                   title: 'after',
+                  text : afterText,
                   targetCanvasInfo: afterCanvasInfo,
                   itemList: [
                     [{key: 'width'}, {key: 'height'},],
@@ -66,26 +69,27 @@ class RedPreview extends React.Component {
               ].map(v => {
                 return <div style={{padding: '10px', border: '1px solid red'}}>
                   <h3>{v['title']}</h3>
-                  {
-                    v.itemList.map(tList => {
-                      return <div style={{display: 'flex'}}>
-                        {
-                          tList.map((tData, index) => {
-                            const key = tData['key']
-                            const targetCanvasInfo = v['targetCanvasInfo']
-                            return <>
-                              {index ? <div style={{width: '5px'}}/> : ''}
-                              <RedNumber title={key} width={'160px'} value={targetCanvasInfo[key]}
-                                         HD_onInput={e => {
-                                           targetCanvasInfo[key] = +e.target.value;
-                                           this.setState({})
-                                         }}/>
-                            </>
-                          })
-                        }
-                      </div>
-                    })
-                  }
+                  <div style={{maxHeight : '150px',overflowY : 'scroll'}}>{v['text']}</div>
+                  {/*{*/}
+                  {/*  v.itemList.map(tList => {*/}
+                  {/*    return <div style={{display: 'flex'}}>*/}
+                  {/*      {*/}
+                  {/*        tList.map((tData, index) => {*/}
+                  {/*          const key = tData['key']*/}
+                  {/*          const targetCanvasInfo = v['targetCanvasInfo']*/}
+                  {/*          return <>*/}
+                  {/*            {index ? <div style={{width: '5px'}}/> : ''}*/}
+                  {/*            <RedNumber title={key} width={'160px'} value={targetCanvasInfo[key]}*/}
+                  {/*                       HD_onInput={e => {*/}
+                  {/*                         targetCanvasInfo[key] = +e.target.value;*/}
+                  {/*                         this.setState({})*/}
+                  {/*                       }}/>*/}
+                  {/*          </>*/}
+                  {/*        })*/}
+                  {/*      }*/}
+                  {/*    </div>*/}
+                  {/*  })*/}
+                  {/*}*/}
                 </div>
               })
             }

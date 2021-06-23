@@ -173,12 +173,14 @@ RedPropertyEdit.getContainerCssText = (rootComponentState) => {
     }
     console.log('className', className)
     let filter = RedCanvas.getFilterCss(canvasInfo['filterList'])
+    let addCustomCss = canvasInfo['addCss'] || ''
     containerCssText = `${className} {
           ${position}
           background : ${(CALC_GRADIENT.calcGradients(rootComponentState.layers, true, rootComponentState.bgColor))};
           background-blend-mode : ${CALC_GRADIENT.calcBlendMode(rootComponentState.layers)};
           ${filter ? `filter : ${filter};` : ''}
-          ${containerCssText}
+          ${containerCssText};
+          ${addCustomCss || ''}
           }`
   }
   return containerCssText
