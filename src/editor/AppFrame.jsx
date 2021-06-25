@@ -231,16 +231,22 @@ class AppFrame extends React.Component {
           <div className={'frame_right'}>
             {/*frame_right Right*/}
             <div style={{height: '100%'}}>
-              <div style={{height: '200px', overflowY: 'auto', background: '#2d2d2d'}}>
-                <RedTitle title={'Gradient Preset'}/>
-                <div style={{padding: '4px'}}>
-                  <RedPreset rootComponent={this}/>
-                </div>
-              </div>
-              <div style={{display: "flex", height: 'calc(100% - 190px)'}}>
-                <RedLayer rootComponent={this}/>
-                {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
-              </div>
+              {
+                LOCAL_STORAGE_MANAGER.getTabOpenYn('Gradient') ?
+                  <>
+                    <div style={{height: '200px', overflowY: 'auto', background: '#2d2d2d'}}>
+                      <RedTitle title={'Gradient Preset'}/>
+                      <div style={{padding: '4px'}}>
+                        <RedPreset rootComponent={this}/>
+                      </div>
+                    </div>
+                    <div style={{display: "flex", height: 'calc(100% - 190px)'}}>
+                      <RedLayer rootComponent={this}/>
+                      {this.state.activeSubData ? <RedPropertyEdit rootComponent={this}/> : ''}
+                    </div>
+                  </> : ''
+              }
+
             </div>
 
           </div>

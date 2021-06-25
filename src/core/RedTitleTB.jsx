@@ -21,5 +21,5 @@ class RedTitleTB extends React.Component {
   }
 }
 
-RedTitleTB.TAB_LIST = ['Container', 'Border']
+RedTitleTB.TAB_LIST = ['Container', 'Border','Gradient']
 export default RedTitleTB;

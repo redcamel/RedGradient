@@ -5,8 +5,9 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-const calcWE = (info) => {
+const calcWE = (info, containerMode) => {
   const {
+    canvasInfo,
     positionInfo,
     sizeInfo,
     originX,
@@ -14,21 +15,27 @@ const calcWE = (info) => {
     cW,
     gapX
   } = info;
-  if (tW === cW) positionInfo['xUnit'] = 'px'
-  if (positionInfo['xUnit'] === '%') {
-    let size = (cW - tW) || cW
-    let newTargetPercentPosition = (originX + gapX) / size * 100;
-    positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+  if (containerMode) {
+    canvasInfo['left'] = originX + gapX
   } else {
-    if (sizeInfo['wUnit'] === '%') {
-      positionInfo['x'] = originX + gapX;
+    if (tW === cW) positionInfo['xUnit'] = 'px';
+    if (positionInfo['xUnit'] === '%') {
+      let size = (cW - tW) || cW;
+      let newTargetPercentPosition = (originX + gapX) / size * 100;
+      positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
     } else {
-      positionInfo['x'] = originX + gapX;
+      if (sizeInfo['wUnit'] === '%') {
+        positionInfo['x'] = originX + gapX;
+      } else {
+        positionInfo['x'] = originX + gapX;
+      }
     }
   }
+
 };
-const calcSN = (info) => {
+const calcSN = (info, containerMode) => {
   const {
+    canvasInfo,
     positionInfo,
     sizeInfo,
     originY,
@@ -36,29 +43,34 @@ const calcSN = (info) => {
     cH,
     gapY
   } = info;
-  if (tH === cH) positionInfo['yUnit'] = 'px'
-  if (positionInfo['yUnit'] === '%') {
-    let size = (cH - tH) || cH
-    let newTargetPercentPosition = (originY + gapY) / size * 100;
-    // console.log('newTargetPercentPosition', newTargetPercentPosition)
-    positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+  if (containerMode) {
+    canvasInfo['top'] = originY + gapY
   } else {
-    if (sizeInfo['hUnit'] === '%') {
-      positionInfo['y'] = originY + gapY;
+    if (tH === cH) positionInfo['yUnit'] = 'px';
+    if (positionInfo['yUnit'] === '%') {
+      let size = (cH - tH) || cH;
+      let newTargetPercentPosition = (originY + gapY) / size * 100;
+      // console.log('newTargetPercentPosition', newTargetPercentPosition)
+      positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
     } else {
-      positionInfo['y'] = originY + gapY;
+      if (sizeInfo['hUnit'] === '%') {
+        positionInfo['y'] = originY + gapY;
+      } else {
+        positionInfo['y'] = originY + gapY;
+      }
     }
   }
+
 };
 
-function RedCanvas_checkPosition(e) {
+function RedCanvas_checkPosition(e, containerMode) {
   if (this.state.positionMode) {
     e = e.nativeEvent;
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     const activeSubData = rootComponentState.activeSubData;
-    // const tX = e.pageX - this.state.positionMode.startX;
+// const tX = e.pageX - this.state.positionMode.startX;
     // const tY = e.pageY - this.state.positionMode.startY;
     // const positionInfo = activeSubData['position'];
     // const sizeInfo = activeSubData['size'];
@@ -71,6 +83,8 @@ function RedCanvas_checkPosition(e) {
     const gapY = (e.pageY - +this.state.positionMode['startY']) / this.state.canvasViewScale;
     this.state.positionMode['startX'] = e.pageX;
     this.state.positionMode['startY'] = e.pageY;
+
+
     const sizeInfo = activeSubData['size'];
     const positionInfo = activeSubData['position'];
     const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
@@ -87,9 +101,10 @@ function RedCanvas_checkPosition(e) {
       w: activeSubDataSize['wUnit'] === '%' ? cW * activeSubDataSize['w'] / 100 : +activeSubDataSize['w'],
       h: activeSubDataSize['hUnit'] === '%' ? cH * activeSubDataSize['h'] / 100 : +activeSubDataSize['h'],
     };
-    const originX = activeSubDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubDataPosition['x'] / 100) : +activeSubDataPosition['x'];
-    const originY = activeSubDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubDataPosition['y'] / 100) : +activeSubDataPosition['y'];
+    const originX = containerMode ? canvasInfo['left'] : (activeSubDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubDataPosition['x'] / 100) : +activeSubDataPosition['x']);
+    const originY = containerMode ? canvasInfo['top'] : (activeSubDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubDataPosition['y'] / 100) : +activeSubDataPosition['y']);
     const info = {
+      canvasInfo,
       positionInfo,
       sizeInfo,
       activeSubDataSize,
@@ -103,28 +118,31 @@ function RedCanvas_checkPosition(e) {
       gapX,
       gapY
     };
+
+    // console.log(e);
     switch (mode) {
       case "e" :
-        calcWE(info);
+        calcWE(info, containerMode);
         break;
       case "w" :
-        calcWE(info);
+        calcWE(info, containerMode);
         break;
       case "s" :
-        calcSN(info);
+        calcSN(info, containerMode);
         break;
       case "n" :
-        calcSN(info);
+        calcSN(info, containerMode);
         break;
       case "all" :
-        calcWE(info);
-        calcSN(info);
+        calcWE(info, containerMode);
+        calcSN(info, containerMode);
         break;
     }
+
     rootComponent.updateRootState({});
     document.body.style.cursor = 'move';
-    // console.log(e);
+
   }
 }
 
-export default RedCanvas_checkPosition
+export default RedCanvas_checkPosition;

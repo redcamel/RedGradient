@@ -26,6 +26,7 @@ import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt.js";
 import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition.js";
 import RedPropertyEdit from "../property/RedPropertyEdit";
 import ACTIVE_FRAME_KEY from "../ACTIVE_FRAME_KEY";
+import LOCAL_STORAGE_MANAGER from "../LOCAL_STORAGE_MANAGER";
 // TODO - 정리필요
 let ghostSize, ghostMode;
 
@@ -39,7 +40,7 @@ class RedCanvas extends React.Component {
       canvasViewScale: 1,
       layerSizeView: true,
       canvasBgColorPickerOpenYn: false,
-      editCanvasOnly : false
+      editCanvasOnly: false
     };
     this.refColorPickerContainer = React.createRef();
     this.refDegree = React.createRef();
@@ -50,12 +51,10 @@ class RedCanvas extends React.Component {
 
   drawCall(canvasInfo, layers, bgColor) {
     const rootComponent = this.props.rootComponent;
-    console.log(rootComponent.state)
+    console.log(rootComponent.state);
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
-    const activeSubDataPosition = activeSubData['position'];
-    const activeSubDataAt = activeSubData['at'];
-    const activeSubDataSize = activeSubData['size'];
+
     {
       activeSubData['position']['x'] = +activeSubData['position']['x'];
       activeSubData['position']['y'] = +activeSubData['position']['y'];
@@ -64,7 +63,353 @@ class RedCanvas extends React.Component {
       activeSubData['at']['x'] = +activeSubData['at']['x'];
       activeSubData['at']['y'] = +activeSubData['at']['y'];
     }
+
     const borderGradientInfo = rootComponentState.borderGradientInfo;
+
+    ////////////////////
+    /////////
+    const appState = this.props.appState;
+    let beforeText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.BEFORE]);
+    let mainText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN]);
+    let afterText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.AFTER]);
+    let beforeText2 = beforeText.replace('.result', '.red_gradient_result');
+    let mainText2 = mainText.replace('.result', '.red_gradient_result');
+    let afterText2 = afterText.replace('.result', '.red_gradient_result');
+    let ResultPreview = `
+    ${beforeText2}
+    ${mainText2}
+    ${afterText2}
+    `;
+    document.getElementById('red_gradient_result_css').textContent = ResultPreview;
+
+
+    return <div
+      style={{
+        ...style.canvas,
+        transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
+      }} className={'transparent_checker redGradient_canvas '}>
+      {
+        this.state.editCanvasOnly ? <div
+          className={'transparent_checker'}
+          style={{
+            width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
+            background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
+            backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
+            // transition: 'width 0.2s, height 0.2s',
+            ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
+            filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
+            cssText: canvasInfo['addCss'] || '',
+            overflow: 'hidden',
+          }}
+        /> : <div className={"red_gradient_result"} />
+      }
+
+
+      {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
+      {/*<div>{borderW}/{borderH}</div>*/}
+      {LOCAL_STORAGE_MANAGER.getTabOpenYn('Gradient') ? this.renderGradient(rootComponentState, activeSubData, canvasInfo) : this.renderEtc(rootComponentState, activeSubData, canvasInfo)}
+
+
+    </div>;
+  }
+
+  renderEtc(rootComponentState, activeSubData, canvasInfo) {
+    const cX = this.state.editCanvasOnly ? 0 : canvasInfo['left'];
+    const cY = this.state.editCanvasOnly ? 0 : canvasInfo['top'];
+    const layoutSize = {
+      w: canvasInfo['width'],
+      h: canvasInfo['height'],
+      x: canvasInfo['left'],
+      y: canvasInfo['top']
+    };
+    const iconScale = Math.min(1, 1 / this.state.canvasViewScale);
+    return this.state.layerSizeView ? <div
+      style={{
+        zIndex: 1,
+        position: 'absolute',
+        left: `${layoutSize['x']}px`,
+        top: `${layoutSize['y']}px`,
+        width: `${layoutSize['w']}px`,
+        height: `${layoutSize['h']}px`,
+        border: '1px dashed #000',
+        outline: '1px dashed rgba(255,255,255,0.75)',
+        background: ghostMode ? 'rgba(255,255,255,0.2)' : '',
+        color: '#000'
+      }}
+    >
+      <div style={{
+        bottom: 0,
+        left: '50%',
+        transform: `translate(-50%, ${20 + 76 * iconScale}px) scale(${iconScale})`,
+        transition: 'transform 0.2s',
+        position: 'absolute',
+        width: '30px',
+        height: '30px',
+        display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'move',
+        border: '1px solid #5e7ade',
+        borderRadius: '50%',
+        boxShadow: '0px 0px 10px rgba(0,0,0,0.3)',
+        background: '#5e7ade',
+
+      }} onMouseDown={e => {
+        e.stopPropagation();
+        ghostMode = true;
+        this.setModes({
+          positionMode: {
+            mode: 'all',
+            startValueX: canvasInfo['left'],
+            startValueY: canvasInfo['top'],
+            startX: e.nativeEvent.pageX,
+            startY: e.nativeEvent.pageY
+          }
+        });
+      }}>
+        <FontAwesomeIcon icon={faArrowsAlt} style={{color:'#fff',fontSize: '17px', transform: 'rotate(-90deg)'}} />
+      </div>
+      <>
+        <div
+          style={{
+            top: 0,
+            left: 0,
+            transform: `translate(-${16 + 7 * iconScale}px, -${16 + 7 * iconScale}px) scale(${iconScale})`,
+            transition: 'transform 0.2s',
+            position: 'absolute',
+            width: '23px',
+            height: '23px',
+            cursor: 'nw-resize',
+            background: 'rgba(84,114,208,1)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '1px solid rgba(0,0,0,0.8)',
+            filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
+          }}
+          onMouseDown={e => {
+            e.stopPropagation();
+            ghostMode = true;
+            this.setModes({
+              resizeMode: {
+                mode: 'nw',
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faExpandAlt} style={{color:'#fff',fontSize: '17px', transform: 'scale(-1,1)'}} />
+        </div>
+        <div
+          style={{
+            top: 0,
+            right: 0,
+            transform: `translate(${16 + 7 * iconScale}px, -${16 + 7 * iconScale}px) scale(${iconScale})`,
+            transition: 'transform 0.2s',
+            position: 'absolute',
+            width: '23px',
+            height: '23px',
+            cursor: 'ne-resize',
+            background: 'rgba(84,114,208,1)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '1px solid rgba(0,0,0,0.8)',
+            filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
+          }}
+          onMouseDown={e => {
+            e.stopPropagation();
+            ghostMode = true;
+            this.setModes({
+              resizeMode: {
+                mode: 'ne',
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faExpandAlt} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+        </div>
+        <div
+          style={{
+            bottom: 0,
+            left: 0,
+            transform: `translate(-${16 + 7 * iconScale}px, ${16 + 7 * iconScale}px) scale(${iconScale})`,
+            transition: 'transform 0.2s',
+            position: 'absolute',
+            width: '23px',
+            height: '23px',
+            cursor: 'sw-resize',
+            background: 'rgba(84,114,208,1)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '1px solid rgba(0,0,0,0.8)',
+            filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
+          }}
+          onMouseDown={e => {
+            e.stopPropagation();
+            ghostMode = true;
+            this.setModes({
+              resizeMode: {
+                mode: 'sw',
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faExpandAlt} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+        </div>
+        <div
+          style={{
+            bottom: 0,
+            right: 0,
+            transform: `translate(${16 + 7 * iconScale}px, ${16 + 7 * iconScale}px) scale(${iconScale})`,
+            transition: 'transform 0.2s',
+            position: 'absolute',
+            width: '23px',
+            height: '23px',
+            cursor: 'se-resize',
+            background: 'rgba(84,114,208,1)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '1px solid rgba(0,0,0,0.8)',
+            filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
+          }}
+          onMouseDown={e => {
+            e.stopPropagation();
+            ghostMode = true;
+            this.setModes({
+              resizeMode: {
+                mode: 'se',
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faExpandAlt} style={{color:'#fff',fontSize: '17px', transform: 'scale(-1,1)'}} />
+        </div>
+        {/*  */}
+        <div
+          style={{
+            top: '50%', left: 0, transform: `translate(-${16 + 7 * iconScale}px, -50%) scale(${iconScale})`,
+            transition: 'transform 0.2s',
+            position: 'absolute', width: '23px', height: '23px',
+            cursor: 'w-resize',
+            background: 'rgba(84,114,208,1)',
+            display: activeSubData['fixRatioYn'] ? 'none' : 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            border: '1px solid rgba(0,0,0,0.8)',
+            filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
+          }}
+          onMouseDown={e => {
+            e.stopPropagation();
+            ghostMode = true;
+            this.setModes({
+              resizeMode: {
+                mode: 'w',
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowsAltH} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+        </div>
+        <div
+          style={{
+            top: '50%', right: 0, transform: `translate(${16 + 7 * iconScale}px, -50%) scale(${iconScale})`,
+            transition: 'transform 0.2s',
+            position: 'absolute', width: '23px', height: '23px',
+            cursor: 'e-resize',
+            background: 'rgba(84,114,208,1)',
+            display: activeSubData['fixRatioYn'] ? 'none' : 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            border: '1px solid rgba(0,0,0,0.8)',
+            filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
+          }}
+          onMouseDown={e => {
+            e.stopPropagation();
+            ghostMode = true;
+            this.setModes({
+              resizeMode: {
+                mode: 'e',
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowsAltH} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+        </div>
+        <div
+          style={{
+            top: 0, left: '50%', transform: `translate(-50%, -${16 + 7 * iconScale}px) scale(${iconScale})`,
+            transition: 'transform 0.2s',
+            position: 'absolute', width: '23px', height: '23px',
+            cursor: 'n-resize',
+            background: 'rgba(84,114,208,1)',
+            display: activeSubData['fixRatioYn'] ? 'none' : 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            border: '1px solid rgba(0,0,0,0.8)',
+            filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
+          }}
+          onMouseDown={e => {
+            e.stopPropagation();
+            ghostMode = true;
+            this.setModes({
+              resizeMode: {
+                mode: 'n',
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowsAltV} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+        </div>
+        <div
+          style={{
+            bottom: 0, left: '50%', transform: `translate(-50%, ${16 + 7 * iconScale}px) scale(${iconScale})`,
+            transition: 'transform 0.2s',
+            position: 'absolute', width: '23px', height: '23px',
+            cursor: 's-resize',
+            background: 'rgba(84,114,208,1)',
+            display: activeSubData['fixRatioYn'] ? 'none' : 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            border: '1px solid rgba(0,0,0,0.8)',
+            filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
+          }}
+          onMouseDown={e => {
+            e.stopPropagation();
+            ghostMode = true;
+            this.setModes({
+              resizeMode: {
+                mode: 's',
+                startX: e.nativeEvent.pageX,
+                startY: e.nativeEvent.pageY
+              }
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowsAltV} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+        </div>
+      </>
+    </div> : '';
+
+  }
+
+  renderGradient(rootComponentState, activeSubData, canvasInfo) {
+    const activeSubDataPosition = activeSubData['position'];
+    const activeSubDataAt = activeSubData['at'];
+    const activeSubDataSize = activeSubData['size'];
+    const cX = this.state.editCanvasOnly ? 0 : canvasInfo['left'];
+    const cY = this.state.editCanvasOnly ? 0 : canvasInfo['top'];
     const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3]);
     const borderH = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2]);
     const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3];
@@ -79,56 +424,14 @@ class RedCanvas extends React.Component {
     const lX = activeSubDataAt['xUnit'] === 'px' ? `${activeSubDataAt['x'] - borderX}${activeSubDataAt['xUnit']}` : `${layoutSize['w'] * activeSubDataAt['x'] / 100}px`;
     const lY = activeSubDataAt['yUnit'] === 'px' ? `${activeSubDataAt['y'] - borderY}${activeSubDataAt['yUnit']}` : `${layoutSize['h'] * activeSubDataAt['y'] / 100}px`;
     if (ghostMode && !ghostSize) ghostSize = {...layoutSize};
-    const iconScale = Math.min(1, 1 / this.state.canvasViewScale)
-    ////////////////////
-    /////////
-    const appState = this.props.appState
-    let beforeText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.BEFORE])
-    let mainText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN])
-    let afterText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.AFTER])
-    let beforeText2 = beforeText.replace('.result', '.red_gradient_result')
-    let mainText2 = mainText.replace('.result', '.red_gradient_result')
-    let afterText2 = afterText.replace('.result', '.red_gradient_result')
-    let ResultPreview = `
-    ${beforeText2}
-    ${mainText2}
-    ${afterText2}
-    `
-    document.getElementById('red_gradient_result_css').textContent = ResultPreview
-
-    const cX = this.state.editCanvasOnly ? 0 : canvasInfo['left']
-    const cY =  this.state.editCanvasOnly ? 0 : canvasInfo['top']
-    return <div
-      style={{
-        ...style.canvas,
-        transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
-      }} className={'transparent_checker redGradient_canvas '}>
-      {
-        this.state.editCanvasOnly ?  <div
-          className={'transparent_checker'}
-          style={{
-            width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
-            background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
-            backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
-            // transition: 'width 0.2s, height 0.2s',
-            ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
-            filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
-            cssText : canvasInfo['addCss'] || '',
-            overflow: 'hidden',
-          }}
-        /> :       <div className={"red_gradient_result"}/>
-      }
-
-
-
-      {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
-      {/*<div>{borderW}/{borderH}</div>*/}
+    const iconScale = Math.min(1, 1 / this.state.canvasViewScale);
+    return <>
       {
         <div
           style={{
             position: 'absolute',
-            left: `${ghostSize ? ghostSize['x']+cX : 0}px`,
-            top: `${ghostSize ? ghostSize['y']+cY : 0}px`,
+            left: `${ghostSize ? ghostSize['x'] + cX : 0}px`,
+            top: `${ghostSize ? ghostSize['y'] + cY : 0}px`,
             width: `${ghostSize ? ghostSize['w'] : 0}px`,
             height: `${ghostSize ? ghostSize['h'] : 0}px`,
             border: '1px dashed #ff0000',
@@ -145,10 +448,10 @@ class RedCanvas extends React.Component {
       {
         this.state.layerSizeView ? <div
           style={{
-            zIndex : 1,
+            zIndex: 1,
             position: 'absolute',
-            left: `${layoutSize['x']+cX}px`,
-            top: `${layoutSize['y']+cY}px`,
+            left: `${layoutSize['x'] + cX}px`,
+            top: `${layoutSize['y'] + cY}px`,
             width: `${layoutSize['w']}px`,
             height: `${layoutSize['h']}px`,
             border: '1px dashed #000',
@@ -181,7 +484,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: `rotate(90deg)`}}/>
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: `rotate(90deg)`}} />
           </div>
           <div style={{
             bottom: 0,
@@ -207,7 +510,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(-90deg)'}}/>
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
           </div>
           <div style={{
             bottom: '50%',
@@ -233,7 +536,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px'}}/>
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px'}} />
           </div>
           <div style={{
             bottom: '50%',
@@ -259,7 +562,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(180deg)'}}/>
+            <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(180deg)'}} />
           </div>
           <div style={{
             bottom: 0,
@@ -285,7 +588,7 @@ class RedCanvas extends React.Component {
               }
             });
           }}>
-            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px', transform: 'rotate(-90deg)'}}/>
+            <FontAwesomeIcon icon={faArrowsAlt} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
           </div>
           <>
             <div
@@ -317,7 +620,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}} />
             </div>
             <div
               style={{
@@ -348,7 +651,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -379,7 +682,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -410,7 +713,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}}/>
+              <FontAwesomeIcon icon={faExpandAlt} style={{fontSize: '17px', transform: 'scale(-1,1)'}} />
             </div>
             {/*  */}
             <div
@@ -437,7 +740,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -463,7 +766,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faArrowsAltH} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -489,7 +792,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
             <div
               style={{
@@ -515,7 +818,7 @@ class RedCanvas extends React.Component {
                 });
               }}
             >
-              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}}/>
+              <FontAwesomeIcon icon={faArrowsAltV} style={{fontSize: '17px', transform: 'scale(1,1)'}} />
             </div>
           </>
 
@@ -608,7 +911,7 @@ class RedCanvas extends React.Component {
                       fontSize: '11px'
                     }}
                   >
-                    <div>{(+activeSubData['deg']).toFixed(1)}<br/><span style={{fontSize: '10px'}}>deg</span></div>
+                    <div>{(+activeSubData['deg']).toFixed(1)}<br /><span style={{fontSize: '10px'}}>deg</span></div>
                     <div style={{
                       lineHeight: 1,
                       width: '10px', height: '10px',
@@ -618,7 +921,7 @@ class RedCanvas extends React.Component {
                       transform: 'translate(-50%,-50%)',
                       top: `calc(50% + ${Math.sin(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`,
                       left: `calc(50% + ${Math.cos(Math.PI / 180 * (activeSubData['deg'] - 90)) * 20}px)`
-                    }}/>
+                    }} />
                   </button>
                 </div>
                 <div
@@ -656,7 +959,7 @@ class RedCanvas extends React.Component {
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
                 </div>
                 <div
                   style={{
@@ -693,7 +996,7 @@ class RedCanvas extends React.Component {
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
                 </div>
                 <div
                   style={{
@@ -730,7 +1033,7 @@ class RedCanvas extends React.Component {
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
                 </div>
                 <div
                   style={{
@@ -767,7 +1070,7 @@ class RedCanvas extends React.Component {
                     });
                   }}
                 >
-                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}}/>
+                  <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
                 </div>
               </>
           }
@@ -789,9 +1092,7 @@ class RedCanvas extends React.Component {
           </div>
         </div> : ''
       }
-
-
-    </div>;
+    </>;
   }
 
   setModes(v = {}) {
@@ -830,10 +1131,17 @@ class RedCanvas extends React.Component {
       style={style.container}
       onMouseMove={e => {
         this.checkCanvasMove(e);
-        this.checkPosition(e);
-        this.checkResize(e);
-        this.checkDegree(e);
-        this.checkAt(e);
+        if (LOCAL_STORAGE_MANAGER.getTabOpenYn('Gradient')) {
+          this.checkPosition(e);
+          this.checkResize(e);
+          this.checkDegree(e);
+          this.checkAt(e);
+        } else {
+          this.checkPosition(e, true);
+          this.checkResize(e,true);
+        }
+
+
       }}
       onMouseLeave={() => this.setModes()}
       onMouseUp={() => {

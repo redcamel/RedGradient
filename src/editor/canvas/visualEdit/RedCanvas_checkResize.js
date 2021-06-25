@@ -5,8 +5,13 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-const calcE = (info) => {
+import ACTIVE_FRAME_KEY from "../../ACTIVE_FRAME_KEY";
+
+const calcE = (info, containerMode) => {
   const {
+
+    key,
+    canvasInfo,
     positionInfo,
     sizeInfo,
     originX,
@@ -14,22 +19,28 @@ const calcE = (info) => {
     cW,
     gapX
   } = info;
-  if (positionInfo['xUnit'] === '%') {
-    let targetPixelSize = tW + gapX;
-    let targetPercentSize = targetPixelSize / cW * 100;
-    if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
-    else sizeInfo['w'] = targetPixelSize;
-    let newTargetPercentPosition = (originX) / (cW - targetPixelSize) * 100;
-    positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+  if (containerMode) {
+    canvasInfo['width'] = originX + gapX;
   } else {
-    let targetPixelSize = tW + gapX;
-    let targetPercentSize = targetPixelSize / cW * 100;
-    if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
-    else sizeInfo['w'] = targetPixelSize;
+    if (positionInfo['xUnit'] === '%') {
+      let targetPixelSize = tW + gapX;
+      let targetPercentSize = targetPixelSize / cW * 100;
+      if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
+      else sizeInfo['w'] = targetPixelSize;
+      let newTargetPercentPosition = (originX) / (cW - targetPixelSize) * 100;
+      positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+    } else {
+      let targetPixelSize = tW + gapX;
+      let targetPercentSize = targetPixelSize / cW * 100;
+      if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
+      else sizeInfo['w'] = targetPixelSize;
+    }
   }
 };
-const calcW = (info) => {
+const calcW = (info, containerMode) => {
   const {
+    key,
+    canvasInfo,
     positionInfo,
     sizeInfo,
     originX,
@@ -37,27 +48,34 @@ const calcW = (info) => {
     cW,
     gapX
   } = info;
-  if (positionInfo['xUnit'] === '%') {
-    let targetPixelSize = tW - gapX;
-    let targetPercentSize = targetPixelSize / cW * 100;
-    if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
-    else sizeInfo['w'] = targetPixelSize;
-    let newTargetPercentPosition = (originX + gapX) / (cW - targetPixelSize) * 100;
-    positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+  if (containerMode) {
+    canvasInfo['width'] = originX - gapX;
+    if (key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['left'] += gapX;
   } else {
-    let targetPixelSize = tW - gapX;
-    let targetPercentSize = targetPixelSize / cW * 100;
-    if (sizeInfo['wUnit'] === '%') {
-      sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
-      positionInfo['x'] = originX + gapX;
+    if (positionInfo['xUnit'] === '%') {
+      let targetPixelSize = tW - gapX;
+      let targetPercentSize = targetPixelSize / cW * 100;
+      if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
+      else sizeInfo['w'] = targetPixelSize;
+      let newTargetPercentPosition = (originX + gapX) / (cW - targetPixelSize) * 100;
+      positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
     } else {
-      sizeInfo['w'] = targetPixelSize;
-      positionInfo['x'] = originX + gapX;
+      let targetPixelSize = tW - gapX;
+      let targetPercentSize = targetPixelSize / cW * 100;
+      if (sizeInfo['wUnit'] === '%') {
+        sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
+        positionInfo['x'] = originX + gapX;
+      } else {
+        sizeInfo['w'] = targetPixelSize;
+        positionInfo['x'] = originX + gapX;
+      }
     }
   }
+
 };
-const calcS = (info) => {
+const calcS = (info, containerMode) => {
   const {
+    canvasInfo,
     positionInfo,
     sizeInfo,
     originY,
@@ -65,22 +83,29 @@ const calcS = (info) => {
     cH,
     gapY
   } = info;
-  if (positionInfo['yUnit'] === '%') {
-    let targetPixelSize = tH + gapY;
-    let targetPercentSize = targetPixelSize / cH * 100;
-    if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
-    else sizeInfo['h'] = targetPixelSize;
-    let newTargetPercentPosition = (originY) / (cH - targetPixelSize) * 100;
-    positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+  if (containerMode) {
+    canvasInfo['height'] = originY + gapY;
   } else {
-    let targetPixelSize = tH + gapY;
-    let targetPercentSize = targetPixelSize / cH * 100;
-    if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
-    else sizeInfo['h'] = targetPixelSize;
+    if (positionInfo['yUnit'] === '%') {
+      let targetPixelSize = tH + gapY;
+      let targetPercentSize = targetPixelSize / cH * 100;
+      if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
+      else sizeInfo['h'] = targetPixelSize;
+      let newTargetPercentPosition = (originY) / (cH - targetPixelSize) * 100;
+      positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+    } else {
+      let targetPixelSize = tH + gapY;
+      let targetPercentSize = targetPixelSize / cH * 100;
+      if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
+      else sizeInfo['h'] = targetPixelSize;
+    }
   }
+
 };
-const calcN = (info) => {
+const calcN = (info, containerMode) => {
   const {
+    key,
+    canvasInfo,
     positionInfo,
     sizeInfo,
     originY,
@@ -88,27 +113,33 @@ const calcN = (info) => {
     cH,
     gapY
   } = info;
-  if (positionInfo['yUnit'] === '%') {
-    let targetPixelSize = tH - gapY;
-    let targetPercentSize = targetPixelSize / cH * 100;
-    if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
-    else sizeInfo['h'] = targetPixelSize;
-    let newTargetPercentPosition = (originY + gapY) / (cH - targetPixelSize) * 100;
-    positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+  if (containerMode) {
+    canvasInfo['height'] = originY - gapY;
+    if (key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['top'] += gapY;
   } else {
-    let targetPixelSize = tH - gapY;
-    let targetPercentSize = targetPixelSize / cH * 100;
-    if (sizeInfo['hUnit'] === '%') {
-      sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
-      positionInfo['y'] = originY + gapY;
+    if (positionInfo['yUnit'] === '%') {
+      let targetPixelSize = tH - gapY;
+      let targetPercentSize = targetPixelSize / cH * 100;
+      if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
+      else sizeInfo['h'] = targetPixelSize;
+      let newTargetPercentPosition = (originY + gapY) / (cH - targetPixelSize) * 100;
+      positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
     } else {
-      sizeInfo['h'] = targetPixelSize;
-      positionInfo['y'] = originY + gapY;
+      let targetPixelSize = tH - gapY;
+      let targetPercentSize = targetPixelSize / cH * 100;
+      if (sizeInfo['hUnit'] === '%') {
+        sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
+        positionInfo['y'] = originY + gapY;
+      } else {
+        sizeInfo['h'] = targetPixelSize;
+        positionInfo['y'] = originY + gapY;
+      }
     }
   }
+
 };
 
-function RedCanvas_checkResize(e) {
+function RedCanvas_checkResize(e, containerMode) {
   const rootComponent = this.props.rootComponent;
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
@@ -121,12 +152,12 @@ function RedCanvas_checkResize(e) {
     switch (mode) {
       case 'sw':
       case 'ne':
-        gapY = (e.shiftKey || activeSubData['fixRatioYn']) ? -gapX : gapY
-        break
+        gapY = (e.shiftKey || activeSubData['fixRatioYn']) ? -gapX : gapY;
+        break;
       case 'nw':
       case 'se':
-        gapY = (e.shiftKey || activeSubData['fixRatioYn']) ? gapX : gapY
-        break
+        gapY = (e.shiftKey || activeSubData['fixRatioYn']) ? gapX : gapY;
+        break;
     }
     this.state.resizeMode['startX'] = e.pageX;
     this.state.resizeMode['startY'] = e.pageY;
@@ -145,9 +176,11 @@ function RedCanvas_checkResize(e) {
       w: activeSubDataSize['wUnit'] === '%' ? cW * activeSubDataSize['w'] / 100 : +activeSubDataSize['w'],
       h: activeSubDataSize['hUnit'] === '%' ? cH * activeSubDataSize['h'] / 100 : +activeSubDataSize['h'],
     };
-    const originX = activeSubDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubDataPosition['x'] / 100) : +activeSubDataPosition['x'];
-    const originY = activeSubDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubDataPosition['y'] / 100) : +activeSubDataPosition['y'];
+    const originX = containerMode ? canvasInfo['width'] : (activeSubDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubDataPosition['x'] / 100) : +activeSubDataPosition['x']);
+    const originY = containerMode ? canvasInfo['height'] : (activeSubDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubDataPosition['y'] / 100) : +activeSubDataPosition['y']);
     const info = {
+      key: rootComponentState['key'],
+      canvasInfo,
       positionInfo,
       sizeInfo,
       activeSubDataSize,
@@ -163,32 +196,32 @@ function RedCanvas_checkResize(e) {
     };
     switch (mode) {
       case "e" :
-        calcE(info);
+        calcE(info, containerMode);
         break;
       case "w" :
-        calcW(info);
+        calcW(info, containerMode);
         break;
       case "s" :
-        calcS(info);
+        calcS(info, containerMode);
         break;
       case "n" :
-        calcN(info);
+        calcN(info, containerMode);
         break;
       case "nw":
-        calcN(info);
-        calcW(info);
+        calcN(info, containerMode);
+        calcW(info, containerMode);
         break;
       case "ne":
-        calcN(info);
-        calcE(info);
+        calcN(info, containerMode);
+        calcE(info, containerMode);
         break;
       case "sw":
-        calcS(info);
-        calcW(info);
+        calcS(info, containerMode);
+        calcW(info, containerMode);
         break;
       case "se":
-        calcS(info);
-        calcE(info);
+        calcS(info, containerMode);
+        calcE(info, containerMode);
         break;
     }
     document.body.style.cursor = `${mode}-resize`;
