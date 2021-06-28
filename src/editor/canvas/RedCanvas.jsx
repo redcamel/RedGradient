@@ -86,7 +86,7 @@ class RedCanvas extends React.Component {
     `;
     document.getElementById('red_gradient_result_css').textContent = ResultPreview;
 
-
+console.log(canvasInfo['addCss'] || ";")
     return <div
       style={{
         ...style.canvas,
@@ -96,14 +96,15 @@ class RedCanvas extends React.Component {
         this.state.editCanvasOnly ? <div
           className={'transparent_checker'}
           style={{
+            cssText: canvasInfo['addCss'] || "",
             width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
             background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
             backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
             // transition: 'width 0.2s, height 0.2s',
             ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
             filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
-            cssText: canvasInfo['addCss'] || '',
             overflow: 'hidden',
+
           }}
         /> : <div className={"red_gradient_result"} />
       }
@@ -121,7 +122,7 @@ class RedCanvas extends React.Component {
   renderVisualEditMode() {
     return <div style={{
       position: 'absolute',
-      display: this.state.editCanvasOnly ? 'none' : 'flex',
+      display: 'flex',
       top: '-100px',
       left: '50%',
       transform: 'translate(-50%,0)',
@@ -149,13 +150,13 @@ class RedCanvas extends React.Component {
   }
 
   renderContainerEdit(rootComponentState, activeSubData, canvasInfo) {
-    const cX = this.state.editCanvasOnly ? 0 : canvasInfo['left'];
-    const cY = this.state.editCanvasOnly ? 0 : canvasInfo['top'];
+    const cX = this.state.editCanvasOnly ? -canvasInfo['left'] : 0;
+    const cY = this.state.editCanvasOnly ? -canvasInfo['top']: 0;
     const layoutSize = {
       w: canvasInfo['width'],
       h: canvasInfo['height'],
-      x: canvasInfo['left'],
-      y: canvasInfo['top']
+      x: canvasInfo['left']+cX,
+      y: canvasInfo['top']+cY
     };
     const iconScale = Math.min(1, 1 / this.state.canvasViewScale);
     return this.state.layerSizeView ? <div
