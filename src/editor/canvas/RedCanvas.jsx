@@ -112,7 +112,7 @@ class RedCanvas extends React.Component {
       {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
       {/*<div>{borderW}/{borderH}</div>*/}
 
-      {this.state.visualEditMode === MODE.GRADIENT ? this.renderGradient(rootComponentState, activeSubData, canvasInfo) : this.renderEtc(rootComponentState, activeSubData, canvasInfo)}
+      {this.state.visualEditMode === MODE.GRADIENT ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo) : this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo)}
 
 
     </div>;
@@ -136,7 +136,7 @@ class RedCanvas extends React.Component {
               cursor: 'pointer',
               color: '#fff',
               padding: '6px',
-              background: this.state.visualEditMode === v ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : ''
+              background: this.state.visualEditMode === v ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333333'
             }}
             onClick={e => {
               this.setState({visualEditMode: v});
@@ -148,7 +148,7 @@ class RedCanvas extends React.Component {
     </div>;
   }
 
-  renderEtc(rootComponentState, activeSubData, canvasInfo) {
+  renderContainerEdit(rootComponentState, activeSubData, canvasInfo) {
     const cX = this.state.editCanvasOnly ? 0 : canvasInfo['left'];
     const cY = this.state.editCanvasOnly ? 0 : canvasInfo['top'];
     const layoutSize = {
@@ -173,6 +173,110 @@ class RedCanvas extends React.Component {
       }}
     >
       {this.renderVisualEditMode()}
+      <div style={{
+        top: 0,
+        left: '50%',
+        transform: `translate(-50%, -${20 + 36 * iconScale}px) scale(${iconScale})`,
+        transition: 'transform 0.2s',
+        position: 'absolute', width: `30px`, height: '30px',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: 'move',
+        border: '1px solid #5e7ade', borderRadius: '50%',
+        boxShadow: '0px 0px 10px rgba(0,0,0,0.3)',
+        background: '#fff'
+      }} onMouseDown={e => {
+        e.stopPropagation();
+        ghostMode = true;
+        this.setModes({
+          positionMode: {
+            mode: 'n',
+            startValueX: canvasInfo['left'],
+            startValueY: canvasInfo['top'],
+            startX: e.nativeEvent.pageX,
+            startY: e.nativeEvent.pageY
+          }
+        });
+      }}>
+        <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: `rotate(90deg)`}} />
+      </div>
+      <div style={{
+        bottom: 0,
+        left: '50%',
+        transform: `translate(-50%, ${20 + 36 * iconScale}px) scale(${iconScale})`,
+        transition: 'transform 0.2s',
+        position: 'absolute', width: '30px', height: '30px',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: 'move',
+        border: '1px solid #5e7ade', borderRadius: '50%',
+        boxShadow: '0px 0px 10px rgba(0,0,0,0.3)',
+        background: '#fff'
+      }} onMouseDown={e => {
+        e.stopPropagation();
+        ghostMode = true;
+        this.setModes({
+          positionMode: {
+            mode: 's',
+            startValueX: canvasInfo['left'],
+            startValueY: canvasInfo['top'],
+            startX: e.nativeEvent.pageX,
+            startY: e.nativeEvent.pageY
+          }
+        });
+      }}>
+        <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(-90deg)'}} />
+      </div>
+      <div style={{
+        bottom: '50%',
+        left: 0,
+        transform: `translate(-${20 + 36 * iconScale}px, 50%) scale(${iconScale})`,
+        transition: 'transform 0.2s',
+        position: 'absolute', width: '30px', height: '30px',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: 'move',
+        border: '1px solid #5e7ade', borderRadius: '50%',
+        boxShadow: '0px 0px 10px rgba(0,0,0,0.3)',
+        background: '#fff'
+      }} onMouseDown={e => {
+        e.stopPropagation();
+        ghostMode = true;
+        this.setModes({
+          positionMode: {
+            mode: 'w',
+            startValueX: canvasInfo['left'],
+            startValueY: canvasInfo['top'],
+            startX: e.nativeEvent.pageX,
+            startY: e.nativeEvent.pageY
+          }
+        });
+      }}>
+        <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px'}} />
+      </div>
+      <div style={{
+        bottom: '50%',
+        right: 0,
+        transform: `translate(${20 + 36 * iconScale}px, 50%) scale(${iconScale})`,
+        transition: 'transform 0.2s',
+        position: 'absolute', width: '30px', height: '30px',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: 'move',
+        border: '1px solid #5e7ade', borderRadius: '50%',
+        boxShadow: '0px 0px 10px rgba(0,0,0,0.3)',
+        background: '#fff'
+      }} onMouseDown={e => {
+        e.stopPropagation();
+        ghostMode = true;
+        this.setModes({
+          positionMode: {
+            mode: 'e',
+            startValueX: canvasInfo['left'],
+            startValueY: canvasInfo['top'],
+            startX: e.nativeEvent.pageX,
+            startY: e.nativeEvent.pageY
+          }
+        });
+      }}>
+        <FontAwesomeIcon icon={faArrowLeft} style={{fontSize: '17px', transform: 'rotate(180deg)'}} />
+      </div>
       <div style={{
         bottom: 0,
         left: '50%',
@@ -440,7 +544,7 @@ class RedCanvas extends React.Component {
 
   }
 
-  renderGradient(rootComponentState, activeSubData, canvasInfo) {
+  renderGradientEdit(rootComponentState, activeSubData, canvasInfo) {
     const activeSubDataPosition = activeSubData['position'];
     const activeSubDataAt = activeSubData['at'];
     const activeSubDataSize = activeSubData['size'];
