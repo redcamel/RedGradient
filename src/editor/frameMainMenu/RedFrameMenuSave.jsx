@@ -26,6 +26,7 @@ class RedFrameMenuSave extends React.Component {
         a.download = `RedGradient.json`;
         a.click();
         URL.revokeObjectURL(a.href);
+        window.actionHistoryCheckNum = 0
       }}
 
     ><FontAwesomeIcon icon={faSave}/>

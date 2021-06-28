@@ -61,8 +61,13 @@ class RedFrameMenuOpen extends React.Component {
                fileReader.onload = evt => {
                  requestAnimationFrame(() => {
                    let t0 = this.checkValidate(evt.target.result)
-                   if (t0) rootComponent.setNewCanvas(t0);
-                   else alert('RedGradient 형식의 파일이 아닙니다.')
+                   if (t0) {
+                     window.actionHistoryCheckNum = 0;
+                     rootComponent.setNewCanvas(t0);
+
+                   } else {
+                     alert('RedGradient 형식의 파일이 아닙니다.')
+                   }
                  });
                };
                fileReader.readAsText(e.target.files[0]);

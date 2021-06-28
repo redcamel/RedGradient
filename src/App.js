@@ -52,6 +52,7 @@ class App extends React.Component {
         }
       }
     }
+
   }
 
   componentDidMount() {
@@ -65,7 +66,7 @@ class App extends React.Component {
   checkUnloadEvent() {
     if (this.state && !window.onbeforeunload) {
       window.onbeforeunload = () => {
-        return "~";
+        if (window.actionHistoryCheckNum > 1) return "~";
       }
     }
   }
@@ -79,6 +80,10 @@ class App extends React.Component {
       if (!activeFrameState || !activeFrameState.canvasInfo) return
       if (this.history.length > 50) this.history.shift()
       this.history.push(JSON.parse(JSON.stringify(this.state)))
+
+      window.actionHistoryCheckNum = window.actionHistoryCheckNum || 0
+      window.actionHistoryCheckNum++
+      console.log('actionHistoryCheckNum',   window.actionHistoryCheckNum)
     }
   }
 
