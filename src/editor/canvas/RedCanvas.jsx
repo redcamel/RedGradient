@@ -95,8 +95,9 @@ console.log(canvasInfo['addCss'] || ";")
       {
         this.state.editCanvasOnly ? <div
           className={'transparent_checker'}
+          cssText={canvasInfo['addCss'] || ""}
           style={{
-            cssText: canvasInfo['addCss'] || "",
+
             width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
             background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
             backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
@@ -104,8 +105,8 @@ console.log(canvasInfo['addCss'] || ";")
             ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
             filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
             overflow: 'hidden',
-
           }}
+
         /> : <div className={"red_gradient_result"} />
       }
 
