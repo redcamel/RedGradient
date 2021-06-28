@@ -20,16 +20,19 @@ import {
   faSyncAlt
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import RedCanvas_checkResize from "./visualEdit/RedCanvas_checkResize.js";
-import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree.js";
-import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt.js";
-import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition.js";
 import RedPropertyEdit from "../property/RedPropertyEdit";
 import ACTIVE_FRAME_KEY from "../ACTIVE_FRAME_KEY";
 import LOCAL_STORAGE_MANAGER from "../LOCAL_STORAGE_MANAGER";
+import RedCanvas_checkResize from "./visualEdit/RedCanvas_checkResize";
+import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree";
+import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt";
+import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition";
 // TODO - 정리필요
 let ghostSize, ghostMode;
-
+const MODE = {
+  GRADIENT : 'gradient',
+  CONTAINER : 'container'
+}
 class RedCanvas extends React.Component {
   constructor(props) {
     super(props);
@@ -40,7 +43,8 @@ class RedCanvas extends React.Component {
       canvasViewScale: 1,
       layerSizeView: true,
       canvasBgColorPickerOpenYn: false,
-      editCanvasOnly: false
+      editCanvasOnly: false,
+      visualEditMode: MODE.GRADIENT
     };
     this.refColorPickerContainer = React.createRef();
     this.refDegree = React.createRef();
@@ -107,8 +111,39 @@ class RedCanvas extends React.Component {
 
       {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
       {/*<div>{borderW}/{borderH}</div>*/}
-      {LOCAL_STORAGE_MANAGER.getTabOpenYn('Gradient') ? this.renderGradient(rootComponentState, activeSubData, canvasInfo) : this.renderEtc(rootComponentState, activeSubData, canvasInfo)}
 
+      {this.state.visualEditMode === MODE.GRADIENT ? this.renderGradient(rootComponentState, activeSubData, canvasInfo) : this.renderEtc(rootComponentState, activeSubData, canvasInfo)}
+
+
+    </div>;
+  }
+
+  renderVisualEditMode() {
+    return <div style={{
+      position: 'absolute',
+      display: this.state.editCanvasOnly ? 'none' : 'flex',
+      top: '-100px',
+      left: '50%',
+      transform: 'translate(-50%,0)',
+      border: '1px solid #000',
+      borderRadius: '5px',
+      overflow: 'hidden'
+    }}>
+      {
+        Object.values(MODE).map((v) => {
+          return <div
+            style={{
+              cursor: 'pointer',
+              color: '#fff',
+              padding: '6px',
+              background: this.state.visualEditMode === v ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : ''
+            }}
+            onClick={e => {
+              this.setState({visualEditMode: v});
+            }}
+          >{v}</div>;
+        })
+      }
 
     </div>;
   }
@@ -137,6 +172,7 @@ class RedCanvas extends React.Component {
         color: '#000'
       }}
     >
+      {this.renderVisualEditMode()}
       <div style={{
         bottom: 0,
         left: '50%',
@@ -167,7 +203,7 @@ class RedCanvas extends React.Component {
           }
         });
       }}>
-        <FontAwesomeIcon icon={faArrowsAlt} style={{color:'#fff',fontSize: '17px', transform: 'rotate(-90deg)'}} />
+        <FontAwesomeIcon icon={faArrowsAlt} style={{color: '#fff', fontSize: '17px', transform: 'rotate(-90deg)'}} />
       </div>
       <>
         <div
@@ -199,7 +235,7 @@ class RedCanvas extends React.Component {
             });
           }}
         >
-          <FontAwesomeIcon icon={faExpandAlt} style={{color:'#fff',fontSize: '17px', transform: 'scale(-1,1)'}} />
+          <FontAwesomeIcon icon={faExpandAlt} style={{color: '#fff', fontSize: '17px', transform: 'scale(-1,1)'}} />
         </div>
         <div
           style={{
@@ -230,7 +266,7 @@ class RedCanvas extends React.Component {
             });
           }}
         >
-          <FontAwesomeIcon icon={faExpandAlt} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+          <FontAwesomeIcon icon={faExpandAlt} style={{color: '#fff', fontSize: '17px', transform: 'scale(1,1)'}} />
         </div>
         <div
           style={{
@@ -261,7 +297,7 @@ class RedCanvas extends React.Component {
             });
           }}
         >
-          <FontAwesomeIcon icon={faExpandAlt} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+          <FontAwesomeIcon icon={faExpandAlt} style={{color: '#fff', fontSize: '17px', transform: 'scale(1,1)'}} />
         </div>
         <div
           style={{
@@ -292,7 +328,7 @@ class RedCanvas extends React.Component {
             });
           }}
         >
-          <FontAwesomeIcon icon={faExpandAlt} style={{color:'#fff',fontSize: '17px', transform: 'scale(-1,1)'}} />
+          <FontAwesomeIcon icon={faExpandAlt} style={{color: '#fff', fontSize: '17px', transform: 'scale(-1,1)'}} />
         </div>
         {/*  */}
         <div
@@ -319,7 +355,7 @@ class RedCanvas extends React.Component {
             });
           }}
         >
-          <FontAwesomeIcon icon={faArrowsAltH} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+          <FontAwesomeIcon icon={faArrowsAltH} style={{color: '#fff', fontSize: '17px', transform: 'scale(1,1)'}} />
         </div>
         <div
           style={{
@@ -345,7 +381,7 @@ class RedCanvas extends React.Component {
             });
           }}
         >
-          <FontAwesomeIcon icon={faArrowsAltH} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+          <FontAwesomeIcon icon={faArrowsAltH} style={{color: '#fff', fontSize: '17px', transform: 'scale(1,1)'}} />
         </div>
         <div
           style={{
@@ -371,7 +407,7 @@ class RedCanvas extends React.Component {
             });
           }}
         >
-          <FontAwesomeIcon icon={faArrowsAltV} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+          <FontAwesomeIcon icon={faArrowsAltV} style={{color: '#fff', fontSize: '17px', transform: 'scale(1,1)'}} />
         </div>
         <div
           style={{
@@ -397,7 +433,7 @@ class RedCanvas extends React.Component {
             });
           }}
         >
-          <FontAwesomeIcon icon={faArrowsAltV} style={{color:'#fff',fontSize: '17px', transform: 'scale(1,1)'}} />
+          <FontAwesomeIcon icon={faArrowsAltV} style={{color: '#fff', fontSize: '17px', transform: 'scale(1,1)'}} />
         </div>
       </>
     </div> : '';
@@ -460,6 +496,7 @@ class RedCanvas extends React.Component {
             color: '#000'
           }}
         >
+          {this.renderVisualEditMode()}
           <div style={{
             top: 0,
             left: '50%',
@@ -1131,14 +1168,14 @@ class RedCanvas extends React.Component {
       style={style.container}
       onMouseMove={e => {
         this.checkCanvasMove(e);
-        if (LOCAL_STORAGE_MANAGER.getTabOpenYn('Gradient')) {
+        if (this.state.visualEditMode===MODE.GRADIENT) {
           this.checkPosition(e);
           this.checkResize(e);
           this.checkDegree(e);
           this.checkAt(e);
         } else {
           this.checkPosition(e, true);
-          this.checkResize(e,true);
+          this.checkResize(e, true);
         }
 
 
