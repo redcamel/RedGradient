@@ -23,6 +23,7 @@ import RedCanvas from "../canvas/RedCanvas";
 import CALC_GRADIENT from "../CALC_GRADIENT";
 import {toast} from "react-toastify";
 import ACTIVE_FRAME_KEY from "../ACTIVE_FRAME_KEY.js";
+import js_beautify from 'js-beautify'
 
 class RedPropertyEdit extends React.Component {
   render() {
@@ -102,7 +103,8 @@ class RedPropertyEdit extends React.Component {
                       style={style.copyClass}
                       onClick={() => {
                         const tempElem = document.createElement('textarea');
-                        tempElem.value = containerCssText;
+
+                        tempElem.value =   js_beautify.css_beautify(containerCssText, { indent_size: 2, space_in_empty_paren: true,max_preserve_newlines : 1 });
                         document.body.appendChild(tempElem);
                         tempElem.select();
                         document.execCommand("copy");

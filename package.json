@@ -41,6 +41,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "gsap": "^3.6.1",
+    "js-beautify": "^1.14.0",
     "react-toastify": "^7.0.4",
     "react-virtualized": "^9.22.3"
   },
