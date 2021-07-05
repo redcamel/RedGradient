@@ -14,7 +14,7 @@ const calcNW = (info) => {
   } = info;
   if (canvasInfo['border_radius_mergeMode']) canvasInfo['border_radius'] = startRadius[0] + gapX;
   else {
-    canvasInfo['border_radius_split'][0] = startRadius[0] + gapX;
+    canvasInfo['border_radius_split'][0] = Math.max(0,startRadius[0] + gapX);
   }
 };
 const calcNE = (info) => {
@@ -25,7 +25,7 @@ const calcNE = (info) => {
   } = info;
   if (canvasInfo['border_radius_mergeMode']) canvasInfo['border_radius'] = startRadius[0] - gapX;
   else {
-    canvasInfo['border_radius_split'][2] = startRadius[2] - gapX;
+    canvasInfo['border_radius_split'][2] = Math.max(startRadius[2] - gapX);
   }
 
 };
@@ -37,7 +37,7 @@ const calcSW = (info) => {
   } = info;
   if (canvasInfo['border_radius_mergeMode']) canvasInfo['border_radius'] = startRadius[0] + gapX;
   else {
-    canvasInfo['border_radius_split'][1] = startRadius[1] + gapX;
+    canvasInfo['border_radius_split'][1] = Math.max(startRadius[1] + gapX);
   }
 };
 const calcSE = (info) => {
@@ -48,7 +48,7 @@ const calcSE = (info) => {
   } = info;
   if (canvasInfo['border_radius_mergeMode']) canvasInfo['border_radius'] = startRadius[0] - gapX;
   else {
-    canvasInfo['border_radius_split'][3] = startRadius[3] - gapX;
+    canvasInfo['border_radius_split'][3] = Math.max(startRadius[3] - gapX);
   }
 };
 
