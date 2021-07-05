@@ -22,17 +22,19 @@ import {
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RedPropertyEdit from "../property/RedPropertyEdit";
 import ACTIVE_FRAME_KEY from "../ACTIVE_FRAME_KEY";
-import LOCAL_STORAGE_MANAGER from "../LOCAL_STORAGE_MANAGER";
 import RedCanvas_checkResize from "./visualEdit/RedCanvas_checkResize";
 import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree";
 import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt";
 import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition";
+import RedCanvas_checkRadius from "./visualEdit/RedCanvas_checkRadius";
 // TODO - 정리필요
 let ghostSize, ghostMode;
 const MODE = {
-  GRADIENT : 'gradient',
-  CONTAINER : 'container'
-}
+  GRADIENT: 'gradient',
+  CONTAINER: 'container',
+  BORDER: 'border'
+};
+
 class RedCanvas extends React.Component {
   constructor(props) {
     super(props);
@@ -86,7 +88,7 @@ class RedCanvas extends React.Component {
     `;
     document.getElementById('red_gradient_result_css').textContent = ResultPreview;
 
-console.log(canvasInfo['addCss'] || ";")
+    console.log(canvasInfo['addCss'] || ";");
     return <div
       style={{
         ...style.canvas,
@@ -114,10 +116,91 @@ console.log(canvasInfo['addCss'] || ";")
       {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
       {/*<div>{borderW}/{borderH}</div>*/}
 
-      {this.state.visualEditMode === MODE.GRADIENT ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo) : this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo)}
-
-
+      {
+        this.state.visualEditMode === MODE.GRADIENT
+          ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo)
+          : this.state.visualEditMode === MODE.CONTAINER
+          ? this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo)
+          : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo)
+      }
     </div>;
+  }
+
+  renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo) {
+    const cX = this.state.editCanvasOnly ? -canvasInfo['left'] || 0 : 0;
+    const cY = this.state.editCanvasOnly ? -canvasInfo['top'] || 0 : 0;
+    const layoutSize = {
+      w: canvasInfo['width'],
+      h: canvasInfo['height'],
+      x: canvasInfo['left'] + cX,
+      y: canvasInfo['top'] + cY
+    };
+    console.log('layoutSize', layoutSize);
+    const borderRadius = canvasInfo['border_radius_mergeMode'] ? [canvasInfo.border_radius, canvasInfo.border_radius, canvasInfo.border_radius, canvasInfo.border_radius] : JSON.parse(JSON.stringify(canvasInfo['border_radius_split']));
+    return this.state.layerSizeView ? <div
+      style={{
+        zIndex: 1,
+        position: 'absolute',
+        left: `${layoutSize['x']}px`,
+        top: `${layoutSize['y']}px`,
+        width: `${layoutSize['w']}px`,
+        height: `${layoutSize['h']}px`,
+        border: '1px dashed #000',
+        outline: '1px dashed rgba(255,255,255,0.75)',
+        background: ghostMode ? 'rgba(255,255,255,0.2)' : '',
+        color: '#000'
+      }}
+    >
+      {this.renderVisualEditMode()}
+      {
+        <>
+          <div style={{
+            position: 'absolute',
+            top: borderRadius[0]/2,
+            left: borderRadius[0]/2,
+            transform: 'translate(-50%,-50%)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '20px',
+            height: '20px',
+            borderRadius: '50%',
+            background: 'red'
+          }}
+               onMouseDown={e => {
+                 e.stopPropagation();
+                 ghostMode = true;
+                 this.setModes({
+                   radiusMode: {
+                     mode: 'nw',
+                     startRadius: borderRadius,
+                     startX: e.nativeEvent.pageX,
+                     startY: e.nativeEvent.pageY
+                   }
+                 });
+               }}
+          >o
+          </div>
+          {/*<div style={{*/}
+          {/*  position : 'absolute',top:0,right:0,*/}
+          {/*  transform : 'translate(50%,-50%)',*/}
+          {/*  display : 'flex', justifyContent : 'center', alignItems : 'center', width : '20px', height : '20px', borderRadius : '50%', background : 'red'*/}
+          {/*}}>o</div>*/}
+          {/*<div style={{*/}
+          {/*  position : 'absolute',bottom:0,right:0,*/}
+          {/*  transform : 'translate(50%,50%)',*/}
+          {/*  display : 'flex', justifyContent : 'center', alignItems : 'center', width : '20px', height : '20px', borderRadius : '50%', background : 'red'*/}
+          {/*}}>o</div>*/}
+          {/*<div style={{*/}
+          {/*  position : 'absolute',bottom:0,left:0,*/}
+          {/*  transform : 'translate(-50%,50%)',*/}
+          {/*  display : 'flex', justifyContent : 'center', alignItems : 'center', width : '20px', height : '20px', borderRadius : '50%', background : 'red'*/}
+          {/*}}>o</div>*/}
+
+        </>
+      }
+      <div style={{background : 'rgba(255,255,255,0.8)'}}>보더에디터 - 작업중</div>
+    </div> : '';
   }
 
   renderVisualEditMode() {
@@ -152,12 +235,12 @@ console.log(canvasInfo['addCss'] || ";")
 
   renderContainerEdit(rootComponentState, activeSubData, canvasInfo) {
     const cX = this.state.editCanvasOnly ? -canvasInfo['left'] : 0;
-    const cY = this.state.editCanvasOnly ? -canvasInfo['top']: 0;
+    const cY = this.state.editCanvasOnly ? -canvasInfo['top'] : 0;
     const layoutSize = {
       w: canvasInfo['width'],
       h: canvasInfo['height'],
-      x: canvasInfo['left']+cX,
-      y: canvasInfo['top']+cY
+      x: canvasInfo['left'] + cX,
+      y: canvasInfo['top'] + cY
     };
     const iconScale = Math.min(1, 1 / this.state.canvasViewScale);
     return this.state.layerSizeView ? <div
@@ -1244,6 +1327,7 @@ console.log(canvasInfo['addCss'] || ";")
     this.state.degreeMode = false;
     this.state.atMode = false;
     this.state.positionMode = false;
+    this.state.radiusMode = false;
     this.setState(v);
   }
 
@@ -1251,6 +1335,7 @@ console.log(canvasInfo['addCss'] || ";")
   checkDegree = RedCanvas_checkDegree;
   checkAt = RedCanvas_checkAt;
   checkPosition = RedCanvas_checkPosition;
+  checkRadius = RedCanvas_checkRadius;
 
   checkCanvasMove(e) {
     if (this.state.useMove) {
@@ -1274,14 +1359,16 @@ console.log(canvasInfo['addCss'] || ";")
       style={style.container}
       onMouseMove={e => {
         this.checkCanvasMove(e);
-        if (this.state.visualEditMode===MODE.GRADIENT) {
+        if (this.state.visualEditMode === MODE.GRADIENT) {
           this.checkPosition(e);
           this.checkResize(e);
           this.checkDegree(e);
           this.checkAt(e);
-        } else {
+        } else if (this.state.visualEditMode === MODE.CONTAINER) {
           this.checkPosition(e, true);
           this.checkResize(e, true);
+        } else {
+          this.checkRadius(e, true);
         }
 
 
