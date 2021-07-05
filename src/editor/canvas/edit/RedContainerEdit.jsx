@@ -10,7 +10,7 @@ import RedTitle from "../../../core/RedTitle";
 import RedCanvasFilterList from "./filter/RedCanvasFilterList.jsx";
 import RedCanvasBoxSizingEdit from "./property/RedCanvasBoxSizingEdit.jsx";
 import RedCanvasSizeEdit from "./property/RedCanvasSizeEdit.jsx";
-import RED_CANVAS_PRESET from "../../../RED_CANVAS_PRESET.js";
+import RED_CANVAS_PRESET from "../../../core/RED_CANVAS_PRESET.js";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDesktop, faMobileAlt} from "@fortawesome/free-solid-svg-icons";
 import {ColorPicker} from "@easylogic/colorpicker";

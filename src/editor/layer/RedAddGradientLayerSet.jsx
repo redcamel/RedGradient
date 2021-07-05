@@ -13,6 +13,7 @@ import DataColor from "../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedTitle from "../../core/RedTitle";
 import RedSelect from "../../core/RedSelect";
+import RedNumber2 from "../../core/RedNumber2";
 
 const easeNameList = [
   'none',
@@ -104,7 +105,7 @@ class RedAddGradientLayerSet extends React.Component {
     >
 
       <div style={style.container}>
-        <div style={{width: '100%'}}><RedTitle title={"add with template"}/></div>
+        <div style={{width: '100%'}}><RedTitle title={"add with template"} /></div>
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -199,7 +200,7 @@ class RedAddGradientLayerSet extends React.Component {
                          this.setState({});
                          requestAnimationFrame(() => {
                            this.state.colorPicker[index].initColorWithoutChangeEvent(tColor);
-                         })
+                         });
                        }}
                   />
 
@@ -211,7 +212,7 @@ class RedAddGradientLayerSet extends React.Component {
                   transform: Math.floor(index / 10) === index / 10 ? 'translate(-25% , 40px)' : index % 10 === 9 ? 'translate(-75% , 40px)' : 'translate(-50% , 40px)',
                   display: this.state.openColorPicker[index] ? 'block' : 'none'
                 }}>
-                  <div ref={this.refColorPickerContainer[index]}/>
+                  <div ref={this.refColorPickerContainer[index]} />
                   <div style={style.complete} onClick={() => {
                     this.state.openColorPicker[index] = false;
                     this.setState({});
@@ -226,7 +227,7 @@ class RedAddGradientLayerSet extends React.Component {
           <div style={{alignItems: 'center', flexDirection: 'column', width: '200px'}}>
             <div style={{display: 'flex', flexDirection: 'column'}}>
               <div className={'ui_item_title'}>division</div>
-              <RedNumber
+              <RedNumber2
                 minValue={1}
                 maxValue={450}
                 step={1}
@@ -234,20 +235,20 @@ class RedAddGradientLayerSet extends React.Component {
                 HD_onInput={e => {
                   let t0 = Math.max(+e.target.value, 1);
                   this.setState({division: t0, tempColorList: []});
-                }}/>
-              <div/>
+                }} />
+              <div />
               <RedSelect title={'ease'} value={this.state['easeName']} options={easeNameList} HD_change={e => {
                 this.setState({easeName: e.target.value, tempColorList: []});
-              }}/>
-              <div/>
+              }} />
+              <div />
               <RedSelect title={'easeType'} value={this.state['easeType']} options={easeTypeList} HD_change={e => {
                 this.setState({easeType: e.target.value, tempColorList: []});
-              }}/>
-              <div/>
+              }} />
+              <div />
               <RedSelect title={'gradient type'} value={this.state['type']} options={Object.entries(gradientTypes)}
                          HD_change={e => {
                            this.setState({type: e.target.value, tempColorList: []});
-                         }}/>
+                         }} />
               {/*             */}
               <div style={{display: 'flex', alignItems: 'center'}}>
                 start color
@@ -285,7 +286,7 @@ class RedAddGradientLayerSet extends React.Component {
                          this.setState({});
                          requestAnimationFrame(() => {
                            this.state.colorPicker[startIndex].initColorWithoutChangeEvent(this.state.startColor['color']);
-                         })
+                         });
                        }}
                   />
                   <div style={{
@@ -293,7 +294,7 @@ class RedAddGradientLayerSet extends React.Component {
                     transform: 'translate(0% , 40px)',
                     display: this.state.openColorPicker[startIndex] ? 'block' : 'none'
                   }}>
-                    <div ref={this.refColorPickerContainer[startIndex]}/>
+                    <div ref={this.refColorPickerContainer[startIndex]} />
                     <div style={style.complete} onClick={() => {
                       this.state.openColorPicker[startIndex] = false;
                       this.setState({tempColorList: []});
@@ -337,7 +338,7 @@ class RedAddGradientLayerSet extends React.Component {
                          this.setState({});
                          requestAnimationFrame(() => {
                            this.state.colorPicker[lastIndex].initColorWithoutChangeEvent(this.state.endColor['color']);
-                         })
+                         });
                        }}
                   />
                   <div style={{
@@ -345,7 +346,7 @@ class RedAddGradientLayerSet extends React.Component {
                     transform: 'translate(-50% , 40px)',
                     display: this.state.openColorPicker[lastIndex] ? 'block' : 'none'
                   }}>
-                    <div ref={this.refColorPickerContainer[lastIndex]}/>
+                    <div ref={this.refColorPickerContainer[lastIndex]} />
                     <div style={style.complete} onClick={() => {
                       this.state.openColorPicker[lastIndex] = false;
                       this.setState({tempColorList: []});
@@ -378,7 +379,7 @@ class RedAddGradientLayerSet extends React.Component {
                   left: v['range'] + '%',
                   width: (v['rangeEnd'] - v['range']) + '%',
                   bottom: 0
-                }}/>;
+                }} />;
               })}
             </div>
           </div>

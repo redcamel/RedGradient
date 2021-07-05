@@ -26,7 +26,7 @@ import BORDER_REPEAT_TYPE from "./BORDER_REPEAT_TYPE";
 import DataLayer from "./data/DataLayer";
 import RedContainerBorderEdit from "./canvas/edit/RedContainerBorderEdit";
 import RedPreview from "./RedPreview.jsx";
-import getUUID from "../getUUID.js";
+import getUUID from "../core/getUUID.js";
 
 class AppFrame extends React.Component {
   constructor(props) {
