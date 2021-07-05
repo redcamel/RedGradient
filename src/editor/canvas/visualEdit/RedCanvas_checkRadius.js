@@ -6,42 +6,53 @@
  *
  */
 
-const calcNW = (info, containerMode) => {
+const calcNW = (info) => {
   const {
     canvasInfo,
-    originX,
+    startRadius,
     gapX
   } = info;
-  canvasInfo['border_radius'] = originX + gapX;
+  if (canvasInfo['border_radius_mergeMode']) canvasInfo['border_radius'] = startRadius[0] + gapX;
+  else {
+    canvasInfo['border_radius_split'][0] = startRadius[0] + gapX;
+  }
 };
-const calcNE = (info, containerMode) => {
+const calcNE = (info) => {
   const {
     canvasInfo,
-    originX,
+    startRadius,
     gapX
   } = info;
-  canvasInfo['border_radius'] = originX + gapX;
+  if (canvasInfo['border_radius_mergeMode']) canvasInfo['border_radius'] = startRadius[0] - gapX;
+  else {
+    canvasInfo['border_radius_split'][2] = startRadius[2] - gapX;
+  }
 
 };
-const calcSW = (info, containerMode) => {
+const calcSW = (info) => {
   const {
     canvasInfo,
-    originY,
-    gapY
+    startRadius,
+    gapX
   } = info;
-  canvasInfo['border_radius'] = originY + gapY;
+  if (canvasInfo['border_radius_mergeMode']) canvasInfo['border_radius'] = startRadius[0] + gapX;
+  else {
+    canvasInfo['border_radius_split'][1] = startRadius[1] + gapX;
+  }
 };
-const calcSE = (info, containerMode) => {
+const calcSE = (info) => {
   const {
     canvasInfo,
-    originY,
-    gapY
+    startRadius,
+    gapX
   } = info;
-  canvasInfo['border_radius'] = originY - gapY;
-
+  if (canvasInfo['border_radius_mergeMode']) canvasInfo['border_radius'] = startRadius[0] - gapX;
+  else {
+    canvasInfo['border_radius_split'][3] = startRadius[3] - gapX;
+  }
 };
 
-function RedCanvas_checkResize(e, containerMode) {
+function RedCanvas_checkResize(e) {
   const rootComponent = this.props.rootComponent;
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
@@ -49,45 +60,38 @@ function RedCanvas_checkResize(e, containerMode) {
   if (this.state.radiusMode) {
     e = e.nativeEvent;
     const mode = this.state.radiusMode['mode'];
-    let gapX = (e.pageX - +this.state.radiusMode['startX']) / this.state.canvasViewScale;
-    let gapY = (e.pageY - +this.state.radiusMode['startY']) / this.state.canvasViewScale;
-    switch (mode) {
-      case 'sw':
-      case 'ne':
-        gapY = (e.shiftKey || activeSubData['fixRatioYn']) ? -gapX : gapY;
-        break;
-      case 'nw':
-      case 'se':
-        gapY = (e.shiftKey || activeSubData['fixRatioYn']) ? gapX : gapY;
-        break;
-    }
-    this.state.radiusMode['startX'] = e.pageX;
-    this.state.radiusMode['startY'] = e.pageY;
+    let gapX = (e.pageX - +this.state.radiusMode['startX']) / this.state.canvasViewScale ;
 
-    const originX = canvasInfo['border_radius']
-    const originY = canvasInfo['border_radius']
+    if (canvasInfo['border_radius_mergeMode']) {
+
+    } else {
+      this.state.radiusMode['startX'] = e.pageX;
+      this.state.radiusMode['startY'] = e.pageY;
+
+    }
+
+    const startRadius = this.state.radiusMode.startRadius;
     const info = {
       key: rootComponentState['key'],
       canvasInfo,
-      originX,
-      originY,
-      gapX,
-      gapY
+      startRadius,
+      gapX
     };
     switch (mode) {
       case "nw":
-        calcNW(info, containerMode);
+        calcNW(info);
         break;
       case "ne":
-        calcNE(info, containerMode);
+        calcNE(info);
         break;
       case "sw":
-        calcSW(info, containerMode);
+        calcSW(info);
         break;
       case "se":
-        calcSE(info, containerMode);
+        calcSE(info);
         break;
     }
+
     document.body.style.cursor = `${mode}-resize`;
     rootComponent.updateRootState({});
     // console.log(e);

@@ -136,7 +136,7 @@ class RedCanvas extends React.Component {
       y: canvasInfo['top'] + cY
     };
     console.log('layoutSize', layoutSize);
-    const borderRadius = canvasInfo['border_radius_mergeMode'] ? [canvasInfo.border_radius, canvasInfo.border_radius, canvasInfo.border_radius, canvasInfo.border_radius] : JSON.parse(JSON.stringify(canvasInfo['border_radius_split']));
+    const borderRadius = canvasInfo['border_radius_mergeMode'] ? [canvasInfo.border_radius, canvasInfo.border_radius, canvasInfo.border_radius, canvasInfo.border_radius] : canvasInfo['border_radius_split'];
     return this.state.layerSizeView ? <div
       style={{
         zIndex: 1,
@@ -147,17 +147,16 @@ class RedCanvas extends React.Component {
         height: `${layoutSize['h']}px`,
         border: '1px dashed #000',
         outline: '1px dashed rgba(255,255,255,0.75)',
-        background: ghostMode ? 'rgba(255,255,255,0.2)' : '',
         color: '#000'
       }}
     >
-      {this.renderVisualEditMode()}
+      {this.renderVisualEditMode(canvasInfo, activeSubData)}
       {
         <>
           <div style={{
             position: 'absolute',
-            top: borderRadius[0]/2,
-            left: borderRadius[0]/2,
+            top: Math.max(0, Math.min(borderRadius[0], canvasInfo['height'] / 2)),
+            left: Math.max(0, Math.max(Math.min(borderRadius[0], canvasInfo['width'] / 2))),
             transform: 'translate(-50%,-50%)',
             display: 'flex',
             justifyContent: 'center',
@@ -165,7 +164,9 @@ class RedCanvas extends React.Component {
             width: '20px',
             height: '20px',
             borderRadius: '50%',
-            background: 'red'
+            background: '#fff',
+            border: '1px solid #000',
+            cursor: 'pointer'
           }}
                onMouseDown={e => {
                  e.stopPropagation();
@@ -179,8 +180,91 @@ class RedCanvas extends React.Component {
                    }
                  });
                }}
-          >o
-          </div>
+          />
+          <div style={{
+            position: 'absolute',
+            bottom: Math.max(0, Math.min(borderRadius[1], canvasInfo['height'] / 2)),
+            left: Math.max(0, Math.max(Math.min(borderRadius[1], canvasInfo['width'] / 2))),
+            transform: 'translate(-50%,50%)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '20px',
+            height: '20px',
+            borderRadius: '50%',
+            background: '#fff',
+            border: '1px solid #000',
+            cursor: 'pointer'
+          }}
+               onMouseDown={e => {
+                 e.stopPropagation();
+                 ghostMode = true;
+                 this.setModes({
+                   radiusMode: {
+                     mode: 'sw',
+                     startRadius: borderRadius,
+                     startX: e.nativeEvent.pageX,
+                     startY: e.nativeEvent.pageY
+                   }
+                 });
+               }}
+          />
+          <div style={{
+            position: 'absolute',
+            top: Math.max(0, Math.min(borderRadius[2], canvasInfo['height'] / 2)),
+            left: Math.min(Math.max(canvasInfo['width'] / 2, canvasInfo['width'] - borderRadius[2]), canvasInfo['width']),
+            transform: 'translate(-50%,-50%)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '20px',
+            height: '20px',
+            borderRadius: '50%',
+            background: '#fff',
+            border: '1px solid #000',
+            cursor: 'pointer'
+          }}
+               onMouseDown={e => {
+                 e.stopPropagation();
+                 ghostMode = true;
+                 this.setModes({
+                   radiusMode: {
+                     mode: 'ne',
+                     startRadius: borderRadius,
+                     startX: e.nativeEvent.pageX,
+                     startY: e.nativeEvent.pageY
+                   }
+                 });
+               }}
+          />
+          <div style={{
+            position: 'absolute',
+            bottom: Math.max(0, Math.min(borderRadius[3], canvasInfo['height'] / 2)),
+            left: Math.min(Math.max(canvasInfo['width'] / 2, canvasInfo['width'] - borderRadius[3]), canvasInfo['width']),
+            transform: 'translate(-50%,50%)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '20px',
+            height: '20px',
+            borderRadius: '50%',
+            background: '#fff',
+            border: '1px solid #000',
+            cursor: 'pointer'
+          }}
+               onMouseDown={e => {
+                 e.stopPropagation();
+                 ghostMode = true;
+                 this.setModes({
+                   radiusMode: {
+                     mode: 'se',
+                     startRadius: borderRadius,
+                     startX: e.nativeEvent.pageX,
+                     startY: e.nativeEvent.pageY
+                   }
+                 });
+               }}
+          />
           {/*<div style={{*/}
           {/*  position : 'absolute',top:0,right:0,*/}
           {/*  transform : 'translate(50%,-50%)',*/}
@@ -199,36 +283,59 @@ class RedCanvas extends React.Component {
 
         </>
       }
-      <div style={{background : 'rgba(255,255,255,0.8)'}}>보더에디터 - 작업중</div>
+      <div style={{background: 'rgba(255,255,255,0.8)'}}>보더에디터 - 작업중</div>
     </div> : '';
   }
 
-  renderVisualEditMode() {
+  renderVisualEditMode(canvasInfo, activeSubData) {
     return <div style={{
       position: 'absolute',
-      display: 'flex',
-      top: '-100px',
+      top: '-138px',
       left: '50%',
-      transform: 'translate(-50%,0)',
-      border: '1px solid #000',
-      borderRadius: '5px',
-      overflow: 'hidden'
+      transform: 'translate(-50%,0)'
     }}>
-      {
-        Object.values(MODE).map((v) => {
-          return <div
-            style={{
-              cursor: 'pointer',
-              color: '#fff',
-              padding: '6px',
-              background: this.state.visualEditMode === v ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333333'
-            }}
-            onClick={e => {
-              this.setState({visualEditMode: v});
-            }}
-          >{v}</div>;
-        })
-      }
+      <div style={{
+        textAlign: 'center',
+        color: '#fff',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        container size : {canvasInfo['width']} * {canvasInfo['height']}
+      </div>
+      <div style={{
+        textAlign: 'center',
+        color: '#fff',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: '10px'
+      }}>
+        bg size
+        : {activeSubData['size']['w']}{activeSubData['size']['wUnit']} * {activeSubData['size']['h']}{activeSubData['size']['hUnit']}
+      </div>
+      <div style={{
+        display: 'flex',
+        border: '1px solid #000',
+        borderRadius: '5px',
+        overflow: 'hidden'
+      }}>
+        {
+          Object.values(MODE).map((v) => {
+            return <div
+              style={{
+                cursor: 'pointer',
+                color: '#fff',
+                padding: '6px',
+                background: this.state.visualEditMode === v ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333333'
+              }}
+              onClick={e => {
+                this.setState({visualEditMode: v});
+              }}
+            >{v}</div>;
+          })
+        }
+      </div>
 
     </div>;
   }
@@ -257,7 +364,7 @@ class RedCanvas extends React.Component {
         color: '#000'
       }}
     >
-      {this.renderVisualEditMode()}
+      {this.renderVisualEditMode(canvasInfo, activeSubData)}
       <div style={{
         top: 0,
         left: '50%',
@@ -685,7 +792,7 @@ class RedCanvas extends React.Component {
             color: '#000'
           }}
         >
-          {this.renderVisualEditMode()}
+          {this.renderVisualEditMode(canvasInfo, activeSubData)}
           <div style={{
             top: 0,
             left: '50%',
