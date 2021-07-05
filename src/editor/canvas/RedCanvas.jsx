@@ -290,7 +290,7 @@ class RedCanvas extends React.Component {
   renderVisualEditMode(canvasInfo, activeSubData) {
     return <div style={{
       position: 'absolute',
-      top: '-138px',
+      top:this.state.visualEditMode === MODE.BORDER ? '-100px' :  '-138px',
       left: '50%',
       transform: 'translate(-50%,0)'
     }}>
