@@ -118,17 +118,26 @@ class RedCanvas extends React.Component {
 
       {
         this.state.visualEditMode === MODE.GRADIENT
-          ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo)
+          ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo,appState)
           : this.state.visualEditMode === MODE.CONTAINER
-          ? this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo)
-          : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo)
+          ? this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo,appState)
+          : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo,appState)
       }
     </div>;
   }
 
-  renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo) {
-    const cX = this.state.editCanvasOnly ? -canvasInfo['left'] || 0 : 0;
-    const cY = this.state.editCanvasOnly ? -canvasInfo['top'] || 0 : 0;
+  renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo,appState) {
+    let cX = this.state.editCanvasOnly ? -canvasInfo['left'] || 0 : 0;
+    let cY = this.state.editCanvasOnly ? -canvasInfo['top'] || 0 : 0;
+    if(rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly ){
+      {
+        const mainCanvasInfo = appState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo']
+        const borderW = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][1] + mainCanvasInfo['border_width_split'][3]);
+        const borderH = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][0] + mainCanvasInfo['border_width_split'][2]);
+        cX+= borderW
+        cY+= borderH
+      }
+    }
     const layoutSize = {
       w: canvasInfo['width'],
       h: canvasInfo['height'],
@@ -341,12 +350,20 @@ class RedCanvas extends React.Component {
     </div>;
   }
 
-  renderContainerEdit(rootComponentState, activeSubData, canvasInfo) {
-    const cX = this.state.editCanvasOnly ? -canvasInfo['left'] : 0;
-    const cY = this.state.editCanvasOnly ? -canvasInfo['top'] : 0;
-    const myElement = document.querySelector('.red_gradient_result')
+  renderContainerEdit(rootComponentState, activeSubData, canvasInfo,appState) {
+    let cX = this.state.editCanvasOnly ? -canvasInfo['left'] : 0;
+    let cY = this.state.editCanvasOnly ? -canvasInfo['top'] : 0;
 
-    console.log('after',myElement)
+    if(rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly ){
+      {
+        const mainCanvasInfo = appState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo']
+        const borderW = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][1] + mainCanvasInfo['border_width_split'][3]);
+        const borderH = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][0] + mainCanvasInfo['border_width_split'][2]);
+        cX+= borderW
+        cY+= borderH
+      }
+    }
+
     const layoutSize = {
       w: canvasInfo['width'],
       h: canvasInfo['height'],
@@ -744,16 +761,25 @@ class RedCanvas extends React.Component {
 
   }
 
-  renderGradientEdit(rootComponentState, activeSubData, canvasInfo) {
+  renderGradientEdit(rootComponentState, activeSubData, canvasInfo,appState) {
     const activeSubDataPosition = activeSubData['position'];
     const activeSubDataAt = activeSubData['at'];
     const activeSubDataSize = activeSubData['size'];
-    const cX = this.state.editCanvasOnly ? 0 : canvasInfo['left'];
-    const cY = this.state.editCanvasOnly ? 0 : canvasInfo['top'];
+    let cX = this.state.editCanvasOnly ? 0 : canvasInfo['left'];
+    let cY = this.state.editCanvasOnly ? 0 : canvasInfo['top'];
     const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3]);
     const borderH = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2]);
     const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3];
     const borderY = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][0];
+    if(rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly ){
+      {
+        const mainCanvasInfo = appState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo']
+        const borderW = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][1] + mainCanvasInfo['border_width_split'][3]);
+        const borderH = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][0] + mainCanvasInfo['border_width_split'][2]);
+        cX+= borderW
+        cY+= borderH
+      }
+    }
     const layoutSize = {
       w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width'] - borderW) * activeSubDataSize['w'] / 100 : activeSubDataSize['w'] - borderW,
       h: activeSubDataSize['hUnit'] === '%' ? (canvasInfo['height'] - borderH) * activeSubDataSize['h'] / 100 : activeSubDataSize['h'] - borderH,
