@@ -283,7 +283,7 @@ class RedCanvas extends React.Component {
 
         </>
       }
-      <div style={{background: 'rgba(255,255,255,0.8)'}}>보더에디터 - 작업중</div>
+      {/*<div style={{background: 'rgba(255,255,255,0.8)'}}>보더에디터 - 작업중</div>*/}
     </div> : '';
   }
 
