@@ -291,6 +291,7 @@ class RedCanvas extends React.Component {
     return <div style={{
       position: 'absolute',
       top:this.state.visualEditMode === MODE.BORDER ? '-100px' :  '-138px',
+
       left: '50%',
       transform: 'translate(-50%,0)'
     }}>
@@ -343,6 +344,9 @@ class RedCanvas extends React.Component {
   renderContainerEdit(rootComponentState, activeSubData, canvasInfo) {
     const cX = this.state.editCanvasOnly ? -canvasInfo['left'] : 0;
     const cY = this.state.editCanvasOnly ? -canvasInfo['top'] : 0;
+    const myElement = document.querySelector('.red_gradient_result')
+
+    console.log('after',myElement)
     const layoutSize = {
       w: canvasInfo['width'],
       h: canvasInfo['height'],
@@ -371,7 +375,8 @@ class RedCanvas extends React.Component {
         transform: `translate(-50%, -${20 + 36 * iconScale}px) scale(${iconScale})`,
         transition: 'transform 0.2s',
         position: 'absolute', width: `30px`, height: '30px',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+        alignItems: 'center', justifyContent: 'center',
         cursor: 'move',
         border: '1px solid #5e7ade', borderRadius: '50%',
         boxShadow: '0px 0px 10px rgba(0,0,0,0.3)',
@@ -397,7 +402,8 @@ class RedCanvas extends React.Component {
         transform: `translate(-50%, ${20 + 36 * iconScale}px) scale(${iconScale})`,
         transition: 'transform 0.2s',
         position: 'absolute', width: '30px', height: '30px',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+        alignItems: 'center', justifyContent: 'center',
         cursor: 'move',
         border: '1px solid #5e7ade', borderRadius: '50%',
         boxShadow: '0px 0px 10px rgba(0,0,0,0.3)',
@@ -423,7 +429,8 @@ class RedCanvas extends React.Component {
         transform: `translate(-${20 + 36 * iconScale}px, 50%) scale(${iconScale})`,
         transition: 'transform 0.2s',
         position: 'absolute', width: '30px', height: '30px',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+        alignItems: 'center', justifyContent: 'center',
         cursor: 'move',
         border: '1px solid #5e7ade', borderRadius: '50%',
         boxShadow: '0px 0px 10px rgba(0,0,0,0.3)',
@@ -449,7 +456,8 @@ class RedCanvas extends React.Component {
         transform: `translate(${20 + 36 * iconScale}px, 50%) scale(${iconScale})`,
         transition: 'transform 0.2s',
         position: 'absolute', width: '30px', height: '30px',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+        alignItems: 'center', justifyContent: 'center',
         cursor: 'move',
         border: '1px solid #5e7ade', borderRadius: '50%',
         boxShadow: '0px 0px 10px rgba(0,0,0,0.3)',
