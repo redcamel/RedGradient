@@ -297,12 +297,12 @@ class RedCanvas extends React.Component {
   }
 
   renderVisualEditMode(canvasInfo, activeSubData) {
+    const iconScale = Math.min(1, 1 / this.state.canvasViewScale);
     return <div style={{
       position: 'absolute',
       top:this.state.visualEditMode === MODE.BORDER ? '-100px' :  '-138px',
-
       left: '50%',
-      transform: 'translate(-50%,0)'
+      transform: `translate(-50%,0) scale(${iconScale})`
     }}>
       <div style={{
         textAlign: 'center',
