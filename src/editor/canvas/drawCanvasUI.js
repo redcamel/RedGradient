@@ -27,7 +27,7 @@ function drawCanvasUI() {
               whiteSpace: 'nowrap',
               cursor: 'pointer'
             }}>
-              View Edit Area
+              View Visual Edit
               <input type={'checkbox'}
                      checked={this.state.layerSizeView}
                      style={{
@@ -54,7 +54,7 @@ function drawCanvasUI() {
               whiteSpace: 'nowrap',
               cursor: 'pointer'
             }}>
-              View Edit Canvas Only
+              View Edit Container Only
               <input type={'checkbox'}
                      checked={this.state.editCanvasOnly}
                      style={{
