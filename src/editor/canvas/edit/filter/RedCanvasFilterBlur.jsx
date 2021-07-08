@@ -14,12 +14,12 @@ class RedCanvasFilterBlur extends React.Component {
   }
 
   getCss(filterData) {
-    return RedCanvasFilterBlur.getCss(filterData)
+    return RedCanvasFilterBlur.getCss(filterData);
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
-    const filterData = this.props.filterData
+    const filterData = this.props.filterData;
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         size <RedNumber
@@ -27,20 +27,20 @@ class RedCanvasFilterBlur extends React.Component {
         value={filterData['values']['amount'] || 0}
         HD_onInput={e => {
           filterData['values']['amount'] = +e.target.value;
-          filterData['css'] = this.getCss(filterData)
+          filterData['css'] = this.getCss(filterData);
           rootComponent.updateRootState({});
-        }}/>
+        }} />
       </div>
     </div>;
   }
 }
 
 RedCanvasFilterBlur.getCss = filterData => {
-  return `blur(${filterData['values']['amount']}px)`
-}
+  return `blur(${filterData['values']['amount']}px)`;
+};
 RedCanvasFilterBlur.getNewDataValues = () => {
   return {
     amount: 10
-  }
-}
+  };
+};
 export default RedCanvasFilterBlur;

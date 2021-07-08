@@ -14,12 +14,12 @@ class RedCanvasFilterContrast extends React.Component {
   }
 
   getCss(filterData) {
-    return RedCanvasFilterContrast.getCss(filterData)
+    return RedCanvasFilterContrast.getCss(filterData);
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
-    const filterData = this.props.filterData
+    const filterData = this.props.filterData;
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         amount <RedNumber
@@ -27,20 +27,20 @@ class RedCanvasFilterContrast extends React.Component {
         value={filterData['values']['amount'] || 0}
         HD_onInput={e => {
           filterData['values']['amount'] = +e.target.value;
-          filterData['css'] = this.getCss(filterData)
+          filterData['css'] = this.getCss(filterData);
           rootComponent.updateRootState({});
-        }}/>
+        }} />
       </div>
     </div>;
   }
 }
 
 RedCanvasFilterContrast.getCss = filterData => {
-  return `contrast(${filterData['values']['amount']})`
-}
+  return `contrast(${filterData['values']['amount']})`;
+};
 RedCanvasFilterContrast.getNewDataValues = () => {
   return {
     amount: 0.5
-  }
-}
+  };
+};
 export default RedCanvasFilterContrast;

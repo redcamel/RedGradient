@@ -15,11 +15,11 @@ class RedTitleTB extends React.Component {
       background: this.props.background
     }}>
       {this.props.icon ?
-        <FontAwesomeIcon icon={this.props.icon} style={{transform: 'rotate(90deg)', marginBottom: '6px'}}/> : ''}
+        <FontAwesomeIcon icon={this.props.icon} style={{transform: 'rotate(90deg)', marginBottom: '6px'}} /> : ''}
       {this.props.title}
     </div>;
   }
 }
 
-RedTitleTB.TAB_LIST = ['Container', 'Border','Gradient']
+RedTitleTB.TAB_LIST = ['Container', 'Border', 'Gradient'];
 export default RedTitleTB;

@@ -28,23 +28,27 @@ class RedLayerTop extends React.Component {
     const layers = rootComponentState.layers;
     const layersComponent = this.props.layersComponent;
     return <div>
-      <RedTitle title={'Layer Edit'}/>
+      <RedTitle title={'Layer Edit'} />
       <div style={style.addLayer}>
-        <div style={style.addLayerItem}
-             onClick={() => {
-               let targetLayer;
-               layers.splice(0, 0, targetLayer = new DataLayer());
-               rootComponent.updateRootState({
-                 activeLayer: targetLayer,
-                 activeSubData: targetLayer['items'][0]
-               });
-             }}
-        ><FontAwesomeIcon icon={faPlusCircle}/> Add Layer
+        <div
+          style={style.addLayerItem}
+          onClick={() => {
+            let targetLayer;
+            layers.splice(0, 0, targetLayer = new DataLayer());
+            rootComponent.updateRootState({
+              activeLayer: targetLayer,
+              activeSubData: targetLayer['items'][0]
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faPlusCircle} /> Add Layer
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <div style={{width: '40%', textAlign: 'center', color: 'rgba(255,255,255,0.5)'}}>layer Bg</div>
-          <select style={{width: '60%', border: 0, outline: 'none', margin: 0}}
-                  onChange={e => layersComponent.setState({layerBgColor: e.target.value})}>
+          <select
+            style={{width: '60%', border: 0, outline: 'none', margin: 0}}
+            onChange={e => layersComponent.setState({layerBgColor: e.target.value})}
+          >
             {options.map(v => <option value={v}>{v}</option>)}
           </select>
         </div>
@@ -55,7 +59,7 @@ class RedLayerTop extends React.Component {
               opacity: layersComponent.state.layerViewSizeMode === 0 ? 1 : 0.25
             }}
             onClick={() => {
-              layersComponent.setState({layerViewSizeMode: 0})
+              layersComponent.setState({layerViewSizeMode: 0});
             }}
           >big
           </div>
@@ -65,7 +69,7 @@ class RedLayerTop extends React.Component {
               opacity: layersComponent.state.layerViewSizeMode === 1 ? 1 : 0.25
             }}
             onClick={() => {
-              layersComponent.setState({layerViewSizeMode: 1})
+              layersComponent.setState({layerViewSizeMode: 1});
             }}
           >wide
           </div>
@@ -75,7 +79,7 @@ class RedLayerTop extends React.Component {
               opacity: layersComponent.state.layerViewSizeMode === 2 ? 1 : 0.25
             }}
             onClick={() => {
-              layersComponent.setState({layerViewSizeMode: 2})
+              layersComponent.setState({layerViewSizeMode: 2});
             }}
           >small
           </div>
@@ -102,14 +106,6 @@ const style = {
     borderRadius: '4px',
     marginBottom: '4px',
     cursor: 'pointer'
-  },
-  bgItem: {
-    padding: '2px',
-    margin: '2px 0px',
-    fontSize: '11px',
-    cursor: 'pointer',
-    border: '1px solid rgba(255,255,255,0.16)',
-    borderRadius: '4px'
   },
   viewScaleItem: {
     background: 'linear-gradient(rgb(114, 53, 212), rgb(77, 29, 147))',

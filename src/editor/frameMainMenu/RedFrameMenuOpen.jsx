@@ -8,7 +8,7 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFolderOpen} from "@fortawesome/free-solid-svg-icons";
-import DataGradient from "../data/DataGradient";
+import DataRedGradient from "../data/DataRedGradient";
 
 class RedFrameMenuOpen extends React.Component {
   checkValidate(v) {
@@ -17,16 +17,16 @@ class RedFrameMenuOpen extends React.Component {
      * activeFrameKey 키를 가지고있는 경우만 통과
      *
      */
-    let loadData
+    let loadData;
     try {
       loadData = JSON.parse(v);
       if (!loadData.hasOwnProperty('activeFrameKey')) {
-        let newData = new DataGradient()
-        newData.main = loadData
-        loadData = newData
+        let newData = new DataRedGradient();
+        newData.main = loadData;
+        loadData = newData;
       }
-      let mainData = loadData['main']
-      console.log(loadData)
+      let mainData = loadData['main'];
+      console.log(loadData);
       if (
         !loadData.hasOwnProperty('activeFrameKey')
         || !mainData.hasOwnProperty('activeLayer')
@@ -60,20 +60,20 @@ class RedFrameMenuOpen extends React.Component {
                let fileReader = new FileReader();
                fileReader.onload = evt => {
                  requestAnimationFrame(() => {
-                   let t0 = this.checkValidate(evt.target.result)
+                   let t0 = this.checkValidate(evt.target.result);
                    if (t0) {
                      window.actionHistoryCheckNum = 0;
                      rootComponent.setNewCanvas(t0);
 
                    } else {
-                     alert('RedGradient 형식의 파일이 아닙니다.')
+                     alert('RedGradient 형식의 파일이 아닙니다.');
                    }
                  });
                };
                fileReader.readAsText(e.target.files[0]);
              };
            }}
-      ><FontAwesomeIcon icon={faFolderOpen}/>
+      ><FontAwesomeIcon icon={faFolderOpen} />
       </div>
     </div>;
   }

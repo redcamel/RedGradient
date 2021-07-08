@@ -33,5 +33,5 @@ const PresetBorder = {
     "useDivideEnd": false,
     "rangeEnd": 50
   }]
-}
-export default PresetBorder
+};
+export default PresetBorder;

@@ -10,12 +10,12 @@ import RedTitle from "../../../core/RedTitle";
 import RedCanvasFilterList from "./filter/RedCanvasFilterList.jsx";
 import RedCanvasBoxSizingEdit from "./property/RedCanvasBoxSizingEdit.jsx";
 import RedCanvasSizeEdit from "./property/RedCanvasSizeEdit.jsx";
-import RED_CANVAS_PRESET from "../../../core/RED_CANVAS_PRESET.js";
+import RED_CANVAS_PRESET from "../../../const/RED_CANVAS_PRESET.js";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDesktop, faMobileAlt} from "@fortawesome/free-solid-svg-icons";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedCanvasBoxPositionEdit from "./property/RedCanvasBoxPositionEdit";
-import ACTIVE_FRAME_KEY from "../../ACTIVE_FRAME_KEY";
+import ACTIVE_FRAME_KEY from "../../../const/ACTIVE_FRAME_KEY";
 import RedCanvasAddCustomCss from "./property/RedCanvasAddCustomCss";
 
 let rootComponent;

@@ -8,8 +8,8 @@
 import React from "react";
 
 let targetContext;
-let startX, startY, startValue, startTime
-let requestAni
+let startX, startY, startValue, startTime;
+let requestAni;
 const HD_move = e => {
   targetContext.calc(e);
 };
@@ -18,41 +18,41 @@ const HD_up = () => {
   window.removeEventListener('mouseup', HD_up);
 };
 const HD_up2 = () => {
-  cancelAnimationFrame(requestAni)
+  cancelAnimationFrame(requestAni);
   window.removeEventListener('mouseup', HD_up2);
 };
 
 class RedNumber extends React.Component {
   constructor(props) {
     super(props);
-    HD_up()
-    HD_up2()
+    HD_up();
+    HD_up2();
   }
 
   componentWillUnmount() {
-    HD_up()
-    HD_up2()
+    HD_up();
+    HD_up2();
   }
 
   calc(e) {
-    const step = this.props.step || 0.1
+    const step = this.props.step || 0.1;
     const tX = e.pageX - startX;
-    console.log(e.pageX)
-    this.update(+startValue + tX * step)
+    console.log(e.pageX);
+    this.update(+startValue + tX * step);
   }
 
   update(v) {
-    if (this.props.hasOwnProperty('minValue')) if (v < this.props.minValue) v = this.props.minValue
-    if (this.props.hasOwnProperty('maxValue')) if (v > this.props.maxValue) v = this.props.maxValue
+    if (this.props.hasOwnProperty('minValue')) if (v < this.props.minValue) v = this.props.minValue;
+    if (this.props.hasOwnProperty('maxValue')) if (v > this.props.maxValue) v = this.props.maxValue;
     this.props.HD_onInput({
       target: {
         value: v
       }
-    })
+    });
   }
 
   render() {
-    const step = this.props.step || 1
+    const step = this.props.step || 1;
     return <div
       style={{width: `${this.props.width || ''}`, flexGrow: 1, display: 'inline-block', whiteSpace: 'nowrap'}}>
       {this.props.title ? <span className={'ui_item_title'}>{this.props.title}</span> : ''}
@@ -68,14 +68,14 @@ class RedNumber extends React.Component {
         type={'number'}
         value={+(+this.props.value).toFixed(2)}
         onInput={e => {
-          this.update(+e.target.value)
+          this.update(+e.target.value);
         }}
         onBlur={this.props.HD_blur}
         onMouseDown={e => {
           targetContext = this;
-          startValue = +this.props.value
-          startX = e.nativeEvent.pageX
-          startY = e.nativeEvent.pageY
+          startValue = +this.props.value;
+          startX = e.nativeEvent.pageX;
+          startY = e.nativeEvent.pageY;
           window.addEventListener('mousemove', HD_move);
           window.addEventListener('mouseup', HD_up);
         }}
@@ -95,17 +95,17 @@ class RedNumber extends React.Component {
       }}
            onMouseDown={() => {
              targetContext = this;
-             startValue = +this.props.value
+             startValue = +this.props.value;
              const tick = time => {
                if (time - startTime > 100) {
-                 this.update(+this.props.value + step)
+                 this.update(+this.props.value + step);
                }
-               console.log('여기냐')
-               requestAni = requestAnimationFrame(tick)
-             }
-             requestAni = tick()
-             startTime = performance.now()
-             this.update(+this.props.value + step)
+               console.log('여기냐');
+               requestAni = requestAnimationFrame(tick);
+             };
+             requestAni = tick();
+             startTime = performance.now();
+             this.update(+this.props.value + step);
              window.addEventListener('mouseup', HD_up2);
            }}
            onClick={() => {
@@ -114,7 +114,7 @@ class RedNumber extends React.Component {
                  target: {
                    value: +this.props.value
                  }
-               })
+               });
              }
            }}
       >+
@@ -133,16 +133,16 @@ class RedNumber extends React.Component {
       }}
            onMouseDown={() => {
              targetContext = this;
-             startValue = +this.props.value
+             startValue = +this.props.value;
              const tick = time => {
                if (time - startTime > 100) {
-                 this.update(+this.props.value - step)
+                 this.update(+this.props.value - step);
                }
-               requestAni = requestAnimationFrame(tick)
-             }
-             requestAni = tick()
-             startTime = performance.now()
-             this.update(+this.props.value - step)
+               requestAni = requestAnimationFrame(tick);
+             };
+             requestAni = tick();
+             startTime = performance.now();
+             this.update(+this.props.value - step);
              window.addEventListener('mouseup', HD_up2);
            }}
            onClick={() => {
@@ -151,13 +151,13 @@ class RedNumber extends React.Component {
                  target: {
                    value: +this.props.value
                  }
-               })
+               });
              }
            }}
       >-
       </div>
 
-    </div>
+    </div>;
   }
 }
 

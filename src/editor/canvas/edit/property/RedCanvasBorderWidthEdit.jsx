@@ -8,7 +8,7 @@
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
 
-const names = ['T', 'R', 'B', 'L']
+const names = ['T', 'R', 'B', 'L'];
 
 class RedCanvasBorderWidthEdit extends React.Component {
   constructor(props) {
@@ -33,15 +33,15 @@ class RedCanvasBorderWidthEdit extends React.Component {
 
           <div
             onClick={() => {
-              canvasInfo.border_width_mergeMode = false
-              rootComponent.updateRootState()
+              canvasInfo.border_width_mergeMode = false;
+              rootComponent.updateRootState();
             }}
             style={{...style.mode, background: canvasInfo.border_width_mergeMode ? '#2f2f2f' : '#5e7ade'}}>solo
           </div>
           <div
             onClick={() => {
-              canvasInfo.border_width_mergeMode = true
-              rootComponent.updateRootState()
+              canvasInfo.border_width_mergeMode = true;
+              rootComponent.updateRootState();
             }}
             style={{
               ...style.mode,
@@ -51,7 +51,7 @@ class RedCanvasBorderWidthEdit extends React.Component {
           </div>
         </div>
       </div>
-      <div style={{marginTop: '6px'}}/>
+      <div style={{marginTop: '6px'}} />
       {
         canvasInfo['border_width_mergeMode']
           ? <div style={style.container}>
@@ -63,7 +63,7 @@ class RedCanvasBorderWidthEdit extends React.Component {
               HD_onInput={e => {
                 canvasInfo['border_width'] = +e.target.value;
                 rootComponent.updateRootState({});
-              }}/>
+              }} />
             <span style={{marginLeft: '3px'}}>px</span>
           </div>
           :
@@ -79,9 +79,9 @@ class RedCanvasBorderWidthEdit extends React.Component {
                     HD_onInput={e => {
                       canvasInfo['border_width_split'][index] = +e.target.value;
                       rootComponent.updateRootState({});
-                    }}/>
+                    }} />
                   <span style={{marginLeft: '3px'}}>px</span>
-                </div>
+                </div>;
               })
             }
           </div>
@@ -103,4 +103,4 @@ const style = {
     padding: '2px 5px',
     cursor: 'pointer',
   }
-}
+};

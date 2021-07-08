@@ -6,8 +6,8 @@
  *
  */
 import DataColor from "./DataColor.js";
-import GRADIENT_TYPE from "../GRADIENT_TYPE.js";
-import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE.js";
+import GRADIENT_TYPE from "../../const/GRADIENT_TYPE.js";
+import ENDING_SHAPE_TYPE from "../../const/ENDING_SHAPE_TYPE.js";
 
 let uuid = 0;
 

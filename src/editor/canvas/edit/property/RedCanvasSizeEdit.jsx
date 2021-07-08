@@ -22,15 +22,15 @@ class RedCanvasSizeEdit extends React.Component {
       <div style={style.container}>
         <RedNumber title={'width'} width={'160px'} value={canvasInfo.width} HD_onInput={e => {
           canvasInfo.width = +e.target.value;
-          this.props.canvasComponent.state.useMove = false
+          this.props.canvasComponent.state.useMove = false;
           rootComponent.updateRootState({});
-        }}/>
-        <div style={{width: '5px'}}/>
+        }} />
+        <div style={{width: '5px'}} />
         <RedNumber title={'height'} width={'160px'} value={canvasInfo.height} HD_onInput={e => {
           canvasInfo.height = +e.target.value;
-          this.props.canvasComponent.state.useMove = false
+          this.props.canvasComponent.state.useMove = false;
           rootComponent.updateRootState({});
-        }}/>
+        }} />
       </div>
     </div>;
   }
@@ -43,4 +43,4 @@ const style = {
     alignItems: 'center',
     padding: '0px 10px'
   }
-}
+};

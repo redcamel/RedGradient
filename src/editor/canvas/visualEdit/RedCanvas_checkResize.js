@@ -5,7 +5,7 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-import ACTIVE_FRAME_KEY from "../../ACTIVE_FRAME_KEY";
+import ACTIVE_FRAME_KEY from "../../../const/ACTIVE_FRAME_KEY";
 
 const calcE = (info, containerMode) => {
   const {

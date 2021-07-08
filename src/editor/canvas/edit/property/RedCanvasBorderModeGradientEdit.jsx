@@ -3,7 +3,7 @@
  *  * RedGL - MIT License
  *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
  *  * https://github.com/redcamel/RedGradient
- *  
+ *
  */
 import React from "react";
 import RedNumber from "../../../../core/RedNumber.jsx";
@@ -14,18 +14,18 @@ import RedCanvasBorderWidthEdit from "./RedCanvasBorderWidthEdit.jsx";
 class RedCanvasBorderModeGradientEdit extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {canvasBgColorPickerOpenYn: false}
-    this.refColorPickerContainer = React.createRef()
+    this.state = {canvasBgColorPickerOpenYn: false};
+    this.refColorPickerContainer = React.createRef();
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
     const borderGradientInfo = rootComponent.state;
     return <div>
-      <RedCanvasBorderRadiusEdit rootComponent={rootComponent}/>
-      <div style={style.divide}/>
-      <RedCanvasBorderWidthEdit rootComponent={rootComponent}/>
-      <div style={style.divide}/>
+      <RedCanvasBorderRadiusEdit rootComponent={rootComponent} />
+      <div style={style.divide} />
+      <RedCanvasBorderWidthEdit rootComponent={rootComponent} />
+      <div style={style.divide} />
       <div style={{...style.container, alignItems: 'center', marginRight: '5px'}}>
         <RedNumber
           title={'outset'}
@@ -36,10 +36,10 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
             // console.log(borderGradientInfo)
             borderGradientInfo['border_image_outset'] = +e.target.value;
             rootComponent.updateRootState(borderGradientInfo);
-          }}/>
+          }} />
         <div style={{marginLeft: '5px'}}> px</div>
       </div>
-      <div style={{height: '5px'}}/>
+      <div style={{height: '5px'}} />
       <div style={style.container}>
         <div>
           <RedNumber
@@ -50,7 +50,7 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
             HD_onInput={e => {
               borderGradientInfo['border_image_sliceT'] = +e.target.value;
               rootComponent.updateRootState({});
-            }}/>
+            }} />
 
           <RedNumber
             title={'sliceR'}
@@ -60,7 +60,7 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
             HD_onInput={e => {
               borderGradientInfo['border_image_sliceR'] = +e.target.value;
               rootComponent.updateRootState({});
-            }}/>
+            }} />
         </div>
 
         <div>
@@ -72,7 +72,7 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
             HD_onInput={e => {
               borderGradientInfo['border_image_sliceB'] = +e.target.value;
               rootComponent.updateRootState({});
-            }}/>
+            }} />
 
           <RedNumber
             title={'sliceL'}
@@ -82,10 +82,10 @@ class RedCanvasBorderModeGradientEdit extends React.Component {
             HD_onInput={e => {
               borderGradientInfo['border_image_sliceL'] = +e.target.value;
               rootComponent.updateRootState({});
-            }}/>
+            }} />
         </div>
       </div>
-      <RedCanvasBorderGradientRepeatEdit rootComponent={rootComponent}/>
+      <RedCanvasBorderGradientRepeatEdit rootComponent={rootComponent} />
     </div>
       ;
   }
@@ -103,4 +103,4 @@ const style = {
     background: '#4e4e4e',
     borderTop: '1px solid #000'
   }
-}
+};

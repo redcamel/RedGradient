@@ -6,9 +6,8 @@
  *
  */
 import React from "react";
-import RedPropertyEdit from "./property/RedPropertyEdit.jsx";
-import ACTIVE_FRAME_KEY from "./ACTIVE_FRAME_KEY.js";
-import RedNumber from "../core/RedNumber.jsx";
+import RedGradientEditComp from "./gradient/RedGradientEditComp.jsx";
+import ACTIVE_FRAME_KEY from "../const/ACTIVE_FRAME_KEY.js";
 
 class RedPreview extends React.Component {
   constructor(props) {
@@ -17,23 +16,23 @@ class RedPreview extends React.Component {
   }
 
   render() {
-    const rootComponent = this.props.rootComponent
-    const rootComponentState = rootComponent.state
-    let beforeText = RedPropertyEdit.getContainerCssText(rootComponentState[ACTIVE_FRAME_KEY.BEFORE])
-    let mainText = RedPropertyEdit.getContainerCssText(rootComponentState[ACTIVE_FRAME_KEY.MAIN])
-    let afterText = RedPropertyEdit.getContainerCssText(rootComponentState[ACTIVE_FRAME_KEY.AFTER])
-    let beforeText2 = beforeText.replace('.result', '.red_gradient_result')
-    let mainText2 = mainText.replace('.result', '.red_gradient_result')
-    let afterText2 = afterText.replace('.result', '.red_gradient_result')
+    const rootComponent = this.props.rootComponent;
+    const rootComponentState = rootComponent.state;
+    let beforeText = RedGradientEditComp.getContainerCssText(rootComponentState[ACTIVE_FRAME_KEY.BEFORE]);
+    let mainText = RedGradientEditComp.getContainerCssText(rootComponentState[ACTIVE_FRAME_KEY.MAIN]);
+    let afterText = RedGradientEditComp.getContainerCssText(rootComponentState[ACTIVE_FRAME_KEY.AFTER]);
+    let beforeText2 = beforeText.replace('.result', '.red_gradient_result');
+    let mainText2 = mainText.replace('.result', '.red_gradient_result');
+    let afterText2 = afterText.replace('.result', '.red_gradient_result');
     let ResultPreview = `
     ${beforeText2}
     ${mainText2}
     ${afterText2}
-    `
-    document.getElementById('red_gradient_result_css').textContent = ResultPreview
-    let beforeCanvasInfo = rootComponentState[ACTIVE_FRAME_KEY.BEFORE]['canvasInfo']
-    let mainCanvasInfo = rootComponentState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo']
-    let afterCanvasInfo = rootComponentState[ACTIVE_FRAME_KEY.AFTER]['canvasInfo']
+    `;
+    document.getElementById('red_gradient_result_css').textContent = ResultPreview;
+    let beforeCanvasInfo = rootComponentState[ACTIVE_FRAME_KEY.BEFORE]['canvasInfo'];
+    let mainCanvasInfo = rootComponentState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo'];
+    let afterCanvasInfo = rootComponentState[ACTIVE_FRAME_KEY.AFTER]['canvasInfo'];
     return <div style={style.bg}>
       <div style={style.container}>
         <div style={{display: 'flex', flex: 1, width: '100%'}}>
@@ -43,7 +42,7 @@ class RedPreview extends React.Component {
                 {
                   title: 'before',
                   targetCanvasInfo: beforeCanvasInfo,
-                  text : beforeText,
+                  text: beforeText,
                   itemList: [
                     [{key: 'width'}, {key: 'height'},],
                     [{key: 'left'}, {key: 'top'},]
@@ -51,7 +50,7 @@ class RedPreview extends React.Component {
                 },
                 {
                   title: 'main',
-                  text : mainText,
+                  text: mainText,
                   targetCanvasInfo: mainCanvasInfo,
                   itemList: [
                     [{key: 'width'}, {key: 'height'},]
@@ -59,7 +58,7 @@ class RedPreview extends React.Component {
                 },
                 {
                   title: 'after',
-                  text : afterText,
+                  text: afterText,
                   targetCanvasInfo: afterCanvasInfo,
                   itemList: [
                     [{key: 'width'}, {key: 'height'},],
@@ -69,7 +68,7 @@ class RedPreview extends React.Component {
               ].map(v => {
                 return <div style={{padding: '10px', border: '1px solid red'}}>
                   <h3>{v['title']}</h3>
-                  <div style={{maxHeight : '150px',overflowY : 'scroll'}}>{v['text']}</div>
+                  <div style={{maxHeight: '150px', overflowY: 'scroll'}}>{v['text']}</div>
                   {/*{*/}
                   {/*  v.itemList.map(tList => {*/}
                   {/*    return <div style={{display: 'flex'}}>*/}
@@ -90,7 +89,7 @@ class RedPreview extends React.Component {
                   {/*    </div>*/}
                   {/*  })*/}
                   {/*}*/}
-                </div>
+                </div>;
               })
             }
 
@@ -111,7 +110,7 @@ class RedPreview extends React.Component {
               transform: 'translate(-50%,-50%)'
             }}
             >
-              <div className={"red_gradient_result"}/>
+              <div className={"red_gradient_result"} />
             </div>
           </div>
 
@@ -129,7 +128,7 @@ class RedPreview extends React.Component {
             }}
             onClick={() => {
               rootComponent.updateRootState({});
-              this.props.HD_Close()
+              this.props.HD_Close();
             }}
           >Close
           </button>

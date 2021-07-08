@@ -7,10 +7,10 @@
  */
 import React from "react";
 import drawCanvasUI from "./drawCanvasUI.js";
-import GRADIENT_TYPE from "../GRADIENT_TYPE";
-import CALC_GRADIENT from "../CALC_GRADIENT";
+import GRADIENT_TYPE from "../../const/GRADIENT_TYPE";
+import CALC_GRADIENT from "../../const/CALC_GRADIENT";
 import RedCanvasFilter from "./edit/filter/RedCanvasFlterItem.jsx";
-import ENDING_SHAPE_TYPE from "../ENDING_SHAPE_TYPE";
+import ENDING_SHAPE_TYPE from "../../const/ENDING_SHAPE_TYPE";
 import {
   faArrowLeft,
   faArrowsAlt,
@@ -20,8 +20,8 @@ import {
   faSyncAlt
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import RedPropertyEdit from "../property/RedPropertyEdit";
-import ACTIVE_FRAME_KEY from "../ACTIVE_FRAME_KEY";
+import RedGradientEditComp from "../gradient/RedGradientEditComp";
+import ACTIVE_FRAME_KEY from "../../const/ACTIVE_FRAME_KEY";
 import RedCanvas_checkResize from "./visualEdit/RedCanvas_checkResize";
 import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree";
 import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt";
@@ -60,7 +60,7 @@ class RedCanvas extends React.Component {
     const rootComponent = this.props.rootComponent;
     console.log(rootComponent.state);
     const rootComponentState = rootComponent.state;
-    const activeSubData = rootComponentState.activeSubData;
+    const activeSubData = rootComponentState.activeSubData || (rootComponentState.activeSubDataIndex = 0,rootComponentState.activeLayer['items'][0]);
 
     {
       activeSubData['position']['x'] = +activeSubData['position']['x'];
@@ -76,9 +76,9 @@ class RedCanvas extends React.Component {
     ////////////////////
     /////////
     const appState = this.props.appComponent.state;
-    let beforeText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.BEFORE]);
-    let mainText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN]);
-    let afterText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.AFTER]);
+    let beforeText = RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.BEFORE]);
+    let mainText = RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN]);
+    let afterText = RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.AFTER]);
     let beforeText2 = beforeText.replace('.result', '.red_gradient_result');
     let mainText2 = mainText.replace('.result', '.red_gradient_result');
     let afterText2 = afterText.replace('.result', '.red_gradient_result');
@@ -330,7 +330,7 @@ class RedCanvas extends React.Component {
         <div style={{color: '#efb26a'}}>Edit target</div>
         <div style={{
           marginTop: '3px',
-          display:'inline-block'
+          display: 'inline-block'
 
         }}>
           <div style={{
@@ -341,12 +341,12 @@ class RedCanvas extends React.Component {
             border: '1px solid #000',
           }}>
             {
-              Object.values(MODE).map((v,index) => {
+              Object.values(MODE).map((v, index) => {
                 return <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent : 'space-between',
+                    justifyContent: 'space-between',
                     cursor: 'pointer',
                     color: '#fff',
                     borderLeft: index ? '1px solid #000' : 0,
@@ -1640,7 +1640,7 @@ const style = {
     whiteSpace: 'nowrap'
   },
   canvasViewInfo: {
-    padding : '3px 4px',
+    padding: '3px 4px',
     display: 'flex',
     alignItems: 'center',
     fontSize: '12px',

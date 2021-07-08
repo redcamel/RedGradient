@@ -43,7 +43,7 @@ function DataCanvas() {
     layers: [
       new DataLayer()
     ]
-  }
+  };
 }
 
 export default DataCanvas;

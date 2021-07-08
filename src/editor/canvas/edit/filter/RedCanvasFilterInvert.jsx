@@ -14,12 +14,12 @@ class RedCanvasFilterInvert extends React.Component {
   }
 
   getCss(filterData) {
-    return RedCanvasFilterInvert.getCss(filterData)
+    return RedCanvasFilterInvert.getCss(filterData);
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
-    const filterData = this.props.filterData
+    const filterData = this.props.filterData;
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         amount <RedNumber
@@ -27,20 +27,20 @@ class RedCanvasFilterInvert extends React.Component {
         value={filterData['values']['amount'] || 0}
         HD_onInput={e => {
           filterData['values']['amount'] = +e.target.value;
-          filterData['css'] = this.getCss(filterData)
+          filterData['css'] = this.getCss(filterData);
           rootComponent.updateRootState({});
-        }}/>
+        }} />
       </div>
     </div>;
   }
 }
 
 RedCanvasFilterInvert.getCss = filterData => {
-  return `invert(${filterData['values']['amount']})`
-}
+  return `invert(${filterData['values']['amount']})`;
+};
 RedCanvasFilterInvert.getNewDataValues = () => {
   return {
     amount: 1
-  }
-}
+  };
+};
 export default RedCanvasFilterInvert;

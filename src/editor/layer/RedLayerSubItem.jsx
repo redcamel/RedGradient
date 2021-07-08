@@ -9,7 +9,7 @@ import React from "react";
 import DataItem from "../data/DataItem.js";
 import {faCopy, faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import CALC_GRADIENT from "../CALC_GRADIENT";
+import CALC_GRADIENT from "../../const/CALC_GRADIENT";
 import RedLayerItem from "./RedLayerItem.jsx";
 
 let startDragLayer;
@@ -51,7 +51,7 @@ class RedLayerSubItem extends React.Component {
   handleDragLeave(e) {
     e.preventDefault();
     e.stopPropagation();
-    if (startDragLayer && e.target.className === 'droparea_title') this.setState({dragOverYn: false});
+    if (startDragLayer && e.target.className === 'drop_area_title') this.setState({dragOverYn: false});
   }
 
   handleDragOver(e) {
@@ -77,8 +77,8 @@ class RedLayerSubItem extends React.Component {
       const startIDX = startDragLayer.items.indexOf(startDragItem);
       startDragLayer.items.splice(startIDX, 1);
       dropAreaLayer.items.splice(dstIDX, 0, startDragItem);
-      t0.activeLayer = dropAreaLayer
-      t0.activeSubData = dropAreaItem
+      t0.activeLayer = dropAreaLayer;
+      t0.activeSubData = dropAreaItem;
       t0.activeLayerIndex = this.props.layers.indexOf(dropAreaLayer);
       t0.activeSubDataIndex = this.props.layer['items'].indexOf(dropAreaItem);
     }
@@ -125,60 +125,73 @@ class RedLayerSubItem extends React.Component {
           activeSubDataIndex: layer['items'].indexOf(item),
           activeLayer: layer, activeSubData: item
         });
-      }
-      }
-
+      }}
     >
-
       <div
         className={'layerItemSubTitle'}
-        style={{textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap'}}>
-        {item.title}</div>
-      <div style={{margin: '2px 2px 2px 0px', display: this.props.layerViewSizeMode === 2 ? 'none' : ''}}>
-        <button style={{...style.bgItem, background: '#000', color: '#fff'}}
-                onClick={() => this.setState({layerBgColor: 'black'})}>B
+        style={{textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap'}}
+      >
+        {item.title}
+      </div>
+      <div
+        style={{margin: '2px 2px 2px 0px', display: this.props.layerViewSizeMode === 2 ? 'none' : ''}}
+      >
+        <button
+          style={{...style.bgItem, background: '#000', color: '#fff'}}
+          onClick={() => this.setState({layerBgColor: 'black'})}
+        >B
         </button>
-        <button style={{...style.bgItem, background: '#fff', color: '#000'}}
-                onClick={() => this.setState({layerBgColor: 'white'})}>W
+        <button
+          style={{...style.bgItem, background: '#fff', color: '#000'}}
+          onClick={() => this.setState({layerBgColor: 'white'})}
+        >W
         </button>
-        <button style={{...style.bgItem, borderRight: 0}} className={'transparent_checker'}
-                onClick={() => this.setState({layerBgColor: 'transparent'})}>T
+        <button
+          style={{...style.bgItem, borderRight: 0}} className={'transparent_checker'}
+          onClick={() => this.setState({layerBgColor: 'transparent'})}
+        >T
         </button>
       </div>
       <div style={{margin: '2px 2px 2px 0px'}}>
-        <button className={'layerVisible2'}
-                onClick={() => this._toggleVisible(item)}><FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash}/>
+        <button
+          className={'layerVisible2'}
+          onClick={() => this._toggleVisible(item)}
+        >
+          <FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash} />
         </button>
-        <button className={'layerDel2'}
-                style={{opacity: layer.items.length > 1 ? 1 : 0.25}}
-                onClick={e => {
-                  e.stopPropagation();
-                  if (layer.items.length > 1) {
-                    let idx = layer.items.indexOf(item);
-                    layer.items.splice(idx, 1);
-                    if (!layer.items.length) {
-                      layer.items.push(new DataItem());
-                      idx = 0;
-                    }
-                    if (!layer.items[idx]) idx = idx - 1;
-                    rootComponent.updateRootState({activeSubData: layer.items[idx]});
-                  }
-                }}
-        ><FontAwesomeIcon icon={faMinusCircle}/>
+        <button
+          className={'layerDel2'}
+          style={{opacity: layer.items.length > 1 ? 1 : 0.25}}
+          onClick={e => {
+            e.stopPropagation();
+            if (layer.items.length > 1) {
+              let idx = layer.items.indexOf(item);
+              layer.items.splice(idx, 1);
+              if (!layer.items.length) {
+                layer.items.push(new DataItem());
+                idx = 0;
+              }
+              if (!layer.items[idx]) idx = idx - 1;
+              rootComponent.updateRootState({activeSubData: layer.items[idx]});
+            }
+          }}
+        >
+          <FontAwesomeIcon icon={faMinusCircle} />
         </button>
         <button className={'layerType'}>{layerType}</button>
       </div>
-      <div style={style.addGradientLayerItem}
-           onClick={() => {
-             const idx = layer.items.indexOf(item);
-             const t0 = JSON.parse(JSON.stringify(item));
-             layer.items.splice(idx, 0, t0);
-             rootComponent.updateRootState({activeSubData: t0});
-           }}
-      ><FontAwesomeIcon icon={faCopy}/>
+      <div
+        style={style.addGradientLayerItem}
+        onClick={() => {
+          const idx = layer.items.indexOf(item);
+          const t0 = JSON.parse(JSON.stringify(item));
+          layer.items.splice(idx, 0, t0);
+          rootComponent.updateRootState({activeSubData: t0});
+        }}
+      >
+        <FontAwesomeIcon icon={faCopy} />
         <div style={{marginLeft: '5px'}}>duplicate</div>
       </div>
-
       <div
         className={'transparent_checker'}
         style={{
@@ -191,13 +204,11 @@ class RedLayerSubItem extends React.Component {
           transition: 'height 0.2s'
         }}
       >
-        <div className={'layerItem'}
-             style={{
-               background: `${CALC_GRADIENT.calcGradientItem(item, false, layer)},${this.state.layerBgColor}`
-             }}
+        <div
+          className={'layerItem'}
+          style={{background: `${CALC_GRADIENT.calcGradientItem(item, false, layer)},${this.state.layerBgColor}`}}
         />
-
-        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine}/>
+        <div style={activeSubDataYn ? style.activeLine : style.deActiveLine} />
       </div>
       <div
         style={{
@@ -212,18 +223,19 @@ class RedLayerSubItem extends React.Component {
           background: 'rgba(255, 122, 222,0.75)',
           borderRadius: '4px'
         }}>
-        <div
-          style={{
-            background: '#fff', color: '#000',
-            fontSize: '12px', borderRadius: '5px', padding: '3px 12px',
-            boxShadow: '0px 0px 10px rgba(0,0,0,0.6)',
-            zIndex: 0
-          }}>
+        <div style={{
+          background: '#fff',
+          color: '#000',
+          fontSize: '12px',
+          borderRadius: '5px',
+          padding: '3px 12px',
+          boxShadow: '0px 0px 10px rgba(0,0,0,0.6)',
+          zIndex: 0
+        }}>
           drop here
         </div>
-
         <div
-          className={'droparea_title'}
+          className={'drop_area_title'}
           style={{
             position: 'absolute',
             top: 0, left: 0, right: 0, overflow: 'hidden',

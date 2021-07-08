@@ -14,12 +14,12 @@ class RedCanvasFilterBrightness extends React.Component {
   }
 
   getCss(filterData) {
-    return RedCanvasFilterBrightness.getCss(filterData)
+    return RedCanvasFilterBrightness.getCss(filterData);
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
-    const filterData = this.props.filterData
+    const filterData = this.props.filterData;
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         amount <RedNumber
@@ -27,20 +27,20 @@ class RedCanvasFilterBrightness extends React.Component {
         value={filterData['values']['amount'] || 0}
         HD_onInput={e => {
           filterData['values']['amount'] = +e.target.value;
-          filterData['css'] = this.getCss(filterData)
+          filterData['css'] = this.getCss(filterData);
           rootComponent.updateRootState({});
-        }}/>
+        }} />
       </div>
     </div>;
   }
 }
 
 RedCanvasFilterBrightness.getCss = filterData => {
-  return `brightness(${filterData['values']['amount']})`
-}
+  return `brightness(${filterData['values']['amount']})`;
+};
 RedCanvasFilterBrightness.getNewDataValues = () => {
   return {
     amount: 0.5
-  }
-}
+  };
+};
 export default RedCanvasFilterBrightness;

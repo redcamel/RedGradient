@@ -7,7 +7,7 @@
  */
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
-import BORDER_REPEAT_TYPE from "../../../BORDER_REPEAT_TYPE.js";
+import BORDER_REPEAT_TYPE from "../../../../const/BORDER_REPEAT_TYPE.js";
 
 class RedCanvasBorderGradientRepeatEdit extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class RedCanvasBorderGradientRepeatEdit extends React.Component {
           HD_change={e => {
             borderGradientInfo['border_image_repeat'] = e.target.value;
             rootComponent.updateRootState({});
-          }}/>
+          }} />
       </div>
     </div>;
   }

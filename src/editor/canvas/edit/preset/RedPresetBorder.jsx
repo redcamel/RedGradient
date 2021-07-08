@@ -6,7 +6,7 @@
  *
  */
 import React from "react";
-import CALC_GRADIENT from "../../../CALC_GRADIENT.js";
+import CALC_GRADIENT from "../../../../const/CALC_GRADIENT.js";
 import {faMinusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import PresetBorder from "./PresetBorder.js";
@@ -35,12 +35,12 @@ class RedPresetBorder extends React.Component {
         style={style.iconContainer}
         onClick={() => {
           if (delMode) {
-            RedPresetBorder.delUserPreset(rootComponent, index)
+            RedPresetBorder.delUserPreset(rootComponent, index);
           } else {
-            const newData = JSON.parse(JSON.stringify(v['data']))
-            const idx = rootComponentState.activeLayer.items.indexOf(activeSubData)
-            rootComponentState.activeLayer.items.splice(idx, 1, newData)
-            rootComponentState.activeSubData = newData
+            const newData = JSON.parse(JSON.stringify(v['data']));
+            const idx = rootComponentState.activeLayer.items.indexOf(activeSubData);
+            rootComponentState.activeLayer.items.splice(idx, 1, newData);
+            rootComponentState.activeSubData = newData;
           }
           rootComponent.updateRootState({});
         }}
@@ -52,19 +52,19 @@ class RedPresetBorder extends React.Component {
         </div>
         <div style={style.name}>{v['name']}</div>
         {delMode ? <div style={style.del}><FontAwesomeIcon
-          icon={faMinusCircle}/></div> : ''}
+          icon={faMinusCircle} /></div> : ''}
       </div>;
-    })
+    });
   }
 
   render() {
-    const userPresetBorder = RedPresetBorder.getUserPreset()
+    const userPresetBorder = RedPresetBorder.getUserPreset();
     // console.log('presetList', presetList)
     // console.log('userPresetBorder', userPresetBorder)
     return <div>
       <div className={'ui_subTitle'}>Preset Border Gradient</div>
       <div style={style.container}>{this.renderList(presetList)}</div>
-      <div style={style.divide}/>
+      <div style={style.divide} />
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
 
         <div className={'ui_subTitle'}>User Preset Border Gradient</div>
@@ -99,24 +99,24 @@ class RedPresetBorder extends React.Component {
         </div>
       </div>
       <div style={style.container}>{this.renderList(userPresetBorder, this.state.mode === 1)}</div>
-    </div>
+    </div>;
   }
 }
 
 export default RedPresetBorder;
-RedPresetBorder.getUserPreset = () => JSON.parse(localStorage.getItem('userPresetBorder') || '[]')
+RedPresetBorder.getUserPreset = () => JSON.parse(localStorage.getItem('userPresetBorder') || '[]');
 RedPresetBorder.addUserPreset = (context, v) => {
-  let t0 = RedPresetBorder.getUserPreset()
+  let t0 = RedPresetBorder.getUserPreset();
   t0.push({name: v['title'], data: v});
-  localStorage.setItem('userPresetBorder', JSON.stringify(t0))
-  context.setState({})
-}
+  localStorage.setItem('userPresetBorder', JSON.stringify(t0));
+  context.setState({});
+};
 RedPresetBorder.delUserPreset = (context, index) => {
-  let t0 = RedPresetBorder.getUserPreset()
-  t0.splice(index, 1)
-  localStorage.setItem('userPresetBorder', JSON.stringify(t0))
-  context.setState({})
-}
+  let t0 = RedPresetBorder.getUserPreset();
+  t0.splice(index, 1);
+  localStorage.setItem('userPresetBorder', JSON.stringify(t0));
+  context.setState({});
+};
 RedPresetBorder.exportPreset = () => {
   const a = document.createElement('a');
   const file = new Blob([JSON.stringify(RedPresetBorder.getUserPreset())], {type: 'application/json'});
@@ -124,7 +124,7 @@ RedPresetBorder.exportPreset = () => {
   a.download = `RedBorderGradientPreset.json`;
   a.click();
   URL.revokeObjectURL(a.href);
-}
+};
 RedPresetBorder.checkValidate = (v) => {
   /**
    * JSON 파싱이 되어야하고..
@@ -136,14 +136,14 @@ RedPresetBorder.checkValidate = (v) => {
   try {
     let t0 = JSON.parse(v);
     if (t0 instanceof Array) {
-      if (t0.length === 0) result = true
+      if (t0.length === 0) result = true;
       else if (!t0[0].hasOwnProperty('data') || !t0[0]['data'].hasOwnProperty('colorList')) result = false;
-    } else result = false
+    } else result = false;
   } catch (e) {
     result = false;
   }
   return result;
-}
+};
 RedPresetBorder.importPreset = (context) => {
   const a = document.createElement('input');
   a.setAttribute('accept', '.json');
@@ -154,13 +154,13 @@ RedPresetBorder.importPreset = (context) => {
     fileReader.onload = evt => {
       // console.log(evt.target.result)
       if (RedPresetBorder.checkValidate(evt.target.result)) {
-        localStorage.setItem('userPresetBorder', evt.target.result)
-        context.setState({})
-      } else alert('RedGradient Preset 형식의 파일이 아닙니다.')
-    }
+        localStorage.setItem('userPresetBorder', evt.target.result);
+        context.setState({});
+      } else alert('RedGradient Preset 형식의 파일이 아닙니다.');
+    };
     fileReader.readAsText(e.target.files[0]);
   };
-}
+};
 const style = {
   container: {
     display: 'flex',

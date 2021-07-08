@@ -16,7 +16,7 @@ const calcWE = (info, containerMode) => {
     gapX
   } = info;
   if (containerMode) {
-    canvasInfo['left'] = originX + gapX
+    canvasInfo['left'] = originX + gapX;
   } else {
     if (tW === cW) positionInfo['xUnit'] = 'px';
     if (positionInfo['xUnit'] === '%') {
@@ -44,7 +44,7 @@ const calcSN = (info, containerMode) => {
     gapY
   } = info;
   if (containerMode) {
-    canvasInfo['top'] = originY + gapY
+    canvasInfo['top'] = originY + gapY;
   } else {
     if (tH === cH) positionInfo['yUnit'] = 'px';
     if (positionInfo['yUnit'] === '%') {

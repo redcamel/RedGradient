@@ -27,4 +27,4 @@ function RedCanvas_checkAt(e) {
   }
 }
 
-export default RedCanvas_checkAt
+export default RedCanvas_checkAt;

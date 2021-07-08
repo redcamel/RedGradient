@@ -13,16 +13,16 @@ class RedCanvasFilterNormal extends React.Component {
   }
 
   getCss(filterData) {
-    return RedCanvasFilterNormal.getCss(filterData)
+    return RedCanvasFilterNormal.getCss(filterData);
   }
 
   render() {
-    return ''
+    return '';
   }
 }
 
-RedCanvasFilterNormal.getCss = () => ''
+RedCanvasFilterNormal.getCss = () => '';
 RedCanvasFilterNormal.getNewDataValues = () => {
-  return {}
-}
+  return {};
+};
 export default RedCanvasFilterNormal;

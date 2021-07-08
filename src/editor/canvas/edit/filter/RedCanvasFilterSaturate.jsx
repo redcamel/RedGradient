@@ -14,12 +14,12 @@ class RedCanvasFilterSaturate extends React.Component {
   }
 
   getCss(filterData) {
-    return RedCanvasFilterSaturate.getCss(filterData)
+    return RedCanvasFilterSaturate.getCss(filterData);
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
-    const filterData = this.props.filterData
+    const filterData = this.props.filterData;
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         amount <RedNumber
@@ -27,20 +27,20 @@ class RedCanvasFilterSaturate extends React.Component {
         value={filterData['values']['amount'] || 0}
         HD_onInput={e => {
           filterData['values']['amount'] = +e.target.value;
-          filterData['css'] = this.getCss(filterData)
+          filterData['css'] = this.getCss(filterData);
           rootComponent.updateRootState({});
-        }}/>
+        }} />
       </div>
     </div>;
   }
 }
 
 RedCanvasFilterSaturate.getCss = filterData => {
-  return `saturate(${filterData['values']['amount']})`
-}
+  return `saturate(${filterData['values']['amount']})`;
+};
 RedCanvasFilterSaturate.getNewDataValues = () => {
   return {
     amount: 0.5
-  }
-}
+  };
+};
 export default RedCanvasFilterSaturate;

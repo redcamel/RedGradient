@@ -14,12 +14,12 @@ class RedCanvasFilterGrayScale extends React.Component {
   }
 
   getCss(filterData) {
-    return RedCanvasFilterGrayScale.getCss(filterData)
+    return RedCanvasFilterGrayScale.getCss(filterData);
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
-    const filterData = this.props.filterData
+    const filterData = this.props.filterData;
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         amount <RedNumber
@@ -27,20 +27,20 @@ class RedCanvasFilterGrayScale extends React.Component {
         value={filterData['values']['amount'] || 0}
         HD_onInput={e => {
           filterData['values']['amount'] = +e.target.value;
-          filterData['css'] = this.getCss(filterData)
+          filterData['css'] = this.getCss(filterData);
           rootComponent.updateRootState({});
-        }}/>
+        }} />
       </div>
     </div>;
   }
 }
 
 RedCanvasFilterGrayScale.getCss = filterData => {
-  return `grayScale(${filterData['values']['amount']})`
-}
+  return `grayScale(${filterData['values']['amount']})`;
+};
 RedCanvasFilterGrayScale.getNewDataValues = () => {
   return {
     amount: 1
-  }
-}
+  };
+};
 export default RedCanvasFilterGrayScale;

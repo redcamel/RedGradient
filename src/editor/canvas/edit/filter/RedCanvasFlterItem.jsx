@@ -32,7 +32,7 @@ const filterComponent = {
   invert: RedCanvasFilterInvert,
   saturate: RedCanvasFilterSaturate,
   sepia: RedCanvasFilterSepia
-}
+};
 
 class RedCanvasFilter extends React.Component {
   constructor(props) {
@@ -41,44 +41,44 @@ class RedCanvasFilter extends React.Component {
 
   render() {
     const rootComponent = this.props.rootComponent;
-    const filterData = this.props.filterData
-    const TargetFilterComponent = filterComponent[filterData['type']]
+    const filterData = this.props.filterData;
+    const TargetFilterComponent = filterComponent[filterData['type']];
     return <div>
       <div style={style.container}>
         type
         <RedSelect value={filterData['type']} options={filterList} HD_change={e => {
           filterData['type'] = e.target.value;
-          filterData['values'] = filterComponent[filterData['type']].getNewDataValues()
+          filterData['values'] = filterComponent[filterData['type']].getNewDataValues();
           rootComponent.updateRootState({});
-        }}/>
+        }} />
         <button
           style={style.buttonIcon}
           onClick={() => {
-            const filterList = rootComponent.state.canvasInfo.filterList
-            filterList.splice(filterList.indexOf(filterData), 1)
-            rootComponent.updateRootState({})
+            const filterList = rootComponent.state.canvasInfo.filterList;
+            filterList.splice(filterList.indexOf(filterData), 1);
+            rootComponent.updateRootState({});
           }}
         >Del
         </button>
         <button
           style={style.buttonIcon}
           onClick={() => {
-            const filterList = rootComponent.state.canvasInfo.filterList
-            filterList.splice(filterList.indexOf(filterData), 0, JSON.parse(JSON.stringify(filterData)))
-            rootComponent.updateRootState({})
+            const filterList = rootComponent.state.canvasInfo.filterList;
+            filterList.splice(filterList.indexOf(filterData), 0, JSON.parse(JSON.stringify(filterData)));
+            rootComponent.updateRootState({});
           }}
         >Copy
         </button>
       </div>
-      {TargetFilterComponent ? <TargetFilterComponent rootComponent={rootComponent} filterData={filterData}/> : ''}
+      {TargetFilterComponent ? <TargetFilterComponent rootComponent={rootComponent} filterData={filterData} /> : ''}
 
-      <div style={style.divide}/>
+      <div style={style.divide} />
     </div>;
   }
 }
 
 export default RedCanvasFilter;
-RedCanvasFilter.FILTER_COMPONENT_MAP = filterComponent
+RedCanvasFilter.FILTER_COMPONENT_MAP = filterComponent;
 const style = {
   container: {
     display: 'flex',

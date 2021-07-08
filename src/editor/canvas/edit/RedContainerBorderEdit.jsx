@@ -25,12 +25,12 @@ class RedContainerBorderEdit extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
-    const canvasInfo = rootComponentState.canvasInfo
+    const canvasInfo = rootComponentState.canvasInfo;
     return <div>
-      <RedTitle title={'Container Border Property'}/>
+      <RedTitle title={'Container Border Property'} />
       <div style={style.container}>
-        <RedCanvasOutlineEdit rootComponent={rootComponent}/>
-        <div style={style.divide}/>
+        <RedCanvasOutlineEdit rootComponent={rootComponent} />
+        <div style={style.divide} />
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <div className={'ui_subTitle'}>border</div>
           <div style={{
@@ -44,15 +44,15 @@ class RedContainerBorderEdit extends React.Component {
 
             <div
               onClick={() => {
-                canvasInfo.borderIsGradientMode = false
-                rootComponent.updateRootState()
+                canvasInfo.borderIsGradientMode = false;
+                rootComponent.updateRootState();
               }}
               style={{...style.mode, background: canvasInfo.borderIsGradientMode ? '#2f2f2f' : '#5e7ade'}}>basic
             </div>
             <div
               onClick={() => {
-                canvasInfo.borderIsGradientMode = true
-                rootComponent.updateRootState()
+                canvasInfo.borderIsGradientMode = true;
+                rootComponent.updateRootState();
               }}
               style={{
                 ...style.mode,
@@ -69,9 +69,9 @@ class RedContainerBorderEdit extends React.Component {
           padding: '10px 6px',
         }}>
           <div style={{display: canvasInfo.borderIsGradientMode ? 'none' : 'block'}}><RedCanvasBorderModeEdit
-            rootComponent={rootComponent}/></div>
+            rootComponent={rootComponent} /></div>
 
-          {canvasInfo.borderIsGradientMode ? <RedCanvasBorderGradientFrame rootComponent={rootComponent}/> : ''}
+          {canvasInfo.borderIsGradientMode ? <RedCanvasBorderGradientFrame rootComponent={rootComponent} /> : ''}
 
         </div>
       </div>

@@ -8,7 +8,7 @@
 import React from "react";
 import RedNumber from "../../core/RedNumber.jsx";
 import gsap from "gsap";
-import GRADIENT_TYPE from "../GRADIENT_TYPE.js";
+import GRADIENT_TYPE from "../../const/GRADIENT_TYPE.js";
 import DataColor from "../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedTitle from "../../core/RedTitle";
@@ -100,21 +100,11 @@ class RedAddGradientLayerSet extends React.Component {
     const tempColorList = this.state.tempColorList;
     const startIndex = 498;
     const lastIndex = 499;
-    return <div style={style.bg}
-
-    >
+    return <div style={style.bg}>
 
       <div style={style.container}>
         <div style={{width: '100%'}}><RedTitle title={"add with template"} /></div>
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          width: '1024px',
-          justiceContent: 'space-between',
-          margin: '10px',
-          border: '1px solid #777',
-          borderRadius: '8px'
-        }}>
+        <div style={style.containerRanges}>
           {
             rangeList.map((v, index) => {
               let ease = this.state.easeName === 'none' ? 'none' : `${this.state.easeName}.${this.state.easeType}`;
@@ -127,8 +117,8 @@ class RedAddGradientLayerSet extends React.Component {
               tETween.pause();
               tETween.seek((index + 1) / rangeList.length);
               // console.log(tSTween)
-              tS = tSTween.ratio * 100;
-              tE = tETween.ratio * 100;
+              tS = tSTween['ratio'] * 100;
+              tE = tETween['ratio'] * 100;
               let tColor = tempColorList[index] ? tempColorList[index]['color'] : gsap.utils.interpolate(this.state.startColor['color'], this.state.endColor['color'], index / rangeList.length);
               if (!tempColorList[index]) {
                 tempColorList[index] = tempColorList[index] || (new DataColor(tColor, tS, '%', false, false, true, tE));
@@ -137,20 +127,17 @@ class RedAddGradientLayerSet extends React.Component {
               }
               tempColorList[index]['rangeEnd'] = tempColorList[index + 1] ? tempColorList[index + 1]['range'] : tempColorList[index]['rangeEnd'];
               const tColorData = tempColorList[index];
-              return <div style={{
-                position: 'relative',
-                padding: '5px',
-                background: (index + Math.floor(index / 10)) % 2 ? 'rgba(0,0,0,0.25)' : '',
-                // borderLeft: index ? '1px solid #777' : 0,
-                width: `${100 / rangeList.length}%`,
-                minWidth: '10%'
-              }}>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  fontSize: '9px',
-                  width: '100px'
-                }}>
+              return <div
+                style={{
+                  position: 'relative',
+                  padding: '5px',
+                  background: (index + Math.floor(index / 10)) % 2 ? 'rgba(0,0,0,0.25)' : '',
+                  // borderLeft: index ? '1px solid #777' : 0,
+                  width: `${100 / rangeList.length}%`,
+                  minWidth: '10%'
+                }}
+              >
+                <div style={style.rangeInput}>
                   <RedNumber
                     fontSize={'11px'}
                     width={'100%'}
@@ -165,13 +152,7 @@ class RedAddGradientLayerSet extends React.Component {
                   <div style={{margin: '0px 2px 0px 2px'}}>%</div>
                 </div>
                 {/*<div>{tE.toFixed()}%</div>*/}
-                <div
-                  style={{
-                    width: '28px', height: '28px', margin: '1px',
-                    textAlign: 'center',
-                  }}
-                  className={'transparent_checker'}
-                >
+                <div style={style.colorBox} className={'transparent_checker'}>
                   <div style={{
                     background: tColor,
                     width: '28px', height: '28px',
@@ -203,10 +184,7 @@ class RedAddGradientLayerSet extends React.Component {
                          });
                        }}
                   />
-
                 </div>
-
-
                 <div style={{
                   ...style.colorPicker,
                   transform: Math.floor(index / 10) === index / 10 ? 'translate(-25% , 40px)' : index % 10 === 9 ? 'translate(-75% , 40px)' : 'translate(-50% , 40px)',
@@ -235,30 +213,39 @@ class RedAddGradientLayerSet extends React.Component {
                 HD_onInput={e => {
                   let t0 = Math.max(+e.target.value, 1);
                   this.setState({division: t0, tempColorList: []});
-                }} />
+                }}
+              />
               <div />
-              <RedSelect title={'ease'} value={this.state['easeName']} options={easeNameList} HD_change={e => {
-                this.setState({easeName: e.target.value, tempColorList: []});
-              }} />
+              <RedSelect
+                title={'ease'}
+                value={this.state['easeName']}
+                options={easeNameList}
+                HD_change={e => {
+                  this.setState({easeName: e.target.value, tempColorList: []});
+                }}
+              />
               <div />
-              <RedSelect title={'easeType'} value={this.state['easeType']} options={easeTypeList} HD_change={e => {
-                this.setState({easeType: e.target.value, tempColorList: []});
-              }} />
+              <RedSelect
+                title={'easeType'}
+                value={this.state['easeType']}
+                options={easeTypeList}
+                HD_change={e => {
+                  this.setState({easeType: e.target.value, tempColorList: []});
+                }}
+              />
               <div />
-              <RedSelect title={'gradient type'} value={this.state['type']} options={Object.entries(gradientTypes)}
-                         HD_change={e => {
-                           this.setState({type: e.target.value, tempColorList: []});
-                         }} />
-              {/*             */}
+              <RedSelect
+                title={'gradient type'}
+                value={this.state['type']}
+                options={Object.entries(gradientTypes)}
+                HD_change={e => {
+                  this.setState({type: e.target.value, tempColorList: []});
+                }}
+              />
+              {/* */}
               <div style={{display: 'flex', alignItems: 'center'}}>
                 start color
-                <div
-                  style={{
-                    width: '28px', height: '28px', margin: '1px',
-                    textAlign: 'center',
-                  }}
-                  className={'transparent_checker'}
-                >
+                <div style={style.colorBox} className={'transparent_checker'}>
                   <div style={{
                     background: this.state.startColor['color'],
                     width: '28px', height: '28px',
@@ -447,6 +434,15 @@ const
       alignItems: 'center',
       flexDirection: 'column'
     },
+    containerRanges: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      width: '1024px',
+      justiceContent: 'space-between',
+      margin: '10px',
+      border: '1px solid #777',
+      borderRadius: '8px'
+    },
     colorPicker: {
       zIndex: 1, position: 'absolute', top: 0, left: '50%', transform: 'translate(-50% , 50px)',
       boxShadow: '0px 0px 16px rgba(0,0,0,0.5)',
@@ -455,4 +451,6 @@ const
       overflow: 'hidden'
     },
     complete: {padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'},
+    rangeInput: {display: 'flex', alignItems: 'center', fontSize: '9px', width: '100px'},
+    colorBox : {width: '28px', height: '28px', margin: '1px', textAlign: 'center'}
   };

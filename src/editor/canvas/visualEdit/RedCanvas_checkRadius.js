@@ -14,7 +14,7 @@ const calcNW = (info) => {
   } = info;
   if (canvasInfo['border_radius_mergeMode']) canvasInfo['border_radius'] = startRadius[0] + gapX;
   else {
-    canvasInfo['border_radius_split'][0] = Math.max(0,startRadius[0] + gapX);
+    canvasInfo['border_radius_split'][0] = Math.max(0, startRadius[0] + gapX);
   }
 };
 const calcNE = (info) => {
@@ -60,7 +60,7 @@ function RedCanvas_checkResize(e) {
   if (this.state.radiusMode) {
     e = e.nativeEvent;
     const mode = this.state.radiusMode['mode'];
-    let gapX = (e.pageX - +this.state.radiusMode['startX']) / this.state.canvasViewScale ;
+    let gapX = (e.pageX - +this.state.radiusMode['startX']) / this.state.canvasViewScale;
 
     if (canvasInfo['border_radius_mergeMode']) {
 

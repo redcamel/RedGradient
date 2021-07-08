@@ -11,8 +11,8 @@ import {faSave} from "@fortawesome/free-solid-svg-icons";
 
 class RedFrameMenuSave extends React.Component {
   render() {
-    const rootComponent = this.props.rootComponent
-    const rootComponentState = rootComponent.state
+    const rootComponent = this.props.rootComponent;
+    const rootComponentState = rootComponent.state;
     return <div
       style={{
         fontSize: '26px',
@@ -26,11 +26,11 @@ class RedFrameMenuSave extends React.Component {
         a.download = `RedGradient.json`;
         a.click();
         URL.revokeObjectURL(a.href);
-        window.actionHistoryCheckNum = 0
+        window.actionHistoryCheckNum = 0;
       }}
 
-    ><FontAwesomeIcon icon={faSave}/>
-    </div>
+    ><FontAwesomeIcon icon={faSave} />
+    </div>;
   }
 }
 

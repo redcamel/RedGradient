@@ -8,9 +8,9 @@
 import '../App.css';
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import ACTIVE_FRAME_KEY from "./ACTIVE_FRAME_KEY";
+import ACTIVE_FRAME_KEY from "../const/ACTIVE_FRAME_KEY";
 import RedPreview from "./RedPreview.jsx";
-import getUUID from "../core/getUUID.js";
+import getUUID from "./js/getUUID.js";
 
 class ActiveSelectBar extends React.Component {
   constructor(props) {
@@ -28,8 +28,8 @@ class ActiveSelectBar extends React.Component {
         border: '1px solid #000',
         borderTop: 0,
         borderLeft: 0,
-        zIndex:1,
-        background : '#333'
+        zIndex: 1,
+        background: '#333'
       }}>
         <div style={{
           display: 'flex'

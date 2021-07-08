@@ -14,12 +14,12 @@ class RedCanvasFilterHueRotate extends React.Component {
   }
 
   getCss(filterData) {
-    return RedCanvasFilterHueRotate.getCss(filterData)
+    return RedCanvasFilterHueRotate.getCss(filterData);
   }
 
   render() {
     const rootComponent = this.props.rootComponent;
-    const filterData = this.props.filterData
+    const filterData = this.props.filterData;
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         deg <RedNumber
@@ -27,20 +27,20 @@ class RedCanvasFilterHueRotate extends React.Component {
         value={filterData['values']['deg'] || 0}
         HD_onInput={e => {
           filterData['values']['deg'] = +e.target.value;
-          filterData['css'] = this.getCss(filterData)
+          filterData['css'] = this.getCss(filterData);
           rootComponent.updateRootState({});
-        }}/>
+        }} />
       </div>
     </div>;
   }
 }
 
 RedCanvasFilterHueRotate.getCss = filterData => {
-  return `hue-rotate(${filterData['values']['deg']}deg)`
-}
+  return `hue-rotate(${filterData['values']['deg']}deg)`;
+};
 RedCanvasFilterHueRotate.getNewDataValues = () => {
   return {
     deg: 0
-  }
-}
+  };
+};
 export default RedCanvasFilterHueRotate;
