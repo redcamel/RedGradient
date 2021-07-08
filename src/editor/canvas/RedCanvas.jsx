@@ -90,53 +90,56 @@ class RedCanvas extends React.Component {
     document.getElementById('red_gradient_result_css').textContent = ResultPreview;
 
     console.log(canvasInfo['addCss'] || ";");
-    return <div
-      style={{
-        ...style.canvas,
-        transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
-      }} className={'transparent_checker redGradient_canvas '}>
-      {
-        this.state.editCanvasOnly ? <div
-          className={'transparent_checker'}
-          cssText={canvasInfo['addCss'] || ""}
-          style={{
+    return <>
+      <div
+        style={{
+          ...style.canvas,
+          transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
+        }} className={'transparent_checker redGradient_canvas '}>
+        {
+          this.state.editCanvasOnly ? <div
+            className={'transparent_checker'}
+            cssText={canvasInfo['addCss'] || ""}
+            style={{
 
-            width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
-            background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
-            backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
-            // transition: 'width 0.2s, height 0.2s',
-            ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
-            filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
-            overflow: 'hidden',
-          }}
+              width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
+              background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
+              backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
+              // transition: 'width 0.2s, height 0.2s',
+              ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
+              filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
+              overflow: 'hidden',
+            }}
 
-        /> : <div className={"red_gradient_result"} />
-      }
+          /> : <div className={"red_gradient_result"} />
+        }
 
 
-      {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
-      {/*<div>{borderW}/{borderH}</div>*/}
+        {/*<div style={{position : 'absolute',top:'50%',left : '50%',transform : 'translate(-50%,-50%)'}}>RedGradient</div>*/}
+        {/*<div>{borderW}/{borderH}</div>*/}
 
-      {
-        this.state.visualEditMode === MODE.GRADIENT
-          ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo,appState)
-          : this.state.visualEditMode === MODE.CONTAINER
-          ? this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo,appState)
-          : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo,appState)
-      }
-    </div>;
+        {
+          this.state.visualEditMode === MODE.GRADIENT
+            ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo, appState)
+            : this.state.visualEditMode === MODE.CONTAINER
+            ? this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo, appState)
+            : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo, appState)
+        }
+      </div>
+      {this.renderVisualEditMode(canvasInfo, activeSubData)}
+    </>;
   }
 
-  renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo,appState) {
+  renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo, appState) {
     let cX = this.state.editCanvasOnly ? -canvasInfo['left'] || 0 : 0;
     let cY = this.state.editCanvasOnly ? -canvasInfo['top'] || 0 : 0;
-    if(rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly ){
+    if (rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly) {
       {
-        const mainCanvasInfo = appState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo']
-        const borderW = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][1] + mainCanvasInfo['border_width_split'][3]);
-        const borderH = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][0] + mainCanvasInfo['border_width_split'][2]);
-        cX+= borderW
-        cY+= borderH
+        const mainCanvasInfo = appState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo'];
+        const borderW = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width'] : (mainCanvasInfo['border_width_split'][1] + mainCanvasInfo['border_width_split'][3]);
+        const borderH = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width'] : (mainCanvasInfo['border_width_split'][0] + mainCanvasInfo['border_width_split'][2]);
+        cX += borderW;
+        cY += borderH;
       }
     }
     const layoutSize = {
@@ -160,7 +163,7 @@ class RedCanvas extends React.Component {
         color: '#000'
       }}
     >
-      {this.renderVisualEditMode(canvasInfo, activeSubData)}
+
       {
         <>
           <div style={{
@@ -298,43 +301,41 @@ class RedCanvas extends React.Component {
   }
 
   renderVisualEditMode(canvasInfo, activeSubData) {
-    const iconScale = Math.min(1, 1 / this.state.canvasViewScale);
     return <div style={{
       position: 'absolute',
-      top:this.state.visualEditMode === MODE.BORDER ? '-100px' :  '-138px',
-      left: '50%',
-      transform: `translate(-50%,0) scale(${iconScale})`
+      top: 130,
+      left: 10,
     }}>
       <div style={{
-        textAlign: 'center',
         color: '#fff',
         display: 'flex',
-        justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: '3px'
       }}>
-        container size : {canvasInfo['width']} * {canvasInfo['height']}
+        <span style={{color: '#efb26a'}}>Container size </span> : {+canvasInfo['width'].toFixed(2)} * {+canvasInfo['height'].toFixed(2)}
       </div>
       <div style={{
-        textAlign: 'center',
         color: '#fff',
         display: 'flex',
-        justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: '10px'
+        marginBottom: '7px'
       }}>
-        bg size
-        : {activeSubData['size']['w']}{activeSubData['size']['wUnit']} * {activeSubData['size']['h']}{activeSubData['size']['hUnit']}
+        <span
+          style={{color: '#efb26a'}}>Gradient size </span> : {activeSubData['size']['w'].toFixed(2)}{activeSubData['size']['wUnit']} * {activeSubData['size']['h'].toFixed(2)}{activeSubData['size']['hUnit']}
       </div>
       <div style={{
         display: 'flex',
+        alignItems:'center',
         border: '1px solid #000',
-        borderRadius: '5px',
+        borderRadius: '4px',
         overflow: 'hidden'
       }}>
         {
           Object.values(MODE).map((v) => {
             return <div
               style={{
+                display: 'flex',
+                alignItems:'center',
                 cursor: 'pointer',
                 color: '#fff',
                 padding: '6px',
@@ -351,17 +352,17 @@ class RedCanvas extends React.Component {
     </div>;
   }
 
-  renderContainerEdit(rootComponentState, activeSubData, canvasInfo,appState) {
+  renderContainerEdit(rootComponentState, activeSubData, canvasInfo, appState) {
     let cX = this.state.editCanvasOnly ? -canvasInfo['left'] : 0;
     let cY = this.state.editCanvasOnly ? -canvasInfo['top'] : 0;
 
-    if(rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly ){
+    if (rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly) {
       {
-        const mainCanvasInfo = appState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo']
-        const borderW = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][1] + mainCanvasInfo['border_width_split'][3]);
-        const borderH = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][0] + mainCanvasInfo['border_width_split'][2]);
-        cX+= borderW
-        cY+= borderH
+        const mainCanvasInfo = appState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo'];
+        const borderW = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width'] : (mainCanvasInfo['border_width_split'][1] + mainCanvasInfo['border_width_split'][3]);
+        const borderH = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width'] : (mainCanvasInfo['border_width_split'][0] + mainCanvasInfo['border_width_split'][2]);
+        cX += borderW;
+        cY += borderH;
       }
     }
 
@@ -386,7 +387,7 @@ class RedCanvas extends React.Component {
         color: '#000'
       }}
     >
-      {this.renderVisualEditMode(canvasInfo, activeSubData)}
+
       <div style={{
         top: 0,
         left: '50%',
@@ -762,7 +763,7 @@ class RedCanvas extends React.Component {
 
   }
 
-  renderGradientEdit(rootComponentState, activeSubData, canvasInfo,appState) {
+  renderGradientEdit(rootComponentState, activeSubData, canvasInfo, appState) {
     const activeSubDataPosition = activeSubData['position'];
     const activeSubDataAt = activeSubData['at'];
     const activeSubDataSize = activeSubData['size'];
@@ -772,13 +773,13 @@ class RedCanvas extends React.Component {
     const borderH = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2]);
     const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3];
     const borderY = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][0];
-    if(rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly ){
+    if (rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly) {
       {
-        const mainCanvasInfo = appState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo']
-        const borderW = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][1] + mainCanvasInfo['border_width_split'][3]);
-        const borderH = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width']  : (mainCanvasInfo['border_width_split'][0] + mainCanvasInfo['border_width_split'][2]);
-        cX+= borderW
-        cY+= borderH
+        const mainCanvasInfo = appState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo'];
+        const borderW = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width'] : (mainCanvasInfo['border_width_split'][1] + mainCanvasInfo['border_width_split'][3]);
+        const borderH = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width'] : (mainCanvasInfo['border_width_split'][0] + mainCanvasInfo['border_width_split'][2]);
+        cX += borderW;
+        cY += borderH;
       }
     }
     const layoutSize = {
@@ -827,7 +828,7 @@ class RedCanvas extends React.Component {
             color: '#000'
           }}
         >
-          {this.renderVisualEditMode(canvasInfo, activeSubData)}
+
           <div style={{
             top: 0,
             left: '50%',
@@ -1533,8 +1534,18 @@ class RedCanvas extends React.Component {
       }}
     >
       {this.draw_canvasUI()}
-      <ActiveSelectBar appComponent={this.props.appComponent}/>
+      <ActiveSelectBar appComponent={this.props.appComponent} />
       {this.drawCall(canvasInfo, layers, rootComponentState.bgColor, activeLayer)}
+      <div style={{
+        position : 'absolute',
+        bottom : '10px',
+        left : '50%',
+        transform : 'translate(-50%,0)'
+      }}>
+        <div style={{marginLeft: '5px', color: '#fff'}}><span style={{color: '#efb26a'}}>Center </span>
+          : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY.toFixed(2)} <span
+            style={{color: '#efb26a'}}>ViewScale </span> : {this.state.canvasViewScale.toFixed(2)}</div>
+      </div>
     </div>;
   }
 }

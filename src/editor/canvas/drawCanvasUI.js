@@ -14,8 +14,8 @@ function drawCanvasUI() {
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
   return <div style={style.container}>
-    <RedTitle title={'Container Information'}/>
-    <div style={{padding : '8px 8px'}}>
+    <RedTitle title={'Container Information'} />
+    <div style={{padding: '8px 8px'}}>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <div style={style.canvasResizer}>
           <div>
@@ -80,9 +80,7 @@ function drawCanvasUI() {
         </div>
         <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
         <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
-        <div style={{marginLeft: '5px', color: '#696969'}}>Center
-          : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY} /
-          ViewScale : {this.state.canvasViewScale.toFixed(2)}</div>
+
 
       </div>
 
@@ -106,7 +104,7 @@ const style = {
   canvasResizer: {
     display: 'flex',
     alignItems: 'center',
-    marginBottom : '5px',
+    marginBottom: '5px',
     fontSize: '12px'
   },
   canvasViewInfo: {
