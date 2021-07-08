@@ -15,21 +15,19 @@ function drawCanvasUI() {
   const canvasInfo = rootComponentState.canvasInfo;
   return <div style={style.container}>
     <RedTitle title={'Container Information'}/>
-
-    <>
+    <div style={{padding : '8px 8px'}}>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <div style={style.canvasResizer}>
           <div>
             <label style={{
-              marginLeft: '5px',
               background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
               display: 'flex',
-              borderRadius: '6px',
-              padding: '5px 10px',
+              borderRadius: '4px',
+              padding: '3px 8px',
               whiteSpace: 'nowrap',
               cursor: 'pointer'
             }}>
-              View Gradient Edit Area
+              View Edit Area
               <input type={'checkbox'}
                      checked={this.state.layerSizeView}
                      style={{
@@ -51,8 +49,8 @@ function drawCanvasUI() {
               marginLeft: '5px',
               background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
               display: 'flex',
-              borderRadius: '6px',
-              padding: '5px 10px',
+              borderRadius: '4px',
+              padding: '3px 8px',
               whiteSpace: 'nowrap',
               cursor: 'pointer'
             }}>
@@ -88,7 +86,7 @@ function drawCanvasUI() {
 
       </div>
 
-    </>
+    </div>
 
 
   </div>;
@@ -108,19 +106,18 @@ const style = {
   canvasResizer: {
     display: 'flex',
     alignItems: 'center',
-    padding: '8px 8px 4px',
+    marginBottom : '5px',
+    fontSize: '12px'
   },
   canvasViewInfo: {
     display: 'flex',
     alignItems: 'center',
-    padding: '0px 8px 5px 12px',
     fontSize: '12px',
-    textAlign: 'right'
   },
   toCenter: {
     background: '#5e7ade',
     display: 'flex',
-    borderRadius: '6px',
+    borderRadius: '4px',
     padding: '3px 8px',
     whiteSpace: 'nowrap',
     cursor: 'pointer',
@@ -132,7 +129,7 @@ const style = {
     marginLeft: '4px',
     background: '#7235d4',
     display: 'flex',
-    borderRadius: '6px',
+    borderRadius: '4px',
     padding: '3px 8px',
     whiteSpace: 'nowrap',
     cursor: 'pointer',

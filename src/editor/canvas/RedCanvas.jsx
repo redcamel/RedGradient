@@ -27,6 +27,7 @@ import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree";
 import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt";
 import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition";
 import RedCanvas_checkRadius from "./visualEdit/RedCanvas_checkRadius";
+import ActiveSelectBar from "../ActiveSelectBar";
 // TODO - 정리필요
 let ghostSize, ghostMode;
 const MODE = {
@@ -74,7 +75,7 @@ class RedCanvas extends React.Component {
 
     ////////////////////
     /////////
-    const appState = this.props.appState;
+    const appState = this.props.appComponent.state;
     let beforeText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.BEFORE]);
     let mainText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN]);
     let afterText = RedPropertyEdit.getContainerCssText(appState[ACTIVE_FRAME_KEY.AFTER]);
@@ -1532,6 +1533,7 @@ class RedCanvas extends React.Component {
       }}
     >
       {this.draw_canvasUI()}
+      <ActiveSelectBar appComponent={this.props.appComponent}/>
       {this.drawCall(canvasInfo, layers, rootComponentState.bgColor, activeLayer)}
     </div>;
   }

@@ -27,6 +27,7 @@ import DataLayer from "./data/DataLayer";
 import RedContainerBorderEdit from "./canvas/edit/RedContainerBorderEdit";
 import RedPreview from "./RedPreview.jsx";
 import getUUID from "../core/getUUID.js";
+import ActiveSelectBar from "./ActiveSelectBar";
 
 class AppFrame extends React.Component {
   constructor(props) {
@@ -119,63 +120,10 @@ class AppFrame extends React.Component {
         <RedFrameMenuOpen rootComponent={rootComponent}/>
         <RedFrameMenuSave rootComponent={rootComponent}/>
       </div>
-      <div className={'frame_toolbar'}>
-        <div style={{display: 'flex', height: '100%', alignItem: 'center'}}>
-          <div style={{
-            marginLeft: LOCAL_STORAGE_MANAGER.checkAllClose() ? '26px' : '387px',
-            width: '360px',
-            display: 'flex'
-          }}>
-            {
-              Object.values(ACTIVE_FRAME_KEY).map((key, index) => {
-                return <div
-                  style={{
-                    display: 'flex',
-                    width: '100px',
-                    height: '30px',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    borderLeft: index ? 0 : '1px solid #000',
-                    borderRight: '1px solid #000',
-                    background: rootComponentState.activeFrameKey === key ? 'linear-gradient(#5e7ade, #2c3565)' : '#333'
-                  }}
-                  onClick={e => {
-                    rootComponentState.activeFrameKey = key;
-                    console.log(rootComponentState);
-                    rootComponent.updateRootState({});
-                  }}
-                >{key}</div>;
-              })
-            }
-            <div
-              style={{
-                display: 'flex',
-                width: '100px',
-                height: '30px',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                borderRight: '1px solid #000',
-                background: '#333'
-              }}
-              onClick={e => {
-                this.previewModeYn = true
-                this.previewModeKey = getUUID()
-                this.setState({})
-              }}
-            >Preview
-            </div>
-            {this.previewModeYn ? <RedPreview
-              key={this.previewModeKey}
-              rootComponent={rootComponent}
-              HD_Close={e => {
-                this.previewModeYn = false
-                this.setState({})
-              }}/> : ''}
-          </div>
-        </div>
-      </div>
+      {/*<div className={'frame_toolbar'}>*/}
+      {/* */}
+
+      {/*</div>*/}
       <div className={'frame_middle'}>
         <div className={'frame_middle_container'}>
           <div className={'frame_left'}>
@@ -226,7 +174,7 @@ class AppFrame extends React.Component {
           </div>
           <div className={'frame_center'}>
             {/*frame_center*/}
-            <RedCanvas rootComponent={this} appState={rootComponentState}/>
+            <RedCanvas rootComponent={this} appComponent={rootComponent}/>
           </div>
           <div className={'frame_right'}>
             {/*frame_right Right*/}
