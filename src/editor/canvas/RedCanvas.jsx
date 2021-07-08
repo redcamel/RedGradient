@@ -303,7 +303,7 @@ class RedCanvas extends React.Component {
   renderVisualEditMode(canvasInfo, activeSubData) {
     return <div style={{
       position: 'absolute',
-      top: 130,
+      top: 110,
       left: 10,
     }}>
       <div style={{
@@ -312,41 +312,55 @@ class RedCanvas extends React.Component {
         alignItems: 'center',
         marginBottom: '3px'
       }}>
-        <span style={{color: '#efb26a'}}>Container size </span> : {+canvasInfo['width'].toFixed(2)} * {+canvasInfo['height'].toFixed(2)}
+        <span
+          style={{color: '#efb26a'}}>Container size </span> : {+canvasInfo['width'].toFixed(2)} * {+canvasInfo['height'].toFixed(2)}
       </div>
       <div style={{
         color: '#fff',
         display: 'flex',
         alignItems: 'center',
-        marginBottom: '7px'
+        marginBottom: '3px'
       }}>
         <span
           style={{color: '#efb26a'}}>Gradient size </span> : {activeSubData['size']['w'].toFixed(2)}{activeSubData['size']['wUnit']} * {activeSubData['size']['h'].toFixed(2)}{activeSubData['size']['hUnit']}
       </div>
       <div style={{
-        display: 'flex',
-        alignItems:'center',
-        border: '1px solid #000',
-        borderRadius: '4px',
-        overflow: 'hidden'
+        marginBottom: '3px'
       }}>
-        {
-          Object.values(MODE).map((v) => {
-            return <div
-              style={{
-                display: 'flex',
-                alignItems:'center',
-                cursor: 'pointer',
-                color: '#fff',
-                padding: '6px',
-                background: this.state.visualEditMode === v ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333333'
-              }}
-              onClick={e => {
-                this.setState({visualEditMode: v});
-              }}
-            >{v}</div>;
-          })
-        }
+        <div style={{color: '#efb26a'}}>Edit target</div>
+        <div style={{
+          marginTop: '3px',
+          display:'inline-block'
+
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            borderRadius: '4px',
+            overflow: 'hidden',
+            border: '1px solid #000',
+          }}>
+            {
+              Object.values(MODE).map((v,index) => {
+                return <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent : 'space-between',
+                    cursor: 'pointer',
+                    color: '#fff',
+                    borderLeft: index ? '1px solid #000' : 0,
+                    padding: '6px',
+                    background: this.state.visualEditMode === v ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333333'
+                  }}
+                  onClick={e => {
+                    this.setState({visualEditMode: v});
+                  }}
+                >{v}</div>;
+              })
+            }
+          </div>
+        </div>
       </div>
 
     </div>;
@@ -1537,11 +1551,21 @@ class RedCanvas extends React.Component {
       <ActiveSelectBar appComponent={this.props.appComponent} />
       {this.drawCall(canvasInfo, layers, rootComponentState.bgColor, activeLayer)}
       <div style={{
-        position : 'absolute',
-        bottom : '10px',
-        left : '50%',
-        transform : 'translate(-50%,0)'
+        position: 'absolute',
+        bottom: '10px',
+        left: '10px',
+        // transform: 'translate(-50%,0)'
       }}>
+        <div style={style.canvasViewInfo}>
+          <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
+            Center
+          </div>
+          <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
+          <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
+
+
+        </div>
+
         <div style={{marginLeft: '5px', color: '#fff'}}><span style={{color: '#efb26a'}}>Center </span>
           : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY.toFixed(2)} <span
             style={{color: '#efb26a'}}>ViewScale </span> : {this.state.canvasViewScale.toFixed(2)}</div>
@@ -1614,5 +1638,34 @@ const style = {
   },
   itemContainer: {
     whiteSpace: 'nowrap'
+  },
+  canvasViewInfo: {
+    padding : '3px 4px',
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '12px',
+  },
+  toCenter: {
+    background: '#5e7ade',
+    display: 'flex',
+    borderRadius: '4px',
+    padding: '3px 8px',
+    whiteSpace: 'nowrap',
+    cursor: 'pointer',
+    outline: 'none',
+    border: 0,
+    color: '#fff'
+  },
+  toScale: {
+    marginLeft: '4px',
+    background: '#7235d4',
+    display: 'flex',
+    borderRadius: '4px',
+    padding: '3px 8px',
+    whiteSpace: 'nowrap',
+    cursor: 'pointer',
+    outline: 'none',
+    border: 0,
+    color: '#fff'
   }
 };

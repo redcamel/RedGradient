@@ -74,15 +74,6 @@ function drawCanvasUI() {
         </div>
 
       </div>
-      <div style={style.canvasViewInfo}>
-        <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
-          Center
-        </div>
-        <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
-        <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
-
-
-      </div>
 
     </div>
 
@@ -107,32 +98,5 @@ const style = {
     marginBottom: '5px',
     fontSize: '12px'
   },
-  canvasViewInfo: {
-    display: 'flex',
-    alignItems: 'center',
-    fontSize: '12px',
-  },
-  toCenter: {
-    background: '#5e7ade',
-    display: 'flex',
-    borderRadius: '4px',
-    padding: '3px 8px',
-    whiteSpace: 'nowrap',
-    cursor: 'pointer',
-    outline: 'none',
-    border: 0,
-    color: '#fff'
-  },
-  toScale: {
-    marginLeft: '4px',
-    background: '#7235d4',
-    display: 'flex',
-    borderRadius: '4px',
-    padding: '3px 8px',
-    whiteSpace: 'nowrap',
-    cursor: 'pointer',
-    outline: 'none',
-    border: 0,
-    color: '#fff'
-  }
+
 };
