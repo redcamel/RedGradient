@@ -6,10 +6,9 @@
  *
  */
 import React from "react";
-import drawCanvasUI from "./drawCanvasUI.js";
 import GRADIENT_TYPE from "../../const/GRADIENT_TYPE";
 import CALC_GRADIENT from "../../const/CALC_GRADIENT";
-import RedCanvasFilter from "./edit/filter/RedCanvasFlterItem.jsx";
+import RedCanvasFilter from "../edit/filter/RedCanvasFlterItem.jsx";
 import ENDING_SHAPE_TYPE from "../../const/ENDING_SHAPE_TYPE";
 import {
   faArrowLeft,
@@ -20,7 +19,7 @@ import {
   faSyncAlt
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import RedGradientEditComp from "../gradient/RedGradientEditComp";
+import RedGradientEditComp from "../edit/gradient/RedGradientEditComp";
 import ACTIVE_FRAME_KEY from "../../const/ACTIVE_FRAME_KEY";
 import RedCanvas_checkResize from "./visualEdit/RedCanvas_checkResize";
 import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree";
@@ -28,6 +27,7 @@ import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt";
 import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition";
 import RedCanvas_checkRadius from "./visualEdit/RedCanvas_checkRadius";
 import ActiveSelectBar from "../ActiveSelectBar";
+import RedTitle from "../../core/RedTitle";
 // TODO - 정리필요
 let ghostSize, ghostMode;
 const MODE = {
@@ -54,7 +54,7 @@ class RedCanvas extends React.Component {
     this.refDegreeCanvas = React.createRef();
   }
 
-  draw_canvasUI = drawCanvasUI;
+
 
   drawCall(canvasInfo, layers, bgColor) {
     const rootComponent = this.props.rootComponent;
@@ -331,7 +331,7 @@ class RedCanvas extends React.Component {
         </div>
         <div style={style.divide}/>
         <div>
-          <div style={{color: '#efb26a'}}>Edit target</div>
+          <div style={{color: '#efb26a'}}>Visual Edit target</div>
           <div style={{
             marginTop: '3px',
             display: 'inline-block'
@@ -1613,7 +1613,7 @@ class RedCanvas extends React.Component {
         style.canvas.transition = 'transform 0.1s';
       }}
     >
-      {this.draw_canvasUI()}
+      <RedTitle title={'Container Information'} />
       <ActiveSelectBar appComponent={this.props.appComponent} />
       {this.drawCall(canvasInfo, layers, rootComponentState.bgColor, activeLayer)}
       <div style={{

@@ -9,12 +9,12 @@ import '../App.css';
 import React from 'react';
 import RedCanvas from "../editor/canvas/RedCanvas.jsx";
 import RedLayerComp from "../editor/layer/RedLayerComp.jsx";
-import RedGradientEditComp from "../editor/gradient/RedGradientEditComp.jsx";
-import RedContainerEdit from "../editor/canvas/edit/RedContainerEdit";
+import RedGradientEditComp from "../editor/edit/gradient/RedGradientEditComp.jsx";
+import RedContainerEdit from "../editor/edit/RedContainerEdit";
 import RedTitle from "../core/RedTitle";
 import RedFrameMenuOpen from "../editor/frameMainMenu/RedFrameMenuOpen.jsx";
 import RedFrameMenuSave from "../editor/frameMainMenu/RedFrameMenuSave.jsx";
-import RedPreset from "../editor/gradient/preset/RedPreset.jsx";
+import RedPreset from "../editor/edit/gradient/preset/RedPreset.jsx";
 import 'react-toastify/dist/ReactToastify.css';
 import RedTitleTB from "../core/RedTitleTB.jsx";
 import LOCAL_STORAGE_MANAGER from "../editor/js/LOCAL_STORAGE_MANAGER.js";
@@ -24,7 +24,7 @@ import getActiveLayer from "../editor/js/getActiveLayer";
 import getActiveSubData from "../editor/js/getActiveSubData";
 import BORDER_REPEAT_TYPE from "../const/BORDER_REPEAT_TYPE";
 import DataLayer from "../editor/data/DataLayer";
-import RedContainerBorderEdit from "../editor/canvas/edit/RedContainerBorderEdit";
+import RedContainerBorderEdit from "../editor/edit/RedContainerBorderEdit";
 
 class AppFrame extends React.Component {
   constructor(props) {

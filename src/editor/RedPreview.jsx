@@ -6,7 +6,7 @@
  *
  */
 import React from "react";
-import RedGradientEditComp from "./gradient/RedGradientEditComp.jsx";
+import RedGradientEditComp from "./edit/gradient/RedGradientEditComp.jsx";
 import ACTIVE_FRAME_KEY from "../const/ACTIVE_FRAME_KEY.js";
 
 class RedPreview extends React.Component {
