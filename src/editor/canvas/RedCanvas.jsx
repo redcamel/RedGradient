@@ -126,7 +126,7 @@ class RedCanvas extends React.Component {
             : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo, appState)
         }
       </div>
-      {this.renderVisualEditMode(canvasInfo, activeSubData)}
+      {this.renderVisualEditMode(rootComponentState,canvasInfo, activeSubData)}
     </>;
   }
 
@@ -300,65 +300,131 @@ class RedCanvas extends React.Component {
     </div> : '';
   }
 
-  renderVisualEditMode(canvasInfo, activeSubData) {
+  renderVisualEditMode(rootComponentState,canvasInfo, activeSubData) {
     return <div style={{
       position: 'absolute',
-      top: 110,
+      top: 65,
       left: 10,
+      display : 'flex',
+      background : 'rgba(0,0,0,0.1)',
+      padding : '8px',
+      borderRadius : '8px',
+      border: '1px solid rgba(0,0,0,0.16)'
     }}>
-      <div style={{
-        color: '#fff',
-        display: 'flex',
-        alignItems: 'center',
-        marginBottom: '3px'
-      }}>
+      <div>
+        <div style={{
+          color: '#fff',
+          display: 'flex',
+          alignItems: 'center'
+        }}>
         <span
           style={{color: '#efb26a'}}>Container size </span> : {+canvasInfo['width'].toFixed(2)} * {+canvasInfo['height'].toFixed(2)}
-      </div>
-      <div style={{
-        color: '#fff',
-        display: 'flex',
-        alignItems: 'center',
-        marginBottom: '3px'
-      }}>
+        </div>
+        <div style={style.divide}/>
+        <div style={{
+          color: '#fff',
+          display: 'flex',
+          alignItems: 'center'
+        }}>
         <span
           style={{color: '#efb26a'}}>Gradient size </span> : {activeSubData['size']['w'].toFixed(2)}{activeSubData['size']['wUnit']} * {activeSubData['size']['h'].toFixed(2)}{activeSubData['size']['hUnit']}
-      </div>
-      <div style={{
-        marginBottom: '3px'
-      }}>
-        <div style={{color: '#efb26a'}}>Edit target</div>
-        <div style={{
-          marginTop: '3px',
-          display: 'inline-block'
-
-        }}>
+        </div>
+        <div style={style.divide}/>
+        <div>
+          <div style={{color: '#efb26a'}}>Edit target</div>
           <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            borderRadius: '4px',
-            overflow: 'hidden',
-            border: '1px solid #000',
+            marginTop: '3px',
+            display: 'inline-block'
+
           }}>
-            {
-              Object.values(MODE).map((v, index) => {
-                return <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    cursor: 'pointer',
-                    color: '#fff',
-                    borderLeft: index ? '1px solid #000' : 0,
-                    padding: '6px',
-                    background: this.state.visualEditMode === v ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333333'
-                  }}
-                  onClick={e => {
-                    this.setState({visualEditMode: v});
-                  }}
-                >{v}</div>;
-              })
-            }
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              borderRadius: '4px',
+              overflow: 'hidden',
+              border: '1px solid #000',
+            }}>
+              {
+                Object.values(MODE).map((v, index) => {
+                  return <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      cursor: 'pointer',
+                      color: '#fff',
+                      borderLeft: index ? '1px solid #000' : 0,
+                      padding: '6px',
+                      background: this.state.visualEditMode === v ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333333'
+                    }}
+                    onClick={e => {
+                      this.setState({visualEditMode: v});
+                    }}
+                  >{v}</div>;
+                })
+              }
+            </div>
+          </div>
+        </div>
+        <div style={style.divide}/>
+        <div >
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <div style={style.canvasResizer}>
+              <div>
+                <label style={{
+                  // background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
+                  display: 'flex',
+                  borderRadius: '4px',
+                  padding: '2px 0px',
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer'
+                }}>
+                  View Visual Edit
+                  <input type={'checkbox'}
+                         checked={this.state.layerSizeView}
+                         style={{
+                           display: 'inline-block',
+                           width: '15px',
+                           height: '15px',
+                           background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
+                           borderRadius: '4px',
+                           border: '1px solid #000',
+                           cursor: 'pointer',
+                           marginLeft: '5px'
+                         }}
+                         onClick={() => this.setState({layerSizeView: !this.state.layerSizeView})}
+                  />
+                </label>
+              </div>
+              <div>
+                <label style={{
+                  // marginLeft: '5px',
+                  // background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
+                  display: 'flex',
+                  borderRadius: '4px',
+                  padding: '2px 0px',
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer'
+                }}>
+                  View Edit Container Only
+                  <input type={'checkbox'}
+                         checked={this.state.editCanvasOnly}
+                         style={{
+                           display: 'inline-block',
+                           width: '15px',
+                           height: '15px',
+                           background: rootComponentState.bgColor === 'transparent' ? '' : rootComponentState.bgColor,
+                           borderRadius: '4px',
+                           border: '1px solid #000',
+                           cursor: 'pointer',
+                           marginLeft: '5px'
+                         }}
+                         onClick={() => this.setState({editCanvasOnly: !this.state.editCanvasOnly})}
+                  />
+                </label>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -1553,8 +1619,9 @@ class RedCanvas extends React.Component {
       <div style={{
         position: 'absolute',
         bottom: '10px',
-        left: '10px',
-        // transform: 'translate(-50%,0)'
+        left: '50%',
+        textAlign : 'center',
+        transform: 'translate(-50%,0)'
       }}>
         <div style={style.canvasViewInfo}>
           <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
@@ -1562,9 +1629,8 @@ class RedCanvas extends React.Component {
           </div>
           <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
           <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
-
-
         </div>
+        <div style={{height : '5px'}}/>
 
         <div style={{marginLeft: '5px', color: '#fff'}}><span style={{color: '#efb26a'}}>Center </span>
           : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY.toFixed(2)} <span
@@ -1667,5 +1733,17 @@ const style = {
     outline: 'none',
     border: 0,
     color: '#fff'
+  },
+
+  canvasResizer: {
+    // display: 'flex',
+    alignItems: 'center',
+    fontSize: '12px'
+  },
+  divide: {
+    margin: '5px 0px',
+    height: '2px',
+    background: '#4e4e4e',
+    borderTop: '1px solid #000'
   }
 };
