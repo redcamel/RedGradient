@@ -6,13 +6,13 @@
  *
  */
 import React from "react";
-import GRADIENT_TYPE from "../../const/GRADIENT_TYPE";
+import GRADIENT_TYPE from "../../../const/GRADIENT_TYPE";
 import RedGradientColorItem from "./RedGradientColorItem";
 import {faExchangeAlt, faSave} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import RedPreset from "./preset/RedPreset.jsx";
-import RedPresetBorder from "../canvas/edit/preset/RedPresetBorder.jsx";
-import RedPropertyOffsetEdit from "./RedPropertyOffsetEdit.jsx";
+import RedPreset from "../preset/RedPreset.jsx";
+import RedPresetBorder from "../../canvas/edit/preset/RedPresetBorder.jsx";
+import RedGradientOffsetEdit from "./RedGradientOffsetEdit.jsx";
 import {AutoSizer, List} from "react-virtualized";
 
 //TODO - 일단 더미로 쭉 쳐보고 정리
@@ -177,7 +177,7 @@ class RedGradientColorEdit extends React.Component {
         {this.renderGradientColorList(activeSubData)}
       </div>
       <div style={{marginTop: '20px'}}>
-        <RedPropertyOffsetEdit rootComponent={rootComponent} />
+        <RedGradientOffsetEdit rootComponent={rootComponent} />
       </div>
       <div style={{marginTop: '15px'}}>
         <AutoSizer disableHeight>

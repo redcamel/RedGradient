@@ -6,7 +6,7 @@
  *
  */
 import React from "react";
-import RedNumber from "../../core/RedNumber.jsx";
+import RedNumber from "../../../core/RedNumber.jsx";
 
 const SIZE = 37;
 let targetContext;
@@ -18,7 +18,7 @@ const HD_up = () => {
   window.removeEventListener('mouseup', HD_up);
 };
 
-class RedPropertyDegreeEdit extends React.Component {
+class RedGradientDegreeEdit extends React.Component {
   constructor(props) {
     super(props);
     this.refCenter = React.createRef();
@@ -82,7 +82,7 @@ class RedPropertyDegreeEdit extends React.Component {
   }
 }
 
-export default RedPropertyDegreeEdit;
+export default RedGradientDegreeEdit;
 const style = {
   box: {
     display: 'inline-block',

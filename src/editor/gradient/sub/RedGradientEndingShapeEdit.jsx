@@ -6,10 +6,10 @@
  *
  */
 import React from "react";
-import RedSelect from "../../core/RedSelect.jsx";
-import BLEND_MODE_TYPE from "../../const/BLEND_MODE_TYPE";
+import RedSelect from "../../../core/RedSelect.jsx";
+import ENDING_SHAPE_TYPE from "../../../const/ENDING_SHAPE_TYPE";
 
-class RedPropertyBlendEdit extends React.Component {
+class RedGradientEndingShapeEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -20,16 +20,17 @@ class RedPropertyBlendEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     return <div style={{display: 'flex', alignItems: 'center'}}>
-      <div className={'ui_subTitle'}>Blend Mode</div>
+
+      <div className={'ui_subTitle'}>EndingShape</div>
       <RedSelect
-        value={activeSubData['blendMode']}
-        options={Object.entries(BLEND_MODE_TYPE)}
+        value={activeSubData['typeEndingShape']}
+        options={Object.entries(ENDING_SHAPE_TYPE)}
         HD_change={e => {
-          activeSubData['blendMode'] = e.target.value;
+          activeSubData['typeEndingShape'] = e.target.value;
           rootComponent.updateRootState({});
         }} />
     </div>;
   }
 }
 
-export default RedPropertyBlendEdit;
+export default RedGradientEndingShapeEdit;

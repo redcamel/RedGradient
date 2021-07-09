@@ -6,13 +6,13 @@
  *
  */
 import React from "react";
-import DataColor from "../data/DataColor.js";
+import DataColor from "../../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
-import RedNumber from "../../core/RedNumber";
-import RedSelect from "../../core/RedSelect";
+import RedNumber from "../../../core/RedNumber";
+import RedSelect from "../../../core/RedSelect";
 import {faPlus, faThumbtack} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import GRADIENT_TYPE from "../../const/GRADIENT_TYPE.js";
+import GRADIENT_TYPE from "../../../const/GRADIENT_TYPE.js";
 
 let targetContext;
 let targetColorData;

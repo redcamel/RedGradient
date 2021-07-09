@@ -6,11 +6,11 @@
  *
  */
 import React from "react";
-import RedSelect from "../../core/RedSelect.jsx";
-import RedNumber from "../../core/RedNumber.jsx";
-import GRADIENT_TYPE from "../../const/GRADIENT_TYPE.js";
+import RedSelect from "../../../core/RedSelect.jsx";
+import RedNumber from "../../../core/RedNumber.jsx";
+import GRADIENT_TYPE from "../../../const/GRADIENT_TYPE.js";
 
-class RedPropertyOffsetEdit extends React.Component {
+class RedGradientOffsetEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -50,4 +50,4 @@ class RedPropertyOffsetEdit extends React.Component {
   }
 }
 
-export default RedPropertyOffsetEdit;
+export default RedGradientOffsetEdit;

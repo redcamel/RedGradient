@@ -6,10 +6,10 @@
  *
  */
 import React from "react";
-import RedSelect from "../../core/RedSelect.jsx";
-import REPEAT_TYPE from "../../const/REPEAT_TYPE.js";
+import RedSelect from "../../../core/RedSelect.jsx";
+import REPEAT_TYPE from "../../../const/REPEAT_TYPE.js";
 
-class RedPropertyRepeatEdit extends React.Component {
+class RedGradientRepeatEdit extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -123,7 +123,7 @@ class RedPropertyRepeatEdit extends React.Component {
   }
 }
 
-export default RedPropertyRepeatEdit;
+export default RedGradientRepeatEdit;
 const style = {
   icon: {
     width: '36px',

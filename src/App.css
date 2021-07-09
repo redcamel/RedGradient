@@ -237,7 +237,7 @@ option {
     color: #fff;
     outline: none;
     cursor: pointer;
-    z-index: 1;
+    /*z-index: 1;*/
     transition: background 0.2s;
 }
 
@@ -340,7 +340,7 @@ option {
 .ui_title {
     position: sticky;
     top: 0;
-    z-index: 1;
+    /*z-index: 1;*/
     background: linear-gradient(rgb(60, 60, 60), rgb(36, 36, 36));
     height: 26px;
     display: flex;

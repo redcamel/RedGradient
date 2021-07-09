@@ -6,10 +6,10 @@
  *
  */
 import React from "react";
-import GRADIENT_TYPE from "../../const/GRADIENT_TYPE";
-import RedRadio from "../../core/RedRadio";
+import GRADIENT_TYPE from "../../../const/GRADIENT_TYPE";
+import RedRadio from "../../../core/RedRadio";
 
-class RedPropertyTypeEdit extends React.Component {
+class RedGradientTypeEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -59,4 +59,4 @@ class RedPropertyTypeEdit extends React.Component {
   }
 }
 
-export default RedPropertyTypeEdit;
+export default RedGradientTypeEdit;

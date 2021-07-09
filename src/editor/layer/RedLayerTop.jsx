@@ -30,19 +30,6 @@ class RedLayerTop extends React.Component {
     return <div>
       <RedTitle title={'Layer Edit'} />
       <div style={style.addLayer}>
-        <div
-          style={style.addLayerItem}
-          onClick={() => {
-            let targetLayer;
-            layers.splice(0, 0, targetLayer = new DataLayer());
-            rootComponent.updateRootState({
-              activeLayer: targetLayer,
-              activeSubData: targetLayer['items'][0]
-            });
-          }}
-        >
-          <FontAwesomeIcon icon={faPlusCircle} /> Add Layer
-        </div>
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <div style={{width: '40%', textAlign: 'center', color: 'rgba(255,255,255,0.5)'}}>layer Bg</div>
           <select
@@ -84,6 +71,19 @@ class RedLayerTop extends React.Component {
           >small
           </div>
         </div>
+        <div
+          style={style.addLayerItem}
+          onClick={() => {
+            let targetLayer;
+            layers.splice(0, 0, targetLayer = new DataLayer());
+            rootComponent.updateRootState({
+              activeLayer: targetLayer,
+              activeSubData: targetLayer['items'][0]
+            });
+          }}
+        >
+          <FontAwesomeIcon icon={faPlusCircle} /> Add Layer
+        </div>
       </div>
 
     </div>;
@@ -96,15 +96,15 @@ const style = {
     position: 'sticky',
     padding: '4px 4px 4px 4px',
     top: 0,
-    zIndex: 1,
+    // zIndex: 1,
     background: '#000'
   },
   addLayerItem: {
-    background: 'linear-gradient(#7235d4, #4d1d93)',
+    background: 'linear-gradient(#32bd61, #123113)',
     padding: '4px 8px',
     fontSize: '11px',
     borderRadius: '4px',
-    marginBottom: '4px',
+    marginTop: '4px',
     cursor: 'pointer'
   },
   viewScaleItem: {

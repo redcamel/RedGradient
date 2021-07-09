@@ -8,17 +8,17 @@
 import React from "react";
 import RedTitle from "../../core/RedTitle.jsx";
 import RedTextField from "../../core/RedTextField.jsx";
-import RedGradientColorEdit from "./RedGradientColorEdit.jsx";
-import RedPropertyPositionEditByMouse from "./RedPropertyPositionEditByMouse.jsx";
-import RedPropertyTypeEdit from "./RedPropertyTypeEdit.jsx";
-import RedPropertyPositionEdit from "./RedPropertyPositionEdit.jsx";
-import RedPropertyDegreeEdit from "./RedPropertyDegreeEdit.jsx";
-import RedPropertyRepeatEdit from "./RedPropertyRepeatEdit.jsx";
-import RedPropertyTypeEndingShapeEdit from "./RedPropertyTypeEndingShapeEdit";
-import RedPropertyAtEdit from "./RedPropertyAtEdit";
+import RedGradientColorEdit from "./sub/RedGradientColorEdit.jsx";
+import RedGradientPositionEditByMouse from "./sub/RedGradientPositionEditByMouse.jsx";
+import RedGradientTypeEdit from "./sub/RedGradientTypeEdit.jsx";
+import RedGradientPositionEdit from "./sub/RedGradientPositionEdit.jsx";
+import RedGradientDegreeEdit from "./sub/RedGradientDegreeEdit.jsx";
+import RedGradientRepeatEdit from "./sub/RedGradientRepeatEdit.jsx";
+import RedGradientEndingShapeEdit from "./sub/RedGradientEndingShapeEdit";
+import RedGradientAtEdit from "./sub/RedGradientAtEdit";
 import GRADIENT_TYPE from "../../const/GRADIENT_TYPE";
-import RedPropertySizeEdit from "./RedPropertySizeEdit";
-import RedPropertyBlendEdit from "./RedPropertyBlendEdit";
+import RedGradientSizeEdit from "./sub/RedGradientSizeEdit";
+import RedGradientBlendEdit from "./sub/RedGradientBlendEdit";
 import RedCanvas from "../canvas/RedCanvas";
 import CALC_GRADIENT from "../../const/CALC_GRADIENT";
 import {toast} from "react-toastify";
@@ -46,41 +46,41 @@ class RedGradientEditComp extends React.Component {
                   rootComponent.updateRootState({});
                 }} />
                 <div style={style.divide} />
-                <RedPropertyTypeEdit rootComponent={rootComponent} />
+                <RedGradientTypeEdit rootComponent={rootComponent} />
                 <div style={style.divide} />
-                <RedPropertyRepeatEdit rootComponent={rootComponent} />
+                <RedGradientRepeatEdit rootComponent={rootComponent} />
                 <div style={style.divide} />
-                <RedPropertyBlendEdit rootComponent={rootComponent} />
+                <RedGradientBlendEdit rootComponent={rootComponent} />
                 {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL ? <>
                   <div style={style.divide} />
-                  <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />
+                  <RedGradientEndingShapeEdit rootComponent={rootComponent} />
                 </> : ''}
                 {data.type === GRADIENT_TYPE.LINEAR || data.type === GRADIENT_TYPE.REPEAT_LINEAR || data.type === GRADIENT_TYPE.CONIC || data.type === GRADIENT_TYPE.REPEAT_CONIC ?
                   <>
                     <div style={style.divide} />
-                    <RedPropertyDegreeEdit rootComponent={rootComponent} />
+                    <RedGradientDegreeEdit rootComponent={rootComponent} />
                   </> : ''}
                 <div style={style.divide} />
-                <RedPropertySizeEdit rootComponent={rootComponent} />
+                <RedGradientSizeEdit rootComponent={rootComponent} />
                 {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC || data.type === GRADIENT_TYPE.REPEAT_CONIC ? <>
                   <div style={style.divide} />
-                  <RedPropertyAtEdit rootComponent={rootComponent} />
+                  <RedGradientAtEdit rootComponent={rootComponent} />
                 </> : ''}
               </div>
 
               <div style={style.divide} />
-              <RedPropertyPositionEdit rootComponent={rootComponent} />
+              <RedGradientPositionEdit rootComponent={rootComponent} />
 
               <div style={style.divide} />
               <div style={{display: 'flex'}}>
                 <div>
                   position
-                  <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'position'} />
+                  <RedGradientPositionEditByMouse rootComponent={rootComponent} targetKey={'position'} />
                 </div>
                 {data.type === GRADIENT_TYPE.RADIAL || data.type === GRADIENT_TYPE.REPEAT_RADIAL || data.type === GRADIENT_TYPE.CONIC || data.type === GRADIENT_TYPE.REPEAT_CONIC ?
                   <div>
                     center
-                    <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'at'} />
+                    <RedGradientPositionEditByMouse rootComponent={rootComponent} targetKey={'at'} />
                   </div> : ''
                 }
 
@@ -117,9 +117,7 @@ class RedGradientEditComp extends React.Component {
                       }}
                     >Copy Class
                     </button>
-                    {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>*/}
                     {containerCssText}
-                    {/*</SyntaxHighlighter>*/}
                   </div>
 
                 </div>
@@ -130,20 +128,6 @@ class RedGradientEditComp extends React.Component {
           <div style={{...style.itemContainer, width: '360px'}}>
             <RedGradientColorEdit rootComponent={rootComponent} />
           </div>
-
-          {/*<div style={style.itemContainer}>*/}
-          {/*  <div>Current Gradient Css</div>*/}
-          {/*{CALC_GRADIENT.calcGradientItem(data, false, activeLayer)}*/}
-          {/*<SyntaxHighlighter language="css" wrapLongLines={'pre'} style={dracula}>*/}
-          {/*  {*/}
-          {/*    JSON.stringify(CALC_GRADIENT.calcGradientItem(data, false, activeLayer))*/}
-          {/*  }*/}
-          {/*</SyntaxHighlighter>*/}
-          {/*<div>Current Gradient Data</div>*/}
-          {/*<SyntaxHighlighter language="javascript" wrapLongLines={'pre'} style={dracula}>*/}
-          {/*  {JSON.stringify(data, null, 2)}*/}
-          {/*</SyntaxHighlighter>*/}
-          {/*</div>*/}
         </div>
       </div>
     </div>;

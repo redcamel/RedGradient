@@ -19,7 +19,7 @@ const HD_up = () => {
   window.removeEventListener('mouseup', HD_up);
 };
 
-class RedPropertyPositionEditByMouse extends React.Component {
+class RedGradientPositionEditByMouse extends React.Component {
   constructor(props) {
     super(props);
     this.refRect = React.createRef();
@@ -268,7 +268,7 @@ class RedPropertyPositionEditByMouse extends React.Component {
   }
 }
 
-export default RedPropertyPositionEditByMouse;
+export default RedGradientPositionEditByMouse;
 const style = {
   mirrorItem: {
     width: `${SIZE}px`,

@@ -6,10 +6,10 @@
  *
  */
 import React from "react";
-import RedSelect from "../../core/RedSelect.jsx";
-import RedNumber from "../../core/RedNumber.jsx";
+import RedSelect from "../../../core/RedSelect.jsx";
+import RedNumber from "../../../core/RedNumber.jsx";
 
-class RedPropertyPositionEdit extends React.Component {
+class RedGradientAtEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -20,7 +20,7 @@ class RedPropertyPositionEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     return <div>
-      <div className={'ui_subTitle'}>Position</div>
+      <div className={'ui_subTitle'}>Center</div>
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -30,36 +30,37 @@ class RedPropertyPositionEdit extends React.Component {
       }}>
         <div>
           <RedNumber
-            title={'x'}
+            title={'cX'}
             width={'179px'}
-            value={activeSubData['position']['x'] || 0}
+            value={activeSubData['at']['x'] || 0}
             HD_onInput={e => {
-              activeSubData['position']['x'] = +e.target.value;
+              activeSubData['at']['x'] = +e.target.value;
               rootComponent.updateRootState({});
             }} />
-          <RedSelect value={activeSubData['position']['xUnit']} options={['px', '%']} HD_change={e => {
-            activeSubData['position']['xUnit'] = e.target.value;
+          <RedSelect value={activeSubData['at']['xUnit']} options={['px', '%']} HD_change={e => {
+            activeSubData['at']['xUnit'] = e.target.value;
             rootComponent.updateRootState({});
           }} />
         </div>
         <div style={{width: '5px'}} />
         <div>
           <RedNumber
-            title={'y'}
+            title={'cY'}
             width={'179px'}
-            value={activeSubData['position']['y'] || 0}
+            value={activeSubData['at']['y'] || 0}
             HD_onInput={e => {
-              activeSubData['position']['y'] = +e.target.value;
+              activeSubData['at']['y'] = +e.target.value;
               rootComponent.updateRootState({});
             }} />
-          <RedSelect value={activeSubData['position']['yUnit']} options={['px', '%']} HD_change={e => {
-            activeSubData['position']['yUnit'] = e.target.value;
+          <RedSelect value={activeSubData['at']['yUnit']} options={['px', '%']} HD_change={e => {
+            activeSubData['at']['yUnit'] = e.target.value;
             rootComponent.updateRootState({});
           }} />
         </div>
       </div>
+
     </div>;
   }
 }
 
-export default RedPropertyPositionEdit;
+export default RedGradientAtEdit;

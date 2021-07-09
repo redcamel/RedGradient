@@ -7,13 +7,13 @@
  */
 import React from "react";
 import RedTextField from "../../../../core/RedTextField.jsx";
-import RedGradientColorEdit from "../../../gradient/RedGradientColorEdit.jsx";
-import RedPropertyPositionEditByMouse from "../../../gradient/RedPropertyPositionEditByMouse.jsx";
-import RedPropertyTypeEdit from "../../../gradient/RedPropertyTypeEdit.jsx";
-import RedPropertyDegreeEdit from "../../../gradient/RedPropertyDegreeEdit.jsx";
-import RedPropertyAtEdit from "../../../gradient/RedPropertyAtEdit.jsx";
+import RedGradientColorEdit from "../../../gradient/sub/RedGradientColorEdit.jsx";
+import RedGradientPositionEditByMouse from "../../../gradient/sub/RedGradientPositionEditByMouse.jsx";
+import RedGradientTypeEdit from "../../../gradient/sub/RedGradientTypeEdit.jsx";
+import RedGradientDegreeEdit from "../../../gradient/sub/RedGradientDegreeEdit.jsx";
+import RedGradientAtEdit from "../../../gradient/sub/RedGradientAtEdit.jsx";
 import GRADIENT_TYPE from "../../../../const/GRADIENT_TYPE.js";
-import RedPropertyTypeEndingShapeEdit from "../../../gradient/RedPropertyTypeEndingShapeEdit.jsx";
+import RedGradientEndingShapeEdit from "../../../gradient/sub/RedGradientEndingShapeEdit.jsx";
 import RedPresetBorder from "../preset/RedPresetBorder.jsx";
 
 class RedPropertyBorderGradientEdit extends React.Component {
@@ -39,19 +39,19 @@ class RedPropertyBorderGradientEdit extends React.Component {
                 rootComponent.updateRootState({});
               }} />
               <div style={style.divide} />
-              <RedPropertyTypeEdit rootComponent={rootComponent} />
+              <RedGradientTypeEdit rootComponent={rootComponent} />
 
               {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL ? <>
-                <RedPropertyTypeEndingShapeEdit rootComponent={rootComponent} />
+                <RedGradientEndingShapeEdit rootComponent={rootComponent} />
               </> : ''}
               {activeSubData.type === GRADIENT_TYPE.LINEAR || activeSubData.type === GRADIENT_TYPE.REPEAT_LINEAR || activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ?
                 <>
                   <div style={style.divide} />
-                  <RedPropertyDegreeEdit rootComponent={rootComponent} />
+                  <RedGradientDegreeEdit rootComponent={rootComponent} />
                 </> : ''}
               {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL || activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? <>
                 <div style={style.divide} />
-                <RedPropertyAtEdit rootComponent={rootComponent} />
+                <RedGradientAtEdit rootComponent={rootComponent} />
               </> : ''}
 
             </div>
@@ -63,7 +63,7 @@ class RedPropertyBorderGradientEdit extends React.Component {
               {activeSubData.type === GRADIENT_TYPE.RADIAL || activeSubData.type === GRADIENT_TYPE.REPEAT_RADIAL || activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ?
                 <div>
                   center
-                  <RedPropertyPositionEditByMouse rootComponent={rootComponent} targetKey={'at'} />
+                  <RedGradientPositionEditByMouse rootComponent={rootComponent} targetKey={'at'} />
                 </div> : ''
               }
 

@@ -6,12 +6,12 @@
  *
  */
 import React from "react";
-import RedSelect from "../../core/RedSelect.jsx";
-import RedNumber from "../../core/RedNumber.jsx";
+import RedSelect from "../../../core/RedSelect.jsx";
+import RedNumber from "../../../core/RedNumber.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLink} from "@fortawesome/free-solid-svg-icons";
 
-class RedPropertySizeEdit extends React.Component {
+class RedGradientSizeEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -51,46 +51,47 @@ class RedPropertySizeEdit extends React.Component {
             width: '12px',
             borderTop: '1px solid #fff'
           }} />
-          <FontAwesomeIcon icon={faLink}
-                           style={{
-                             filter: activeSubData['fixRatioYn'] ? '' : 'brightness(0.5)',
-                             marginLeft: '10px',
-                             opacity: 1,
-                             cursor: 'pointer',
-                             transition: 'filter 0.2s'
-                           }}
-                           onClick={() => {
-                             activeSubData['fixRatioYn'] = !activeSubData['fixRatioYn'];
-                             if (activeSubData['fixRatioYn']) {
-                               // - 픽스된경우 비쥬얼 에디터의 리사이즈도 모양과 동작이 변화되어야함
-                               const sizeInfo = activeSubData['size'];
-                               if (sizeInfo['wUnit'] === sizeInfo['hUnit']) {
-                               } else {
-                                 const cW = (canvasInfo.width);
-                                 const cH = (canvasInfo.height);
-                                 const layoutSize = {
-                                   w: sizeInfo['wUnit'] === '%' ? cW * sizeInfo['w'] / 100 : +sizeInfo['w'],
-                                   h: sizeInfo['hUnit'] === '%' ? cH * sizeInfo['h'] / 100 : +sizeInfo['h'],
-                                 };
-                                 let t0, t1;
-                                 if (layoutSize['w'] > layoutSize['h']) {
-                                   t0 = 'w';
-                                   t1 = 'h';
-                                 } else {
-                                   t0 = 'h';
-                                   t1 = 'w';
-                                 }
-                                 if (sizeInfo[`${t0}Unit`] === 'px') {
-                                   sizeInfo[`${t1}Unit`] = 'px';
-                                   sizeInfo[`${t1}`] = layoutSize[t1];
-                                 } else {
-                                   sizeInfo[`${t1}Unit`] = '%';
-                                   sizeInfo[`${t1}`] = layoutSize[t1] / (t1 === 'w' ? cW : cH) * 100;
-                                 }
-                               }
-                             }
-                             rootComponent.updateRootState({});
-                           }}
+          <FontAwesomeIcon
+            icon={faLink}
+            style={{
+              filter: activeSubData['fixRatioYn'] ? '' : 'brightness(0.5)',
+              marginLeft: '10px',
+              opacity: 1,
+              cursor: 'pointer',
+              transition: 'filter 0.2s'
+            }}
+            onClick={() => {
+              activeSubData['fixRatioYn'] = !activeSubData['fixRatioYn'];
+              if (activeSubData['fixRatioYn']) {
+                // - 픽스된경우 비쥬얼 에디터의 리사이즈도 모양과 동작이 변화되어야함
+                const sizeInfo = activeSubData['size'];
+                if (sizeInfo['wUnit'] === sizeInfo['hUnit']) {
+                } else {
+                  const cW = (canvasInfo.width);
+                  const cH = (canvasInfo.height);
+                  const layoutSize = {
+                    w: sizeInfo['wUnit'] === '%' ? cW * sizeInfo['w'] / 100 : +sizeInfo['w'],
+                    h: sizeInfo['hUnit'] === '%' ? cH * sizeInfo['h'] / 100 : +sizeInfo['h'],
+                  };
+                  let t0, t1;
+                  if (layoutSize['w'] > layoutSize['h']) {
+                    t0 = 'w';
+                    t1 = 'h';
+                  } else {
+                    t0 = 'h';
+                    t1 = 'w';
+                  }
+                  if (sizeInfo[`${t0}Unit`] === 'px') {
+                    sizeInfo[`${t1}Unit`] = 'px';
+                    sizeInfo[`${t1}`] = layoutSize[t1];
+                  } else {
+                    sizeInfo[`${t1}Unit`] = '%';
+                    sizeInfo[`${t1}`] = layoutSize[t1] / (t1 === 'w' ? cW : cH) * 100;
+                  }
+                }
+              }
+              rootComponent.updateRootState({});
+            }}
           />
 
         </div>
@@ -134,4 +135,4 @@ class RedPropertySizeEdit extends React.Component {
   }
 }
 
-export default RedPropertySizeEdit;
+export default RedGradientSizeEdit;
