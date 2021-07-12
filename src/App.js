@@ -6,6 +6,7 @@
  *
  */
 import './App.css';
+import '@easylogic/colorpicker/dist/colorpicker.css'
 import React from 'react';
 import RedStart from "./start/RedStart.jsx";
 import {ToastContainer} from 'react-toastify';
