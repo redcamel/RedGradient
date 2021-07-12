@@ -7,7 +7,7 @@
  */
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
-import BLEND_MODE_TYPE from "../../../../const/BLEND_MODE_TYPE";
+import BLEND_MODE_TYPE from "../../../../js/const/BLEND_MODE_TYPE";
 
 class RedGradientBlendEdit extends React.Component {
   constructor(props) {

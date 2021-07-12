@@ -8,7 +8,7 @@
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
 import RedNumber from "../../../../core/RedNumber.jsx";
-import GRADIENT_TYPE from "../../../../const/GRADIENT_TYPE.js";
+import GRADIENT_TYPE from "../../../../js/const/GRADIENT_TYPE.js";
 
 class RedGradientOffsetEdit extends React.Component {
   constructor(props) {
@@ -26,9 +26,8 @@ class RedGradientOffsetEdit extends React.Component {
       if (activeSubData['offsetUnit'] === 'deg') activeSubData['offsetUnit'] = '%';
     }
     const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['deg'] : ['px', '%'];
-    {
-      activeSubData['offsetUnit'] = activeSubData['type'] === GRADIENT_TYPE.CONIC || activeSubData['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (activeSubData['offsetUnit'] === 'deg' ? '%' : (activeSubData['offsetUnit'] || '%'));
-    }
+    activeSubData['offsetUnit'] = activeSubData['type'] === GRADIENT_TYPE.CONIC || activeSubData['type'] === GRADIENT_TYPE.REPEAT_CONIC ? 'deg' : (activeSubData['offsetUnit'] === 'deg' ? '%' : (activeSubData['offsetUnit'] || '%'));
+
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <div className={'ui_item_title'}>start offset</div>

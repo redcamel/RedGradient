@@ -18,7 +18,7 @@ import {
   faMinusCircle,
   faPlusCircle
 } from '@fortawesome/free-solid-svg-icons';
-import CALC_GRADIENT from "../../const/CALC_GRADIENT";
+import CALC_GRADIENT from "../../js/CALC_GRADIENT";
 import RedLayerSubItem from "./RedLayerSubItem.jsx";
 import RedAddGradientLayerSet from "./RedAddGradientLayerSet";
 

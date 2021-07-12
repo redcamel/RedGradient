@@ -7,7 +7,7 @@
  */
 import React from "react";
 import RedGradientEditComp from "./edit/gradient/RedGradientEditComp.jsx";
-import ACTIVE_FRAME_KEY from "../const/ACTIVE_FRAME_KEY.js";
+import ACTIVE_FRAME_KEY from "../js/const/ACTIVE_FRAME_KEY.js";
 
 class RedPreview extends React.Component {
   constructor(props) {
@@ -24,12 +24,12 @@ class RedPreview extends React.Component {
     let beforeText2 = beforeText.replace('.result', '.red_gradient_result');
     let mainText2 = mainText.replace('.result', '.red_gradient_result');
     let afterText2 = afterText.replace('.result', '.red_gradient_result');
-    let ResultPreview = `
+    document.getElementById('red_gradient_result_css').textContent = `
     ${beforeText2}
     ${mainText2}
     ${afterText2}
     `;
-    document.getElementById('red_gradient_result_css').textContent = ResultPreview;
+
     let beforeCanvasInfo = rootComponentState[ACTIVE_FRAME_KEY.BEFORE]['canvasInfo'];
     let mainCanvasInfo = rootComponentState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo'];
     let afterCanvasInfo = rootComponentState[ACTIVE_FRAME_KEY.AFTER]['canvasInfo'];
@@ -74,8 +74,8 @@ class RedPreview extends React.Component {
                   {/*    return <div style={{display: 'flex'}}>*/}
                   {/*      {*/}
                   {/*        tList.map((tData, index) => {*/}
-                  {/*          const key = tData['key']*/}
-                  {/*          const targetCanvasInfo = v['targetCanvasInfo']*/}
+                  {/*          js key = tData['key']*/}
+                  {/*          js targetCanvasInfo = v['targetCanvasInfo']*/}
                   {/*          return <>*/}
                   {/*            {index ? <div style={{width: '5px'}}/> : ''}*/}
                   {/*            <RedNumber title={key} width={'160px'} value={targetCanvasInfo[key]}*/}

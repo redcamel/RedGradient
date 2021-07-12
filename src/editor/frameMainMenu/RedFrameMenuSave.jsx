@@ -28,8 +28,8 @@ class RedFrameMenuSave extends React.Component {
         URL.revokeObjectURL(a.href);
         window.actionHistoryCheckNum = 0;
       }}
-
-    ><FontAwesomeIcon icon={faSave} />
+    >
+      <FontAwesomeIcon icon={faSave} />
     </div>;
   }
 }

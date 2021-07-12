@@ -8,7 +8,7 @@
 import React from "react";
 import RedNumber from "../../core/RedNumber.jsx";
 import gsap from "gsap";
-import GRADIENT_TYPE from "../../const/GRADIENT_TYPE.js";
+import GRADIENT_TYPE from "../../js/const/GRADIENT_TYPE.js";
 import DataColor from "../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedTitle from "../../core/RedTitle";
@@ -39,7 +39,6 @@ const gradientTypes = {
   RADIAL: GRADIENT_TYPE.RADIAL,
   CONIC: GRADIENT_TYPE.CONIC
 };
-let targetColorData;
 
 // TODO - 여기정리
 class RedAddGradientLayerSet extends React.Component {
@@ -89,6 +88,8 @@ class RedAddGradientLayerSet extends React.Component {
         break;
       case GRADIENT_TYPE.CONIC:
         code = `${GRADIENT_TYPE.CONIC}(${gradients})`;
+        break;
+      default :
         break;
     }
     return code;
@@ -174,8 +175,6 @@ class RedAddGradientLayerSet extends React.Component {
                              }
                            });
                          }
-                         targetColorData = tColorData;
-                         // this.state.colorPicker[index].setOption({color: tColor});
                          this.state.openColorPicker = [];
                          this.state.openColorPicker[index] = true;
                          this.setState({});
@@ -452,5 +451,5 @@ const
     },
     complete: {padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'},
     rangeInput: {display: 'flex', alignItems: 'center', fontSize: '9px', width: '100px'},
-    colorBox : {width: '28px', height: '28px', margin: '1px', textAlign: 'center'}
+    colorBox: {width: '28px', height: '28px', margin: '1px', textAlign: 'center'}
   };

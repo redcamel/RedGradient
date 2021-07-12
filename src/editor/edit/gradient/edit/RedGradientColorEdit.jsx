@@ -6,12 +6,12 @@
  *
  */
 import React from "react";
-import GRADIENT_TYPE from "../../../../const/GRADIENT_TYPE";
+import GRADIENT_TYPE from "../../../../js/const/GRADIENT_TYPE";
 import RedGradientColorItem from "./RedGradientColorItem";
 import {faExchangeAlt, faSave} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RedPreset from "../preset/RedPreset.jsx";
-import RedPresetBorder from "../../preset/RedPresetBorder.jsx";
+import RedPresetBorder from "../../border/preset/RedPresetBorder.jsx";
 import RedGradientOffsetEdit from "./RedGradientOffsetEdit.jsx";
 import {AutoSizer, List} from "react-virtualized";
 
@@ -196,7 +196,7 @@ class RedGradientColorEdit extends React.Component {
         </AutoSizer>
         {/*{*/}
         {/*  activeSubData['colorList'].map((v, index) => {*/}
-        {/*    // const height=97*/}
+        {/*    // js height=97*/}
         {/*    // if(height * index)*/}
         {/*    return <RedGradientColorItem*/}
         {/*      rootComponent={rootComponent}*/}

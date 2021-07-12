@@ -7,12 +7,10 @@
  */
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
-import REPEAT_TYPE from "../../../../const/REPEAT_TYPE.js";
+import REPEAT_TYPE from "../../../../js/const/REPEAT_TYPE.js";
 
 class RedGradientRepeatEdit extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   render() {
     const rootComponent = this.props.rootComponent;

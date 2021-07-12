@@ -6,7 +6,7 @@
  *
  */
 import React from "react";
-import GRADIENT_TYPE from "../../../../const/GRADIENT_TYPE";
+import GRADIENT_TYPE from "../../../../js/const/GRADIENT_TYPE";
 import RedRadio from "../../../../core/RedRadio";
 
 class RedGradientTypeEdit extends React.Component {

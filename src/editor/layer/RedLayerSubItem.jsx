@@ -9,7 +9,7 @@ import React from "react";
 import DataItem from "../data/DataItem.js";
 import {faCopy, faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import CALC_GRADIENT from "../../const/CALC_GRADIENT";
+import CALC_GRADIENT from "../../js/CALC_GRADIENT";
 import RedLayerItem from "./RedLayerItem.jsx";
 
 let startDragLayer;

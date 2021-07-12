@@ -5,7 +5,7 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-import ACTIVE_FRAME_KEY from "../../const/ACTIVE_FRAME_KEY";
+import ACTIVE_FRAME_KEY from "../../js/const/ACTIVE_FRAME_KEY";
 import DataCanvas from "./DataCanvas";
 
 function DataRedGradient() {

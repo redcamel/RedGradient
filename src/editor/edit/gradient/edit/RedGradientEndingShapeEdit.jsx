@@ -7,7 +7,7 @@
  */
 import React from "react";
 import RedSelect from "../../../../core/RedSelect.jsx";
-import ENDING_SHAPE_TYPE from "../../../../const/ENDING_SHAPE_TYPE";
+import ENDING_SHAPE_TYPE from "../../../../js/const/ENDING_SHAPE_TYPE";
 
 class RedGradientEndingShapeEdit extends React.Component {
   constructor(props) {

@@ -8,15 +8,11 @@
 import '../App.css';
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import ACTIVE_FRAME_KEY from "../const/ACTIVE_FRAME_KEY";
+import ACTIVE_FRAME_KEY from "../js/const/ACTIVE_FRAME_KEY";
 import RedPreview from "./RedPreview.jsx";
-import getUUID from "./js/getUUID.js";
+import getUUID from "../js/getUUID.js";
 
 class ActiveSelectBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const appComponent = this.props.appComponent;
     const appComponentState = appComponent.state;
@@ -35,7 +31,7 @@ class ActiveSelectBar extends React.Component {
           display: 'flex'
         }}>
           {
-            Object.values(ACTIVE_FRAME_KEY).map((key, index) => {
+            Object.values(ACTIVE_FRAME_KEY).map(key => {
               return <div
                 style={{
                   display: 'flex',
@@ -47,7 +43,7 @@ class ActiveSelectBar extends React.Component {
                   borderRight: '1px solid #000',
                   background: appComponentState.activeFrameKey === key ? 'linear-gradient(#5e7ade, #2c3565)' : '#333'
                 }}
-                onClick={e => {
+                onClick={() => {
                   appComponentState.activeFrameKey = key;
                   console.log(appComponentState);
                   appComponent.updateRootState({});
@@ -66,7 +62,7 @@ class ActiveSelectBar extends React.Component {
               borderRight: '1px solid #000',
               background: '#333'
             }}
-            onClick={e => {
+            onClick={() => {
               this.previewModeYn = true;
               this.previewModeKey = getUUID();
               this.setState({});
@@ -76,7 +72,7 @@ class ActiveSelectBar extends React.Component {
           {this.previewModeYn ? <RedPreview
             key={this.previewModeKey}
             rootComponent={appComponent}
-            HD_Close={e => {
+            HD_Close={() => {
               this.previewModeYn = false;
               this.setState({});
             }} /> : ''}

@@ -5,12 +5,11 @@
  *  * https://github.com/redcamel/RedGradient
  *
  */
-import ACTIVE_FRAME_KEY from "../../../const/ACTIVE_FRAME_KEY";
+import ACTIVE_FRAME_KEY from "../../../js/const/ACTIVE_FRAME_KEY";
 
 const calcE = (info, containerMode) => {
   const {
 
-    key,
     canvasInfo,
     positionInfo,
     sizeInfo,
@@ -158,6 +157,8 @@ function RedCanvas_checkResize(e, containerMode) {
       case 'se':
         gapY = (e.shiftKey || activeSubData['fixRatioYn']) ? gapX : gapY;
         break;
+      default :
+        break;
     }
     this.state.resizeMode['startX'] = e.pageX;
     this.state.resizeMode['startY'] = e.pageY;
@@ -222,6 +223,8 @@ function RedCanvas_checkResize(e, containerMode) {
       case "se":
         calcS(info, containerMode);
         calcE(info, containerMode);
+        break;
+      default :
         break;
     }
     document.body.style.cursor = `${mode}-resize`;

@@ -34,6 +34,8 @@ function RedCanvas_checkDegree(e) {
         deg = Math.atan2(tY, tX) - Math.atan2(tY2, tX2);
         activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
         break;
+      default :
+        break;
     }
     {
       const ctx = degreeInfo.ref.getContext('2d');

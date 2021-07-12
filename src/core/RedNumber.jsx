@@ -8,7 +8,7 @@
 import React from "react";
 
 let targetContext;
-let startX, startY, startValue, startTime;
+let startX, startValue, startTime;
 let requestAni;
 const HD_move = e => {
   targetContext.calc(e);
@@ -75,7 +75,7 @@ class RedNumber extends React.Component {
           targetContext = this;
           startValue = +this.props.value;
           startX = e.nativeEvent.pageX;
-          startY = e.nativeEvent.pageY;
+
           window.addEventListener('mousemove', HD_move);
           window.addEventListener('mouseup', HD_up);
         }}

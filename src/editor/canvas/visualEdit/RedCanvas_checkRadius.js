@@ -56,7 +56,7 @@ function RedCanvas_checkResize(e) {
   const rootComponent = this.props.rootComponent;
   const rootComponentState = rootComponent.state;
   const canvasInfo = rootComponentState.canvasInfo;
-  const activeSubData = rootComponentState.activeSubData;
+
   if (this.state.radiusMode) {
     e = e.nativeEvent;
     const mode = this.state.radiusMode['mode'];
@@ -89,6 +89,8 @@ function RedCanvas_checkResize(e) {
         break;
       case "se":
         calcSE(info);
+        break;
+      default :
         break;
     }
 

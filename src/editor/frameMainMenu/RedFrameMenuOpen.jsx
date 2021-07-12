@@ -44,36 +44,38 @@ class RedFrameMenuOpen extends React.Component {
   render() {
     const rootComponent = this.props.rootComponent;
     return <div>
-      <div style={{
-        fontSize: '26px',
-        margin: '5px',
-        cursor: 'pointer'
-      }}
-           onClick={() => {
-             const a = document.createElement('input');
-             a.setAttribute('accept', '.json');
-             a.setAttribute('type', 'file');
-             a.click();
-             a.onchange = e => {
-               // console.log(e);
-               // console.log(e.target.files);
-               let fileReader = new FileReader();
-               fileReader.onload = evt => {
-                 requestAnimationFrame(() => {
-                   let t0 = this.checkValidate(evt.target.result);
-                   if (t0) {
-                     window.actionHistoryCheckNum = 0;
-                     rootComponent.setNewCanvas(t0);
+      <div
+        style={{
+          fontSize: '26px',
+          margin: '5px',
+          cursor: 'pointer'
+        }}
+        onClick={() => {
+          const a = document.createElement('input');
+          a.setAttribute('accept', '.json');
+          a.setAttribute('type', 'file');
+          a.click();
+          a.onchange = e => {
+            // console.log(e);
+            // console.log(e.target.files);
+            let fileReader = new FileReader();
+            fileReader.onload = evt => {
+              requestAnimationFrame(() => {
+                let t0 = this.checkValidate(evt.target.result);
+                if (t0) {
+                  window.actionHistoryCheckNum = 0;
+                  rootComponent.setNewCanvas(t0);
 
-                   } else {
-                     alert('RedGradient 형식의 파일이 아닙니다.');
-                   }
-                 });
-               };
-               fileReader.readAsText(e.target.files[0]);
-             };
-           }}
-      ><FontAwesomeIcon icon={faFolderOpen} />
+                } else {
+                  alert('RedGradient 형식의 파일이 아닙니다.');
+                }
+              });
+            };
+            fileReader.readAsText(e.target.files[0]);
+          };
+        }}
+      >
+        <FontAwesomeIcon icon={faFolderOpen} />
       </div>
     </div>;
   }

@@ -70,12 +70,12 @@ function RedCanvas_checkPosition(e, containerMode) {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     const activeSubData = rootComponentState.activeSubData;
-// const tX = e.pageX - this.state.positionMode.startX;
-    // const tY = e.pageY - this.state.positionMode.startY;
-    // const positionInfo = activeSubData['position'];
-    // const sizeInfo = activeSubData['size'];
-    // const tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
-    // const tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
+// js tX = e.pageX - this.state.positionMode.startX;
+    // js tY = e.pageY - this.state.positionMode.startY;
+    // js positionInfo = activeSubData['position'];
+    // js sizeInfo = activeSubData['size'];
+    // js tW = sizeInfo['wUnit'] === '%' ? canvasInfo.width * sizeInfo['w'] / 100 : sizeInfo['w'];
+    // js tH = sizeInfo['hUnit'] === '%' ? canvasInfo.height * sizeInfo['h'] / 100 : sizeInfo['h'];
     // positionInfo['x'] = +this.state.positionMode.startValueX + (positionInfo['xUnit'] === '%' ? tX / tW * 100 : tX) * 1 / this.state.canvasViewScale;
     // positionInfo['y'] = +this.state.positionMode.startValueY + (positionInfo['yUnit'] === '%' ? tY / tH * 100 : tY) * 1 / this.state.canvasViewScale;
     // console.log(tX, tY);
@@ -136,6 +136,8 @@ function RedCanvas_checkPosition(e, containerMode) {
       case "all" :
         calcWE(info, containerMode);
         calcSN(info, containerMode);
+        break;
+      default :
         break;
     }
 

@@ -10,10 +10,10 @@ import PresetCircle from "./PresetCircle.js";
 import PresetCircle2 from "./PresetCircle2.js";
 import PresetCircle3 from "./PresetCircle3.js";
 import PresetCircle4 from "./PresetCircle4.js";
-import CALC_GRADIENT from "../../../../const/CALC_GRADIENT.js";
+import CALC_GRADIENT from "../../../../js/CALC_GRADIENT.js";
 import {faMinusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import RedPresetBorder from "../../preset/RedPresetBorder";
+import RedPresetBorder from "../../border/preset/RedPresetBorder";
 
 const presetList = [
   {

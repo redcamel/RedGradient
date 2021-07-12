@@ -62,8 +62,6 @@ class RedGradientPositionEditByMouse extends React.Component {
     const activeSubDataSize = activeSubData['size'];
     const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3]);
     const borderH = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2]);
-    // const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3]
-    // const borderY = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][0]
     const layoutSize = {
       w: activeSubDataSize['wUnit'] === '%' ? (canvasInfo['width'] - borderW) * activeSubDataSize['w'] / 100 : activeSubDataSize['w'] - borderW,
       h: activeSubDataSize['hUnit'] === '%' ? (canvasInfo['height'] - borderH) * activeSubDataSize['h'] / 100 : activeSubDataSize['h'] - borderH,
@@ -135,11 +133,11 @@ class RedGradientPositionEditByMouse extends React.Component {
         {/**/}
         <button
           onClick={() => {
-            {
-              let tY = 50;
-              if (targetData['yUnit'] === 'px') tY = (canvasInfo['height'] - borderH) * 0.5;
-              this.setPosition(0, tY);
-            }
+
+            let tY = 50;
+            if (targetData['yUnit'] === 'px') tY = (canvasInfo['height'] - borderH) * 0.5;
+            this.setPosition(0, tY);
+
           }}
           style={{...style.location, top: '50%', left: 0, transform: 'translate(0%,-50%)'}}><FontAwesomeIcon
           icon={faArrowDown}
@@ -233,7 +231,7 @@ class RedGradientPositionEditByMouse extends React.Component {
                    tW = activeSubData['size']['wUnit'] === '%' ? tW / 100 * canvasInfo['width'] : tW;
                    tX = canvasInfo['width'] - tX - tW;
                  } else {
-                   let tW = activeSubData['size']['w'];
+
                    tX = 100 - tX;
                  }
                }
@@ -255,7 +253,7 @@ class RedGradientPositionEditByMouse extends React.Component {
                    tH = activeSubData['size']['hUnit'] === '%' ? tH / 100 * canvasInfo['height'] : tH;
                    tY = canvasInfo['height'] - tY - tH;
                  } else {
-                   let tH = activeSubData['size']['h'];
+
                    tY = 100 - tY;
                  }
                }

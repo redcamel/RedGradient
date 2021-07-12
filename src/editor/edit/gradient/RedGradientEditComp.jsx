@@ -16,13 +16,13 @@ import RedGradientDegreeEdit from "./edit/RedGradientDegreeEdit.jsx";
 import RedGradientRepeatEdit from "./edit/RedGradientRepeatEdit.jsx";
 import RedGradientEndingShapeEdit from "./edit/RedGradientEndingShapeEdit";
 import RedGradientAtEdit from "./edit/RedGradientAtEdit";
-import GRADIENT_TYPE from "../../../const/GRADIENT_TYPE";
+import GRADIENT_TYPE from "../../../js/const/GRADIENT_TYPE";
 import RedGradientSizeEdit from "./edit/RedGradientSizeEdit";
 import RedGradientBlendEdit from "./edit/RedGradientBlendEdit";
 import RedCanvas from "../../canvas/RedCanvas";
-import CALC_GRADIENT from "../../../const/CALC_GRADIENT";
+import CALC_GRADIENT from "../../../js/CALC_GRADIENT";
 import {toast} from "react-toastify";
-import ACTIVE_FRAME_KEY from "../../../const/ACTIVE_FRAME_KEY.js";
+import ACTIVE_FRAME_KEY from "../../../js/const/ACTIVE_FRAME_KEY.js";
 import js_beautify from 'js-beautify';
 
 class RedGradientEditComp extends React.Component {
@@ -157,6 +157,8 @@ RedGradientEditComp.getContainerCssText = (rootComponentState) => {
       case ACTIVE_FRAME_KEY.AFTER:
         className = `.result::after`;
         position = `content: ""; position : absolute; top : ${canvasInfo['top'] || 0}px; left : ${canvasInfo['left'] || 0}px; `;
+        break;
+      default:
         break;
     }
     console.log('className', className);

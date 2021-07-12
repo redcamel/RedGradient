@@ -10,7 +10,7 @@ import React from 'react';
 import RedCanvas from "../editor/canvas/RedCanvas.jsx";
 import RedLayerComp from "../editor/layer/RedLayerComp.jsx";
 import RedGradientEditComp from "../editor/edit/gradient/RedGradientEditComp.jsx";
-import RedContainerEdit from "../editor/edit/RedContainerEdit";
+import RedContainerEdit from "../editor/edit/container/RedContainerEdit";
 import RedTitle from "../core/RedTitle";
 import RedFrameMenuOpen from "../editor/frameMainMenu/RedFrameMenuOpen.jsx";
 import RedFrameMenuSave from "../editor/frameMainMenu/RedFrameMenuSave.jsx";
@@ -19,78 +19,75 @@ import 'react-toastify/dist/ReactToastify.css';
 import RedTitleTB from "../core/RedTitleTB.jsx";
 import LOCAL_STORAGE_MANAGER from "../editor/js/LOCAL_STORAGE_MANAGER.js";
 import {faFolder, faFolderOpen} from "@fortawesome/free-solid-svg-icons";
-import ACTIVE_FRAME_KEY from "../const/ACTIVE_FRAME_KEY";
+import ACTIVE_FRAME_KEY from "../js/const/ACTIVE_FRAME_KEY";
 import getActiveLayer from "../editor/js/getActiveLayer";
 import getActiveSubData from "../editor/js/getActiveSubData";
-import BORDER_REPEAT_TYPE from "../const/BORDER_REPEAT_TYPE";
+import BORDER_REPEAT_TYPE from "../js/const/BORDER_REPEAT_TYPE";
 import DataLayer from "../editor/data/DataLayer";
-import RedContainerBorderEdit from "../editor/edit/RedContainerBorderEdit";
+import RedContainerBorderEdit from "../editor/edit/border/RedContainerBorderEdit";
 
 class AppFrame extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   /**
    * 데이터를 돌면서 누락된 데이터들을 채워준다.
    */
-  checkDatas() {
+  checkFrameDataList() {
     const appComponent = this.props.appComponent;
     const appComponentState = appComponent.state;
     Object.values(ACTIVE_FRAME_KEY).forEach(key => {
-      {
-        const checkTargetState = appComponentState[key];
-        checkTargetState['key'] = key;
-        checkTargetState.activeLayer = getActiveLayer(checkTargetState);
-        checkTargetState.activeSubData = getActiveSubData(checkTargetState);
-        if (!checkTargetState.borderGradientInfo) {
-          checkTargetState.borderGradientInfo = {
-            'border_image_sliceT': 1,
-            'border_image_sliceR': 1,
-            'border_image_sliceL': 1,
-            'border_image_sliceB': 1,
-            'border_image_repeat': BORDER_REPEAT_TYPE.STRETCH,
-            'border_image_outset': 0,
-            "activeLayer": null,
-            "activeSubData": null,
-            "bgColor": "#ffffff",
-            "layers": [
-              new DataLayer()
-            ]
-          };
-        }
-        const canvasInfo = checkTargetState.canvasInfo;
-        if (!canvasInfo.hasOwnProperty('border_radius')) {
-          canvasInfo['border_radius'] = 0;
-          canvasInfo['border_radius_unit'] = 'px';
-        }
-        if (!canvasInfo.hasOwnProperty('border_radius_mergeMode')) {
-          canvasInfo['border_radius_mergeMode'] = 1;
-          canvasInfo['border_radius_split'] = [0, 0, 0, 0];
-          canvasInfo['border_radius_unit_split'] = ['px', 'px', 'px', 'px'];
-        }
-        if (!canvasInfo.hasOwnProperty('border_width')) {
-          canvasInfo['border_width'] = 0;
-          canvasInfo['border_width_unit'] = 'px';
-          canvasInfo['border_type'] = 'solid';
-          canvasInfo['border_color'] = '#000';
-        }
-        if (!canvasInfo.hasOwnProperty('border_width_mergeMode')) {
-          canvasInfo['border_width_mergeMode'] = 1;
-          canvasInfo['border_width_split'] = [0, 0, 0, 0];
-        }
-        if (!canvasInfo.hasOwnProperty('outline_width')) {
-          canvasInfo['outline_width'] = 0;
-          canvasInfo['outline_width_unit'] = 'px';
-          canvasInfo['outline_type'] = 'solid';
-          canvasInfo['outline_color'] = '#000';
-          canvasInfo['outline_offset'] = 0;
-          canvasInfo['outline_offset_unit'] = 'px';
-        }
-        checkTargetState.borderGradientInfo.canvasInfo = checkTargetState.canvasInfo;
-        checkTargetState.borderGradientInfo.activeLayer = getActiveLayer(checkTargetState.borderGradientInfo);
-        checkTargetState.borderGradientInfo.activeSubData = getActiveSubData(checkTargetState.borderGradientInfo);
+
+      const checkTargetState = appComponentState[key];
+      checkTargetState['key'] = key;
+      checkTargetState.activeLayer = getActiveLayer(checkTargetState);
+      checkTargetState.activeSubData = getActiveSubData(checkTargetState);
+      if (!checkTargetState.borderGradientInfo) {
+        checkTargetState.borderGradientInfo = {
+          'border_image_sliceT': 1,
+          'border_image_sliceR': 1,
+          'border_image_sliceL': 1,
+          'border_image_sliceB': 1,
+          'border_image_repeat': BORDER_REPEAT_TYPE.STRETCH,
+          'border_image_outset': 0,
+          "activeLayer": null,
+          "activeSubData": null,
+          "bgColor": "#ffffff",
+          "layers": [
+            new DataLayer()
+          ]
+        };
       }
+      const canvasInfo = checkTargetState.canvasInfo;
+      if (!canvasInfo.hasOwnProperty('border_radius')) {
+        canvasInfo['border_radius'] = 0;
+        canvasInfo['border_radius_unit'] = 'px';
+      }
+      if (!canvasInfo.hasOwnProperty('border_radius_mergeMode')) {
+        canvasInfo['border_radius_mergeMode'] = 1;
+        canvasInfo['border_radius_split'] = [0, 0, 0, 0];
+        canvasInfo['border_radius_unit_split'] = ['px', 'px', 'px', 'px'];
+      }
+      if (!canvasInfo.hasOwnProperty('border_width')) {
+        canvasInfo['border_width'] = 0;
+        canvasInfo['border_width_unit'] = 'px';
+        canvasInfo['border_type'] = 'solid';
+        canvasInfo['border_color'] = '#000';
+      }
+      if (!canvasInfo.hasOwnProperty('border_width_mergeMode')) {
+        canvasInfo['border_width_mergeMode'] = 1;
+        canvasInfo['border_width_split'] = [0, 0, 0, 0];
+      }
+      if (!canvasInfo.hasOwnProperty('outline_width')) {
+        canvasInfo['outline_width'] = 0;
+        canvasInfo['outline_width_unit'] = 'px';
+        canvasInfo['outline_type'] = 'solid';
+        canvasInfo['outline_color'] = '#000';
+        canvasInfo['outline_offset'] = 0;
+        canvasInfo['outline_offset_unit'] = 'px';
+      }
+      checkTargetState.borderGradientInfo.canvasInfo = checkTargetState.canvasInfo;
+      checkTargetState.borderGradientInfo.activeLayer = getActiveLayer(checkTargetState.borderGradientInfo);
+      checkTargetState.borderGradientInfo.activeSubData = getActiveSubData(checkTargetState.borderGradientInfo);
+
     });
   }
 
@@ -104,7 +101,7 @@ class AppFrame extends React.Component {
 
   render() {
     LOCAL_STORAGE_MANAGER.check();
-    this.checkDatas();
+    this.checkFrameDataList();
     const appComponent = this.props.appComponent;
     const appComponentState = appComponent.state;
     this.state = appComponentState[appComponentState.activeFrameKey];
