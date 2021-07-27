@@ -21,8 +21,8 @@ const calcE = (info, containerMode) => {
     key
   } = info;
   if (containerMode) {
-    canvasInfo['width'] = originX + gapX
-    if(altKey && key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['left'] -= gapX/2
+    canvasInfo['width'] = originX + gapX;
+    if (altKey && key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['left'] -= gapX / 2;
   } else {
     if (positionInfo['xUnit'] === '%') {
       let targetPixelSize = tW + gapX;
@@ -30,12 +30,17 @@ const calcE = (info, containerMode) => {
       if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
       else sizeInfo['w'] = targetPixelSize;
       let newTargetPercentPosition = (originX) / (cW - targetPixelSize) * 100;
+
       positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+
+      if(altKey) positionInfo['x'] -=  ((gapX) / (cW - targetPixelSize) * 100)/2;
+
     } else {
       let targetPixelSize = tW + gapX;
       let targetPercentSize = targetPixelSize / cW * 100;
       if (sizeInfo['wUnit'] === '%') sizeInfo['w'] = Math.max(targetPercentSize, 0.1);
       else sizeInfo['w'] = targetPixelSize;
+      if(altKey) positionInfo['x'] -=  gapX/2;
     }
   }
 };
@@ -54,7 +59,7 @@ const calcW = (info, containerMode) => {
   if (containerMode) {
     canvasInfo['width'] = originX - gapX;
     if (key !== ACTIVE_FRAME_KEY.MAIN) {
-      if(altKey) canvasInfo['left'] += gapX/2;
+      if (altKey) canvasInfo['left'] += gapX / 2;
       else canvasInfo['left'] += gapX;
     }
 
@@ -66,6 +71,7 @@ const calcW = (info, containerMode) => {
       else sizeInfo['w'] = targetPixelSize;
       let newTargetPercentPosition = (originX + gapX) / (cW - targetPixelSize) * 100;
       positionInfo['x'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+      if(altKey) positionInfo['x'] -=  ((gapX) / (cW - targetPixelSize) * 100)/2;
     } else {
       let targetPixelSize = tW - gapX;
       let targetPercentSize = targetPixelSize / cW * 100;
@@ -76,6 +82,7 @@ const calcW = (info, containerMode) => {
         sizeInfo['w'] = targetPixelSize;
         positionInfo['x'] = originX + gapX;
       }
+      if(altKey) positionInfo['x'] -=  gapX/2;
     }
   }
 
@@ -94,7 +101,7 @@ const calcS = (info, containerMode) => {
   } = info;
   if (containerMode) {
     canvasInfo['height'] = originY + gapY;
-    if(altKey && key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['top'] -= gapY/2
+    if (altKey && key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['top'] -= gapY / 2;
   } else {
     if (positionInfo['yUnit'] === '%') {
       let targetPixelSize = tH + gapY;
@@ -103,11 +110,14 @@ const calcS = (info, containerMode) => {
       else sizeInfo['h'] = targetPixelSize;
       let newTargetPercentPosition = (originY) / (cH - targetPixelSize) * 100;
       positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+      if(altKey) positionInfo['y'] -=  ((gapY) / (cH - targetPixelSize) * 100)/2;
     } else {
       let targetPixelSize = tH + gapY;
       let targetPercentSize = targetPixelSize / cH * 100;
       if (sizeInfo['hUnit'] === '%') sizeInfo['h'] = Math.max(targetPercentSize, 0.1);
       else sizeInfo['h'] = targetPixelSize;
+
+      if(altKey) positionInfo['y'] -=  gapY/2;
     }
   }
 
@@ -127,7 +137,7 @@ const calcN = (info, containerMode) => {
   if (containerMode) {
     canvasInfo['height'] = originY - gapY;
     if (key !== ACTIVE_FRAME_KEY.MAIN) {
-      if(altKey) canvasInfo['top'] += gapY/2;
+      if (altKey) canvasInfo['top'] += gapY / 2;
       else canvasInfo['top'] += gapY;
     }
   } else {
@@ -138,6 +148,7 @@ const calcN = (info, containerMode) => {
       else sizeInfo['h'] = targetPixelSize;
       let newTargetPercentPosition = (originY + gapY) / (cH - targetPixelSize) * 100;
       positionInfo['y'] = Number.isNaN(newTargetPercentPosition) ? 0 : newTargetPercentPosition;
+      if(altKey) positionInfo['y'] -=  ((gapY) / (cH - targetPixelSize) * 100)/2;
     } else {
       let targetPixelSize = tH - gapY;
       let targetPercentSize = targetPixelSize / cH * 100;
@@ -148,6 +159,7 @@ const calcN = (info, containerMode) => {
         sizeInfo['h'] = targetPixelSize;
         positionInfo['y'] = originY + gapY;
       }
+      if(altKey) positionInfo['y'] -=  gapY/2;
     }
   }
 
@@ -194,7 +206,7 @@ function RedCanvas_checkResize(e, containerMode) {
     };
     const originX = containerMode ? canvasInfo['width'] : (activeSubDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubDataPosition['x'] / 100) : +activeSubDataPosition['x']);
     const originY = containerMode ? canvasInfo['height'] : (activeSubDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubDataPosition['y'] / 100) : +activeSubDataPosition['y']);
-    const altKey = e.altKey
+    const altKey = e.altKey;
     const info = {
       key: rootComponentState['key'],
       canvasInfo,
