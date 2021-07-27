@@ -12,22 +12,35 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
     border: '1px solid rgba(0,0,0,0.16)'
   }}>
     <div>
-      <div style={{
-        color: '#fff',
-        display: 'flex',
-        alignItems: 'center'
-      }}>
-        <span
-          style={{color: '#efb26a'}}>Container size </span> : {+canvasInfo['width'].toFixed(2)} * {+canvasInfo['height'].toFixed(2)}
+      <div>
+        <div style={{
+          color: '#fff',
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
+          <span style={{color: '#efb26a'}}>Container info </span>
+          <div style={{marginTop : '3px'}}>
+            w : {+canvasInfo['width'].toFixed(2)}, h : {+canvasInfo['height'].toFixed(2)} /
+            x : {+canvasInfo['left'].toFixed(2)} , y : {+canvasInfo['top'].toFixed(2)}
+          </div>
+        </div>
       </div>
       <div style={style.divide} />
       <div style={{
         color: '#fff',
         display: 'flex',
-        alignItems: 'center'
+        flexDirection: 'column'
       }}>
-        <span
-          style={{color: '#efb26a'}}>Gradient size </span> : {activeSubData['size']['w'].toFixed(2)}{activeSubData['size']['wUnit']} * {activeSubData['size']['h'].toFixed(2)}{activeSubData['size']['hUnit']}
+        <span style={{color: '#efb26a'}}>Gradient info </span>
+        <div style={{marginTop : '3px'}}>
+          w : {activeSubData['size']['w'].toFixed(2)}{activeSubData['size']['wUnit']},
+          h : {activeSubData['size']['h'].toFixed(2)}{activeSubData['size']['hUnit']}
+        </div>
+        <div>
+          x : {activeSubData['position']['x'].toFixed(2)}{activeSubData['position']['xUnit']},
+          y : {activeSubData['position']['y'].toFixed(2)}{activeSubData['position']['yUnit']}
+        </div>
+
       </div>
       <div style={style.divide} />
       <div>
