@@ -16,10 +16,13 @@ const calcE = (info, containerMode) => {
     originX,
     tW,
     cW,
-    gapX
+    gapX,
+    altKey,
+    key
   } = info;
   if (containerMode) {
-    canvasInfo['width'] = originX + gapX;
+    canvasInfo['width'] = originX + gapX
+    if(altKey && key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['left'] -= gapX/2
   } else {
     if (positionInfo['xUnit'] === '%') {
       let targetPixelSize = tW + gapX;
@@ -45,11 +48,16 @@ const calcW = (info, containerMode) => {
     originX,
     tW,
     cW,
-    gapX
+    gapX,
+    altKey
   } = info;
   if (containerMode) {
     canvasInfo['width'] = originX - gapX;
-    if (key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['left'] += gapX;
+    if (key !== ACTIVE_FRAME_KEY.MAIN) {
+      if(altKey) canvasInfo['left'] += gapX/2;
+      else canvasInfo['left'] += gapX;
+    }
+
   } else {
     if (positionInfo['xUnit'] === '%') {
       let targetPixelSize = tW - gapX;
@@ -80,10 +88,13 @@ const calcS = (info, containerMode) => {
     originY,
     tH,
     cH,
-    gapY
+    gapY,
+    key,
+    altKey
   } = info;
   if (containerMode) {
     canvasInfo['height'] = originY + gapY;
+    if(altKey && key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['top'] -= gapY/2
   } else {
     if (positionInfo['yUnit'] === '%') {
       let targetPixelSize = tH + gapY;
@@ -110,11 +121,15 @@ const calcN = (info, containerMode) => {
     originY,
     tH,
     cH,
-    gapY
+    gapY,
+    altKey
   } = info;
   if (containerMode) {
     canvasInfo['height'] = originY - gapY;
-    if (key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['top'] += gapY;
+    if (key !== ACTIVE_FRAME_KEY.MAIN) {
+      if(altKey) canvasInfo['top'] += gapY/2;
+      else canvasInfo['top'] += gapY;
+    }
   } else {
     if (positionInfo['yUnit'] === '%') {
       let targetPixelSize = tH - gapY;
@@ -179,6 +194,7 @@ function RedCanvas_checkResize(e, containerMode) {
     };
     const originX = containerMode ? canvasInfo['width'] : (activeSubDataPosition['xUnit'] === '%' ? (cW - layoutSize.w) * (activeSubDataPosition['x'] / 100) : +activeSubDataPosition['x']);
     const originY = containerMode ? canvasInfo['height'] : (activeSubDataPosition['yUnit'] === '%' ? (cH - layoutSize.h) * (activeSubDataPosition['y'] / 100) : +activeSubDataPosition['y']);
+    const altKey = e.altKey
     const info = {
       key: rootComponentState['key'],
       canvasInfo,
@@ -193,7 +209,8 @@ function RedCanvas_checkResize(e, containerMode) {
       cW,
       cH,
       gapX,
-      gapY
+      gapY,
+      altKey
     };
     switch (mode) {
       case "e" :
