@@ -6,7 +6,7 @@
  *
  */
 import './App.css';
-import '@easylogic/colorpicker/dist/colorpicker.css'
+import '@easylogic/colorpicker/dist/colorpicker.css';
 import React from 'react';
 import RedStart from "./start/RedStart.jsx";
 import {ToastContainer} from 'react-toastify';
@@ -14,6 +14,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import getActiveLayer from "./editor/js/getActiveLayer.js";
 import getActiveSubData from "./editor/js/getActiveSubData.js";
 import AppFrame from "./frame/AppFrame";
+
+let prevUpdateTime = 0;
 
 class App extends React.Component {
   constructor(props) {
@@ -79,12 +81,17 @@ class App extends React.Component {
       console.log(this.state);
       const activeFrameState = this.state[this.state.activeFrameKey];
       if (!activeFrameState || !activeFrameState.canvasInfo) return;
-      if (this.history.length > 50) this.history.shift();
-      this.history.push(JSON.parse(JSON.stringify(this.state)));
 
-      window.actionHistoryCheckNum = window.actionHistoryCheckNum || 0;
-      window.actionHistoryCheckNum++;
-      console.log('actionHistoryCheckNum', window.actionHistoryCheckNum);
+      let t0 = performance.now();
+      if (t0 - prevUpdateTime > 100) {
+        if (this.history.length > 50) this.history.shift();
+        this.history.push(JSON.parse(JSON.stringify(this.state)));
+
+        window.actionHistoryCheckNum = window.actionHistoryCheckNum || 0;
+        window.actionHistoryCheckNum++;
+        console.log('actionHistoryCheckNum', window.actionHistoryCheckNum);
+      }
+      prevUpdateTime = t0
     }
   }
 
