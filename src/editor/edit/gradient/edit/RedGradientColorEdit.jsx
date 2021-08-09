@@ -45,7 +45,7 @@ class RedGradientColorEdit extends React.Component {
           this.setState({activeIDX: index});
         }}
         HD_sort={() => {
-          this.sortColorList();
+          // this.sortColorList();
         }}
       />
     </div>;
@@ -121,6 +121,19 @@ class RedGradientColorEdit extends React.Component {
     return <div style={style.container}>
       <div style={{display: 'flex', margin: '4px 0px', justifyContent: 'space-between'}}>
         <div className={'ui_subTitle'}>Preview</div>
+        <div>
+          <button style={{...style.bgItem, background: '#000', color: '#fff'}}
+                  onClick={() => this.setState({layerBgColor: 'black'})}>B
+          </button>
+          <button style={{...style.bgItem, background: '#fff', color: '#000'}}
+                  onClick={() => this.setState({layerBgColor: 'white'})}>W
+          </button>
+          <button style={{...style.bgItem}} className={'transparent_checker'}
+                  onClick={() => this.setState({layerBgColor: 'transparent'})}>T
+          </button>
+        </div>
+      </div>
+      <div style={{display:'flex',margin: '4px 0px'}}>
         <button
           style={{...style.preset}}
           onClick={() => {
@@ -157,17 +170,14 @@ class RedGradientColorEdit extends React.Component {
           }}
         ><FontAwesomeIcon icon={faExchangeAlt} style={{marginRight: '5px'}} /> Reverse
         </button>
-        <div>
-          <button style={{...style.bgItem, background: '#000', color: '#fff'}}
-                  onClick={() => this.setState({layerBgColor: 'black'})}>B
-          </button>
-          <button style={{...style.bgItem, background: '#fff', color: '#000'}}
-                  onClick={() => this.setState({layerBgColor: 'white'})}>W
-          </button>
-          <button style={{...style.bgItem}} className={'transparent_checker'}
-                  onClick={() => this.setState({layerBgColor: 'transparent'})}>T
-          </button>
-        </div>
+        <button
+          style={{...style.preset}}
+          onClick={() => {
+            this.sortColorList()
+            rootComponent.updateRootState({});
+          }}
+        ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}} /> Auto Sort
+        </button>
       </div>
       <div
         ref={this.refBar}

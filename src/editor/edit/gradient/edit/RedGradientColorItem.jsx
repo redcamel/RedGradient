@@ -13,6 +13,8 @@ import RedSelect from "../../../../core/RedSelect";
 import {faPlus, faThumbtack} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GRADIENT_TYPE from "../../../../js/const/GRADIENT_TYPE.js";
+import RedLayerItem from "../../../layer/RedLayerItem";
+import RedLayerSubItem from "../../../layer/RedLayerSubItem";
 
 let targetContext;
 let targetColorData;
@@ -57,6 +59,8 @@ const HD_up = () => {
     targetRange = null;
   });
 };
+let startDragColorItem;
+let emptyImage;
 
 class RedGradientColorItem extends React.Component {
   constructor(props) {
@@ -70,6 +74,53 @@ class RedGradientColorItem extends React.Component {
     this.refBar = React.createRef();
     this.refColorPickerContainer = React.createRef();
     this.refColorEndPickerContainer = React.createRef();
+  }
+
+  handleDragStart(e) {
+    if (!RedGradientColorItem.getDragInfo()) {
+      RedGradientColorItem.clearDragInfo();
+      startDragColorItem = this.props.colorData;
+    } else {
+      RedGradientColorItem.clearDragInfo();
+    }
+    if (!emptyImage) emptyImage = new Image();
+    e.nativeEvent.dataTransfer.setDragImage(emptyImage, 0, 0);
+    console.log(e)
+  }
+
+  handleDragEnter(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  handleDragLeave(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (startDragColorItem && e.target.className === 'drop_area_color_item') this.setState({dragOverYn: false});
+  }
+
+  handleDragOver(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (startDragColorItem) this.setState({dragOverYn: true});
+  }
+
+  handleDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    let t0 = {};
+    if (startDragColorItem) {
+      this.setState({dragOverYn: false});
+      const colorList = this.props.rootComponent.state.activeSubData.colorList;
+      const colorData = this.props.colorData;
+      const dstIDX = colorList.indexOf(colorData);
+      const startIDX = colorList.indexOf(startDragColorItem);
+      colorList.splice(startIDX, 1);
+      colorList.splice(dstIDX, 0, startDragColorItem);
+      this.props.HD_active(dstIDX)
+    }
+    RedGradientColorItem.clearDragInfo();
+    this.props.rootComponent.updateRootState(t0);
   }
 
   getIndex() {
@@ -90,7 +141,19 @@ class RedGradientColorItem extends React.Component {
     const colorInfo = colorData['color'];
     if (!colorData['useRange']) colorData['rangeEnd'] = colorData['range'];
     const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['%', 'deg'] : ['px', '%'];
-    return <div>
+    return <div
+      draggable={targetRefBar ? false : true}
+      onDragStart={e => this.handleDragStart(e)}
+      onDrop={e => this.handleDrop(e)}
+      onDragOver={e => this.handleDragOver(e)}
+      onDragEnter={e => this.handleDragEnter(e)}
+      onDragLeave={e => this.handleDragLeave(e)}
+      onDragEnd={() => {
+        RedGradientColorItem.clearDragInfo();
+        this.setState({dragOverYn: false});
+        this.props.rootComponent.updateRootState({});
+      }}
+    >
       <button
         style={style.add}
         onClick={() => {
@@ -257,7 +320,7 @@ class RedGradientColorItem extends React.Component {
                   rootComponent.updateRootState({});
                 }}
                 HD_blur={e => {
-                  this.props.HD_sort(e);
+                  // this.props.HD_sort(e);
                   this.props.HD_active(this.getIndex());
                 }}
               />
@@ -274,7 +337,7 @@ class RedGradientColorItem extends React.Component {
                     rootComponent.updateRootState({});
                   }}
                   HD_blur={e => {
-                    this.props.HD_sort(e);
+                    // this.props.HD_sort(e);
                     this.props.HD_active(this.getIndex());
                   }}
                 /> : ''
@@ -398,10 +461,41 @@ class RedGradientColorItem extends React.Component {
         </div>
 
       </div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'absolute',
+          zIndex: 1,
+          top: 0, left: 0, right: 0, overflow: 'hidden',
+          bottom: this.state.dragOverYn ? 0 : '100%',
+          opacity: this.state.dragOverYn ? 1 : 0,
+          transition: 'opacity 0.2s',
+          background: 'rgb(39,133,196,0.75)',
+          borderRadius: '4px'
+        }}>
+        <div style={{background: '#fff', color: '#000', fontSize: '12px', borderRadius: '5px', padding: '3px 12px',}}>
+          drop here
+        </div>
+        <div
+          className={'drop_area_color_item'}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'absolute',
+            top: 0, left: 0, right: 0,
+            height: '100%',
+          }} />
+      </div>
     </div>;
   }
 }
-
+RedGradientColorItem.getDragInfo = () => startDragColorItem;
+RedGradientColorItem.clearDragInfo = () => {
+  startDragColorItem = null;
+};
 export default RedGradientColorItem;
 const style = {
   container: {
