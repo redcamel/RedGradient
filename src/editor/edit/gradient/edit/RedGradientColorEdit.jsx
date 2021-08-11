@@ -176,7 +176,7 @@ class RedGradientColorEdit extends React.Component {
             this.sortColorList()
             rootComponent.updateRootState({});
           }}
-        ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}} /> Auto Sort
+        ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}} /> Sort By Range
         </button>
       </div>
       <div
