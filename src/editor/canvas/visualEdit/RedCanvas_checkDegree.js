@@ -19,20 +19,20 @@ function RedCanvas_checkDegree(e) {
     let deg;
     switch (degreeInfo.mode) {
       case "nw":
-        deg = Math.atan2(tY, tX) - Math.atan2(tY2, tX2);
-        activeSubData['deg'] = +degreeInfo.startDeg + (deg * 180 / Math.PI) * 3;
+        deg = Math.atan2(tY, tX) - Math.atan2(tY-tY2, tX-tX2);
+        activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI);
         break;
       case "ne":
-        deg = Math.atan2(tY2, tX) - Math.atan2(tY, tX2);
-        activeSubData['deg'] = +degreeInfo.startDeg + (deg * 180 / Math.PI) * 3;
+        deg = Math.atan2(tY, tX) - Math.atan2(tY2-tY, tX2-tX);
+        activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI);
         break;
       case "sw":
-        deg = Math.atan2(tY2, tX) - Math.atan2(tY, tX2);
-        activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
+        deg = Math.atan2(tY, tX) - Math.atan2(tY-tY2, tX-tX2);
+        activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI);
         break;
       case "se":
-        deg = Math.atan2(tY, tX) - Math.atan2(tY2, tX2);
-        activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI) * 3;
+        deg = Math.atan2(tY, tX) - Math.atan2(tY2-tY, tX2-tX);
+        activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI);
         break;
       default :
         break;
@@ -50,7 +50,7 @@ function RedCanvas_checkDegree(e) {
       if (direction) ctx.arc(w / 2, h / 2, w / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2);
       else ctx.arc(w / 2, h / 2, w / 2, activeSubData['deg'] * Math.PI / 180 - Math.PI / 2, degreeInfo.startDeg * Math.PI / 180 - Math.PI / 2);
       ctx.strokeStyle = 'rgba(0, 0, 0,1)';
-      ctx.fillStyle = direction ? 'rgba(94, 122, 222,0.85)' : 'rgb(222,94,113)';
+      ctx.fillStyle = direction ? 'rgba(94, 122, 222,0.55)' : 'rgb(222,94,113,0.55)';
       ctx.lineTo(w / 2, h / 2);
       ctx.fill();
       ctx.stroke();
