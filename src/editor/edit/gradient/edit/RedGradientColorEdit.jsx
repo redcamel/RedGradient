@@ -198,7 +198,7 @@ class RedGradientColorEdit extends React.Component {
               height={window.innerHeight - 500}
               overscanRowCount={10}
               rowCount={activeSubData['colorList'].length}
-              rowHeight={110}
+              rowHeight={100}
               rowRenderer={v => this._rowRender(v)}
               width={width}
             />

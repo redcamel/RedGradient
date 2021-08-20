@@ -142,7 +142,7 @@ class RedGradientColorItem extends React.Component {
     if (!colorData['useRange']) colorData['rangeEnd'] = colorData['range'];
     const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['%', 'deg'] : ['px', '%'];
     return <div
-      draggable={targetRefBar ? false : true}
+      draggable={targetRefBar || this.state.numberDrag || ( this.state.openColorPicker || this.state.openColorEndPicker)? false : true}
       onDragStart={e => this.handleDragStart(e)}
       onDrop={e => this.handleDrop(e)}
       onDragOver={e => this.handleDragOver(e)}
@@ -249,7 +249,7 @@ class RedGradientColorItem extends React.Component {
               </div>
               <div
                 style={{
-                  width: '28px', height: '28px', margin: '1px',
+                  width: '24px', height: '24px', margin: '1px 3px 1px',
                   display: colorData.useRange ? 'block' : 'none',
                   textAlign: 'center'
                 }}
@@ -257,11 +257,11 @@ class RedGradientColorItem extends React.Component {
               >
                 <div style={{
                   background: colorData['colorEnd'],
-                  width: '28px', height: '28px',
+                  width: '24px', height: '24px',
                   borderRadius: '4px', border: '1px solid #000',
                   marginRight: '10px'
                 }}
-                     onClick={() => {
+                     onClick={(e) => {
                        if (!this.state.colorEndPicker) {
                          this.state.colorEndPicker = new ColorPicker({
                            type: "sketch",
@@ -312,6 +312,7 @@ class RedGradientColorItem extends React.Component {
                 width={colorData['useRange'] ? '90px' : '210px'}
                 value={colorData['range'] || 0}
                 HD_onInput={e => {
+                  this.state.numberDrag=true
                   colorData['range'] = +e.target.value;
                   let i = activeSubData.colorList.length;
                   while (i--) {
@@ -320,6 +321,7 @@ class RedGradientColorItem extends React.Component {
                   rootComponent.updateRootState({});
                 }}
                 HD_blur={e => {
+                  this.state.numberDrag=false
                   // this.props.HD_sort(e);
                   this.props.HD_active(this.getIndex());
                 }}
@@ -329,6 +331,7 @@ class RedGradientColorItem extends React.Component {
                   width={'90px'}
                   value={colorData['rangeEnd'] || 0}
                   HD_onInput={e => {
+                    this.state.numberDrag=true
                     colorData['rangeEnd'] = +e.target.value;
                     let i = activeSubData.colorList.length;
                     while (i--) {
@@ -338,6 +341,7 @@ class RedGradientColorItem extends React.Component {
                   }}
                   HD_blur={e => {
                     // this.props.HD_sort(e);
+                    this.state.numberDrag=false
                     this.props.HD_active(this.getIndex());
                   }}
                 /> : ''
@@ -423,7 +427,7 @@ class RedGradientColorItem extends React.Component {
             left: `${colorData['rangeUnit'] === 'deg' ? colorData['range'] / 360 * 100 : colorData['rangeUnit'] === 'px' ? colorData['range'] / canvasInfo['width'] * 100 : colorData['range']}%`,
             background: activeYn ? '#5e7ade' : '#fff'
           }}
-               onMouseDown={() => {
+               onMouseDown={(e) => {
                  targetContext = this;
                  targetColorData = colorData;
                  targetRefBar = this.refBar;
@@ -524,11 +528,11 @@ const style = {
     top: 0,
     right: 0,
     background: '#5e7ade',
-    borderRadius: '4px',
+    borderRadius: '50%',
     color: '#fff',
     fontSize: '8px',
     border: '1px solid #000',
-    transform: `translate(-3px,-11px)`,
+    transform: `translate(-3px,-9px)`,
     cursor: 'pointer',
     zIndex: 1,
     boxShadow: '0px 0px 10px rgba(0,0,0,0.46)'
