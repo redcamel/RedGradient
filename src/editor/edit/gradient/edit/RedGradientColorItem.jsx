@@ -194,14 +194,14 @@ class RedGradientColorItem extends React.Component {
             <div style={{whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row'}}>
               <div
                 style={{
-                  width: '28px', height: '28px', margin: '1px',
+                  width: '24px', height: '24px', margin: '1px 3px 1px',
                   textAlign: 'center'
                 }}
                 className={'transparent_checker'}
               >
                 <div style={{
                   background: colorInfo,
-                  width: '28px', height: '28px',
+                  width: '24px', height: '24px',
                   borderRadius: '4px', border: '1px solid #000',
                   marginRight: '10px',
                   textAlign: 'center',
@@ -510,7 +510,7 @@ const style = {
   },
   complete: {padding: '4px', background: '#5e7ade', cursor: 'pointer', textAlign: 'center'},
   line: {
-    height: '10px',
+    height: '5px',
     background: 'rgba(255,255,255,0.5)',
     borderRadius: '5px',
     boxShadow: 'rgba(0, 0, 0, 0.35) 0px 0px 5px inset',
@@ -553,7 +553,7 @@ const style = {
     outline: 'none',
     border: '1px solid #000',
     borderRadius: '6px',
-    height: '30px',
+    height: '25px',
     marginLeft: '5px',
     cursor: 'pointer'
   },

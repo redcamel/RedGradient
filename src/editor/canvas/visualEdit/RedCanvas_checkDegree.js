@@ -14,24 +14,24 @@ function RedCanvas_checkDegree(e) {
     const activeSubData = rootComponentState.activeSubData;
     const tX = degreeInfo.startX - degreeInfo.startDegX;
     const tY = degreeInfo.startY - degreeInfo.startDegY;
-    const tX2 = e ? e.pageX - degreeInfo.startDegX: 0;
-    const tY2 = e ? e.pageY - degreeInfo.startDegY : 0;
+    const tX2 = e ? e.pageX - degreeInfo.startDegX: degreeInfo.startDegX;
+    const tY2 = e ? e.pageY - degreeInfo.startDegY : degreeInfo.startDegY;
     let deg;
     switch (degreeInfo.mode) {
       case "nw":
-        deg = - Math.atan2(tY-tY2, tX-tX2);
+        deg = Math.atan2(tY, tX) - Math.atan2(tY-tY2, tX-tX2);
         activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI);
         break;
       case "ne":
-        deg = - Math.atan2(tY2-tY, tX2-tX);
+        deg = Math.atan2(tY, tX) - Math.atan2(tY2-tY, tX2-tX);
         activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI);
         break;
       case "sw":
-        deg = - Math.atan2(tY-tY2, tX-tX2);
+        deg = Math.atan2(tY, tX) - Math.atan2(tY-tY2, tX-tX2);
         activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI);
         break;
       case "se":
-        deg =  - Math.atan2(tY2-tY, tX2-tX);
+        deg = Math.atan2(tY, tX) - Math.atan2(tY2-tY, tX2-tX);
         activeSubData['deg'] = +degreeInfo.startDeg - (deg * 180 / Math.PI);
         break;
       default :
