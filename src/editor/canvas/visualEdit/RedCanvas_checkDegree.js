@@ -6,6 +6,7 @@
  *
  */
 function RedCanvas_checkDegree(e) {
+  return
   if (this.state.degreeMode) {
     e = e ? e.nativeEvent : null;
     const degreeInfo = this.state.degreeMode;

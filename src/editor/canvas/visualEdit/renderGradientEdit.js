@@ -11,6 +11,8 @@ import {
 import GRADIENT_TYPE from "../../../js/const/GRADIENT_TYPE";
 import ENDING_SHAPE_TYPE from "../../../js/const/ENDING_SHAPE_TYPE";
 import RedCanvas from "../RedCanvas";
+import RedGradientDegreeEdit from "../../edit/gradient/edit/RedGradientDegreeEdit";
+import RedGradientDegreeEdit2 from "../../edit/gradient/edit/RedGradientDegreeEdit2";
 
 
 const renderGradientEdit = function (rootComponentState, activeSubData, canvasInfo, appState) {
@@ -548,149 +550,100 @@ const renderGradientEdit = function (rootComponentState, activeSubData, canvasIn
                 style={{
                   top: 0,
                   left: 0,
-                  transform: `translate(-${20 + 32 * iconScale}px, -${20 + 32 * iconScale}px) scale(${iconScale})`,
+                  transform: `scale(${iconScale})`,
                   transition: 'transform 0.2s',
                   position: 'absolute',
-                  width: '30px',
-                  height: '30px',
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.75)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '1px solid rgba(0,0,0,0.8)',
+                  // border: '1px solid rgba(0,0,0,0.8)',
                   filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
                   cursor: 'pointer',
                 }}
                 onMouseDown={e => {
                   e.stopPropagation();
-                  const rect = this.refDegree.current.getBoundingClientRect();
-                  this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500 * this.state.canvasViewScale, 500 * this.state.canvasViewScale);
-                  this.setModes({
-                    degreeMode: {
-                      ref: this.refDegreeCanvas.current,
-                      startX: e.nativeEvent.pageX,
-                      startY: e.nativeEvent.pageY,
-                      startDegX: rect.x + rect.width / 2,
-                      startDegY: rect.x + rect.height / 2,
-                      startDeg: activeSubData['deg'],
-                      mode: 'nw'
-                    }
-                  });
                 }}
               >
-                <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                <div style={{
+                  position : 'absolute',
+                  transform : 'translate(calc(-50% - 12px),calc(-100% - 5px))'
+                }}>
+                  <RedGradientDegreeEdit2 rootComponent={this.props.rootComponent} />
+                </div>
+
               </div>
               <div
                 style={{
                   top: 0,
                   right: 0,
-                  transform: `translate(${20 + 32 * iconScale}px, -${20 + 32 * iconScale}px) scale(${iconScale})`,
+                  transform: `scale(${iconScale})`,
                   transition: 'transform 0.2s',
                   position: 'absolute',
-                  width: '30px',
-                  height: '30px',
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.75)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '1px solid rgba(0,0,0,0.8)',
                   filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
                   cursor: 'pointer',
                 }}
                 onMouseDown={e => {
                   e.stopPropagation();
-                  const rect = this.refDegree.current.getBoundingClientRect();
-                  this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500 * this.state.canvasViewScale, 500 * this.state.canvasViewScale);
-                  this.setModes({
-                    degreeMode: {
-                      ref: this.refDegreeCanvas.current,
-                      startX: e.nativeEvent.pageX,
-                      startY: e.nativeEvent.pageY,
-                      startDegX: rect.x + rect.width / 2,
-                      startDegY: rect.x + rect.height / 2,
-                      startDeg: activeSubData['deg'],
-                      mode: 'ne'
-                    }
-                  });
                 }}
               >
-                <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                <div style={{
+                  position : 'absolute',
+                  transform : 'translate(calc(50% + 12px),calc(-100% - 5px))'
+                }}>
+                  <RedGradientDegreeEdit2 rootComponent={this.props.rootComponent} invert={true}/>
+                </div>
               </div>
               <div
                 style={{
                   bottom: 0,
                   right: 0,
-                  transform: `translate(${20 + 32 * iconScale}px, ${20 + 32 * iconScale}px) scale(${iconScale})`,
+                  transform: `scale(${iconScale})`,
                   transition: 'transform 0.2s',
                   position: 'absolute',
-                  width: '30px',
-                  height: '30px',
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.75)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '1px solid rgba(0,0,0,0.8)',
                   filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
                   cursor: 'pointer',
                 }}
                 onMouseDown={e => {
                   e.stopPropagation();
-                  const rect = this.refDegree.current.getBoundingClientRect();
-                  this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500 * this.state.canvasViewScale, 500 * this.state.canvasViewScale);
-                  this.setModes({
-                    degreeMode: {
-                      ref: this.refDegreeCanvas.current,
-                      startX: e.nativeEvent.pageX,
-                      startY: e.nativeEvent.pageY,
-                      startDegX: rect.x + rect.width / 2,
-                      startDegY: rect.x + rect.height / 2,
-                      startDeg: activeSubData['deg'],
-                      mode: 'se'
-                    }
-                  });
                 }}
               >
-                <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                <div style={{
+                  position : 'absolute',
+                  transform : 'translate(calc(50% + 12px),calc(100% + 5px))'
+                }}>
+                  <RedGradientDegreeEdit2 rootComponent={this.props.rootComponent} invert={true}/>
+                </div>
               </div>
               <div
                 style={{
                   bottom: 0,
                   left: 0,
-                  transform: `translate(-${20 + 32 * iconScale}px, ${20 + 32 * iconScale}px) scale(${iconScale})`,
+                  transform: `scale(${iconScale})`,
                   transition: 'transform 0.2s',
                   position: 'absolute',
-                  width: '30px',
-                  height: '30px',
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.75)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '1px solid rgba(0,0,0,0.8)',
                   filter: 'drop-shadow(0px 0px 5px rgba(0,0,0,0.3)',
                   cursor: 'pointer',
                 }}
                 onMouseDown={e => {
                   e.stopPropagation();
-                  const rect = this.refDegree.current.getBoundingClientRect();
-                  this.refDegreeCanvas.current.getContext('2d').clearRect(0, 0, 500 * this.state.canvasViewScale, 500 * this.state.canvasViewScale);
-                  this.setModes({
-                    degreeMode: {
-                      ref: this.refDegreeCanvas.current,
-                      startX: e.nativeEvent.pageX,
-                      startY: e.nativeEvent.pageY,
-                      startDegX: rect.x + rect.width / 2,
-                      startDegY: rect.x + rect.height / 2,
-                      startDeg: activeSubData['deg'],
-                      mode: 'sw'
-                    }
-                  });
+
                 }}
               >
-                <FontAwesomeIcon icon={faSyncAlt} style={{transform: 'rotate(0deg)'}} />
+                <div style={{
+                  position : 'absolute',
+                  transform : 'translate(calc(-50% - 12px),calc(100% + 5px))'
+                }}>
+                  <RedGradientDegreeEdit2 rootComponent={this.props.rootComponent} />
+                </div>
               </div>
             </>
         }
