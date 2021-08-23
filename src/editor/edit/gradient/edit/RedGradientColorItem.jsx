@@ -13,8 +13,6 @@ import RedSelect from "../../../../core/RedSelect";
 import {faPlus, faThumbtack} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GRADIENT_TYPE from "../../../../js/const/GRADIENT_TYPE.js";
-import RedLayerItem from "../../../layer/RedLayerItem";
-import RedLayerSubItem from "../../../layer/RedLayerSubItem";
 
 let targetContext;
 let targetColorData;
@@ -85,7 +83,7 @@ class RedGradientColorItem extends React.Component {
     }
     if (!emptyImage) emptyImage = new Image();
     e.nativeEvent.dataTransfer.setDragImage(emptyImage, 0, 0);
-    console.log(e)
+    console.log(e);
   }
 
   handleDragEnter(e) {
@@ -117,7 +115,7 @@ class RedGradientColorItem extends React.Component {
       const startIDX = colorList.indexOf(startDragColorItem);
       colorList.splice(startIDX, 1);
       colorList.splice(dstIDX, 0, startDragColorItem);
-      this.props.HD_active(dstIDX)
+      this.props.HD_active(dstIDX);
     }
     RedGradientColorItem.clearDragInfo();
     this.props.rootComponent.updateRootState(t0);
@@ -142,7 +140,7 @@ class RedGradientColorItem extends React.Component {
     if (!colorData['useRange']) colorData['rangeEnd'] = colorData['range'];
     const unitList = activeSubData.type === GRADIENT_TYPE.CONIC || activeSubData.type === GRADIENT_TYPE.REPEAT_CONIC ? ['%', 'deg'] : ['px', '%'];
     return <div
-      draggable={targetRefBar || this.state.numberDrag || ( this.state.openColorPicker || this.state.openColorEndPicker)? false : true}
+      draggable={targetRefBar || this.state.numberDrag || (this.state.openColorPicker || this.state.openColorEndPicker) ? false : true}
       onDragStart={e => this.handleDragStart(e)}
       onDrop={e => this.handleDrop(e)}
       onDragOver={e => this.handleDragOver(e)}
@@ -312,7 +310,7 @@ class RedGradientColorItem extends React.Component {
                 width={colorData['useRange'] ? '90px' : '210px'}
                 value={colorData['range'] || 0}
                 HD_onInput={e => {
-                  this.state.numberDrag=true
+                  this.state.numberDrag = true;
                   colorData['range'] = +e.target.value;
                   let i = activeSubData.colorList.length;
                   while (i--) {
@@ -321,7 +319,7 @@ class RedGradientColorItem extends React.Component {
                   rootComponent.updateRootState({});
                 }}
                 HD_blur={e => {
-                  this.state.numberDrag=false
+                  this.state.numberDrag = false;
                   // this.props.HD_sort(e);
                   this.props.HD_active(this.getIndex());
                 }}
@@ -331,7 +329,7 @@ class RedGradientColorItem extends React.Component {
                   width={'90px'}
                   value={colorData['rangeEnd'] || 0}
                   HD_onInput={e => {
-                    this.state.numberDrag=true
+                    this.state.numberDrag = true;
                     colorData['rangeEnd'] = +e.target.value;
                     let i = activeSubData.colorList.length;
                     while (i--) {
@@ -341,7 +339,7 @@ class RedGradientColorItem extends React.Component {
                   }}
                   HD_blur={e => {
                     // this.props.HD_sort(e);
-                    this.state.numberDrag=false
+                    this.state.numberDrag = false;
                     this.props.HD_active(this.getIndex());
                   }}
                 /> : ''
@@ -496,6 +494,7 @@ class RedGradientColorItem extends React.Component {
     </div>;
   }
 }
+
 RedGradientColorItem.getDragInfo = () => startDragColorItem;
 RedGradientColorItem.clearDragInfo = () => {
   startDragColorItem = null;

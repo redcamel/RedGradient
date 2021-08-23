@@ -91,7 +91,7 @@ class App extends React.Component {
         window.actionHistoryCheckNum++;
         console.log('actionHistoryCheckNum', window.actionHistoryCheckNum);
       }
-      prevUpdateTime = t0
+      prevUpdateTime = t0;
     }
   }
 

@@ -19,7 +19,7 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
           flexDirection: 'column'
         }}>
           <span style={{color: '#efb26a'}}>Container info </span>
-          <div style={{marginTop : '3px'}}>
+          <div style={{marginTop: '3px'}}>
             w : {+canvasInfo['width'].toFixed(2)}, h : {+canvasInfo['height'].toFixed(2)} /
             x : {+canvasInfo['left'].toFixed(2)} , y : {+canvasInfo['top'].toFixed(2)}
           </div>
@@ -32,7 +32,7 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
         flexDirection: 'column'
       }}>
         <span style={{color: '#efb26a'}}>Gradient info </span>
-        <div style={{marginTop : '3px'}}>
+        <div style={{marginTop: '3px'}}>
           w : {activeSubData['size']['w'].toFixed(2)}{activeSubData['size']['wUnit']},
           h : {activeSubData['size']['h'].toFixed(2)}{activeSubData['size']['hUnit']}
         </div>

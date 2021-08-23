@@ -1,17 +1,9 @@
 import ACTIVE_FRAME_KEY from "../../../js/const/ACTIVE_FRAME_KEY";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faArrowsAlt,
-  faArrowsAltH,
-  faArrowsAltV,
-  faExpandAlt,
-  faSyncAlt
-} from "@fortawesome/free-solid-svg-icons";
+import {faArrowLeft, faArrowsAlt, faArrowsAltH, faArrowsAltV, faExpandAlt} from "@fortawesome/free-solid-svg-icons";
 import GRADIENT_TYPE from "../../../js/const/GRADIENT_TYPE";
 import ENDING_SHAPE_TYPE from "../../../js/const/ENDING_SHAPE_TYPE";
 import RedCanvas from "../RedCanvas";
-import RedGradientDegreeEdit from "../../edit/gradient/edit/RedGradientDegreeEdit";
 import RedGradientDegreeEdit2 from "../../edit/gradient/edit/RedGradientDegreeEdit2";
 
 
@@ -565,8 +557,8 @@ const renderGradientEdit = function (rootComponentState, activeSubData, canvasIn
                 }}
               >
                 <div style={{
-                  position : 'absolute',
-                  transform : 'translate(calc(-50% - 12px),calc(-100% - 5px))'
+                  position: 'absolute',
+                  transform: 'translate(calc(-50% - 12px),calc(-100% - 5px))'
                 }}>
                   <RedGradientDegreeEdit2 rootComponent={this.props.rootComponent} />
                 </div>
@@ -590,10 +582,10 @@ const renderGradientEdit = function (rootComponentState, activeSubData, canvasIn
                 }}
               >
                 <div style={{
-                  position : 'absolute',
-                  transform : 'translate(calc(50% + 12px),calc(-100% - 5px))'
+                  position: 'absolute',
+                  transform: 'translate(calc(50% + 12px),calc(-100% - 5px))'
                 }}>
-                  <RedGradientDegreeEdit2 rootComponent={this.props.rootComponent} invert={true}/>
+                  <RedGradientDegreeEdit2 rootComponent={this.props.rootComponent} invert={true} />
                 </div>
               </div>
               <div
@@ -614,10 +606,10 @@ const renderGradientEdit = function (rootComponentState, activeSubData, canvasIn
                 }}
               >
                 <div style={{
-                  position : 'absolute',
-                  transform : 'translate(calc(50% + 12px),calc(100% + 5px))'
+                  position: 'absolute',
+                  transform: 'translate(calc(50% + 12px),calc(100% + 5px))'
                 }}>
-                  <RedGradientDegreeEdit2 rootComponent={this.props.rootComponent} invert={true}/>
+                  <RedGradientDegreeEdit2 rootComponent={this.props.rootComponent} invert={true} />
                 </div>
               </div>
               <div
@@ -639,8 +631,8 @@ const renderGradientEdit = function (rootComponentState, activeSubData, canvasIn
                 }}
               >
                 <div style={{
-                  position : 'absolute',
-                  transform : 'translate(calc(-50% - 12px),calc(100% + 5px))'
+                  position: 'absolute',
+                  transform: 'translate(calc(-50% - 12px),calc(100% + 5px))'
                 }}>
                   <RedGradientDegreeEdit2 rootComponent={this.props.rootComponent} />
                 </div>

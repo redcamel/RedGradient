@@ -11,7 +11,7 @@ import RedCanvasFilter from "../edit/container/filter/RedFlterItem.jsx";
 import RedGradientEditComp from "../edit/gradient/RedGradientEditComp";
 import ACTIVE_FRAME_KEY from "../../js/const/ACTIVE_FRAME_KEY";
 import RedCanvas_checkResize from "./visualEdit/RedCanvas_checkResize";
-import RedCanvas_checkDegree from "./visualEdit/RedCanvas_checkDegree";
+
 import RedCanvas_checkAt from "./visualEdit/RedCanvas_checkAt";
 import RedCanvas_checkPosition from "./visualEdit/RedCanvas_checkPosition";
 import RedCanvas_checkRadius from "./visualEdit/RedCanvas_checkRadius";
@@ -25,7 +25,7 @@ import VISUAL_EDIT_MODE from "../../js/const/VISUAL_EDIT_MODE";
 import js_beautify from "js-beautify";
 import {toast} from "react-toastify";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCopy, faMinusCircle} from "@fortawesome/free-solid-svg-icons";
+import {faCopy} from "@fortawesome/free-solid-svg-icons";
 
 // TODO - 정리필요
 
@@ -37,7 +37,6 @@ class RedCanvas extends React.Component {
   renderVisualEditMode = renderVisualEditMode;
   //
   checkResize = RedCanvas_checkResize;
-  checkDegree = RedCanvas_checkDegree;
   checkAt = RedCanvas_checkAt;
   checkPosition = RedCanvas_checkPosition;
   checkRadius = RedCanvas_checkRadius;
@@ -120,16 +119,16 @@ class RedCanvas extends React.Component {
           this.state.visualEditMode === VISUAL_EDIT_MODE.GRADIENT
             ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo, appState)
             : this.state.visualEditMode === VISUAL_EDIT_MODE.CONTAINER
-            ? this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo, appState)
-            : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo, appState)
+              ? this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo, appState)
+              : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo, appState)
         }
       </div>
       {this.renderVisualEditMode(rootComponentState, canvasInfo, activeSubData)}
       <button
         style={{
-          position:'absolute',
-          top : '64px',
-          right : '6px',
+          position: 'absolute',
+          top: '64px',
+          right: '6px',
           cursor: 'pointer',
           padding: '6px',
           fontSize: '12px',
@@ -159,7 +158,7 @@ class RedCanvas extends React.Component {
             position: 'bottom-left'
           });
         }}
-      >   <FontAwesomeIcon icon={faCopy} style={{marginRight : '6px'}}/>Copy Result Class
+      ><FontAwesomeIcon icon={faCopy} style={{marginRight: '6px'}} />Copy Result Class
       </button>
     </>;
   }
@@ -200,7 +199,6 @@ class RedCanvas extends React.Component {
         if (this.state.visualEditMode === VISUAL_EDIT_MODE.GRADIENT) {
           this.checkPosition(e);
           this.checkResize(e);
-          this.checkDegree(e);
           this.checkAt(e);
         } else if (this.state.visualEditMode === VISUAL_EDIT_MODE.CONTAINER) {
           this.checkPosition(e, true);

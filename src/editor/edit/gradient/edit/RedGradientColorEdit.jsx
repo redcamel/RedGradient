@@ -133,7 +133,7 @@ class RedGradientColorEdit extends React.Component {
           </button>
         </div>
       </div>
-      <div style={{display:'flex',margin: '4px 0px'}}>
+      <div style={{display: 'flex', margin: '4px 0px'}}>
         <button
           style={{...style.preset}}
           onClick={() => {
@@ -173,7 +173,7 @@ class RedGradientColorEdit extends React.Component {
         <button
           style={{...style.preset}}
           onClick={() => {
-            this.sortColorList()
+            this.sortColorList();
             rootComponent.updateRootState({});
           }}
         ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}} /> Sort By Range

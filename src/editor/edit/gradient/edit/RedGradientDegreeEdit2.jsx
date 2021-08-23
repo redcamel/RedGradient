@@ -44,42 +44,42 @@ class RedGradientDegreeEdit2 extends React.Component {
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData;
     const deg = activeSubData['deg'];
-    return <div style={{display: 'flex', alignItems: 'center',width : '200px',color:'#fff'}}>
+    return <div style={{display: 'flex', alignItems: 'center', width: '200px', color: '#fff'}}>
 
       {
-        this.props.invert?
-        <>
-          <div style={{textAlign: 'center', marginLeft: '10px', marginRight: '10px'}}>
-            <div
-              style={style.box}
-              onMouseDown={() => {
-                targetContext = this;
-                window.addEventListener('mousemove', HD_move);
-                window.addEventListener('mouseup', HD_up);
-              }}
-              onClick={e => {
-                targetContext = this;
-                this.calcDegree(e.nativeEvent);
-              }}
-            >
-              <div style={style.centerItem} ref={this.refCenter} />
-              <div style={{
-                ...style.degreeItem,
-                top: `calc(50% + ${Math.sin(Math.PI / 180 * (deg - 90)) * SIZE / 3}px)`,
-                left: `calc(50% + ${Math.cos(Math.PI / 180 * (deg - 90)) * SIZE / 3}px)`
-              }} />
+        this.props.invert ?
+          <>
+            <div style={{textAlign: 'center', marginLeft: '10px', marginRight: '10px'}}>
+              <div
+                style={style.box}
+                onMouseDown={() => {
+                  targetContext = this;
+                  window.addEventListener('mousemove', HD_move);
+                  window.addEventListener('mouseup', HD_up);
+                }}
+                onClick={e => {
+                  targetContext = this;
+                  this.calcDegree(e.nativeEvent);
+                }}
+              >
+                <div style={style.centerItem} ref={this.refCenter} />
+                <div style={{
+                  ...style.degreeItem,
+                  top: `calc(50% + ${Math.sin(Math.PI / 180 * (deg - 90)) * SIZE / 3}px)`,
+                  left: `calc(50% + ${Math.cos(Math.PI / 180 * (deg - 90)) * SIZE / 3}px)`
+                }} />
+              </div>
             </div>
-          </div>
-          <RedNumber
-            title={'Deg'}
-            width={'61px'}
-            value={deg || 0}
-            HD_onInput={e => {
-              activeSubData['deg'] = +e.target.value;
-              rootComponent.updateRootState({});
-            }} />
+            <RedNumber
+              title={'Deg'}
+              width={'61px'}
+              value={deg || 0}
+              HD_onInput={e => {
+                activeSubData['deg'] = +e.target.value;
+                rootComponent.updateRootState({});
+              }} />
 
-        </> :
+          </> :
           <>
             <RedNumber
               title={'Deg'}
@@ -121,20 +121,22 @@ const style = {
   box: {
     display: 'inline-block',
     width: `${SIZE}px`, height: `${SIZE}px`,
-    border: '1px solid #5e7ade',
+    border: '1px solid #835b41',
     borderRadius: '50%',
+    background: 'rgba(255,255,255,0.1)',
     cursor: 'pointer'
   },
   centerItem: {
     width: '5px', height: '5px',
-    background: '#5e7ade',
+    background: '#835b41',
     borderRadius: '50%',
     position: 'absolute',
     top: '50%', left: '50%', transform: 'translate(-50%,-50%)'
   },
   degreeItem: {
     width: '10px', height: '10px',
-    border: '1px solid #5e7ade',
+    background: '#da7537',
+    // border: '1px solid #da7537',
     borderRadius: '50%',
     position: 'absolute',
     top: '50%', left: '50%', transform: 'translate(-50%,-50%)'
