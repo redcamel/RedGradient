@@ -109,7 +109,7 @@ class RedCanvas extends React.Component {
               borderTop: '80px solid #000',
               borderBottom: '40px solid #000',
               boxShadow: '0px 0px 20px rgba(0,0,0,0.5)',
-              transition : 'width 0.2s, height 0.2s'
+              transition : 'width 0.1s, height 0.1s'
             })
             // overflow : 'hidden'
           }}/>
