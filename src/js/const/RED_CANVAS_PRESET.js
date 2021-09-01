@@ -7,6 +7,11 @@
  */
 const RED_CANVAS_PRESET = [
   {
+    title: 'Responsive',
+    width: 256,
+    height: 256
+  },
+  {
     title: '512 x 512',
     width: 512,
     height: 512

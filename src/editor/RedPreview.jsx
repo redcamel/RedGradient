@@ -95,22 +95,28 @@ class RedPreview extends React.Component {
 
             <h3>
               TODO
-              <li>아마 여기서 위치조정은 해야할듯한데?</li>
               <li>프리뷰 줌도 해줘야할것 같고</li>
-              <li>흠 사이즈 편집도 해줘야하나</li>
             </h3>
           </div>
           <div style={{
             display: 'flex', flex: 1, alignItems: 'center', justifyItems: 'center',
-            background: '#fff'
+            background: '#000'
           }}>
             <div style={{
-              position: 'absolute',
-              top: '50%', left: '50%',
-              transform: 'translate(-50%,-50%)'
-            }}
-            >
-              <div className={"red_gradient_result"} />
+              position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+              width: `${rootComponentState.device['width']}px`,
+              height: `${rootComponentState.device['height']}px`,
+              background: '#fff',
+              // overflow : 'hidden'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: '50%', left: '50%',
+                transform: 'translate(-50%,-50%)'
+              }}
+              >
+                <div className={"red_gradient_result"} />
+              </div>
             </div>
           </div>
 
@@ -145,7 +151,7 @@ const
       position: 'fixed',
       top: 0, left: 0, right: 0, bottom: 0,
       background: 'rgba(0,0,0,0.46)',
-      zIndex: 2
+      zIndex: 3
     },
     container: {
       position: 'fixed',

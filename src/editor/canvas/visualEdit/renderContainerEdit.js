@@ -7,8 +7,12 @@ import RedCanvas from "../RedCanvas";
 const renderContainerEdit = function (rootComponentState, activeSubData, canvasInfo, appState) {
   let cX = this.state.editCanvasOnly ? -canvasInfo['left'] : 0;
   let cY = this.state.editCanvasOnly ? -canvasInfo['top'] : 0;
-
-  if (rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly) {
+  if(appState.activeFrameKey!=='main' && !this.state.editCanvasOnly){
+    cX+= appState['main']['canvasInfo']['left']
+    cY+= appState['main']['canvasInfo']['top']
+  }
+  // if (rootComponentState['key'] !== ACTIVE_FRAME_KEY.MAIN && !this.state.editCanvasOnly) {
+  if (!this.state.editCanvasOnly) {
     const mainCanvasInfo = appState[ACTIVE_FRAME_KEY.MAIN]['canvasInfo'];
     const borderW = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width'] : (mainCanvasInfo['border_width_split'][1] + mainCanvasInfo['border_width_split'][3]);
     const borderH = mainCanvasInfo['border_width_mergeMode'] ? mainCanvasInfo['border_width'] : (mainCanvasInfo['border_width_split'][0] + mainCanvasInfo['border_width_split'][2]);
@@ -44,7 +48,8 @@ const renderContainerEdit = function (rootComponentState, activeSubData, canvasI
       transform: `translate(-50%, -${20 + 36 * iconScale}px) scale(${iconScale})`,
       transition: 'transform 0.2s',
       position: 'absolute', width: `30px`, height: '30px',
-      display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+      // display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+      display:  'flex',
       alignItems: 'center', justifyContent: 'center',
       cursor: 'move',
       border: '1px solid #5e7ade', borderRadius: '50%',
@@ -71,7 +76,8 @@ const renderContainerEdit = function (rootComponentState, activeSubData, canvasI
       transform: `translate(-50%, ${20 + 36 * iconScale}px) scale(${iconScale})`,
       transition: 'transform 0.2s',
       position: 'absolute', width: '30px', height: '30px',
-      display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+      // display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+      display: 'flex',
       alignItems: 'center', justifyContent: 'center',
       cursor: 'move',
       border: '1px solid #5e7ade', borderRadius: '50%',
@@ -98,7 +104,8 @@ const renderContainerEdit = function (rootComponentState, activeSubData, canvasI
       transform: `translate(-${20 + 36 * iconScale}px, 50%) scale(${iconScale})`,
       transition: 'transform 0.2s',
       position: 'absolute', width: '30px', height: '30px',
-      display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+      // display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+      display:  'flex',
       alignItems: 'center', justifyContent: 'center',
       cursor: 'move',
       border: '1px solid #5e7ade', borderRadius: '50%',
@@ -125,7 +132,8 @@ const renderContainerEdit = function (rootComponentState, activeSubData, canvasI
       transform: `translate(${20 + 36 * iconScale}px, 50%) scale(${iconScale})`,
       transition: 'transform 0.2s',
       position: 'absolute', width: '30px', height: '30px',
-      display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+      // display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+      display: 'flex',
       alignItems: 'center', justifyContent: 'center',
       cursor: 'move',
       border: '1px solid #5e7ade', borderRadius: '50%',
@@ -154,7 +162,8 @@ const renderContainerEdit = function (rootComponentState, activeSubData, canvasI
       position: 'absolute',
       width: '30px',
       height: '30px',
-      display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+      // display: rootComponentState['key'] === ACTIVE_FRAME_KEY.MAIN ? 'none' : 'flex',
+      display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'move',

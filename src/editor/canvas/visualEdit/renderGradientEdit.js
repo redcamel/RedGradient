@@ -11,9 +11,14 @@ const renderGradientEdit = function (rootComponentState, activeSubData, canvasIn
   const activeSubDataPosition = activeSubData['position'];
   const activeSubDataAt = activeSubData['at'];
   const activeSubDataSize = activeSubData['size'];
-  console.log('~~~', this);
+  console.log('~~~', appState);
+
   let cX = this.state.editCanvasOnly ? 0 : canvasInfo['left'];
   let cY = this.state.editCanvasOnly ? 0 : canvasInfo['top'];
+  if(appState.activeFrameKey!=='main' && !this.state.editCanvasOnly){
+    cX+= appState['main']['canvasInfo']['left']
+    cY+= appState['main']['canvasInfo']['top']
+  }
   const borderW = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][1] + canvasInfo['border_width_split'][3]);
   const borderH = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] * 2 : (canvasInfo['border_width_split'][0] + canvasInfo['border_width_split'][2]);
   const borderX = canvasInfo['border_width_mergeMode'] ? canvasInfo['border_width'] : canvasInfo['border_width_split'][3];

@@ -45,27 +45,27 @@ class RedContainerEdit extends React.Component {
             ? ''
             : <RedContainerPositionEdit rootComponent={rootComponent} canvasComponent={this} />
         }
-        <div style={style.divide} />
-        <div style={{display: 'inline-block', margin: '8px 10px 8px 10px'}}>
-          {
-            RED_CANVAS_PRESET.map(v => {
-              return <button
-                style={style.presetButton}
-                onClick={() => {
-                  canvasInfo.width = v.width;
-                  canvasInfo.height = v.height;
-                  rootComponent.updateRootState({});
-                }}
-              >
-                <div>
-                  <FontAwesomeIcon
-                    icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}
-                  /> {v['title']}({v['width']}x{v['height']})
-                </div>
-              </button>;
-            })
-          }
-        </div>
+        {/*<div style={style.divide} />*/}
+        {/*<div style={{display: 'inline-block', margin: '8px 10px 8px 10px'}}>*/}
+        {/*  {*/}
+        {/*    RED_CANVAS_PRESET.map(v => {*/}
+        {/*      return <button*/}
+        {/*        style={style.presetButton}*/}
+        {/*        onClick={() => {*/}
+        {/*          canvasInfo.width = v.width;*/}
+        {/*          canvasInfo.height = v.height;*/}
+        {/*          rootComponent.updateRootState({});*/}
+        {/*        }}*/}
+        {/*      >*/}
+        {/*        <div>*/}
+        {/*          <FontAwesomeIcon*/}
+        {/*            icon={v['type'] === 'mobile' ? faMobileAlt : faDesktop}*/}
+        {/*          /> {v['title']}({v['width']}x{v['height']})*/}
+        {/*        </div>*/}
+        {/*      </button>;*/}
+        {/*    })*/}
+        {/*  }*/}
+        {/*</div>*/}
         <div style={style.divide} />
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <div className={'ui_subTitle'}>background</div>

@@ -25,6 +25,8 @@ import getActiveSubData from "../editor/js/getActiveSubData";
 import BORDER_REPEAT_TYPE from "../js/const/BORDER_REPEAT_TYPE";
 import DataLayer from "../editor/data/DataLayer";
 import RedContainerBorderEdit from "../editor/edit/border/RedContainerBorderEdit";
+import RedNumber from "../core/RedNumber";
+import RED_CANVAS_PRESET from "../js/const/RED_CANVAS_PRESET.js";
 
 class AppFrame extends React.Component {
 
@@ -104,6 +106,8 @@ class AppFrame extends React.Component {
     this.checkFrameDataList();
     const appComponent = this.props.appComponent;
     const appComponentState = appComponent.state;
+    console.log('appComponentState', appComponentState);
+    const deviceData = appComponentState.device;
     this.state = appComponentState[appComponentState.activeFrameKey];
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
@@ -113,9 +117,58 @@ class AppFrame extends React.Component {
         </div>
         <RedFrameMenuOpen rootComponent={appComponent} />
         <RedFrameMenuSave rootComponent={appComponent} />
+        <div style={{
+          display: 'flex', alignItems: 'center',
+          position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', whiteSpace: 'nowrap',
+        }}>
+          <div>Device Information</div>
+          <div style={{width: '10px'}} />
+          <RedNumber title={'width'} width={'160px'} value={deviceData['width']} minValue={0} HD_onInput={e => {
+            deviceData['width'] = parseInt(+e.target.value);
+            appComponent.updateRootState({});
+          }} />
+          <div style={{width: '10px'}} />
+          <RedNumber title={'height'} width={'160px'} value={deviceData['height']} minValue={0} HD_onInput={e => {
+            deviceData['height'] = parseInt(+e.target.value);
+            appComponent.updateRootState({});
+          }} />
+          <div style={{width: '10px'}} />
+          <div>
+            <select
+              onChange={e => {
+                let t0 = JSON.parse(e.target.value);
+                deviceData['width'] = parseInt(+t0['width']);
+                deviceData['height'] = parseInt(+t0['height']);
+                appComponent.updateRootState({});
+              }}
+            >
+              {
+                RED_CANVAS_PRESET.map(v => {
+                  return <option
+                    color={'#fff'}
+                    value={JSON.stringify(v)}
+                    selected={deviceData['width']===v['width'] && deviceData['height']===v['height']}
+                  >
+                    {/*<div>*/}
+                    {/*  <FontAwesomeIcon*/}
+                    {/*    icon={v['type'] === 'mobile' ? 📱 : 🖥️}*/}
+                    {/*  /> {v['title']}({v['width']}x{v['height']})*/}
+                    {/*</div>*/}
+
+                    {
+                      v['title'] === 'Responsive' ? v['title'] :
+                        `${v['type'] === 'mobile' ? '📱' : '🖥️'} ${v['title']}(${v['width']}x${v['height']}`
+                    }
+
+                  </option>;
+                })
+              }
+            </select>
+          </div>
+        </div>
       </div>
       {/*<div className={'frame_toolbar'}>*/}
-      {/* */}
+      {/*  */}
       {/*</div>*/}
       <div className={'frame_middle'}>
         <div className={'frame_middle_container'}>

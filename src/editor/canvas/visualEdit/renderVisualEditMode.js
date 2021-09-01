@@ -6,7 +6,7 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
     top: 65,
     left: 10,
     display: 'flex',
-    background: 'rgba(0,0,0,0.1)',
+    background: 'rgba(0,0,0,0.8)',
     padding: '8px',
     borderRadius: '8px',
     border: '1px solid rgba(0,0,0,0.16)'

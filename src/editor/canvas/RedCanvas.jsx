@@ -91,39 +91,66 @@ class RedCanvas extends React.Component {
     `;
 
     console.log(canvasInfo['addCss'] || ";");
+    const device = appState['device']
     return <>
-      <div
-        style={{
-          ...style.canvas,
-          transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
-        }} className={'transparent_checker redGradient_canvas '}>
-        {
-          this.state.editCanvasOnly ? <div
-            className={'transparent_checker'}
-            //TODO - cssText 확인
-            cssText={canvasInfo['addCss'] || ""}
-            style={{
+        <div
+          style={{
+            ...style.canvas,
+            transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
+          }} className={'transparent_checker redGradient_canvas '}>
+          <div style={{
+            position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,calc(-50% - 20px))',
+            ...(this.state.editCanvasOnly ?  {} : {
+              width: `${device['width']}px`,
+              height: `${device['height']}px`,
+              borderRadius: '20px',
+              boxSizing: 'content-box',
+              border: '30px solid #000',
+              borderTop: '80px solid #000',
+              borderBottom: '40px solid #000',
+              boxShadow: '0px 0px 20px rgba(0,0,0,0.5)',
+              transition : 'width 0.2s, height 0.2s'
+            })
+            // overflow : 'hidden'
+          }}/>
+          <div style={{
+            position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+            ...(this.state.editCanvasOnly ? {} : {
+              width: `${device['width']}px`,
+              height: `${device['height']}px`,
+              background: '#fff',
+              transition : 'width 0.1s, height 0.1s'
+            } )
+            // overflow : 'hidden'
+          }}>
+          {
+            this.state.editCanvasOnly ? <div
+              className={'transparent_checker'}
+              //TODO - cssText 확인
+              cssText={canvasInfo['addCss'] || ""}
+              style={{
 
-              width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
-              background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
-              backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
-              // transition: 'width 0.2s, height 0.2s',
-              ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
-              filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
-              overflow: 'hidden',
-            }}
+                width: `${canvasInfo.width}px`, height: `${canvasInfo.height}px`,
+                background: CALC_GRADIENT.calcGradients(layers, true, bgColor),
+                backgroundBlendMode: CALC_GRADIENT.calcBlendMode(layers),
+                // transition: 'width 0.2s, height 0.2s',
+                ...RedCanvas.getContainerCss(canvasInfo, borderGradientInfo),
+                filter: RedCanvas.getFilterCss(canvasInfo['filterList']),
+                overflow: 'hidden',
+              }}
 
-          /> : <div className={"red_gradient_result"} />
-        }
-        {
-          this.state.visualEditMode === VISUAL_EDIT_MODE.GRADIENT
-            ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo, appState)
-            : this.state.visualEditMode === VISUAL_EDIT_MODE.CONTAINER
-              ? this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo, appState)
-              : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo, appState)
-        }
+            /> : <div className={"red_gradient_result"} />
+          }
+          {
+            this.state.visualEditMode === VISUAL_EDIT_MODE.GRADIENT
+              ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo, appState)
+              : this.state.visualEditMode === VISUAL_EDIT_MODE.CONTAINER
+                ? this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo, appState)
+                : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo, appState)
+          }
+        </div>
       </div>
-      {this.renderVisualEditMode(rootComponentState, canvasInfo, activeSubData)}
+        {this.renderVisualEditMode(rootComponentState, canvasInfo, activeSubData)}
       <button
         style={{
           position: 'absolute',
@@ -143,7 +170,8 @@ class RedCanvas extends React.Component {
 
           tempElem.value = js_beautify.css_beautify(`
     ${beforeText}
-    ${mainText}
+    // ${mainText}
+    ${RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN],true)}
     ${afterText}
     `, {
             indent_size: 2,
@@ -226,7 +254,7 @@ class RedCanvas extends React.Component {
         style.canvas.transition = 'transform 0.1s';
       }}
     >
-      <RedTitle title={'Container Information'} />
+      <RedTitle title={'Container Information'} style={{zIndex:1}}/>
       <ActiveSelectBar appComponent={this.props.appComponent} />
       {this.drawCall(canvasInfo, layers, rootComponentState.bgColor, activeLayer)}
       <div style={{

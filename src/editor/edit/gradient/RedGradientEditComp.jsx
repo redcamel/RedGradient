@@ -134,7 +134,7 @@ class RedGradientEditComp extends React.Component {
   }
 }
 
-RedGradientEditComp.getContainerCssText = (rootComponentState) => {
+RedGradientEditComp.getContainerCssText = (rootComponentState,resultMode) => {
   const canvasInfo = rootComponentState.canvasInfo;
   let containerCssText = '';
   {
@@ -152,7 +152,8 @@ RedGradientEditComp.getContainerCssText = (rootComponentState) => {
         break;
       case ACTIVE_FRAME_KEY.MAIN:
         className = '.result';
-        position = 'position : relative;';
+        if(resultMode) position = 'position : relative;';
+        else position = ` position : relative; top : ${canvasInfo['top'] || 0}px; left : ${canvasInfo['left'] || 0}px; `;
         break;
       case ACTIVE_FRAME_KEY.AFTER:
         className = `.result::after`;

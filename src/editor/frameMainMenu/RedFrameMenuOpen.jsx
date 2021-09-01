@@ -9,6 +9,7 @@ import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFolderOpen} from "@fortawesome/free-solid-svg-icons";
 import DataRedGradient from "../data/DataRedGradient";
+import DataDevice from "../data/DataDevice";
 
 class RedFrameMenuOpen extends React.Component {
   checkValidate(v) {
@@ -38,6 +39,7 @@ class RedFrameMenuOpen extends React.Component {
     } catch (e) {
       return false;
     }
+    if(!loadData['device']) loadData['device'] = new DataDevice()
     return loadData;
   }
 

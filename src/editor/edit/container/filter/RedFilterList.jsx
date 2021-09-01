@@ -21,7 +21,7 @@ class RedFilterList extends React.Component {
     const filterList = canvasInfo.filterList;
     return <div>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        filterList
+        <div className={'ui_subTitle'}>filterList</div>
         <FontAwesomeIcon
           icon={faPlusSquare} style={{fontSize: '16px', cursor: 'pointer'}}
           onClick={() => {
