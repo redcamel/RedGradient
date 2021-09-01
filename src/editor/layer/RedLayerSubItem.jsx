@@ -11,6 +11,7 @@ import {faCopy, faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CALC_GRADIENT from "../../js/CALC_GRADIENT";
 import RedLayerItem from "./RedLayerItem.jsx";
+import getActiveSubData from "../js/getActiveSubData";
 
 let startDragLayer;
 let startDragItem;
@@ -172,7 +173,8 @@ class RedLayerSubItem extends React.Component {
                 idx = 0;
               }
               if (!layer.items[idx]) idx = idx - 1;
-              rootComponent.updateRootState({activeSubData: layer.items[idx]});
+              rootComponent.updateRootState({activeSubData: layer.items[idx],activeSubDataIndex :idx});
+
             }
           }}
         >
@@ -186,6 +188,7 @@ class RedLayerSubItem extends React.Component {
           const idx = layer.items.indexOf(item);
           const t0 = JSON.parse(JSON.stringify(item));
           layer.items.splice(idx, 0, t0);
+          console.log('흠 뭐징',rootComponent,t0)
           rootComponent.updateRootState({activeSubData: t0});
         }}
       >
