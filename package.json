@@ -40,6 +40,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@scena/react-ruler": "^0.8.1",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "customize-cra": "^1.0.0",
     "gsap": "^3.6.1",

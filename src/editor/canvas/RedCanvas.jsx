@@ -26,6 +26,7 @@ import js_beautify from "js-beautify";
 import {toast} from "react-toastify";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy} from "@fortawesome/free-solid-svg-icons";
+import Ruler from "@scena/react-ruler";
 
 // TODO - 정리필요
 
@@ -91,38 +92,59 @@ class RedCanvas extends React.Component {
     `;
 
     console.log(canvasInfo['addCss'] || ";");
-    const device = appState['device']
+    const device = appState['device'];
     return <>
-        <div
-          style={{
-            ...style.canvas,
-            transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
-          }} className={'transparent_checker redGradient_canvas '}>
-          <div style={{
-            position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,calc(-50% - 20px))',
-            ...(this.state.editCanvasOnly ?  {} : {
+      <div
+        style={{
+          ...style.canvas,
+          transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
+        }} className={'transparent_checker redGradient_canvas '}>
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,calc(-50% - 20px))',
+          ...(this.state.editCanvasOnly ? {} : {
+            width: `${device['width']}px`,
+            height: `${device['height']}px`,
+            borderRadius: '20px',
+            boxSizing: 'content-box',
+            border: '30px solid #171717',
+            borderTop: '80px solid #171717',
+            borderBottom: '40px solid #171717',
+            boxShadow: '0px 0px 20px rgba(0,0,0,0.5)',
+            transition: 'width 0.1s, height 0.1s'
+          })
+          // overflow : 'hidden'
+        }} />
+        {
+          this.state.editCanvasOnly ? '' : <>
+            <Ruler type="horizontal" direction="end" style={{
+              display: "block",
+              height: "20px",
+              position: 'absolute',
               width: `${device['width']}px`,
+              top: `${-device['height'] / 2-20}px`,
+              left: `${-device['width']/2}px`,
+            }} backgroundColor={'transparent'} lineColor={'#525252'} textColor={'#98866f'} textOffset={[0,5]}/>
+            <Ruler type="vertical" direction="end" style={{
+              display: "block",
+              width: "20px",
+              position: 'absolute',
               height: `${device['height']}px`,
-              borderRadius: '20px',
-              boxSizing: 'content-box',
-              border: '30px solid #000',
-              borderTop: '80px solid #000',
-              borderBottom: '40px solid #000',
-              boxShadow: '0px 0px 20px rgba(0,0,0,0.5)',
-              transition : 'width 0.1s, height 0.1s'
-            })
-            // overflow : 'hidden'
-          }}/>
-          <div style={{
-            position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-            ...(this.state.editCanvasOnly ? {} : {
-              width: `${device['width']}px`,
-              height: `${device['height']}px`,
-              background: '#fff',
-              transition : 'width 0.1s, height 0.1s'
-            } )
-            // overflow : 'hidden'
-          }}>
+              top:`${-device['height'] / 2}px`,
+              left: `${-device['width']/2-20}px`,
+            }} backgroundColor={'transparent'} lineColor={'#525252'} textColor={'#98866f'}  textOffset={[5,0]} negativeRuler/>
+          </>
+        }
+
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+          ...(this.state.editCanvasOnly ? {} : {
+            width: `${device['width']}px`,
+            height: `${device['height']}px`,
+            background: '#fff',
+            transition: 'width 0.1s, height 0.1s'
+          })
+          // overflow : 'hidden'
+        }}>
           {
             this.state.editCanvasOnly ? <div
               className={'transparent_checker'}
@@ -150,7 +172,7 @@ class RedCanvas extends React.Component {
           }
         </div>
       </div>
-        {this.renderVisualEditMode(rootComponentState, canvasInfo, activeSubData)}
+      {this.renderVisualEditMode(rootComponentState, canvasInfo, activeSubData)}
       <button
         style={{
           position: 'absolute',
@@ -171,7 +193,7 @@ class RedCanvas extends React.Component {
           tempElem.value = js_beautify.css_beautify(`
     ${beforeText}
     // ${mainText}
-    ${RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN],true)}
+    ${RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN], true)}
     ${afterText}
     `, {
             indent_size: 2,
@@ -254,7 +276,7 @@ class RedCanvas extends React.Component {
         style.canvas.transition = 'transform 0.1s';
       }}
     >
-      <RedTitle title={'Container Information'} style={{zIndex:1}}/>
+      <RedTitle title={'Container Information'} style={{zIndex: 1}} />
       <ActiveSelectBar appComponent={this.props.appComponent} />
       {this.drawCall(canvasInfo, layers, rootComponentState.bgColor, activeLayer)}
       <div style={{
