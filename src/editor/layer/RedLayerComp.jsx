@@ -22,7 +22,7 @@ class RedLayerComp extends React.Component {
     const rootComponent = this.props.rootComponent;
     const rootComponentState = rootComponent.state;
     const layers = rootComponentState.layers;
-    return <div style={{flexDirection: 'column', display: 'flex'}}>
+    return <div style={{flexDirection: 'column', display: 'flex',background:'linear-gradient(to bottom, rgb(51 51 51)  0%, rgb(23 23 23)  )'}}>
       <RedLayerTop rootComponent={rootComponent} layersComponent={this} />
       <div style={style.container}>
         {

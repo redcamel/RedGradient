@@ -107,6 +107,7 @@ option {
     min-height: 46px;
     display: flex;
     align-items: center;
+    background: linear-gradient(to right, rgb(51 51 51)  0%, rgb(23 23 23)50%, rgb(51 51 51)  100% );
 }
 
 .frame_toolbar {
@@ -129,6 +130,7 @@ option {
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
+
 }
 
 .frame_left {
@@ -136,12 +138,15 @@ option {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: linear-gradient(to bottom, rgb(51 51 51)  0%, rgb(23 23 23)  );
 }
 
 .frame_center {
     border-right: 1px solid #0c0b0b;
     display: flex;
     flex-grow: 100;
+
+    background: linear-gradient(to right, rgb(23 23 23)  0%, rgb(51 51 51) 50%, rgb(23 23 23)  100% );
 }
 
 .frame_right {
@@ -164,6 +169,7 @@ option {
     border: 1px solid #0c0b0b;
     padding: 8px;
     max-height: 36px;
+    background: linear-gradient(to right, rgb(51 51 51)  0%, rgb(23 23 23)50%, rgb(51 51 51)  100% );
 }
 
 /* 스크롤바 */
@@ -374,7 +380,7 @@ option {
 }
 
 .ui_item_title {
-    color: #696969;
+    color: #7a7a7a;
     margin-right: 5px;
     white-space: nowrap;
 }
