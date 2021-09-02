@@ -22,7 +22,8 @@ const calcE = (info, containerMode) => {
   } = info;
   if (containerMode) {
     canvasInfo['width'] = originX + gapX;
-    if (altKey && key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['left'] -= gapX / 2;
+    // if (altKey && key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['left'] -= gapX / 2;
+    if (altKey ) canvasInfo['left'] -= gapX / 2;
   } else {
     if (positionInfo['xUnit'] === '%') {
       let targetPixelSize = tW + gapX;
@@ -58,10 +59,10 @@ const calcW = (info, containerMode) => {
   } = info;
   if (containerMode) {
     canvasInfo['width'] = originX - gapX;
-    if (key !== ACTIVE_FRAME_KEY.MAIN) {
+    // if (key !== ACTIVE_FRAME_KEY.MAIN) {
       if (altKey) canvasInfo['left'] += gapX / 2;
       else canvasInfo['left'] += gapX;
-    }
+    // }
 
   } else {
     if (positionInfo['xUnit'] === '%') {
@@ -101,7 +102,8 @@ const calcS = (info, containerMode) => {
   } = info;
   if (containerMode) {
     canvasInfo['height'] = originY + gapY;
-    if (altKey && key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['top'] -= gapY / 2;
+    // if (altKey && key !== ACTIVE_FRAME_KEY.MAIN) canvasInfo['top'] -= gapY / 2;
+    if (altKey ) canvasInfo['top'] -= gapY / 2;
   } else {
     if (positionInfo['yUnit'] === '%') {
       let targetPixelSize = tH + gapY;
@@ -136,10 +138,10 @@ const calcN = (info, containerMode) => {
   } = info;
   if (containerMode) {
     canvasInfo['height'] = originY - gapY;
-    if (key !== ACTIVE_FRAME_KEY.MAIN) {
+    // if (key !== ACTIVE_FRAME_KEY.MAIN) {
       if (altKey) canvasInfo['top'] += gapY / 2;
       else canvasInfo['top'] += gapY;
-    }
+    // }
   } else {
     if (positionInfo['yUnit'] === '%') {
       let targetPixelSize = tH - gapY;
