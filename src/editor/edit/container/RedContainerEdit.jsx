@@ -37,7 +37,7 @@ class RedContainerEdit extends React.Component {
     rootComponentState = rootComponent.state;
     canvasInfo = rootComponentState.canvasInfo;
     return <div>
-      <RedTitle title={'Container Property'} />
+      <RedTitle title={<div><span style={{color : '#efb26a'}}>{rootComponentState['key'].toLocaleUpperCase()}</span> Container Property</div>} />
       <div style={style.container}>
         <RedContainerSizeEdit rootComponent={rootComponent} canvasComponent={this} />
         {
