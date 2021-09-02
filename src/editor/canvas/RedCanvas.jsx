@@ -111,8 +111,7 @@ class RedCanvas extends React.Component {
             borderBottom: '40px solid #171717',
             boxShadow: '0px 0px 20px rgba(0,0,0,0.5)',
             transition: 'width 0.1s, height 0.1s'
-          })
-          // overflow : 'hidden'
+          }),
         }} />
         {
           this.state.editCanvasOnly ? '' : <>
@@ -121,17 +120,18 @@ class RedCanvas extends React.Component {
               height: "20px",
               position: 'absolute',
               width: `${device['width']}px`,
-              top: `${-device['height'] / 2-20}px`,
-              left: `${-device['width']/2}px`,
-            }} backgroundColor={'transparent'} lineColor={'#525252'} textColor={'#98866f'} textOffset={[0,5]}/>
+              top: `${-device['height'] / 2 - 20}px`,
+              left: `${-device['width'] / 2}px`,
+            }} backgroundColor={'transparent'} lineColor={'#525252'} textColor={'#98866f'} textOffset={[0, 5]} />
             <Ruler type="vertical" direction="end" style={{
               display: "block",
               width: "20px",
               position: 'absolute',
               height: `${device['height']}px`,
-              top:`${-device['height'] / 2}px`,
-              left: `${-device['width']/2-20}px`,
-            }} backgroundColor={'transparent'} lineColor={'#525252'} textColor={'#98866f'}  textOffset={[5,0]} negativeRuler/>
+              top: `${-device['height'] / 2}px`,
+              left: `${-device['width'] / 2 - 20}px`,
+            }} backgroundColor={'transparent'} lineColor={'#525252'} textColor={'#98866f'} textOffset={[5, 0]}
+                   negativeRuler />
           </>
         }
 
@@ -143,7 +143,28 @@ class RedCanvas extends React.Component {
             background: '#fff',
             transition: 'width 0.1s, height 0.1s'
           }),
-          overflow : 'hidden'
+          overflow: 'hidden'
+        }}>
+          {
+            this.state.editCanvasOnly ? '' : <div className={"red_gradient_result"} />
+          }
+        </div>
+      </div>
+      <div
+        style={{
+          ...style.canvas,
+          transform: `translate(calc(-50% + ${this.state.canvasViewOffsetX}px),calc(-50% + ${this.state.canvasViewOffsetY}px)) scale(${this.state.canvasViewScale})`
+        }} className={'transparent_checker redGradient_canvas '}>
+
+
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+          ...(this.state.editCanvasOnly ? {} : {
+            width: `${device['width']}px`,
+            height: `${device['height']}px`,
+            transition: 'width 0.1s, height 0.1s'
+          })
+          // overflow : 'hidden'
         }}>
           {
             this.state.editCanvasOnly ? <div
@@ -161,18 +182,8 @@ class RedCanvas extends React.Component {
                 overflow: 'hidden',
               }}
 
-            /> : <div className={"red_gradient_result"} />
+            /> : ''
           }
-        </div>
-        <div style={{
-          position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-          ...(this.state.editCanvasOnly ? {} : {
-            width: `${device['width']}px`,
-            height: `${device['height']}px`,
-            transition: 'width 0.1s, height 0.1s'
-          }),
-        }}>
-
           {
             this.state.visualEditMode === VISUAL_EDIT_MODE.GRADIENT
               ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo, appState)
