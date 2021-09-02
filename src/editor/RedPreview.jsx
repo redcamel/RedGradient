@@ -107,12 +107,12 @@ class RedPreview extends React.Component {
               width: `${rootComponentState.device['width']}px`,
               height: `${rootComponentState.device['height']}px`,
               background: '#fff',
-              // overflow : 'hidden'
+              overflow : 'hidden'
             }}>
               <div style={{
-                position: 'absolute',
-                top: '50%', left: '50%',
-                transform: 'translate(-50%,-50%)'
+                // position: 'absolute',
+                // top: '50%', left: '50%',
+                // transform: 'translate(-50%,-50%)'
               }}
               >
                 <div className={"red_gradient_result"} />
