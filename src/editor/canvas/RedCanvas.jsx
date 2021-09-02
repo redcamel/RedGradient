@@ -142,8 +142,8 @@ class RedCanvas extends React.Component {
             height: `${device['height']}px`,
             background: '#fff',
             transition: 'width 0.1s, height 0.1s'
-          })
-          // overflow : 'hidden'
+          }),
+          overflow : 'hidden'
         }}>
           {
             this.state.editCanvasOnly ? <div
@@ -163,6 +163,16 @@ class RedCanvas extends React.Component {
 
             /> : <div className={"red_gradient_result"} />
           }
+        </div>
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+          ...(this.state.editCanvasOnly ? {} : {
+            width: `${device['width']}px`,
+            height: `${device['height']}px`,
+            transition: 'width 0.1s, height 0.1s'
+          }),
+        }}>
+
           {
             this.state.visualEditMode === VISUAL_EDIT_MODE.GRADIENT
               ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo, appState)
