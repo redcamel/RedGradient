@@ -1,4 +1,7 @@
 import VISUAL_EDIT_MODE from "../../../js/const/VISUAL_EDIT_MODE";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import React from "react";
+import {faCompressArrowsAlt, faEye} from "@fortawesome/free-solid-svg-icons";
 
 const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSubData) {
   return <div style={{
@@ -90,9 +93,10 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
                 borderRadius: '4px',
                 padding: '2px 0px',
                 whiteSpace: 'nowrap',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                alignItems:'center'
               }}>
-                View Visual Edit
+                <FontAwesomeIcon icon={faCompressArrowsAlt} style={{marginRight: '6px',fontSize:'12px'}} />View Visual Edit
                 <input type={'checkbox'}
                        checked={this.state.layerSizeView}
                        style={{
@@ -117,9 +121,10 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
                 borderRadius: '4px',
                 padding: '2px 0px',
                 whiteSpace: 'nowrap',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                alignItems:'center',
               }}>
-                View Edit Container Only
+                <FontAwesomeIcon icon={faEye} style={{marginRight: '4px',fontSize:'12px'}} />View Edit Container Only
                 <input type={'checkbox'}
                        checked={this.state.editCanvasOnly}
                        style={{
