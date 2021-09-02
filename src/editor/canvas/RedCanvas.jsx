@@ -202,7 +202,6 @@ class RedCanvas extends React.Component {
 
           tempElem.value = js_beautify.css_beautify(`
     ${beforeText}
-    // ${mainText}
     ${RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN], true)}
     ${afterText}
     `, {
