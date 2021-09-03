@@ -75,6 +75,7 @@ class RedCanvas extends React.Component {
     ////////////////////
     /////////
     const appState = this.props.appComponent.state;
+    const deviceData = appState['device']
     let beforeText = RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.BEFORE]);
     let mainText = RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN]);
     let afterText = RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.AFTER]);
@@ -97,7 +98,7 @@ class RedCanvas extends React.Component {
         }} className={'transparent_checker redGradient_canvas '}>
         <div style={{
           position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,calc(-50% - 20px))',
-          ...(this.state.editCanvasOnly ? {} : {
+          ...(this.state.editCanvasOnly || !deviceData['activeFrame'] ? {} : {
             width: `${device['width']}px`,
             height: `${device['height']}px`,
             borderRadius: '20px',
@@ -110,7 +111,7 @@ class RedCanvas extends React.Component {
           }),
         }} />
         {
-          this.state.editCanvasOnly ? '' : <>
+          this.state.editCanvasOnly || !deviceData['activeRuler'] ? '' : <>
             <Ruler type="horizontal" direction="end" style={{
               display: "block",
               height: "20px",

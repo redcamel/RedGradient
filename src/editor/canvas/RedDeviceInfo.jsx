@@ -68,13 +68,14 @@ class RedDeviceInfo extends React.Component {
         lineHeight: '20px',
         borderRadius: '4px',
         border: '1px solid #000',
-        background: 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))',
+        background: deviceData['activeRuler'] ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333',
         padding : '4px',
         width : '32px',
         cursor: 'pointer'
       }}
            onClick={() => {
-             alert('TODO - 룰러 on/off');
+             deviceData['activeRuler'] = !deviceData['activeRuler']
+             appComponent.updateRootState({});
            }}
       >
         <FontAwesomeIcon icon={faRulerCombined} />
@@ -89,13 +90,14 @@ class RedDeviceInfo extends React.Component {
         lineHeight: '20px',
         borderRadius: '4px',
         border: '1px solid #000',
-        background: 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))',
+        background: deviceData['activeFrame'] ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333',
         padding : '4px',
         width : '32px',
         cursor: 'pointer'
       }}
            onClick={() => {
-             alert('TODO - 디바이스 프레임 on/off');
+             deviceData['activeFrame'] = !deviceData['activeFrame']
+             appComponent.updateRootState({});
            }}
       >
         <FontAwesomeIcon icon={faTabletAlt} />

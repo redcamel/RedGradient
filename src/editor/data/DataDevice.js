@@ -10,7 +10,9 @@
 function DataDevice() {
   return {
     width: 512,
-    height: 512
+    height: 512,
+    activeRuler : true,
+    activeFrame : true
   };
 }
 
