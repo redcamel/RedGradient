@@ -6,7 +6,7 @@ import {faCompressArrowsAlt, faEye} from "@fortawesome/free-solid-svg-icons";
 const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSubData) {
   return <div style={{
     position: 'absolute',
-    top: 65,
+    top: 70,
     left: 10,
     display: 'flex',
     background: 'rgba(0,0,0,0.8)',

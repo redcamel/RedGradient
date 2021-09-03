@@ -194,42 +194,7 @@ class RedCanvas extends React.Component {
         </div>
       </div>
       {this.renderVisualEditMode(rootComponentState, canvasInfo, activeSubData)}
-      <button
-        style={{
-          position: 'absolute',
-          top: '64px',
-          right: '6px',
-          cursor: 'pointer',
-          padding: '6px',
-          fontSize: '12px',
-          color: '#fff',
-          outline: 'none',
-          border: '1px solid #111',
-          background: 'linear-gradient(#5e7ade, #2c3565)',
-          borderRadius: '4px'
-        }}
-        onClick={() => {
-          const tempElem = document.createElement('textarea');
 
-          tempElem.value = js_beautify.css_beautify(`
-    ${beforeText}
-    ${RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN], true)}
-    ${afterText}
-    `, {
-            indent_size: 2,
-            space_in_empty_paren: true,
-            max_preserve_newlines: 1
-          });
-          document.body.appendChild(tempElem);
-          tempElem.select();
-          document.execCommand("copy");
-          document.body.removeChild(tempElem);
-          toast.dark("Copy Result Class!", {
-            position: 'bottom-left'
-          });
-        }}
-      ><FontAwesomeIcon icon={faCopy} style={{marginRight: '6px'}} />Copy Result Class
-      </button>
     </>;
   }
 
