@@ -80,7 +80,7 @@ class RedLayerTop extends React.Component {
             });
           }}
         >
-          <FontAwesomeIcon icon={faPlusCircle} /> Add Layer
+          <FontAwesomeIcon icon={faPlusCircle} style={{marginRight : '5px',fontSize: '14px'}} /> Add Layer
         </div>
       </div>
 
@@ -98,6 +98,8 @@ const style = {
     background: '#000'
   },
   addLayerItem: {
+    display: 'flex',
+    alignItems: 'center',
     background: 'linear-gradient(#32bd61, #123113)',
     padding: '4px 8px',
     fontSize: '11px',

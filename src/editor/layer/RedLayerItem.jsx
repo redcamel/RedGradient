@@ -216,7 +216,7 @@ class RedLayerItem extends React.Component {
           }}
         >
           <FontAwesomeIcon icon={faPlusCircle} />
-          <div style={{marginLeft: '5px'}}>add with template</div>
+          <div style={{marginLeft: '5px'}}>Add Template</div>
         </div>
         {
           this.state.openPanel

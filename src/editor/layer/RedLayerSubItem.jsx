@@ -135,33 +135,33 @@ class RedLayerSubItem extends React.Component {
         {item.title}
       </div>
       <div
-        style={{margin: '2px 2px 2px 0px', display: this.props.layerViewSizeMode === 2 ? 'none' : ''}}
+        style={{margin: '2px 2px 1px 0px', display: this.props.layerViewSizeMode === 2 ? 'none' : ''}}
       >
         <button
-          style={{...style.bgItem, background: '#000', color: '#fff'}}
+          style={{...style.bgItem, background: '#000', color: '#fff',opacity : this.state.layerBgColor==='black' ? 1 : 0.2}}
           onClick={() => this.setState({layerBgColor: 'black'})}
         >B
         </button>
         <button
-          style={{...style.bgItem, background: '#fff', color: '#000'}}
+          style={{...style.bgItem, background: '#fff', color: '#000',opacity : this.state.layerBgColor==='white' ? 1 : 0.2}}
           onClick={() => this.setState({layerBgColor: 'white'})}
         >W
         </button>
         <button
-          style={{...style.bgItem, borderRight: 0}} className={'transparent_checker'}
+          style={{...style.bgItem, borderRight: 0,opacity : this.state.layerBgColor==='transparent' ? 1 : 0.2}} className={'transparent_checker'}
           onClick={() => this.setState({layerBgColor: 'transparent'})}
         >T
         </button>
       </div>
-      <div style={{margin: '2px 2px 2px 0px'}}>
+      <div style={{margin: '1px 2px 2px 0px',display:'flex'}}>
         <button
-          className={'layerVisible2'}
+          className={'layerVisible2 hoverButtonStyle'}
           onClick={() => this._toggleVisible(item)}
         >
-          <FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash} />
+          <FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash} style={{fontSize:'14px'}}/>
         </button>
         <button
-          className={'layerDel2'}
+          className={'layerDel2 hoverButtonStyle'}
           style={{opacity: layer.items.length > 1 ? 1 : 0.25}}
           onClick={e => {
             e.stopPropagation();
@@ -178,7 +178,7 @@ class RedLayerSubItem extends React.Component {
             }
           }}
         >
-          <FontAwesomeIcon icon={faTrash} />
+          <FontAwesomeIcon icon={faTrash} style={{fontSize:'14px'}}/>
         </button>
         <button className={'layerType'}>{layerType}</button>
       </div>
@@ -192,7 +192,7 @@ class RedLayerSubItem extends React.Component {
           rootComponent.updateRootState({activeSubData: t0});
         }}
       >
-        <FontAwesomeIcon icon={faClone} />
+        <FontAwesomeIcon icon={faClone} style={{fontSize:'16px'}}/>
         <div style={{marginLeft: '5px'}}>duplicate</div>
       </div>
       <div
@@ -281,7 +281,7 @@ const style = {
     alignItems: 'center',
     marginTop: '2px',
     background: 'linear-gradient(#5e7ade, #2c3565)',
-    padding: '3px 5px',
+    padding: '5px 5px',
     fontSize: '11px',
     borderRadius: '4px',
     marginBottom: '2px',

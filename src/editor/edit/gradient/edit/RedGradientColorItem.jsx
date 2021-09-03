@@ -10,7 +10,7 @@ import DataColor from "../../../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedNumber from "../../../../core/RedNumber";
 import RedSelect from "../../../../core/RedSelect";
-import {faClone, faCopy, faPlus, faThumbtack, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faClone, faPlus, faThumbtack, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GRADIENT_TYPE from "../../../../js/const/GRADIENT_TYPE.js";
 
@@ -387,22 +387,27 @@ class RedGradientColorItem extends React.Component {
               </button>
             </div>
             <div style={{display: 'flex', alignItems: 'center', margin: '5px 0px'}}>
-              {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
-                                            onClick={() => {
-                                              colorData['colorEnd'] = colorData['color'];
-                                              rootComponent.updateRootState({});
-                                            }}
-              ><FontAwesomeIcon icon={faClone} style={{marginRight:'6px'}} /> L to R</div> : ''}
-              {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
-                                            onClick={() => {
-                                              colorData['color'] = colorData['colorEnd'];
-                                              rootComponent.updateRootState({});
-                                            }}
-              ><FontAwesomeIcon icon={faClone} style={{marginRight:'6px'}} />  R to L</div> : ''}
+              {colorData['useRange'] ? <div
+                className={'hoverButtonStyle'}
+                style={{...style.lock, marginLeft: '5px'}}
+                onClick={() => {
+                  colorData['colorEnd'] = colorData['color'];
+                  rootComponent.updateRootState({});
+                }}
+              ><FontAwesomeIcon icon={faClone} style={{marginRight: '6px'}} /> L to R</div> : ''}
+              {colorData['useRange'] ? <div
+                className={'hoverButtonStyle'}
+                style={{...style.lock, marginLeft: '5px'}}
+                onClick={() => {
+                  colorData['color'] = colorData['colorEnd'];
+                  rootComponent.updateRootState({});
+                }}
+              ><FontAwesomeIcon icon={faClone} style={{marginRight: '6px'}} /> R to L</div> : ''}
               <label
+
                 style={{
                   ...style.lock,
-                  background : colorData['useRange'] ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : '#333'
+                  background: colorData['useRange'] ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : '#333'
                 }}
                 onClick={(e) => {
                   if (e.target.type === 'checkbox') {
@@ -411,8 +416,12 @@ class RedGradientColorItem extends React.Component {
                     rootComponent.updateRootState({});
                   }
                 }}
-              ><FontAwesomeIcon icon={faThumbtack} style={{marginRight:'6px'}} />Use Range <input type={'checkbox'} checked={colorData['useRange']}
-                               style={{border: '1px solid #fff', marginLeft: '5px'}} />
+              ><FontAwesomeIcon icon={faThumbtack} style={{marginRight: '6px'}} />Use Range <input type={'checkbox'}
+                                                                                                   checked={colorData['useRange']}
+                                                                                                   style={{
+                                                                                                     border: '1px solid #fff',
+                                                                                                     marginLeft: '5px'
+                                                                                                   }} />
               </label>
 
 
@@ -570,7 +579,7 @@ const style = {
     alignItems: 'center',
     fontSize: '11px',
     color: '#fff',
-    background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
+    // background: 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))',
     outline: 'none',
     border: '1px solid #000',
     borderRadius: '4px',

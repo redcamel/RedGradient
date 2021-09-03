@@ -104,7 +104,7 @@ class RedAddGradientLayerSet extends React.Component {
     return <div style={style.bg}>
 
       <div style={style.container}>
-        <div style={{width: '100%'}}><RedTitle title={"add with template"} /></div>
+        <div style={{width: '100%'}}><RedTitle title={"Add Template"} /></div>
         <div style={style.containerRanges}>
           {
             rangeList.map((v, index) => {
