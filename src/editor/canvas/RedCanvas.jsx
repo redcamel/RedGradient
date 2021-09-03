@@ -266,7 +266,9 @@ class RedCanvas extends React.Component {
         bottom: '10px',
         left: '50%',
         textAlign: 'center',
-        transform: 'translate(-50%,0)'
+        transform: 'translate(-50%,0)',
+        display:'flex',
+        alignItems:'center'
       }}>
         <div style={style.canvasViewInfo}>
           <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
@@ -275,15 +277,18 @@ class RedCanvas extends React.Component {
           <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
           <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
         </div>
-        <div style={{height: '2px'}} />
-
-        <div style={{
-          background:'rgba(0,0,0,0.7)',
-          borderRadius : '6px',
-          padding : '3px 0px',
-          color: '#fff'}}><span style={{color: '#efb26a'}}>Center </span>
-          : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY.toFixed(2)} <span
-            style={{color: '#efb26a'}}>ViewScale </span> : {this.state.canvasViewScale.toFixed(2)}</div>
+        <div style={{textAlign:'left',width : '210px'}}>
+          <div style={{
+            display:'inline-block',
+            marginLeft:'5px',
+            background:'#333',
+            borderRadius : '4px',
+            padding : '3px 8px',
+            whiteSpace:'nowrap',
+            color: '#fff'}}><span style={{color: '#efb26a'}}>Center </span>
+            : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY.toFixed(2)} <span
+              style={{color: '#efb26a'}}>ViewScale </span> : {this.state.canvasViewScale.toFixed(2)}</div>
+        </div>
       </div>
     </div>;
   }
