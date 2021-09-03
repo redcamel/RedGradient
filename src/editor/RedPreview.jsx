@@ -8,6 +8,10 @@
 import React from "react";
 import RedGradientEditComp from "./edit/gradient/RedGradientEditComp.jsx";
 import ACTIVE_FRAME_KEY from "../js/const/ACTIVE_FRAME_KEY.js";
+import js_beautify from "js-beautify";
+import {toast} from "react-toastify";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCopy} from "@fortawesome/free-solid-svg-icons";
 
 class RedPreview extends React.Component {
   constructor(props) {
@@ -36,7 +40,7 @@ class RedPreview extends React.Component {
     return <div style={style.bg}>
       <div style={style.container}>
         <div style={{display: 'flex', flex: 1, width: '100%'}}>
-          <div style={{display: 'flex', flexDirection: 'column', width: '360px'}}>
+          <div style={{display: 'flex', flexDirection: 'column', width: '360px',margin : '7px 10px'}}>
             {
               [
                 {
@@ -66,38 +70,48 @@ class RedPreview extends React.Component {
                   ]
                 }
               ].map(v => {
-                return <div style={{padding: '10px', border: '1px solid red'}}>
-                  <h3>{v['title']}</h3>
+                return <div style={{margin :'3px 0px',padding: '10px', border: '1px solid #111',borderRadius:'10px'}}>
+                  <div style={{fontSize : '16px',color : '#efb26a'}}>{v['title']}</div>
                   <div style={{maxHeight: '150px', overflowY: 'scroll'}}>{v['text']}</div>
-                  {/*{*/}
-                  {/*  v.itemList.map(tList => {*/}
-                  {/*    return <div style={{display: 'flex'}}>*/}
-                  {/*      {*/}
-                  {/*        tList.map((tData, index) => {*/}
-                  {/*          js key = tData['key']*/}
-                  {/*          js targetCanvasInfo = v['targetCanvasInfo']*/}
-                  {/*          return <>*/}
-                  {/*            {index ? <div style={{width: '5px'}}/> : ''}*/}
-                  {/*            <RedNumber title={key} width={'160px'} value={targetCanvasInfo[key]}*/}
-                  {/*                       HD_onInput={e => {*/}
-                  {/*                         targetCanvasInfo[key] = +e.target.value;*/}
-                  {/*                         this.setState({})*/}
-                  {/*                       }}/>*/}
-                  {/*          </>*/}
-                  {/*        })*/}
-                  {/*      }*/}
-                  {/*    </div>*/}
-                  {/*  })*/}
-                  {/*}*/}
+                  {v['title']==='main' ? <div style={{fontSize : '14px',color : '#efb26a',marginTop:'5px'}}>출력시 top, left는 0으로 출력됩니다.</div> : ''}
                 </div>;
               })
             }
+            <button
+              style={{
+                cursor: 'pointer',
+                padding: '6px',
+                fontSize: '12px',
+                color: '#fff',
+                outline: 'none',
+                border: '1px solid #111',
+                background: 'linear-gradient(#5e7ade, #2c3565)',
+                borderRadius: '4px'
+              }}
+              onClick={() => {
+                const tempElem = document.createElement('textarea');
 
-            <h3>
-              TODO
-              <li>프리뷰 줌도 해줘야할것 같고</li>
-            </h3>
+                tempElem.value = js_beautify.css_beautify(`
+    ${beforeText}
+    ${RedGradientEditComp.getContainerCssText(rootComponentState[ACTIVE_FRAME_KEY.MAIN], true)}
+    ${afterText}
+    `, {
+                  indent_size: 2,
+                  space_in_empty_paren: true,
+                  max_preserve_newlines: 1
+                });
+                document.body.appendChild(tempElem);
+                tempElem.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempElem);
+                toast.dark("Copy Result Class!", {
+                  position: 'bottom-left'
+                });
+              }}
+            ><FontAwesomeIcon icon={faCopy} style={{marginRight: '6px'}} />Copy Result Class
+            </button>
           </div>
+
           <div style={{
             display: 'flex', flex: 1, alignItems: 'center', justifyItems: 'center',
             background: '#000'
