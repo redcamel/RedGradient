@@ -275,9 +275,13 @@ class RedCanvas extends React.Component {
           <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
           <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
         </div>
-        <div style={{height: '5px'}} />
+        <div style={{height: '2px'}} />
 
-        <div style={{marginLeft: '5px', color: '#fff'}}><span style={{color: '#efb26a'}}>Center </span>
+        <div style={{
+          background:'rgba(0,0,0,0.7)',
+          borderRadius : '6px',
+          padding : '3px 0px',
+          color: '#fff'}}><span style={{color: '#efb26a'}}>Center </span>
           : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY.toFixed(2)} <span
             style={{color: '#efb26a'}}>ViewScale </span> : {this.state.canvasViewScale.toFixed(2)}</div>
       </div>
@@ -353,7 +357,7 @@ const style = {
     whiteSpace: 'nowrap'
   },
   canvasViewInfo: {
-    padding: '3px 4px',
+    padding: '3px 0px',
     display: 'flex',
     alignItems: 'center',
     fontSize: '12px',
