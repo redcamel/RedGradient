@@ -8,7 +8,7 @@
 import React from "react";
 import DataLayer from "../data/DataLayer.js";
 import RedTitle from "../../core/RedTitle.jsx";
-import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
+import {faFolderPlus, faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const options = [
@@ -80,7 +80,7 @@ class RedLayerTop extends React.Component {
             });
           }}
         >
-          <FontAwesomeIcon icon={faPlusCircle} style={{marginRight : '5px',fontSize: '14px'}} /> Add Layer
+          <FontAwesomeIcon icon={faFolderPlus} style={{marginRight : '5px',fontSize: '18px'}} /> Add Layer
         </div>
       </div>
 
