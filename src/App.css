@@ -349,10 +349,11 @@ option {
     top: 0;
     /*z-index: 1;*/
     background: linear-gradient(rgb(60, 60, 60), rgb(36, 36, 36));
-    height: 26px;
+    height: 30px;
     display: flex;
     padding-left: 8px;
-    font-size: 12px;
+    line-height: 30px;
+    font-size: 13px;
     align-items: center;
     border-top: 1px solid rgb(71, 71, 71);
     border-bottom: 1px solid rgb(26, 26, 26);
@@ -372,10 +373,12 @@ option {
 }
 
 .ui_subTitle {
-    padding: 3px 7px;
+    padding: 5px 5px 5px 1px;
     background: linear-gradient(180deg, #272727, rgba(0, 0, 0, 0));
     border-radius: 6px 10px 0 0;
     color: #efb26a;
+    font-size: 12px;
+    line-height:  12px;
     margin-right: 5px;
 }
 
