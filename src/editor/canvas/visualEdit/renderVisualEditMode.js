@@ -1,7 +1,7 @@
 import VISUAL_EDIT_MODE from "../../../js/const/VISUAL_EDIT_MODE";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
-import {faCompressArrowsAlt, faEye} from "@fortawesome/free-solid-svg-icons";
+import {faCompressArrowsAlt, faEdit, faEye, faUserEdit} from "@fortawesome/free-solid-svg-icons";
 
 const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSubData) {
   return <div style={{
@@ -62,6 +62,7 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
           }}>
             {
               Object.values(VISUAL_EDIT_MODE).map((v, index) => {
+                const activeYn = this.state.visualEditMode === v
                 return <div
                   style={{
                     display: 'flex',
@@ -71,12 +72,12 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
                     color: '#fff',
                     borderLeft: index ? '1px solid #000' : 0,
                     padding: '6px',
-                    background: this.state.visualEditMode === v ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333333'
+                    background: activeYn ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333333'
                   }}
                   onClick={() => {
                     this.setState({visualEditMode: v});
                   }}
-                >{v}</div>;
+                ><FontAwesomeIcon icon={faEdit} style={{marginRight: '6px',opacity : activeYn ? 1 : 0.3}} />{v}</div>;
               })
             }
           </div>

@@ -7,7 +7,7 @@
  */
 import React from "react";
 import DataItem from "../data/DataItem.js";
-import {faCopy, faEye, faEyeSlash, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
+import {faClone, faCopy, faEye, faEyeSlash, faMinusCircle, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CALC_GRADIENT from "../../js/CALC_GRADIENT";
 import RedLayerItem from "./RedLayerItem.jsx";
@@ -178,7 +178,7 @@ class RedLayerSubItem extends React.Component {
             }
           }}
         >
-          <FontAwesomeIcon icon={faMinusCircle} />
+          <FontAwesomeIcon icon={faTrash} />
         </button>
         <button className={'layerType'}>{layerType}</button>
       </div>
@@ -192,7 +192,7 @@ class RedLayerSubItem extends React.Component {
           rootComponent.updateRootState({activeSubData: t0});
         }}
       >
-        <FontAwesomeIcon icon={faCopy} />
+        <FontAwesomeIcon icon={faClone} />
         <div style={{marginLeft: '5px'}}>duplicate</div>
       </div>
       <div

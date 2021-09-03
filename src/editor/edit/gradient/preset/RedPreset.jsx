@@ -11,7 +11,15 @@ import PresetCircle2 from "./PresetCircle2.js";
 import PresetCircle3 from "./PresetCircle3.js";
 import PresetCircle4 from "./PresetCircle4.js";
 import CALC_GRADIENT from "../../../../js/CALC_GRADIENT.js";
-import {faMinusCircle} from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faEye,
+  faFileExport,
+  faFileImport,
+  faMinusCircle,
+  faRemoveFormat,
+  faTrash
+} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RedPresetBorder from "../../border/preset/RedPresetBorder";
 
@@ -102,11 +110,13 @@ class RedPreset extends React.Component {
           </div>
           <div
             onClick={() => RedPreset.exportPreset()}
-            style={{...style.mode, borderLeft: '1px solid #000', background: '#2f2f2f'}}>export
+            style={{...style.mode, borderLeft: '1px solid #000', background: '#2f2f2f'}}>
+            <FontAwesomeIcon icon={faFileExport} style={{marginRight: '6px'}} /> export
           </div>
           <div
             onClick={() => RedPreset.importPreset(this.props.rootComponent)}
-            style={{...style.mode, borderLeft: '1px solid #000', background: '#2f2f2f'}}>import
+            style={{...style.mode, borderLeft: '1px solid #000', background: '#2f2f2f'}}>
+            <FontAwesomeIcon icon={faFileImport} style={{marginRight: '6px'}} /> import
           </div>
         </div>
       </div>
@@ -179,6 +189,8 @@ const style = {
     maxWidth: '800px'
   },
   mode: {
+    display: 'flex',
+    alignItems:'center',
     padding: '2px 5px',
     cursor: 'pointer',
   },

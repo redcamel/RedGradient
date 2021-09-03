@@ -16,7 +16,7 @@ import {
   faFolder,
   faFolderOpen,
   faMinusCircle,
-  faPlusCircle
+  faPlusCircle, faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import CALC_GRADIENT from "../../js/CALC_GRADIENT";
 import RedLayerSubItem from "./RedLayerSubItem.jsx";
@@ -196,7 +196,7 @@ class RedLayerItem extends React.Component {
               }
             }}
           >
-            <FontAwesomeIcon icon={faMinusCircle} />
+            <FontAwesomeIcon icon={faTrash} />
           </button>
           <button
             className={'layerAdd'}

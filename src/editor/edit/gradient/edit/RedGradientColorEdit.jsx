@@ -139,7 +139,7 @@ class RedGradientColorEdit extends React.Component {
           onClick={() => {
             this.props.borderMode ? RedPresetBorder.addUserPreset(rootComponent, activeSubData) : RedPreset.addUserPreset(rootComponent, activeSubData);
           }}
-        ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}} /> Add Preset
+        ><FontAwesomeIcon icon={faSave} style={{marginRight: '5px'}} /> Add To Preset
         </button>
         <button
           style={style.reverse}
@@ -244,9 +244,9 @@ const style = {
     display: 'flex',
     alignItems: 'center',
     marginRight: '3px',
-    background: '#5e7ade',
+    background: 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))',
     color: '#fff',
-    fontSize: '12px',
+    fontSize: '11px',
     border: '1px solid #000',
     borderRadius: '4px',
     height: '21px',
@@ -257,9 +257,9 @@ const style = {
     display: 'flex',
     alignItems: 'center',
     marginRight: '3px',
-    background: '#5e7ade',
+    background: 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))',
     color: '#fff',
-    fontSize: '12px',
+    fontSize: '11px',
     border: '1px solid #000',
     borderRadius: '4px',
     height: '21px',

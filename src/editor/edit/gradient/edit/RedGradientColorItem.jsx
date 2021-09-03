@@ -10,7 +10,7 @@ import DataColor from "../../../data/DataColor.js";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedNumber from "../../../../core/RedNumber";
 import RedSelect from "../../../../core/RedSelect";
-import {faPlus, faThumbtack} from "@fortawesome/free-solid-svg-icons";
+import {faClone, faCopy, faPlus, faThumbtack, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GRADIENT_TYPE from "../../../../js/const/GRADIENT_TYPE.js";
 
@@ -383,7 +383,7 @@ class RedGradientColorItem extends React.Component {
                   activeSubData.colorList.splice(this.getIndex(), 1);
                   rootComponent.updateRootState({});
                 }}
-              >Del
+              ><FontAwesomeIcon icon={faTrash} style={{}} />
               </button>
             </div>
             <div style={{display: 'flex', alignItems: 'center', margin: '5px 0px'}}>
@@ -392,15 +392,18 @@ class RedGradientColorItem extends React.Component {
                                               colorData['colorEnd'] = colorData['color'];
                                               rootComponent.updateRootState({});
                                             }}
-              >Copy L to R</div> : ''}
+              ><FontAwesomeIcon icon={faClone} style={{marginRight:'6px'}} /> L to R</div> : ''}
               {colorData['useRange'] ? <div style={{...style.lock, marginLeft: '5px'}}
                                             onClick={() => {
                                               colorData['color'] = colorData['colorEnd'];
                                               rootComponent.updateRootState({});
                                             }}
-              >Copy R to L</div> : ''}
+              ><FontAwesomeIcon icon={faClone} style={{marginRight:'6px'}} />  R to L</div> : ''}
               <label
-                style={style.lock}
+                style={{
+                  ...style.lock,
+                  background : colorData['useRange'] ? 'linear-gradient(rgb(94, 122, 222), rgb(58, 73, 125))' : '#333'
+                }}
                 onClick={(e) => {
                   if (e.target.type === 'checkbox') {
                     colorData['useRange'] = !colorData['useRange'];
@@ -408,7 +411,7 @@ class RedGradientColorItem extends React.Component {
                     rootComponent.updateRootState({});
                   }
                 }}
-              >useRange <input type={'checkbox'} checked={colorData['useRange']}
+              ><FontAwesomeIcon icon={faThumbtack} style={{marginRight:'6px'}} />Use Range <input type={'checkbox'} checked={colorData['useRange']}
                                style={{border: '1px solid #fff', marginLeft: '5px'}} />
               </label>
 
@@ -552,10 +555,10 @@ const style = {
   del: {
     fontSize: '11px',
     color: '#fff',
-    background: '#5e7ade',
+    background: 'rgba(0,0,0,0.6)',
     outline: 'none',
-    border: '1px solid #000',
-    borderRadius: '6px',
+    border: '1px solid #222',
+    borderRadius: '4px',
     height: '25px',
     marginLeft: '5px',
     cursor: 'pointer'
