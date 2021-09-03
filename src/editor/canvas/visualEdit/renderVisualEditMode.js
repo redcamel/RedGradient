@@ -1,7 +1,7 @@
 import VISUAL_EDIT_MODE from "../../../js/const/VISUAL_EDIT_MODE";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
-import {faCompressArrowsAlt, faEdit, faEye, faUserEdit} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faEye, faObjectGroup, faObjectUngroup} from "@fortawesome/free-solid-svg-icons";
 
 const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSubData) {
   return <div style={{
@@ -62,7 +62,7 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
           }}>
             {
               Object.values(VISUAL_EDIT_MODE).map((v, index) => {
-                const activeYn = this.state.visualEditMode === v
+                const activeYn = this.state.visualEditMode === v;
                 return <div
                   style={{
                     display: 'flex',
@@ -77,7 +77,7 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
                   onClick={() => {
                     this.setState({visualEditMode: v});
                   }}
-                ><FontAwesomeIcon icon={faEdit} style={{marginRight: '6px',opacity : activeYn ? 1 : 0.3}} />{v}</div>;
+                ><FontAwesomeIcon icon={faEdit} style={{marginRight: '6px', opacity: activeYn ? 1 : 0.3}} />{v}</div>;
               })
             }
           </div>
@@ -95,9 +95,21 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
                 padding: '2px 0px',
                 whiteSpace: 'nowrap',
                 cursor: 'pointer',
-                alignItems:'center'
+                alignItems: 'center'
               }}>
-                <FontAwesomeIcon icon={faCompressArrowsAlt} style={{marginRight: '6px',fontSize:'12px'}} />View Visual Edit
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: '26px',
+                  justifyContent: 'center',
+                  marginRight: '4px',
+                }}><FontAwesomeIcon
+                  icon={faObjectGroup} style={{
+                  opacity: this.state.layerSizeView ? 1 : 0.5,
+                  color : '#efb26a',
+                  fontSize: '20px'
+                }} /></div>
+                View Visual Edit
                 <input type={'checkbox'}
                        checked={this.state.layerSizeView}
                        style={{
@@ -123,9 +135,23 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
                 padding: '2px 0px',
                 whiteSpace: 'nowrap',
                 cursor: 'pointer',
-                alignItems:'center',
+                alignItems: 'center',
               }}>
-                <FontAwesomeIcon icon={faEye} style={{marginRight: '4px',fontSize:'12px'}} />View Edit Container Only
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: '26px',
+                  height: '26px',
+                  justifyContent: 'center',
+                  marginRight: '4px',
+                }}><FontAwesomeIcon icon={faEye}
+                                    style={{
+                                      opacity: this.state.editCanvasOnly ? 1 : 0.5,
+                                      color : '#efb26a',
+                                      fontSize: '20px', marginTop: '2px'
+                                    }} />
+                </div>
+                View Edit Container Only
                 <input type={'checkbox'}
                        checked={this.state.editCanvasOnly}
                        style={{
