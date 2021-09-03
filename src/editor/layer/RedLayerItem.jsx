@@ -215,7 +215,7 @@ class RedLayerItem extends React.Component {
             this.setState({openPanel: true, draggable: false});
           }}
         >
-          <FontAwesomeIcon icon={faPlusCircle} />
+          <FontAwesomeIcon icon={faPlusCircle} style={{fontSize:'14px'}} />
           <div style={{marginLeft: '5px'}}>Add Template</div>
         </div>
         {
@@ -321,7 +321,7 @@ const style = {
     alignItems: 'center',
     marginTop: '2px',
     background: 'linear-gradient(#5e7ade, #2c3565)',
-    padding: '3px 5px',
+    padding: '5px 5px 5px 10px',
     fontSize: '11px',
     borderRadius: '3px',
     marginBottom: '2px',

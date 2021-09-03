@@ -183,6 +183,7 @@ class RedLayerSubItem extends React.Component {
         <button className={'layerType'}>{layerType}</button>
       </div>
       <div
+        className={'hoverButtonStyle'}
         style={style.addGradientLayerItem}
         onClick={() => {
           const idx = layer.items.indexOf(item);
@@ -280,10 +281,11 @@ const style = {
     display: 'flex',
     alignItems: 'center',
     marginTop: '2px',
-    background: 'linear-gradient(#5e7ade, #2c3565)',
+    // background: 'linear-gradient(#5e7ade, #2c3565)',
     padding: '5px 5px',
     fontSize: '11px',
     borderRadius: '4px',
+    border:'1px solid #111',
     marginBottom: '2px',
     cursor: 'pointer'
   },
