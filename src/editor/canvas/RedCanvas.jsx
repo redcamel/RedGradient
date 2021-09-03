@@ -22,10 +22,6 @@ import renderContainerEdit from "./visualEdit/renderContainerEdit";
 import renderBorderRadiusEdit from "./visualEdit/renderBorderRadiusEdit";
 import renderVisualEditMode from "./visualEdit/renderVisualEditMode";
 import VISUAL_EDIT_MODE from "../../js/const/VISUAL_EDIT_MODE";
-import js_beautify from "js-beautify";
-import {toast} from "react-toastify";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCopy} from "@fortawesome/free-solid-svg-icons";
 import Ruler from "@scena/react-ruler";
 
 // TODO - 정리필요
