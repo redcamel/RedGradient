@@ -25,8 +25,6 @@ import getActiveSubData from "../editor/js/getActiveSubData";
 import BORDER_REPEAT_TYPE from "../js/const/BORDER_REPEAT_TYPE";
 import DataLayer from "../editor/data/DataLayer";
 import RedContainerBorderEdit from "../editor/edit/border/RedContainerBorderEdit";
-import RedNumber from "../core/RedNumber";
-import RED_CANVAS_PRESET from "../js/const/RED_CANVAS_PRESET.js";
 import RedDeviceInfo from "../editor/canvas/RedDeviceInfo";
 
 class AppFrame extends React.Component {
@@ -107,7 +105,7 @@ class AppFrame extends React.Component {
     this.checkFrameDataList();
     const appComponent = this.props.appComponent;
     const appComponentState = appComponent.state;
-    console.log('appComponentState', appComponentState);
+    // console.log('appComponentState', appComponentState);
     this.state = appComponentState[appComponentState.activeFrameKey];
     return <div className={'frame'}>
       <div className={'frame_main_menu'}>
@@ -117,7 +115,7 @@ class AppFrame extends React.Component {
         </div>
         <RedFrameMenuOpen rootComponent={appComponent} />
         <RedFrameMenuSave rootComponent={appComponent} />
-        <RedDeviceInfo appComponent={appComponent}/>
+        <RedDeviceInfo appComponent={appComponent} />
       </div>
       {/*<div className={'frame_toolbar'}>*/}
       {/*  */}

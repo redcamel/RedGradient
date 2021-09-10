@@ -8,7 +8,7 @@ class RedDeviceInfo extends React.Component {
   render() {
     const appComponent = this.props.appComponent;
     const appComponentState = appComponent.state;
-    console.log('appComponentState', appComponentState);
+    // console.log('appComponentState', appComponentState);
     const deviceData = appComponentState.device;
     return <div style={{
       display: 'flex', alignItems: 'center',
@@ -69,12 +69,12 @@ class RedDeviceInfo extends React.Component {
         borderRadius: '4px',
         border: '1px solid #000',
         background: deviceData['activeRuler'] ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333',
-        padding : '4px',
-        width : '32px',
+        padding: '4px',
+        width: '32px',
         cursor: 'pointer'
       }}
            onClick={() => {
-             deviceData['activeRuler'] = !deviceData['activeRuler']
+             deviceData['activeRuler'] = !deviceData['activeRuler'];
              appComponent.updateRootState({});
            }}
       >
@@ -91,12 +91,12 @@ class RedDeviceInfo extends React.Component {
         borderRadius: '4px',
         border: '1px solid #000',
         background: deviceData['activeFrame'] ? 'linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101))' : '#333',
-        padding : '4px',
-        width : '32px',
+        padding: '4px',
+        width: '32px',
         cursor: 'pointer'
       }}
            onClick={() => {
-             deviceData['activeFrame'] = !deviceData['activeFrame']
+             deviceData['activeFrame'] = !deviceData['activeFrame'];
              appComponent.updateRootState({});
            }}
       >

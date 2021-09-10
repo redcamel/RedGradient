@@ -10,9 +10,6 @@ import RedTitle from "../../../core/RedTitle";
 import RedFilterList from "./filter/RedFilterList.jsx";
 import RedContainerBoxSizingEdit from "./RedContainerBoxSizingEdit.jsx";
 import RedContainerSizeEdit from "./RedContainerSizeEdit.jsx";
-import RED_CANVAS_PRESET from "../../../js/const/RED_CANVAS_PRESET.js";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faDesktop, faMobileAlt} from "@fortawesome/free-solid-svg-icons";
 import {ColorPicker} from "@easylogic/colorpicker";
 import RedContainerPositionEdit from "./RedContainerPositionEdit";
 import ACTIVE_FRAME_KEY from "../../../js/const/ACTIVE_FRAME_KEY";
@@ -37,7 +34,9 @@ class RedContainerEdit extends React.Component {
     rootComponentState = rootComponent.state;
     canvasInfo = rootComponentState.canvasInfo;
     return <div>
-      <RedTitle title={<div><span style={{color : '#efb26a'}}>{rootComponentState['key'].toLocaleUpperCase()}</span> Container Property</div>} />
+      <RedTitle
+        title={<div><span style={{color: '#efb26a'}}>{rootComponentState['key'].toLocaleUpperCase()}</span> Container
+          Property</div>} />
       <div style={style.container}>
         <RedContainerSizeEdit rootComponent={rootComponent} canvasComponent={this} />
         {

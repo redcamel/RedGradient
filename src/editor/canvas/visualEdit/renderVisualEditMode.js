@@ -1,7 +1,7 @@
 import VISUAL_EDIT_MODE from "../../../js/const/VISUAL_EDIT_MODE";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
-import {faEdit, faEye, faObjectGroup, faObjectUngroup} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faEye, faObjectGroup} from "@fortawesome/free-solid-svg-icons";
 
 const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSubData) {
   return <div style={{
@@ -106,7 +106,7 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
                 }}><FontAwesomeIcon
                   icon={faObjectGroup} style={{
                   opacity: this.state.layerSizeView ? 1 : 0.5,
-                  color : '#efb26a',
+                  color: '#efb26a',
                   fontSize: '20px'
                 }} /></div>
                 View Visual Edit
@@ -147,7 +147,7 @@ const renderVisualEditMode = function (rootComponentState, canvasInfo, activeSub
                 }}><FontAwesomeIcon icon={faEye}
                                     style={{
                                       opacity: this.state.editCanvasOnly ? 1 : 0.5,
-                                      color : '#efb26a',
+                                      color: '#efb26a',
                                       fontSize: '20px', marginTop: '2px'
                                     }} />
                 </div>

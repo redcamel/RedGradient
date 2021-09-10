@@ -7,11 +7,10 @@
  */
 import React from "react";
 import DataItem from "../data/DataItem.js";
-import {faClone, faCopy, faEye, faEyeSlash, faMinusCircle, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faClone, faEye, faEyeSlash, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CALC_GRADIENT from "../../js/CALC_GRADIENT";
 import RedLayerItem from "./RedLayerItem.jsx";
-import getActiveSubData from "../js/getActiveSubData";
 
 let startDragLayer;
 let startDragItem;
@@ -138,27 +137,38 @@ class RedLayerSubItem extends React.Component {
         style={{margin: '2px 2px 1px 0px', display: this.props.layerViewSizeMode === 2 ? 'none' : ''}}
       >
         <button
-          style={{...style.bgItem, background: '#000', color: '#fff',opacity : this.state.layerBgColor==='black' ? 1 : 0.2}}
+          style={{
+            ...style.bgItem,
+            background: '#000',
+            color: '#fff',
+            opacity: this.state.layerBgColor === 'black' ? 1 : 0.2
+          }}
           onClick={() => this.setState({layerBgColor: 'black'})}
         >B
         </button>
         <button
-          style={{...style.bgItem, background: '#fff', color: '#000',opacity : this.state.layerBgColor==='white' ? 1 : 0.2}}
+          style={{
+            ...style.bgItem,
+            background: '#fff',
+            color: '#000',
+            opacity: this.state.layerBgColor === 'white' ? 1 : 0.2
+          }}
           onClick={() => this.setState({layerBgColor: 'white'})}
         >W
         </button>
         <button
-          style={{...style.bgItem, borderRight: 0,opacity : this.state.layerBgColor==='transparent' ? 1 : 0.2}} className={'transparent_checker'}
+          style={{...style.bgItem, borderRight: 0, opacity: this.state.layerBgColor === 'transparent' ? 1 : 0.2}}
+          className={'transparent_checker'}
           onClick={() => this.setState({layerBgColor: 'transparent'})}
         >T
         </button>
       </div>
-      <div style={{margin: '1px 2px 2px 0px',display:'flex'}}>
+      <div style={{margin: '1px 2px 2px 0px', display: 'flex'}}>
         <button
           className={'layerVisible2 hoverButtonStyle'}
           onClick={() => this._toggleVisible(item)}
         >
-          <FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash} style={{fontSize:'14px'}}/>
+          <FontAwesomeIcon icon={item.visible ? faEye : faEyeSlash} style={{fontSize: '14px'}} />
         </button>
         <button
           className={'layerDel2 hoverButtonStyle'}
@@ -173,12 +183,12 @@ class RedLayerSubItem extends React.Component {
                 idx = 0;
               }
               if (!layer.items[idx]) idx = idx - 1;
-              rootComponent.updateRootState({activeSubData: layer.items[idx],activeSubDataIndex :idx});
+              rootComponent.updateRootState({activeSubData: layer.items[idx], activeSubDataIndex: idx});
 
             }
           }}
         >
-          <FontAwesomeIcon icon={faTrash} style={{fontSize:'14px'}}/>
+          <FontAwesomeIcon icon={faTrash} style={{fontSize: '14px'}} />
         </button>
         <button className={'layerType'}>{layerType}</button>
       </div>
@@ -189,11 +199,10 @@ class RedLayerSubItem extends React.Component {
           const idx = layer.items.indexOf(item);
           const t0 = JSON.parse(JSON.stringify(item));
           layer.items.splice(idx, 0, t0);
-          console.log('흠 뭐징',rootComponent,t0)
           rootComponent.updateRootState({activeSubData: t0});
         }}
       >
-        <FontAwesomeIcon icon={faClone} style={{fontSize:'16px'}}/>
+        <FontAwesomeIcon icon={faClone} style={{fontSize: '16px'}} />
         <div style={{marginLeft: '5px'}}>duplicate</div>
       </div>
       <div
@@ -285,7 +294,7 @@ const style = {
     padding: '5px 5px',
     fontSize: '11px',
     borderRadius: '4px',
-    border:'1px solid #111',
+    border: '1px solid #111',
     marginBottom: '2px',
     cursor: 'pointer'
   },

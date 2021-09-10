@@ -37,7 +37,7 @@ class RedNumber extends React.Component {
   calc(e) {
     const step = this.props.step || 0.1;
     const tX = e.pageX - startX;
-    console.log(e.pageX);
+    // console.log(e.pageX);
     this.update(+startValue + tX * step);
   }
 
@@ -100,7 +100,6 @@ class RedNumber extends React.Component {
                if (time - startTime > 100) {
                  this.update(+this.props.value + step);
                }
-               console.log('여기냐');
                requestAni = requestAnimationFrame(tick);
              };
              requestAni = tick();

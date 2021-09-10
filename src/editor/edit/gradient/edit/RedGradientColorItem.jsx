@@ -83,7 +83,7 @@ class RedGradientColorItem extends React.Component {
     }
     if (!emptyImage) emptyImage = new Image();
     e.nativeEvent.dataTransfer.setDragImage(emptyImage, 0, 0);
-    console.log(e);
+    // console.log(e);
   }
 
   handleDragEnter(e) {

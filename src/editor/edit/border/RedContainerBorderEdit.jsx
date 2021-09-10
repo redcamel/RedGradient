@@ -27,7 +27,9 @@ class RedContainerBorderEdit extends React.Component {
     const rootComponentState = rootComponent.state;
     const canvasInfo = rootComponentState.canvasInfo;
     return <div>
-      <RedTitle title={<div><span style={{color : '#efb26a'}}>{rootComponentState['key'].toLocaleUpperCase()}</span> Container Border Property</div>} />
+      <RedTitle
+        title={<div><span style={{color: '#efb26a'}}>{rootComponentState['key'].toLocaleUpperCase()}</span> Container
+          Border Property</div>} />
       <div style={style.container}>
         <RedOutlineEdit rootComponent={rootComponent} />
         <div style={style.divide} />

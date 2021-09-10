@@ -58,7 +58,7 @@ class RedCanvas extends React.Component {
   drawCall(canvasInfo, layers, bgColor) {
     const rootComponent = this.props.rootComponent;
     // console.log('this',this)
-    console.log(rootComponent.state);
+    // console.log(rootComponent.state);
     const rootComponentState = rootComponent.state;
     const activeSubData = rootComponentState.activeSubData || (rootComponentState.activeSubDataIndex = 0 || rootComponentState.activeLayer['items'][0]);
     /////////////////////
@@ -75,7 +75,7 @@ class RedCanvas extends React.Component {
     ////////////////////
     /////////
     const appState = this.props.appComponent.state;
-    const deviceData = appState['device']
+    const deviceData = appState['device'];
     let beforeText = RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.BEFORE]);
     let mainText = RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.MAIN]);
     let afterText = RedGradientEditComp.getContainerCssText(appState[ACTIVE_FRAME_KEY.AFTER]);
@@ -88,7 +88,6 @@ class RedCanvas extends React.Component {
     ${afterText2}
     `;
 
-    console.log(canvasInfo['addCss'] || ";");
     const device = appState['device'];
     return <>
       <div
@@ -181,11 +180,19 @@ class RedCanvas extends React.Component {
 
             /> : ''
           }
+
           {
+
             this.state.visualEditMode === VISUAL_EDIT_MODE.GRADIENT
-              ? this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo, appState)
+              ? <>
+                {this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo, appState,false)}
+                {this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo, appState,true)}
+            </>
               : this.state.visualEditMode === VISUAL_EDIT_MODE.CONTAINER
-                ? this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo, appState)
+                ? <>
+                  {this.renderGradientEdit(rootComponentState, activeSubData, canvasInfo, appState,false)}
+                  {this.renderContainerEdit(rootComponentState, activeSubData, canvasInfo, appState,true)}
+                </>
                 : this.renderBorderRadiusEdit(rootComponentState, activeSubData, canvasInfo, appState)
           }
         </div>
@@ -267,8 +274,8 @@ class RedCanvas extends React.Component {
         left: '50%',
         textAlign: 'center',
         transform: 'translate(-50%,0)',
-        display:'flex',
-        alignItems:'center'
+        display: 'flex',
+        alignItems: 'center'
       }}>
         <div style={style.canvasViewInfo}>
           <div style={style.toCenter} onClick={() => this.setState({canvasViewOffsetX: 0, canvasViewOffsetY: 0})}>set
@@ -277,15 +284,16 @@ class RedCanvas extends React.Component {
           <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 1})}>setScale 1x</div>
           <div style={style.toScale} onClick={() => this.setState({canvasViewScale: 0.5})}>setScale 0.5x</div>
         </div>
-        <div style={{textAlign:'left',width : '210px'}}>
+        <div style={{textAlign: 'left', width: '210px'}}>
           <div style={{
-            display:'inline-block',
-            marginLeft:'5px',
-            background:'#333',
-            borderRadius : '4px',
-            padding : '3px 8px',
-            whiteSpace:'nowrap',
-            color: '#fff'}}><span style={{color: '#efb26a'}}>Center </span>
+            display: 'inline-block',
+            marginLeft: '5px',
+            background: '#333',
+            borderRadius: '4px',
+            padding: '3px 8px',
+            whiteSpace: 'nowrap',
+            color: '#fff'
+          }}><span style={{color: '#efb26a'}}>Center </span>
             : {this.state.canvasViewOffsetX.toFixed(2)},{this.state.canvasViewOffsetY.toFixed(2)} <span
               style={{color: '#efb26a'}}>ViewScale </span> : {this.state.canvasViewScale.toFixed(2)}</div>
         </div>

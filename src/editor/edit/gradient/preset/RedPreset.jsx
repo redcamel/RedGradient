@@ -11,15 +11,7 @@ import PresetCircle2 from "./PresetCircle2.js";
 import PresetCircle3 from "./PresetCircle3.js";
 import PresetCircle4 from "./PresetCircle4.js";
 import CALC_GRADIENT from "../../../../js/CALC_GRADIENT.js";
-import {
-  faEdit,
-  faEye,
-  faFileExport,
-  faFileImport,
-  faMinusCircle,
-  faRemoveFormat,
-  faTrash
-} from "@fortawesome/free-solid-svg-icons";
+import {faFileExport, faFileImport, faMinusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RedPresetBorder from "../../border/preset/RedPresetBorder";
 
@@ -190,7 +182,7 @@ const style = {
   },
   mode: {
     display: 'flex',
-    alignItems:'center',
+    alignItems: 'center',
     padding: '2px 5px',
     cursor: 'pointer',
   },

@@ -58,7 +58,7 @@ class RedBorderModeEdit extends React.Component {
                 color: canvasInfo.border_color,
                 container: this.refColorPickerContainer.current,
                 onChange: color => {
-                  console.log('rootComponentState.key', rootComponentState.key, color, canvasInfo);
+                  // console.log('rootComponentState.key', rootComponentState.key, color, canvasInfo);
                   canvasInfo['border_color'] = color;
                   rootComponent.updateRootState({canvasInfo});
                 }

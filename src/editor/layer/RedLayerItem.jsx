@@ -15,8 +15,8 @@ import {
   faEyeSlash,
   faFolder,
   faFolderOpen,
-  faMinusCircle,
-  faPlusCircle, faTrash
+  faPlusCircle,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import CALC_GRADIENT from "../../js/CALC_GRADIENT";
 import RedLayerSubItem from "./RedLayerSubItem.jsx";
@@ -215,7 +215,7 @@ class RedLayerItem extends React.Component {
             this.setState({openPanel: true, draggable: false});
           }}
         >
-          <FontAwesomeIcon icon={faPlusCircle} style={{fontSize:'14px'}} />
+          <FontAwesomeIcon icon={faPlusCircle} style={{fontSize: '14px'}} />
           <div style={{marginLeft: '5px'}}>Add Template</div>
         </div>
         {
@@ -249,7 +249,7 @@ class RedLayerItem extends React.Component {
           }}
           onClick={() => {
             let activeLayerIndex = layers.indexOf(layer);
-            console.log('activeLayerIndex', activeLayerIndex);
+            // console.log('activeLayerIndex', activeLayerIndex);
             rootComponent.updateRootState({
               activeLayerIndex: activeLayerIndex,
               activeSubDataIndex: 0,

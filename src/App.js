@@ -77,8 +77,8 @@ class App extends React.Component {
   updateRootState(v = {}) {
     if (this.state) {
       this.setState(v);
-      console.log('App updateRootState', this.state);
-      console.log(this.state);
+      // console.log('App updateRootState', this.state);
+      // console.log(this.state);
       const activeFrameState = this.state[this.state.activeFrameKey];
       if (!activeFrameState || !activeFrameState.canvasInfo) return;
 
@@ -89,7 +89,7 @@ class App extends React.Component {
 
         window.actionHistoryCheckNum = window.actionHistoryCheckNum || 0;
         window.actionHistoryCheckNum++;
-        console.log('actionHistoryCheckNum', window.actionHistoryCheckNum);
+        // console.log('actionHistoryCheckNum', window.actionHistoryCheckNum);
       }
       prevUpdateTime = t0;
     }
@@ -97,7 +97,7 @@ class App extends React.Component {
 
   setNewCanvas(newState) {
     this.state = newState;
-    console.log(this.state);
+    // console.log(this.state);
     //
     this.updateRootState(this.state);
   }

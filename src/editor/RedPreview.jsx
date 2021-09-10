@@ -40,7 +40,7 @@ class RedPreview extends React.Component {
     return <div style={style.bg}>
       <div style={style.container}>
         <div style={{display: 'flex', flex: 1, width: '100%'}}>
-          <div style={{display: 'flex', flexDirection: 'column', width: '360px',margin : '7px 10px'}}>
+          <div style={{display: 'flex', flexDirection: 'column', width: '360px', margin: '7px 10px'}}>
             {
               [
                 {
@@ -70,10 +70,13 @@ class RedPreview extends React.Component {
                   ]
                 }
               ].map(v => {
-                return <div style={{margin :'3px 0px',padding: '10px', border: '1px solid #111',borderRadius:'10px'}}>
-                  <div style={{fontSize : '16px',color : '#efb26a'}}>{v['title']}</div>
+                return <div
+                  style={{margin: '3px 0px', padding: '10px', border: '1px solid #111', borderRadius: '10px'}}>
+                  <div style={{fontSize: '16px', color: '#efb26a'}}>{v['title']}</div>
                   <div style={{maxHeight: '150px', overflowY: 'scroll'}}>{v['text']}</div>
-                  {v['title']==='main' ? <div style={{fontSize : '14px',color : '#efb26a',marginTop:'5px'}}>출력시 top, left는 0으로 출력됩니다.</div> : ''}
+                  {v['title'] === 'main' ?
+                    <div style={{fontSize: '14px', color: '#efb26a', marginTop: '5px'}}>출력시 top, left는 0으로
+                      출력됩니다.</div> : ''}
                 </div>;
               })
             }
@@ -121,7 +124,7 @@ class RedPreview extends React.Component {
               width: `${rootComponentState.device['width']}px`,
               height: `${rootComponentState.device['height']}px`,
               background: '#fff',
-              overflow : 'hidden'
+              overflow: 'hidden'
             }}>
               <div style={{
                 // position: 'absolute',

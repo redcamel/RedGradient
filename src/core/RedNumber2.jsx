@@ -100,7 +100,6 @@ class RedNumber2 extends React.Component {
                if (time - startTime > 100) {
                  this.update(+this.props.value + step);
                }
-               console.log('여기냐');
                requestAni = requestAnimationFrame(tick);
              };
              requestAni = tick();

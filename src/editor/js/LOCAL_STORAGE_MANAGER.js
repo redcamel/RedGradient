@@ -16,7 +16,6 @@ const LOCAL_STORAGE_MANAGER = {
       if (t0 === null) test++;
     });
     if (test === RedTitleTB.TAB_LIST.length) {
-      console.log('도냐');
       RedTitleTB.TAB_LIST.forEach((v, index) => {
         let searchKey = 'redGradient_openYn_' + v;
         localStorage.setItem(searchKey, index === RedTitleTB.TAB_LIST.length - 1);
@@ -36,7 +35,7 @@ const LOCAL_STORAGE_MANAGER = {
     let searchKey = 'redGradient_openYn_' + key;
     let t0 = localStorage.getItem(searchKey);
     t0 = t0 === undefined || t0 === null || t0 === 'true';
-    console.log('getTabOpenYn', searchKey, t0);
+    // console.log('getTabOpenYn', searchKey, t0);
     return t0;
   },
   toggleTabOpenYn: (key) => {
@@ -46,9 +45,9 @@ const LOCAL_STORAGE_MANAGER = {
       let searchKey = 'redGradient_openYn_' + v;
       localStorage.setItem(searchKey, false);
     });
-    console.log(t0);
+    // console.log(t0);
     localStorage.setItem(searchKey, t0);
-    console.log('toggleTabOpenYn', searchKey, t0);
+    // console.log('toggleTabOpenYn', searchKey, t0);
   }
 };
 export default LOCAL_STORAGE_MANAGER;

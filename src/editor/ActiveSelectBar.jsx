@@ -15,7 +15,7 @@ import js_beautify from "js-beautify";
 import RedGradientEditComp from "./edit/gradient/RedGradientEditComp";
 import {toast} from "react-toastify";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCopy, faEye, faEyeSlash, faPlayCircle, faUserEdit} from "@fortawesome/free-solid-svg-icons";
+import {faCopy, faPlayCircle, faUserEdit} from "@fortawesome/free-solid-svg-icons";
 
 class ActiveSelectBar extends React.Component {
   render() {
@@ -37,7 +37,7 @@ class ActiveSelectBar extends React.Component {
         }}>
           {
             Object.values(ACTIVE_FRAME_KEY).map(key => {
-              const activeYn = appComponentState.activeFrameKey === key
+              const activeYn = appComponentState.activeFrameKey === key;
               return <div
                 style={{
                   display: 'flex',
@@ -48,15 +48,16 @@ class ActiveSelectBar extends React.Component {
                   cursor: 'pointer',
                   borderRight: '1px solid #000',
                   // fontWeight:'bold',
-                  color :activeYn ?'#fff': '#efb26a',
+                  color: activeYn ? '#fff' : '#efb26a',
                   background: activeYn ? 'linear-gradient(#5e7ade, #2c3565)' : '#333'
                 }}
                 onClick={() => {
                   appComponentState.activeFrameKey = key;
-                  console.log(appComponentState);
+                  // console.log(appComponentState);
                   appComponent.updateRootState({});
                 }}
-              ><FontAwesomeIcon icon={faUserEdit} style={{marginRight: '6px',opacity : activeYn ? 1 : 0.3}} /> {key.toUpperCase()}</div>;
+              ><FontAwesomeIcon icon={faUserEdit}
+                                style={{marginRight: '6px', opacity: activeYn ? 1 : 0.3}} /> {key.toUpperCase()}</div>;
             })
           }
           <div
@@ -92,16 +93,16 @@ class ActiveSelectBar extends React.Component {
             fontSize: '11px',
             color: '#fff',
             outline: 'none',
-            border : 0,
+            border: 0,
             background: 'linear-gradient(#5e7ade, #2c3565)'
           }}
           onClick={() => {
             const tempElem = document.createElement('textarea');
 
             tempElem.value = js_beautify.css_beautify(`
-    ${RedGradientEditComp.getContainerCssText(appComponentState[ACTIVE_FRAME_KEY.BEFORE], )}
+    ${RedGradientEditComp.getContainerCssText(appComponentState[ACTIVE_FRAME_KEY.BEFORE],)}
     ${RedGradientEditComp.getContainerCssText(appComponentState[ACTIVE_FRAME_KEY.MAIN], true)}
-    ${RedGradientEditComp.getContainerCssText(appComponentState[ACTIVE_FRAME_KEY.AFTER], )}
+    ${RedGradientEditComp.getContainerCssText(appComponentState[ACTIVE_FRAME_KEY.AFTER],)}
     `, {
               indent_size: 2,
               space_in_empty_paren: true,

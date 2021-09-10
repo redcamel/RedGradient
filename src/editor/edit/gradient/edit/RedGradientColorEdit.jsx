@@ -28,7 +28,6 @@ class RedGradientColorEdit extends React.Component {
   }
 
   _rowRender(v) {
-    // console.log(v)
     let idx = v['index'];
     let key = v['key'];
     let style = v['style'];
@@ -71,7 +70,7 @@ class RedGradientColorEdit extends React.Component {
       }
     });
     const code = `${GRADIENT_TYPE.LINEAR}(90deg, ${gradients}),${this.state.layerBgColor}`;
-    // console.log(code)
+
     return <div style={{
       height: '55px',
       background: code,
@@ -144,7 +143,6 @@ class RedGradientColorEdit extends React.Component {
         <button
           style={style.reverse}
           onClick={() => {
-            // console.log('원본', JSON.parse(JSON.stringify(activeSubData['colorList'])));
             let t0 = JSON.parse(JSON.stringify(activeSubData['colorList']));
             t0 = t0.reverse();
             t0.forEach(v => {
@@ -166,7 +164,6 @@ class RedGradientColorEdit extends React.Component {
             });
             activeSubData['colorList'] = t0;
             rootComponent.updateRootState({});
-            // console.log('결과', t0);
           }}
         ><FontAwesomeIcon icon={faExchangeAlt} style={{marginRight: '5px'}} /> Reverse
         </button>

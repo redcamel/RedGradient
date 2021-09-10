@@ -31,7 +31,10 @@ class RedGradientEditComp extends React.Component {
     const rootComponentState = rootComponent.state;
     const data = rootComponentState.activeSubData;
     let containerCssText = RedGradientEditComp.getContainerCssText(rootComponentState);
-    return <div style={{borderLeft: '1px solid rgb(0, 0, 0)',background : 'linear-gradient(to bottom, rgb(51 51 51)  0%, rgb(23 23 23)  )'}}>
+    return <div style={{
+      borderLeft: '1px solid rgb(0, 0, 0)',
+      background: 'linear-gradient(to bottom, rgb(51 51 51)  0%, rgb(23 23 23)  )'
+    }}>
       <RedTitle title={'Gradient Edit'} />
       <div style={style.container}>
         <div style={style.contentWrap}>
@@ -134,7 +137,7 @@ class RedGradientEditComp extends React.Component {
   }
 }
 
-RedGradientEditComp.getContainerCssText = (rootComponentState,resultMode) => {
+RedGradientEditComp.getContainerCssText = (rootComponentState, resultMode) => {
   const canvasInfo = rootComponentState.canvasInfo;
   let containerCssText = '';
   {
@@ -152,7 +155,7 @@ RedGradientEditComp.getContainerCssText = (rootComponentState,resultMode) => {
         break;
       case ACTIVE_FRAME_KEY.MAIN:
         className = '.result';
-        if(resultMode) position = 'position : relative;';
+        if (resultMode) position = 'position : relative;';
         else position = ` position : relative; top : ${canvasInfo['top'] || 0}px; left : ${canvasInfo['left'] || 0}px; `;
         break;
       case ACTIVE_FRAME_KEY.AFTER:
@@ -162,7 +165,7 @@ RedGradientEditComp.getContainerCssText = (rootComponentState,resultMode) => {
       default:
         break;
     }
-    console.log('className', className);
+    // console.log('className', className);
     let filter = RedCanvas.getFilterCss(canvasInfo['filterList']);
     let addCustomCss = canvasInfo['addCss'] || '';
     containerCssText = `${className} {

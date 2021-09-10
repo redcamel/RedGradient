@@ -17,7 +17,7 @@ const renderBorderRadiusEdit = function (rootComponentState, activeSubData, canv
     x: canvasInfo['left'] + cX,
     y: canvasInfo['top'] + cY
   };
-  console.log('layoutSize', layoutSize);
+  // console.log('layoutSize', layoutSize);
   const borderRadius = canvasInfo['border_radius_mergeMode'] ? [canvasInfo.border_radius, canvasInfo.border_radius, canvasInfo.border_radius, canvasInfo.border_radius] : canvasInfo['border_radius_split'];
   return this.state.layerSizeView ? <div
     style={{

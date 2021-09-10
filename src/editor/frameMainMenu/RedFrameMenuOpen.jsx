@@ -27,7 +27,7 @@ class RedFrameMenuOpen extends React.Component {
         loadData = newData;
       }
       let mainData = loadData['main'];
-      console.log(loadData);
+      // console.log(loadData);
       if (
         !loadData.hasOwnProperty('activeFrameKey')
         || !mainData.hasOwnProperty('activeLayer')
@@ -39,7 +39,7 @@ class RedFrameMenuOpen extends React.Component {
     } catch (e) {
       return false;
     }
-    if(!loadData['device']) loadData['device'] = new DataDevice()
+    if (!loadData['device']) loadData['device'] = new DataDevice();
     return loadData;
   }
 

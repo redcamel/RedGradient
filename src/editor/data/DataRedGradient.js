@@ -11,7 +11,7 @@ import DataDevice from "./DataDevice";
 
 function DataRedGradient() {
   return {
-    device : new DataDevice(),
+    device: new DataDevice(),
     before: new DataCanvas(),
     main: new DataCanvas(),
     after: new DataCanvas(),
