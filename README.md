@@ -1,7 +1,11 @@
 # RedGradient
+```
+All about CSS gradients.
+Design quickly and create your own gradients with a graphic pro-tools-grade editing system.
+```
+
 ![RedGradient](public/screenshot/Screenshot_1.png)
-- All about CSS gradients. Design quickly and create your own gradients <br/>with a
-  graphic pro-tools-grade editing system.
+
 
 ## Version List
 - Version 1.0.0 - https://redcamel.github.io/RedGradient/build/
