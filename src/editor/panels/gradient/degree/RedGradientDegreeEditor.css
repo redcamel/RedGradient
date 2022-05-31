@@ -1,0 +1,51 @@
+.RedGradientDegreeEditor_container {
+    min-width: 46px;
+    min-height: 46px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.RedGradientDegreeEditor_container:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    background: #222;
+    border: 1px solid #000;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    line-height: 1;
+    z-index: 1;
+}
+
+.RedGradientDegreeEditor_container:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 7px;
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(#2a2a2a, #181818);
+    border: 1px solid #000;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    line-height: 1;
+}
+
+.RedGradientDegreeEditor_line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 20px;
+    background: linear-gradient(#2a2a2a, #000);
+    width: 1px;
+    z-index: 0;
+    transform: translate(-50%, 0);
+}

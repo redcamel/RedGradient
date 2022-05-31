@@ -1,0 +1,68 @@
+/* RedLayerPreviewBackgroundType */
+
+
+.RedLayerPreviewBackgroundType {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    white-space: nowrap;
+    font-weight: 500;
+    /*border-radius: 4px;*/
+    border-top: 1px solid var(--panel-title-border-top-color);
+    border-bottom: 1px solid var(--panel-title-border-bottom-color);
+    background: var(--panel-title-background);
+}
+
+.RedLayerPreviewBackgroundType_item_container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.RedLayerPreviewBackgroundType_item {
+    cursor: pointer;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    padding: 0 7px;
+    height: 29px;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 5px;
+    border-right: 1px solid var(--panel-title-border-bottom-color);
+    background: var(--panel-title-background);
+}
+
+.RedLayerPreviewBackgroundType_item:last-child {
+    border-right: 0;
+
+}
+
+.RedLayerPreviewBackgroundType_item.active {
+    background: linear-gradient(rgb(114, 53, 212), rgb(77, 29, 147))
+}
+
+.RedLayerPreviewBackgroundType_item_box {
+    display: flex;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    gap: 0 5px;
+    border: 1px solid var(--panel-title-border-bottom-color);
+}
+
+.RedLayerPreviewBackgroundType_item_box.white {
+    background: #fff
+}
+
+.RedLayerPreviewBackgroundType_item_box.black {
+    background: #000
+}
+
+.RedLayerPreviewBackgroundType_item_box.transparent {
+    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}

@@ -1,0 +1,96 @@
+/* RedStart */
+.RedStart_Container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #333;
+}
+
+.RedStart_Box {
+    display: flex;
+    /*flex-direction: column;*/
+    align-items: center;
+    gap: 60px;
+    justify-content: center;
+    background: #1d1d1d;
+    animation: aniOpacity 0.6s;
+    box-shadow: 0 0 36px rgba(0, 0, 0, 0.36), inset 2px -2px 20px rgba(255, 255, 255, 0.05);
+    border: 1px solid #110a15;
+    border-radius: 26px;
+    width: 700px;
+    padding: 26px;
+    background: linear-gradient(40deg, rgba(0, 0, 0, 0.45), rgba(87, 11, 107, 0.5));
+}
+
+.RedStart_ProjectName {
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 20px;
+    color: #fff
+}
+
+.RedStart_ProjectVersion {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+    margin: 6px 0 20px;
+}
+
+.RedStart_NewProject, .RedStart_LoadProject {
+    padding: 8px 10px;
+    cursor: pointer;
+    background: #333;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    color: rgb(255, 255, 255);
+    font-size: 11px;
+    border-radius: 6px;
+    box-shadow: 0 0 36px rgba(255, 255, 255, 0.1), inset 0 0 3px rgba(255, 255, 255, 0.1);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.RedStart_NewProject:hover, .RedStart_LoadProject:hover {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background: linear-gradient(40deg, rgba(0, 0, 0, 0.3), rgba(147, 45, 45, 0.5));
+}
+
+.RedStart_LoadProject {
+    margin-top: 10px;
+}
+
+.RedStart_Logo {
+    height: 300px;
+    filter: drop-shadow(0px 0px 50px rgba(0, 0, 0, 0.6));
+}
+
+.RedStart_Copyright {
+    margin-top: 16px;
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.8;
+}
+
+.RedStart_CopyrightTagA {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.RedStart_CopyrightTagA2 {
+    margin-top: 3px;
+    font-size: 10px;
+}
+
+.RedStart_CopyrightTagA:hover, .RedStart_CopyrightTagA2:hover {
+    transition: all 0.2s;
+    color: #b07747;
+}

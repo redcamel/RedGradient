@@ -1,0 +1,32 @@
+/* RedContextMenu */
+.RedContextMenu_container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    flex-grow: 1;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #44475A;
+    background: #F8F8F2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 16px 12px;
+    border-radius: 6px;
+    animation: aniOpacity 0.2s;
+}
+
+.RedContextMenu_contextBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.RedContextMenu_contextItem {
+    padding: 4px 0
+}
+
+.RedContextMenu_contextDivision {
+    margin: 7px 0 7px;
+    height: 1px;
+    background: #f6f6f6;
+    border-top: 1px solid rgba(82, 82, 82, 0.2);
+}

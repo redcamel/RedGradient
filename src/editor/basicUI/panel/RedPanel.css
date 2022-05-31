@@ -1,0 +1,51 @@
+/* RedPanel */
+.RedPanel {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-grow: 1;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.RedPanel_Tab_Container {
+    position: sticky;
+    top: 31px;
+    display: none;
+    border-bottom: 1px solid var(--panel-title-border-bottom-color);
+    z-index: 1;
+    background: var(--panel-base-background);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.16);
+}
+
+.RedPanel_Tab_Container.active {
+    display: flex;
+
+}
+
+.RedPanel_Tab_item {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-right: 1px solid var(--panel-title-border-bottom-color);
+    cursor: pointer;
+    transition: background 0.2s;
+    gap: 5px
+}
+
+.RedPanel_Tab_item:last-child {
+    border-right: 0;
+}
+
+.RedPanel_Tab_item.active {
+    /*background: #1e1e1e;*/
+    background: linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101));
+}
+
+.RedPanel_Contents {
+    padding: 10px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}

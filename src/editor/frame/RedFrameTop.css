@@ -1,0 +1,56 @@
+/* RedFrameTop */
+.RedFrameTop_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    font-size: 11px;
+    padding: 0 6px;
+    min-height: 40px;
+}
+
+.RedFrameTop_logoBox {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.RedFrameTop_logo {
+    display: flex;
+    height: 16px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.RedFrameTop_menuBox {
+    display: flex;
+    font-size: 24px;
+    gap: 2px
+}
+
+.RedFrameTop_history_button {
+    position: absolute;
+    top: 5px;
+    left: -5px;
+    /*padding: 10px;*/
+    /*background: #1f1f1f;*/
+    /*border-radius: 4px;*/
+    cursor: pointer;
+    transform: translate(-100%, 0);
+}
+
+.RedFrameTop_history_container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 400px;
+    z-index: 3;
+    background: #1f1f1f;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform: translate(100%, 0);
+    transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+.RedFrameTop_history_container.active {
+    transform: translate(0%, 0);
+}

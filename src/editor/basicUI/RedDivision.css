@@ -1,0 +1,15 @@
+/* RedDivision */
+
+.RedDivision {
+    margin: 5px 0;
+    height: 0;
+    border-bottom: 1px solid rgb(78, 78, 78);
+    border-top: 1px solid rgb(0, 0, 0);
+}
+
+.RedDivision_vertical {
+    margin: 0 5px;
+    width: 0;
+    border-right: 1px solid rgb(78, 78, 78);
+    border-left: 1px solid rgb(0, 0, 0);
+}

@@ -1,0 +1,109 @@
+/* RedGradientStepEditor */
+.RedGradientStepEditor_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: var(--panel-base-background);
+    /*min-width: 200px;*/
+}
+
+.RedGradientStepEditor_middle {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+    padding: 7px;
+
+}
+
+.RedGradientStepEditor_addPreset {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    overflow: hidden;
+    padding: 7px;
+    background: linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101));
+    border-radius: 4px;
+    margin-right: 4px;
+    cursor: pointer;
+    border: 1px solid #222
+}
+
+.RedGradientStepEditor_stepList_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-top: 6px;
+}
+
+.RedGradientStepEditor_stepList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0 6px 0 0;
+}
+
+.RedGradientStepEditor_stepItemArea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all 0.1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+}
+
+.RedGradientStepEditor_stepItemAreaTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    background: linear-gradient(rgb(114, 53, 212), rgb(77, 29, 147));
+    padding: 0 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 11px;
+    transition: all 0.1s ease-out;
+    pointer-events: none;
+    border: 1px solid #333;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.RedGradientStepEditor_step_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 6px;
+    background: linear-gradient(#282828, #282828);
+    border: 1px solid #333;
+    border-top: 1px solid #525252;;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 10px;
+}
+
+.RedGradientStepEditor_step_item_icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px
+}
+
+.RedGradientStepEditor_bottom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    color: red;
+    padding: 0 13px;
+    justify-content: flex-end;
+    border-top: 1px solid var(--panel-title-border-top-color);
+}

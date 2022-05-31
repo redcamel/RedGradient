@@ -1,0 +1,105 @@
+/* RedLayerGroupItem */
+
+.RedLayerGroupItem_container {
+    margin: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid var(--panel-title-border-bottom-color);
+    padding-bottom: 4px;
+    background: var(--panel-active-background);
+    transition: background 0.2s;
+}
+
+.RedLayerGroupItem_container.active {
+    z-index: 1;
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.75);
+    background: var(--panel-active-background);
+
+}
+
+.RedLayerGroupItem_container_add_group {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 30px;
+    margin: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
+    background: var(--basic-ui-select-background);
+    cursor: pointer;
+}
+
+.RedLayerGroupItem_label {
+    border-radius: 4px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    gap: 4px;
+    align-items: center;
+    padding: 6px 8px 7px 8px;
+    font-size: 18px;
+    font-weight: 500;
+    border-top: 1px solid var(--panel-title-border-top-color);
+    border-bottom: 1px solid var(--panel-title-border-bottom-color);
+    background: var(--group-base-background);
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.RedLayerGroupItem_label_container {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    gap: 4px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.RedLayerGroupItem_label.active {
+    background: var(--group-active-background);
+    background: linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101));
+}
+
+.RedLayerGroupItem_preview {
+    display: flex;
+    flex-grow: 1;
+    margin: 4px 4px 0 4px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.RedLayerGroupItem_preview.white {
+    background: #fff
+}
+
+.RedLayerGroupItem_preview.black {
+    background: #000
+}
+
+.RedLayerGroupItem_preview.transparent {
+    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}
+
+.RedLayerGroupItem_layer_container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.RedLayerGroupItem_add_layer {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 30px;
+    margin: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
+    background: var(--basic-ui-select-background);
+    cursor: pointer;
+}

@@ -1,0 +1,89 @@
+/* RedBasicUI */
+.RedBasicUI_container {
+    display: flex;
+}
+
+.RedBasicUI_inputField {
+    border-radius: 6px;
+    min-height: 23px;
+    padding: 0 4px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.26);
+    background: var(--basic-ui-input-background);
+    border: 1px solid var(--basic-ui-input-borderColor);
+    transition: border 0.2s;
+    pointer-events: painted;
+}
+
+.RedBasicUI_inputField[type=number] {
+    cursor: ew-resize;
+    border-radius: 6px 0 0 6px;
+}
+
+.RedBasicUI_inputField:disabled {
+    opacity: 0.2;
+    background: var(--basic-ui-input-background);
+    pointer-events: none;
+}
+
+.RedBasicUI_inputField:hover, .RedBasicUI_inputField:focus {
+    border: 1px solid var(--basic-ui-input-borderActiveColor);
+}
+
+.RedBasicUI_inputField_plus, .RedBasicUI_inputField_minus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 23px;
+    cursor: pointer;
+    font-size: 12px;
+    background: var(--basic-ui-input-calcItemBackground);
+    transition: background 0.2s;
+}
+
+.RedBasicUI_inputField_plus {
+    border-right: 1px solid var(--basic-ui-input-borderColor);
+}
+
+.RedBasicUI_inputField_minus {
+    border-radius: 0 6px 6px 0;
+}
+
+.RedBasicUI_inputField_plus:hover, .RedBasicUI_inputField_minus:hover {
+    background: var(--basic-ui-input-calcItemActiveBackground);
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.RedBasicUI_select {
+    border-radius: 6px;
+    min-height: 23px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+    padding: 0 4px;
+    cursor: pointer;
+    background: var(--basic-ui-select-background);
+    border: 1px solid var(--basic-ui-select-borderColor);
+    transition: border 0.2s;
+    pointer-events: painted;
+}
+
+.RedBasicUI_select:hover, .RedBasicUI_select:focus {
+    border: 1px solid var(--basic-ui-select-borderActiveColor);
+}
+
+.RedBasicUI_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    min-height: 23px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+    padding: 0 6px;
+    cursor: pointer;
+    background: var(--basic-ui-select-background);
+    border: 1px solid var(--basic-ui-select-borderColor);
+    transition: border 0.2s;
+}
+
+.RedBasicUI_button:hover {
+    border: 1px solid var(--basic-ui-select-borderActiveColor);
+}

@@ -1,0 +1,8 @@
+.RedWindow {
+    min-width: 50px;
+    min-height: 50px;
+    background: var(--panel-base-background);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+}

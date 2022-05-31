@@ -1,0 +1,14 @@
+/* RedPanelTitle */
+.RedPanelTitle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 8px 9px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-top: 1px solid var(--panel-title-border-top-color);
+    border-bottom: 1px solid var(--panel-title-border-bottom-color);
+    background: var(--panel-title-background);
+    cursor: pointer;
+}

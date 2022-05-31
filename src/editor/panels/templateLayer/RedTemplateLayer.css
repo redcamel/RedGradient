@@ -1,0 +1,92 @@
+.RedTemplateLayer_Container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 16px rgb(0 0 0 / 60%);
+    background: #333;
+    width: calc(100% - 100px);
+    height: 90%;
+}
+
+.RedTemplateLayer_Container_middle {
+    display: flex;
+    gap: 10px;
+    padding: 16px 16px 0;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.RedTemplateLayer_Container_setting {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+    margin: 16px 16px 0;
+    border-radius: 8px;
+    border: 1px solid #222;
+}
+
+.RedTemplateLayer_Container_setting_item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 11px;
+    color: #888
+}
+
+.RedTemplateLayer_Container_preview {
+    display: flex;
+    width: 50%;
+    flex-grow: 1;
+    border-radius: 8px;
+    border: 1px solid #222;
+}
+
+.RedTemplateLayer_Container_colorsRoot {
+    display: flex;
+    width: 50%;
+    flex-grow: 1;
+    border-radius: 8px;
+    border: 1px solid #222;
+    overflow: hidden;
+}
+
+.RedTemplateLayer_Container_colors {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    gap: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 16px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    align-content: flex-start
+}
+
+.RedTemplateLayer_Container_colors_item {
+    border: 1px solid #222;
+    border-radius: 6px;
+    flex-direction: column;
+    gap: 2px;
+    height: 55px;
+}
+
+.RedTemplateLayer_Container_bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.RedTemplateLayer_Container_close {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translate(0, -50%);
+    line-height: 1;
+    color: red;
+    cursor: pointer;
+}

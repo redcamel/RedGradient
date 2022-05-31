@@ -1,118 +1,68 @@
-/*
- *
- *  * RedGL - MIT License
- *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
- *  * https://github.com/redcamel/RedGradient
- *
- */
 import './App.css';
-import '@easylogic/colorpicker/dist/colorpicker.css';
-import React from 'react';
-import RedStart from "./start/RedStart.jsx";
-import {ToastContainer} from 'react-toastify';
+import RedFrameStatus from "./editor/frame/RedFrameStatus";
+import RedFrameTop from "./editor/frame/RedFrameTop.jsx";
+import RedContextMenu from "./editor/core/contextMenu/RedContextMenu";
+import ContextMenu from "./editor/contexts/contextMenu/ContextMenu";
+import RedStart from "./editor/start/RedStart";
+import useContextMenuReducer from "./editor/contexts/contextMenu/useContextMenuReducer";
+import ContextGradient from "./editor/contexts/system/ContextGradient";
+import useContextGradientReducer from "./editor/contexts/system/useContextGradientReducer";
+import RedFrameCenter from "./editor/frame/RedFrameCenter";
+import RedFrameRight from "./editor/frame/RedFrameRight";
+import RedFrameLeft from "./editor/frame/RedFrameLeft";
+import RedFrameLayout from "./editor/core/RedFrameLayout.jsx";
+import RedFrameBottom from "./editor/frame/RedFrameBottom.jsx";
+import ContextColorPicker from "./editor/contexts/contextColorPicker/ContextColorPicker.js";
+import useContextColorPickerReducer from "./editor/contexts/contextColorPicker/useContextColorPickerReducer.js";
+import RedColorPicker from "./editor/core/colorPicker/RedColorPicker.jsx";
+import useContextWindowReducer from "./editor/contexts/window/useContextWindowReducer.js";
+import ContextWindows from "./editor/contexts/window/ContextWindows.js";
+import RedWindowRender from "./editor/basicUI/window/RedWindowRender.jsx";
+import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import getActiveLayer from "./editor/js/getActiveLayer.js";
-import getActiveSubData from "./editor/js/getActiveSubData.js";
-import AppFrame from "./frame/AppFrame";
 
-let prevUpdateTime = 0;
+function App() {
+	const reducerMenu = useContextMenuReducer();
+	const reducerGradient = useContextGradientReducer();
+	const reducerColorPicker = useContextColorPickerReducer();
+	const reducerWindow = useContextWindowReducer();
+	console.log('reducerGradient', reducerGradient)
+	// console.log(reducerColorPicker, reducerColorPicker.state.openYn)
+	console.log(reducerWindow.state)
+	const startYn = !reducerGradient.state
+	return (
+		<div className={'app_root'}>
+			<ContextGradient.Provider value={reducerGradient}>
+				<ContextColorPicker.Provider value={reducerColorPicker}>
+					<ContextMenu.Provider value={reducerMenu}>
+						<ContextWindows.Provider value={reducerWindow}>
+							{
+								startYn
+									? <RedStart/>
+									: <>
+										<RedFrameLayout
+											top={<RedFrameTop/>}
+											left={<RedFrameLeft/>}
+											center={<RedFrameCenter/>}
+											right={<RedFrameRight/>}
+											bottom={<RedFrameBottom/>}
+											status={<RedFrameStatus/>}
+										/>
+										<RedContextMenu/>
+									</>
+							}
+							<RedWindowRender/>
+							<RedColorPicker/>
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.history = [];
-    this.historyRedo = [];
-    window.addEventListener('resize', () => {
-      this.updateRootState();
-    });
-  }
-
-  HD_keydown(e) {
-    if (e.ctrlKey && e.shiftKey && e.key === 'Z') {
-      // console.log('리두 실행해야함')
-      let targetState = this.historyRedo.pop();
-      if (targetState) {
-        this.state = JSON.parse(JSON.stringify(targetState));
-        const activeFrameState = this.state[this.state.activeFrameKey];
-        activeFrameState.activeLayer = getActiveLayer(activeFrameState);
-        activeFrameState.activeSubData = getActiveSubData(activeFrameState);
-        this.updateRootState(this.state);
-      }
-      // console.log('history',this.history)
-      // console.log('historyRedo',this.historyRedo)
-    } else if (e.ctrlKey && e.key === 'z') {
-      // console.log('언두 실행해야함')
-      let targetState = this.history.pop();
-      if (targetState) {
-        this.historyRedo.push(JSON.parse(JSON.stringify(targetState)));
-        targetState = this.history[this.history.length - 1];
-        if (targetState) {
-          this.state = JSON.parse(JSON.stringify(targetState));
-          const activeFrameState = this.state[this.state.activeFrameKey];
-          activeFrameState.activeLayer = getActiveLayer(activeFrameState);
-          activeFrameState.activeSubData = getActiveSubData(activeFrameState);
-          this.setState(this.state);
-        }
-      }
-    }
-
-  }
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.HD_keydown.bind(this));
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.HD_keydown.bind(this));
-  }
-
-  checkUnloadEvent() {
-    if (this.state && !window.onbeforeunload) {
-      window.onbeforeunload = () => {
-        if (window.actionHistoryCheckNum > 1) return "~";
-      };
-    }
-  }
-
-  updateRootState(v = {}) {
-    if (this.state) {
-      this.setState(v);
-      // console.log('App updateRootState', this.state);
-      // console.log(this.state);
-      const activeFrameState = this.state[this.state.activeFrameKey];
-      if (!activeFrameState || !activeFrameState.canvasInfo) return;
-
-      let t0 = performance.now();
-      if (t0 - prevUpdateTime > 100) {
-        if (this.history.length > 50) this.history.shift();
-        this.history.push(JSON.parse(JSON.stringify(this.state)));
-
-        window.actionHistoryCheckNum = window.actionHistoryCheckNum || 0;
-        window.actionHistoryCheckNum++;
-        // console.log('actionHistoryCheckNum', window.actionHistoryCheckNum);
-      }
-      prevUpdateTime = t0;
-    }
-  }
-
-  setNewCanvas(newState) {
-    this.state = newState;
-    // console.log(this.state);
-    //
-    this.updateRootState(this.state);
-  }
-
-  render() {
-    // console.log(this.state);
-    if (!this.state) return <RedStart rootComponent={this} />;
-    this.checkUnloadEvent();
-    return <div className={'frame'}>
-      <AppFrame appComponent={this} />
-      <ToastContainer
-        hideProgressBar={true}
-      />
-    </div>;
-  }
+						</ContextWindows.Provider>
+					</ContextMenu.Provider>
+				</ContextColorPicker.Provider>
+			</ContextGradient.Provider>
+			<ToastContainer
+				hideProgressBar={true}
+			/>
+		</div>
+	);
 }
 
 export default App;

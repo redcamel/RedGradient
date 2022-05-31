@@ -1,0 +1,114 @@
+.RedGradientVisibleEditor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    z-index: 4;
+    will-change: transform;
+    pointer-events: none;
+}
+
+.RedGradientVisibleEditorRotatePoint {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%, -50%);
+    border: 1px solid #222;
+    z-index: 4;
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: painted;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+
+}
+
+.RedGradientVisibleEditorRangeBarContainer {
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    will-change: transform;
+    width: 0;
+}
+
+.RedGradientVisibleEditorRangeBar {
+    position: absolute;
+    transform: translate(-50%, 0%);
+    will-change: transform;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.RedGradientVisibleEditorRangeBarArea {
+    position: absolute;
+    transform: translate(-50%, 0px);
+    will-change: transform;
+    width: 60px;
+    background: rgba(255, 0, 0, 0.0);
+    cursor: pointer;
+    pointer-events: painted;
+}
+
+.RedGradientVisibleEditorBarAreaCircle {
+    position: absolute;
+    transform: translate(19px, -50%);
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background: rgba(255, 0, 0, 1.0);
+    border: 2px solid #fff;
+    outline: 2px solid rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 500;
+    color: #fff;
+    transition: opacity 0.3s;
+}
+
+.RedGradientVisibleEditorBarAreaCircle > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    line-height: 1;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.85);
+    transform: translate(0, -2px);
+}
+
+.RedGradientVisibleEditorCircle {
+    position: absolute;
+    transform: translate(-50%, 0%);
+    will-change: transform;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    outline: 2px dashed rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.RedGradientVisibleEditorColorBox {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(calc(100% + 10px), -50%)
+}
+
+.RedGradientVisibleEditorColorBox:before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 16px;
+    background: rgba(0, 0, 0, 0.5);
+    top: 50%;
+    left: 0;
+    transform: translate(calc(-100%), -50%)
+}
+

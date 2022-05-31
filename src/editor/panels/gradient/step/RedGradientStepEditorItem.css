@@ -1,0 +1,54 @@
+/* RedGradientStepEditorItem */
+.RedGradientEditor_step_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid #5a5a5a;
+    border-top: 1px solid #686868;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+    padding: 6px 8px;
+    background: linear-gradient(#3c3c3c, #242424);
+    box-shadow: none;
+    transition: all 0.2s ease-out;
+}
+
+.RedGradientEditor_step_item.active, .RedGradientEditor_step_item:hover {
+    box-shadow: inset 0px 0 100px rgb(10, 10, 10);
+    color: #644f70
+}
+
+.RedGradientEditor_step_item_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+    pointer-events: none;
+
+}
+
+.RedGradientEditor_step_item_bottom {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.RedGradientEditor_step_item_icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2px;
+}
+
+.RedGradientEditor_step_item_width {
+    display: flex;
+    align-items: center;
+    gap: 4px
+}
+
+.RedGradientEditor_step_item_colorActionBox {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}

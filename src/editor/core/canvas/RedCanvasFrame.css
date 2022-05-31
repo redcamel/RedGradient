@@ -1,0 +1,83 @@
+/* RedCanvasWindow */
+.RedCanvasWindow_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+    height: 100%;
+    transition: border 0.2s;
+    border: 1px solid transparent;
+}
+
+.RedCanvasWindow_container.active {
+    border: 1px solid #676767;
+    border-top: 1px solid transparent;
+}
+
+.RedCanvasWindow_topContainer {
+    display: flex;
+    align-items: center;
+    background: var(--panel-base-background);
+    border-top: 1px solid var(--panel-title-border-top-color);
+    border-bottom: 1px solid var(--panel-title-border-bottom-color);
+    white-space: nowrap;
+    padding: 6px;
+    gap: 5px;
+    z-index: 1;
+    transition: background 0.2s;
+}
+
+.RedCanvasWindow_topContainer_viewKey {
+    display: flex;
+    align-items: center;
+    background: #222;
+    white-space: nowrap;
+    padding: 6px 7px 7px;
+    gap: 5px;
+    z-index: 1;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.RedCanvasWindow_topContainer_viewKey.active {
+    background: linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101));
+}
+
+
+.RedCanvasWindow_topContainer.active {
+    background: linear-gradient(#757575, #444);
+
+}
+
+.RedCanvasWindow_editArea {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    overflow: hidden;
+}
+
+.RedCanvasWindow_canvasContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.RedCanvasWindow_bottomContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 6px;
+    gap: 5px;
+}
+
+.RedCanvasWindow_centerPoint {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    color: #888
+}

@@ -1,0 +1,74 @@
+.RedCanvasWindowEditMode {
+    position: absolute;
+    top: 48px;
+    left: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #efb26a;
+    background: rgba(33, 32, 32, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.16)
+}
+
+.RedCanvasWindowEditMode_item_container {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.RedCanvasWindowEditMode_item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    justify-content: center;
+    height: 30px;
+    padding: 0 6px;
+    transition: color 0.2s, border 0.2s;
+    cursor: pointer;
+    /*border: 1px solid #222;*/
+    color: #fff;
+    background: linear-gradient(#3f3f3f, #1f1f1f);
+}
+
+.RedCanvasWindowEditMode_item:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.RedCanvasWindowEditMode_item:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+.RedCanvasWindowEditMode_item.active {
+    color: #fff;
+    background: linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101));
+    /*border: 1px solid #604a32;*/
+}
+
+
+.RedCanvasWindowEditMode_item_toolTip {
+    white-space: nowrap;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    opacity: 0;
+    transition: opacity 0.1s;
+    font-size: 10px;
+    background: #333;
+    border-radius: 6px;
+    display: flex;
+    pointer-events: none;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 6px 5px;
+    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 2;
+    gap: 5px;
+}
+
+.RedCanvasWindowEditMode_item:hover .RedCanvasWindowEditMode_item_toolTip {
+    opacity: 1;
+}

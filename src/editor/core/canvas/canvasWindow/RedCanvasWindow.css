@@ -1,0 +1,28 @@
+/* RedCanvasFrameFrame */
+.RedCanvasFrame_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.RedCanvasFrame_topContainer {
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    z-index: 1;
+    border-top: 1px solid var(--panel-title-border-top-color);
+    border-bottom: 1px solid var(--panel-title-border-bottom-color);
+    background: var(--panel-title-background);
+    margin-bottom: 1px;
+}
+
+.RedCanvasFrame_layoutContainer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+    z-index: 0;
+}

@@ -1,0 +1,63 @@
+/* RedGradientEditor */
+.RedGradientEditor_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: var(--panel-base-background);
+    width: 212px;
+}
+
+.RedGradientEditor_middle {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 7px;
+}
+
+.RedGradientEditor_bottom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    color: red;
+    padding: 0 13px;
+    justify-content: flex-end;
+    border-top: 1px solid var(--panel-title-border-top-color);
+}
+
+.RedGradientEditor_container_repeat_box {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    gap: 4px;
+}
+
+.RedGradientEditor_container_repeat_box_item {
+    display: flex;
+    width: 27px;
+    height: 27px;
+    border-radius: 4px;
+    border: 1px solid #222;
+    cursor: pointer;
+    background: radial-gradient(at 50% 50%, rgba(255, 255, 0, 0.9) 0px, rgba(255, 0, 0, 0.5) 5px, transparent 10px);
+    background-size: 10px 10px;
+    opacity: 0.5;
+    filter: grayscale(1);
+    transition: opacity 0.2s, border 0.2s, filter 0.2s;
+}
+
+.RedGradientEditor_container_repeat_box_item.active {
+    opacity: 1;
+    filter: grayscale(0);
+    border: 1px solid #1c1a1a;
+}
+
+.RedGradientEditor_container_sizeBox {
+    display: flex;
+    gap: 4px;
+}

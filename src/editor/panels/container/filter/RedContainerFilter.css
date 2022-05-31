@@ -1,0 +1,80 @@
+/* RedContainerFilter */
+.RedContainerFilter_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+    background: var(--panel-base-background);
+}
+
+.RedContainerFilter_title {
+    display: flex;
+    align-items: center;
+    gap: 5px
+}
+
+.RedContainerFilter_title.target {
+    color: #efb26a
+}
+
+.RedContainerFilter_middle {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.RedContainerFilter_item_container {
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.2s;
+}
+
+.RedContainerFilter_item_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: 5px;
+}
+
+.RedContainerFilter_item_title_box {
+    display: flex;
+    align-items: center;
+}
+
+.RedContainerFilter_item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    flex-grow: 1;
+    gap: 5px;
+    padding: 0 9px 0 10px;
+}
+
+.RedContainerFilter_top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    font-size: 16px;
+    padding: 0 13px;
+    justify-content: flex-end;
+    border-bottom: 1px solid var(--panel-title-border-top-color);
+    margin-bottom: 10px;
+}
+
+.RedContainerFilter_add_filter {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 30px;
+    margin: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
+    background: var(--basic-ui-select-background);
+    cursor: pointer;
+}
+

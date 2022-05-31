@@ -1,0 +1,32 @@
+/* RedContainerEditor */
+.RedContainerEditor_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: var(--panel-base-background);
+}
+
+.RedContainerEditor_description {
+    margin-bottom: 10px;
+}
+
+.RedContainerEditor_title {
+    display: flex;
+    align-items: center;
+    gap: 5px
+}
+
+.RedContainerEditor_title.target {
+    color: #efb26a
+}
+
+.RedContainerEditor_middle {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+    /*overflow-x: hidden;*/
+    /*overflow-y: auto;*/
+}

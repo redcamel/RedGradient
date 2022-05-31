@@ -1,0 +1,68 @@
+
+.RedGradientAtEditor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    will-change: transform;
+}
+
+.RedGradientAtEditor_center {
+    cursor: pointer;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    /*background: red;*/
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px dashed red;
+    outline: 1px dashed #111;
+}
+
+.RedGradientAtEditor_center:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    border: 2px solid red;
+}
+
+.RedGradientAtEditor_info .box {
+    margin-top: 3px;
+    line-height: 1;
+    display: flex;
+    width: 100%;
+    gap: 5px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.RedGradientAtEditor_info .title {
+    width: 46px;
+    color: #919191;
+    font-weight: 500;
+
+}
+
+.RedGradientAtEditor_info .prev {
+    display: flex;
+    justify-content: space-between;
+    color: #939393;
+    font-size: 10px;
+}
+
+.RedGradientAtEditor_info .current {
+    display: flex;
+    justify-content: space-between;
+    color: #efb26a;
+    font-size: 10px;
+}
+

@@ -1,0 +1,37 @@
+/* RedColorPickerButton */
+.RedColorPickerButton {
+    min-width: 24px;
+    min-height: 24px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--basic-ui-input-borderColor);
+    border-radius: 6px;
+    cursor: pointer;
+    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+    background-size: 10px 10px;
+    background-position: 0 0, 0 5px, 5px -5px, -5px 0;
+    overflow: hidden;
+
+}
+
+.RedColorPickerButton_item {
+
+    min-width: 24px;
+    min-height: 24px;
+}
+
+.RedColorPickerButton_item_rgb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 50%
+}
+
+.RedColorPickerButton_item_rgba {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 24px;
+    height: 50%
+}

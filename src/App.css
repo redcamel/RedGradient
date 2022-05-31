@@ -1,180 +1,54 @@
-/*
- *
- *  * RedGL - MIT License
- *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
- *  * https://github.com/redcamel/RedGradient
- *
- */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
 html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    height: 100%;
-    background: rgb(51, 51, 51);
 }
 
 * {
-    box-sizing: border-box;
-    user-select: none;
-    font-size: 11px;
-}
-
-div {
     position: relative;
-}
-
-a {
-    color: #acacac;
-    text-decoration: none;
+    line-height: 1;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    color: #ddd;
+    user-select: none;
 }
 
 input, select {
-    margin: 1px;
-    border-radius: 6px;
     outline: none;
-    padding: 4px 6px;
-    color: #fff;
-    font-size: 11px;
-    background: rgb(49, 49, 49);
-    border: 1px solid rgb(31, 31, 31);
-    box-shadow: rgba(0, 0, 0, 0.25) 0 0 10px inset;
+    border: 0;
+
 }
 
-select {
-    background: linear-gradient(rgb(84, 84, 84), rgb(64, 63, 63));
-    color: #fff;
-    border: 1px solid rgb(31, 31, 31);
-    box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
+input[type='radio'] {
+    appearance: none;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    border: 1px solid #6b6b6b;
+    background: #4f4f4f;
     cursor: pointer;
-    font-size: 11px;
 }
 
-input:focus, input:hover {
-    border: 1px solid #715739;
-    transition: border 0.2s;
+input[type='radio']:checked {
+    background: radial-gradient(#efb26a, #1a1a1a);
 }
 
-option {
-    background: #575757;
-}
 
-/*컬러피커용*/
-.input-field .input {
-    background: #fff !important;
-    box-shadow: none !important;
-
+a {
+    text-decoration: none;
 }
 
 #root {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-/* 배경 체크박스 */
-.transparent_checker {
-    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
-}
-
-.grid {
-    background-image: linear-gradient(rgba(0, 0, 0, .3) .1em, transparent .1em), linear-gradient(90deg, rgba(0, 0, 0, .3) .1em, transparent .1em);
-    background-size: 10px 10px;
-}
-
-.grid3_3 {
-    background-image: linear-gradient(rgba(0, 0, 0, .3) .1em, transparent .1em), linear-gradient(90deg, rgba(0, 0, 0, .3) .1em, transparent .1em);
-    background-size: 10px 10px;
-}
-
-/* 프레임 */
-.frame {
-    display: flex;
-    width: 100%;
     height: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
-    font-size: 12px;
-    color: #fff;
-}
-
-.frame_main_menu {
-    border-bottom: 1px solid #0c0b0b;
-    min-height: 46px;
-    display: flex;
-    align-items: center;
-    background: linear-gradient(to right, rgb(51 51 51) 0%, rgb(23 23 23) 50%, rgb(51 51 51) 100%);
-}
-
-.frame_toolbar {
-    border-bottom: 1px solid #0c0b0b;
-    /*min-height: 28px;*/
-    display: flex;
-    align-items: center;
-}
-
-.frame_middle {
-    border-bottom: 1px solid #0c0b0b;
-    display: flex;
-    flex-grow: 100;
-    flex-direction: row;
-    overflow: hidden;
-}
-
-.frame_middle_container {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-
-}
-
-.frame_left {
-    border-right: 1px solid #0c0b0b;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background: linear-gradient(to bottom, rgb(51 51 51) 0%, rgb(23 23 23));
-}
-
-.frame_center {
-    border-right: 1px solid #0c0b0b;
-    display: flex;
-    flex-grow: 100;
-
-    background: linear-gradient(to right, rgb(23 23 23) 0%, rgb(62 62 62) 50%, rgb(23 23 23) 100%);
-}
-
-.frame_right {
-    border-right: 1px solid #0c0b0b;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.frame_bottom {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-}
-
-.frame_status {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #0c0b0b;
-    padding: 8px;
-    max-height: 36px;
-    background: linear-gradient(to right, rgb(51 51 51) 0%, rgb(23 23 23) 50%, rgb(51 51 51) 100%);
 }
 
 /* 스크롤바 */
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 2px;
+    height: 2px;
 }
 
 /* 스크롤 바 */
@@ -207,210 +81,6 @@ option {
 ::-webkit-scrollbar-button {
     display: none;
 }
-
-
-.todo {
-    color: #ff0000;
-    font-size: 9px;
-}
-
-/* 레이어 */
-.layerItem {
-    height: 100%;
-    margin-bottom: 1px;
-    border: 1px solid #000;
-    border-radius: 4px;
-    transition: border 0.2s;
-}
-
-.layerType {
-    width: calc(100% / 3);
-    border: 0;
-    /*border-right: 1px solid #000;*/
-    height: 24px;
-    background: #5a5a60;
-    font-size: 11px;
-    color: #fff;
-    outline: none;
-}
-
-.layerDel {
-    width: calc(100% / 3);
-    border: 0;
-    border-right: 1px solid #000;
-    height: 24px;
-    background: linear-gradient(#7235d4, #4d1d93);
-    font-size: 14px;
-    color: #fff;
-    outline: none;
-    cursor: pointer;
-    /*z-index: 1;*/
-    transition: background 0.2s;
-}
-
-.layerVisible {
-    width: calc(100% / 3);
-    border: 0;
-    border-right: 1px solid #000;
-    height: 24px;
-    background: linear-gradient(#7235d4, #4d1d93);
-    font-size: 14px;
-    color: #fff;
-    outline: none;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.layerVisible:hover, .layerDel:hover, .layerAdd:hover {
-    filter: contrast(1.25);
-    transition: filter 0.2s;
-}
-
-.layerAdd {
-    width: calc(100% / 3);
-    border: 0;
-    height: 24px;
-    background: linear-gradient(#7235d4, #4d1d93);
-    font-size: 14px;
-    color: #fff;
-    outline: none;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.layerDel2 {
-    width: calc(100% / 3);
-    border: 0;
-    border-right: 1px solid #000;
-    height: 24px;
-    background: linear-gradient(#5e7ade, #2c3565);
-    font-size: 11px;
-    color: #fff;
-    outline: none;
-    cursor: pointer;
-    /*z-index: 1;*/
-    transition: background 0.2s;
-}
-
-.layerVisible2 {
-    width: calc(100% / 3);
-    border: 0;
-    border-right: 1px solid #000;
-    height: 24px;
-    background: linear-gradient(#5e7ade, #2c3565);
-    font-size: 11px;
-    color: #fff;
-    outline: none;
-    /*z-index: 1;*/
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.layerVisible2:hover, .layerDel2:hover {
-    background: #5e7ade;
-}
-
-.layerItemTitle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 4px 0 2px;
-    border-radius: 4px;
-    background: linear-gradient(#7235d4, #4d1d93);
-    border: 1px solid rgb(31, 31, 31);
-    box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
-    padding: 4px 8px;
-    font-size: 11px;
-    color: #fff;
-    text-shadow: 0 0 rgba(0, 0, 0, 1);
-    word-break: break-all;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.layerItemSubTitle {
-    margin: 4px 0 2px 0;
-    border-radius: 4px;
-    background: #333;
-    border: 1px solid rgb(31, 31, 31);
-    box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
-    padding: 4px 8px;
-    font-size: 11px;
-    color: #fff;
-    cursor: grab;
-    text-shadow: 0 0 rgba(0, 0, 0, 1);
-    word-break: break-all;
-}
-
-/* UI */
-.ui_title {
-    position: sticky;
-    top: 0;
-    /*z-index: 1;*/
-    background: linear-gradient(rgb(60, 60, 60), rgb(36, 36, 36));
-    height: 30px;
-    display: flex;
-    padding-left: 8px;
-    line-height: 30px;
-    font-size: 13px;
-    align-items: center;
-    border-top: 1px solid rgb(71, 71, 71);
-    border-bottom: 1px solid rgb(26, 26, 26);
-}
-
-.ui_title_tb {
-    z-index: 1;
-    background: rgb(60, 60, 60);
-    width: 26px;
-    display: flex;
-    padding: 8px 0;
-    font-size: 12px;
-    align-items: center;
-    border-top: 1px solid rgb(26, 26, 26);
-    transform: rotate(180deg);
-    cursor: pointer;
-}
-
-.ui_subTitle {
-    padding: 5px 5px 5px 1px;
-    background: linear-gradient(180deg, #272727, rgba(0, 0, 0, 0));
-    border-radius: 6px 10px 0 0;
-    color: #efb26a;
-    font-size: 12px;
-    line-height: 12px;
-    margin-right: 5px;
-}
-
-.ui_item_title {
-    color: #696969;
-    margin-right: 5px;
-    white-space: nowrap;
-}
-
-.ReactVirtualized__Grid__innerScrollContainer {
-    overflow: hidden hidden !important;
-    min-height: 500px;
-}
-
-.hoverItem_opacity1 {
-    opacity: 0.5;
-    transition: opacity 0.2s;
-}
-
-.hoverItem_opacity1:hover {
-    opacity: 1;
-}
-
-.hoverButtonStyle {
-    background: rgb(51, 51, 51);
-}
-
-.hoverButtonStyle:hover {
-    background: linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101));
-
-}
-
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {

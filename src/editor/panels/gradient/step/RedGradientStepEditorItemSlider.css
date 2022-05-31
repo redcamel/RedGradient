@@ -1,0 +1,48 @@
+.RedGradientStepEditorItemSlider {
+    margin: 0 6px;
+    padding: 10px 11px;
+    height: 25px;
+}
+
+.RedGradientStepEditorItemSlider_bar_container {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translate(0, -50%);
+    background: #505050;
+    border-radius: 3px;
+    border-top: 1px solid #444;
+    height: 4px;
+    overflow: hidden;
+}
+
+.RedGradientStepEditorItemSlider_bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #5691ec;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.RedGradientStepEditorItemSlider_ball {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    color: #fff;
+    background: radial-gradient(#577ec2 30%, #5691ec);
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    line-height: 1;
+    padding-bottom: 2px;
+    border: 1px solid #2c2c2c;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.55);
+    cursor: pointer;
+}

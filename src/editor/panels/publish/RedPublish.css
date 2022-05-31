@@ -1,0 +1,96 @@
+.RedPublishButton {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 7px;
+    cursor: pointer;
+    overflow: hidden;
+    background: linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101));
+    border-radius: 4px;
+    margin-right: 4px;
+    border: 1px solid #222;
+    line-height: 1;
+}
+
+.RedPublishRoot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.RedPublishContainerParent {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - 200px);
+    height: calc(100% - 200px);
+    transform: translate(-50%, -50%);
+    background: #333;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+
+}
+
+.RedPublishContainer {
+    display: flex;
+    align-items: flex-start;
+    height: calc(100% - 40px)
+}
+
+.RedPublishBoxList {
+    display: flex;
+    /*flex-direction: column;*/
+    height: 100%;
+    gap: 10px;
+    padding: 10px;
+}
+
+.RedPublishBox {
+    /*display: flex;*/
+    width: 300px;
+    border: 1px solid #222;
+    padding: 10px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.RedPublishBoxTitle {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.RedPublishResultBox {
+    display: flex;
+    flex-grow: 1;
+    height: calc(100% - 60px);
+    margin: 10px;
+    border: 1px solid #222;
+}
+
+.RedPublishCommandBox {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+
+}
+
+.RedPublishCommandBt {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    overflow: hidden;
+    padding: 7px;
+    background: linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101));
+    border-radius: 4px;
+    margin-right: 4px;
+    cursor: pointer;
+    border: 1px solid #222;
+}

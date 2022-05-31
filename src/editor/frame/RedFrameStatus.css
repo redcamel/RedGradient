@@ -1,0 +1,17 @@
+/* RedFrameStatus */
+.RedFrameStatus_container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--main-color);
+    align-items: center;
+    line-height: 1;
+    z-index: 100;
+}
+
+.RedFrameStatus_tagA {
+    color: #999;
+    font-size: 11px;
+
+}

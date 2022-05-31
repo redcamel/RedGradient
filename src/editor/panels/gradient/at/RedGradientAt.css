@@ -1,0 +1,39 @@
+.RedGradientAt_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    width: 16px;
+    height: 16px;
+    background: rgb(17, 17, 17);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.RedGradientAt_item:hover {
+    background: rgb(70, 61, 166);
+}
+
+.RedGradientAt_itemBox {
+    display: flex;
+    gap: 1px;
+}
+
+.RedGradientAt_itemMirror {
+    cursor: pointer;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 5px;
+    background: #444;
+    transition: background 0.2s;
+    border-radius: 4px;
+    z-index: 1;
+    border: 1px solid #222;
+    font-size: 11px;
+}
+
+.RedGradientAt_itemMirror:hover {
+    background: rgb(70, 61, 166);
+}

@@ -1,0 +1,55 @@
+/* RedLayerItem */
+.RedHistory_container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: var(--panel-base-background);
+}
+
+
+.RedHistory_item {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    white-space: nowrap;
+    padding: 6px 8px 7px 25px;
+    transition: opacity 0.3s;
+    margin-bottom: 1px;
+    cursor: pointer;
+    font-size: 11px;
+    opacity: 0.25;
+    background: var(--panel-item-background);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    gap: 7px
+}
+
+.RedHistory_undoBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.RedHistory_redoBox {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.RedHistory_title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 8px;
+    border-top: 1px solid #111;
+    background: linear-gradient(#3c3c3c, #242424);
+    font-size: 12px;
+}
+
+.RedHistory_icon_active {
+    display: flex;
+    font-size: 11px;
+    position: absolute;
+    transform: translate(calc(-100% - 7px), 0);
+}

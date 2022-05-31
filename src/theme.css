@@ -1,0 +1,42 @@
+:root {
+    --main-background: #2f2f2f;
+    --main-color: #222;
+    /* frame   */
+    --frame-border-color: #0c0b0b;
+    /* panel */
+    --panel-base-background: #333;
+    --panel-active-background: #1e1e1e;
+    --panel-title-background: linear-gradient(#3c3c3c, #242424);
+    --panel-title-border-top-color: #525252;
+    --panel-title-border-bottom-color: #101010;
+    --panel-title-border-right-color: #171515;
+    --panel-item-background: #313131;
+    /* group */
+    --group-base-background: linear-gradient(#1e1e1e, #2c2c2c);
+    --group-active-background: linear-gradient(#6b6b6b, #2c2c2c);
+    /* basic ui */
+    --basic-ui-input-background: #313131;
+    --basic-ui-input-borderColor: #1f1f1f;
+    --basic-ui-input-borderActiveColor: #715739;
+    --basic-ui-input-calcItemBackground: #000000;
+    --basic-ui-input-calcItemActiveBackground: #111;
+    --basic-ui-select-background: linear-gradient(#6b6b6b, #2c2c2c), #444;
+    --basic-ui-select-borderColor: #1f1f1f;
+    --basic-ui-select-borderActiveColor: #715739;
+}
+
+@keyframes aniOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.app_root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
