@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>RedGradient</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
     <style>
         html, body {
             margin: 0;
@@ -12,25 +18,38 @@
             font-size: 12px;
 
         }
-        h1{
-            font-size: 100px!important;
+
+        .container {
+            background: #222;
+            color: #999;
+
         }
-        h2{
-            font-weight: bold!important;
+
+        h1 {
+            font-size: 100px !important;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: bold !important;
+            color: #ccc
+        }
+
+        .featureImg {
+            margin: 6px 0 10px 0;
+            width: 100%;
+            max-width: 1280px;
+            border-radius: 10px;
+            box-shadow: 0 0 160px rgba(0, 0, 0, 0.9)
         }
     </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-            crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="bg-dark text-secondary px-4 py-5 text-center" style="background-color: #222!important">
-    <div class="py-5" >
+    <div class="py-5">
         <img class="d-block mx-auto mb-4" src="./build/tempLogo.svg" alt="" height="200">
         <h1 class="display-5 fw-bold text-white">RedGradient</h1>
-        <div class="col-lg-6 mx-auto" >
+        <div class="col-lg-6 mx-auto">
             <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
                 most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system,
                 extensive prebuilt components, and powerful JavaScript plugins.</p>
@@ -46,84 +65,84 @@
             </div>
         </div>
     </div>
-    <img src="./build/screenshot/Screenshot_1.png" style="width:100%;max-width:1280px;border-radius: 6px;box-shadow: 0 0 160px rgba(0,0,0,0.9)"/>
+    <img src="./build/screenshot/Screenshot_1.png"
+         style="width:100%;max-width:1280px;border-radius: 6px;box-shadow: 0 0 160px rgba(0,0,0,0.9)"/>
 </div>
 <div class="container px-4 py-5" id="featured-3">
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
         <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center bg-primary bg-gradient text-white fs-2 mb-3">
-                <svg class="bi" width="1em" height="1em">
-                    <use xlink:href="#collection"/>
-                </svg>
-            </div>
+
             <h2>Visual Editor for Gradient.</h2>
-            <p>Css Gradient Editor Css Gradient Editor Css Gradient Editor Css Gradient Editor Css Gradient Editor
-                Css Gradient Editor Css Gradient Editor  Css Gradient Editor</p>
+
+            <p>마우스 기반의 비주얼 에디터로 정교한 그라디언트를 생성할수 있습니다.</p>
 
         </div>
         <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center bg-primary bg-gradient text-white fs-2 mb-3">
-                <svg class="bi" width="1em" height="1em">
-                    <use xlink:href="#people-circle"/>
-                </svg>
-            </div>
+
             <h2>Layer Group Base Edit.</h2>
-            <p>Css Gradient Editor Css Gradient Editor Css Gradient Editor Css Gradient Editor Css Gradient Editor
-                Css Gradient Editor Css Gradient Editor  Css Gradient Editor</p>
+
+            <p>레이어와 레이어그룹을 통한 편집이 가능합니다. 중첩된 그라디언트를 이용해 다양한 표현을 할수 있습니다.</p>
 
         </div>
         <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center bg-primary bg-gradient text-white fs-2 mb-3">
-                <svg class="bi" width="1em" height="1em">
-                    <use xlink:href="#toggles2"/>
-                </svg>
-            </div>
+
             <h2>Save/Load</h2>
-            <p>Css Gradient Editor Css Gradient Editor Css Gradient Editor Css Gradient Editor Css Gradient Editor
-                Css Gradient Editor Css Gradient Editor  Css Gradient Editor</p>
+
+            <p>작업중인 프로젝트파일을 저장하고 로드 할 수 있습니다.</p>
 
         </div>
         <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center bg-primary bg-gradient text-white fs-2 mb-3">
-                <svg class="bi" width="1em" height="1em">
-                    <use xlink:href="#toggles2"/>
-                </svg>
-            </div>
+
             <h2>User Preset Save/Load</h2>
-            <p>Css Gradient Editor Css Gradient Editor Css Gradient Editor Css Gradient Editor Css Gradient Editor
-                Css Gradient Editor Css Gradient Editor  Css Gradient Editor</p>
+
+            <p>사용자 기반의 프리셋을 저장하고 불러 올 수 있습니다. Border gradient, Layer gradient, Group gradient에 대한 독립적으로 저장/가져오기를
+                지원합니다.</p>
 
         </div>
+        <div class="feature col">
+
+            <h2>Generate a single CSS Gradient output.</h2>
+
+            <p>복잡하게 구성된 레이어를 단일 Css 클래스로 생성합니다.</p>
+        </div>
+        <div class="feature col">
+
+            <h2>Publish</h2>
+
+            <p>최종 Css 결과물을 확인하고 Copy 하거나 Html 파일로 다운로드 할 수 있습니다. </p>
+
+        </div>
+
     </div>
 </div>
 
-<div class="container">
+<div class="container ">
     <footer class="py-5">
         <div class="row">
-            <div class="col-6 col-md-2 mb-3">
+            <div class="col-6 col-md-2 mb-3 ">
                 <h5>지원</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="https://github.com/redcamel/RedGradient/issues" target="_blank"
-                                                 class="nav-link p-0 text-muted">Issue</a></li>
+                    <li class="nav-item mb-2 "><a href="https://github.com/redcamel/RedGradient/issues" target="_blank"
+                                                 class="nav-link p-0 text-white">Issue</a></li>
                     <li class="nav-item mb-2"><a href="https://github.com/redcamel/RedGradient/" target="_blank"
-                                                 class="nav-link p-0 text-muted">Source</a></li>
+                                                 class="nav-link p-0 text-white">Source</a></li>
                 </ul>
             </div>
 
             <div class="col-6 col-md-2 mb-3">
                 <h5>Latest Version</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="build" target="_blank" class="nav-link p-0 text-muted">V1.0.0</a>
+                    <li class="nav-item mb-2"><a href="build" target="_blank" class="nav-link p-0 text-white">V1.0.0</a>
                     </li>
-                    <li class="nav-item mb-2"><a href="beta_version" target="_blank" class="nav-link p-0 text-muted">Beta
+                    <li class="nav-item mb-2"><a href="beta_version" target="_blank" class="nav-link p-0 text-white">Beta
                         Version</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 " style="border-top:1px solid #444">
             <a href="https://github.com/redcamel/" target="_blank"
-               class="nav-link p-0 text-muted">&copy; 2022 RedCamel. All rights reserved.</a>
+               class="nav-link p-0 text-white">&copy; 2022 RedCamel. All rights reserved.</a>
 
         </div>
     </footer>
