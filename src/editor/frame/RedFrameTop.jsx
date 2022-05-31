@@ -38,7 +38,7 @@ const RedFrameTop = () => {
 	return (
 		<div className={'RedFrameTop_container'}>
 			<div className={'RedFrameTop_logoBox'}>
-				<img alt={'logo'} className={'RedFrameTop_logo'} src={'/tempLogo.svg'}/>
+				<img alt={'logo'} className={'RedFrameTop_logo'} src={'./tempLogo.svg'}/>
 				<RedTextField
 					value={gradientContext['projectName']}
 					onInput={HD_changeProjectName}
