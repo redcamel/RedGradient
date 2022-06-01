@@ -30,6 +30,7 @@
         h1 {
             font-size: 100px !important;
         }
+
         h5 {
             font-size: 12px !important;
         }
@@ -38,14 +39,14 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 14px;
+            font-size: 26px;
             text-shadow: 0 0 10px rgba(0, 0, 0, 1);
             /*font-weight: bold !important;*/
             border-radius: 6px 10px 0 0;
             border-top: 1px solid #525252;
             padding: 10px 10px 16px;
             color: #efb26a;
-            background: linear-gradient(180deg, #3f3f3f, transparent);
+            /*background: linear-gradient(180deg, #3f3f3f, transparent);*/
         }
 
         .feature > p {
@@ -86,8 +87,8 @@
     <img src="./build/screenshot/Screenshot_1.png"
          style="width:100%;max-width:1280px;border-radius: 6px;box-shadow: 0 0 160px rgba(0,0,0,0.9)"/>
 </div>
-<div class="container px-4 py-5" id="featured-3">
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+<div class="container px-4 py-5">
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
         <div class="feature col">
 
             <h2>
@@ -99,8 +100,63 @@
 
             <p>Create sophisticated gradients with a mouse-based visual editor.</p>
             <p style="font-size: 11px">마우스 기반의 비주얼 에디터로 정교한 그라디언트를 생성할수 있습니다.</p>
+            <div style="padding: 0 10px 0">
+                <h6>Visible Editing for GradientType</h6>
+                <div style="margin-top:10px;display: flex; gap : 10px">
+
+                    <img src="./build/screenshot/Screenshot_4.png" height="160px" style="
+    border-radius: 6px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+"/>
+                    <img src="./build/screenshot/Screenshot_5.png" height="160px" style="
+    border-radius: 6px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+"/>
+                    <img src="./build/screenshot/Screenshot_6.png" height="160px" style="
+    border-radius: 6px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+"/>
+                </div>
+            </div>
+            <div style="padding: 10px 10px 0">
+                <h6>Resizing And Move Editing</h6>
+                <div style="margin-top:10px;display: flex; gap : 10px">
+
+                    <img src="./build/screenshot/Screenshot_7.png" height="160px" style="
+    border-radius: 6px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+"/>
+                    <img src="./build/screenshot/Screenshot_8.png" height="160px" style="
+    border-radius: 6px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+"/>
+                    <img src="./build/screenshot/Screenshot_9.png" height="160px" style="
+    border-radius: 6px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+"/>
+                </div>
+            </div>
+        </div>
+        <div style="perspective : 1000px; ">
+            <img src="./build/screenshot/Screenshot_3.png" width="100%" style="
+    border-radius: 6px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    transform: translateY(-35px) translateZ(-120px) rotateX(25deg);
+"/>
 
         </div>
+    </div>
+</div>
+<div class="container px-4" ">
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
+
         <div class="feature col">
 
             <h2>
@@ -110,41 +166,57 @@
                 </svg>
                 Layer Group Base Edit.
             </h2>
-
-            <p>Editing is possible through layers and layer groups. You can create various expressions using nested
-                gradients.</p>
-            <p style="font-size: 11px">레이어와 레이어그룹을 통한 편집이 가능합니다. 중첩된 그라디언트를 이용해 다양한 표현을 할수 있습니다.</p>
+            <div style="display: flex;align-items: flex-start;gap : 20px">
+                <img src="./build/screenshot/Screenshot_10.png" height="500px" style="
+    border-radius: 6px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+"/>
+               <div>
+                   <p>Editing is possible through layers and layer groups. You can create various expressions using nested
+                       gradients.</p>
+                   <p style="font-size: 11px">레이어와 레이어그룹을 통한 편집이 가능합니다. 중첩된 그라디언트를 이용해 다양한 표현을 할수 있습니다.</p>
+                   <img src="./build/screenshot/Screenshot_12.png" height="395px" style="
+    border-radius: 6px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+"/>
+               </div>
+            </div>
 
         </div>
-        <div class="feature col">
+        <div>
+            <div class="feature col">
 
-            <h2>
-                <svg style="height: 24px;" fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                    <path d="M480 352h-133.5l-45.25 45.25C289.2 409.3 273.1 416 256 416s-33.16-6.656-45.25-18.75L165.5 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32v-96C512 366.3 497.7 352 480 352zM432 456c-13.2 0-24-10.8-24-24c0-13.2 10.8-24 24-24s24 10.8 24 24C456 445.2 445.2 456 432 456zM233.4 374.6C239.6 380.9 247.8 384 256 384s16.38-3.125 22.62-9.375l128-128c12.49-12.5 12.49-32.75 0-45.25c-12.5-12.5-32.76-12.5-45.25 0L288 274.8V32c0-17.67-14.33-32-32-32C238.3 0 224 14.33 224 32v242.8L150.6 201.4c-12.49-12.5-32.75-12.5-45.25 0c-12.49 12.5-12.49 32.75 0 45.25L233.4 374.6z"/>
-                </svg>
-                Save/Load
-            </h2>
+                <h2>
+                    <svg style="height: 24px;" fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                        <path d="M480 352h-133.5l-45.25 45.25C289.2 409.3 273.1 416 256 416s-33.16-6.656-45.25-18.75L165.5 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32v-96C512 366.3 497.7 352 480 352zM432 456c-13.2 0-24-10.8-24-24c0-13.2 10.8-24 24-24s24 10.8 24 24C456 445.2 445.2 456 432 456zM233.4 374.6C239.6 380.9 247.8 384 256 384s16.38-3.125 22.62-9.375l128-128c12.49-12.5 12.49-32.75 0-45.25c-12.5-12.5-32.76-12.5-45.25 0L288 274.8V32c0-17.67-14.33-32-32-32C238.3 0 224 14.33 224 32v242.8L150.6 201.4c-12.49-12.5-32.75-12.5-45.25 0c-12.49 12.5-12.49 32.75 0 45.25L233.4 374.6z"/>
+                    </svg>
+                    Save/Load
+                </h2>
 
-            <p>You can save and load the project file you are working on.</p>
-            <p style="font-size: 11px">작업중인 프로젝트파일을 저장하고 로드 할 수 있습니다.</p>
+                <p>You can save and load the project file you are working on.</p>
+                <p style="font-size: 11px">작업중인 프로젝트파일을 저장하고 로드 할 수 있습니다.</p>
 
-        </div>
-        <div class="feature col">
+            </div>
+            <div class="feature col">
 
-            <h2>
-                <svg style="height: 24px;" fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                    <path d="M384 0H96C60.65 0 32 28.65 32 64v384c0 35.35 28.65 64 64 64h288c35.35 0 64-28.65 64-64V64C448 28.65 419.3 0 384 0zM240 128c35.35 0 64 28.65 64 64s-28.65 64-64 64c-35.34 0-64-28.65-64-64S204.7 128 240 128zM336 384h-192C135.2 384 128 376.8 128 368C128 323.8 163.8 288 208 288h64c44.18 0 80 35.82 80 80C352 376.8 344.8 384 336 384zM496 64H480v96h16C504.8 160 512 152.8 512 144v-64C512 71.16 504.8 64 496 64zM496 192H480v96h16C504.8 288 512 280.8 512 272v-64C512 199.2 504.8 192 496 192zM496 320H480v96h16c8.836 0 16-7.164 16-16v-64C512 327.2 504.8 320 496 320z"/>
-                </svg>
-                User Preset Save/Load
-            </h2>
+                <h2>
+                    <svg style="height: 24px;" fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                        <path d="M384 0H96C60.65 0 32 28.65 32 64v384c0 35.35 28.65 64 64 64h288c35.35 0 64-28.65 64-64V64C448 28.65 419.3 0 384 0zM240 128c35.35 0 64 28.65 64 64s-28.65 64-64 64c-35.34 0-64-28.65-64-64S204.7 128 240 128zM336 384h-192C135.2 384 128 376.8 128 368C128 323.8 163.8 288 208 288h64c44.18 0 80 35.82 80 80C352 376.8 344.8 384 336 384zM496 64H480v96h16C504.8 160 512 152.8 512 144v-64C512 71.16 504.8 64 496 64zM496 192H480v96h16C504.8 288 512 280.8 512 272v-64C512 199.2 504.8 192 496 192zM496 320H480v96h16c8.836 0 16-7.164 16-16v-64C512 327.2 504.8 320 496 320z"/>
+                    </svg>
+                    User Preset Save/Load
+                </h2>
 
-            <p>User-based presets can be saved and recalled. Independently save/import border gradient, layer gradient,
-                and group gradient
-                Support.</p>
-            <p style="font-size: 11px">사용자 기반의 프리셋을 저장하고 불러 올 수 있습니다. Border gradient, Layer gradient, Group gradient에
-                대한 독립적으로 저장/가져오기를 지원합니다.</p>
+                <p>User-based presets can be saved and recalled. Independently save/import border gradient, layer gradient,
+                    and group gradient
+                    Support.</p>
+                <p style="font-size: 11px">사용자 기반의 프리셋을 저장하고 불러 올 수 있습니다. Border gradient, Layer gradient, Group gradient에
+                    대한 독립적으로 저장/가져오기를 지원합니다.</p>
+
+            </div>
 
         </div>
         <div class="feature col">
