@@ -3,8 +3,10 @@
 All about CSS gradients.
 Design quickly and create your own gradients with a graphic pro-tools-grade editing system.
 ```
+![RedGradient](public/screenshot/Screenshot_15.png)
 
-![RedGradient](public/screenshot/Screenshot_1.png)
+![RedGradientScreenshot](public/screenshot/Screenshot_1.png)
+
 
 
 ## Version List
