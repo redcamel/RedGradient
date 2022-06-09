@@ -12,10 +12,12 @@ const cmd_updateContainerBoxSizing = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {viewKey,value} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		newData.canvasInfo[payload.viewKey]['containerInfo']['boxSizing'] = payload.value
+		newData.canvasInfo[viewKey]['containerInfo']['boxSizing'] = value
+		action.label = `${viewKey} Container BoxSizing : ${value}`
 		return pushHistory(action, newData, true)
 	}
 }
