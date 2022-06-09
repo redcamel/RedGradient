@@ -86,7 +86,8 @@ const RedContainerSize = ({viewKey}) => {
 	const HD_setFixedRatio = () => {
 		gradientActions.updateContainerUseFixedRatio({
 			viewKey,
-			value: !useFixedRatio
+			value: !useFixedRatio,
+			saveHistoryYn : true
 		})
 	}
 	return (

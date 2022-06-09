@@ -38,7 +38,7 @@ const cmd_updateContainerSizePosition = {
 			if (checkInfo['x']) t0.push('X')
 			if (checkInfo['y']) t0.push('Y')
 		}
-		action.label = `Container ${t0.length ? t0.join(' & ') : 'Layout'} Change`
+		action.label = `${viewKey} Container ${t0.length ? t0.join(' & ') : 'Layout'} Change`
 		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
