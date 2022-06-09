@@ -79,7 +79,61 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 	useEffect(() => {
 
 			const HD_up = (e) => {
-				gradientActions.updateLayerValueInfoByKey([])
+				if(resizeMode){
+					gradientActions.updateLayerValueInfoByKey([])
+				}else{
+					console.log('window.RedKey',JSON.stringify(window.RedKey.downList))
+					if(window.RedKey['downList']['alt']){
+						gradientActions.duplicateLayer({
+							groupIndex: activeGroupIndex,
+							groupLayerIndex: activeGroupLayerIndex
+						})
+						const updateList = []
+						updateList.push(
+							{
+								targetInfoKey: 'sizeInfo',
+								key: 'width',
+								time,
+								value: startSizeInfo['width'],
+								groupIndex: activeGroupIndex,
+								groupLayerIndex: activeGroupLayerIndex+1,
+							},
+							{
+								targetInfoKey: 'positionInfo',
+								key: 'x',
+								time,
+								value: startPositionInfo['x'],
+								groupIndex: activeGroupIndex,
+								groupLayerIndex: activeGroupLayerIndex+1,
+							},
+							{
+								targetInfoKey: 'sizeInfo',
+								key: 'height',
+								time,
+								value: startSizeInfo['height'],
+								groupIndex: activeGroupIndex,
+								groupLayerIndex: activeGroupLayerIndex+1,
+							},
+							{
+								targetInfoKey: 'positionInfo',
+								key: 'y',
+								time,
+								value: startPositionInfo['y'],
+								groupIndex: activeGroupIndex,
+								groupLayerIndex: activeGroupLayerIndex+1,
+							}
+						)
+						gradientActions.updateLayerValueInfoByKey(
+							updateList
+						)
+						gradientActions.setActiveGroupAndLayer(
+							{activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: activeGroupLayerIndex}
+						)
+					}else{
+						gradientActions.updateLayerValueInfoByKey([])
+					}
+				}
+
 				tX = e.pageX;
 				tY = e.pageY;
 				resizeMode = false
