@@ -1,9 +1,10 @@
-import {faBox} from "@fortawesome/free-solid-svg-icons";
-
 /**
  * 컨테이너 outline key 베이스로 변경
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
+import {faBox} from "@fortawesome/free-solid-svg-icons";
+
+
 const cmd_updateContainerOutlineByKey = {
 	description: {
 		key: 'updateContainerOutlineByKey',

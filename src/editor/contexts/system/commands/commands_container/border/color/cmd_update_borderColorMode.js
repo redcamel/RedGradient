@@ -1,4 +1,4 @@
-import {faFill} from "@fortawesome/free-solid-svg-icons";
+import {faBorderStyle} from "@fortawesome/free-solid-svg-icons";
 import HELPER_GET_DATA from "../../../../HELPER_GET_DATA.js";
 
 /**
@@ -9,14 +9,15 @@ const cmd_update_borderColorMode = {
 	description: {
 		key: 'update_borderColorMode',
 		label: 'BorderColor Mode Change',
-		icon: faFill
+		icon: faBorderStyle
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		const borderInfo = HELPER_GET_DATA.getTargetViewInfo(newData)['containerInfo']['borderInfo']
+		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const borderInfo = targetViewInfo['containerInfo']['borderInfo']
 		const {borderColorInfo} = borderInfo
 		borderColorInfo['mode'] = payload
 		action.label = `BorderColor Mode Change - ${payload}`
