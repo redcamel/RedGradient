@@ -12,12 +12,13 @@ const cmd_updateContainerOutlineByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {viewKey,key,value,saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		newData.canvasInfo[payload.viewKey]['containerInfo']['outlineInfo'][payload.key] = payload.value
-		action.label = `Container Outline ${payload.key} Change`
-		return pushHistory(action, newData, payload.saveHistoryYn)
+		newData.canvasInfo[viewKey]['containerInfo']['outlineInfo'][key] = value
+		action.label = `${viewKey} Container Outline ${key} : ${value}`
+		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
 export default cmd_updateContainerOutlineByKey
