@@ -22,7 +22,7 @@ const makeCssText = v => {
 		}).join('')
 		t0.push(`${key} : ${value}`.trim())
 	})
-	return t0.join(';\n')
+	return t0.join(';\n')+';'
 }
 const PARSER_CONTAINER_CSS = {
 	makeCssText: makeCssText,
@@ -102,10 +102,11 @@ const PARSER_CONTAINER_CSS = {
 			//
 			...(filterInfo.length ? {filter: PARSER_CONTAINER_CSS.getFilterCss(filterInfo, forceYn)} : {})
 		}
+		console.log('result',result)
 		return result
 	},
 	getBoxShadowCss: (boxShadowInfo) => {
-		return `${boxShadowInfo['type'] === ConstBoxShadowType.OUTSET ? '' : boxShadowInfo['type']} ${boxShadowInfo['offsetX']}px ${boxShadowInfo['offsetY']}px ${boxShadowInfo['blur']}px ${boxShadowInfo['spread']}px ${boxShadowInfo['color']};`
+		return `${boxShadowInfo['type'] === ConstBoxShadowType.OUTSET ? '' : boxShadowInfo['type']} ${boxShadowInfo['offsetX']}px ${boxShadowInfo['offsetY']}px ${boxShadowInfo['blur']}px ${boxShadowInfo['spread']}px ${boxShadowInfo['color']}`
 	},
 	getOutlineCss: (outlineInfo, viewScale) => {
 		return `${outlineInfo['width'] * viewScale}px ${outlineInfo['type']} ${outlineInfo['color']}`
@@ -220,7 +221,7 @@ const PARSER_CONTAINER_CSS = {
 			topStyle = '',
 			rightStyle = ''
 		} = targetBorderWidthData
-		return `${borderStyle} ${topStyle} ${rightStyle} ${bottomStyle} ${leftStyle} `
+		return `${borderStyle} ${topStyle} ${rightStyle} ${bottomStyle} ${leftStyle}`.trim()
 	},
 	getBorderColorCss: (borderColorInfo) => {
 		const targetBorderWidthData = borderColorInfo[borderColorInfo['mode']]
@@ -231,7 +232,7 @@ const PARSER_CONTAINER_CSS = {
 			topBorderColor = '',
 			rightBorderColor = ''
 		} = targetBorderWidthData
-		return `${borderColor} ${topBorderColor} ${rightBorderColor} ${bottomBorderColor} ${leftBorderColor};`
+		return `${borderColor} ${topBorderColor} ${rightBorderColor} ${bottomBorderColor} ${leftBorderColor}`.trim()
 	},
 	getFilterCss: (filterInfo, forceYn) => {
 		const result = []
