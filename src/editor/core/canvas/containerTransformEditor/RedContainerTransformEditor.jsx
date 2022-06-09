@@ -275,7 +275,7 @@ const RedContainerTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targ
 					const gap = dummyHeight - calced_height_px
 					dummyPositionY = -gap
 					const calced_y_px = startDummyPositionY_calced - dummyPositionY
-					const calced_y_unit = convertPxToPercent_position(calced_y_px, 'x')
+					const calced_y_unit = convertPxToPercent_position(calced_y_px, 'y')
 					updateList.push(
 						{
 							targetInfo: 'positionInfo',
