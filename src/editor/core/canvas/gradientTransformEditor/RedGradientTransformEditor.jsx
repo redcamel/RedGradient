@@ -80,7 +80,9 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 
 			const HD_up = (e) => {
 				if(resizeMode){
-					gradientActions.updateLayerValueInfoByKey([])
+					const payload = []
+					payload.saveHistoryYn=true
+					gradientActions.updateLayerValueInfoByKey(payload)
 				}else{
 					console.log('window.RedKey',JSON.stringify(window.RedKey.downList))
 					if(window.RedKey['downList']['alt']){
@@ -130,7 +132,9 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 							{activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: activeGroupLayerIndex}
 						)
 					}else{
-						gradientActions.updateLayerValueInfoByKey([])
+						const payload = []
+						payload.saveHistoryYn=true
+						gradientActions.updateLayerValueInfoByKey(payload)
 					}
 				}
 
