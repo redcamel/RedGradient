@@ -12,11 +12,13 @@ const cmd_updateContainerUseFixedRatio = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {viewKey, saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
 		newData.canvasInfo[payload.viewKey]['containerInfo']['sizeInfo']['useFixedRatio'] = payload.value
-		return pushHistory(action, newData)
+		action.label = `${viewKey} Container Fixed Ratio Change`
+		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
 export default cmd_updateContainerUseFixedRatio
