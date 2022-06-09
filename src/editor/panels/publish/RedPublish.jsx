@@ -13,6 +13,7 @@ import ContextGradient from "../../contexts/system/ContextGradient";
 import RedCssPreview from "../css/RedCssPreview";
 import {toast} from "react-toastify";
 import RedToastSkin from "../../core/RedToastSkin";
+import DataRedGradientLayer from "../../../data/DataRedGradientLayer";
 
 const RedPublish = () => {
 	const {actions: windowActions} = useContext(ContextWindows)
@@ -35,7 +36,8 @@ const RedPublishContents = () => {
 
 	const getCode = (viewKey) => {
 		const targetView = state.canvasInfo[viewKey]
-		if (targetView.layerGroupInfo.groupList.length && targetView.layerGroupInfo.groupList[0].children.length) {
+		const groupList = targetView.layerGroupInfo.groupList
+		if (groupList.length && groupList[0].children.length && calcLayerGradient(groupList[0].children[0],0) !== calcLayerGradient(new DataRedGradientLayer(),0)  ) {
 			return [
 				PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'container'),
 				PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'border'),
@@ -48,14 +50,15 @@ const RedPublishContents = () => {
 	const getGradientCode = (viewKey) => {
 		const targetView = state.canvasInfo[viewKey]
 		const current_LayoutInfo = calcedLayoutSize[viewKey]
-		if (targetView.layerGroupInfo.groupList.length && targetView.layerGroupInfo.groupList[0].children.length) {
+		const groupList = targetView.layerGroupInfo.groupList
+		if (groupList.length && groupList[0].children.length && calcLayerGradient(groupList[0].children[0],0) !== calcLayerGradient(new DataRedGradientLayer(),0)  ) {
 			return {
-				background: targetView.layerGroupInfo.groupList.map(v => {
+				background: groupList.map(v => {
 					return v['visibleYn'] ? v.children.map((v2, layerIndex) => {
 						return v2['visibleYn'] ? calcLayerGradient(v2, state.timelineInfo.time, current_LayoutInfo, 1) : null
 					}).filter(Boolean).join(',') : null
 				}).filter(Boolean).join(',') + `, ${targetView.containerInfo['backgroundColor']}`,
-				backgroundBlendMode: calcLayerGradientBlendMode(targetView.layerGroupInfo.groupList)
+				backgroundBlendMode: calcLayerGradientBlendMode(groupList)
 			}
 		} else {
 			return {}

@@ -2,12 +2,12 @@ import DataRedGradientLayer from "./DataRedGradientLayer.js";
 
 let uuid = 0
 
-function DataRedGradientLayerGroup(emptyLayer=false) {
+function DataRedGradientLayerGroup() {
 	return {
 		label: 'Group' + uuid++,
 		openYn: true,
 		visibleYn: true,
-		children: emptyLayer ? [] : [new DataRedGradientLayer()]
+		children: [new DataRedGradientLayer()]
 	};
 }
 

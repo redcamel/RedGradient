@@ -65,9 +65,11 @@
 .RedPublishResultBox {
     display: flex;
     flex-grow: 1;
-    height: calc(100% - 60px);
+    height: calc(100% - 20px);
     margin: 10px;
     border: 1px solid #222;
+    background: #fff;
+    border-radius: 10px;
 }
 
 .RedPublishCommandBox {
