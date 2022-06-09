@@ -35,29 +35,41 @@ const RedPublishContents = () => {
 
 	const getCode = (viewKey) => {
 		const targetView = state.canvasInfo[viewKey]
-		return [
-			PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'container'),
-			PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'border'),
-			PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'filter'),
-		].join(' ')
+		if (targetView.layerGroupInfo.groupList.length && targetView.layerGroupInfo.groupList[0].children.length) {
+			return [
+				PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'container'),
+				PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'border'),
+				PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'filter'),
+			].join(' ')
+		} else {
+			return ''
+		}
 	}
 	const getGradientCode = (viewKey) => {
 		const targetView = state.canvasInfo[viewKey]
 		const current_LayoutInfo = calcedLayoutSize[viewKey]
-		return {
-			background: targetView.layerGroupInfo.groupList.map(v => {
-				return v['visibleYn'] ? v.children.map((v2, layerIndex) => {
-					return v2['visibleYn'] ? calcLayerGradient(v2, state.timelineInfo.time, current_LayoutInfo, 1) : null
-				}).filter(Boolean).join(',') : null
-			}).filter(Boolean).join(',') + `, ${targetView.containerInfo['backgroundColor']}`,
-			backgroundBlendMode: calcLayerGradientBlendMode(targetView.layerGroupInfo.groupList)
+		if (targetView.layerGroupInfo.groupList.length && targetView.layerGroupInfo.groupList[0].children.length) {
+			return {
+				background: targetView.layerGroupInfo.groupList.map(v => {
+					return v['visibleYn'] ? v.children.map((v2, layerIndex) => {
+						return v2['visibleYn'] ? calcLayerGradient(v2, state.timelineInfo.time, current_LayoutInfo, 1) : null
+					}).filter(Boolean).join(',') : null
+				}).filter(Boolean).join(',') + `, ${targetView.containerInfo['backgroundColor']}`,
+				backgroundBlendMode: calcLayerGradientBlendMode(targetView.layerGroupInfo.groupList)
+			}
+		} else {
+			return {}
 		}
+
 	}
 	const makeCssText = PARSER_CONTAINER_CSS.makeCssText
+	const containerStr_MAIN = getCode(ConstCanvasViewKey.MAIN)
+	const containerStr_BEFORE = getCode(ConstCanvasViewKey.BEFORE)
+	const containerStr_AFTER = getCode(ConstCanvasViewKey.AFTER)
 	const resultCss = [
-		`.red_gradient_result_css {${getCode(ConstCanvasViewKey.MAIN)};${makeCssText(getGradientCode(ConstCanvasViewKey.MAIN))}}`,
-		`.red_gradient_result_css::before {content:"";${getCode(ConstCanvasViewKey.BEFORE)};${makeCssText(getGradientCode(ConstCanvasViewKey.BEFORE))}}`,
-		`.red_gradient_result_css::after {content:"";${getCode(ConstCanvasViewKey.AFTER)};${makeCssText(getGradientCode(ConstCanvasViewKey.AFTER))}}`,
+		`.red_gradient_result_css {${containerStr_MAIN};${makeCssText(getGradientCode(ConstCanvasViewKey.MAIN))}}`,
+		containerStr_BEFORE ? `.red_gradient_result_css::before {content:"";${containerStr_BEFORE};${makeCssText(getGradientCode(ConstCanvasViewKey.BEFORE))}}` : '',
+		containerStr_AFTER ? `.red_gradient_result_css::after {content:"";${containerStr_AFTER};${makeCssText(getGradientCode(ConstCanvasViewKey.AFTER))}}` : '',
 	].join('\n')
 	document.getElementById('red_gradient_result').textContent = resultCss
 	useEffect(() => {
@@ -69,15 +81,17 @@ const RedPublishContents = () => {
 				<div className={'RedPublishBoxList'}>
 					{
 						Object.values(ConstCanvasViewKey).map(viewKey => {
-							return <div className={'RedPublishBox'}>
+							const containerStr = getCode(viewKey)
+							const gradientStr = makeCssText(getGradientCode(viewKey))
+							return <div className={'RedPublishBox'} style={{opacity: containerStr ? 1 : 0.25}}>
 								<div className={'RedPublishBoxTitle'}>{viewKey}</div>
 								<RedCssPreview
 									label={`${viewKey} Container Css Preview`}
-									codeStr={getCode(viewKey)}
+									codeStr={containerStr}
 								/>
 								<RedCssPreview
 									label={`${viewKey} Gradient Css Preview`}
-									codeStr={makeCssText(getGradientCode(viewKey))}
+									codeStr={gradientStr}
 								/>
 							</div>
 						})

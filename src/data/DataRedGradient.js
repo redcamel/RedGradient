@@ -43,7 +43,7 @@ function DataRedGradient(projectName, deviceInfo, sizeInfo, backgroundColor = 't
 		layerGroupInfo: {
 			activeGroupIndex: 0,
 			activeGroupLayerIndex: 0,
-			groupList: [new DataRedGradientLayerGroup()]
+			groupList: [new DataRedGradientLayerGroup(true)]
 		}
 	}
 	const MAIN_DATA = {
@@ -103,7 +103,7 @@ function DataRedGradient(projectName, deviceInfo, sizeInfo, backgroundColor = 't
 		layerGroupInfo: {
 			activeGroupIndex: 0,
 			activeGroupLayerIndex: 0,
-			groupList: [new DataRedGradientLayerGroup()]
+			groupList: [new DataRedGradientLayerGroup(true)]
 		}
 	}
 	return {
