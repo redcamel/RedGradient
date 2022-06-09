@@ -657,7 +657,6 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 			{/*{JSON.stringify(window.RedKey.downList)}*/}
 			{/*dummyPositionX : {dummyPositionX}*/}
 			{/*dummyPositionY : {dummyPositionY}*/}
-
 			<div
 				className={`RedGradientTransformEditor_item ${transformPointerVisible || (resizeMode && horizontalDirection === 'L' && verticalDirection === 'T') ? '' : 'deActive'} lt`}
 				onMouseDownCapture={e => HD_resizeStart(e, 'L', 'T', true)}
@@ -716,8 +715,9 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 			>
 				<FontAwesomeIcon icon={faArrowsAlt} size={'1x'}/>
 			</div>
+
 			<div
-				className={`RedGradientTransformEditor_item_move ${!resizeMode || (!resizeMode && (horizontalDirection === 'L' && !verticalDirection)) ? '' : 'deActive'} left`}
+				className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && (horizontalDirection === 'L' && !verticalDirection)) ? '' : 'deActive'} left`}
 				onMouseDownCapture={e => HD_resizeStart(e, 'L', null, false)}
 			>
 				<FontAwesomeIcon icon={faArrowLeft}/>
@@ -786,9 +786,11 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 			)`
 			}}
 		>
+
 			{
 				startSizeInfo && <>
 					<div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
+
 						<div>
 							<span className={'title'}>Size</span>
 							<div className={'box'}>
