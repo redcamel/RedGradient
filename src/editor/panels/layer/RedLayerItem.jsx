@@ -52,7 +52,8 @@ const RedLayerItem = ({
 				key: 'visibleYn',
 				groupIndex: groupIdx,
 				groupLayerIndex: layerIdx,
-				value: !visibleYn
+				value: !visibleYn,
+				saveHistoryYn : true
 			}
 		)
 	}

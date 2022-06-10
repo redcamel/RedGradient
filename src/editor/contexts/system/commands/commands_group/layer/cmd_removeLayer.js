@@ -19,11 +19,12 @@ const cmd_removeLayer = {
 		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
 		const groupList = layerGroupInfo['groupList']
 		const targetGroup = groupList[payload.groupIndex]
-		targetGroup['children'].splice(payload.groupLayerIndex, 1)
+		const deleteData = targetGroup['children'].splice(payload.groupLayerIndex, 1)[0]
 		if (!targetGroup['children'][payload.groupLayerIndex]) {
 			layerGroupInfo['activeGroupLayerIndex'] = 0
 		}
-		action.label = `Remove Layer at ${targetGroup.label} Group`
+		action.label = `Remove Layer(${deleteData['label']}) at ${targetGroup.label} Group`
+
 		return pushHistory(action, newData, true)
 	}
 }
