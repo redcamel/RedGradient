@@ -1,6 +1,5 @@
 import ContextGradient from "../../../../../contexts/system/ContextGradient.js";
 import {useContext} from "react";
-import ConstCanvasViewKey from "../../../../../../data/const/ConstCanvasViewKey.js";
 import RedNumberField from "../../../../../basicUI/RedNumberField.jsx";
 import RedSelect from "../../../../../basicUI/RedSelect.jsx";
 import ConstUnitPxPercent from "../../../../../../data/const/ConstUnitPxPercent.js";
@@ -14,7 +13,7 @@ import ConstBoxBorderPropertyModeType from "../ConstBoxBorderPropertyModeType.js
  */
 const RedContainerBorderMerge = ({viewKey, valueKey, targetInfo, useUnit, unitData = ConstUnitPxPercent}) => {
 	const {actions: gradientActions} = useContext(ContextGradient)
-	if (viewKey === ConstCanvasViewKey.ALL) return null
+	
 	const valueUnitKey = `${valueKey}Unit`
 	const HD_changeBorder = (value, key, saveHistoryYn) => {
 		gradientActions[`update_${valueKey}`]({

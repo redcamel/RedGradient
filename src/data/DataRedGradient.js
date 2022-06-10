@@ -147,16 +147,6 @@ function DataRedGradient(projectName, deviceInfo, sizeInfo, backgroundColor = 't
 			[ConstCanvasViewKey.BEFORE]: BEFORE_DATA,
 			[ConstCanvasViewKey.MAIN]: MAIN_DATA,
 			[ConstCanvasViewKey.AFTER]: AFTER_DATA,
-			// [ConstCanvasViewKey.ALL]: {
-			// 	viewKey: ConstCanvasViewKey.MAIN,
-			// 	deviceVisible: true,
-			// 	rulerVisible: false,
-			// 	overflowHiddenYn: true,
-			// 	viewTransformInfo: {
-			// 		viewScale: 1,
-			// 		viewOffset: {x: 0, y: 0}
-			// 	}
-			// }
 		}
 	};
 }

@@ -48,15 +48,21 @@ const RedCanvasWindowEditMode = ({
 					</div>
 				})}
 			</div>
-			<label style={{display: 'flex', alignItems: 'center', cursor: 'pointer',gap:'5px'}} onClick={onVisibleGradientEditor}>
-				<FontAwesomeIcon icon={faPalette}/> Use Visual Gradient Editor <input type={'checkbox'} key={Math.random()} checked={valueVisibleGradientEditor}
-																					style={{cursor: 'pointer'}} onChange={() => {
-			}}/>
+			<label style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '5px'}}
+						 onClick={onVisibleGradientEditor}>
+				<FontAwesomeIcon icon={faPalette}/> Use Visual Gradient Editor <input type={'checkbox'} key={Math.random()}
+																																							checked={valueVisibleGradientEditor}
+																																							style={{cursor: 'pointer'}}
+																																							onChange={() => {
+																																							}}/>
 			</label>
 			{
-				value === ConstEditMode.GRADIENT && <label style={{display: 'flex', alignItems: 'center', cursor: 'pointer',gap:'5px'}} onClick={onSnapToContainer}>
-					<FontAwesomeIcon icon={faMagnet}/> Snap To Container <input type={'checkbox'} key={Math.random()} checked={valueSnapToContainer}
-																	 style={{cursor: 'pointer'}} onChange={() => {
+				value === ConstEditMode.GRADIENT &&
+				<label style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '5px'}}
+							 onClick={onSnapToContainer}>
+					<FontAwesomeIcon icon={faMagnet}/> Snap To Container <input type={'checkbox'} key={Math.random()}
+																																			checked={valueSnapToContainer}
+																																			style={{cursor: 'pointer'}} onChange={() => {
 				}}/>
 				</label>
 			}

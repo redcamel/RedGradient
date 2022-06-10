@@ -13,7 +13,7 @@ const cmd_updateContainerOutlineByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const {viewKey,key,value,saveHistoryYn} = payload
+		const {viewKey, key, value, saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}

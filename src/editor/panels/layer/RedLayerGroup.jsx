@@ -7,7 +7,6 @@ import HELPER_GET_DATA from "../../contexts/system/HELPER_GET_DATA.js";
 import RedLayerPreviewSize from "./helper/RedLayerPreviewSize.jsx";
 import RedLayerGroupItem from "./RedLayerGroupItem.jsx";
 import RedLayerGroupPreviewBackgroundType from "./helper/RedLayerGroupPreviewBackgroundType.jsx";
-import ConstCanvasViewKey from "../../../data/const/ConstCanvasViewKey.js"
 import RedPanelTitle from "../../basicUI/panel/RedPanelTitle.jsx";
 import ContextWindows from "../../contexts/window/ContextWindows";
 import RedTemplateLayer from "../templateLayer/RedTemplateLayer";
@@ -21,14 +20,6 @@ const RedLayerGroup = () => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
 	const {actions: windowActions} = useContext(ContextWindows)
 	const targetView = HELPER_GET_DATA.getTargetViewInfo(state)
-	if (targetView.viewKey === ConstCanvasViewKey.ALL) {
-		return <div className={'RedLayerGroup_container'}>
-			<div className={'RedLayerGroup_title'}>
-				<FontAwesomeIcon icon={faLayerGroup}/> Layer Edit
-			</div>
-			<div>All 모드에서는 편집을 넣어야게쓰</div>
-		</div>
-	}
 	const {layerGroupInfo} = targetView
 	const {groupList, activeGroupIndex, activeGroupLayerIndex} = layerGroupInfo
 	const activeGroupChildren = groupList[activeGroupIndex]?.['children'] || []

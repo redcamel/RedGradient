@@ -120,8 +120,8 @@ const RedCanvasFrame = () => {
 			value
 		})
 	}
-	const setActiveFrameLayoutKey = (key,icon) => {
-		gradientActions.setActiveFrameLayoutKey({key,icon})
+	const setActiveFrameLayoutKey = (key, icon) => {
+		gradientActions.setActiveFrameLayoutKey({key, icon})
 	}
 	const entries = Object.entries(frameInfo)
 	const renderWindows = () => {
@@ -141,7 +141,7 @@ const RedCanvasFrame = () => {
 							return <RedToolTipIcon
 								icon={value['icon']}
 								activeYn={activeLayoutKey === key}
-								onClick={() => setActiveFrameLayoutKey(key,value['icon'])}
+								onClick={() => setActiveFrameLayoutKey(key, value['icon'])}
 								toolTip={value['toolTip']}
 								key={entry}
 							/>

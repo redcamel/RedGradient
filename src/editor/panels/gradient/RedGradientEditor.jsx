@@ -235,7 +235,7 @@ const RedGradientEditor = () => {
 						<RedToastSkin title={'Copy Layer Css!'}
 													text={<>{activeViewLayerGroupInfo['groupList'][activeGroupIndex]['label']} > {activeLayerData['label']}</>}/>
 						, {
-							position: 'bottom-left'
+							position: 'bottom-right'
 						});
 				}}>
 					<FontAwesomeIcon

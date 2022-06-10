@@ -22,7 +22,7 @@ const makeCssText = v => {
 		}).join('')
 		t0.push(`${key} : ${value}`.trim())
 	})
-	return t0.join(';\n')+';'
+	return t0.join(';\n') + ';'
 }
 const PARSER_CONTAINER_CSS = {
 	makeCssText: makeCssText,
@@ -102,7 +102,7 @@ const PARSER_CONTAINER_CSS = {
 			//
 			...(filterInfo.length ? {filter: PARSER_CONTAINER_CSS.getFilterCss(filterInfo, forceYn)} : {})
 		}
-		console.log('result',result)
+		console.log('result', result)
 		return result
 	},
 	getBoxShadowCss: (boxShadowInfo) => {

@@ -12,7 +12,7 @@ const cmd_updateContainerBoxShadowColor = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const {viewKey,value,saveHistoryYn} = payload
+		const {viewKey, value, saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}

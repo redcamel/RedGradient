@@ -41,7 +41,7 @@ const RedBorderPresetItem = ({data, deleteMode, idx}) => {
 				toast.dark(
 					<RedToastSkin title={'Removed custom border gradient from your presets.'} text={data['label']}/>,
 					{
-						position: 'bottom-left'
+						position: 'bottom-right'
 					}
 				);
 			}}>-</div>}

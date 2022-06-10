@@ -16,7 +16,7 @@ const update_borderWidth = {
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		const {mode,key,value,saveHistoryYn} = payload
+		const {mode, key, value, saveHistoryYn} = payload
 		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
 		const borderInfo = targetViewInfo['containerInfo']['borderInfo']
 		const {borderWidthInfo} = borderInfo

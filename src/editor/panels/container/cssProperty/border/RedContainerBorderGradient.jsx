@@ -1,6 +1,5 @@
 import ContextGradient from "../../../../contexts/system/ContextGradient.js";
 import {useContext, useState} from "react";
-import ConstCanvasViewKey from "../../../../../data/const/ConstCanvasViewKey.js";
 import RedDivision from "../../../../basicUI/RedDivision.jsx";
 import RedGradientStepEditorPreview from "../../../gradient/step/RedGradientStepEditorPreview";
 import RedGradientStepEditorItem from "../../../gradient/step/RedGradientStepEditorItem";
@@ -32,7 +31,7 @@ let dragStartIDX = null
 const RedContainerBorderGradient = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
 	const [dummyDropTargetIDX, setDummyDropTargetIDX] = useState(null);
-	if (viewKey === ConstCanvasViewKey.ALL) return null
+	
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
@@ -219,7 +218,7 @@ const RedContainerBorderGradient = ({viewKey}) => {
 								toast().dark(
 									<RedToastSkin title={'Add custom gradient to your presets.'} text={borderGradientInfo['label']}/>,
 									{
-										position: 'bottom-left'
+										position: 'bottom-right'
 									}
 								);
 								alert('TODO')

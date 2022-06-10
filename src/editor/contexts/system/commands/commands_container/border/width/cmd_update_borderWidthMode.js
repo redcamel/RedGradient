@@ -17,10 +17,10 @@ const cmd_update_borderWidthMode = {
 			...JSON.parse(JSON.stringify(state))
 		}
 
-			const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
-			const borderInfo = targetViewInfo['containerInfo']['borderInfo']
-			const {borderWidthInfo} = borderInfo
-			borderWidthInfo['mode'] = payload
+		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const borderInfo = targetViewInfo['containerInfo']['borderInfo']
+		const {borderWidthInfo} = borderInfo
+		borderWidthInfo['mode'] = payload
 
 		action.label = `${targetViewInfo['viewKey']} Border Width Mode : ${payload}`
 		return pushHistory(action, newData, true)

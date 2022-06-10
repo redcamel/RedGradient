@@ -7,11 +7,11 @@ import {faWindowMaximize} from "@fortawesome/free-solid-svg-icons";
 const cmd_setFrameLayoutData = {
 	description: {
 		key: 'setFrameLayoutData',
-		icon : faWindowMaximize
+		icon: faWindowMaximize
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const {viewKey,index,layoutKey,value} = payload
+		const {viewKey, index, layoutKey, value} = payload
 		const newData = {
 			...state
 		}

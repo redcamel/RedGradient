@@ -30,7 +30,8 @@ const RedContextMenu = () => {
 		// <>컨텍스트 메뉴가 나옴 {JSON.stringify(data)}</>,
 		// RedContextMenu.DIVISION,
 		// <>컨텍스트 메뉴가 나옴 {JSON.stringify(data)}</>,
-		<div style={{color : '#222',cursor:'pointer'}}><a href={'https://github.com/redcamel/RedGradient/'} target={'_blank'} style={{color :'#222'}}>GitHub</a></div>,
+		<div style={{color: '#222', cursor: 'pointer'}}><a href={'https://github.com/redcamel/RedGradient/'}
+																											 target={'_blank'} style={{color: '#222'}}>GitHub</a></div>,
 	]
 	return (
 		<>

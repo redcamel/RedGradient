@@ -34,7 +34,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 	const openLeftGroupList = [
 		{
 			label: 'Container Editor',
-			shortcut : 'F1'
+			shortcut: 'F1'
 		},
 		// {
 		// 	label: 'Container Editor - TODO - 멀티로되게...',
@@ -43,7 +43,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 	const openRightGroupList = [
 		{
 			label: 'Gradient Editor',
-			shortcut : 'F2'
+			shortcut: 'F2'
 		},
 		// {
 		// 	label: 'Container Editor - TODO - 멀티로되게...',
@@ -114,7 +114,8 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 								writingMode: 'vertical-rl',
 								cursor: 'pointer'
 							}}
-						><FontAwesomeIcon icon={activeYn ? faFolderOpen : faFolder}/> {v['label']} {v["shortcut"] ? ` - ${v['shortcut']}` : ''}
+						><FontAwesomeIcon
+							icon={activeYn ? faFolderOpen : faFolder}/> {v['label']} {v["shortcut"] ? ` - ${v['shortcut']}` : ''}
 						</div>
 					})
 				}
@@ -175,7 +176,8 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 								writingMode: 'vertical-rl',
 								cursor: 'pointer'
 							}}
-						><FontAwesomeIcon icon={activeYn ? faFolderOpen : faFolder}/> {v['label']}  {v["shortcut"] ? ` - ${v['shortcut']}` : ''}
+						><FontAwesomeIcon
+							icon={activeYn ? faFolderOpen : faFolder}/> {v['label']} {v["shortcut"] ? ` - ${v['shortcut']}` : ''}
 						</div>
 					})
 				}

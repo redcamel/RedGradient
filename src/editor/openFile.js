@@ -51,7 +51,7 @@ const openFile = (actions) => {
 					toast.dark(
 						<RedToastSkin title={'Open Gradient Project'} text={fileName}/>,
 						{
-							position: 'bottom-left'
+							position: 'bottom-right'
 						}
 					);
 				} else alert('RedGradient 형식의 파일이 아닙니다.');

@@ -7,7 +7,7 @@ import {faEdit} from "@fortawesome/free-solid-svg-icons";
 const cmd_updateCanvasEditMode = {
 	description: {
 		key: 'updateCanvasEditMode',
-		icon : faEdit
+		icon: faEdit
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo

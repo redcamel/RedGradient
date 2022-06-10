@@ -1,6 +1,5 @@
 import ContextGradient from "../../../contexts/system/ContextGradient.js";
 import {useContext} from "react";
-import ConstCanvasViewKey from "../../../../data/const/ConstCanvasViewKey.js";
 import RedItemTitle from "../../../basicUI/RedItemTitle.jsx";
 import RedSelect from "../../../basicUI/RedSelect.jsx";
 import ConstBlendModeType from "../../../../data/const/ConstBlendModeType.js";
@@ -13,7 +12,7 @@ import ConstBlendModeType from "../../../../data/const/ConstBlendModeType.js";
  */
 const RedContainerMixBlendMode = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	if (viewKey === ConstCanvasViewKey.ALL) return null
+	
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView

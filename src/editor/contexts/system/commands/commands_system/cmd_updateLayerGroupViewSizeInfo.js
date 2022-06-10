@@ -8,11 +8,13 @@ const cmd_updateLayerGroupViewSizeInfo = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {key, value} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		newData['layerGroupViewSizeInfo'][payload.key] = payload.value
-		return pushHistory(action, newData, false)
+		newData['layerGroupViewSizeInfo'][key] = value
+		action.label = `set ${key === 'previewBackgroundType' ? 'bgColor' : key} of group preview.  : ${value}`
+		return pushHistory(action, newData, true)
 	}
 }
 export default cmd_updateLayerGroupViewSizeInfo

@@ -16,7 +16,7 @@ const cmd_update_borderRadius = {
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		const {mode,key,value,saveHistoryYn} = payload
+		const {mode, key, value, saveHistoryYn} = payload
 		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
 		const borderInfo = targetViewInfo['containerInfo']['borderInfo']
 		const {borderRadiusInfo} = borderInfo
