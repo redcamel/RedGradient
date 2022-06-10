@@ -39,7 +39,7 @@ const RedPresetItem = ({data, deleteMode, idx}) => {
 				toast.dark(
 					<RedToastSkin title={'Removed custom gradient from your presets.'} text={data['label']}/>,
 					{
-						position: 'bottom-left'
+						position: 'bottom-right'
 					}
 				);
 			}}>-</div>}

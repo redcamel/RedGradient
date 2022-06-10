@@ -58,7 +58,8 @@ const RedLayerGroupItem = () => {
 			{
 				groupIndex: index,
 				key: 'openYn',
-				value: !groupList[index]['openYn']
+				value: !groupList[index]['openYn'],
+				saveHistoryYn: true
 			}
 		)
 	}
@@ -69,7 +70,8 @@ const RedLayerGroupItem = () => {
 			{
 				key: 'visibleYn',
 				groupIndex: index,
-				value: !groupList[index]['visibleYn']
+				value: !groupList[index]['visibleYn'],
+				saveHistoryYn: true
 			}
 		)
 	}
@@ -238,12 +240,16 @@ const RedLayerGroupItem = () => {
 							icon={visibleYn ? faEye : faEyeSlash}
 							activeYn={visibleYn}
 							size={'sm'}
+							toolTip={'Group Visible'}
+							align={'left'}
 							onClick={(e) => HD_setVisibleYn(e, index)}
 						/>
-						<FontAwesomeIcon
-							fixedWidth={true}
+						<RedToolTipIcon
 							icon={openYn ? faFolderOpen : faFolder}
+							activeYn={openYn}
 							size={'sm'}
+							toolTip={'Group Open'}
+							align={'left'}
 							onClick={(e) => HD_setOpenYn(e, index)}
 						/>
 						<RedTextField
@@ -256,19 +262,26 @@ const RedLayerGroupItem = () => {
 					</div>
 					<RedDivision/>
 					<div className={`RedLayerGroupItem_label_container`} style={{flexGrow: ''}}>
-						{prevSwapAble ? <RedToolTipIcon icon={faArrowUp} toolTip={'Move Up'} style={{fontSize: '14px'}}
+						{prevSwapAble ? <RedToolTipIcon icon={faArrowUp} toolTip={'Move Up'}
 																						onClick={(e) => HD_swapGroup(e, index, index - 1)}
 						/> : ''}
 						{nextSwapAble ?
-							<RedToolTipIcon icon={faArrowDown} toolTip={'Move Down'} style={{fontSize: '14px'}}
+							<RedToolTipIcon icon={faArrowDown} toolTip={'Move Down'}
 															onClick={(e) => HD_swapGroup(e, index, index + 1)}
 							/> : ''}
-						<RedToolTipIcon icon={faFileMedical} toolTip={'Add Layer'} style={{fontSize: '14px'}}
-														onClick={(e) => HD_addLayer(e, index)}/>
-						<RedToolTipIcon icon={faCopy} toolTip={'Duplicate Group'} style={{fontSize: '14px'}}
-														onClick={(e) => HD_duplicateGroup(e, index)}/>
-						<RedToolTipIcon icon={faTrashAlt} toolTip={'Remove Group'} style={{fontSize: '14px'}}
-														onClick={(e) => HD_removeGroup(e, index)}/>
+						<RedToolTipIcon
+							icon={faFileMedical} toolTip={'Add Layer'}
+							align={'left'}
+							onClick={(e) => HD_addLayer(e, index)}
+						/>
+						<RedToolTipIcon
+							icon={faCopy} toolTip={'Duplicate Group'}
+							onClick={(e) => HD_duplicateGroup(e, index)}
+						/>
+						<RedToolTipIcon
+							icon={faTrashAlt} toolTip={'Remove Group'}
+							onClick={(e) => HD_removeGroup(e, index)}
+						/>
 						<div className={'RedGradientStepEditor_addPreset'} onClick={() => {
 							window.dispatchEvent(new CustomEvent('addUserGroupPreset', {
 								detail: groupData
@@ -276,7 +289,7 @@ const RedLayerGroupItem = () => {
 							toast.dark(
 								<RedToastSkin title={'Add custom Group to your presets.'} text={groupData['label']}/>,
 								{
-									position: 'bottom-left'
+									position: 'bottom-right'
 								}
 							);
 						}}>

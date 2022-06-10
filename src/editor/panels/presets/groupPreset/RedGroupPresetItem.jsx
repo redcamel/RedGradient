@@ -29,7 +29,7 @@ const RedGroupPresetItem = ({data, deleteMode, idx}) => {
 				toast.dark(
 					<RedToastSkin title={'Removed custom Group from your presets.'} text={data['label']}/>,
 					{
-						position: 'bottom-left'
+						position: 'bottom-right'
 					}
 				);
 			}}>-</div>}

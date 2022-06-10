@@ -153,7 +153,7 @@ const RedGradientStepEditor = () => {
 									toast.dark(
 										<RedToastSkin title={'Add custom gradient to your presets.'} text={activeLayerData['label']}/>,
 										{
-											position: 'bottom-left'
+											position: 'bottom-right'
 										}
 									);
 								}}>

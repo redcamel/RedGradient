@@ -119,7 +119,7 @@ const RedPublishContents = () => {
 					toast.dark(
 						<RedToastSkin title={'Copy Result Css!'} text={<></>}/>
 						, {
-							position: 'bottom-left'
+							position: 'bottom-right'
 						});
 				}}>Copy Result Css
 				</div>

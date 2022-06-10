@@ -218,7 +218,7 @@ const RedContainerBorderGradient = ({viewKey}) => {
 								toast().dark(
 									<RedToastSkin title={'Add custom gradient to your presets.'} text={borderGradientInfo['label']}/>,
 									{
-										position: 'bottom-left'
+										position: 'bottom-right'
 									}
 								);
 								alert('TODO')

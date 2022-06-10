@@ -53,9 +53,14 @@
     z-index: 2;
     gap: 5px
 }
-
+.RedToolTipIcon_toolTip.left {
+    left:0;
+    transform: translate(0%, 100%);
+}
 .RedToolTipIcon_toolTip.right {
-    transform: translate(-100%, 100%);
+    left : auto;
+    right:0;
+    transform: translate(0%, 100%);
 }
 
 .RedToolTipIcon_toolTip_shortCut {

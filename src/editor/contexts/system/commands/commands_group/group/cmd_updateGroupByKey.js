@@ -13,21 +13,22 @@ const cmd_updateGroupByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {key, value, groupIndex,saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
 		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
-		const targetGroup = layerGroupInfo['groupList'][payload.groupIndex === undefined ? layerGroupInfo.activeGroupIndex : payload.groupIndex]
-		targetGroup[payload.key] = payload.value
-		action.label = `Group Update ${payload.key} : ${payload.value}`
-		switch (payload.key) {
+		const targetGroup = layerGroupInfo['groupList'][groupIndex === undefined ? layerGroupInfo.activeGroupIndex : groupIndex]
+		targetGroup[key] = value
+		action.label = `Group Update ${key} : ${value}`
+		switch (key) {
 			case 'label' :
 				action.icon = faFont
 				break
 			default :
 				action.icon = faFolder
 		}
-		return pushHistory(action, newData, payload.saveHistoryYn)
+		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
 export default cmd_updateGroupByKey

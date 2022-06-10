@@ -55,7 +55,7 @@ const RedNewDocument = () => {
 		toast.dark(
 			<RedToastSkin title={'New Gradient Project'} text={''}/>,
 			{
-				position: 'bottom-left'
+				position: 'bottom-right'
 			}
 		);
 	}
