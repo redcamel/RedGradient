@@ -7,11 +7,16 @@ const cmd_setActiveFrameLayoutKey = {
 		key: 'setActiveFrameLayoutKey'
 	},
 	execute: (state, action, payload, historyInfo) => {
+		const {pushHistory} = historyInfo
+		const {key,icon} = payload
+		console.log('value',key,icon)
 		const newData = {
 			...state
 		}
-		newData.systemFrameLayoutInfo.activeLayoutKey = payload.value
-		return newData
+		newData.systemFrameLayoutInfo.activeLayoutKey = key
+		action.label = `set active frame layout : ${key}`
+		action.icon = icon
+		return pushHistory(action, newData, true)
 	}
 }
 export default cmd_setActiveFrameLayoutKey

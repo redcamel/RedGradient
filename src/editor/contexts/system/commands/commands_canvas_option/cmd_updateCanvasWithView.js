@@ -1,5 +1,3 @@
-import {faKitchenSet, faPersonWalkingWithCane} from "@fortawesome/free-solid-svg-icons";
-
 /**
  * Canvas WithView 업데이트
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}

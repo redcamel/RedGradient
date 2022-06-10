@@ -19,11 +19,12 @@ const RedDeviceInfo = ({children}) => {
 	}, {})
 	let currentKeyName = keyNameData[0];
 	for (const k in ConstDevicePreset) {
+		const tData = ConstDevicePreset[k]
 		if (
-			ConstDevicePreset[k]['sizeInfo']['width'] === sizeInfo['width']
-			&& ConstDevicePreset[k]['sizeInfo']['height'] === sizeInfo['height']
+			tData['sizeInfo']['width'] === sizeInfo['width']
+			&& tData['sizeInfo']['height'] === sizeInfo['height']
 		) {
-			currentKeyName = ConstDevicePreset[k]['deviceName']
+			currentKeyName = tData['deviceName']
 			break
 		}
 	}

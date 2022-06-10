@@ -1,4 +1,4 @@
-import {faBorderStyle, faFolder, faSliders} from "@fortawesome/free-solid-svg-icons";
+import {faBorderStyle, faSliders} from "@fortawesome/free-solid-svg-icons";
 import HELPER_GET_DATA from "../../HELPER_GET_DATA";
 
 
