@@ -1,6 +1,5 @@
 import ContextGradient from "../../../contexts/system/ContextGradient.js";
 import {useContext} from "react";
-import ConstCanvasViewKey from "../../../../data/const/ConstCanvasViewKey.js";
 import RedNumberField from "../../../basicUI/RedNumberField.jsx";
 import RedItemTitle from "../../../basicUI/RedItemTitle.jsx";
 import RedSelect from "../../../basicUI/RedSelect.jsx";
@@ -15,7 +14,7 @@ import getCalcedContainerEditorLayoutInfo_pixel from "../../../core/canvas/getCa
  */
 const RedContainerPosition = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	if (viewKey === ConstCanvasViewKey.ALL) return null
+	
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView

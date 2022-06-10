@@ -37,7 +37,7 @@ const RedPublishContents = () => {
 	const getCode = (viewKey) => {
 		const targetView = state.canvasInfo[viewKey]
 		const groupList = targetView.layerGroupInfo.groupList
-		if (viewKey === ConstCanvasViewKey.MAIN || groupList.length && groupList[0].children.length && calcLayerGradient(groupList[0].children[0],0) !== calcLayerGradient(new DataRedGradientLayer(),0)  ) {
+		if (viewKey === ConstCanvasViewKey.MAIN || groupList.length && groupList[0].children.length && calcLayerGradient(groupList[0].children[0], 0) !== calcLayerGradient(new DataRedGradientLayer(), 0)) {
 			return [
 				PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'container'),
 				PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'border'),
@@ -51,7 +51,7 @@ const RedPublishContents = () => {
 		const targetView = state.canvasInfo[viewKey]
 		const current_LayoutInfo = calcedLayoutSize[viewKey]
 		const groupList = targetView.layerGroupInfo.groupList
-		if (groupList.length && groupList[0].children.length && calcLayerGradient(groupList[0].children[0],0) !== calcLayerGradient(new DataRedGradientLayer(),0)  ) {
+		if (groupList.length && groupList[0].children.length && calcLayerGradient(groupList[0].children[0], 0) !== calcLayerGradient(new DataRedGradientLayer(), 0)) {
 			return {
 				background: groupList.map(v => {
 					return v['visibleYn'] ? v.children.map((v2, layerIndex) => {

@@ -57,7 +57,7 @@ const cmd_updateLayerValueInfoByKey = {
 			pushHistory(action, newData, payload.saveHistoryYn)
 		})
 		const needSave = payload.saveHistoryYn
-		if(needSave) pushHistory(action, newData, needSave)
+		if (needSave) pushHistory(action, newData, needSave)
 		return newData
 	}
 }

@@ -8,7 +8,6 @@ import {useContext} from "react"
 import RedContainerPosition from "./cssProperty/RedContainerPosition.jsx";
 import RedContainerBoxSizing from "./cssProperty/RedContainerBoxSizing.jsx";
 import RedContainerBackgroundColor from "./cssProperty/RedContainerBackgroundColor.jsx";
-import ConstCanvasViewKey from "../../../data/const/ConstCanvasViewKey.js"
 import RedContainerBoxShadow from "./cssProperty/RedContainerBoxShadow.jsx";
 import RedPanel from "../../basicUI/panel/RedPanel.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -27,9 +26,7 @@ const RedContainerEditor = () => {
 	const {state} = useContext(ContextGradient)
 	const targetView = HELPER_GET_DATA.getTargetViewInfo(state)
 	const viewKey = targetView.viewKey
-	if (viewKey === ConstCanvasViewKey.ALL) return <div>
-		TODO - All일때 이공간을 어떻게 활용할것 인가..
-	</div>
+
 	return (
 		<div className={'RedContainerEditor_container'}>
 			<RedPanel
@@ -49,7 +46,7 @@ const RedContainerEditor = () => {
 							contents: <div>
 								<div className={'RedContainerEditor_description'}>Container edit</div>
 								{
-									viewKey !== ConstCanvasViewKey.ALL && <div className={'RedContainerEditor_middle'}>
+									 <div className={'RedContainerEditor_middle'}>
 										<RedContainerSize viewKey={viewKey}/>
 										<RedDivision/>
 										<RedContainerPosition viewKey={viewKey}/>

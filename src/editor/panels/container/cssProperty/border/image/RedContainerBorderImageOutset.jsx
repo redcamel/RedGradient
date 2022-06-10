@@ -1,6 +1,5 @@
 import ContextGradient from "../../../../../contexts/system/ContextGradient.js";
 import {useContext} from "react";
-import ConstCanvasViewKey from "../../../../../../data/const/ConstCanvasViewKey.js";
 import ConstBoxBorderPropertyModeType from "../ConstBoxBorderPropertyModeType.js";
 import RedContainerBorderSolo from "../widthAndRadius/RedContainerBorderSolo.jsx";
 import RedContainerBorderMerge from "../widthAndRadius/RedContainerBorderMerge.jsx";
@@ -15,7 +14,6 @@ import ConstUnitPxNumber from "../../../../../../data/const/ConstUnitPxNumber.js
  */
 const RedContainerBorderImageOutset = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	if (viewKey === ConstCanvasViewKey.ALL) return null
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView

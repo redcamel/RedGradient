@@ -7,11 +7,11 @@ import {faRulerCombined} from "@fortawesome/free-solid-svg-icons";
 const cmd_updateCanvasRulerVisible = {
 	description: {
 		key: 'updateCanvasRulerVisible',
-		icon : faRulerCombined
+		icon: faRulerCombined
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const {viewKey,value} = payload
+		const {viewKey, value} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}

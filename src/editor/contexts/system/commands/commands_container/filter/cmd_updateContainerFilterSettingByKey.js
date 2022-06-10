@@ -12,7 +12,7 @@ const cmd_updateContainerFilterSettingByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const {value, viewKey, key,idx,saveHistoryYn} = payload
+		const {value, viewKey, key, idx, saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}

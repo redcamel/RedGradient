@@ -40,7 +40,6 @@ const RedCanvas = ({
 	const {state, actions: gradientActions} = useContext(ContextGradient)
 	useEffect(() => {
 		const {canvasInfo} = state
-		// const viewAllModeYn = viewKey === ConstCanvasViewKey.ALL
 		const viewAllModeYn = false
 		if (viewAllModeYn) {
 		} else {
@@ -54,8 +53,7 @@ const RedCanvas = ({
 		}
 	}, [])
 	const {canvasInfo} = state
-	const viewAllModeYn = viewKey === ConstCanvasViewKey.ALL
-	if (viewAllModeYn) return 'TODO - 프리뷰를 따로 만들어야겠군?'
+
 	const targetView = canvasInfo[viewKey]
 	const calcedLayoutSize = getCalcedContainerEditorLayoutInfo_pixel(state, viewScale)
 	const current_LayoutInfo = calcedLayoutSize[viewKey]
@@ -119,7 +117,6 @@ const RedCanvas = ({
 		//
 		dummyMain_LayoutInfo = calcedLayoutSize[ConstCanvasViewKey.MAIN]
 		//
-		// return Object.values(ConstCanvasViewKey).filter(v => v !== viewKey && v !== ConstCanvasViewKey.ALL).map((dummyKey, index) => {
 		return Object.values(ConstCanvasViewKey).filter(v => v !== viewKey).map((dummyKey, index) => {
 			const targetView = canvasInfo[dummyKey]
 
@@ -269,8 +266,6 @@ const RedCanvas = ({
 			<RedCanvasDevice layoutInfo={deviceLayoutInfo} viewScale={viewScale} visible={deviceVisible}/>
 			{renderContainer(viewKey)}
 			{
-				// targetView['editMode'] === ConstEditMode.CONTAINER &&
-				// frameViewKey === ConstCanvasViewKey.ALL &&
 				renderContainerDummyCanvas(viewKey)
 			}
 			<RedCanvasCross layoutInfo={deviceLayoutInfo} viewScale={viewScale}/>

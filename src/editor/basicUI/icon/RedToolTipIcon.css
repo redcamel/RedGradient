@@ -53,7 +53,8 @@
     z-index: 2;
     gap: 5px
 }
-.RedToolTipIcon_toolTip.right{
+
+.RedToolTipIcon_toolTip.right {
     transform: translate(-100%, 100%);
 }
 

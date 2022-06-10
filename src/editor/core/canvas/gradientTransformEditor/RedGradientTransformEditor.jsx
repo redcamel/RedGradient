@@ -79,13 +79,13 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 	useEffect(() => {
 
 			const HD_up = (e) => {
-				if(resizeMode){
+				if (resizeMode) {
 					const payload = []
-					payload.saveHistoryYn=true
+					payload.saveHistoryYn = true
 					gradientActions.updateLayerValueInfoByKey(payload)
-				}else{
-					console.log('window.RedKey',JSON.stringify(window.RedKey.downList))
-					if(window.RedKey['downList']['alt']){
+				} else {
+					console.log('window.RedKey', JSON.stringify(window.RedKey.downList))
+					if (window.RedKey['downList']['alt']) {
 						gradientActions.duplicateLayer({
 							groupIndex: activeGroupIndex,
 							groupLayerIndex: activeGroupLayerIndex
@@ -98,7 +98,7 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 								time,
 								value: startSizeInfo['width'],
 								groupIndex: activeGroupIndex,
-								groupLayerIndex: activeGroupLayerIndex+1,
+								groupLayerIndex: activeGroupLayerIndex + 1,
 							},
 							{
 								targetInfoKey: 'positionInfo',
@@ -106,7 +106,7 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 								time,
 								value: startPositionInfo['x'],
 								groupIndex: activeGroupIndex,
-								groupLayerIndex: activeGroupLayerIndex+1,
+								groupLayerIndex: activeGroupLayerIndex + 1,
 							},
 							{
 								targetInfoKey: 'sizeInfo',
@@ -114,7 +114,7 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 								time,
 								value: startSizeInfo['height'],
 								groupIndex: activeGroupIndex,
-								groupLayerIndex: activeGroupLayerIndex+1,
+								groupLayerIndex: activeGroupLayerIndex + 1,
 							},
 							{
 								targetInfoKey: 'positionInfo',
@@ -122,7 +122,7 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 								time,
 								value: startPositionInfo['y'],
 								groupIndex: activeGroupIndex,
-								groupLayerIndex: activeGroupLayerIndex+1,
+								groupLayerIndex: activeGroupLayerIndex + 1,
 							}
 						)
 						gradientActions.updateLayerValueInfoByKey(
@@ -131,9 +131,9 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 						gradientActions.setActiveGroupAndLayer(
 							{activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: activeGroupLayerIndex}
 						)
-					}else{
+					} else {
 						const payload = []
-						payload.saveHistoryYn=true
+						payload.saveHistoryYn = true
 						gradientActions.updateLayerValueInfoByKey(payload)
 					}
 				}

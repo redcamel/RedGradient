@@ -1,6 +1,5 @@
 import ContextGradient from "../../../contexts/system/ContextGradient.js";
 import {useContext} from "react";
-import ConstCanvasViewKey from "../../../../data/const/ConstCanvasViewKey.js";
 import RedNumberField from "../../../basicUI/RedNumberField.jsx";
 import RedItemTitle from "../../../basicUI/RedItemTitle.jsx";
 import RedSelect from "../../../basicUI/RedSelect.jsx";
@@ -17,7 +16,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
  */
 const RedContainerSize = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	if (viewKey === ConstCanvasViewKey.ALL) return null
+	
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
@@ -87,7 +86,7 @@ const RedContainerSize = ({viewKey}) => {
 		gradientActions.updateContainerUseFixedRatio({
 			viewKey,
 			value: !useFixedRatio,
-			saveHistoryYn : true
+			saveHistoryYn: true
 		})
 	}
 	return (
