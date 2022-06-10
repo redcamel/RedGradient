@@ -16,7 +16,8 @@ const RedLayerPreviewBackgroundType = ({layerData, groupIdx, layerIdx}) => {
 		key: 'previewBackgroundType',
 		groupIndex: groupIdx,
 		groupLayerIndex: layerIdx,
-		value
+		value,
+		saveHistoryYn : true
 	})
 	const HD_remove = (e) => {
 		e.preventDefault()

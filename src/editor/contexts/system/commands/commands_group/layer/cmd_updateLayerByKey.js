@@ -13,15 +13,18 @@ const cmd_updateLayerByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {groupIndex, groupLayerIndex, key, value, saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
 		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
-		layerGroupInfo['groupList'][payload.groupIndex]['children'][payload.groupLayerIndex][payload.key] = payload.value
-		action.label = `Layer Update ${payload.key} : ${payload.value}`
-		switch (payload.key) {
+		const layerData = layerGroupInfo['groupList'][groupIndex]['children'][groupLayerIndex]
+		layerData[key] = value
+		action.label = `Layer (${layerData['label']}) ${key === 'previewBackgroundType' ? 'bgColor of preview' : key} : ${value}`
+		switch (key) {
 			case 'label' :
 				action.icon = faFont
+				action.label = `Layer ${key} : ${value}`
 				break
 			case 'type' :
 				action.icon = faGear
@@ -29,7 +32,7 @@ const cmd_updateLayerByKey = {
 			default :
 				action.icon = faFolder
 		}
-		return pushHistory(action, newData, payload.saveHistoryYn)
+		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
 export default cmd_updateLayerByKey
