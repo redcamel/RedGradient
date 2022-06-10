@@ -20,10 +20,11 @@ const cmd_addLayer = {
 		const groupList = HELPER_GET_DATA.getActiveViewGroupList(newData)
 		const targetGroup = groupList[payload.groupIndex]
 		const children = targetGroup['children']
+		const newLayerData = new DataRedGradientLayer()
 		children.reverse()
-		children.push(new DataRedGradientLayer())
+		children.push(newLayerData)
 		children.reverse()
-		action.label = `Add Layer at ${targetGroup.label} Group`
+		action.label = `Add Layer(${newLayerData.label}) at ${targetGroup.label} Group`
 		return pushHistory(action, newData, true)
 	}
 }
