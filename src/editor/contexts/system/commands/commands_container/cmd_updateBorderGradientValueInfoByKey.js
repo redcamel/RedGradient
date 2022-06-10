@@ -1,4 +1,4 @@
-import {faFolder, faSliders} from "@fortawesome/free-solid-svg-icons";
+import {faBorderStyle, faSliders} from "@fortawesome/free-solid-svg-icons";
 import HELPER_GET_DATA from "../../HELPER_GET_DATA";
 
 
@@ -10,7 +10,7 @@ const cmd_updateBorderGradientValueInfoByKey = {
 	description: {
 		key: 'updateBorderGradientValueInfoByKey',
 		label: 'updateBorderGradientValueInfoByKey Update',
-		icon: faFolder
+		icon: faBorderStyle
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
@@ -18,16 +18,17 @@ const cmd_updateBorderGradientValueInfoByKey = {
 			...JSON.parse(JSON.stringify(state))
 		}
 		const payloads = payload instanceof Array ? payload : [payload]
+		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
 		payloads.forEach(payload => {
-			const info = HELPER_GET_DATA.getTargetViewInfo(newData).containerInfo['borderInfo']['borderGradientInfo']['timeline'][payload.time]
+			const info = targetViewInfo.containerInfo['borderInfo']['borderGradientInfo']['timeline'][payload.time]
 			info['valueInfo'][payload.key] = payload.value
-			action.label = `Border Gradient Update ${payload.targetInfo} ${payload.key} : ${payload.value}`
+			action.label = `${targetViewInfo['viewKey']} Border Gradient ${payload.key} : ${JSON.stringify(payload.value)}`
 			switch (payload.key) {
 				case 'stop' :
 					action.icon = faSliders
 					break
 				default :
-					action.icon = faFolder
+					action.icon = faBorderStyle
 			}
 			pushHistory(action, newData, payload.saveHistoryYn)
 		})

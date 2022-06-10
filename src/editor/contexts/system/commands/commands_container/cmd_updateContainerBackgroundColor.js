@@ -12,13 +12,13 @@ const cmd_updateContainerBackgroundColor = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const {viewKey} = payload
+		const {viewKey, value, saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		newData.canvasInfo[payload.viewKey]['containerInfo']['backgroundColor'] = payload.value
-		action.label = `${viewKey} Container Background Change`
-		return pushHistory(action, newData, payload.saveHistoryYn)
+		newData.canvasInfo[viewKey]['containerInfo']['backgroundColor'] = value
+		action.label = `${viewKey} Container Background : ${value}`
+		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
 export default cmd_updateContainerBackgroundColor

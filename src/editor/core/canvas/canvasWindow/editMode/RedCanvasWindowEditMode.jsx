@@ -2,7 +2,7 @@ import './RedCanvasWindowEditMode.css'
 import ConstEditMode from "../../../../../data/const/ConstEditMode";
 import ConstCanvasViewKey from "../../../../../data/const/ConstCanvasViewKey";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit, faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faEye, faEyeSlash, faMagnet, faPalette} from "@fortawesome/free-solid-svg-icons";
 
 const RedCanvasWindowEditMode = ({
 																	 viewKey,
@@ -48,14 +48,14 @@ const RedCanvasWindowEditMode = ({
 					</div>
 				})}
 			</div>
-			<label style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={onVisibleGradientEditor}>
-				Use Visual Gradient Editor <input type={'checkbox'} key={Math.random()} checked={valueVisibleGradientEditor}
+			<label style={{display: 'flex', alignItems: 'center', cursor: 'pointer',gap:'5px'}} onClick={onVisibleGradientEditor}>
+				<FontAwesomeIcon icon={faPalette}/> Use Visual Gradient Editor <input type={'checkbox'} key={Math.random()} checked={valueVisibleGradientEditor}
 																					style={{cursor: 'pointer'}} onChange={() => {
 			}}/>
 			</label>
 			{
-				value === ConstEditMode.GRADIENT && <label style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={onSnapToContainer}>
-					Snap To Container <input type={'checkbox'} key={Math.random()} checked={valueSnapToContainer}
+				value === ConstEditMode.GRADIENT && <label style={{display: 'flex', alignItems: 'center', cursor: 'pointer',gap:'5px'}} onClick={onSnapToContainer}>
+					<FontAwesomeIcon icon={faMagnet}/> Snap To Container <input type={'checkbox'} key={Math.random()} checked={valueSnapToContainer}
 																	 style={{cursor: 'pointer'}} onChange={() => {
 				}}/>
 				</label>

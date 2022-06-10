@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {faFileAlt, faFolderOpen, faHistory, faRedo, faSave, faUndo} from "@fortawesome/free-solid-svg-icons";
 import ContextGradient from "../contexts/system/ContextGradient.js";
 import RedTextField from "../basicUI/RedTextField.jsx"
@@ -35,6 +35,16 @@ const RedFrameTop = () => {
 	const [openHistoryYn, setOpenHistoryYn] = useState(false)
 	const HD_save = () => saveFile(gradientContext)
 	const HD_open = () => openFile(actions)
+	useEffect(() => {
+		const HD_keyUp = e => {
+			// console.log(e.keyCode) // f9
+			if (e.keyCode === 120) setOpenHistoryYn(!openHistoryYn)
+		}
+		document.addEventListener('keyup', HD_keyUp);
+		return () => {
+			document.removeEventListener('keyup', HD_keyUp);
+		}
+	}, [openHistoryYn])
 	return (
 		<div className={'RedFrameTop_container'}>
 			<div className={'RedFrameTop_logoBox'}>
@@ -58,7 +68,8 @@ const RedFrameTop = () => {
 			</div>
 			<div className={`RedFrameTop_history_container ${openHistoryYn ? 'active' : ''}`}>
 				<div className={'RedFrameTop_history_button'}>
-					<RedToolTipIcon icon={faHistory} toolTip={'History'} style={{fontSize: '14px'}}
+					<RedToolTipIcon icon={faHistory} toolTip={'History'} shortcut={'F9'} style={{fontSize: '14px'}}
+													align={'right'}
 													onClick={() => setOpenHistoryYn(!openHistoryYn)}
 					/>
 				</div>

@@ -113,15 +113,15 @@ const RedCanvasFrame = () => {
 		})
 	}
 	const setFrameLayoutData = (index, value) => {
-		console.log('setFrameLayoutData', index, value)
+		// console.log('setFrameLayoutData', index, value)
 		gradientActions.setFrameLayoutData({
 			layoutKey: activeLayoutKey,
 			index,
 			value
 		})
 	}
-	const setActiveFrameLayoutKey = (value) => {
-		gradientActions.setActiveFrameLayoutKey({value})
+	const setActiveFrameLayoutKey = (key,icon) => {
+		gradientActions.setActiveFrameLayoutKey({key,icon})
 	}
 	const entries = Object.entries(frameInfo)
 	const renderWindows = () => {
@@ -131,6 +131,7 @@ const RedCanvasFrame = () => {
 	}
 	return (
 		<div className={'RedCanvasFrame_container'}>
+
 			<RedDeviceInfo>
 				<div style={{display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap'}}>
 					{
@@ -140,7 +141,7 @@ const RedCanvasFrame = () => {
 							return <RedToolTipIcon
 								icon={value['icon']}
 								activeYn={activeLayoutKey === key}
-								onClick={() => setActiveFrameLayoutKey(key)}
+								onClick={() => setActiveFrameLayoutKey(key,value['icon'])}
 								toolTip={value['toolTip']}
 								key={entry}
 							/>

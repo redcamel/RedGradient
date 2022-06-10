@@ -20,7 +20,8 @@ const cmd_changeFilterType = {
 			...JSON.parse(JSON.stringify(state))
 		}
 		const {type} = payload
-		const {containerInfo} = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const {containerInfo} = targetViewInfo
 		const {filterInfo} = containerInfo
 		let newFilterData
 		switch (type) {
@@ -46,7 +47,7 @@ const cmd_changeFilterType = {
 				break
 		}
 		if (newFilterData) filterInfo[payload.target_filterIndex] = newFilterData
-		action.label = `Change Filter Type - ${filterInfo[payload.target_filterIndex]?.type}`
+		action.label = `${targetViewInfo['viewKey']} Change Filter Type : ${filterInfo[payload.target_filterIndex]?.type}`
 		return pushHistory(action, newData, true)
 	}
 }

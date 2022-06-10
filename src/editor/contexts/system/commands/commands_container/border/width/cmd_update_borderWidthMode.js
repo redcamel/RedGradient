@@ -1,4 +1,4 @@
-import {faFill} from "@fortawesome/free-solid-svg-icons";
+import {faBorderStyle} from "@fortawesome/free-solid-svg-icons";
 import HELPER_GET_DATA from "../../../../HELPER_GET_DATA.js";
 
 /**
@@ -9,19 +9,20 @@ const cmd_update_borderWidthMode = {
 	description: {
 		key: 'update_borderWidthMode',
 		label: 'BorderWidth Mode Change',
-		icon: faFill
+		icon: faBorderStyle
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		{
-			const borderInfo = HELPER_GET_DATA.getTargetViewInfo(newData)['containerInfo']['borderInfo']
+
+			const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+			const borderInfo = targetViewInfo['containerInfo']['borderInfo']
 			const {borderWidthInfo} = borderInfo
 			borderWidthInfo['mode'] = payload
-		}
-		action.label = `BorderWidth Mode Change - ${payload}`
+
+		action.label = `${targetViewInfo['viewKey']} Border Width Mode : ${payload}`
 		return pushHistory(action, newData, true)
 	}
 }

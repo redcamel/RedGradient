@@ -12,12 +12,13 @@ const cmd_updateDeviceByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {key, value, saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		newData.deviceInfo['sizeInfo'][payload.key] = payload.value
-		action.label = `Device ${payload.key} Update : ${payload.value}`
-		return pushHistory(action, newData, payload.saveHistoryYn)
+		newData.deviceInfo['sizeInfo'][key] = value
+		action.label = `Device ${key} : ${value}`
+		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
 export default cmd_updateDeviceByKey

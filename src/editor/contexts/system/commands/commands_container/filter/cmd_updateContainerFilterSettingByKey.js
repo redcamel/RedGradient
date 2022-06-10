@@ -12,13 +12,14 @@ const cmd_updateContainerFilterSettingByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {value, viewKey, key,idx,saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		const filterData = newData.canvasInfo[payload.viewKey]['containerInfo']['filterInfo'][payload.idx]
-		filterData['setting'][payload.key] = payload.value
-		action.label = `Filter ${filterData.type} - ${payload.key} Update : ${payload.value}`
-		return pushHistory(action, newData, payload.saveHistoryYn)
+		const filterData = newData.canvasInfo[viewKey]['containerInfo']['filterInfo'][idx]
+		filterData['setting'][key] = value
+		action.label = `${viewKey} ${filterData.type}Filter ${key} : ${value}`
+		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
 export default cmd_updateContainerFilterSettingByKey

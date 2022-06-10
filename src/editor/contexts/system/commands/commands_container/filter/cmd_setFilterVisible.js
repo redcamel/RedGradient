@@ -16,12 +16,13 @@ const cmd_setFilterVisible = {
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		const {containerInfo} = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const {containerInfo} = targetViewInfo
 		const {filterInfo} = containerInfo
 		const filterData = filterInfo[payload.target_filterIndex]
 		filterData['visibleYn'] = payload.value
-		action.label = `Filter Visible - ${payload.value ? 'On' : 'Off'} ${filterData.type}`
-		action.icon = `Filter Visible - ${payload.value ? faEye : faEyeSlash}`
+		action.label = `${targetViewInfo['viewKey']}  ${filterData.type} Filter Visible : ${payload.value ? 'On' : 'Off'}`
+		action.icon = payload.value ? faEye : faEyeSlash
 		return pushHistory(action, newData, true)
 	}
 }

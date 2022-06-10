@@ -1,4 +1,4 @@
-import {faBox} from "@fortawesome/free-solid-svg-icons";
+import {faSun} from "@fortawesome/free-solid-svg-icons";
 
 /**
  * 컨테이너 box-shadow key 베이스로 변경
@@ -8,16 +8,17 @@ const cmd_updateContainerBoxShadowByKey = {
 	description: {
 		key: 'updateContainerBoxShadowByKey',
 		label: 'Container BoxShadow Change',
-		icon: faBox
+		icon: faSun
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {viewKey,key,value,saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		newData.canvasInfo[payload.viewKey]['containerInfo']['boxShadowInfo'][payload.key] = payload.value
-		action.label = `Container BoxShadow ${payload.key} Change`
-		return pushHistory(action, newData, payload.saveHistoryYn)
+		newData.canvasInfo[viewKey]['containerInfo']['boxShadowInfo'][key] = value
+		action.label = `Container BoxShadow ${key} : ${value}`
+		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
 export default cmd_updateContainerBoxShadowByKey

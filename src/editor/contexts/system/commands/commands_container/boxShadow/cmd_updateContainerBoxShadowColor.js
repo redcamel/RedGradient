@@ -1,22 +1,24 @@
-import {faBox} from "@fortawesome/free-solid-svg-icons";
+import {faSun} from "@fortawesome/free-solid-svg-icons";
 
 /**
  * 컨테이너 box-shadow Color 변경
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
-const cmd_updateContainerBoxShadowByKey = {
+const cmd_updateContainerBoxShadowColor = {
 	description: {
 		key: 'updateContainerBoxShadowColor',
 		label: 'Container BoxShadow Color Change',
-		icon: faBox
+		icon: faSun
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {viewKey,value,saveHistoryYn} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		newData.canvasInfo[payload.viewKey]['containerInfo']['boxShadowInfo']['color'] = payload.value
-		return pushHistory(action, newData, payload.saveHistoryYn)
+		newData.canvasInfo[viewKey]['containerInfo']['boxShadowInfo']['color'] = value
+		action.label = `${viewKey} Container BoxShadow Color : ${value}`
+		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
-export default cmd_updateContainerBoxShadowByKey
+export default cmd_updateContainerBoxShadowColor

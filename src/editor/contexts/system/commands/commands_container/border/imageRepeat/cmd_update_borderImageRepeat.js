@@ -1,4 +1,4 @@
-import {faFill} from "@fortawesome/free-solid-svg-icons";
+import {faBorderStyle} from "@fortawesome/free-solid-svg-icons";
 import HELPER_GET_DATA from "../../../../HELPER_GET_DATA.js";
 
 /**
@@ -9,17 +9,19 @@ const cmd_update_borderImageRepeat = {
 	description: {
 		key: 'update_borderImageRepeat',
 		label: 'BorderImageRepeat Change',
-		icon: faFill
+		icon: faBorderStyle
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		const borderInfo = HELPER_GET_DATA.getTargetViewInfo(newData)['containerInfo']['borderInfo']
+		const {mode, key, value, saveHistoryYn} = payload
+		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const borderInfo = targetViewInfo['containerInfo']['borderInfo']
 		const {borderImageRepeatInfo} = borderInfo
-		borderImageRepeatInfo[payload.key] = payload.value
-		action.label = `BorderImageRepeat Change - ${payload.key} : ${payload.value}`
+		borderImageRepeatInfo[key] = value
+		action.label = `${targetViewInfo['viewKey']} BorderImageRepeat - ${key} : ${value}`
 		return pushHistory(action, newData, true)
 	}
 }

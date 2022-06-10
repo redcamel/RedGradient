@@ -19,7 +19,7 @@ const cmd_updateDevicePreset = {
 		Object.values(ConstDevicePreset).forEach(v => {
 			if (v['deviceName'] === payload.value) newData.deviceInfo = JSON.parse(JSON.stringify(v))
 		})
-		action.label = `Device Preset Update : ${newData.deviceInfo.deviceName}`
+		action.label = `Device Preset : ${newData.deviceInfo.deviceName}`
 		return pushHistory(action, newData, true)
 	}
 }

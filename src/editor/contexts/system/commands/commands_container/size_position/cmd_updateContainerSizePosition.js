@@ -17,18 +17,20 @@ const cmd_updateContainerSizePosition = {
 		}
 		const {value, viewKey, saveHistoryYn} = payload
 		const checkInfo = {}
+		const valueStr = []
 		value.forEach(v => {
 			const {value, targetInfo, key} = v
 			checkInfo[key] = true
-			newData.canvasInfo[viewKey]['containerInfo'][targetInfo][key] = typeof v.value === 'number' ? +value.toFixed(2) : value
+			const t0 = typeof v.value === 'number' ? +value.toFixed(2) : value
+			valueStr.push(t0)
+			newData.canvasInfo[viewKey]['containerInfo'][targetInfo][key] = t0
 		})
-		// TODO - 정확하게 표현되도록 수정
 		const t0 = []
 		if (checkInfo['widthUnit']) t0.push('W Uint')
 		if (checkInfo['heightUnit']) t0.push('H Unit')
 		if (checkInfo['xUnit']) t0.push('X Unit')
 		if (checkInfo['yUnit']) t0.push('Y Unit')
-		if (checkInfo['width'] && checkInfo['height']) t0.push('Size')
+		if (checkInfo['width'] && checkInfo['height']) t0.push('Width & Height')
 		else {
 			if (checkInfo['width']) t0.push('Width')
 			if (checkInfo['height']) t0.push('Height')
@@ -38,7 +40,7 @@ const cmd_updateContainerSizePosition = {
 			if (checkInfo['x']) t0.push('X')
 			if (checkInfo['y']) t0.push('Y')
 		}
-		action.label = `${viewKey} Container ${t0.length ? t0.join(' & ') : 'Layout'} Change`
+		action.label = `${viewKey} Container ${t0.length ? t0.join(' & ') : 'Layout'} : ${valueStr.join(' / ')}`
 		return pushHistory(action, newData, saveHistoryYn)
 	}
 }
