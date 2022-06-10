@@ -1,4 +1,4 @@
-import {faFolder} from "@fortawesome/free-solid-svg-icons";
+import {faMagnet} from "@fortawesome/free-solid-svg-icons";
 
 /**
  * updateSnapToContainer
@@ -8,17 +8,18 @@ const cmd_updateSnapToContainer = {
 	description: {
 		key: 'updateSnapToContainer',
 		label: 'snapToContainer',
-		icon: faFolder
+		icon: faMagnet
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
+		const {viewKey,value} = payload
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		newData['snapToContainer'] = payload.value
-		action.label = `Snap To Container ${payload.value.toString()}`
+		newData['snapToContainer'] = value
+		action.label = `${viewKey} Snap To Container : ${value.toString()}`
 
-		return pushHistory(action, newData, payload.saveHistoryYn)
+		return pushHistory(action, newData, true)
 	}
 }
 export default cmd_updateSnapToContainer
