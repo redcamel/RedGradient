@@ -53,6 +53,19 @@
     z-index: 2;
     gap: 5px
 }
+.RedToolTipIcon_toolTip.top {
+    left:auto;
+    bottom: auto;
+    top : -10px;
+    transform: translate(0%, -100%);
+}
+.RedToolTipIcon_toolTip.topRight {
+    left:auto;
+    bottom: auto;
+    right:0;
+    top : -10px;
+    transform: translate(0%, -100%);
+}
 .RedToolTipIcon_toolTip.left {
     left:0;
     transform: translate(0%, 100%);

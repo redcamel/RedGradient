@@ -10,6 +10,7 @@ import RedLayerGroupPreviewBackgroundType from "./helper/RedLayerGroupPreviewBac
 import RedPanelTitle from "../../basicUI/panel/RedPanelTitle.jsx";
 import ContextWindows from "../../contexts/window/ContextWindows";
 import RedTemplateLayer from "../templateLayer/RedTemplateLayer";
+import RedToolTipIcon from "../../basicUI/icon/RedToolTipIcon";
 
 /**
  * 히스토리 창
@@ -76,34 +77,42 @@ const RedLayerGroup = () => {
 					{/*	/>*/}
 					{/*	<span>Add Template</span>*/}
 					{/*</div>*/}
-					<FontAwesomeIcon
+					<RedToolTipIcon
 						icon={faFolderPlus}
 						style={{cursor: 'pointer'}}
 						size={'1x'}
 						fixedWidth={true}
+						toolTip={'add group'}
+						align={'top'}
 						onClick={HD_addGroup}
 					/>
 					{
 						groupList.length
 							? <>
-								<FontAwesomeIcon
+								<RedToolTipIcon
 									icon={faFileMedical}
 									style={{cursor: 'pointer', opacity: hasGroupOpacity}}
 									size={'1x'}
 									fixedWidth={true}
+									toolTip={'add layer'}
+									align={'top'}
 									onClick={HD_addLayer}
 								/>
-								<FontAwesomeIcon
+								<RedToolTipIcon
 									icon={faCopy}
 									style={{cursor: 'pointer', opacity: hasGroupChildrenOpacity}}
 									size={'1x'}
+									toolTip={'duplicate layer'}
+									align={'top'}
 									fixedWidth={true}
 									onClick={HD_duplicateLayer}
 								/>
-								<FontAwesomeIcon
+								<RedToolTipIcon
 									icon={faTrashAlt}
+									toolTip={'remove layer'}
 									style={{cursor: 'pointer', opacity: hasGroupChildrenOpacity}}
 									size={'1x'}
+									align={'topRight'}
 									fixedWidth={true}
 									onClick={HD_removeLayer}
 								/>
