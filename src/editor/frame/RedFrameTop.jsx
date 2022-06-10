@@ -68,7 +68,8 @@ const RedFrameTop = () => {
 			</div>
 			<div className={`RedFrameTop_history_container ${openHistoryYn ? 'active' : ''}`}>
 				<div className={'RedFrameTop_history_button'}>
-					<RedToolTipIcon icon={faHistory} toolTip={'History'} style={{fontSize: '14px'}}
+					<RedToolTipIcon icon={faHistory} toolTip={'History'} shortcut={'F9'} style={{fontSize: '14px'}}
+													align={'right'}
 													onClick={() => setOpenHistoryYn(!openHistoryYn)}
 					/>
 				</div>
