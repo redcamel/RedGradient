@@ -16,11 +16,12 @@ const cmd_duplicateFilter = {
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		const {containerInfo} = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const {containerInfo} = targetViewInfo
 		const {filterInfo} = containerInfo
 		const duplicateData = JSON.parse(JSON.stringify(filterInfo[payload.target_filterIndex]))
 		filterInfo.splice(payload.target_filterIndex, 0, duplicateData)
-		action.label = `Remove Duplicate - ${duplicateData.type}`
+		action.label = `${targetViewInfo['viewKey']} Remove Duplicate : ${duplicateData.type}`
 		return pushHistory(action, newData, true)
 	}
 }

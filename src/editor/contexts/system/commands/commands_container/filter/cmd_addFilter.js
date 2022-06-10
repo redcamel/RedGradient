@@ -18,13 +18,14 @@ const cmd_swapFilter = {
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		const {containerInfo} = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const {containerInfo} = targetViewInfo
 		const {filterInfo} = containerInfo
 		const newFilterData = new DataFilterAmountFilter(ConstFilterType.BLUR)
 		filterInfo.reverse()
 		filterInfo.push(newFilterData)
 		filterInfo.reverse()
-		action.label = `Add Filter - ${newFilterData.type}`
+		action.label = `${targetViewInfo['viewKey']} Add Filter : ${newFilterData.type}`
 		return pushHistory(action, newData, true)
 	}
 }

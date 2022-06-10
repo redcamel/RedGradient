@@ -16,11 +16,12 @@ const cmd_removeFilter = {
 		const newData = {
 			...JSON.parse(JSON.stringify(state))
 		}
-		const {containerInfo} = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const {containerInfo} = targetViewInfo
 		const {filterInfo} = containerInfo
 		const trash = filterInfo[payload.target_filterIndex]
 		filterInfo.splice(payload.target_filterIndex, 1)
-		action.label = `Remove Filter - ${trash?.type}`
+		action.label = `${targetViewInfo['viewKey']} Remove Filter : ${trash?.type}`
 		return pushHistory(action, newData, true)
 	}
 }
