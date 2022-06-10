@@ -34,6 +34,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 	const openLeftGroupList = [
 		{
 			label: 'Container Editor',
+			shortcut : 'F1'
 		},
 		// {
 		// 	label: 'Container Editor - TODO - 멀티로되게...',
@@ -42,6 +43,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 	const openRightGroupList = [
 		{
 			label: 'Gradient Editor',
+			shortcut : 'F2'
 		},
 		// {
 		// 	label: 'Container Editor - TODO - 멀티로되게...',
@@ -56,6 +58,31 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 			data: Math.random()
 		})
 	}
+	useEffect(() => {
+		const HD_keyDown = e => {
+
+			console.log(e.keyCode)
+			switch (e.keyCode) {
+				case 112 :
+				case 113:
+					e.stopPropagation()
+					e.preventDefault()
+					break
+			}
+			if (e.keyCode === 112) {
+				//f1
+				setActiveLeftGroupIDX(activeLeftGroupIDX === null ? 0 : activeLeftGroupIDX === 0 ? null : 0)
+			}
+			if (e.keyCode === 113) {
+				//f2
+				setActiveRightGroupIDX(activeRightGroupIDX === null ? 0 : activeRightGroupIDX === 0 ? null : 0)
+			}
+		}
+		document.addEventListener('keydown', HD_keyDown);
+		return () => {
+			document.removeEventListener('keydown', HD_keyDown);
+		}
+	}, [activeLeftGroupIDX, activeRightGroupIDX])
 	const renderMiddle = () => {
 		return <div style={{display: 'flex', flexGrow: 1}}>
 			<div style={{
@@ -87,7 +114,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 								writingMode: 'vertical-rl',
 								cursor: 'pointer'
 							}}
-						><FontAwesomeIcon icon={activeYn ? faFolderOpen : faFolder}/> {v['label']}
+						><FontAwesomeIcon icon={activeYn ? faFolderOpen : faFolder}/> {v['label']} {v["shortcut"] ? ` - ${v['shortcut']}` : ''}
 						</div>
 					})
 				}
@@ -148,7 +175,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 								writingMode: 'vertical-rl',
 								cursor: 'pointer'
 							}}
-						><FontAwesomeIcon icon={activeYn ? faFolderOpen : faFolder}/> {v['label']}
+						><FontAwesomeIcon icon={activeYn ? faFolderOpen : faFolder}/> {v['label']}  {v["shortcut"] ? ` - ${v['shortcut']}` : ''}
 						</div>
 					})
 				}
@@ -204,7 +231,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 			redKey.code2name[v] = k;
 		}
 		const HD_keyDown = e => {
-			console.log('e.keyCode', e.keyCode,e)
+			console.log('e.keyCode', e.keyCode, e)
 			const code2name = redKey.code2name[e.keyCode]
 			if (code2name) redKey.downList[code2name] = 1
 			if (redKey.downList.control && e.keyCode === 79) {
