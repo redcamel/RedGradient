@@ -33,7 +33,6 @@ const RedContainerFilter_DropShadowFilter = ({
 	}
 	const HD_getColor = () => setting['color']
 	const HD_updateColorFunction = (value) => {
-		console.log('value', value)
 		gradientActions[updateMethodName]({
 			...value,
 			key: 'color',
@@ -43,18 +42,19 @@ const RedContainerFilter_DropShadowFilter = ({
 	return (
 		<div className={'RedContainerFilter_item_container'}>
 			<div className={'RedContainerFilter_item'}>
-				{HD_getColor()}
 				<div>blur</div>
-				<RedNumberField value={setting['blur']} width={'100%'} flexGrow={1}
-												min={min}
-												max={max}
-												step={step}
-												toFixed={toFixed}
-												dragStep={dragStep}
-												onInput={(value, saveHistoryYn) => HD_changeValue(value, 'blur', saveHistoryYn)}
-												onKeyDown={(value, saveHistoryYn) => HD_changeValue(value, 'blur', saveHistoryYn)}
-												onBlur={(value, saveHistoryYn) => HD_changeValue(value, 'blur', saveHistoryYn)}
+				<RedNumberField
+					value={setting['blur']} width={'100%'} flexGrow={1}
+					min={min}
+					max={max}
+					step={step}
+					toFixed={toFixed}
+					dragStep={dragStep}
+					onInput={(value, saveHistoryYn) => HD_changeValue(value, 'blur', saveHistoryYn)}
+					onKeyDown={(value, saveHistoryYn) => HD_changeValue(value, 'blur', saveHistoryYn)}
+					onBlur={(value, saveHistoryYn) => HD_changeValue(value, 'blur', saveHistoryYn)}
 				/>
+				{HD_getColor()}
 				<RedColorPickerButton
 					getColorFunction={HD_getColor}
 					updateFunction={HD_updateColorFunction}
@@ -62,27 +62,29 @@ const RedContainerFilter_DropShadowFilter = ({
 			</div>
 			<div className={'RedContainerFilter_item'} style={{marginTop: '5px'}}>
 				<div>x</div>
-				<RedNumberField value={setting.offsetX} width={'100%'} flexGrow={1}
-												min={min}
-												max={max}
-												step={step}
-												toFixed={toFixed}
-												dragStep={dragStep}
-												onInput={(value, saveHistoryYn) => HD_changeValue(value, 'offsetX', saveHistoryYn)}
-												onKeyDown={(value, saveHistoryYn) => HD_changeValue(value, 'offsetX', saveHistoryYn)}
-												onBlur={(value, saveHistoryYn) => HD_changeValue(value, 'offsetX', saveHistoryYn)}
+				<RedNumberField
+					value={setting.offsetX} width={'100%'} flexGrow={1}
+					min={min}
+					max={max}
+					step={step}
+					toFixed={toFixed}
+					dragStep={dragStep}
+					onInput={(value, saveHistoryYn) => HD_changeValue(value, 'offsetX', saveHistoryYn)}
+					onKeyDown={(value, saveHistoryYn) => HD_changeValue(value, 'offsetX', saveHistoryYn)}
+					onBlur={(value, saveHistoryYn) => HD_changeValue(value, 'offsetX', saveHistoryYn)}
 
 				/>
 				<div>y</div>
-				<RedNumberField value={setting.offsetY} width={'100%'} flexGrow={1}
-												min={min}
-												max={max}
-												step={step}
-												toFixed={toFixed}
-												dragStep={dragStep}
-												onInput={(value, saveHistoryYn) => HD_changeValue(value, 'offsetY', saveHistoryYn)}
-												onKeyDown={(value, saveHistoryYn) => HD_changeValue(value, 'offsetY', saveHistoryYn)}
-												onBlur={(value, saveHistoryYn) => HD_changeValue(value, 'offsetY', saveHistoryYn)}
+				<RedNumberField
+					value={setting.offsetY} width={'100%'} flexGrow={1}
+					min={min}
+					max={max}
+					step={step}
+					toFixed={toFixed}
+					dragStep={dragStep}
+					onInput={(value, saveHistoryYn) => HD_changeValue(value, 'offsetY', saveHistoryYn)}
+					onKeyDown={(value, saveHistoryYn) => HD_changeValue(value, 'offsetY', saveHistoryYn)}
+					onBlur={(value, saveHistoryYn) => HD_changeValue(value, 'offsetY', saveHistoryYn)}
 				/>
 			</div>
 		</div>

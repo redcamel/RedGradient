@@ -2,7 +2,7 @@ import {faFolder, faFont} from "@fortawesome/free-solid-svg-icons";
 import HELPER_GET_DATA from "../../../HELPER_GET_DATA.js";
 
 /**
- * Group 업데이트
+ * Group  update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_updateGroupByKey = {
@@ -13,11 +13,9 @@ const cmd_updateGroupByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const {key, value, groupIndex,saveHistoryYn} = payload
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
-		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const {key, value, groupIndex, saveHistoryYn} = payload
+		const newData = HELPER_GET_DATA.makeNewState(state)
+		const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const targetGroup = layerGroupInfo['groupList'][groupIndex === undefined ? layerGroupInfo.activeGroupIndex : groupIndex]
 		targetGroup[key] = value
 		action.label = `Group Update ${key} : ${value}`

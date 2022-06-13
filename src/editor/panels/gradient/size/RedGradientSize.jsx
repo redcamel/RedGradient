@@ -13,8 +13,6 @@ import {faExpand, faLink, faLinkSlash} from "@fortawesome/free-solid-svg-icons";
 const RedGradientSize = ({sizeInfo, onChange, onChanges, containerSizeInfo_raw}) => {
 	const {useFixedRatio} = sizeInfo
 	const HD_FitSize = () => {
-		console.log('containerSizeInfo_raw', containerSizeInfo_raw)
-
 		const pxWidth = sizeInfo['widthUnit'] === ConstUnitPxPercent.PERCENT ? 100 : containerSizeInfo_raw.width
 		const pxHeight = sizeInfo['heightUnit'] === ConstUnitPxPercent.PERCENT ? 100 : containerSizeInfo_raw.height
 		onChanges([

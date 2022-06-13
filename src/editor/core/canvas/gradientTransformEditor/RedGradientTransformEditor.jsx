@@ -17,7 +17,7 @@ let resizeMode
 let dummyWidth, dummyHeight
 let startSizeInfo, startPositionInfo
 const snapSize = 10
-const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targetView, HD_ActiveWindow}) => {
+const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD_ActiveWindow}) => {
 	const {state: gradientState, actions: gradientActions} = useContext(ContextGradient)
 	const [dummyVisible, setDummyVisible] = useState(false)
 	const [resizeKey, setResizeKey] = useState({})
@@ -35,7 +35,6 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 		resetTempInfo(tX, tY)
 	}, [])
 	useEffect(() => {
-		// 	// console.log('오냐')
 		resetTempInfo(tX, tY)
 		const updateList = []
 		updateList.push(
@@ -153,13 +152,12 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 				tX = e.pageX;
 				tY = e.pageY;
 				const {alt} = window.RedKey.downList
-				const {sizeInfo, parentSizeInfo, positionInfo} = gradient_calcedLayoutInfo
+				const {sizeInfo, positionInfo} = gradient_calcedLayoutInfo
 				const useFixedRatio = window.RedKey.downList['shift'] || sizeInfo.useFixedRatio
 				const updateList = []
-				const convertPxToPercent_size = (calced_px, key) => {
+				const convertPxToPercent_size = (calced_px, sizeInfoKey) => {
 					let calced_unit = calced_px
-					const sizeInfoKey = key
-					if (sizeInfo[`${key}Unit`] === ConstUnitPxPercent.PERCENT) {
+					if (sizeInfo[`${sizeInfoKey}Unit`] === ConstUnitPxPercent.PERCENT) {
 						calced_unit = calced_px / calcedLayoutInfo.raw[sizeInfoKey] * 100
 					}
 					return calced_unit
@@ -223,11 +221,8 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 							const gradientTop = startDummyPositionY_calced - (calced_height_px - dummyHeight)
 							if (valueSnapToContainer && Math.abs(layoutTop - gradientTop) < snapSize) {
 								calced_height_px -= layoutTop - gradientTop
-								// console.log('snap info', '걸려따',Math.abs(layoutTop - gradientTop))
 								calced_height_unit = convertPxToPercent_size(calced_height_px, 'height')
 							}
-							// console.log('snap info', calcedLayoutInfo.raw.y, calcedLayoutInfo.raw.height, startDummyPositionY_calced, calced_height_px)
-							// console.log('snap info', layoutTop, gradientTop, calced_height_px)
 						}
 						updateList.push(
 							{
@@ -278,11 +273,8 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 							const gradientBottom = startDummyPositionY_calced + calced_height_px
 							if (valueSnapToContainer && Math.abs(layoutBottom - gradientBottom) < snapSize) {
 								calced_height_px += layoutBottom - gradientBottom
-								// console.log('snap info', '걸려따',Math.abs(layoutBottom - gradientBottom))
 								calced_height_unit = convertPxToPercent_size(calced_height_px, 'height')
 							}
-							// console.log('snap info', calcedLayoutInfo.raw.y, calcedLayoutInfo.raw.height, startDummyPositionY_calced, calced_height_px)
-							// console.log('snap info', layoutBottom, gradientBottom, calced_height_px)
 						}
 						updateList.push(
 							{
@@ -345,11 +337,8 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 							const gradientLeft = startDummyPositionX_calced - (calced_width_px - dummyWidth)
 							if (valueSnapToContainer && Math.abs(layoutLeft - gradientLeft) < snapSize) {
 								calced_width_px -= layoutLeft - gradientLeft
-								// console.log('snap info', '걸려따',Math.abs(layoutTop - gradientTop))
 								calced_width_unit = convertPxToPercent_size(calced_width_px, 'width')
 							}
-							// console.log('snap info', calcedLayoutInfo.raw.y, calcedLayoutInfo.raw.height, startDummyPositionY_calced, calced_height_px)
-							// console.log('snap info', layoutTop, gradientTop, calced_height_px)
 						}
 						updateList.push(
 							{
@@ -399,11 +388,8 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 							const gradientRight = startDummyPositionX_calced + calced_width_px
 							if (valueSnapToContainer && Math.abs(layoutRight - gradientRight) < snapSize) {
 								calced_width_px += layoutRight - gradientRight
-								// console.log('snap info', '걸려따',Math.abs(layoutRight - gradientRight))
 								calced_width_unit = convertPxToPercent_size(calced_width_px, 'width')
 							}
-							// console.log('snap info', calcedLayoutInfo.raw.y, calcedLayoutInfo.raw.height, startDummyPositionX_calced, calced_width_px)
-							// console.log('snap info', layoutRight, gradientRight, calced_width_px)
 						}
 						updateList.push(
 							{
@@ -476,26 +462,21 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 						// snap left
 						const layoutLeft = 0
 						const gradientLeft = calced_x_px
-						// console.log('snap info', layoutLeft, gradientLeft, startDummyPositionX_calced)
 						if (valueSnapToContainer && Math.abs(layoutLeft - gradientLeft) < snapSize) {
 							calced_x_px = 0
 							calced_x_unit = calced_x_px / ((startContainerW_calced - dummyWidth)) * 100
 							dummyPositionX -= layoutLeft - gradientLeft
-							// console.log('snap info', '걸려따', Math.abs(0))
 						}
-						// console.log('snap info', layoutLeft, gradientLeft, startDummyPositionX_calced)
 					}
 					{
 						// snap right
 						const layoutRight = calcedLayoutInfo.raw.width
 						const gradientRight = calced_x_px + dummyWidth
-						console.log('snap info', calced_x_px, dummyWidth)
 						if (valueSnapToContainer && Math.abs(layoutRight - gradientRight) < snapSize) {
 							calced_x_px = layoutRight - dummyWidth
 							if (positionInfo['xUnit'] === ConstUnitPxPercent.PX) calced_x_unit = calced_x_px
 							else calced_x_unit = calced_x_px / (layoutRight - dummyWidth) * 100
 							dummyPositionX -= (layoutRight - gradientRight)
-							// console.log('snap info', '걸려따', layoutRight, gradientRight, calced_x_px, dummyWidth)
 						}
 					}
 					updateList.push(
@@ -533,14 +514,12 @@ const RedGradientTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targe
 							calced_y_px = 0
 							calced_y_unit = calced_y_px / ((startContainerH_calced - dummyHeight)) * 100
 							dummyPositionY -= layoutTop - gradientTop
-							// console.log('snap info', '걸려따', Math.abs(0))
 						}
 					}
 					{
 						// snap bottom
 						const layoutBottom = calcedLayoutInfo.raw.height
 						const gradientBottom = calced_y_px + dummyHeight
-						console.log('snap info', calced_y_px, dummyHeight)
 						if (valueSnapToContainer && Math.abs(layoutBottom - gradientBottom) < snapSize) {
 							calced_y_px = layoutBottom - dummyHeight
 							if (positionInfo['yUnit'] === ConstUnitPxPercent.PX) calced_y_unit = calced_y_px

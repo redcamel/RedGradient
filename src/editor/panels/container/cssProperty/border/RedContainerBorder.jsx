@@ -20,7 +20,7 @@ import RedContainerBorderGradient from "./RedContainerBorderGradient";
  */
 const RedContainerBorder = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
@@ -28,6 +28,25 @@ const RedContainerBorder = ({viewKey}) => {
 	const {mode} = borderInfo
 	const HD_changeBorderMode = (v) => {
 		gradientActions.update_borderModeType(v)
+	}
+	const renderGradient = () => {
+		return <>
+			<RedContainerBorderImageOutset viewKey={viewKey}/>
+			<RedDivision/>
+			<RedContainerBorderImageSlice viewKey={viewKey}/>
+			<RedDivision/>
+			<RedContainerBorderImageRepeat viewKey={viewKey}/>
+			<RedDivision/>
+			<RedContainerBorderGradient viewKey={viewKey}/>
+		</>
+	}
+	const renderBasic = () => {
+		return <>
+			<RedContainerBorderColor viewKey={viewKey}/>
+			<RedDivision/>
+			<RedContainerBorderStyle viewKey={viewKey}/>
+			<RedDivision/>
+		</>
 	}
 	return (
 		<div style={style.container}>
@@ -63,24 +82,7 @@ const RedContainerBorder = ({viewKey}) => {
 				<RedDivision/>
 				<RedContainerBorderWidth viewKey={viewKey}/>
 				<RedDivision/>
-				{
-					mode === ConstBoxBorderModeType.GRADIENT ? <>
-							<RedContainerBorderImageOutset viewKey={viewKey}/>
-							<RedDivision/>
-							<RedContainerBorderImageSlice viewKey={viewKey}/>
-							<RedDivision/>
-							<RedContainerBorderImageRepeat viewKey={viewKey}/>
-							<RedDivision/>
-							<RedContainerBorderGradient viewKey={viewKey}/>
-						</>
-						: <>
-							<RedContainerBorderColor viewKey={viewKey}/>
-							<RedDivision/>
-							<RedContainerBorderStyle viewKey={viewKey}/>
-							<RedDivision/>
-						</>
-				}
-
+				{mode === ConstBoxBorderModeType.GRADIENT ? renderGradient() : renderBasic()}
 			</div>
 		</div>
 	)

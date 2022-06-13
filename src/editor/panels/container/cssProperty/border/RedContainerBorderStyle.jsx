@@ -13,15 +13,13 @@ import RedDivision from "../../../../basicUI/RedDivision.jsx";
  */
 const RedContainerBorderStyle = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
 	const {borderInfo} = containerInfo
 	const {borderStyleInfo} = borderInfo
 	const {mode} = borderStyleInfo
-	// console.log('test mode', mode)
-	// console.log('test borderStyleInfo', borderStyleInfo)
 	const targetBorderStyleInfo = borderStyleInfo[mode]
 	const HD_changeBorderStyleMode = (mode) => {
 		gradientActions.update_borderStyleMode(mode)
@@ -42,48 +40,27 @@ const RedContainerBorderStyle = ({viewKey}) => {
 			onChange={(e) => HD_changeBorder(e.target.value, 'borderStyle', true)}
 		/>
 	}
+	const renderItem = key => {
+		return <div style={style.itemBox}>
+			{key}
+			<RedSelect
+				flexGrow={1}
+				optionData={ConstBoxBorderType}
+				value={targetBorderStyleInfo[`${key}Style`]}
+				onChange={(e) => HD_changeBorder(e.target.value, `${key}Style`, true)}
+			/>
+		</div>
+	}
 	const renderSolo = () => {
 		return <div style={style.previewBoxRoot}>
 			<div style={style.previewBox}>
 				<div style={style.top}>
-					<div style={style.itemBox}>
-						Top
-						<RedSelect
-							flexGrow={1}
-							optionData={ConstBoxBorderType}
-							value={targetBorderStyleInfo['topStyle']}
-							onChange={(e) => HD_changeBorder(e.target.value, 'topStyle', true)}
-						/>
-					</div>
-					<div style={style.itemBox}>
-						Right
-						<RedSelect
-							flexGrow={1}
-							optionData={ConstBoxBorderType}
-							value={targetBorderStyleInfo['rightStyle']}
-							onChange={(e) => HD_changeBorder(e.target.value, 'rightStyle', true)}
-						/>
-					</div>
+					{renderItem('top')}
+					{renderItem('right')}
 				</div>
 				<div style={style.bottom}>
-					<div style={style.itemBox}>
-						Left
-						<RedSelect
-							flexGrow={1}
-							optionData={ConstBoxBorderType}
-							value={targetBorderStyleInfo['leftStyle']}
-							onChange={(e) => HD_changeBorder(e.target.value, 'leftStyle', true)}
-						/>
-					</div>
-					<div style={style.itemBox}>
-						Bottom
-						<RedSelect
-							flexGrow={1}
-							optionData={ConstBoxBorderType}
-							value={targetBorderStyleInfo['bottomStyle']}
-							onChange={(e) => HD_changeBorder(e.target.value, 'bottomStyle', true)}
-						/>
-					</div>
+					{renderItem('left')}
+					{renderItem('bottom')}
 				</div>
 			</div>
 		</div>
@@ -115,16 +92,7 @@ const RedContainerBorderStyle = ({viewKey}) => {
 				</div>
 			</div>
 			<RedDivision/>
-			{
-				mode === ConstBoxBorderPropertyModeType.SOLO ? renderSolo() : renderMerge()
-			}
-
-			{/*{JSON.stringify(borderStyleInfo)}*/}
-			{/*{*/}
-			{/*  mode === ConstBoxBorderPropertyModeType.SOLO*/}
-			{/*    ? <RedContainerBorderSolo viewKey={viewKey} valueKey={'borderStyle'} targetInfo={targetBorderWidthInfo}/>*/}
-			{/*    : <RedContainerBorderMerge viewKey={viewKey} valueKey={'borderStyle'} targetInfo={targetBorderWidthInfo}/>*/}
-			{/*}*/}
+			{mode === ConstBoxBorderPropertyModeType.SOLO ? renderSolo() : renderMerge()}
 		</div>
 	)
 }

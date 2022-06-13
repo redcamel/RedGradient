@@ -14,7 +14,7 @@ import ConstBoxShadowType from "../../../../data/const/ConstBoxShadowType.js";
  */
 const RedContainerBoxShadow = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
@@ -37,6 +37,17 @@ const RedContainerBoxShadow = ({viewKey}) => {
 			value: e.target.value
 		})
 	}
+	const renderItem = key => {
+		return <div style={style.itemBox}>
+			<div>{key}</div>
+			<RedNumberField
+				value={boxShadowInfo[key]} width={'100%'} flexGrow={1}
+				onInput={(value, saveHistoryYn) => HD_changeBoxShadow(value, key, saveHistoryYn)}
+				onKeyDown={(value, saveHistoryYn) => HD_changeBoxShadow(value, key, saveHistoryYn)}
+				onBlur={(value, saveHistoryYn) => HD_changeBoxShadow(value, key, saveHistoryYn)}
+			/>
+		</div>
+	}
 	return (
 		<div style={style.container}>
 			<div style={style.title}>
@@ -53,41 +64,12 @@ const RedContainerBoxShadow = ({viewKey}) => {
 				value={boxShadowInfo.type}
 				onChange={HD_changeBoxShadowType}
 			/>
+			{renderItem('blur')}
+			{renderItem('spread')}
 			<div style={style.itemBox}>
-				<div>blur</div>
-				<RedNumberField value={boxShadowInfo.blur} width={'100%'} flexGrow={1}
-												onInput={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'blur', saveHistoryYn)}
-												onKeyDown={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'blur', saveHistoryYn)}
-												onBlur={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'blur', saveHistoryYn)}
-
-				/>
+				{renderItem('offsetX')}
+				{renderItem('offsetY')}
 			</div>
-			<div style={style.itemBox}>
-
-				<div>spread</div>
-				<RedNumberField value={boxShadowInfo.spread} width={'100%'} flexGrow={1}
-												onInput={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'spread', saveHistoryYn)}
-												onKeyDown={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'spread', saveHistoryYn)}
-												onBlur={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'spread', saveHistoryYn)}
-				/>
-			</div>
-			<div style={style.itemBox}>
-				<div>x</div>
-				<RedNumberField value={boxShadowInfo.offsetX} width={'100%'} flexGrow={1}
-												onInput={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'offsetX', saveHistoryYn)}
-												onKeyDown={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'offsetX', saveHistoryYn)}
-												onBlur={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'offsetX', saveHistoryYn)}
-
-				/>
-				<div>y</div>
-				<RedNumberField value={boxShadowInfo.offsetY} width={'100%'} flexGrow={1}
-												onInput={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'offsetY', saveHistoryYn)}
-												onKeyDown={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'offsetY', saveHistoryYn)}
-												onBlur={(value, saveHistoryYn) => HD_changeBoxShadow(value, 'offsetY', saveHistoryYn)}
-				/>
-			</div>
-
-
 		</div>
 	)
 }

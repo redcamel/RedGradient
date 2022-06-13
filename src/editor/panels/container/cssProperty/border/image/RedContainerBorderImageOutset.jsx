@@ -20,8 +20,6 @@ const RedContainerBorderImageOutset = ({viewKey}) => {
 	const {borderInfo} = containerInfo
 	const {borderImageOutsetInfo} = borderInfo
 	const {mode} = borderImageOutsetInfo
-	// console.log('test mode', mode)
-	// console.log('test borderRadiusInfo', borderRadiusInfo)
 	const targetBorderImageOutsetInfo = borderImageOutsetInfo[mode]
 	const HD_changeBorderRadiusMode = (mode) => {
 		gradientActions.update_borderImageOutsetMode(mode)

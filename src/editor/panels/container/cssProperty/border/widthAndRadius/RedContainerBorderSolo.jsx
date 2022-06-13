@@ -87,6 +87,11 @@ const column = [
 /**
  * 컨테이너 RedContainerBorderSolo 담당
  * @param viewKey
+ * @param valueKey
+ * @param targetInfo
+ * @param useUnit
+ * @param unitData
+ * @param layout
  * @returns {JSX.Element}
  * @constructor
  */
@@ -99,7 +104,7 @@ const RedContainerBorderSolo = ({
 																	layout = RedContainerBorderSolo.LAYOUT_BASIC
 																}) => {
 	const {actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const HD_changeBorder = (value, key, saveHistoryYn) => {
 		gradientActions[`update_${valueKey}`]({
 			viewKey,

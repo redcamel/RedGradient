@@ -2,7 +2,7 @@ import {faFolder, faSliders} from "@fortawesome/free-solid-svg-icons";
 import HELPER_GET_DATA from "../../../../HELPER_GET_DATA.js";
 
 /**
- * Layer stepInfo 업데이트
+ * Layer stepInfo  update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_updateLayerStepInfoByKey = {
@@ -13,12 +13,10 @@ const cmd_updateLayerStepInfoByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const payloads = payload instanceof Array ? payload : [payload]
 		payloads.forEach(payload => {
-			const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+			const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 			const info = layerGroupInfo['groupList'][payload.groupIndex]['children'][payload.groupLayerIndex]['timeline'][payload.time]
 			if (payload.targetInfo) info['stepInfoList'][payload.stepIDX][payload.targetInfo][payload.key] = payload.value
 			else info['stepInfoList'][payload.stepIDX][payload.key] = payload.value

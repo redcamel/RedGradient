@@ -13,10 +13,8 @@ const cmd_duplicateFilter = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
-		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const newData = HELPER_GET_DATA.makeNewState(state)
+		const targetViewInfo = HELPER_GET_DATA.getActiveViewInfo(newData)
 		const {containerInfo} = targetViewInfo
 		const {filterInfo} = containerInfo
 		const duplicateData = JSON.parse(JSON.stringify(filterInfo[payload.target_filterIndex]))

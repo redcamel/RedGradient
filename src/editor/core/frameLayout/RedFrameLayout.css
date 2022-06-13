@@ -12,6 +12,50 @@
     color: var(--main-color);
 }
 
+.RedFrameLayout_containerLeft {
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: #222;
+    gap: 1px;
+    border-right: 1px solid #111
+}
+
+.RedFrameLayout_containerLeft {
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: #222;
+    gap: 1px;
+    border-right: 1px solid #111
+}
+
+.RedFrameLayout_containerRight {
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: #222;
+    gap: 1px;
+    border-left: 1px solid #111
+}
+
+.RedFrameLayout_containerLeftRightBox {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
+    width: 100%;
+    gap: 4px;
+    writing-mode: vertical-rl;
+    cursor: pointer
+}
+
+
 .RedFrameLayout_top {
     display: flex;
     border-bottom: 1px solid var(--frame-border-color);

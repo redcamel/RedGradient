@@ -1,4 +1,5 @@
 import {faMagnet} from "@fortawesome/free-solid-svg-icons";
+import HELPER_GET_DATA from "../../../HELPER_GET_DATA";
 
 /**
  * updateSnapToContainer
@@ -13,9 +14,7 @@ const cmd_updateSnapToContainer = {
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const {viewKey, value} = payload
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		newData['snapToContainer'] = value
 		action.label = `${viewKey} Snap To Container : ${value.toString()}`
 

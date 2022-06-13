@@ -1,4 +1,4 @@
-import calcLayerGradient from "../../layer/calcLayerGradient";
+import calcGradientLayer from "../../layer/js/calcGradientLayer";
 import ContextGradient from "../../../contexts/system/ContextGradient";
 import {useContext} from "react";
 import {toast} from "react-toastify";
@@ -6,7 +6,7 @@ import RedToastSkin from "../../../core/RedToastSkin";
 
 const RedGroupPresetItem = ({data, deleteMode, idx}) => {
 	const {actions} = useContext(ContextGradient)
-	// console.log(data)
+
 	const HD_setData = () => {
 		if (!deleteMode) {
 			actions.addGroup(JSON.parse(JSON.stringify(data)))
@@ -18,8 +18,8 @@ const RedGroupPresetItem = ({data, deleteMode, idx}) => {
 			style={{
 				...style.container,
 				background: data['children'].map((v2, layerIndex) => {
-					// console.log(v2)
-					return v2['visibleYn'] ? calcLayerGradient(v2) : null
+
+					return v2['visibleYn'] ? calcGradientLayer(v2) : null
 				}).filter(Boolean).join(','),
 			}}
 			onClick={HD_setData}

@@ -9,7 +9,7 @@ const cmd_setActiveFrameLayoutKey = {
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const {key, icon} = payload
-		console.log('value', key, icon)
+
 		const newData = {
 			...state
 		}

@@ -2,9 +2,10 @@ import ConstCanvasViewKey from "../../../data/const/ConstCanvasViewKey.js";
 import ConstUnitPxPercent from "../../../data/const/ConstUnitPxPercent.js";
 
 /**
- * 픽셀 계산된 레이아웃 사이즈를 알려줌
+ *
  * @param state
- * @returns {{raw: {top: number, left: number, x: number, width: number, y: number, height: number}, viewScalePixel: {top: string, left: string, x: string, width: string, y: string, height: string}}}
+ * @param viewScale
+ * @returns {{}}
  */
 const getCalcedContainerEditorLayoutInfo_pixel = (state, viewScale = 1) => {
 	const {canvasInfo, deviceInfo} = state

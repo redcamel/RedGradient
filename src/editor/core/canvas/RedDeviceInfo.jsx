@@ -28,13 +28,7 @@ const RedDeviceInfo = ({children}) => {
 			break
 		}
 	}
-	const HD_changeSize = (value, key, saveHistoryYn) => {
-		gradientActions.updateDeviceByKey({
-			key,
-			value,
-			saveHistoryYn
-		})
-	}
+	const HD_changeSize = (value, key, saveHistoryYn) => gradientActions.updateDeviceByKey({key, value, saveHistoryYn})
 	return (
 		<div className={'RedCanvasFrame_topContainer'}>
 			{children}
@@ -42,23 +36,20 @@ const RedDeviceInfo = ({children}) => {
 			<RedSelect
 				optionData={keyNameData}
 				value={currentKeyName}
-				onChange={e => {
-					gradientActions.updateDevicePreset({
-						value: e.target.value
-					})
-				}}
+				onChange={e => gradientActions.updateDevicePreset({value: e.target.value})}
 			/>
-			width : <RedNumberField value={sizeInfo['width']} width={'75px'}
-															onInput={(value, saveHistoryYn) => HD_changeSize(value, 'width', saveHistoryYn)}
-															onKeyDown={(value, saveHistoryYn) => HD_changeSize(value, 'width', saveHistoryYn)}
-															onBlur={(value, saveHistoryYn) => HD_changeSize(value, 'width', saveHistoryYn)}
+			width : <RedNumberField
+			value={sizeInfo['width']} width={'75px'}
+			onInput={(value, saveHistoryYn) => HD_changeSize(value, 'width', saveHistoryYn)}
+			onKeyDown={(value, saveHistoryYn) => HD_changeSize(value, 'width', saveHistoryYn)}
+			onBlur={(value, saveHistoryYn) => HD_changeSize(value, 'width', saveHistoryYn)}
 		/>
-			height : <RedNumberField value={sizeInfo['height']} width={'75px'}
-															 onInput={(value, saveHistoryYn) => HD_changeSize(value, 'height', saveHistoryYn)}
-															 onKeyDown={(value, saveHistoryYn) => HD_changeSize(value, 'height', saveHistoryYn)}
-															 onBlur={(value, saveHistoryYn) => HD_changeSize(value, 'height', saveHistoryYn)}
+			height : <RedNumberField
+			value={sizeInfo['height']} width={'75px'}
+			onInput={(value, saveHistoryYn) => HD_changeSize(value, 'height', saveHistoryYn)}
+			onKeyDown={(value, saveHistoryYn) => HD_changeSize(value, 'height', saveHistoryYn)}
+			onBlur={(value, saveHistoryYn) => HD_changeSize(value, 'height', saveHistoryYn)}
 		/>
-
 		</div>
 	)
 }

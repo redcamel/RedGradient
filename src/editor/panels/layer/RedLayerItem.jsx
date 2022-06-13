@@ -7,7 +7,7 @@ import RedTextField from "../../basicUI/RedTextField.jsx";
 import RedToolTipIcon from "../../basicUI/icon/RedToolTipIcon.jsx";
 import ConstLayerSizeValue from "../../../data/const/ConstLayerSizeValue.js";
 import RedLayerPreviewBackgroundType from "./helper/RedLayerPreviewBackgroundType.jsx";
-import calcLayerGradient from "./calcLayerGradient";
+import calcGradientLayer from "./js/calcGradientLayer";
 
 /**
  * 레이어
@@ -17,7 +17,6 @@ import calcLayerGradient from "./calcLayerGradient";
 const RedLayerItem = ({
 												layerData, groupIdx, layerIdx,
 												dummyDropTargetLayerYn,
-												dummySameGroupYn,
 												dummyYn,
 												onDragStart,
 												onDragEnter,
@@ -27,7 +26,7 @@ const RedLayerItem = ({
 												onDrop,
 											}) => {
 	const {state, actions: gradientActions, state: {layerGroupViewSizeInfo}} = useContext(ContextGradient)
-	const targetView = HELPER_GET_DATA.getTargetViewInfo(state)
+	const targetView = HELPER_GET_DATA.getActiveViewInfo(state)
 	const {layerGroupInfo} = targetView
 	const {activeGroupIndex, activeGroupLayerIndex, groupList} = layerGroupInfo
 	const previewSize = ConstLayerSizeValue[layerGroupViewSizeInfo['size']]
@@ -53,7 +52,7 @@ const RedLayerItem = ({
 				groupIndex: groupIdx,
 				groupLayerIndex: layerIdx,
 				value: !visibleYn,
-				saveHistoryYn : true
+				saveHistoryYn: true
 			}
 		)
 	}
@@ -92,7 +91,6 @@ const RedLayerItem = ({
 				onDragEnd={onDragEnd}
 				onDrop={dummyDropTargetLayerYn ? onDrop : () => {
 				}}
-
 			>
 				<div
 					className={'RedLayerItem_stepItemArea'}
@@ -112,22 +110,23 @@ const RedLayerItem = ({
 				</div>
 			</div>
 			<div className={'RedLayerItem_arrow_container'}>
-				{prevSwapAble ? <RedToolTipIcon icon={faArrowUp} toolTip={'Move Up'} style={{fontSize: '9px'}}
-																				onClick={(e) => HD_swapLayer(e, layerIdx, layerIdx - 1)}
+				{prevSwapAble ? <RedToolTipIcon
+					icon={faArrowUp}
+					toolTip={'Move Up'} align={'left'}
+					onClick={(e) => HD_swapLayer(e, layerIdx, layerIdx - 1)}
 				/> : ''}
-				{nextSwapAble ? <RedToolTipIcon icon={faArrowDown} toolTip={'Move Down'} style={{fontSize: '9px'}}
-																				onClick={(e) => HD_swapLayer(e, layerIdx, layerIdx + 1)}
+				{nextSwapAble ? <RedToolTipIcon
+					icon={faArrowDown}
+					toolTip={'Move Down'} align={'left'}
+					onClick={(e) => HD_swapLayer(e, layerIdx, layerIdx + 1)}
 				/> : ''}
 			</div>
 			<div className={`RedLayerItem_label ${activeGroupLayerYn ? 'active' : ''}`} style={{pointerEvents: 'none'}}>
-
 				<RedToolTipIcon
 					icon={visibleYn ? faEye : faEyeSlash}
 					activeYn={visibleYn}
-					style={{fontSize: '14px'}}
 					onClick={(e) => HD_setVisibleYn(e)}
 				/>
-				{/*<FontAwesomeIcon icon={faPaintBrush} fixedWidth={true}/>*/}
 				<RedTextField
 					value={layerData['label']} width={'120px'}
 					onInput={HD_changeLayerLabel}
@@ -142,14 +141,7 @@ const RedLayerItem = ({
 				height: previewSize[1] + 'px',
 				pointerEvents: 'none'
 			}}>
-				<div
-					style={{
-						width: '100%',
-						height: '100%',
-						background: calcLayerGradient(layerData),
-					}}
-				/>
-
+				<div style={{width: '100%', height: '100%', background: calcGradientLayer(layerData)}}/>
 			</div>
 		</div>
 	)

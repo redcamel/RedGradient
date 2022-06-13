@@ -2,7 +2,7 @@ import ContextGradient from "../../../../contexts/system/ContextGradient.js";
 import {useContext} from "react";
 import ConstBoxBorderPropertyModeType from "./ConstBoxBorderPropertyModeType.js";
 import RedColorPickerButton from "../../../../basicUI/RedColorPickerButton.jsx";
-import RedDivision from "../../../../basicUI/RedDivision.jsx";
+import RedDivision from "../../../../basicUI/RedDivision";
 
 /**
  * 컨테이너 RedContainerBorderColor 담당
@@ -12,7 +12,7 @@ import RedDivision from "../../../../basicUI/RedDivision.jsx";
  */
 const RedContainerBorderColor = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
@@ -24,7 +24,7 @@ const RedContainerBorderColor = ({viewKey}) => {
 		gradientActions.update_borderColorMode(mode)
 	}
 	const HD_updateColorFunction = (value, key) => {
-		gradientActions[`update_borderColor`]({
+		gradientActions.update_borderColor({
 			viewKey,
 			key,
 			mode: mode,
@@ -44,53 +44,29 @@ const RedContainerBorderColor = ({viewKey}) => {
 			</div>
 		</div>
 	}
+	const HD_getColor = (key) => targetBorderColorInfo[key]
+	const renderSoloItem = key => {
+		return <div style={style.itemBox}>
+			{key.charAt(0).toUpperCase()}
+			<div style={style.itemValue}>
+				{targetBorderColorInfo[`${key}BorderColor`]}
+				<RedColorPickerButton
+					getColorFunction={() => HD_getColor(`${key}BorderColor`)}
+					updateFunction={(v) => HD_updateColorFunction(v, `${key}BorderColor`)}
+				/>
+			</div>
+		</div>
+	}
 	const renderSolo = () => {
-		const HD_getColor = (key) => targetBorderColorInfo[key]
 		return <div style={style.previewBoxRoot}>
 			<div style={style.previewBox}>
 				<div style={style.top}>
-					<div style={style.itemBox}>
-						T
-						<div style={style.itemValue}>
-							{targetBorderColorInfo['topBorderColor']}
-							<RedColorPickerButton
-								getColorFunction={() => HD_getColor('topBorderColor')}
-								updateFunction={(v) => HD_updateColorFunction(v, 'topBorderColor')}
-							/>
-						</div>
-					</div>
-					<div style={style.itemBox}>
-						R
-						<div style={style.itemValue}>
-							{targetBorderColorInfo['rightBorderColor']}
-							<RedColorPickerButton
-								getColorFunction={() => HD_getColor('rightBorderColor')}
-								updateFunction={(v) => HD_updateColorFunction(v, 'rightBorderColor')}
-							/>
-						</div>
-					</div>
+					{renderSoloItem('top')}
+					{renderSoloItem('right')}
 				</div>
 				<div style={style.bottom}>
-					<div style={style.itemBox}>
-						L
-						<div style={style.itemValue}>
-							{targetBorderColorInfo['leftBorderColor']}
-							<RedColorPickerButton
-								getColorFunction={() => HD_getColor('leftBorderColor')}
-								updateFunction={(v) => HD_updateColorFunction(v, 'leftBorderColor')}
-							/>
-						</div>
-					</div>
-					<div style={style.itemBox}>
-						B
-						<div style={style.itemValue}>
-							{targetBorderColorInfo['bottomBorderColor']}
-							<RedColorPickerButton
-								getColorFunction={() => HD_getColor('bottomBorderColor')}
-								updateFunction={(v) => HD_updateColorFunction(v, 'bottomBorderColor')}
-							/>
-						</div>
-					</div>
+					{renderSoloItem('left')}
+					{renderSoloItem('bottom')}
 				</div>
 			</div>
 		</div>
@@ -122,9 +98,7 @@ const RedContainerBorderColor = ({viewKey}) => {
 				</div>
 			</div>
 			<RedDivision/>
-			{
-				mode === ConstBoxBorderPropertyModeType.SOLO ? renderSolo() : renderMerge()
-			}
+			{mode === ConstBoxBorderPropertyModeType.SOLO ? renderSolo() : renderMerge()}
 
 		</div>
 	)
@@ -163,7 +137,9 @@ const style = {
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		gap: '5px',
-		width: '50%'
+		width: '50%',
+		minWidth: '50%',
+		maxWidth: '50%'
 	},
 	itemValue: {
 		display: 'flex',

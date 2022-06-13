@@ -8,7 +8,7 @@ import RedSelect from "../../basicUI/RedSelect";
 import gsap from "gsap";
 import RedColorPickerButton from "../../basicUI/RedColorPickerButton";
 import DataRedGradientStepInfo from "../../../data/DataRedGradientStepInfo";
-import calcLayerGradient from "../layer/calcLayerGradient";
+import calcGradientLayer from "../layer/js/calcGradientLayer";
 import DataRedGradientLayer from "../../../data/DataRedGradientLayer";
 import ConstGradientStepMode from "../../../data/const/ConstGradientStepMode";
 import ConstEndingShape from "../../../data/const/ConstEndingShape";
@@ -73,8 +73,7 @@ const RedTemplateLayer = () => {
 		data.timeline[0].stepInfoList = colorList
 		data.timeline[0].valueInfo.endingShape = ConstEndingShape.CIRCLE
 		data.type = state.type
-		gradients = calcLayerGradient(data)
-		console.log(gradients)
+		gradients = calcGradientLayer(data)
 		return gradients;
 	};
 	const repeatYn = state.type.indexOf('repeating') > -1
@@ -94,7 +93,7 @@ const RedTemplateLayer = () => {
 			let tETween = gsap.to(tS, {value: maxRange, duration: 1, ease: ease});
 			tETween.pause();
 			tETween.seek((index + 1) / len);
-			// console.log(tSTween)
+
 			tS = tSTween['ratio'] * maxRange;
 			tE = tETween['ratio'] * maxRange;
 			let tColor
@@ -109,10 +108,10 @@ const RedTemplateLayer = () => {
 				tempColorList[index]['start']['stop'] = tS;
 				tempColorList[index]['end']['stop'] = tE;
 			}
-			// tempColorList[index]['start']['colorHint'] = tColor
+
 			tempColorList[index]['end']['colorHint'] = tempColorList[index]['start']['colorHint']
 			tempColorList[index]['end']['stop'] = tempColorList[index + 1] ? tempColorList[index + 1]['start']['stop'] : maxRange;
-			// console.log(tempColorList[index])
+
 			const tColorData = tempColorList[index];
 			return <div
 				className={'RedTemplateLayer_Container_colors_item'}
@@ -254,7 +253,7 @@ const RedTemplateLayer = () => {
 						getColorFunction={() => state.startEndColor['start']['colorHint']}
 						updateFunction={(v) => {
 							state.startEndColor['start']['colorHint'] = v['value']
-							// console.log(v)
+
 							setState(prev => ({...prev, tempColorList: []}))
 						}}
 					/>
@@ -265,7 +264,7 @@ const RedTemplateLayer = () => {
 						getColorFunction={() => state.startEndColor['end']['colorHint']}
 						updateFunction={(v) => {
 							state.startEndColor['end']['colorHint'] = v['value']
-							// console.log(v)
+
 							setState(prev => ({...prev, tempColorList: []}))
 						}}
 					/>

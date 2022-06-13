@@ -2,19 +2,18 @@ import ContextGradient from "../../../contexts/system/ContextGradient.js";
 import {useContext, useState} from "react";
 import ConstCanvasViewKey from "../../../../data/const/ConstCanvasViewKey.js";
 import ConstCanvasScale from "./ConstCanvasScale.js";
-import RedCanvas from "../RedCanvas.jsx";
+import RedCanvas from "../canvas/RedCanvas.jsx";
 import './RedCanvasWindow.css'
 import RedGrid from "../grid/RedGrid";
 
 /**
  * 윈도우내 뷰컨트롤 담당
  * @param viewKey
- * @param frameViewKey
  * @param onClick
  * @returns {JSX.Element}
  * @constructor
  */
-const RedCanvasWindowViewControl = ({viewKey, frameViewKey, onClick}) => {
+const RedCanvasWindowViewControl = ({viewKey, onClick}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
 	const [moveModeYn, setMoveModeYn] = useState(false)
 	const {canvasInfo} = state
@@ -23,7 +22,6 @@ const RedCanvasWindowViewControl = ({viewKey, frameViewKey, onClick}) => {
 	const {viewScale, viewOffset} = targetView.viewTransformInfo
 	//
 	const HD_wheel = e => {
-		console.log('tet', e)
 		let t0 = viewScale - e.nativeEvent.deltaY / 1000;
 		if (t0 < 0.05) t0 = 0.05;
 		gradientActions.updateCanvasViewScale({viewKey, value: t0})
@@ -48,7 +46,6 @@ const RedCanvasWindowViewControl = ({viewKey, frameViewKey, onClick}) => {
 		setMoveModeYn(false)
 		document.body.style.cursor = 'default';
 	}
-	// console.log('viewOffset', viewOffset)
 	const scaleKeyData = Object.assign({}, ConstCanvasScale)
 	const intViewScale = parseInt(viewScale * 100)
 	if (!scaleKeyData[`SCALE_${intViewScale}`]) scaleKeyData[`SCALE_${intViewScale}`] = intViewScale
@@ -77,7 +74,6 @@ const RedCanvasWindowViewControl = ({viewKey, frameViewKey, onClick}) => {
 				>
 					<RedCanvas
 						viewKey={viewKey}
-						frameViewKey={frameViewKey}
 						viewScale={viewScale}
 						viewOffset={viewOffset}
 						deviceVisible={targetView['deviceVisible']}

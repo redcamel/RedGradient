@@ -3,6 +3,7 @@
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 import {faBox} from "@fortawesome/free-solid-svg-icons";
+import HELPER_GET_DATA from "../../../HELPER_GET_DATA";
 
 
 const cmd_updateContainerOutlineByKey = {
@@ -14,9 +15,7 @@ const cmd_updateContainerOutlineByKey = {
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const {viewKey, key, value, saveHistoryYn} = payload
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		newData.canvasInfo[viewKey]['containerInfo']['outlineInfo'][key] = value
 		action.label = `${viewKey} Container Outline ${key} : ${value}`
 		return pushHistory(action, newData, saveHistoryYn)

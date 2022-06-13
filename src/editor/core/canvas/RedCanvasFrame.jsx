@@ -17,24 +17,24 @@ import RedDeviceInfo from "./RedDeviceInfo.jsx";
 const RedCanvasFrame = () => {
 	const {state: {systemFrameLayoutInfo}, actions: gradientActions} = useContext(ContextGradient)
 	const {activeLayoutKey} = systemFrameLayoutInfo
-	const SINGLE = ConstCanvasFrameLayout.SINGLE
-	const VERTICAL = ConstCanvasFrameLayout.VERTICAL
-	const HORIZON = ConstCanvasFrameLayout.HORIZON
-	const TRIPLE = ConstCanvasFrameLayout.TRIPLE
+	const {SINGLE, VERTICAL, HORIZON, TRIPLE} = ConstCanvasFrameLayout
+	const makeGetLayout = (data) => {
+		return data.viewList.map((frameViewKey, index) => {
+			const activeYn = index === activeWindowIndex
+			return <RedCanvasWindow
+				key={frameViewKey}
+				frameViewKey={frameViewKey}
+				activeYn={activeYn}
+				onClick={() => setActiveWindowIndex(index)}
+				setLayout={value => setFrameLayoutData(index, value)}
+			/>
+		})
+	}
 	const frameInfo = {
 		[SINGLE]: {
 			icon: faExpand,
 			toolTip: SINGLE,
-			getLayout: () => {
-				return systemFrameLayoutInfo[SINGLE].viewList.map((frameViewKey, index) => {
-					const activeYn = index === activeWindowIndex
-					return <RedCanvasWindow
-						key={frameViewKey}
-						frameViewKey={frameViewKey} activeYn={activeYn}
-						setLayout={value => setFrameLayoutData(index, value)}
-					/>
-				})
-			}
+			getLayout: () => makeGetLayout(systemFrameLayoutInfo[SINGLE])
 		},
 		[VERTICAL]: {
 			icon: faSquarePollHorizontal,
@@ -44,15 +44,7 @@ const RedCanvasFrame = () => {
 				primaryMinSize={10}
 				secondaryMinSize={10} secondaryInitialSize={50}
 			>
-				{systemFrameLayoutInfo[VERTICAL].viewList.map((frameViewKey, index) => {
-					const activeYn = index === activeWindowIndex
-					return <RedCanvasWindow
-						key={frameViewKey}
-						frameViewKey={frameViewKey} activeYn={activeYn}
-						onClick={() => setActiveWindowIndex(index)}
-						setLayout={value => setFrameLayoutData(index, value)}
-					/>
-				})}
+				{makeGetLayout(systemFrameLayoutInfo[VERTICAL])}
 			</SplitterLayout>
 		},
 		[HORIZON]: {
@@ -63,15 +55,7 @@ const RedCanvasFrame = () => {
 				primaryMinSize={10}
 				secondaryInitialSize={50} secondaryMinSize={10}
 			>
-				{systemFrameLayoutInfo[HORIZON].viewList.map((frameViewKey, index) => {
-					const activeYn = index === activeWindowIndex
-					return <RedCanvasWindow
-						key={frameViewKey}
-						frameViewKey={frameViewKey} activeYn={activeYn}
-						onClick={() => setActiveWindowIndex(index)}
-						setLayout={value => setFrameLayoutData(index, value)}
-					/>
-				})}
+				{makeGetLayout(systemFrameLayoutInfo[HORIZON])}
 			</SplitterLayout>
 		},
 		[TRIPLE]: {
@@ -88,41 +72,43 @@ const RedCanvasFrame = () => {
 					secondaryInitialSize={50} secondaryMinSize={10}
 				>
 					<RedCanvasWindow
-						frameViewKey={systemFrameLayoutInfo[TRIPLE].viewList[0]} activeYn={0 === activeWindowIndex}
+						frameViewKey={systemFrameLayoutInfo[TRIPLE].viewList[0]}
+						activeYn={0 === activeWindowIndex}
 						onClick={() => setActiveWindowIndex(0)}
-						setLayout={value => setFrameLayoutData(0, value)}/>
+						setLayout={value => setFrameLayoutData(0, value)}
+					/>
 					<SplitterLayout
 						vertical percentage
 						primaryMinSize={10}
 						secondaryInitialSize={50} secondaryMinSize={10}
 					>
-						<RedCanvasWindow frameViewKey={systemFrameLayoutInfo[TRIPLE].viewList[1]} activeYn={1 === activeWindowIndex}
-														 onClick={() => setActiveWindowIndex(1)}
-														 setLayout={value => setFrameLayoutData(1, value)}/>
+						<RedCanvasWindow
+							frameViewKey={systemFrameLayoutInfo[TRIPLE].viewList[1]}
+							activeYn={1 === activeWindowIndex}
+							onClick={() => setActiveWindowIndex(1)}
+							setLayout={value => setFrameLayoutData(1, value)}
+						/>
 					</SplitterLayout>
 				</SplitterLayout>
-				<RedCanvasWindow frameViewKey={systemFrameLayoutInfo[TRIPLE].viewList[2]} activeYn={2 === activeWindowIndex}
-												 onClick={() => setActiveWindowIndex(2)} setLayout={value => setFrameLayoutData(2, value)}/>
+				<RedCanvasWindow
+					frameViewKey={systemFrameLayoutInfo[TRIPLE].viewList[2]}
+					activeYn={2 === activeWindowIndex}
+					onClick={() => setActiveWindowIndex(2)}
+					setLayout={value => setFrameLayoutData(2, value)}
+				/>
 			</SplitterLayout>
 		}
 	}
 	const activeWindowIndex = systemFrameLayoutInfo[activeLayoutKey]['activeWindowIndex']
-	const setActiveWindowIndex = (value) => {
-		gradientActions.setActiveWindowIndex({
-			value
-		})
-	}
+	const setActiveWindowIndex = (value) => gradientActions.setActiveWindowIndex({value})
 	const setFrameLayoutData = (index, value) => {
-		// console.log('setFrameLayoutData', index, value)
 		gradientActions.setFrameLayoutData({
 			layoutKey: activeLayoutKey,
 			index,
 			value
 		})
 	}
-	const setActiveFrameLayoutKey = (key, icon) => {
-		gradientActions.setActiveFrameLayoutKey({key, icon})
-	}
+	const setActiveFrameLayoutKey = (key, icon) => gradientActions.setActiveFrameLayoutKey({key, icon})
 	const entries = Object.entries(frameInfo)
 	const renderWindows = () => {
 		return <div className={'RedCanvasFrame_layoutContainer'} key={activeLayoutKey}>
@@ -131,7 +117,6 @@ const RedCanvasFrame = () => {
 	}
 	return (
 		<div className={'RedCanvasFrame_container'}>
-
 			<RedDeviceInfo>
 				<div style={{display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap'}}>
 					{

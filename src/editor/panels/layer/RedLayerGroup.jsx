@@ -1,4 +1,3 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import './RedLayerGroup.css'
 import {faCopy, faFileMedical, faFolderPlus, faLayerGroup, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {useContext} from "react";
@@ -20,14 +19,13 @@ import RedToolTipIcon from "../../basicUI/icon/RedToolTipIcon";
 const RedLayerGroup = () => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
 	const {actions: windowActions} = useContext(ContextWindows)
-	const targetView = HELPER_GET_DATA.getTargetViewInfo(state)
+	const targetView = HELPER_GET_DATA.getActiveViewInfo(state)
 	const {layerGroupInfo} = targetView
 	const {groupList, activeGroupIndex, activeGroupLayerIndex} = layerGroupInfo
 	const activeGroupChildren = groupList[activeGroupIndex]?.['children'] || []
 	const hasGroup = groupList.length
 	const hasGroupChildren = activeGroupChildren.length
-	const hasGroupOpacity = hasGroup ? 1 : 0.25
-	const hasGroupChildrenOpacity = hasGroupChildren ? 1 : 0.25
+
 	const HD_removeLayer = () => {
 		if (!hasGroup || !hasGroupChildren) return
 		gradientActions.removeLayer({
@@ -49,7 +47,7 @@ const RedLayerGroup = () => {
 			groupLayerIndex: activeGroupLayerIndex
 		})
 	}
-	const HD_addGroup = (e) => {
+	const HD_addGroup = () => {
 		gradientActions.addGroup()
 	}
 	const HD_addTemplate = () => {
@@ -71,7 +69,7 @@ const RedLayerGroup = () => {
 					{/*<div className={'RedLayerGroup_addTemplate'} onClick={HD_addTemplate}>*/}
 					{/*	<FontAwesomeIcon*/}
 					{/*		icon={faFileMedical}*/}
-					{/*		style={{cursor: 'pointer', opacity: hasGroupOpacity}}*/}
+					{/*		*/}
 					{/*		size={'1x'}*/}
 					{/*		fixedWidth={true}*/}
 					{/*	/>*/}
@@ -91,7 +89,6 @@ const RedLayerGroup = () => {
 							? <>
 								<RedToolTipIcon
 									icon={faFileMedical}
-									style={{cursor: 'pointer', opacity: hasGroupOpacity}}
 									size={'1x'}
 									fixedWidth={true}
 									toolTip={'add layer'}
@@ -100,7 +97,6 @@ const RedLayerGroup = () => {
 								/>
 								<RedToolTipIcon
 									icon={faCopy}
-									style={{cursor: 'pointer', opacity: hasGroupChildrenOpacity}}
 									size={'1x'}
 									toolTip={'duplicate layer'}
 									align={'top'}
@@ -110,7 +106,6 @@ const RedLayerGroup = () => {
 								<RedToolTipIcon
 									icon={faTrashAlt}
 									toolTip={'remove layer'}
-									style={{cursor: 'pointer', opacity: hasGroupChildrenOpacity}}
 									size={'1x'}
 									align={'topRight'}
 									fixedWidth={true}

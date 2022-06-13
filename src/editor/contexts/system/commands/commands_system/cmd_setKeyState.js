@@ -1,5 +1,5 @@
 /**
- * 키보드의 상태를 업데이트
+ * 키보드의 상태를  update
  * @type {{description: {key: string}, execute: (function(*, *, *): *&{keyState})}}
  */
 const cmd_setKeyState = {

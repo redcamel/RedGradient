@@ -182,12 +182,12 @@ const RedNewDocument = () => {
 					<div className={'RedNewDocument_setItemBox_item'} style={{width: '100%', display: 'flex'}}>
 						<div
 							className={'RedNewDocument_make_button'}
-							onClick={e => HD_newDocument(activeDeviceData)}>
+							onClick={() => HD_newDocument(activeDeviceData)}>
 							생성
 						</div>
 						<div
 							className={'RedNewDocument_make_button'}
-							onClick={e => windowActions.removeLastWindow()}>
+							onClick={() => windowActions.removeLastWindow()}>
 							닫기
 						</div>
 					</div>

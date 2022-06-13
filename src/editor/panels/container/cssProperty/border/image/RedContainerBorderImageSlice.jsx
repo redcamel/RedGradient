@@ -14,15 +14,13 @@ import ConstUnitNumberPercent from "../../../../../../data/const/ConstUnitNumber
  */
 const RedContainerBorderImageSlice = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
 	const {borderInfo} = containerInfo
 	const {borderImageSliceInfo} = borderInfo
 	const {mode} = borderImageSliceInfo
-	// console.log('test mode', mode)
-	// console.log('test borderRadiusInfo', borderRadiusInfo)
 	const targetBorderImageSliceInfo = borderImageSliceInfo[mode]
 	const {borderImageSliceFill} = targetBorderImageSliceInfo
 	const HD_changeBorderImageSliceMode = (mode) => {
@@ -42,7 +40,7 @@ const RedContainerBorderImageSlice = ({viewKey}) => {
 			<div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
 				Border Image Slice
 
-				<label onClick={(e) => HD_changeFill(!borderImageSliceFill, 'borderImageSliceFill', true)}>
+				<label onClick={() => HD_changeFill(!borderImageSliceFill, 'borderImageSliceFill', true)}>
 					<div style={{display: 'flex', alignItems: 'center'}}>
 						<input type={'checkbox'} key={Math.random()} checked={borderImageSliceFill}/>Fill
 					</div>

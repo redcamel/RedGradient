@@ -1,4 +1,5 @@
 import {faBox} from "@fortawesome/free-solid-svg-icons";
+import HELPER_GET_DATA from "../../HELPER_GET_DATA";
 
 /**
  * 컨테이너 박스사이징 변경
@@ -13,9 +14,7 @@ const cmd_updateContainerBoxSizing = {
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const {viewKey, value} = payload
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		newData.canvasInfo[viewKey]['containerInfo']['boxSizing'] = value
 		action.label = `${viewKey} Container BoxSizing : ${value}`
 		return pushHistory(action, newData, true)

@@ -14,7 +14,7 @@ import {faFillDrip} from "@fortawesome/free-solid-svg-icons";
  */
 const RedContainerFilter = () => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	const targetView = HELPER_GET_DATA.getTargetViewInfo(state)
+	const targetView = HELPER_GET_DATA.getActiveViewInfo(state)
 	const {containerInfo} = targetView
 	const {filterInfo} = containerInfo
 	const HD_addFilter = () => {

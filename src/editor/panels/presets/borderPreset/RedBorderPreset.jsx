@@ -218,9 +218,9 @@ const RedBorderPreset = () => {
 												if (pass) {
 													const t0 = new DataRedGradientLayer()
 													checkData.forEach(data => {
-														console.log(data)
+
 														for (const k in t0) {
-															console.log('k', k)
+
 															if (!data.hasOwnProperty(k)) {
 																pass = false
 																break

@@ -9,6 +9,7 @@ import './RedToolTipIcon.css'
  * @param toolTip
  * @param shortcut
  * @param size
+ * @param align
  * @returns {JSX.Element}
  * @constructor
  */

@@ -30,7 +30,6 @@ import HELPER_GET_DATA from "../../../contexts/system/HELPER_GET_DATA";
 const RedGradientStepEditorItem = ({
 																		 gradientType,
 																		 data,
-																		 onChange,
 																		 borderGradientMode,
 																		 activeYn,
 																		 time,
@@ -50,7 +49,6 @@ const RedGradientStepEditorItem = ({
 																	 }) => {
 	const {state: gradientState, actions} = useContext(ContextGradient)
 	const HD_changeStepInfo = (targetInfo, key, value, saveHistoryYn) => {
-		// console.log('HD_changeInfo', targetInfo, key, value, saveHistoryYn)
 		const updateList = []
 		if (key === 'mode') {
 			if (value !== data['mode'] && value === ConstGradientStepMode.RANGE) {
@@ -62,10 +60,9 @@ const RedGradientStepEditorItem = ({
 				data[targetInfo]['divideYn'] = false
 			} else {
 				const {
-					layerSizeW,
-					layerSizeH
+					layerSizeW
 				} = HELPER_GET_DATA.calcLayerPixelSize(gradientState, HELPER_GET_DATA.getActiveLayerInfo(gradientState))
-				// console.log('getActiveLayerInfo',value,layerSizeW,layerSizeH,value)
+
 				if (value !== data[targetInfo]['stopUnit']) {
 					if (value !== ConstUnitPxPercentAuto.AUTO) {
 						//TODO 개선해야함
@@ -90,7 +87,7 @@ const RedGradientStepEditorItem = ({
 					}
 
 				}
-				console.log('getActiveLayerInfo', value, layerSizeW, layerSizeH, value)
+
 			}
 
 

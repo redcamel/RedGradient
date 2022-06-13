@@ -14,11 +14,9 @@ const cmd_updateBorderGradientStepValueInfoByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const payloads = payload instanceof Array ? payload : [payload]
-		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const targetViewInfo = HELPER_GET_DATA.getActiveViewInfo(newData)
 		payloads.forEach(payload => {
 			const info = targetViewInfo.containerInfo['borderInfo']['borderGradientInfo']['timeline'][payload.time]
 			if (payload.targetInfo) info['stepInfoList'][payload.stepIDX][payload.targetInfo][payload.key] = payload.value

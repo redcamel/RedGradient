@@ -1,6 +1,6 @@
 import RedItemTitle from "../../../basicUI/RedItemTitle.jsx";
 import RedDivision from "../../../basicUI/RedDivision.jsx";
-import calcLayerGradient from "../../layer/calcLayerGradient.js";
+import calcGradientLayer from "../../layer/js/calcGradientLayer.js";
 import ConstGradientType from "../../../../data/const/ConstGradientType.js";
 import ConstGradientRepeatType from "../../../../data/const/ConstGradientRepeatType.js";
 import ConstBlendModeType from "../../../../data/const/ConstBlendModeType.js";
@@ -33,7 +33,6 @@ const RedGradientStepEditorPreview = ({data, time, title = 'Preview'}) => {
 		layerSizeW
 	} = HELPER_GET_DATA.calcLayerPixelSize(gradientState, HELPER_GET_DATA.getActiveLayerInfo(gradientState));
 	const {stepInfoList} = previewDataAtTime
-	//TODO - 정리
 	const renderPoint = () => {
 		let i = 0;
 		const newList = stepInfoList.map(v => {
@@ -42,7 +41,7 @@ const RedGradientStepEditorPreview = ({data, time, title = 'Preview'}) => {
 			}
 			return [v['start']]
 		}).flat()
-		// console.log('newList', newList)
+
 		const len = newList.length
 		const result = []
 		let prevStop, prevStopUnit
@@ -134,7 +133,7 @@ const RedGradientStepEditorPreview = ({data, time, title = 'Preview'}) => {
 						}
 					}
 					i2 = i
-					// console.log('num', num)
+
 					let nextStop
 					let nextStopUnit
 					const lastItem = newList[i + num]
@@ -155,12 +154,11 @@ const RedGradientStepEditorPreview = ({data, time, title = 'Preview'}) => {
 						nextStop = 100
 						nextStopUnit = ConstUnitPxPercentAuto.PERCENT
 					}
-					// console.log('num',num,len,i + num,lastItem)
+
 					let gap = newList[i + num] ? 1 : 0
 					for (i2; i2 <= num + i; i2++) {
-						// const str = `calc(${prevStop}${prevStopUnit} + calc(calc(90% - 10%) / ${num}) * ${i2 - i}) )`
 						const str = `calc(${prevStop}${prevStopUnit} + calc(calc(calc(${nextStop}${nextStopUnit} - ${prevStop}${prevStopUnit})/${num + gap}) * ${i2 - i + 1})`
-						// console.log('num', str)
+
 						if (newList[i2]) {
 							result.push(
 								<div
@@ -215,8 +213,8 @@ const RedGradientStepEditorPreview = ({data, time, title = 'Preview'}) => {
 					width: '100%',
 					height: '100%',
 					overflowX: 'hidden',
-					// background: `${data['type'].indexOf('repeating') > -1 ? 'repeating-' : ''}${calcLayerGradient(previewData)}`,
-					background: `${data['type'].indexOf('repeating') > -1 ? '' : ''}${calcLayerGradient(previewData)}`,
+					// background: `${data['type'].indexOf('repeating') > -1 ? 'repeating-' : ''}${calcGradientLayer(previewData)}`,
+					background: `${data['type'].indexOf('repeating') > -1 ? '' : ''}${calcGradientLayer(previewData)}`,
 				}}
 			>
 				<div

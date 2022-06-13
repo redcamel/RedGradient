@@ -4,7 +4,7 @@ import DataRedGradientStepInfo from "../../../../../../../data/DataRedGradientSt
 import ConstGradientStepMode from "../../../../../../../data/const/ConstGradientStepMode.js";
 
 /**
- * Add stepInfo 업데이트
+ * Add stepInfo  update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_addLayerStepInfo = {
@@ -15,11 +15,9 @@ const cmd_addLayerStepInfo = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const {borderGradientMode} = payload
-		const layerGroupInfo = borderGradientMode ? HELPER_GET_DATA.getTargetViewInfo(newData).containerInfo.borderInfo.borderGradientInfo : HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const layerGroupInfo = borderGradientMode ? HELPER_GET_DATA.getActiveViewInfo(newData).containerInfo.borderInfo.borderGradientInfo : HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const info = (borderGradientMode ? layerGroupInfo : layerGroupInfo['groupList'][payload.groupIndex]['children'][payload.groupLayerIndex])['timeline'][payload.time]
 
 		{

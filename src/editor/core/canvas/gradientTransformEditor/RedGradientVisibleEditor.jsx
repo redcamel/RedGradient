@@ -14,7 +14,7 @@ let rect
 let startCircle
 let rangeBarHeight
 let targetPercent
-const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetView, HD_ActiveWindow}) => {
+const RedGradientVisibleEditor = ({calcedLayoutInfo, viewScale, targetView, HD_ActiveWindow}) => {
 	const {state: gradientState, actions: gradientActions} = useContext(ContextGradient)
 	const [modeAngleEdit, setModeAngleEdit] = useState(false)
 	const [targetMoveInfo, setTargetMoveInfo] = useState()
@@ -29,6 +29,7 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 		groupList
 	} = layerGroupInfo
 	useEffect(() => {
+
 			const HD_up = (e) => {
 				tX = e.pageX;
 				tY = e.pageY;
@@ -115,12 +116,6 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 				const tValue = point_moveData['stopUnit'] === ConstUnitPxPercent.PERCENT ? tPercent : tPx
 				point_moveData['stop'] = tValue
 
-				console.log('실제이동 targetPercent', targetPercent)
-				console.log('실제이동s - point_moveData[\'stop\']', point_moveData['stop'])
-				console.log('실제이동', tX, '바대비퍼센트', tPercent, point_moveData['stop'])
-				console.log('실제이동e - point_moveData[\'stop\']', point_moveData['stop'])
-				// console.log('실제이동', tX, '바대비퍼센트', tPercent, '레이어대비 픽셀', tPx)
-
 
 				const updateList = []
 				updateList.push(
@@ -203,6 +198,7 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 						 e.nativeEvent.stopPropagation()
 						 rect = ref.current.getBoundingClientRect()
 						 setModeAngleEdit(true)
+						 HD_ActiveWindow?.()
 						 startCircle = startCircleYn
 					 }}
 			><span style={{
@@ -239,7 +235,6 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 				}
 				return [v['start']]
 			}).flat()
-			// console.log('newList', newList)
 			const len = newList.length
 			const result = []
 			let prevStop, prevStopUnit
@@ -284,7 +279,6 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 								getColorFunction={() => targetData['colorHint']}
 								updateFunction={(v) => {
 									const updateList = []
-									// console.log('color value',v)
 									updateList.push(
 										{
 											key: 'colorHint',
@@ -316,6 +310,7 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 								e.stopPropagation()
 								e.preventDefault()
 								rect = ref.current.getBoundingClientRect()
+								HD_ActiveWindow?.()
 								setTargetMoveInfo({
 									point_startPoint: {x: e.pageX, y: e.pageY},
 									point_moveData: targetData,
@@ -375,7 +370,7 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 						prevStop = 0
 						prevStopUnit = ConstUnitPxPercentAuto.PERCENT
 					} else {
-						// 현재 부터 다음 값이 null인경우를 찾는다.
+						// 현재 부터 다음 값이 null 인 경우를 찾는다.
 						let i2 = i
 						let num = 0
 						for (i2; i2 < len; i2++) {
@@ -386,7 +381,6 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 							} else break
 						}
 						i2 = i
-						// console.log('num', num)
 						let nextStop
 						let nextStopUnit
 						const lastItem = newList[i + num]
@@ -411,8 +405,7 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 						for (i2; i2 <= num + i; i2++) {
 							const str = `calc(${prevStop}${prevStopUnit} + calc(calc(calc(${nextStop}${nextStopUnit} - ${prevStop}${prevStopUnit})/${num + gap}) * ${i2 - i + 1})`
 							const conicStr = prevStop + (nextStop - prevStop) / (num + gap) * (i2 - i + 1)
-							// console.log('num', str)
-							// console.log('conicStr', conicStr)
+
 							const targetData = newList[i2]
 							if (targetData) {
 								const borderRadius = targetData['mode'] === ConstGradientStepMode.RANGE ? (targetData['endItem'] ? '0 0 50% 50%' : '50% 50% 0 0') : '50%'
@@ -486,10 +479,8 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 						 onMouseDownCapture={e => {
 							 if (!conicYn) {
 								 const {offsetY} = e.nativeEvent
-								 const percent = 100 - offsetY / rangeBarHeight * 100
-								 targetPercent = percent
+								 targetPercent = 100 - offsetY / rangeBarHeight * 100
 							 }
-
 						 }}
 						 onMouseMove={e => {
 							 if (!conicYn) {
@@ -497,17 +488,17 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 								 const percent = 100 - (offsetY) / rangeBarHeight * 100
 								 targetPercent = percent
 								 if (ref2Current) {
-									 ref2Current.style.top = offsetY + 'px'
-									 ref2Current.style.opacity = targetMoveInfo ? 0 : 1
+									 ref2Current['style'].top = offsetY + 'px'
+									 ref2Current['style'].opacity = targetMoveInfo ? 0 : 1
 									 ref2Current.innerHTML = `<span style="transform: ${textRotateStr}">${percent.toFixed(0)}</span>`
 								 }
 
 							 }
 						 }}
-						 onMouseLeave={(e) => {
+						 onMouseLeave={() => {
 							 if (!conicYn) {
 								 if (ref2Current) {
-									 ref2Current.style.opacity = 0
+									 ref2Current['style'].opacity = 0
 								 }
 
 							 }
@@ -527,7 +518,7 @@ const RedGradientVisibleEditor = ({viewKey, calcedLayoutInfo, viewScale, targetV
 										 const {start} = v
 										 const {stop, stopUnit} = start
 										 const tPercent = stopUnit === ConstUnitPxPercent.PX ? (stop / (layerSizeW) * 100) : stop
-										 console.log('stepIDX', tPercent, percent)
+
 										 if (tPercent < percent) {
 											 stepIDX = i
 										 }

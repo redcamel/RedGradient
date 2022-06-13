@@ -22,11 +22,41 @@ const RedCanvasWindow = ({frameViewKey, setLayout, activeYn, onClick}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
 	const {canvasInfo} = state
 	const viewKey = canvasInfo[frameViewKey]['viewKey']
-	console.log('frameViewKey', frameViewKey)
-	console.log('viewKey', viewKey)
 	const targetView = canvasInfo[viewKey] || {}
 	const valueVisibleGradientEditor = targetView['visualGradientEditorVisible']
 	const valueSnapToContainer = state['snapToContainer']
+	const HD_DeviceVisible = () => gradientActions.updateCanvasDeviceVisible({
+		viewKey,
+		value: !targetView['deviceVisible']
+	})
+	const HD_RulerVisible = () => gradientActions.updateCanvasRulerVisible({
+		viewKey,
+		value: !targetView['rulerVisible']
+	})
+	const HD_overflowHidden = () => gradientActions.updateCanvasOverflowHidden({
+		viewKey,
+		value: !targetView['overflowHiddenYn']
+	})
+	const HD_editMode = value => gradientActions.updateCanvasEditMode({
+		viewKey,
+		value
+	})
+	const HD_withView = value => gradientActions.updateCanvasWithView({
+		viewKey,
+		value
+	})
+	const HD_VisibleGradientEditor = () => {
+		gradientActions.updateVisualGradientEditorVisible({
+			viewKey,
+			value: !valueVisibleGradientEditor
+		})
+	}
+	const HD_snap = () => {
+		gradientActions.updateSnapToContainer({
+			viewKey,
+			value: !valueSnapToContainer
+		})
+	}
 	return (
 		<div className={`RedCanvasWindow_container ${activeYn ? 'active' : ''}`}>
 			<div
@@ -34,7 +64,6 @@ const RedCanvasWindow = ({frameViewKey, setLayout, activeYn, onClick}) => {
 				onMouseDown={onClick}
 				onClick={onClick}
 			>
-
 				{/*<RedSelect*/}
 				{/*	optionData={ConstCanvasViewKey}*/}
 				{/*	value={frameViewKey}*/}
@@ -56,83 +85,40 @@ const RedCanvasWindow = ({frameViewKey, setLayout, activeYn, onClick}) => {
 						})
 					}
 				</div>
-
 				{/*frameViewKey : {frameViewKey} / viewKey : {viewKey}*/}
 				<RedToolTipIcon
 					icon={targetView['deviceVisible'] ? faMobileAlt : faMobile}
 					toolTip={'Device Visible'}
 					activeYn={targetView['deviceVisible']}
-					onClick={() => gradientActions.updateCanvasDeviceVisible({
-						viewKey,
-						value: !targetView['deviceVisible']
-					})}
-					style={{
-						width: '22px',
-						height: '21px',
-					}}
+					onClick={HD_DeviceVisible}
 				/>
 				<RedToolTipIcon
 					icon={faRulerCombined}
 					toolTip={'Ruler Visible'}
 					activeYn={targetView['rulerVisible']}
-					onClick={() => gradientActions.updateCanvasRulerVisible({
-						viewKey,
-						value: !targetView['rulerVisible']
-					})}
-					style={{
-						width: '22px',
-						height: '21px',
-					}}
+					onClick={HD_RulerVisible}
 				/>
-				{
-					<RedToolTipIcon
-						icon={targetView['overflowHiddenYn'] ? faImages : faImage}
-						toolTip={'Device Overflow Allow'}
-						activeYn={targetView['overflowHiddenYn']}
-						onClick={() => gradientActions.updateCanvasOverflowHidden({
-							viewKey,
-							value: !targetView['overflowHiddenYn']
-						})}
-						style={{
-							width: '22px',
-							height: '21px',
-						}}
-					/>
-				}
+				<RedToolTipIcon
+					icon={targetView['overflowHiddenYn'] ? faImages : faImage}
+					toolTip={'Device Overflow Allow'}
+					activeYn={targetView['overflowHiddenYn']}
+					onClick={HD_overflowHidden}
+				/>
 				<RedContainerBackgroundColor viewKey={viewKey}/>
 			</div>
-			<RedCanvasWindowViewControl viewKey={viewKey} frameViewKey={frameViewKey} onClick={onClick}/>
+			<RedCanvasWindowViewControl viewKey={viewKey} onClick={onClick}/>
 			<RedCanvasWindowEditMode
 				viewKey={viewKey}
 				value={targetView['editMode']}
 				valueWithView={targetView['withView']}
 				valueVisibleGradientEditor={valueVisibleGradientEditor}
 				valueSnapToContainer={valueSnapToContainer}
-				onChangeMode={(value) => gradientActions.updateCanvasEditMode({
-					viewKey,
-					value
-				})}
-				onWithViewChange={(value) => gradientActions.updateCanvasWithView({
-					viewKey,
-					value
-				})}
-				onVisibleGradientEditor={(value) => {
-					console.log('AAA', valueVisibleGradientEditor)
-					gradientActions.updateVisualGradientEditorVisible({
-						viewKey,
-						value: !valueVisibleGradientEditor
-					})
-				}}
-				onSnapToContainer={(value) => {
-					console.log('AAA', valueVisibleGradientEditor)
-					gradientActions.updateSnapToContainer({
-						viewKey,
-						value: !valueSnapToContainer
-					})
-				}}
+				onChangeEditMode={HD_editMode}
+				onWithViewChange={HD_withView}
+				onVisibleGradientEditor={HD_VisibleGradientEditor}
+				onSnapToContainer={HD_snap}
 			/>
 			<RedCanvasWindowBottom viewKey={viewKey}/>
-
 		</div>
 	)
 }

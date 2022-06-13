@@ -10,7 +10,7 @@ import ConstUnitPxNumber from "../../../data/const/ConstUnitPxNumber.js";
 import ConstBoxBorderModeType from "../../panels/container/cssProperty/border/ConstBoxBorderModeType.js";
 import ConstCanvasViewKey from "../../../data/const/ConstCanvasViewKey.js";
 import ConstUnitPxPercent from "../../../data/const/ConstUnitPxPercent";
-import calcLayerGradient from "../../panels/layer/calcLayerGradient";
+import calcGradientLayer from "../../panels/layer/js/calcGradientLayer";
 
 const makeCssText = v => {
 	const t0 = []
@@ -74,12 +74,13 @@ const PARSER_CONTAINER_CSS = {
 			filterInfo
 		} = targetView.containerInfo
 		const {mode: borderMode} = borderInfo
-		const result = {
+
+		return {
 			display: targetView.viewKey === ConstCanvasViewKey.MAIN ? 'block' : 'flex',
 			background: `${backgroundColor}`,
 			boxSizing: boxSizing,
 			mixBlendMode: mixBlendMode,
-			boxShadow: PARSER_CONTAINER_CSS.getBoxShadowCss(boxShadowInfo),
+			boxShadow: PARSER_CONTAINER_CSS.getBoxShadowCss(boxShadowInfo, viewScale),
 			//
 			outline: PARSER_CONTAINER_CSS.getOutlineCss(outlineInfo, viewScale),
 			outlineOffset: PARSER_CONTAINER_CSS.getOutlineOffsetCss(outlineInfo, viewScale),
@@ -93,7 +94,7 @@ const PARSER_CONTAINER_CSS = {
 				borderMode === ConstBoxBorderModeType.BASIC
 					? {borderColor: PARSER_CONTAINER_CSS.getBorderColorCss(borderInfo.borderColorInfo)}
 					: {
-						borderImageSource: calcLayerGradient(borderInfo.borderGradientInfo, undefined, undefined, viewScale, false, true),
+						borderImageSource: calcGradientLayer(borderInfo.borderGradientInfo, undefined, undefined, viewScale, false, true),
 						borderImageOutset: PARSER_CONTAINER_CSS.getBorderImageOutsetCss(borderInfo.borderImageOutsetInfo, viewScale),
 						borderImageRepeat: PARSER_CONTAINER_CSS.getBorderImageRepeatCss(borderInfo.borderImageRepeatInfo),
 						borderImageSlice: PARSER_CONTAINER_CSS.getBorderImageSliceCss(borderInfo.borderImageSliceInfo, viewScale),
@@ -102,11 +103,13 @@ const PARSER_CONTAINER_CSS = {
 			//
 			...(filterInfo.length ? {filter: PARSER_CONTAINER_CSS.getFilterCss(filterInfo, forceYn)} : {})
 		}
-		console.log('result', result)
-		return result
 	},
-	getBoxShadowCss: (boxShadowInfo) => {
-		return `${boxShadowInfo['type'] === ConstBoxShadowType.OUTSET ? '' : boxShadowInfo['type']} ${boxShadowInfo['offsetX']}px ${boxShadowInfo['offsetY']}px ${boxShadowInfo['blur']}px ${boxShadowInfo['spread']}px ${boxShadowInfo['color']}`
+	getBoxShadowCss: (boxShadowInfo, viewScale) => {
+		const offsetX = boxShadowInfo['offsetX'] * viewScale
+		const offsetY = boxShadowInfo['offsetY'] * viewScale
+		const blur = boxShadowInfo['blur'] * viewScale
+		const spread = boxShadowInfo['spread'] * viewScale
+		return `${boxShadowInfo['type'] === ConstBoxShadowType.OUTSET ? '' : boxShadowInfo['type']} ${offsetX}px ${offsetY}px ${blur}px ${spread}px ${boxShadowInfo['color']}`
 	},
 	getOutlineCss: (outlineInfo, viewScale) => {
 		return `${outlineInfo['width'] * viewScale}px ${outlineInfo['type']} ${outlineInfo['color']}`

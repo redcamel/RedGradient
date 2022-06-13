@@ -13,11 +13,9 @@ const cmd_update_borderImageSlice = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const {mode, key, value, saveHistoryYn} = payload
-		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const targetViewInfo = HELPER_GET_DATA.getActiveViewInfo(newData)
 		const borderInfo = targetViewInfo['containerInfo']['borderInfo']
 		const {borderImageSliceInfo} = borderInfo
 		borderImageSliceInfo[mode][key] = value

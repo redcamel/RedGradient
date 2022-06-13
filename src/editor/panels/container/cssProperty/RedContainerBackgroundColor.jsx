@@ -6,12 +6,12 @@ import RedColorPickerButton from "../../../basicUI/RedColorPickerButton.jsx";
 /**
  * 컨테이너 컬러 담당
  * @param viewKey
+ * @param useLabel
  * @returns {JSX.Element}
  * @constructor
  */
 const RedContainerBackgroundColor = ({viewKey, useLabel}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const HD_getColor = () => targetView['containerInfo']['backgroundColor']
@@ -26,8 +26,6 @@ const RedContainerBackgroundColor = ({viewKey, useLabel}) => {
 					{targetView['containerInfo']['backgroundColor']}
 				</>
 			}
-
-
 			<RedColorPickerButton
 				getColorFunction={HD_getColor}
 				updateFunction={HD_updateFunction}

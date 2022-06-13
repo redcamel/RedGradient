@@ -12,7 +12,7 @@ import RedContainerBoxShadow from "./cssProperty/RedContainerBoxShadow.jsx";
 import RedPanel from "../../basicUI/panel/RedPanel.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import RedContainerFilter from "./filter/RedContainerFilter.jsx";
-import RedContainerOutline from "./cssProperty/RedContainerOutline.jsx";
+import RedContainerOutline from "./cssProperty/outline/RedContainerOutline.jsx";
 import RedContainerBorder from "./cssProperty/border/RedContainerBorder.jsx";
 import RedCssPreview from "../css/RedCssPreview.jsx";
 import PARSER_CONTAINER_CSS from "../../contexts/system/PARSER_CONTAINER_CSS.js";
@@ -24,18 +24,18 @@ import PARSER_CONTAINER_CSS from "../../contexts/system/PARSER_CONTAINER_CSS.js"
  */
 const RedContainerEditor = () => {
 	const {state} = useContext(ContextGradient)
-	const targetView = HELPER_GET_DATA.getTargetViewInfo(state)
-	const viewKey = targetView.viewKey
+	const targetView = HELPER_GET_DATA.getActiveViewInfo(state)
+	const {viewKey} = targetView
 
 	return (
 		<div className={'RedContainerEditor_container'}>
 			<RedPanel
-				// initActiveYn={true}
 				useOnOff={false}
 				titleLabel={
 					<div className={'RedContainerEditor_title'}>
 						<div className={'RedContainerEditor_title target'}>{viewKey}</div>
-						Container Editor<FontAwesomeIcon icon={faPalette}/></div>
+						Container Editor <FontAwesomeIcon icon={faPalette}/>
+					</div>
 				}
 				tabFlexGrow={1}
 				tabInfo={
@@ -46,7 +46,7 @@ const RedContainerEditor = () => {
 							contents: <div>
 								<div className={'RedContainerEditor_description'}>Container edit</div>
 								{
-									 <div className={'RedContainerEditor_middle'}>
+									<div className={'RedContainerEditor_middle'}>
 										<RedContainerSize viewKey={viewKey}/>
 										<RedDivision/>
 										<RedContainerPosition viewKey={viewKey}/>
@@ -59,36 +59,10 @@ const RedContainerEditor = () => {
 										<RedDivision/>
 										<RedContainerBoxShadow viewKey={viewKey}/>
 										<RedDivision/>
-										<RedCssPreview label={`${viewKey} Container Css Preview`}
-																	 codeStr={PARSER_CONTAINER_CSS.getPreviewCss(HELPER_GET_DATA.getTargetViewInfo(state), 'container')}/>
-										{/*<div style={{wordBreak: 'break-all'}}>*/}
-										{/*  {*/}
-										{/*    Object.entries(targetView).map(v => {*/}
-										{/*      const key = v[0]*/}
-										{/*      const value = v[1]*/}
-										{/*      if (key === 'layerGroupInfo') return null*/}
-										{/*      if (key === 'containerInfo') {*/}
-										{/*        return <div>*/}
-										{/*          <div>{key}</div>*/}
-										{/*          {*/}
-										{/*            Object.keys(value).map(key => {*/}
-										{/*              return <div style={{marginLeft: '8px'}}>*/}
-										{/*                {key}*/}
-										{/*                <div>{JSON.stringify(value[key])}</div>*/}
-										{/*                <RedDivision/>*/}
-										{/*              </div>*/}
-										{/*            })*/}
-										{/*          }*/}
-										{/*        </div>*/}
-										{/*      }*/}
-										{/*      return <div>*/}
-										{/*        {key}*/}
-										{/*        <div>{JSON.stringify(value)}</div>*/}
-										{/*        <RedDivision/>*/}
-										{/*      </div>*/}
-										{/*    })*/}
-										{/*  }*/}
-										{/*</div>*/}
+										<RedCssPreview
+											label={`${viewKey} Container Css Preview`}
+											codeStr={PARSER_CONTAINER_CSS.getPreviewCss(HELPER_GET_DATA.getActiveViewInfo(state), 'container')}
+										/>
 									</div>
 								}
 							</div>
@@ -102,8 +76,10 @@ const RedContainerEditor = () => {
 								<RedDivision/>
 								<RedContainerBorder viewKey={viewKey}/>
 								<RedDivision/>
-								<RedCssPreview label={'Border & Outline Css Preview'}
-															 codeStr={PARSER_CONTAINER_CSS.getPreviewCss(HELPER_GET_DATA.getTargetViewInfo(state), 'border')}/>
+								<RedCssPreview
+									label={'Border & Outline Css Preview'}
+									codeStr={PARSER_CONTAINER_CSS.getPreviewCss(HELPER_GET_DATA.getActiveViewInfo(state), 'border')}
+								/>
 							</div>
 						},
 						{
@@ -113,8 +89,10 @@ const RedContainerEditor = () => {
 								<div className={'RedContainerEditor_description'}>Filter Edit</div>
 								<RedContainerFilter viewKey={viewKey}/>
 								<RedDivision/>
-								<RedCssPreview label={'Filter Css Preview'}
-															 codeStr={PARSER_CONTAINER_CSS.getPreviewCss(HELPER_GET_DATA.getTargetViewInfo(state), 'filter')}/>
+								<RedCssPreview
+									label={'Filter Css Preview'}
+									codeStr={PARSER_CONTAINER_CSS.getPreviewCss(HELPER_GET_DATA.getActiveViewInfo(state), 'filter')}
+								/>
 							</>
 						}
 					]

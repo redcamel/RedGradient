@@ -1,5 +1,5 @@
 /**
- * Canvas WithView 업데이트
+ * Canvas WithView  update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_updateCanvasWithView = {
@@ -9,11 +9,8 @@ const cmd_updateCanvasWithView = {
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const {value, viewKey} = payload
-		const newData = {
-			...state
-		}
+		const newData = {...state}
 		const withView = newData.canvasInfo[viewKey]['withView']
-		// console.log('withView', withView)
 		if (withView.indexOf(value) > -1) newData.canvasInfo[viewKey]['withView'] = withView.filter(v => v !== value)
 		withView.push(value)
 		newData.canvasInfo[viewKey]['editMode'] = value

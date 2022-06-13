@@ -21,10 +21,10 @@ import RedTextField from "../../basicUI/RedTextField.jsx";
 import RedToolTipIcon from "../../basicUI/icon/RedToolTipIcon.jsx";
 import ConstLayerSizeValue from "../../../data/const/ConstLayerSizeValue.js";
 import RedDivision from "../../basicUI/RedDivision.jsx";
-import calcLayerGradient from "./calcLayerGradient.js";
-import calcLayerGradientBlendMode from "./calcLayerGradientBlendMode";
+import calcLayerGradientBlendMode from "./js/calcLayerGradientBlendMode";
 import {toast} from "react-toastify";
 import RedToastSkin from "../../core/RedToastSkin";
+import calcGradientGroupLayerList from "./js/calcGradientGroupLayerList";
 
 /**
  * 히스토리 창
@@ -40,7 +40,7 @@ const RedLayerGroupItem = () => {
 	const [dummyDropTargetLayerIDX, setDummyDropTargetLayerIDX] = useState(null);
 	const [dummyDropTargetGroupIDX, setDummyDropTargetGroupIDX] = useState(null);
 	const [dummyDropTargetGroupRootIDX, setDummyDropTargetGroupRootIDX] = useState(null);
-	const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(state)
+	const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(state)
 	const {groupList, activeGroupIndex} = layerGroupInfo
 	const previewSize = ConstLayerSizeValue[layerGroupViewSizeInfo['size']]
 	const {previewBackgroundType} = layerGroupViewSizeInfo
@@ -50,7 +50,6 @@ const RedLayerGroupItem = () => {
 			{activeGroupIndex: groupIdx, activeGroupLayerIndex: 0}
 		)
 	}
-	console.log('layerGroupInfo', layerGroupInfo)
 	const HD_setOpenYn = (e, index) => {
 		e.preventDefault()
 		e.stopPropagation()
@@ -75,7 +74,7 @@ const RedLayerGroupItem = () => {
 			}
 		)
 	}
-	const HD_addGroup = (e) => {
+	const HD_addGroup = () => {
 		gradientActions.addGroup()
 	}
 	const HD_duplicateGroup = (e, index) => {
@@ -132,7 +131,7 @@ const RedLayerGroupItem = () => {
 		setDummyDropTargetGroupRootIDX(null)
 	}
 
-	const handleDragOverGroup = (e, groupIndex, layerIndex) => {
+	const handleDragOverGroup = (e, groupIndex) => {
 		e.preventDefault();
 		e.stopPropagation();
 		if (dragStartGroupRootIDX !== null) {
@@ -148,7 +147,6 @@ const RedLayerGroupItem = () => {
 	}
 	const handleDropGroup = (e, groupIndex) => {
 		if (dragStartGroupRootIDX !== null) {
-			console.log('dragStartGroupRootIDX', dragStartGroupRootIDX)
 			gradientActions.swapGroup({
 				target_groupIndex: dragStartGroupRootIDX,
 				destination_groupIndex: groupIndex
@@ -198,8 +196,7 @@ const RedLayerGroupItem = () => {
 
 	const handleDrop = (e, groupIndex, layerIndex) => {
 		if (dragStartGroupIDX !== null) {
-			console.log('dragStartGroupIDX', dragStartGroupIDX, 'dragStartLayerIDX', dragStartLayerIDX)
-			console.log('targetGroupIDX', groupIndex, 'targetLayerIDX', layerIndex)
+
 			gradientActions.dropLayer({
 				startGroupIndex: dragStartGroupIDX,
 				targetGroupIndex: groupIndex,
@@ -263,10 +260,12 @@ const RedLayerGroupItem = () => {
 					<RedDivision/>
 					<div className={`RedLayerGroupItem_label_container`} style={{flexGrow: ''}}>
 						{prevSwapAble ? <RedToolTipIcon icon={faArrowUp} toolTip={'Move Up'}
+																						align={'left'}
 																						onClick={(e) => HD_swapGroup(e, index, index - 1)}
 						/> : ''}
 						{nextSwapAble ?
 							<RedToolTipIcon icon={faArrowDown} toolTip={'Move Down'}
+															align={'left'}
 															onClick={(e) => HD_swapGroup(e, index, index + 1)}
 							/> : ''}
 						<RedToolTipIcon
@@ -323,9 +322,7 @@ const RedLayerGroupItem = () => {
 						left: 0,
 						width: '100%',
 						height: '100%',
-						background: layerList.map((v2, layerIndex) => {
-							return v2['visibleYn'] ? calcLayerGradient(v2) : null
-						}).filter(Boolean).join(','),
+						background: calcGradientGroupLayerList(groupData, undefined, undefined, undefined, true),
 						backgroundBlendMode: calcLayerGradientBlendMode(groupList)
 					}}>
 
@@ -340,7 +337,7 @@ const RedLayerGroupItem = () => {
 				{/*				left: 0,*/}
 				{/*				width: '100%',*/}
 				{/*				height: '100%',*/}
-				{/*				background: calcLayerGradient(v),*/}
+				{/*				background: calcGradientLayer(v),*/}
 				{/*			}}*/}
 				{/*		/> : null*/}
 				{/*	}).reverse()*/}
@@ -368,7 +365,6 @@ const RedLayerGroupItem = () => {
 					layerData={v} groupIdx={index}
 					layerIdx={layerIndex}
 					dummyYn={dummyDropTargetLayerIDX !== null}
-					dummySameGroupYn={dummyDropTargetGroupIDX === dragStartGroupIDX}
 					dummyDropTargetLayerYn={dummyDropTargetGroupIDX === index && dummyDropTargetLayerIDX === layerIndex}
 					onDragStart={e => handleDragStart(e, index, layerIndex)}
 					onDrop={e => handleDrop(e, index, layerIndex)}

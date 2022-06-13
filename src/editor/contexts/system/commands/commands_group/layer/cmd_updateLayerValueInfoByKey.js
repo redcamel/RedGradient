@@ -10,7 +10,7 @@ import {
 import HELPER_GET_DATA from "../../../HELPER_GET_DATA.js";
 
 /**
- * Layer ValueInfo업데이트
+ * Layer ValueInfo update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_updateLayerValueInfoByKey = {
@@ -21,16 +21,14 @@ const cmd_updateLayerValueInfoByKey = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
-		// console.log(payload)
-		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const newData = HELPER_GET_DATA.makeNewState(state)
+
+		const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const payloads = payload instanceof Array ? payload : [payload]
 		payloads.forEach(payload => {
-			// console.log(payload)
+
 			const info = layerGroupInfo['groupList'][payload.groupIndex]['children'][payload.groupLayerIndex]['timeline'][payload.time]
-			// console.log(info)
+
 			info[payload.targetInfoKey][payload.key] = payload.value
 			action.label = `Layer ValueInfo Update ${payload.key} : ${JSON.stringify(payload.value)}`
 			switch (payload.key) {

@@ -1,10 +1,10 @@
-import ContextGradient from "../../../contexts/system/ContextGradient.js";
+import ContextGradient from "../../../../contexts/system/ContextGradient.js";
 import {useContext} from "react";
-import RedItemTitle from "../../../basicUI/RedItemTitle.jsx";
-import RedSelect from "../../../basicUI/RedSelect.jsx";
-import ConstBoxOutlineType from "../../../../data/const/ConstBoxOutlineType.js";
-import RedNumberField from "../../../basicUI/RedNumberField.jsx";
-import RedColorPickerButton from "../../../basicUI/RedColorPickerButton.jsx";
+import RedItemTitle from "../../../../basicUI/RedItemTitle.jsx";
+import RedSelect from "../../../../basicUI/RedSelect.jsx";
+import ConstBoxOutlineType from "../../../../../data/const/ConstBoxOutlineType.js";
+import RedNumberField from "../../../../basicUI/RedNumberField.jsx";
+import RedColorPickerButton from "../../../../basicUI/RedColorPickerButton.jsx";
 
 /**
  * 컨테이너 outline 담당
@@ -14,7 +14,7 @@ import RedColorPickerButton from "../../../basicUI/RedColorPickerButton.jsx";
  */
 const RedContainerOutline = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
@@ -31,11 +31,22 @@ const RedContainerOutline = ({viewKey}) => {
 	}
 	const HD_getColor = () => outlineInfo['color']
 	const HD_updateColorFunction = (v) => {
-		console.log(v)
 		gradientActions.updateContainerOutlineByKey({
 			...v,
 			key: 'color'
 		})
+	}
+	const renderItem = key => {
+		return <div style={style.item}>
+			<div>{key}</div>
+			<RedNumberField
+				value={outlineInfo[key]} width={'100%'} min={0} flexGrow={1}
+				onInput={(value, saveHistoryYn) => HD_changeOutline(value, key, saveHistoryYn)}
+				onKeyDown={(value, saveHistoryYn) => HD_changeOutline(value, key, saveHistoryYn)}
+				onBlur={(value, saveHistoryYn) => HD_changeOutline(value, key, saveHistoryYn)}
+
+			/>
+		</div>
 	}
 	return (
 		<div style={style.container}>
@@ -54,23 +65,8 @@ const RedContainerOutline = ({viewKey}) => {
 			</div>
 			<div style={{...style.titleContainer2, opacity: disableYn ? 0.25 : 1}}>
 				<div style={style.itemBox}>
-					<div style={style.item}>
-						<div>width</div>
-						<RedNumberField value={outlineInfo.width} width={'100%'} min={0} flexGrow={1}
-														onInput={(value, saveHistoryYn) => HD_changeOutline(value, 'width', saveHistoryYn)}
-														onKeyDown={(value, saveHistoryYn) => HD_changeOutline(value, 'width', saveHistoryYn)}
-														onBlur={(value, saveHistoryYn) => HD_changeOutline(value, 'width', saveHistoryYn)}
-
-						/>
-					</div>
-					<div style={style.item}>
-						<div>offset</div>
-						<RedNumberField value={outlineInfo.offset} width={'100%'} flexGrow={1}
-														onInput={(value, saveHistoryYn) => HD_changeOutline(value, 'offset', saveHistoryYn)}
-														onKeyDown={(value, saveHistoryYn) => HD_changeOutline(value, 'offset', saveHistoryYn)}
-														onBlur={(value, saveHistoryYn) => HD_changeOutline(value, 'offset', saveHistoryYn)}
-						/>
-					</div>
+					{renderItem('width')}
+					{renderItem('offset')}
 				</div>
 			</div>
 		</div>

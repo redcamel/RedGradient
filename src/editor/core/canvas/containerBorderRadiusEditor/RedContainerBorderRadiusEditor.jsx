@@ -8,11 +8,12 @@ import ConstUnitPxPercent from "../../../../data/const/ConstUnitPxPercent";
 let startMousePointX, startMousePointY
 let tX, tY
 let startKey
-const RedContainerBorderRadiusEditor = ({viewKey, calcedLayoutInfo, viewScale, targetView, HD_ActiveWindow}) => {
+const RedContainerBorderRadiusEditor = ({viewKey, calcedLayoutInfo, viewScale, targetView}) => {
 	const {actions: gradientActions} = useContext(ContextGradient)
 	const [dummyVisible, setDummyVisible] = useState(false)
 	const {borderInfo} = targetView.containerInfo
 	const {borderRadiusInfo} = borderInfo
+	const {raw, viewScalePixel} = calcedLayoutInfo
 
 	const HD_resizeStart = (e, direction) => {
 		startKey = direction
@@ -21,7 +22,7 @@ const RedContainerBorderRadiusEditor = ({viewKey, calcedLayoutInfo, viewScale, t
 		setDummyVisible(true)
 	}
 	useEffect(() => {
-			const HD_up = (e) => {
+			const HD_up = () => {
 				gradientActions.updateContainerSizePosition({
 					viewKey,
 					value: [],
@@ -38,7 +39,7 @@ const RedContainerBorderRadiusEditor = ({viewKey, calcedLayoutInfo, viewScale, t
 				let key = 'borderRadius'
 				if (borderRadiusInfo['mode'] === ConstBoxBorderPropertyModeType.SOLO) key = startKey
 
-				const maxSize = Math.max(calcedLayoutInfo.raw.width, calcedLayoutInfo.raw.height) / 2
+				const maxSize = Math.max(raw.width, raw.height) / 2
 				const gap = ((startKey === 'tr' || startKey === 'br' ? 1 - tX / startMousePointX : tX / startMousePointX - 1)) * viewScale * maxSize
 				const calcedSize = Math.min(maxSize, borderRadiusInfo[borderRadiusInfo.mode][key] + gap)
 				const value = Math.max(calcedSize, 0)
@@ -65,14 +66,13 @@ const RedContainerBorderRadiusEditor = ({viewKey, calcedLayoutInfo, viewScale, t
 	const soloYn = borderRadiusInfo['mode'] === ConstBoxBorderPropertyModeType.SOLO
 
 	const calcSize = (key) => {
-		const rawH = calcedLayoutInfo.raw.height / 2 * viewScale
-		const rawW = calcedLayoutInfo.raw.width / 2 * viewScale
+		const rawH = raw.height / 2 * viewScale
+		const rawW = raw.width / 2 * viewScale
 		const unit = borderRadiusInfo[borderRadiusInfo.mode][(soloYn ? key : 'borderRadius') + 'Unit']
+		const unitIsPercent = unit === ConstUnitPxPercent.PERCENT
 		const borderRadius = borderRadiusInfo[borderRadiusInfo.mode][soloYn ? key : 'borderRadius']
-		const borderRadiusPixelWidth = unit === ConstUnitPxPercent.PERCENT ? borderRadius * rawW * 0.01 : (borderRadius * viewScale * 1)
-		const borderRadiusPixelHeight = unit === ConstUnitPxPercent.PERCENT ? borderRadius * rawH * 0.01 : (borderRadius * viewScale * 1)
-		// const t0 = ConstUnitPxPercent.PERCENT ? v : v/(horizonYn ? rawW : rawH) * 100
-		// return unit === ConstUnitPxPercent.PERCENT ? t0 * (horizonYn ? rawW : rawH) * 0.01 : t0
+		const borderRadiusPixelWidth = unit === unitIsPercent ? borderRadius * rawW * 0.01 : (borderRadius * viewScale)
+		const borderRadiusPixelHeight = unit === unitIsPercent ? borderRadius * rawH * 0.01 : (borderRadius * viewScale)
 		const tV = Math.min(rawH * 0.9, Math.min(borderRadiusPixelHeight, rawH))
 		const tH = Math.min(rawW * 0.9, Math.min(borderRadiusPixelWidth, rawW))
 		switch (key) {
@@ -81,19 +81,16 @@ const RedContainerBorderRadiusEditor = ({viewKey, calcedLayoutInfo, viewScale, t
 					top: tV,
 					left: tH,
 				}
-
 			case 'tr':
 				return {
 					top: tV,
 					right: tH,
 				}
-
 			case 'bl':
 				return {
 					bottom: tV,
 					left: tH,
 				}
-
 			case 'br':
 				return {
 					bottom: tV,
@@ -101,42 +98,26 @@ const RedContainerBorderRadiusEditor = ({viewKey, calcedLayoutInfo, viewScale, t
 				}
 			default :
 				break
-
 		}
 	}
 	return <>
 		<div
 			className={'RedContainerBorderRadiusEditor'}
 			style={{
-				top: 0,
-				left: 0,
-				transform: `translate(${(parseInt(calcedLayoutInfo.viewScalePixel.x))}px,${parseInt(calcedLayoutInfo.viewScalePixel.y)}px)`,
-				width: calcedLayoutInfo.viewScalePixel.width,
-				height: calcedLayoutInfo.viewScalePixel.height
+				transform: `translate(${(parseInt(viewScalePixel.x))}px,${parseInt(viewScalePixel.y)}px)`,
+				width: viewScalePixel.width,
+				height: viewScalePixel.height
 			}}
 		>
-
-			<div
-				className={`RedContainerBorderRadiusEditor_item lt`}
-				style={calcSize('tl')}
-				onMouseDownCapture={e => HD_resizeStart(e, 'tl')}
-			/>
-			<div
-				className={`RedContainerBorderRadiusEditor_item rt`}
-				style={calcSize('tr')}
-				onMouseDownCapture={e => HD_resizeStart(e, 'tr')}
-			/>
-			<div
-				className={`RedContainerBorderRadiusEditor_item lb`}
-				style={calcSize('bl')}
-				onMouseDownCapture={e => HD_resizeStart(e, 'bl')}
-			/>
-			<div
-				className={`RedContainerBorderRadiusEditor_item rb`}
-				style={calcSize('br')}
-				onMouseDownCapture={e => HD_resizeStart(e, 'br')}
-			/>
-
+			{
+				['tl', 'tr', 'bl', 'br'].map(key => {
+					return <div
+						className={`RedContainerBorderRadiusEditor_item ${key}`}
+						style={calcSize(key)}
+						onMouseDownCapture={e => HD_resizeStart(e, key)}
+					/>
+				})
+			}
 		</div>
 
 	</>

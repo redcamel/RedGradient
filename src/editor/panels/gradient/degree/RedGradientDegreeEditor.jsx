@@ -10,7 +10,7 @@ let rect
  */
 const RedGradientDegreeEditor = ({value, onChange}) => {
 	const ref = useRef()
-	const HD_MoveStart = (e) => {
+	const HD_MoveStart = () => {
 		rect = ref.current.getBoundingClientRect()
 		window.addEventListener('mousemove', HD_move);
 		window.addEventListener('mouseup', HD_up);
@@ -19,12 +19,10 @@ const RedGradientDegreeEditor = ({value, onChange}) => {
 		const tX = e.pageX - (rect.x + rect.width / 2);
 		const tY = e.pageY - (rect.y + rect.height / 2);
 		const angle = Math.atan2(tY, tX) * 180 / Math.PI + 90;
-		console.log(angle)
 		update(angle)
 	};
 	const update = (v, saveHistoryYn) => {
 		currentValue = v
-		console.log(v)
 		onChange?.(v, saveHistoryYn)
 	}
 	const HD_up = () => {

@@ -22,16 +22,15 @@ let emptyImage
 let dragStartIDX = null
 const RedGradientStepEditor = () => {
 	const {state: gradientState, actions} = useContext(ContextGradient)
-	const activeViewLayerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(gradientState)
+	const activeViewLayerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(gradientState)
 	const [dummyDropTargetIDX, setDummyDropTargetIDX] = useState(null);
 	if (!activeViewLayerGroupInfo) return null
 	const {activeGroupIndex, activeGroupLayerIndex} = activeViewLayerGroupInfo
 	const activeLayerData = HELPER_GET_DATA.getActiveLayerInfo(gradientState)
 
-	// console.log('activeLayerData', activeLayerData)
 	//////
 	if (!activeLayerData) return null
-	//TODO - 타임라인에서 찾는거 병합해야함
+
 	const {type: gradientType} = activeLayerData
 	const time = gradientState['timelineInfo']['time']
 	const {stepInfoList} = activeLayerData?.['timeline'][time] || {}
@@ -86,7 +85,7 @@ const RedGradientStepEditor = () => {
 		e.stopPropagation();
 	}
 
-	const handleDragLeave = (e, idx) => {
+	const handleDragLeave = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
 		setDummyDropTargetIDX(null)
@@ -108,7 +107,6 @@ const RedGradientStepEditor = () => {
 
 	const handleDrop = (e, idx) => {
 		if (dragStartIDX !== null) {
-			console.log('dragStepIDX', dragStartIDX, 'targetStepIDX', idx)
 			actions.dropLayerStepInfo({
 				time,
 				groupIndex: activeGroupIndex,
@@ -130,7 +128,6 @@ const RedGradientStepEditor = () => {
 				<RedGradientStepEditorPreview data={activeLayerData} time={time}/>
 				TODO - Start Offset
 				<RedDivision/>
-				{/*TODO - StepEdit*/}
 				<RedItemTitle
 					label={
 						<div style={{
@@ -159,18 +156,9 @@ const RedGradientStepEditor = () => {
 								}}>
 									<FontAwesomeIcon icon={faDownload}/>Add Preset
 								</div>
-								<RedToolTipIcon icon={faSort} style={{fontSize: '16px'}}
-																toolTip={'Sort Steps'}
-																onClick={HD_sortStep}
-								/>
-								<RedToolTipIcon icon={faExchangeAlt} style={{fontSize: '16px'}}
-																toolTip={'Reverse Steps'}
-																onClick={HD_reverseStep}
-								/>
-								<RedToolTipIcon icon={faFileMedical} style={{fontSize: '16px'}}
-																toolTip={'Add Step'}
-																onClick={HD_addStepInfo}
-								/>
+								<RedToolTipIcon icon={faSort} toolTip={'Sort Steps'} onClick={HD_sortStep}/>
+								<RedToolTipIcon icon={faExchangeAlt} toolTip={'Reverse Steps'} onClick={HD_reverseStep}/>
+								<RedToolTipIcon icon={faFileMedical} toolTip={'Add Step'} onClick={HD_addStepInfo}/>
 							</div>
 						</div>
 					}
@@ -180,7 +168,6 @@ const RedGradientStepEditor = () => {
 						{stepInfoList.map((v, index) => {
 							const activeYn = false
 							return <div key={index}>
-
 								<RedGradientStepEditorItem
 									gradientType={gradientType}
 									stepInfoList={stepInfoList}
@@ -189,7 +176,6 @@ const RedGradientStepEditor = () => {
 									time={time}
 									stepIDX={index}
 									data={v}
-									onChange={HD_changeInfo}
 									activeYn={activeYn}
 									//
 									dummyYn={dummyDropTargetIDX !== null}
@@ -200,14 +186,11 @@ const RedGradientStepEditor = () => {
 									onDragEnter={handleDragEnter}
 									onDragLeave={e => handleDragLeave(e, index)}
 									onDragEnd={handleDragEnd}
-
 								/>
-
 								<RedDivision/>
 							</div>
 						})}
 					</div>
-
 				</div>
 			</div>
 			<div className={'RedGradientStepEditor_bottom'}>

@@ -1,8 +1,18 @@
 /* RedFrameBottom */
-.RedFrameBottom_container {
+.RedFrameBottom_root {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     height: 100%;
     overflow: hidden;
+}
+
+.RedFrameBottom_container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1px;
+    background: #000
 }

@@ -468,7 +468,7 @@ const RedGroupPreset = () => {
 									a.onchange = e => {
 										let fileReader = new FileReader();
 										fileReader.onload = evt => {
-											console.log(evt.target.result)
+
 											const newData = evt.target.result
 
 											const checkValidate = (checkData) => {
@@ -483,9 +483,9 @@ const RedGroupPreset = () => {
 												if (pass) {
 													const t0 = new DataRedGradientLayerGroup()
 													checkData.forEach(data => {
-														console.log(data)
+
 														for (const k in t0) {
-															console.log('k', k)
+
 															if (!data.hasOwnProperty(k)) {
 																pass = false
 																break

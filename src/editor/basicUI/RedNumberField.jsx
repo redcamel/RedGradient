@@ -19,17 +19,12 @@ const RedNumberField = (
 ) => {
 	let currentValue = value
 	const [focusValue, setFocusValue] = useState()
-	const HD_focus = e => {
-		setFocusValue(+e.target.value)
-	}
-	const HD_input = e => {
-		update(e.target.value)
-	}
+	const HD_focus = e => setFocusValue(+e.target.value)
+	const HD_input = e => update(e.target.value)
 	const HD_keyDown = e => {
 		if (onKeyDown && e.keyCode === 13) update(e.target.value, true)
 	}
 	const HD_blur = (e, saveHistoryYn) => {
-		// console.log(e, focusValue, currentValue)
 		onInput?.(currentValue, focusValue !== currentValue || saveHistoryYn)
 		onDummySetting?.(false)
 	}
@@ -42,7 +37,7 @@ const RedNumberField = (
 		if (min !== undefined) v = Math.max(v, min)
 		if (max !== undefined) v = Math.min(v, max)
 		v = +v
-		// console.log(v)
+
 		if (min !== undefined) if (v < min) v = min;
 		if (max !== undefined) if (v > max) v = max;
 		currentValue = +v.toFixed(toFixed)

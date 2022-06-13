@@ -3,7 +3,7 @@ import HELPER_GET_DATA from "../../../../HELPER_GET_DATA.js";
 import ConstUnitPxPercent from "../../../../../../../data/const/ConstUnitPxPercent";
 
 /**
- * sort stepInfo 업데이트
+ * sort stepInfo  update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_sortLayerStepInfo = {
@@ -14,11 +14,9 @@ const cmd_sortLayerStepInfo = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const {borderGradientMode} = payload
-		const layerGroupInfo = borderGradientMode ? HELPER_GET_DATA.getTargetViewInfo(newData).containerInfo.borderInfo.borderGradientInfo : HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const layerGroupInfo = borderGradientMode ? HELPER_GET_DATA.getActiveViewInfo(newData).containerInfo.borderInfo.borderGradientInfo : HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const activeLayerInfo = borderGradientMode ? layerGroupInfo : layerGroupInfo['groupList'][payload.groupIndex]['children'][payload.groupLayerIndex]
 		const info = activeLayerInfo['timeline'][payload.time]
 		const {stepInfoList} = info

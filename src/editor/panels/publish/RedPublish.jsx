@@ -6,14 +6,15 @@ import ContextWindows from "../../contexts/window/ContextWindows";
 import {useContext, useEffect} from "react";
 import ConstCanvasViewKey from "../../../data/const/ConstCanvasViewKey";
 import PARSER_CONTAINER_CSS from "../../contexts/system/PARSER_CONTAINER_CSS";
-import calcLayerGradient from "../layer/calcLayerGradient";
-import calcLayerGradientBlendMode from "../layer/calcLayerGradientBlendMode";
+import calcGradientLayer from "../layer/js/calcGradientLayer";
+import calcLayerGradientBlendMode from "../layer/js/calcLayerGradientBlendMode";
 import getCalcedContainerEditorLayoutInfo_pixel from "../../core/canvas/getCalcedContainerEditorLayoutInfo_pixel";
 import ContextGradient from "../../contexts/system/ContextGradient";
 import RedCssPreview from "../css/RedCssPreview";
 import {toast} from "react-toastify";
 import RedToastSkin from "../../core/RedToastSkin";
 import DataRedGradientLayer from "../../../data/DataRedGradientLayer";
+import calcGradientGroupList from "../layer/js/calcGradientGroupList";
 
 const RedPublish = () => {
 	const {actions: windowActions} = useContext(ContextWindows)
@@ -31,13 +32,13 @@ export default RedPublish
 
 const RedPublishContents = () => {
 	const {actions: windowActions} = useContext(ContextWindows)
-	const {state, actions: gradientActions} = useContext(ContextGradient)
+	const {state} = useContext(ContextGradient)
 	const calcedLayoutSize = getCalcedContainerEditorLayoutInfo_pixel(state, 1)
 
 	const getCode = (viewKey) => {
 		const targetView = state.canvasInfo[viewKey]
 		const groupList = targetView.layerGroupInfo.groupList
-		if (viewKey === ConstCanvasViewKey.MAIN || groupList.length && groupList[0].children.length && calcLayerGradient(groupList[0].children[0], 0) !== calcLayerGradient(new DataRedGradientLayer(), 0)) {
+		if (viewKey === ConstCanvasViewKey.MAIN || (groupList.length && groupList[0].children.length && calcGradientLayer(groupList[0].children[0], 0) !== calcGradientLayer(new DataRedGradientLayer(), 0))) {
 			return [
 				PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'container'),
 				PARSER_CONTAINER_CSS.getPreviewCss(targetView, 'border'),
@@ -51,13 +52,9 @@ const RedPublishContents = () => {
 		const targetView = state.canvasInfo[viewKey]
 		const current_LayoutInfo = calcedLayoutSize[viewKey]
 		const groupList = targetView.layerGroupInfo.groupList
-		if (groupList.length && groupList[0].children.length && calcLayerGradient(groupList[0].children[0], 0) !== calcLayerGradient(new DataRedGradientLayer(), 0)) {
+		if (groupList.length && groupList[0].children.length && (calcGradientLayer(groupList[0].children[0], 0) !== calcGradientLayer(new DataRedGradientLayer(), 0))) {
 			return {
-				background: groupList.map(v => {
-					return v['visibleYn'] ? v.children.map((v2, layerIndex) => {
-						return v2['visibleYn'] ? calcLayerGradient(v2, state.timelineInfo.time, current_LayoutInfo, 1) : null
-					}).filter(Boolean).join(',') : null
-				}).filter(Boolean).join(',') + `, ${targetView.containerInfo['backgroundColor']}`,
+				background: calcGradientGroupList(targetView, current_LayoutInfo, state.timelineInfo.time, 1),
 				backgroundBlendMode: calcLayerGradientBlendMode(groupList)
 			}
 		} else {
@@ -124,7 +121,7 @@ const RedPublishContents = () => {
 				}}>Copy Result Css
 				</div>
 				<div className={'RedPublishCommandBt'} onClick={() => {
-					const t0 = `
+					const newCssStr = `
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -141,24 +138,13 @@ const RedPublishContents = () => {
   </body>
 </html>
 `
-					const data = t0
 					const a = document.createElement('a');
-					const file = new Blob([data], {type: 'text/plane'});
-					console.log('file', file)
+					const file = new Blob([newCssStr], {type: 'text/plane'});
+
 					a.href = URL.createObjectURL(file);
 					a.download = `RedGradient.html`;
 					a.click();
-					// var zip = new JSZip();
-					// zip.file("index.html",t0);
-					// zip.generateAsync({type: "blob"})
-					// 	.then(function (content) {
-					// 		console.log(content)
-					// 		const a = document.createElement('a');
-					// 		console.log('content', content)
-					// 		a.href = URL.createObjectURL(content);
-					// 		a.download = `RedGradient.html`;
-					// 		a.click();
-					// 	});
+
 				}}>Export Html
 				</div>
 			</div>

@@ -10,10 +10,8 @@ const cmd_setActiveGroupAndLayer = {
 	},
 	execute: (state, action, payload) => {
 		const {activeGroupIndex, activeGroupLayerIndex} = payload
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
-		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const newData = HELPER_GET_DATA.makeNewState(state)
+		const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		layerGroupInfo['activeGroupIndex'] = activeGroupIndex
 		layerGroupInfo['activeGroupLayerIndex'] = activeGroupLayerIndex
 		return newData

@@ -3,7 +3,7 @@ import RedNumberField from "../../../basicUI/RedNumberField.jsx";
 import RedGradientDegreeEditor from "./RedGradientDegreeEditor.jsx";
 
 /**
- * RedGradientDegreeor
+ * RedGradientDegree
  * @returns {JSX.Element}
  * @constructor
  */

@@ -21,9 +21,13 @@ const RedSelect = ({optionData = {}, value, unit, onChange, flexGrow, toFixed = 
 	>
 		{
 			optionList.map(v => {
-				// console.log(v)
 				return (
-					<option value={v} key={v}>{typeof v == 'number' ? v.toFixed(toFixed) : v}{unit}</option>
+					<option
+						value={v}
+						key={v}
+					>
+						{typeof v == 'number' ? v.toFixed(toFixed) : v}{unit}
+					</option>
 				)
 			})
 		}

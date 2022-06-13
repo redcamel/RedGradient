@@ -4,7 +4,7 @@
 .RedCanvas_device {
     background: rgba(255, 255, 255, 0.0);
     border-radius: 0;
-    outline: 0 solid rgba(0, 0, 0, 0.3);
+    outline: 0 solid rgba(0, 0, 0, 1);
     box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     transition: box-shadow 0.2s, border-radius 0.2s, background 0.2s;
     will-change: transform;
@@ -13,7 +13,7 @@
 
 .RedCanvas_device.active {
     background: rgba(255, 255, 255, 1);
-    outline: 15px solid rgba(0, 0, 0, 0.3);
+    outline: 15px solid rgba(0, 0, 0, 1);
     border-radius: 5px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 1);
 }

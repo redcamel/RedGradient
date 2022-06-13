@@ -14,10 +14,8 @@ const cmd_duplicateLayer = {
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const {groupIndex, groupLayerIndex} = payload
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
-		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const newData = HELPER_GET_DATA.makeNewState(state)
+		const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const children = layerGroupInfo['groupList'][groupIndex]['children']
 		const originData = children[groupLayerIndex]
 		const duplicateData = JSON.parse(JSON.stringify(originData))

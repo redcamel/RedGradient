@@ -1,8 +1,9 @@
 import {faMobileAlt} from "@fortawesome/free-solid-svg-icons";
 import ConstDevicePreset from "../../../../../data/const/ConstDevicePreset.js";
+import HELPER_GET_DATA from "../../HELPER_GET_DATA";
 
 /**
- * Device Preset 업데이트
+ * Device Preset  update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_updateDevicePreset = {
@@ -13,9 +14,7 @@ const cmd_updateDevicePreset = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		Object.values(ConstDevicePreset).forEach(v => {
 			if (v['deviceName'] === payload.value) newData.deviceInfo = JSON.parse(JSON.stringify(v))
 		})

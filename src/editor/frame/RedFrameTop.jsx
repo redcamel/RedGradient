@@ -18,7 +18,7 @@ import RedPublish from "../panels/publish/RedPublish";
  * @constructor
  */
 const RedFrameTop = () => {
-	const {state: gradientContext, actions, history, historyRedo} = useContext(ContextGradient)
+	const {state: gradientContext, actions} = useContext(ContextGradient)
 	const {actions: windowActions} = useContext(ContextWindows)
 	const HD_newProject = () => {
 		windowActions.addWindow({
@@ -37,7 +37,6 @@ const RedFrameTop = () => {
 	const HD_open = () => openFile(actions)
 	useEffect(() => {
 		const HD_keyUp = e => {
-			// console.log(e.keyCode) // f9
 			if (e.keyCode === 120) setOpenHistoryYn(!openHistoryYn)
 		}
 		document.addEventListener('keyup', HD_keyUp);
@@ -60,16 +59,17 @@ const RedFrameTop = () => {
 					<RedToolTipIcon icon={faFolderOpen} toolTip={'open'} shortcut={'Ctr + O'} onClick={HD_open}/>
 					<RedToolTipIcon icon={faSave} toolTip={'save'} shortcut={'Ctr + S'} onClick={HD_save}/>
 					<RedToolTipIcon icon={faUndo} toolTip={'undo'} shortcut={'Ctr + Z'} onClick={actions.undo}
-													style={{fontSize: '18px', opacity: history.length ? 0.75 : 0.25}}/>
+						// activeYn={history.length}
+					/>
 					<RedToolTipIcon icon={faRedo} toolTip={'redo'} shortcut={'Ctr + shift + Z'} onClick={actions.redo}
-													style={{fontSize: '18px', opacity: historyRedo.length ? 0.75 : 0.25}}/>
+						// activeYn={historyRedo.length}
+					/>
 				</div>
 				<RedPublish/>
 			</div>
 			<div className={`RedFrameTop_history_container ${openHistoryYn ? 'active' : ''}`}>
 				<div className={'RedFrameTop_history_button'}>
-					<RedToolTipIcon icon={faHistory} toolTip={'History'} shortcut={'F9'} style={{fontSize: '14px'}}
-													align={'right'}
+					<RedToolTipIcon icon={faHistory} toolTip={'History'} shortcut={'F9'} align={'right'}
 													onClick={() => setOpenHistoryYn(!openHistoryYn)}
 					/>
 				</div>

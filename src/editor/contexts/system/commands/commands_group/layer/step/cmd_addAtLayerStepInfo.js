@@ -5,7 +5,7 @@ import ConstGradientStepMode from "../../../../../../../data/const/ConstGradient
 import ConstUnitPxPercent from "../../../../../../../data/const/ConstUnitPxPercent";
 
 /**
- * Add stepInfo 업데이트
+ * Add stepInfo  update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_addAtLayerStepInfo = {
@@ -16,10 +16,8 @@ const cmd_addAtLayerStepInfo = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
-		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const newData = HELPER_GET_DATA.makeNewState(state)
+		const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const info = layerGroupInfo['groupList'][payload.groupIndex]['children'][payload.groupLayerIndex]['timeline'][payload.time]
 		const makeData = (targetItem, stop, targetKey) => {
 			return new DataRedGradientStepInfo({

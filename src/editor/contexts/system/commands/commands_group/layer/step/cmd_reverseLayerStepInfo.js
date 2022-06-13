@@ -4,7 +4,7 @@ import ConstGradientStepMode from "../../../../../../../data/const/ConstGradient
 import ConstUnitPxPercent from "../../../../../../../data/const/ConstUnitPxPercent";
 
 /**
- * reverse stepInfo 업데이트
+ * reverse stepInfo  update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_reverseLayerStepInfo = {
@@ -15,11 +15,9 @@ const cmd_reverseLayerStepInfo = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const {borderGradientMode} = payload
-		const layerGroupInfo = borderGradientMode ? HELPER_GET_DATA.getTargetViewInfo(newData).containerInfo.borderInfo.borderGradientInfo : HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const layerGroupInfo = borderGradientMode ? HELPER_GET_DATA.getActiveViewInfo(newData).containerInfo.borderInfo.borderGradientInfo : HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const activeLayerInfo = borderGradientMode ? layerGroupInfo : layerGroupInfo['groupList'][payload.groupIndex]['children'][payload.groupLayerIndex]
 		const info = activeLayerInfo['timeline'][payload.time]
 

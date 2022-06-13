@@ -1,4 +1,4 @@
-import calcLayerGradient from "../../layer/calcLayerGradient";
+import calcGradientLayer from "../../layer/js/calcGradientLayer";
 import HELPER_GET_DATA from "../../../contexts/system/HELPER_GET_DATA";
 import ContextGradient from "../../../contexts/system/ContextGradient";
 import {useContext} from "react";
@@ -8,7 +8,7 @@ import RedToastSkin from "../../../core/RedToastSkin";
 const RedBorderPresetItem = ({data, deleteMode, idx}) => {
 	const {state: gradientState, actions} = useContext(ContextGradient)
 	const HD_setData = () => {
-		const targetView = HELPER_GET_DATA.getTargetViewInfo(gradientState)
+		const targetView = HELPER_GET_DATA.getActiveViewInfo(gradientState)
 		const {borderInfo} = targetView['containerInfo']
 		const {borderGradientInfo} = borderInfo
 		if (!deleteMode) {
@@ -23,7 +23,7 @@ const RedBorderPresetItem = ({data, deleteMode, idx}) => {
 		<div
 			style={{
 				...style.container,
-				background: `${calcLayerGradient(data, undefined, undefined, 1, true)}, linear-gradient(#000, #000)`
+				background: `${calcGradientLayer(data, undefined, undefined, 1, true)}, linear-gradient(#000, #000)`
 			}}
 			onClick={HD_setData}
 		>

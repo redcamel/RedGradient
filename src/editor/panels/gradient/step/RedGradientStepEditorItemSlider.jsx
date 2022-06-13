@@ -22,14 +22,13 @@ const RedGradientStepEditorItemSlider = ({
 	const ref = useRef()
 	const deviceWidth = deviceInfo.sizeInfo['width']
 /////////////////
-	const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(gradientState)
+	const targetViewInfo = HELPER_GET_DATA.getActiveViewInfo(gradientState)
 	const {containerInfo} = targetViewInfo
 	const {sizeInfo: containerSizeInfo} = containerInfo
 	const time = gradientState['timelineInfo']['time']
 	const activeLayer = HELPER_GET_DATA.getActiveLayerInfo(gradientState)['timeline'][time]
 	const {sizeInfo: layerSizeInfo} = activeLayer
 	const [newRenderVersion, setNewRenderVersion] = useState()
-	// console.log('activeLayer', activeLayer)
 	//
 	const containerWidthPX = containerSizeInfo['widthUnit'] === ConstUnitPxPercent.PERCENT ? deviceWidth * containerSizeInfo['width'] / 100 : containerSizeInfo['width']
 	const layerWidthPX = layerSizeInfo['widthUnit'] === ConstUnitPxPercent.PERCENT ? containerWidthPX * layerSizeInfo['width'] / 100 : layerSizeInfo['width']
@@ -101,7 +100,7 @@ const RedGradientStepEditorItemSlider = ({
 		update(value)
 	};
 	const update = (v, saveHistoryYn) => {
-		// console.log(v)
+
 		currentValue = v
 		onChange?.(moveTargetKey, v, saveHistoryYn)
 	}
@@ -111,7 +110,7 @@ const RedGradientStepEditorItemSlider = ({
 		window.removeEventListener('mousemove', HD_move);
 		window.removeEventListener('mouseup', HD_up);
 	};
-	// console.log(startX, endX)
+
 	useEffect(() => {
 		setNewRenderVersion(Math.random())
 	}, [ref.current])
@@ -135,7 +134,7 @@ const RedGradientStepEditorItemSlider = ({
 					className={'RedGradientStepEditorItemSlider_ball'}
 					style={{
 						left: startToUnit + data['start']['stopUnit'],
-						transform: `translate(calc(-50% ),-50%)`,
+						transform: `translate(-50%,-50%)`,
 						borderRadius: data['mode'] === ConstGradientStepMode.RANGE ? '50% 0 0 50%' : '50%'
 					}}
 					onMouseDown={e => HD_moveStart('start', e)}
@@ -148,7 +147,7 @@ const RedGradientStepEditorItemSlider = ({
 					className={'RedGradientStepEditorItemSlider_ball'}
 					style={{
 						left: endToUnit + data['end']['stopUnit'],
-						transform: `translate(calc(-50%),-50%)`,
+						transform: `translate(-50%,-50%)`,
 						borderRadius: data['mode'] === ConstGradientStepMode.RANGE ? '0 50% 50% 0' : '50%'
 					}}
 					onMouseDown={e => HD_moveStart('end', e)}

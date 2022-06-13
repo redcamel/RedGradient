@@ -1,9 +1,9 @@
-import ConstGradientType from "../../../data/const/ConstGradientType";
-import ConstUnitPxPercentAuto from "../../../data/const/ConstUnitPxPercentAuto.js";
-import ConstGradientStepMode from "../../../data/const/ConstGradientStepMode.js";
-import ConstUnitPxPercent from "../../../data/const/ConstUnitPxPercent.js";
+import ConstGradientType from "../../../../data/const/ConstGradientType";
+import ConstUnitPxPercentAuto from "../../../../data/const/ConstUnitPxPercentAuto.js";
+import ConstGradientStepMode from "../../../../data/const/ConstGradientStepMode.js";
+import ConstUnitPxPercent from "../../../../data/const/ConstUnitPxPercent.js";
 
-const calcLayerGradient = (layerData, time = 0, offsetInfo = {
+const calcGradientLayer = (layerData, time = 0, offsetInfo = {
 	raw: {
 		x: 0,
 		xUnit: ConstUnitPxPercent.PX,
@@ -11,13 +11,13 @@ const calcLayerGradient = (layerData, time = 0, offsetInfo = {
 		yUnit: ConstUnitPxPercent.PX
 	}
 }, viewScale = 1, presetMode = false, borderGradientMode) => {
-	//TODO - 타임라인에서 찾는거 병합해야함
+	
 	const targetData = layerData['timeline'][time]
 	const {stepInfoList} = targetData
 	const layerType = layerData.type
 	const {valueInfo, sizeInfo, positionInfo} = targetData
 	//
-	let result = ''
+	let result
 	let stepStr;
 	switch (layerType) {
 		case ConstGradientType.LINEAR :
@@ -47,7 +47,7 @@ const calcLayerGradient = (layerData, time = 0, offsetInfo = {
 
 	return result
 }
-export default calcLayerGradient
+export default calcGradientLayer
 const calcAt = (atInfo, viewScale) => {
 	const at = 'at ' + [
 		atInfo['xUnit'] !== ConstUnitPxPercentAuto.AUTO ? `${(atInfo['xUnit'] === ConstUnitPxPercent.PX ? viewScale : 1) * atInfo['x']}${atInfo['xUnit']}` : `${atInfo['x']}${atInfo['xUnit']}`,
@@ -85,12 +85,8 @@ const checkColorStepInfo = (stepInfoList, viewScale) => {
 		const {start, end} = target
 		const nextData = stepInfoList[index + 1] || stepInfoList[stepInfoList.length - 1]
 		const colorStop_start = start['stopUnit'] !== ConstUnitPxPercentAuto.AUTO ? `${(start['stopUnit'] === ConstUnitPxPercent.PX ? viewScale : 1) * start['stop']}${start['stopUnit']}` : ''
-		// const linearColorStop_start2 = start['stopUnit'] !== ConstUnitPxPercentAuto.AUTO ? `calc(${(start['stopUnit'] === ConstUnitPxPercent.PX ? viewScale : 1) * start['stop']}${start['stopUnit']} + 1px)` : ''
 		const colorStop_end = end['stopUnit'] !== ConstUnitPxPercentAuto.AUTO ? `${(end['stopUnit'] === ConstUnitPxPercent.PX ? viewScale : 1) * end['stop']}${end['stopUnit']}` : ''
-		// const linearColorStop_end2 = end['stopUnit'] !== ConstUnitPxPercentAuto.AUTO ? `calc(${(start['stopUnit'] === ConstUnitPxPercent.PX ? viewScale : 1) * end['stop']}${end['stopUnit']} + 1px)` : ''
-		// const nextStartStop = nextData['start']['stopUnit'] !== ConstUnitPxPercentAuto.AUTO ? `${(nextData['start']['stopUnit'] === ConstUnitPxPercent.PX ? viewScale : 1) * nextData['start']['stop']}${nextData['start']['stopUnit']}` : ''
 
-		// console.log('colorStop_start', colorStop_start, colorStop_end)
 		const result = []
 		if (target['mode'] === ConstGradientStepMode.RANGE) {
 			if (start['divideYn'] || end['divideYn']) {

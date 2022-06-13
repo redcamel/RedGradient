@@ -1,6 +1,7 @@
 /**
  * 디바이스표현
  * @param layoutInfo
+ * @param viewScale
  * @param visible
  * @returns {JSX.Element}
  * @constructor

@@ -11,7 +11,7 @@ let startMousePointX, startMousePointY
 let startAtInfo
 let tX, tY
 
-const RedGradientAtEditor = ({viewKey, calcedLayoutInfo, viewScale, targetView, HD_ActiveWindow}) => {
+const RedGradientAtEditor = ({calcedLayoutInfo, viewScale, targetView, HD_ActiveWindow}) => {
 	const {state: gradientState, actions: gradientActions} = useContext(ContextGradient)
 	const [dummyVisible, setDummyVisible] = useState(false)
 	//
@@ -28,24 +28,15 @@ const RedGradientAtEditor = ({viewKey, calcedLayoutInfo, viewScale, targetView, 
 		resetTempInfo(tX, tY)
 	}, [])
 	useEffect(() => {
-		// 	// console.log('오냐')
-		resetTempInfo(tX, tY)
-		const updateList = []
-		updateList.push(
-
-		)
-		gradientActions.updateLayerValueInfoByKey(
-			updateList
-		)
-	}, [window.RedKey.downList.alt, window.RedKey.downList.shift])
-	useEffect(() => {
 
 			const HD_up = (e) => {
-				gradientActions.updateLayerValueInfoByKey([])
+				const payload = []
+				payload.saveHistoryYn = true
+				gradientActions.updateLayerValueInfoByKey(payload)
 				tX = e.pageX - startMousePointX;
 				tY = e.pageY - startMousePointY;
 				setDummyVisible(false)
-				console.log(tX, tY)
+
 			};
 			const HD_move = (e) => {
 
@@ -57,8 +48,7 @@ const RedGradientAtEditor = ({viewKey, calcedLayoutInfo, viewScale, targetView, 
 				tY = startAtInfo['yUnit'] === ConstUnitPxPercent.PERCENT ? tY / layerSizeH * 100 : tY
 				const calcX = startAtInfo['x'] + tX
 				const calcY = startAtInfo['y'] + tY
-				console.log(tX, tY)
-				console.log('TODO-계산')
+
 				const updateList = []
 				updateList.push(
 					{

@@ -31,7 +31,7 @@ let dragStartIDX = null
 const RedContainerBorderGradient = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
 	const [dummyDropTargetIDX, setDummyDropTargetIDX] = useState(null);
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
@@ -58,7 +58,6 @@ const RedContainerBorderGradient = ({viewKey}) => {
 						end['stopUnit'] = ConstUnitPxPercent.PERCENT
 					}
 				})
-				console.log('변환체크', containerSizeInfo_raw, stepInfoList)
 			}
 		}
 		gradientActions.update_borderGradientType(
@@ -118,7 +117,7 @@ const RedContainerBorderGradient = ({viewKey}) => {
 		e.stopPropagation();
 	}
 
-	const handleDragLeave = (e, idx) => {
+	const handleDragLeave = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
 		setDummyDropTargetIDX(null)
@@ -140,7 +139,6 @@ const RedContainerBorderGradient = ({viewKey}) => {
 
 	const handleDrop = (e, idx) => {
 		if (dragStartIDX !== null) {
-			console.log('dragStepIDX', dragStartIDX, 'targetStepIDX', idx)
 			gradientActions.dropLayerStepInfo({
 				time,
 				dragStartIDX,
@@ -185,8 +183,7 @@ const RedContainerBorderGradient = ({viewKey}) => {
 							HD_changeInfo('valueInfo', 'atInfo', newValue, saveHistoryYn)
 						}}
 						unVisibleVisibleEditor={true}
-						onChanges={(updateListInfo) => {
-
+						onChanges={() => {
 						}}
 						atInfo={valueInfo['atInfo']}
 						containerSizeInfo_raw={containerSizeInfo_raw}
@@ -206,37 +203,23 @@ const RedContainerBorderGradient = ({viewKey}) => {
 						color: 'inherit'
 					}}>
 						Steps
-						<div style={{
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'space-between',
-						}}>
+						<div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between',}}>
 							<div className={'RedGradientStepEditor_addPreset'} onClick={() => {
 								window.dispatchEvent(new CustomEvent('addUserBorderPreset', {
 									detail: borderGradientInfo
 								}))
-								toast().dark(
+								toast.dark(
 									<RedToastSkin title={'Add custom gradient to your presets.'} text={borderGradientInfo['label']}/>,
 									{
 										position: 'bottom-right'
 									}
 								);
-								alert('TODO')
 							}}>
 								<FontAwesomeIcon icon={faDownload}/>Add Preset
 							</div>
-							<RedToolTipIcon icon={faSort} style={{fontSize: '16px'}}
-															toolTip={'Sort Steps'}
-															onClick={HD_sortStep}
-							/>
-							<RedToolTipIcon icon={faExchangeAlt} style={{fontSize: '16px'}}
-															toolTip={'Reverse Steps'}
-															onClick={HD_reverseStep}
-							/>
-							<RedToolTipIcon icon={faFileMedical} style={{fontSize: '16px'}}
-															toolTip={'Add Step'}
-															onClick={HD_addStepInfo}
-							/>
+							<RedToolTipIcon icon={faSort} toolTip={'Sort Steps'} onClick={HD_sortStep}/>
+							<RedToolTipIcon icon={faExchangeAlt} toolTip={'Reverse Steps'} onClick={HD_reverseStep}/>
+							<RedToolTipIcon icon={faFileMedical} toolTip={'Add Step'} onClick={HD_addStepInfo}/>
 						</div>
 					</div>
 				}
@@ -265,7 +248,6 @@ const RedContainerBorderGradient = ({viewKey}) => {
 						onDragEnd={handleDragEnd}
 
 					/>
-
 					<RedDivision/>
 				</div>
 			})}

@@ -17,7 +17,7 @@ import RedContainerFilter_DropShadowFilter from "./blur/RedContainerFilter_DropS
  */
 const RedContainerFilter_Item = ({data, filterIDX}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	const targetView = HELPER_GET_DATA.getTargetViewInfo(state)
+	const targetView = HELPER_GET_DATA.getActiveViewInfo(state)
 	const {viewKey, containerInfo} = targetView
 	const {type, visibleYn} = data
 	const {filterInfo} = containerInfo
@@ -52,7 +52,7 @@ const RedContainerFilter_Item = ({data, filterIDX}) => {
 			target_filterIndex: filterIDX
 		})
 	}
-	const HD_setFilterVisible = (e) => {
+	const HD_setFilterVisible = () => {
 		gradientActions.setFilterVisible({
 			target_filterIndex: filterIDX,
 			value: !visibleYn
@@ -161,15 +161,15 @@ const RedContainerFilter_Item = ({data, filterIDX}) => {
 					<RedToolTipIcon
 						icon={visibleYn ? faEye : faEyeSlash}
 						activeYn={visibleYn}
-						style={{fontSize: '11px'}}
+
 						toolTip={'Remove Filter'}
 						onClick={HD_setFilterVisible}
 					/>
-					{prevSwapAble && <RedToolTipIcon icon={faArrowUp} style={{fontSize: '11px'}}
+					{prevSwapAble && <RedToolTipIcon icon={faArrowUp}
 																					 toolTip={'Move Up'}
 																					 onClick={(e) => HD_swapFilter(e, filterIDX, filterIDX - 1)}
 					/>}
-					{nextSwapAble && <RedToolTipIcon icon={faArrowDown} style={{fontSize: '11px'}}
+					{nextSwapAble && <RedToolTipIcon icon={faArrowDown}
 																					 toolTip={'Move Down'}
 																					 onClick={(e) => HD_swapFilter(e, filterIDX, filterIDX + 1)}
 					/>}
@@ -182,14 +182,8 @@ const RedContainerFilter_Item = ({data, filterIDX}) => {
 					onChange={HD_changeFilter}
 				/>
 				<div className={'RedContainerFilter_item_title_box'}>
-					<RedToolTipIcon icon={faTrash} style={{fontSize: '11px'}}
-													toolTip={'Remove Filter'}
-													onClick={HD_removeFilter}
-					/>
-					<RedToolTipIcon icon={faCopy} style={{fontSize: '11px'}}
-													toolTip={'Duplicate Filter'}
-													onClick={HD_duplicateFilter}
-					/>
+					<RedToolTipIcon icon={faTrash} toolTip={'Remove Filter'} onClick={HD_removeFilter}/>
+					<RedToolTipIcon icon={faCopy} toolTip={'Duplicate Filter'} onClick={HD_duplicateFilter}/>
 				</div>
 			</div>}/>
 			{renderFilter()}

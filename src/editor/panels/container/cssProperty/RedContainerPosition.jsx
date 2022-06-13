@@ -14,7 +14,6 @@ import getCalcedContainerEditorLayoutInfo_pixel from "../../../core/canvas/getCa
  */
 const RedContainerPosition = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
@@ -34,14 +33,15 @@ const RedContainerPosition = ({viewKey}) => {
 		)
 	}
 	const HD_changeUnit = (e, prefix, sizeKey) => {
-		const sameUnitYn = positionInfo[`${prefix}Unit`] === e.target.value
+		const value = e.target.value
+		const sameUnitYn = positionInfo[`${prefix}Unit`] === value
 		const calced = getCalcedContainerEditorLayoutInfo_pixel(state)
 		let calced_value;
 		const targetCalced = calced[viewKey]
 		if (sameUnitYn) {
 			calced_value = positionInfo[prefix]
 		} else {
-			if (positionInfo[`${prefix}Unit`] === ConstUnitPxPercent.PX && e.target.value === ConstUnitPxPercent.PERCENT) {
+			if (positionInfo[`${prefix}Unit`] === ConstUnitPxPercent.PX && value === ConstUnitPxPercent.PERCENT) {
 				calced_value = positionInfo[`${prefix}`] * 100 / targetCalced.parentSizeInfo[sizeKey]
 			} else {
 				calced_value = targetCalced.raw[prefix]
@@ -53,7 +53,7 @@ const RedContainerPosition = ({viewKey}) => {
 				{
 					targetInfo: 'positionInfo',
 					key: `${prefix}Unit`,
-					value: e.target.value
+					value: value
 				},
 				{
 					targetInfo: 'positionInfo',
@@ -64,39 +64,30 @@ const RedContainerPosition = ({viewKey}) => {
 			saveHistoryYn: true
 		})
 	}
+	const renderItem = (key, unit) => {
+		return <div style={style.item}>
+			<div style={style.label}>{key} :</div>
+			<RedNumberField
+				value={positionInfo[key]} width={'100%'} flexGrow={1}
+				onInput={(value, saveHistoryYn) => HD_changePosition(value, key, saveHistoryYn)}
+				onKeyDown={(value, saveHistoryYn) => HD_changePosition(value, key, saveHistoryYn)}
+				onBlur={(value, saveHistoryYn) => HD_changePosition(value, key, saveHistoryYn)}
+				onDummySetting={(v) => gradientActions.setOtherContainerDummyRenderYn(v)}
+
+			/>
+			<RedSelect
+				optionData={ConstUnitPxPercent}
+				value={positionInfo[`${key}Unit`]}
+				onChange={e => HD_changeUnit(e, key, unit)}
+			/>
+		</div>
+	}
 	return (
 		<div style={style.container}>
 			<RedItemTitle label={'Position'}/>
 			<div style={style.itemBox}>
-				<div style={style.item}>
-					<div style={style.label}>x :</div>
-					<RedNumberField value={positionInfo.x} width={'100%'} flexGrow={1}
-													onInput={(value, saveHistoryYn) => HD_changePosition(value, 'x', saveHistoryYn)}
-													onKeyDown={(value, saveHistoryYn) => HD_changePosition(value, 'x', saveHistoryYn)}
-													onBlur={(value, saveHistoryYn) => HD_changePosition(value, 'x', saveHistoryYn)}
-													onDummySetting={(v) => gradientActions.setOtherContainerDummyRenderYn(v)}
-
-					/>
-					<RedSelect
-						optionData={ConstUnitPxPercent}
-						value={positionInfo['xUnit']}
-						onChange={e => HD_changeUnit(e, 'x', 'width')}
-					/>
-				</div>
-				<div style={style.item}>
-					<div style={style.label}>y :</div>
-					<RedNumberField value={positionInfo.y} width={'100%'} flexGrow={1}
-													onInput={(value, saveHistoryYn) => HD_changePosition(value, 'y', saveHistoryYn)}
-													onKeyDown={(value, saveHistoryYn) => HD_changePosition(value, 'y', saveHistoryYn)}
-													onBlur={(value, saveHistoryYn) => HD_changePosition(value, 'y', saveHistoryYn)}
-													onDummySetting={(v) => gradientActions.setOtherContainerDummyRenderYn(v)}
-					/>
-					<RedSelect
-						optionData={ConstUnitPxPercent}
-						value={positionInfo['yUnit']}
-						onChange={e => HD_changeUnit(e, 'y', 'height')}
-					/>
-				</div>
+				{renderItem('x', 'width')}
+				{renderItem('y', 'height')}
 			</div>
 		</div>
 	)

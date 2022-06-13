@@ -6,8 +6,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    /*background: rgba(255, 0, 0, 0.5);*/
-    /*border: 2px dashed rgba(94, 122, 222, 0.46);*/
     z-index: 4;
     will-change: transform;
 
@@ -18,19 +16,14 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    /*background: linear-gradient(#888888, #5d5d5d);*/
-    /*background: linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101));*/
     background: #fff;
     border: 2px solid rgb(94, 122, 222);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    /*border: 0px solid #2a2626;*/
-    /*border-top: 0px solid #525252;*/
-    /*border-left: 0px solid #525252;*/
     opacity: 1;
     transition: opacity 0.2s;
 }
 
-.RedContainerBorderRadiusEditor_item.lt {
+.RedContainerBorderRadiusEditor_item.tl {
     top: 0;
     left: 0;
     transform: translate(calc(-50% - 0px), calc(-50% - 0px));
@@ -38,21 +31,21 @@
 }
 
 
-.RedContainerBorderRadiusEditor_item.rt {
+.RedContainerBorderRadiusEditor_item.tr {
     top: 0;
     right: 0;
     transform: translate(calc(50% + 0px), calc(-50% - 0px));
     cursor: ne-resize;
 }
 
-.RedContainerBorderRadiusEditor_item.lb {
+.RedContainerBorderRadiusEditor_item.bl {
     bottom: 0;
     left: 0;
     transform: translate(calc(-50% - 0px), calc(50% + 0px));
     cursor: sw-resize;
 }
 
-.RedContainerBorderRadiusEditor_item.rb {
+.RedContainerBorderRadiusEditor_item.br {
     bottom: 0;
     right: 0;
     transform: translate(calc(50% + 0px), calc(50% + 0px));

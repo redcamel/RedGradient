@@ -10,7 +10,7 @@ const RedCanvasWindowEditMode = ({
 																	 valueWithView,
 																	 valueVisibleGradientEditor,
 																	 valueSnapToContainer,
-																	 onChangeMode,
+																	 onChangeEditMode,
 																	 onWithViewChange,
 																	 onVisibleGradientEditor,
 																	 onSnapToContainer
@@ -24,7 +24,7 @@ const RedCanvasWindowEditMode = ({
 					return <div
 						key={index}
 						className={`RedCanvasWindowEditMode_item ${activeYn ? 'active' : ''}`}
-						onClick={() => onChangeMode(v)}
+						onClick={() => onChangeEditMode(v)}
 					>
 						<FontAwesomeIcon icon={activeYn ? faEdit : faEdit} fixedWidth={true} size={'1x'}/>
 						{v}
@@ -48,22 +48,37 @@ const RedCanvasWindowEditMode = ({
 					</div>
 				})}
 			</div>
-			<label style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '5px'}}
-						 onClick={onVisibleGradientEditor}>
-				<FontAwesomeIcon icon={faPalette}/> Use Visual Gradient Editor <input type={'checkbox'} key={Math.random()}
-																																							checked={valueVisibleGradientEditor}
-																																							style={{cursor: 'pointer'}}
-																																							onChange={() => {
-																																							}}/>
+			<label
+				style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '5px'}}
+				onClick={onVisibleGradientEditor}
+			>
+				<FontAwesomeIcon icon={faPalette}/>
+				Use Visual Gradient Editor
+				<input
+					type={'checkbox'}
+					key={Math.random()}
+					checked={valueVisibleGradientEditor}
+					style={{cursor: 'pointer'}}
+					onChange={() => {
+					}}
+				/>
 			</label>
 			{
 				value === ConstEditMode.GRADIENT &&
-				<label style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '5px'}}
-							 onClick={onSnapToContainer}>
-					<FontAwesomeIcon icon={faMagnet}/> Snap To Container <input type={'checkbox'} key={Math.random()}
-																																			checked={valueSnapToContainer}
-																																			style={{cursor: 'pointer'}} onChange={() => {
-				}}/>
+				<label
+					style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '5px'}}
+					onClick={onSnapToContainer}
+				>
+					<FontAwesomeIcon icon={faMagnet}/>
+					Snap To Container
+					<input
+						type={'checkbox'}
+						key={Math.random()}
+						checked={valueSnapToContainer}
+						style={{cursor: 'pointer'}}
+						onChange={() => {
+						}}
+					/>
 				</label>
 			}
 

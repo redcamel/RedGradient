@@ -17,7 +17,7 @@ const RedFrameStatus = () => {
 				href={projectInfo['github']}
 				target={'_blank'}
 			>
-				Preject GitHub : {projectInfo['github']}
+				Project GitHub : {projectInfo['github']}
 			</a>
 			<a
 				rel="noreferrer"

@@ -13,15 +13,13 @@ import RedDivision from "../../../../../basicUI/RedDivision.jsx";
  */
 const RedContainerBorderRadius = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
 	const {borderInfo} = containerInfo
 	const {borderRadiusInfo} = borderInfo
 	const {mode} = borderRadiusInfo
-	// console.log('test mode', mode)
-	// console.log('test borderRadiusInfo', borderRadiusInfo)
 	const targetBorderRadiusInfo = borderRadiusInfo[mode]
 	const HD_changeBorderRadiusMode = (mode) => {
 		gradientActions.update_borderRadiusMode(mode)

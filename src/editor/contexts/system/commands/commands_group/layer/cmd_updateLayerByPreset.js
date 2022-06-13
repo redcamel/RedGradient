@@ -1,7 +1,8 @@
 import {faFolder} from "@fortawesome/free-solid-svg-icons";
+import HELPER_GET_DATA from "../../../HELPER_GET_DATA";
 
 /**
- * Layer 업데이트
+ * Layer  update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_updateLayerByPreset = {
@@ -12,9 +13,7 @@ const cmd_updateLayerByPreset = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		action.label = `Layer Update By Preset`
 		return pushHistory(action, newData, true)
 	}

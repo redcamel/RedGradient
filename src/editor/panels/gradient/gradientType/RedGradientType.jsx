@@ -33,7 +33,7 @@ const RedGradientType = ({value, onChange}) => {
 						return <label
 							key={type}
 							style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '2px'}}
-							onMouseDown={(e) => onChange('type', type, true)}
+							onMouseDown={() => onChange('type', type, true)}
 						>
 							{/*{activeYn.toString()}*/}
 							<input

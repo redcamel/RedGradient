@@ -1,4 +1,4 @@
-import ConstCanvasViewKey from "../../../data/const/ConstCanvasViewKey.js";
+import ConstCanvasViewKey from "../../../../data/const/ConstCanvasViewKey.js";
 
 const calcMain = (canvasInfo) => {
 	const targetView = canvasInfo[ConstCanvasViewKey.MAIN]
@@ -31,7 +31,6 @@ const PARSER_CanvasLayoutHelper = {
 		switch (viewKey) {
 			case ConstCanvasViewKey.MAIN:
 				return calcMain(canvasInfo)
-
 			case ConstCanvasViewKey.BEFORE:
 			case ConstCanvasViewKey.AFTER:
 				return calcEtc(canvasInfo, viewKey)

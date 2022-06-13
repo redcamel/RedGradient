@@ -32,14 +32,14 @@ const RedColorPicker = () => {
 					state['getColorFunction'](),
 					function (newColor) {
 						state['updateFunction']({
-							viewKey: gradientState ? HELPER_GET_DATE.getTargetViewInfo(gradientState)['viewKey'] : null,
+							viewKey: gradientState ? HELPER_GET_DATE.getActiveViewInfo(gradientState)['viewKey'] : null,
 							value: newColor,
 						})
 					},
 					null,
 					function (newColor) {
 						state['updateFunction']({
-							viewKey: gradientState ? HELPER_GET_DATE.getTargetViewInfo(gradientState)['viewKey'] : null,
+							viewKey: gradientState ? HELPER_GET_DATE.getActiveViewInfo(gradientState)['viewKey'] : null,
 							value: newColor,
 							saveHistoryYn: true
 						})
@@ -79,6 +79,5 @@ const RedColorPicker = () => {
 		</div>
 	)
 }
-RedColorPicker.DIVISION = 'division'
 export default RedColorPicker
 

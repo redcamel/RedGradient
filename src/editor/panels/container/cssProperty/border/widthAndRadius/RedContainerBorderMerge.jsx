@@ -6,14 +6,18 @@ import ConstUnitPxPercent from "../../../../../../data/const/ConstUnitPxPercent.
 import ConstBoxBorderPropertyModeType from "../ConstBoxBorderPropertyModeType.js";
 
 /**
- * 컨테이너 RedContainerBorderMerge 담당
+ *
  * @param viewKey
+ * @param valueKey
+ * @param targetInfo
+ * @param useUnit
+ * @param unitData
  * @returns {JSX.Element}
  * @constructor
  */
 const RedContainerBorderMerge = ({viewKey, valueKey, targetInfo, useUnit, unitData = ConstUnitPxPercent}) => {
 	const {actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const valueUnitKey = `${valueKey}Unit`
 	const HD_changeBorder = (value, key, saveHistoryYn) => {
 		gradientActions[`update_${valueKey}`]({

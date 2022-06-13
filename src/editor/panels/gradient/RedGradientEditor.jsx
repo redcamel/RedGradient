@@ -5,7 +5,7 @@ import RedDivision from "../../basicUI/RedDivision.jsx";
 import HELPER_GET_DATA from "../../contexts/system/HELPER_GET_DATA.js";
 import {useContext} from "react";
 import ContextGradient from "../../contexts/system/ContextGradient.js";
-import calcLayerGradient from "../layer/calcLayerGradient.js";
+import calcGradientLayer from "../layer/js/calcGradientLayer.js";
 import RedCssPreview from "../css/RedCssPreview.jsx";
 import RedGradientDegree from "./degree/RedGradientDegree.jsx";
 import RedGradientSize from "./size/RedGradientSize.jsx";
@@ -31,18 +31,17 @@ import RedToastSkin from "../../core/RedToastSkin";
  */
 const RedGradientEditor = () => {
 	const {state: gradientState, actions} = useContext(ContextGradient)
-	const activeViewLayerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(gradientState)
+	const activeViewLayerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(gradientState)
 	if (!activeViewLayerGroupInfo) return null
 	const {activeGroupIndex, activeGroupLayerIndex} = activeViewLayerGroupInfo
 	const activeLayerData = HELPER_GET_DATA.getActiveLayerInfo(gradientState)
 	if (!activeLayerData) return null
 	const {type: gradientType} = activeLayerData
-	console.log('activeLayerData', activeLayerData)
 	//////
-	//TODO - 타임라인에서 찾는거 병합해야함
+	
 	const time = gradientState['timelineInfo']['time']
 	const {valueInfo, positionInfo, sizeInfo, stepInfoList} = activeLayerData['timeline'][time]
-	const activeViewkey = HELPER_GET_DATA.getTargetViewInfo(gradientState)['viewKey']
+	const activeViewkey = HELPER_GET_DATA.getActiveViewInfo(gradientState)['viewKey']
 	const containerSizeInfo_raw = getCalcedContainerEditorLayoutInfo_pixel(gradientState)[activeViewkey]['raw']
 	//////
 	const HD_change = (key, value, saveHistoryYn) => {
@@ -60,7 +59,6 @@ const RedGradientEditor = () => {
 						end['stopUnit'] = ConstUnitPxPercent.PERCENT
 					}
 				})
-				console.log('변환체크', containerSizeInfo_raw, stepInfoList)
 			}
 		}
 		actions.updateLayerByKey(
@@ -221,12 +219,12 @@ const RedGradientEditor = () => {
 					containerSizeInfo_raw={containerSizeInfo_raw}
 				/>
 				<RedDivision/>
-				<RedCssPreview label={'Container Css Preview'} codeStr={calcLayerGradient(activeLayerData)}/>
+				<RedCssPreview label={'Container Css Preview'} codeStr={calcGradientLayer(activeLayerData)}/>
 			</div>
 			<div className={'RedGradientEditor_bottom'}>
 				<div className={'RedLayerGroup_addTemplate'} onClick={() => {
 					const tempElem = document.createElement('textarea');
-					tempElem.value = calcLayerGradient(activeLayerData)
+					tempElem.value = calcGradientLayer(activeLayerData)
 					document.body.appendChild(tempElem);
 					tempElem.select();
 					document.execCommand("copy");

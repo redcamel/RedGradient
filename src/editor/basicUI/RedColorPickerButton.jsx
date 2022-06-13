@@ -13,7 +13,6 @@ import ColorPickerUI from '@easylogic/pure-colorpicker';
  * @constructor
  */
 const RedColorPickerButton = ({getColorFunction, updateFunction}) => {
-	// console.log('ColorPickerUI',ColorPickerUI)
 	const {actions: colorPickerActions} = useContext(ContextColorPicker)
 	const HD_openColorPicker = (e) => {
 		let {pageX: tX, pageY: tY} = e
@@ -34,7 +33,7 @@ const RedColorPickerButton = ({getColorFunction, updateFunction}) => {
 					width: t0.offsetWidth,
 					height: t0.offsetHeight
 				}
-				console.log(rect)
+
 				const windowW = window.innerWidth
 				const windowH = window.innerHeight
 				if (tX + rect.width > windowW) tX = windowW - rect.width - 10

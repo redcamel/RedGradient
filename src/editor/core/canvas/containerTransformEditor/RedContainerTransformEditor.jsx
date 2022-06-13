@@ -45,7 +45,6 @@ const RedContainerTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targ
 		gradientActions.setOtherContainerDummyRenderYn(true)
 	}
 	useEffect(() => {
-		// console.log('오냐')
 		resetTempInfo(tX, tY)
 		const updateList = []
 		updateList.push(
@@ -76,7 +75,7 @@ const RedContainerTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targ
 		})
 	}, [window.RedKey.downList.alt, window.RedKey.downList.shift])
 	useEffect(() => {
-			const HD_up = (e) => {
+			const HD_up = () => {
 				gradientActions.updateContainerSizePosition({
 					viewKey,
 					value: [],
@@ -98,10 +97,9 @@ const RedContainerTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targ
 				const {sizeInfo, parentSizeInfo, positionInfo} = calcedLayoutInfo
 				const useFixedRatio = window.RedKey.downList['shift'] || sizeInfo.useFixedRatio
 				const updateList = []
-				const convertPxToPercent_size = (calced_px, key) => {
+				const convertPxToPercent_size = (calced_px, sizeInfoKey) => {
 					let calced_unit = calced_px
-					const sizeInfoKey = key
-					if (sizeInfo[`${key}Unit`] === ConstUnitPxPercent.PERCENT) calced_unit = calced_px / parentSizeInfo[sizeInfoKey] * 100
+					if (sizeInfo[`${sizeInfoKey}Unit`] === ConstUnitPxPercent.PERCENT) calced_unit = calced_px / parentSizeInfo[sizeInfoKey] * 100
 					return calced_unit
 				}
 				const convertPxToPercent_position = (calced_px, key) => {

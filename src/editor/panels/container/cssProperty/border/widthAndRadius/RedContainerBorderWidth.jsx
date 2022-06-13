@@ -13,15 +13,13 @@ import RedDivision from "../../../../../basicUI/RedDivision.jsx";
  */
 const RedContainerBorderWidth = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
 	const {borderInfo} = containerInfo
 	const {borderWidthInfo} = borderInfo
 	const {mode} = borderWidthInfo
-	// console.log('test mode', mode)
-	// console.log('test borderWidthInfo', borderWidthInfo)
 	const targetBorderWidthInfo = borderWidthInfo[mode]
 	const HD_changeBorderWidthMode = (mode) => {
 		gradientActions.update_borderWidthMode(mode)

@@ -1,4 +1,5 @@
 import {faVectorSquare} from "@fortawesome/free-solid-svg-icons";
+import HELPER_GET_DATA from "../../../HELPER_GET_DATA";
 
 /**
  * 컨테이너 사이즈 변경
@@ -12,9 +13,7 @@ const cmd_updateContainerSizePosition = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const {value, viewKey, saveHistoryYn} = payload
 		const checkInfo = {}
 		const valueStr = []

@@ -12,7 +12,7 @@ import RedSelect from "../../../basicUI/RedSelect.jsx";
  */
 const RedContainerBoxSizing = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView
@@ -32,7 +32,6 @@ const RedContainerBoxSizing = ({viewKey}) => {
 				value={boxSizing}
 				onChange={HD_changeBoxSizing}
 			/>
-
 		</div>
 	)
 }

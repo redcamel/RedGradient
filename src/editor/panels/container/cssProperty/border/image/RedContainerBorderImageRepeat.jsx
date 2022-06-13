@@ -12,7 +12,7 @@ import ConstBoxBorderImageRepeatType from "../ConstBoxBorderImageRepeatType.js";
  */
 const RedContainerBorderImageRepeat = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView

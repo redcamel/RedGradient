@@ -14,9 +14,7 @@ const cmd_duplicateGroup = {
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const {groupIndex} = payload
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const groupList = HELPER_GET_DATA.getActiveViewGroupList(newData)
 		const originData = groupList[groupIndex]
 		const duplicateData = JSON.parse(JSON.stringify(originData))

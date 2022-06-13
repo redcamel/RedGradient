@@ -14,9 +14,7 @@ const cmd_addGroup = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const groupList = HELPER_GET_DATA.getActiveViewGroupList(newData)
 		groupList.reverse()
 		groupList.push(payload || new DataRedGradientLayerGroup())

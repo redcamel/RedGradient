@@ -13,7 +13,7 @@ const openFile = (actions) => {
 	a.setAttribute('type', 'file');
 	a.click();
 	a.onchange = e => {
-		// console.log(e);
+
 		const fileName = e.target.files[0]['name']
 		let fileReader = new FileReader();
 		fileReader.onload = evt => {
@@ -21,8 +21,7 @@ const openFile = (actions) => {
 			requestAnimationFrame(() => {
 				const checkValidate = (v, testBase) => {
 					let result = v
-					// console.log('t0',testBase)
-					// console.log('result',result)
+
 					for (const k in testBase) {
 						console.log(k)
 						if (!result.hasOwnProperty(k)) {

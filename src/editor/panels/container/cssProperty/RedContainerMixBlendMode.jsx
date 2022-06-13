@@ -12,7 +12,7 @@ import ConstBlendModeType from "../../../../data/const/ConstBlendModeType.js";
  */
 const RedContainerMixBlendMode = ({viewKey}) => {
 	const {state, actions: gradientActions} = useContext(ContextGradient)
-	
+
 	const {canvasInfo} = state
 	const targetView = canvasInfo[viewKey]
 	const {containerInfo} = targetView

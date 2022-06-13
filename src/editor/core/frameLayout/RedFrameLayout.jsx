@@ -1,18 +1,18 @@
 import {useContext, useEffect, useState} from "react";
-import ContextMenu from "../contexts/contextMenu/ContextMenu.js";
-import ContextGradient from "../contexts/system/ContextGradient.js";
+import ContextMenu from "../../contexts/contextMenu/ContextMenu.js";
+import ContextGradient from "../../contexts/system/ContextGradient.js";
 import './RedFrameLayout.css';
-import SplitterLayout from "./splitterLayout/SplitterLayout.js";
-import RedFrameTopStatus from "../frame/RedFrameTopStatus";
-import HELPER_GET_DATA from "../contexts/system/HELPER_GET_DATA.js";
-import ConstEditMode from "../../data/const/ConstEditMode.js";
+import SplitterLayout from "../splitterLayout/SplitterLayout.js";
+import RedFrameTopStatus from "../../frame/RedFrameTopStatus";
+import HELPER_GET_DATA from "../../contexts/system/HELPER_GET_DATA.js";
+import ConstEditMode from "../../../data/const/ConstEditMode.js";
 import {faFolder, faFolderOpen} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import openFile from "../openFile";
-import saveFile from "../saveFile";
-import RedWindow from "../basicUI/window/RedWindow";
-import RedNewDocument from "../start/newDocument/RedNewDocument";
-import ContextWindows from "../contexts/window/ContextWindows";
+import openFile from "../../openFile";
+import saveFile from "../../saveFile";
+import RedWindow from "../../basicUI/window/RedWindow";
+import RedNewDocument from "../../start/newDocument/RedNewDocument";
+import ContextWindows from "../../contexts/window/ContextWindows";
 
 /**
  * 기본 프레임 구성
@@ -60,22 +60,26 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 	}
 	useEffect(() => {
 		const HD_keyDown = e => {
-
-			console.log(e.keyCode)
 			switch (e.keyCode) {
 				case 112 :
 				case 113:
 					e.stopPropagation()
 					e.preventDefault()
 					break
+				default :
+					break
 			}
-			if (e.keyCode === 112) {
-				//f1
-				setActiveLeftGroupIDX(activeLeftGroupIDX === null ? 0 : activeLeftGroupIDX === 0 ? null : 0)
-			}
-			if (e.keyCode === 113) {
-				//f2
-				setActiveRightGroupIDX(activeRightGroupIDX === null ? 0 : activeRightGroupIDX === 0 ? null : 0)
+			switch (e.keyCode) {
+				case 112 :
+					//f1
+					setActiveLeftGroupIDX(activeLeftGroupIDX === null ? 0 : activeLeftGroupIDX === 0 ? null : 0)
+					break
+				case 113:
+					//f2
+					setActiveRightGroupIDX(activeRightGroupIDX === null ? 0 : activeRightGroupIDX === 0 ? null : 0)
+					break
+				default :
+					break
 			}
 		}
 		document.addEventListener('keydown', HD_keyDown);
@@ -83,40 +87,26 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 			document.removeEventListener('keydown', HD_keyDown);
 		}
 	}, [activeLeftGroupIDX, activeRightGroupIDX])
+	const renderMiddleItem = (v, index, activeYn, onClick) => {
+		return <div
+			key={index}
+			onClick={onClick}
+			className={'RedFrameLayout_containerLeftRightBox'}
+			style={{background: activeYn ? '#111' : '#333'}}
+		><FontAwesomeIcon
+			icon={activeYn ? faFolderOpen : faFolder}/> {v['label']} {v["shortcut"] ? ` - ${v['shortcut']}` : ''}
+		</div>
+	}
 	const renderMiddle = () => {
 		return <div style={{display: 'flex', flexGrow: 1}}>
-			<div style={{
-				width: '30px',
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center',
-				justifyContent: 'flex-start',
-				background: '#222',
-				gap: '1px',
-				borderRight: '1px solid #111'
-			}}>
+			<div className={'RedFrameLayout_containerLeft'}>
 				{
 					openLeftGroupList.map((v, index) => {
 						const activeYn = index === activeLeftGroupIDX
-						return <div
-							key={index}
-							onClick={() => {
-								if (activeLeftGroupIDX === index) setActiveLeftGroupIDX(null)
-								else setActiveLeftGroupIDX(index)
-							}}
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								padding: '10px 0px',
-								width: '100%',
-								gap: '4px',
-								background: activeYn ? '#111' : '#333',
-								writingMode: 'vertical-rl',
-								cursor: 'pointer'
-							}}
-						><FontAwesomeIcon
-							icon={activeYn ? faFolderOpen : faFolder}/> {v['label']} {v["shortcut"] ? ` - ${v['shortcut']}` : ''}
-						</div>
+						return renderMiddleItem(v, index, activeYn, () => {
+							if (activeLeftGroupIDX === index) setActiveLeftGroupIDX(null)
+							else setActiveLeftGroupIDX(index)
+						})
 					})
 				}
 			</div>
@@ -147,38 +137,14 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 					{bottom && <div className={'RedFrameLayout_bottom'}>{bottom}</div>}
 				</SplitterLayout>
 			</div>
-			<div style={{
-				width: '30px',
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center',
-				justifyContent: 'flex-start',
-				background: '#222',
-				gap: '1px',
-				borderLeft: '1px solid #111'
-			}}>
+			<div className={'RedFrameLayout_containerRight'}>
 				{
 					openRightGroupList.map((v, index) => {
 						const activeYn = index === activeRightGroupIDX
-						return <div
-							key={index}
-							onClick={() => {
-								if (activeRightGroupIDX === index) setActiveRightGroupIDX(null)
-								else setActiveRightGroupIDX(index)
-							}}
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								padding: '10px 0px',
-								width: '100%',
-								gap: '4px',
-								background: activeYn ? '#111' : '#333',
-								writingMode: 'vertical-rl',
-								cursor: 'pointer'
-							}}
-						><FontAwesomeIcon
-							icon={activeYn ? faFolderOpen : faFolder}/> {v['label']} {v["shortcut"] ? ` - ${v['shortcut']}` : ''}
-						</div>
+						return renderMiddleItem(v, index, activeYn, () => {
+							if (activeRightGroupIDX === index) setActiveRightGroupIDX(null)
+							else setActiveRightGroupIDX(index)
+						})
 					})
 				}
 			</div>
@@ -206,7 +172,6 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 		}
 	}, [contextMenuState.data])
 	useEffect(() => {
-
 		const checkUnloadEvent = () => {
 			if (history.length > 1) return 'test'
 		}
@@ -233,68 +198,67 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 			redKey.code2name[v] = k;
 		}
 		const HD_keyDown = e => {
-			console.log('e.keyCode', e.keyCode, e)
-			const code2name = redKey.code2name[e.keyCode]
-			if (code2name) redKey.downList[code2name] = 1
-			if (redKey.downList.control && e.keyCode === 79) {
+			const stopEvent = () => {
 				e.preventDefault()
 				e.stopPropagation()
+			}
+			const KEYCODE = e.keyCode
+			const code2name = redKey.code2name[KEYCODE]
+			const downList = redKey.downList
+			const CONTROL = downList.control
+			const ALT = downList.alt
+			const SHIFT = downList.shift
+			if (code2name) downList[code2name] = 1
+			if (CONTROL && KEYCODE === 79) {
+				stopEvent()
 				openFile(contextGradientActions)
-			} else if (redKey.downList.control && e.keyCode === 83) {
-				e.preventDefault()
-				e.stopPropagation()
+			} else if (CONTROL && KEYCODE === 83) {
+				stopEvent()
 				saveFile(contextGradientState)
-			} else if (redKey.downList.alt && e.keyCode === 78) {
-				e.preventDefault()
-				e.stopPropagation()
+			} else if (ALT && KEYCODE === 78) {
+				stopEvent()
 				windowActions.addWindow({
 					contents: <RedWindow><RedNewDocument/></RedWindow>,
 					backgroundColor: 'rgba(0,0,0, 0.5)'
 				})
-			} else if (redKey.downList.control && redKey.downList.shift && redKey.downList.z) {
-				e.preventDefault()
-				e.stopPropagation()
+			} else if (CONTROL && SHIFT && downList.z) {
+				stopEvent()
 				contextGradientActions.redo()
-			} else if (redKey.downList.control && redKey.downList.z) {
-				e.preventDefault()
-				e.stopPropagation()
+			} else if (CONTROL && downList.z) {
+				stopEvent()
 				contextGradientActions.undo()
 			} else {
-				console.log('test', HELPER_GET_DATA.getTargetViewInfo(contextGradientState))
-				if (code2name === '1' && redKey.downList.control) {
-					e.preventDefault()
-					contextGradientActions.updateCanvasEditMode({
-						viewKey: HELPER_GET_DATA.getTargetViewInfo(contextGradientState)['viewKey'],
-						value: ConstEditMode.CONTAINER
-					})
-				}
-				if (code2name === '2' && redKey.downList.control) {
-					e.preventDefault()
-					contextGradientActions.updateCanvasEditMode({
-						viewKey: HELPER_GET_DATA.getTargetViewInfo(contextGradientState)['viewKey'],
-						value: ConstEditMode.GRADIENT
-					})
-				}
-				if (code2name === '3' && redKey.downList.control) {
-					e.preventDefault()
-					contextGradientActions.updateCanvasEditMode({
-						viewKey: HELPER_GET_DATA.getTargetViewInfo(contextGradientState)['viewKey'],
-						value: ConstEditMode.BORDER_RADIUS
-					})
-				}
-				if (code2name === '4' && redKey.downList.control) {
-					e.preventDefault()
-					contextGradientActions.updateCanvasEditMode({
-						viewKey: HELPER_GET_DATA.getTargetViewInfo(contextGradientState)['viewKey'],
-						value: ConstEditMode.NONE
-					})
+				if (CONTROL) {
+					let editMode
+					switch (code2name) {
+						case '1' :
+							editMode = ConstEditMode.CONTAINER
+							break
+						case '2' :
+							editMode = ConstEditMode.GRADIENT
+							break
+						case '3' :
+							editMode = ConstEditMode.BORDER_RADIUS
+							break
+						case '4' :
+							editMode = ConstEditMode.NONE
+							break
+						default :
+							break
+					}
+					if (editMode) {
+						stopEvent()
+						contextGradientActions.updateCanvasEditMode({
+							viewKey: HELPER_GET_DATA.getActiveViewInfo(contextGradientState)['viewKey'],
+							value: editMode
+						})
+					}
 				}
 			}
 			contextGradientActions.setKeyState(redKey)
 		}
 		const HD_keyUp = e => {
 			const code2name = redKey.code2name[e.keyCode]
-			console.log(code2name, redKey.downList[code2name])
 			if (code2name === 'alt' && redKey.downList[code2name]) {
 				e.preventDefault()
 			}

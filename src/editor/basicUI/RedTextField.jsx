@@ -22,13 +22,8 @@ const RedTextField = (props) => {
 			}
 		}
 	}
-	const HD_focus = e => {
-		setFocusValue(e.target.value)
-	}
-	const HD_blur = e => {
-		console.log(e, focusValue, currentValue)
-		props.onBlur?.(currentValue, focusValue !== currentValue)
-	}
+	const HD_focus = e => setFocusValue(e.target.value)
+	const HD_blur = () => props.onBlur?.(currentValue, focusValue !== currentValue)
 	return <input
 		className={'RedBasicUI_inputField'}
 		placeholder={props.placeholder}

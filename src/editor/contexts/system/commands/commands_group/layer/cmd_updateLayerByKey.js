@@ -2,7 +2,7 @@ import {faFolder, faFont, faGear} from "@fortawesome/free-solid-svg-icons";
 import HELPER_GET_DATA from "../../../HELPER_GET_DATA.js";
 
 /**
- * Layer 업데이트
+ * Layer  update
  * @type {{description: {icon: IconDefinition, label: string, key: string}, execute: (function(*, *, *, *): *)}}
  */
 const cmd_updateLayerByKey = {
@@ -14,10 +14,8 @@ const cmd_updateLayerByKey = {
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const {groupIndex, groupLayerIndex, key, value, saveHistoryYn} = payload
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
-		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const newData = HELPER_GET_DATA.makeNewState(state)
+		const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const layerData = layerGroupInfo['groupList'][groupIndex]['children'][groupLayerIndex]
 		layerData[key] = value
 		action.label = `Layer (${layerData['label']}) ${key === 'previewBackgroundType' ? 'bgColor of preview' : key} : ${value}`

@@ -17,7 +17,7 @@ const RedLayerPreviewBackgroundType = ({layerData, groupIdx, layerIdx}) => {
 		groupIndex: groupIdx,
 		groupLayerIndex: layerIdx,
 		value,
-		saveHistoryYn : true
+		saveHistoryYn: true
 	})
 	const HD_remove = (e) => {
 		e.preventDefault()
@@ -50,14 +50,10 @@ const RedLayerPreviewBackgroundType = ({layerData, groupIdx, layerIdx}) => {
 					</div>
 				})}
 				<div className={`RedLayerPreviewBackgroundType_item`} style={{padding: '0 4px'}}>
-					<RedToolTipIcon icon={faCopy} toolTip={'Duplicate Layer'} style={{fontSize: '14px'}}
-													onClick={HD_duplicateLayer}
-					/>
+					<RedToolTipIcon icon={faCopy} toolTip={'Duplicate Layer'} onClick={HD_duplicateLayer}/>
 				</div>
 				<div className={`RedLayerPreviewBackgroundType_item`} style={{padding: '0 4px'}}>
-					<RedToolTipIcon icon={faTrashAlt} toolTip={'Remove Layer'} style={{fontSize: '14px', width: '24px'}}
-													onClick={HD_remove}
-					/>
+					<RedToolTipIcon icon={faTrashAlt} toolTip={'Remove Layer'} onClick={HD_remove}/>
 				</div>
 			</div>
 		</div>

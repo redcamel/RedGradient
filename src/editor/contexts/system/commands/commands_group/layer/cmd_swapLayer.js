@@ -13,11 +13,9 @@ const cmd_swapLayer = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const {startGroupIndex, targetGroupIndex, startLayerIndex, targetLayerIndex} = payload
-		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const groupList = layerGroupInfo['groupList']
 		const startGroupChildren = groupList[startGroupIndex]['children']
 		const targetGroupChildren = groupList[targetGroupIndex]['children']

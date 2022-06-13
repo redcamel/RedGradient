@@ -1,4 +1,4 @@
-import calcLayerGradient from "../../layer/calcLayerGradient";
+import calcGradientLayer from "../../layer/js/calcGradientLayer";
 import HELPER_GET_DATA from "../../../contexts/system/HELPER_GET_DATA";
 import ContextGradient from "../../../contexts/system/ContextGradient";
 import {useContext} from "react";
@@ -21,7 +21,7 @@ const RedPresetItem = ({data, deleteMode, idx}) => {
 		<div
 			style={{
 				...style.container,
-				background: `${calcLayerGradient(data, undefined, undefined, 1, true)}, linear-gradient(#000, #000)`
+				background: `${calcGradientLayer(data, undefined, undefined, 1, true)}, linear-gradient(#000, #000)`
 			}}
 			onClick={HD_setData}
 		>

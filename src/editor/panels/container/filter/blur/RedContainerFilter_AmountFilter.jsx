@@ -35,15 +35,16 @@ const RedContainerFilter_AmountFilter = ({
 		<div className={'RedContainerFilter_item_container'}>
 			<div className={'RedContainerFilter_item'}>
 				<div>{valueKey}</div>
-				<RedNumberField value={setting[valueKey]} width={'100%'} flexGrow={1}
-												min={min}
-												max={max}
-												step={step}
-												toFixed={toFixed}
-												dragStep={dragStep}
-												onInput={(value, saveHistoryYn) => HD_changeValue(value, valueKey, saveHistoryYn)}
-												onKeyDown={(value, saveHistoryYn) => HD_changeValue(value, valueKey, saveHistoryYn)}
-												onBlur={(value, saveHistoryYn) => HD_changeValue(value, valueKey, saveHistoryYn)}
+				<RedNumberField
+					value={setting[valueKey]} width={'100%'} flexGrow={1}
+					min={min}
+					max={max}
+					step={step}
+					toFixed={toFixed}
+					dragStep={dragStep}
+					onInput={(value, saveHistoryYn) => HD_changeValue(value, valueKey, saveHistoryYn)}
+					onKeyDown={(value, saveHistoryYn) => HD_changeValue(value, valueKey, saveHistoryYn)}
+					onBlur={(value, saveHistoryYn) => HD_changeValue(value, valueKey, saveHistoryYn)}
 				/>
 			</div>
 		</div>

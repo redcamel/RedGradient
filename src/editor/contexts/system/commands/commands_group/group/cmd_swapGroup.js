@@ -13,10 +13,8 @@ const cmd_swapGroup = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
-		const layerGroupInfo = HELPER_GET_DATA.getActiveViewLayerGroupInfo(newData)
+		const newData = HELPER_GET_DATA.makeNewState(state)
+		const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const groupList = layerGroupInfo['groupList']
 		const targetItem = groupList[payload.target_groupIndex]
 		const destinationItem = groupList[payload.destination_groupIndex]

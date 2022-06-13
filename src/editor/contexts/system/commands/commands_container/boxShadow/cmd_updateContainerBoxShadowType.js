@@ -1,4 +1,5 @@
 import {faSun} from "@fortawesome/free-solid-svg-icons";
+import HELPER_GET_DATA from "../../../HELPER_GET_DATA";
 
 /**
  * 컨테이너 box-shadow Type 변경
@@ -13,9 +14,7 @@ const cmd_updateContainerBoxShadowType = {
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
 		const {viewKey, value} = payload
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		newData.canvasInfo[viewKey]['containerInfo']['boxShadowInfo']['type'] = value
 		action.label = `${viewKey} Container BoxShadow : ${value}`
 		return pushHistory(action, newData, true)

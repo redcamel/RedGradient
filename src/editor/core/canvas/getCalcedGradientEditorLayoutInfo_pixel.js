@@ -19,7 +19,8 @@ const getCalcedGradientEditorLayoutInfo_pixel = (containerInfo, layerData, calce
 	const calcHeight2 = (containerSizeInfo_raw.height - calcHeight) * viewScale
 	const calcX = (positionInfo['xUnit'] === ConstUnitPxPercent.PERCENT ? positionInfo['x'] * calcWidth2 * 0.01 / viewScale : positionInfo['x']) + containerSizeInfo_viewScalePixel['x']
 	const calcY = (positionInfo['yUnit'] === ConstUnitPxPercent.PERCENT ? positionInfo['y'] * calcHeight2 * 0.01 / viewScale : positionInfo['y']) + containerSizeInfo_viewScalePixel['y']
-	const result = {
+
+	return {
 		parentSizeInfo: containerInfo.sizeInfo,
 		sizeInfo,
 		positionInfo,
@@ -40,6 +41,5 @@ const getCalcedGradientEditorLayoutInfo_pixel = (containerInfo, layerData, calce
 			height: calcHeight * viewScale + 'px'
 		}
 	}
-	return result
 }
 export default getCalcedGradientEditorLayoutInfo_pixel

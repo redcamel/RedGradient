@@ -21,6 +21,17 @@ const RedCanvasWindowBottom = ({viewKey}) => {
 	if (!scaleKeyData[`SCALE_${intViewScale}`]) scaleKeyData[`SCALE_${intViewScale}`] = intViewScale
 	const {containerInfo} = targetView
 	const {sizeInfo, positionInfo} = containerInfo || {}
+	const HD_viewScale = e => gradientActions.updateCanvasViewScale({
+		viewKey,
+		value: e.target.value / 100
+	})
+	const HD_setCenter = () => gradientActions.updateCanvasViewOffset({
+		viewKey,
+		value: {
+			x: -sizeInfo.width / 2 * viewScale - positionInfo.x * viewScale,
+			y: -sizeInfo.height / 2 * viewScale - positionInfo.y * viewScale
+		}
+	})
 	return (
 		<div className={'RedCanvasWindow_bottomContainer'}>
 			<RedSelect
@@ -28,19 +39,9 @@ const RedCanvasWindowBottom = ({viewKey}) => {
 				value={intViewScale}
 				unit={'%'}
 				toFixed={0}
-				onChange={e => gradientActions.updateCanvasViewScale({
-					viewKey,
-					value: e.target.value / 100
-				})}
+				onChange={HD_viewScale}
 			/>
-			<RedButton label={'setCenter'} onClick={() => gradientActions.updateCanvasViewOffset({
-				viewKey,
-				//TODO - 계산기 기반으로 처리
-				value: {
-					x: -sizeInfo.width / 2 * viewScale - positionInfo.x * viewScale,
-					y: -sizeInfo.height / 2 * viewScale - positionInfo.y * viewScale
-				}
-			})}/>
+			<RedButton label={'setCenter'} onClick={HD_setCenter}/>
 			<div className={'RedCanvasWindow_centerPoint'}>Offset {viewOffset.x}px {viewOffset.y}px</div>
 		</div>
 	)

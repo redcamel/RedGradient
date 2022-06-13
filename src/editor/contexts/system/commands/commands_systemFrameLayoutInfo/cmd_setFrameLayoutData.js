@@ -11,7 +11,7 @@ const cmd_setFrameLayoutData = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const {viewKey, index, layoutKey, value} = payload
+		const {index, layoutKey, value} = payload
 		const newData = {
 			...state
 		}

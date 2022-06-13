@@ -7,6 +7,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     background: var(--panel-base-background);
+    border-left: 1px solid #444;
 }
 
 
@@ -15,9 +16,11 @@
     align-items: center;
     flex-grow: 1;
     white-space: nowrap;
-    padding: 6px 8px 7px 25px;
+    padding: 10px 8px 10px 25px;
+    line-height: 1;
+    border-bottom: 1px solid #222;
+    border-top: 1px solid #444;
     transition: opacity 0.3s;
-    margin-bottom: 1px;
     cursor: pointer;
     font-size: 11px;
     opacity: 0.25;
@@ -42,7 +45,7 @@
     align-items: center;
     gap: 5px;
     padding: 10px 8px;
-    border-top: 1px solid #111;
+    /*border-top: 1px solid #111;*/
     background: linear-gradient(#3c3c3c, #242424);
     font-size: 12px;
 }

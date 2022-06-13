@@ -13,11 +13,9 @@ const cmd_swapFilter = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 
-		const targetViewInfo = HELPER_GET_DATA.getTargetViewInfo(newData)
+		const targetViewInfo = HELPER_GET_DATA.getActiveViewInfo(newData)
 		const {containerInfo} = targetViewInfo
 		const {filterInfo} = containerInfo
 		const targetItem = filterInfo[payload.target_filterIndex]

@@ -14,9 +14,7 @@ const cmd_addLayer = {
 	},
 	execute: (state, action, payload, historyInfo) => {
 		const {pushHistory} = historyInfo
-		const newData = {
-			...JSON.parse(JSON.stringify(state))
-		}
+		const newData = HELPER_GET_DATA.makeNewState(state)
 		const groupList = HELPER_GET_DATA.getActiveViewGroupList(newData)
 		const targetGroup = groupList[payload.groupIndex]
 		const children = targetGroup['children']
