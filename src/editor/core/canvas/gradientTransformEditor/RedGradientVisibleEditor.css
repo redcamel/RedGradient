@@ -40,7 +40,8 @@
     will-change: transform;
     width: 2px;
     height: 100%;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 1px rgba(0,0,0,1);
 }
 
 .RedGradientVisibleEditorRangeBarArea {

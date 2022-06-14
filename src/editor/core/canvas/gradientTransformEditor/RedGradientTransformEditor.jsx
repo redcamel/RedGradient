@@ -236,6 +236,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 						)
 						let calced_y_px, calced_y_unit
 						const gap = dummyHeight - calced_height_px
+						const sizeGap = startContainerH_calced - calced_height_px
 						if (alt) {
 							dummyPositionY = -gap * 0.5
 							calced_y_px = (startDummyPositionY_calced) + gap * 0.5
@@ -244,7 +245,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 							calced_y_px = (startDummyPositionY_calced) + gap
 						}
 						if (positionInfo['yUnit'] === ConstUnitPxPercent.PERCENT) {
-							calced_y_unit = calced_y_px / ((startContainerH_calced - calced_height_px)) * 100
+							calced_y_unit = sizeGap ? calced_y_px / sizeGap * 100 : 0
 						} else {
 							calced_y_unit = calced_y_px
 						}
@@ -287,6 +288,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 							}
 						)
 						let calced_y_px, calced_y_unit
+						const sizeGap = startContainerH_calced - calced_height_px
 						const gap = dummyHeight - calced_height_px
 						if (alt) {
 							dummyPositionY = -gap * 0.5
@@ -296,7 +298,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 							} else {
 								dummyPositionY = -gap * 0.5
 								calced_y_px = (startDummyPositionY_calced) + gap * 0.5
-								calced_y_unit = calced_y_px / ((startContainerH_calced - calced_height_px)) * 100
+								calced_y_unit = sizeGap ? calced_y_px / sizeGap * 100 : 0
 							}
 							updateList.push(
 								{
@@ -311,7 +313,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 						} else {
 							if (positionInfo['yUnit'] === ConstUnitPxPercent.PERCENT) {
 								const tempY = (startDummyPositionY_calced)
-								calced_y_unit = tempY / ((startContainerH_calced - calced_height_px)) * 100
+								calced_y_unit = sizeGap ? tempY / sizeGap * 100 : 0
 								updateList.push(
 									{
 										targetInfoKey: 'positionInfo',
@@ -331,6 +333,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 					if (resizeMode) {
 						calced_width_px = Math.max(0, dummyWidth - (tX - startMousePointX) * (alt ? 2 : 1) / viewScale)
 						calced_width_unit = convertPxToPercent_size(calced_width_px, 'width')
+						const sizeGap = startContainerW_calced - calced_width_px
 						{
 							// snap
 							const layoutLeft = 0
@@ -360,7 +363,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 							calced_x_px = (startDummyPositionX_calced) + gap
 						}
 						if (positionInfo['xUnit'] === ConstUnitPxPercent.PERCENT) {
-							calced_x_unit = calced_x_px / ((startContainerW_calced - calced_width_px)) * 100
+							calced_x_unit = sizeGap ? calced_x_px / sizeGap * 100 : 0
 						} else {
 							calced_x_unit = calced_x_px
 						}
@@ -403,6 +406,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 						)
 						let calced_x_px, calced_x_unit
 						const gap = dummyWidth - calced_width_px
+						const sizeGap = startContainerW_calced - calced_width_px
 						if (alt) {
 							dummyPositionX = -gap * 0.5
 							if (positionInfo['xUnit'] === ConstUnitPxPercent.PX) {
@@ -411,7 +415,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 							} else {
 								dummyPositionX = -gap * 0.5
 								calced_x_px = (startDummyPositionX_calced) + gap * 0.5
-								calced_x_unit = calced_x_px / ((startContainerW_calced - calced_width_px)) * 100
+								calced_x_unit = sizeGap ? calced_x_px / sizeGap * 100 : 0
 							}
 							updateList.push(
 								{
@@ -426,7 +430,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 						} else {
 							if (positionInfo['xUnit'] === ConstUnitPxPercent.PERCENT) {
 								const tempX = (startDummyPositionX_calced)
-								calced_x_unit = tempX / ((startContainerW_calced - calced_width_px)) * 100
+								calced_x_unit = sizeGap ? tempX / sizeGap * 100 : 0
 								updateList.push(
 									{
 										targetInfoKey: 'positionInfo',
@@ -447,6 +451,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 					const gap = dummyWidth - calced_width_px
 					let calced_x_px
 					let calced_x_unit
+					const sizeGap = startContainerW_calced - dummyWidth
 					//
 
 					if (positionInfo['xUnit'] === ConstUnitPxPercent.PX) {
@@ -454,9 +459,10 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 						calced_x_px = (startDummyPositionX_calced) + gap * 0.5
 						calced_x_unit = calced_x_px
 					} else {
+						if (!sizeGap) return
 						dummyPositionX = -gap * 0.5
 						calced_x_px = (startDummyPositionX_calced) + gap * 0.5
-						calced_x_unit = calced_x_px / ((startContainerW_calced - dummyWidth)) * 100
+						calced_x_unit = calced_x_px / ((sizeGap)) * 100
 					}
 					{
 						// snap left
@@ -464,7 +470,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 						const gradientLeft = calced_x_px
 						if (valueSnapToContainer && Math.abs(layoutLeft - gradientLeft) < snapSize) {
 							calced_x_px = 0
-							calced_x_unit = calced_x_px / ((startContainerW_calced - dummyWidth)) * 100
+							calced_x_unit = calced_x_px / ((sizeGap)) * 100
 							dummyPositionX -= layoutLeft - gradientLeft
 						}
 					}
@@ -496,15 +502,17 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 					const gap = dummyHeight - calced_height_px
 					let calced_y_px
 					let calced_y_unit
+					const sizeGap = startContainerH_calced - dummyHeight
 					//
 					if (positionInfo['yUnit'] === ConstUnitPxPercent.PX) {
 						dummyPositionY = -gap * 0.5
 						calced_y_px = (startDummyPositionY_calced) + gap * 0.5
 						calced_y_unit = calced_y_px
 					} else {
+						if (!sizeGap) return
 						dummyPositionY = -gap * 0.5
 						calced_y_px = (startDummyPositionY_calced) + gap * 0.5
-						calced_y_unit = calced_y_px / ((startContainerH_calced - dummyHeight)) * 100
+						calced_y_unit = calced_y_px / sizeGap * 100
 					}
 					{
 						// snap top
@@ -512,7 +520,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 						const gradientTop = calced_y_px
 						if (valueSnapToContainer && Math.abs(layoutTop - gradientTop) < snapSize) {
 							calced_y_px = 0
-							calced_y_unit = calced_y_px / ((startContainerH_calced - dummyHeight)) * 100
+							calced_y_unit = calced_y_px / sizeGap * 100
 							dummyPositionY -= layoutTop - gradientTop
 						}
 					}
