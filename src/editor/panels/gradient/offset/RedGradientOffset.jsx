@@ -47,7 +47,7 @@ const RedGradientOffset = ({data, time, groupIndex, groupLayerIndex}) => {
 	}
 	return (
 		<div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-			<RedItemTitle label={'Offset'}/>
+			<RedItemTitle label={'Start Offset'}/>
 			<RedNumberField
 				value={offsetInfo['value']} width={'100%'} flexGrow={1}
 				onInput={(value, saveHistoryYn) => HD_onChange(value, saveHistoryYn)}
