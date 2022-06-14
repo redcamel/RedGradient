@@ -38,7 +38,7 @@ const RedGradientEditor = () => {
 	if (!activeLayerData) return null
 	const {type: gradientType} = activeLayerData
 	//////
-	
+
 	const time = gradientState['timelineInfo']['time']
 	const {valueInfo, positionInfo, sizeInfo, stepInfoList} = activeLayerData['timeline'][time]
 	const activeViewkey = HELPER_GET_DATA.getActiveViewInfo(gradientState)['viewKey']
@@ -71,7 +71,7 @@ const RedGradientEditor = () => {
 			}
 		)
 	}
-	const HD_changeInfos = (updateListInfo) => {
+	const HD_changeInfos = (updateListInfo, label) => {
 		const updateList = []
 		updateListInfo.forEach(v => {
 			const {targetInfoKey, key, value, saveHistoryYn} = v
@@ -87,11 +87,13 @@ const RedGradientEditor = () => {
 				}
 			)
 		})
+		updateList.saveHistoryYn = true
+		updateList.label = label
 		actions.updateLayerValueInfoByKey(
 			updateList
 		)
 	}
-	const HD_changeInfo = (targetInfoKey, key, value, saveHistoryYn) => {
+	const HD_changeInfo = (targetInfoKey, key, value, saveHistoryYn, label) => {
 		const updateList = []
 		if ((key === 'width' || key === 'height') && sizeInfo['useFixedRatio']) {
 			const ratio = value / sizeInfo[key]
@@ -132,6 +134,7 @@ const RedGradientEditor = () => {
 				saveHistoryYn
 			}
 		)
+		updateList.label = label
 		actions.updateLayerValueInfoByKey(
 			updateList
 		)
@@ -170,14 +173,16 @@ const RedGradientEditor = () => {
 					!linearTypeYn
 					&& <>
 						<RedGradientAt
-							onChange={(targetInfoKey, key, value, saveHistoryYn) => {
+							onChange={(targetInfoKey, key, value, saveHistoryYn, label) => {
 								const newValue = JSON.parse(JSON.stringify(valueInfo['atInfo']))
 								newValue[key] = value
 								valueInfo['atInfo'] = newValue
-								HD_changeInfo('valueInfo', 'atInfo', newValue, saveHistoryYn)
+								HD_changeInfo('valueInfo', 'atInfo', newValue, saveHistoryYn, label)
 							}}
-							onChanges={(updateListInfo) => {
+							onChanges={(updateListInfo, label) => {
 								const updateList = []
+								updateList.saveHistoryYn = true
+								updateList.label = label
 								const newValue = JSON.parse(JSON.stringify(valueInfo['atInfo']))
 								updateListInfo.forEach(v => {
 									const {key, value} = v
@@ -191,8 +196,7 @@ const RedGradientEditor = () => {
 										time,
 										groupIndex: activeGroupIndex,
 										groupLayerIndex: activeGroupLayerIndex,
-										value: newValue,
-										saveHistoryYn: true
+										value: newValue
 									}
 								)
 								actions.updateLayerValueInfoByKey(

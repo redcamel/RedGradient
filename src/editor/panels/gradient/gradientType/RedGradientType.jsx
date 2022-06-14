@@ -18,14 +18,7 @@ const RedGradientType = ({value, onChange}) => {
 			/>
 			<div
 				className={'RedGradientEditor_container_repeat_box'}
-				style={{
-					// flexDirection: 'column',
-					padding: '2px 0 5px 0',
-					// alignItems: 'flex-start',
-					// justifyContent : 'space-between',
-					gap: '2px',
-					flexWrap: 'wrap'
-				}}
+				style={{padding: '2px 0 5px 0', gap: '2px', flexWrap: 'wrap'}}
 			>
 				{
 					Object.values(ConstGradientType).map(type => {

@@ -27,46 +27,52 @@ const RedGradientAt = ({atInfo, onChange, onChanges, sizeInfo, containerSizeInfo
 		const {x, y, xUnit, yUnit} = atInfo
 		let calcX = x
 		let calcY = y
-		const gradientWidth = sizeInfo['widthUnit'] === ConstUnitPxPercent.PERCENT ? containerSizeInfo_raw.width * sizeInfo['width'] * 0.01 : sizeInfo['width']
-		const gradientHeight = sizeInfo['heightUnit'] === ConstUnitPxPercent.PERCENT ? containerSizeInfo_raw.height * sizeInfo['height'] * 0.01 : sizeInfo['height']
-		const middleX = xUnit === ConstUnitPxPercent.PERCENT ? 50 : (gradientWidth * 0.5);
-		const middleY = yUnit === ConstUnitPxPercent.PERCENT ? 50 : (gradientHeight * 0.5);
-		const rightX = xUnit === ConstUnitPxPercent.PERCENT ? 100 : gradientWidth;
-		const bottomY = yUnit === ConstUnitPxPercent.PERCENT ? 100 : gradientHeight;
+		const {PERCENT} = ConstUnitPxPercent
+		const gradientWidth = sizeInfo['widthUnit'] === PERCENT ? containerSizeInfo_raw.width * sizeInfo['width'] * 0.01 : sizeInfo['width']
+		const gradientHeight = sizeInfo['heightUnit'] === PERCENT ? containerSizeInfo_raw.height * sizeInfo['height'] * 0.01 : sizeInfo['height']
+		const middleX = xUnit === PERCENT ? 50 : (gradientWidth * 0.5);
+		const middleY = yUnit === PERCENT ? 50 : (gradientHeight * 0.5);
+		const rightX = xUnit === PERCENT ? 100 : gradientWidth;
+		const bottomY = yUnit === PERCENT ? 100 : gradientHeight;
+		const targetInfoKey = 'atInfo'
 		switch (type) {
 			case 'tl' :
 				onChanges(
 					[
-						{targetInfoKey: 'atInfo', key: 'x', value: 0, saveHistoryYn: true},
-						{targetInfoKey: 'atInfo', key: 'y', value: 0, saveHistoryYn: true}
-					]
+						{targetInfoKey, key: 'x', value: 0},
+						{targetInfoKey, key: 'y', value: 0}
+					],
+					`Layer At : Top Left`
 				)
 				break
 			case 't' :
 				calcX = middleX
 				onChanges(
 					[
-						{targetInfoKey: 'atInfo', key: 'x', value: calcX, saveHistoryYn: true},
-						{targetInfoKey: 'atInfo', key: 'y', value: 0, saveHistoryYn: true}
-					]
+						{targetInfoKey, key: 'x', value: calcX},
+						{targetInfoKey, key: 'y', value: 0}
+					],
+					`Layer At : Top`
 				)
 				break
 			case 'tr' :
 				calcX = rightX
 				onChanges(
 					[
-						{targetInfoKey: 'atInfo', key: 'x', value: calcX, saveHistoryYn: true},
-						{targetInfoKey: 'atInfo', key: 'y', value: 0, saveHistoryYn: true}
-					]
+						{targetInfoKey, key: 'x', value: calcX},
+						{targetInfoKey, key: 'y', value: 0}
+					],
+					`Layer At : Top Right`
 				)
 				break
 			case 'ml' :
 				calcY = middleY
 				onChanges(
 					[
-						{targetInfoKey: 'atInfo', key: 'x', value: 0, saveHistoryYn: true},
-						{targetInfoKey: 'atInfo', key: 'y', value: calcY, saveHistoryYn: true}
-					]
+						{targetInfoKey, key: 'x', value: 0},
+						{targetInfoKey, key: 'y', value: calcY}
+					],
+					`Layer At : Middle Left`
 				)
 				break
 			case 'm' :
@@ -74,9 +80,10 @@ const RedGradientAt = ({atInfo, onChange, onChanges, sizeInfo, containerSizeInfo
 				calcY = middleY
 				onChanges(
 					[
-						{targetInfoKey: 'atInfo', key: 'x', value: calcX, saveHistoryYn: true},
-						{targetInfoKey: 'atInfo', key: 'y', value: calcY, saveHistoryYn: true}
-					]
+						{targetInfoKey, key: 'x', value: calcX},
+						{targetInfoKey, key: 'y', value: calcY}
+					],
+					`Layer At : Middle`
 				)
 				break
 			case 'mr' :
@@ -84,18 +91,20 @@ const RedGradientAt = ({atInfo, onChange, onChanges, sizeInfo, containerSizeInfo
 				calcY = middleY
 				onChanges(
 					[
-						{targetInfoKey: 'atInfo', key: 'x', value: calcX, saveHistoryYn: true},
-						{targetInfoKey: 'atInfo', key: 'y', value: calcY, saveHistoryYn: true}
-					]
+						{targetInfoKey, key: 'x', value: calcX},
+						{targetInfoKey, key: 'y', value: calcY}
+					],
+					`Layer At : Middle Right`
 				)
 				break
 			case 'bl' :
 				calcY = bottomY
 				onChanges(
 					[
-						{targetInfoKey: 'atInfo', key: 'x', value: 0, saveHistoryYn: true},
-						{targetInfoKey: 'atInfo', key: 'y', value: calcY, saveHistoryYn: true}
-					]
+						{targetInfoKey, key: 'x', value: 0},
+						{targetInfoKey, key: 'y', value: calcY}
+					],
+					`Layer At : Bottom Left`
 				)
 				break
 			case 'b' :
@@ -103,9 +112,10 @@ const RedGradientAt = ({atInfo, onChange, onChanges, sizeInfo, containerSizeInfo
 				calcY = bottomY
 				onChanges(
 					[
-						{targetInfoKey: 'atInfo', key: 'x', value: calcX, saveHistoryYn: true},
-						{targetInfoKey: 'atInfo', key: 'y', value: calcY, saveHistoryYn: true}
-					]
+						{targetInfoKey, key: 'x', value: calcX},
+						{targetInfoKey, key: 'y', value: calcY}
+					],
+					`Layer At : Bottom`
 				)
 				break
 			case 'br' :
@@ -113,93 +123,83 @@ const RedGradientAt = ({atInfo, onChange, onChanges, sizeInfo, containerSizeInfo
 				calcY = bottomY
 				onChanges(
 					[
-						{targetInfoKey: 'atInfo', key: 'x', value: calcX, saveHistoryYn: true},
-						{targetInfoKey: 'atInfo', key: 'y', value: calcY, saveHistoryYn: true}
-					]
+						{targetInfoKey, key: 'x', value: calcX},
+						{targetInfoKey, key: 'y', value: calcY}
+					],
+					`Layer At : Bottom Right`
 				)
 				break
 			case 'horizontal':
-				if (xUnit === ConstUnitPxPercent.PERCENT) calcX = 100 - x
+				if (xUnit === PERCENT) calcX = 100 - x
 				else calcX = gradientWidth - x
-				onChange('atInfo', 'x', calcX, true)
+				onChange(targetInfoKey, 'x', calcX, true, `Layer At : Mirror Horizontal`)
 				break
 			case 'vertical':
-				if (yUnit === ConstUnitPxPercent.PERCENT) calcY = 100 - y
+				if (yUnit === PERCENT) calcY = 100 - y
 				else calcY = gradientHeight - y
-				onChange('atInfo', 'y', calcY, true)
+				onChange(targetInfoKey, 'y', calcY, true, `Layer At : Mirror Vertical`)
 				break
 			default :
 				break
 		}
 	}
+	const renderLocationItem = (key, icon, style) => {
+		return <div onClick={() => HD_setPosition(key)} className={'RedGradientAt_item'}><FontAwesomeIcon
+			icon={icon}
+			style={style}/>
+		</div>
+	}
+	const renderItem = (key, style) => {
+		return <div className={'RedGradientEditor_container_sizeBox'} style={style}>
+			<RedNumberField
+				value={atInfo[key]} width={'100%'} flexGrow={1}
+				onInput={(value, saveHistoryYn) => onChange('atInfo', key, value, saveHistoryYn)}
+				onKeyDown={(value, saveHistoryYn) => onChange('atInfo', key, value, saveHistoryYn)}
+				onBlur={(value, saveHistoryYn) => onChange('atInfo', key, value, saveHistoryYn)}
+			/>
+			<RedSelect
+				optionData={ConstUnitPxPercent}
+				value={atInfo[`${key}Unit`]}
+				onChange={e => onChange('atInfo', `${key}Unit`, e.target.value, true)}
+			/>
+		</div>
+	}
 	return (
 		<div>
 			<RedItemTitle label={'At'}/>
-			<div className={'RedGradientEditor_container_sizeBox'}>
-				<RedNumberField value={atInfo['x']} width={'100%'} flexGrow={1}
-												onInput={(value, saveHistoryYn) => onChange('atInfo', 'x', value, saveHistoryYn)}
-												onKeyDown={(value, saveHistoryYn) => onChange('atInfo', 'x', value, saveHistoryYn)}
-												onBlur={(value, saveHistoryYn) => onChange('atInfo', 'x', value, saveHistoryYn)}
-				/>
-				<RedSelect
-					optionData={ConstUnitPxPercent}
-					value={atInfo['xUnit']}
-					onChange={e => onChange('atInfo', 'xUnit', e.target.value, true)}
-				/>
-			</div>
-			<div className={'RedGradientEditor_container_sizeBox'} style={{marginTop: '4px'}}>
-				<RedNumberField value={atInfo['y']} width={'100%'} flexGrow={1}
-												onInput={(value, saveHistoryYn) => onChange('atInfo', 'y', value, saveHistoryYn)}
-												onKeyDown={(value, saveHistoryYn) => onChange('atInfo', 'y', value, saveHistoryYn)}
-												onBlur={(value, saveHistoryYn) => onChange('atInfo', 'y', value, saveHistoryYn)}
-				/>
-				<RedSelect
-					optionData={ConstUnitPxPercent}
-					value={atInfo['yUnit']}
-					onChange={e => onChange('atInfo', 'yUnit', e.target.value, true)}
-				/>
-			</div>
+			{renderItem('x')}
+			{renderItem('y')}
 			{!unVisibleVisibleEditor &&
 				<div style={{display: 'flex', gap: '5px', marginTop: '5px'}}>
 					<div style={{display: 'flex', flexDirection: 'column', gap: '1px', border: '1px solid #222'}}>
 						<div className={'RedGradientAt_itemBox'}>
-							<div onClick={() => HD_setPosition('tl')} className={'RedGradientAt_item'}><FontAwesomeIcon
-								icon={faArrowUp}
-								style={{transform: 'rotate(-45deg)'}}/>
-							</div>
-							<div onClick={() => HD_setPosition('t')} className={'RedGradientAt_item'}><FontAwesomeIcon
-								icon={faArrowUp}/></div>
-							<div onClick={() => HD_setPosition('tr')} className={'RedGradientAt_item'}><FontAwesomeIcon
-								icon={faArrowUp}
-								style={{transform: 'rotate(45deg)'}}/>
-							</div>
+							{renderLocationItem('tl', faArrowUp, {transform: 'rotate(-45deg)'})}
+							{renderLocationItem('t', faArrowUp)}
+							{renderLocationItem('tr', faArrowUp, {transform: 'rotate(45deg)'})}
 						</div>
 						<div className={'RedGradientAt_itemBox'}>
-							<div onClick={() => HD_setPosition('ml')} className={'RedGradientAt_item'}><FontAwesomeIcon
-								icon={faArrowLeft}/></div>
-							<div onClick={() => HD_setPosition('m')} className={'RedGradientAt_item'}><FontAwesomeIcon
-								icon={faDotCircle} style={{fontSize: '10px'}}/>
-							</div>
-							<div onClick={() => HD_setPosition('mr')} className={'RedGradientAt_item'}><FontAwesomeIcon
-								icon={faArrowRight}/></div>
+							{renderLocationItem('ml', faArrowLeft)}
+							{renderLocationItem('m', faDotCircle, {fontSize: '10px'})}
+							{renderLocationItem('mr', faArrowRight)}
 						</div>
 						<div className={'RedGradientAt_itemBox'}>
-							<div onClick={() => HD_setPosition('bl')} className={'RedGradientAt_item'}><FontAwesomeIcon
-								icon={faArrowDown}
-								style={{transform: 'rotate(45deg)'}}/></div>
-							<div onClick={() => HD_setPosition('b')} className={'RedGradientAt_item'}><FontAwesomeIcon
-								icon={faArrowDown}/></div>
-							<div onClick={() => HD_setPosition('br')} className={'RedGradientAt_item'}><FontAwesomeIcon
-								icon={faArrowDown}
-								style={{transform: 'rotate(-45deg)'}}/></div>
+							{renderLocationItem('bl', faArrowDown, {transform: 'rotate(45deg)'})}
+							{renderLocationItem('b', faArrowDown)}
+							{renderLocationItem('br', faArrowDown, {transform: 'rotate(-45deg)'})}
 						</div>
 					</div>
 					<div style={{display: 'flex', flexDirection: 'column', gap: '2px', flexGrow: 1}}>
-						<div onClick={() => HD_setPosition('horizontal')}
-								 className={'RedGradientAt_itemMirror'}>{renderMirrorIcon()} Mirror Horizontal
+						<div
+							onClick={() => HD_setPosition('horizontal')}
+							className={'RedGradientAt_itemMirror'}
+						>
+							{renderMirrorIcon()} Mirror Horizontal
 						</div>
-						<div onClick={() => HD_setPosition('vertical')}
-								 className={'RedGradientAt_itemMirror'}>{renderMirrorIcon(true)} Mirror Vertical
+						<div
+							onClick={() => HD_setPosition('vertical')}
+							className={'RedGradientAt_itemMirror'}
+						>
+							{renderMirrorIcon(true)} Mirror Vertical
 						</div>
 					</div>
 				</div>

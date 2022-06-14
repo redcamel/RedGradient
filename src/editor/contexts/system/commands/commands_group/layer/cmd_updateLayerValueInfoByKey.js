@@ -26,11 +26,9 @@ const cmd_updateLayerValueInfoByKey = {
 		const layerGroupInfo = HELPER_GET_DATA.getActiveLayerGroupInfo(newData)
 		const payloads = payload instanceof Array ? payload : [payload]
 		payloads.forEach(payload => {
-
 			const info = layerGroupInfo['groupList'][payload.groupIndex]['children'][payload.groupLayerIndex]['timeline'][payload.time]
-
 			info[payload.targetInfoKey][payload.key] = payload.value
-			action.label = `Layer ValueInfo Update ${payload.key} : ${JSON.stringify(payload.value)}`
+			action.label = payloads.label || `Layer ValueInfo Update ${payload.key} : ${JSON.stringify(payload.value)}`
 			switch (payload.key) {
 				case 'label' :
 					action.icon = faTag
@@ -55,6 +53,7 @@ const cmd_updateLayerValueInfoByKey = {
 			pushHistory(action, newData, payload.saveHistoryYn)
 		})
 		const needSave = payload.saveHistoryYn
+		if(payload.label) action.label = payload.label
 		if (needSave) pushHistory(action, newData, needSave)
 		return newData
 	}
