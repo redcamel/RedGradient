@@ -92,7 +92,6 @@ function reducer(state, action) {
 		})
 	} else {
 		switch (action.type) {
-
 			//
 			case 'updateContainerMixBlendMode':
 				value = payload.value
@@ -108,10 +107,10 @@ function reducer(state, action) {
 		}
 	}
 }
-
+let actions;
 const useContextGradientReducer = () => {
 	const [state, dispatch] = useReducer(reducer, null)
-	const actions = makeActions(useContextGradientReducer, keyList, dispatch)
+	actions = actions || makeActions(useContextGradientReducer, keyList, dispatch)
 	return {
 		state: state,
 		history,

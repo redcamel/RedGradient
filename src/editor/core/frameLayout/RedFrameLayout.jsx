@@ -255,7 +255,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 					}
 				}
 			}
-			contextGradientActions.setKeyState(redKey)
+			// contextGradientActions.setKeyState(redKey)
 		}
 		const HD_keyUp = e => {
 			const code2name = redKey.code2name[e.keyCode]
@@ -278,7 +278,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 			document.removeEventListener('keydown', HD_keyDown);
 			document.removeEventListener('keyup', HD_keyUp);
 		}
-	}, [contextGradientState])
+	}, [])
 	return (
 		<div className={'RedFrameLayout_container'}>
 			<div className={'RedFrameLayout_top'}>{top}</div>
