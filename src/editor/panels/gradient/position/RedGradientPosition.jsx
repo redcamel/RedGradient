@@ -132,12 +132,12 @@ const RedGradientPosition = ({positionInfo, sizeInfo, onChange, onChanges, conta
 			case 'horizontal':
 				if (xUnit === PERCENT) calcX = 100 - x
 				else calcX = containerSizeInfo_raw.width - x - gradientWidth
-				onChange(targetInfoKey, 'x', calcX, true)
+				onChange(targetInfoKey, 'x', calcX, true, 'Layer Position : Mirror Horizontal')
 				break
 			case 'vertical':
 				if (yUnit === PERCENT) calcY = 100 - y
 				else calcY = containerSizeInfo_raw.height - y - gradientHeight
-				onChange(targetInfoKey, 'y', calcY, true)
+				onChange(targetInfoKey, 'y', calcY, true, 'Layer Position : Mirror Vertical')
 				break
 			default :
 				break
@@ -145,10 +145,11 @@ const RedGradientPosition = ({positionInfo, sizeInfo, onChange, onChanges, conta
 	}
 	const renderItem = (key, style) => {
 		return <div className={'RedGradientEditor_container_sizeBox'} style={style}>
-			<RedNumberField value={positionInfo[key]} width={'100%'} flexGrow={1}
-											onInput={(value, saveHistoryYn) => onChange('positionInfo', key, value, saveHistoryYn)}
-											onKeyDown={(value, saveHistoryYn) => onChange('positionInfo', key, value, saveHistoryYn)}
-											onBlur={(value, saveHistoryYn) => onChange('positionInfo', key, value, saveHistoryYn)}
+			<RedNumberField
+				value={positionInfo[key]} width={'100%'} flexGrow={1}
+				onInput={(value, saveHistoryYn) => onChange('positionInfo', key, value, saveHistoryYn)}
+				onKeyDown={(value, saveHistoryYn) => onChange('positionInfo', key, value, saveHistoryYn)}
+				onBlur={(value, saveHistoryYn) => onChange('positionInfo', key, value, saveHistoryYn)}
 			/>
 			<RedSelect
 				optionData={ConstUnitPxPercent}

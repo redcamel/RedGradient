@@ -15,10 +15,13 @@ const RedGradientSize = ({sizeInfo, onChange, onChanges, containerSizeInfo_raw})
 	const HD_FitSize = () => {
 		const pxWidth = sizeInfo['widthUnit'] === ConstUnitPxPercent.PERCENT ? 100 : containerSizeInfo_raw.width
 		const pxHeight = sizeInfo['heightUnit'] === ConstUnitPxPercent.PERCENT ? 100 : containerSizeInfo_raw.height
-		onChanges([
-			{targetInfoKey: 'sizeInfo', key: 'width', value: pxWidth, saveHistoryYn: true},
-			{targetInfoKey: 'sizeInfo', key: 'height', value: pxHeight, saveHistoryYn: true}
-		])
+		const updateList = [
+			{targetInfoKey: 'sizeInfo', key: 'width', value: pxWidth},
+			{targetInfoKey: 'sizeInfo', key: 'height', value: pxHeight}
+		]
+		updateList.saveHistoryYn = true
+
+		onChanges(updateList,'Layer Fit To Container')
 	}
 	return (
 		<div>
