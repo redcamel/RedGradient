@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExpand, faLink, faLinkSlash} from "@fortawesome/free-solid-svg-icons";
 
 /**
- * RedGradientSize
+ * RedGradientOffset
  * @returns {JSX.Element}
  * @constructor
  */

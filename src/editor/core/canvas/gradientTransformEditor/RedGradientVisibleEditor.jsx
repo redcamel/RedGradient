@@ -221,7 +221,6 @@ const RedGradientVisibleEditor = ({calcedLayoutInfo, viewScale, targetView, HD_A
 		const previewDataAtTime = JSON.parse(JSON.stringify(activeLayer['timeline'][time]))
 		const {stepInfoList} = previewDataAtTime
 
-		//TODO - 정리
 		const renderPoint = () => {
 			let i = 0;
 			const newList = stepInfoList.map((v, index) => {

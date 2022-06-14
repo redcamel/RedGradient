@@ -1,6 +1,5 @@
 /**
  * 파일 열기 매서드
- * TODO - 밸리체크
  * @param actions
  */
 import DataRedGradient from "../data/DataRedGradient";
@@ -25,7 +24,7 @@ const openFile = (actions) => {
 					for (const k in testBase) {
 						console.log(k)
 						if (!result.hasOwnProperty(k)) {
-							if (k === 'snapToContainer' || k === 'borderGradientInfo') {
+							if (k === 'snapToContainer' || k === 'borderGradientInfo' || k === 'offsetInfo') {
 								result[k] = testBase[k]
 								console.log(k, '채워줌')
 							} else {

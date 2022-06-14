@@ -12,6 +12,7 @@ import RedToolTipIcon from "../../../basicUI/icon/RedToolTipIcon.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {toast} from "react-toastify";
 import RedToastSkin from "../../../core/RedToastSkin";
+import RedGradientOffset from "../offset/RedGradientOffset";
 
 /**
  * RedGradientStepEditor
@@ -126,77 +127,82 @@ const RedGradientStepEditor = () => {
 			<RedPanelTitle label={'Gradient Step Editor'} icon={faPalette}/>
 			<div className={'RedGradientStepEditor_middle'}>
 				<RedGradientStepEditorPreview data={activeLayerData} time={time}/>
-				TODO - Start Offset
-				<RedDivision/>
-				<RedItemTitle
-					label={
-						<div style={{
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'space-between',
-							width: '100%',
-							color: 'inherit'
-						}}>
-							Step Edit
+				<RedGradientOffset
+					data={activeLayerData}
+					time={time}
+					groupIndex={activeGroupIndex}
+					groupLayerIndex={activeGroupLayerIndex}
+				/>
+					<RedDivision/>
+					<RedItemTitle
+						label={
 							<div style={{
 								display: 'flex',
 								alignItems: 'center',
 								justifyContent: 'space-between',
+								width: '100%',
+								color: 'inherit'
 							}}>
-								<div className={'RedGradientStepEditor_addPreset'} onClick={() => {
-									window.dispatchEvent(new CustomEvent('addUserPreset', {
-										detail: activeLayerData
-									}))
-									toast.dark(
-										<RedToastSkin title={'Add custom gradient to your presets.'} text={activeLayerData['label']}/>,
-										{
-											position: 'bottom-right'
-										}
-									);
+								Step Edit
+								<div style={{
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'space-between',
 								}}>
-									<FontAwesomeIcon icon={faDownload}/>Add Preset
+									<div className={'RedGradientStepEditor_addPreset'} onClick={() => {
+										window.dispatchEvent(new CustomEvent('addUserPreset', {
+											detail: activeLayerData
+										}))
+										toast.dark(
+											<RedToastSkin title={'Add custom gradient to your presets.'} text={activeLayerData['label']}/>,
+											{
+												position: 'bottom-right'
+											}
+										);
+									}}>
+										<FontAwesomeIcon icon={faDownload}/>Add Preset
+									</div>
+									<RedToolTipIcon icon={faSort} toolTip={'Sort Steps'} onClick={HD_sortStep}/>
+									<RedToolTipIcon icon={faExchangeAlt} toolTip={'Reverse Steps'} onClick={HD_reverseStep}/>
+									<RedToolTipIcon icon={faFileMedical} toolTip={'Add Step'} onClick={HD_addStepInfo}/>
 								</div>
-								<RedToolTipIcon icon={faSort} toolTip={'Sort Steps'} onClick={HD_sortStep}/>
-								<RedToolTipIcon icon={faExchangeAlt} toolTip={'Reverse Steps'} onClick={HD_reverseStep}/>
-								<RedToolTipIcon icon={faFileMedical} toolTip={'Add Step'} onClick={HD_addStepInfo}/>
 							</div>
+						}
+					/>
+					<div className={'RedGradientStepEditor_stepList_container'}>
+						<div className={'RedGradientStepEditor_stepList'}>
+							{stepInfoList.map((v, index) => {
+								const activeYn = false
+								return <div key={index}>
+									<RedGradientStepEditorItem
+										gradientType={gradientType}
+										stepInfoList={stepInfoList}
+										groupIndex={activeGroupIndex}
+										groupLayerIndex={activeGroupLayerIndex}
+										time={time}
+										stepIDX={index}
+										data={v}
+										activeYn={activeYn}
+										//
+										dummyYn={dummyDropTargetIDX !== null}
+										dummyDropTargetYn={dummyDropTargetIDX === index}
+										onDragStart={e => handleDragStart(e, index)}
+										onDrop={e => handleDrop(e, index)}
+										onDragOver={e => handleDragOver(e, index)}
+										onDragEnter={handleDragEnter}
+										onDragLeave={e => handleDragLeave(e, index)}
+										onDragEnd={handleDragEnd}
+									/>
+									<RedDivision/>
+								</div>
+							})}
 						</div>
-					}
-				/>
-				<div className={'RedGradientStepEditor_stepList_container'}>
-					<div className={'RedGradientStepEditor_stepList'}>
-						{stepInfoList.map((v, index) => {
-							const activeYn = false
-							return <div key={index}>
-								<RedGradientStepEditorItem
-									gradientType={gradientType}
-									stepInfoList={stepInfoList}
-									groupIndex={activeGroupIndex}
-									groupLayerIndex={activeGroupLayerIndex}
-									time={time}
-									stepIDX={index}
-									data={v}
-									activeYn={activeYn}
-									//
-									dummyYn={dummyDropTargetIDX !== null}
-									dummyDropTargetYn={dummyDropTargetIDX === index}
-									onDragStart={e => handleDragStart(e, index)}
-									onDrop={e => handleDrop(e, index)}
-									onDragOver={e => handleDragOver(e, index)}
-									onDragEnter={handleDragEnter}
-									onDragLeave={e => handleDragLeave(e, index)}
-									onDragEnd={handleDragEnd}
-								/>
-								<RedDivision/>
-							</div>
-						})}
 					</div>
-				</div>
 			</div>
 			<div className={'RedGradientStepEditor_bottom'}>
 				{/*dragStartIDX : {dragStartIDX} / dummyDropTargetIDX : {dummyDropTargetIDX}*/}
 			</div>
 		</div>
-	)
+)
 }
 export default RedGradientStepEditor

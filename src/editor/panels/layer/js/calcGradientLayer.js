@@ -16,21 +16,23 @@ const calcGradientLayer = (layerData, time = 0, offsetInfo = {
 	const {stepInfoList} = targetData
 	const layerType = layerData.type
 	const {valueInfo, sizeInfo, positionInfo} = targetData
+	const valueOffsetInfo = valueInfo['offsetInfo']
+	console.log('valueOffsetInfo',layerData,valueOffsetInfo)
 	//
 	let result
 	let stepStr;
 	switch (layerType) {
 		case ConstGradientType.LINEAR :
 		case ConstGradientType.REPEATING_LINEAR :
-			stepStr = calcLinear(valueInfo, stepInfoList, viewScale)
+			stepStr = calcLinear(valueInfo, stepInfoList, viewScale,valueOffsetInfo)
 			break
 		case ConstGradientType.RADIAL :
 		case ConstGradientType.REPEATING_RADIAL :
-			stepStr = calcRadial(valueInfo, stepInfoList, viewScale)
+			stepStr = calcRadial(valueInfo, stepInfoList, viewScale,valueOffsetInfo)
 			break
 		case ConstGradientType.CONIC :
 		case ConstGradientType.REPEATING_CONIC :
-			stepStr = calcConic(valueInfo, stepInfoList, viewScale)
+			stepStr = calcConic(valueInfo, stepInfoList, viewScale,valueOffsetInfo)
 			break
 		default:
 			break
@@ -55,37 +57,39 @@ const calcAt = (atInfo, viewScale) => {
 	].join(' ')
 	return at
 }
-const calcLinear = (valueInfo, stepInfoList, viewScale) => {
+const calcLinear = (valueInfo, stepInfoList, viewScale,valueOffsetInfo) => {
 	const deg = valueInfo['angle'] ? `${valueInfo['angle']}deg` : ''
 	return checkValue([
 		deg,
-		checkColorStepInfo(stepInfoList, viewScale)
+		checkColorStepInfo(stepInfoList, viewScale,valueOffsetInfo)
 	]).join(', ')
 }
-const calcRadial = (valueInfo, stepInfoList, viewScale) => {
+const calcRadial = (valueInfo, stepInfoList, viewScale,valueOffsetInfo) => {
 	const at = calcAt(valueInfo['atInfo'], viewScale)
 	const sizeType = valueInfo['sizeType']
 	const endingShape = valueInfo['endingShape']
 	return checkValue([
 		[endingShape, sizeType, at].filter(Boolean).join(' '),
-		checkColorStepInfo(stepInfoList, viewScale)
+		checkColorStepInfo(stepInfoList, viewScale,valueOffsetInfo)
 	]).join(', ')
 }
-const calcConic = (valueInfo, stepInfoList, viewScale) => {
+const calcConic = (valueInfo, stepInfoList, viewScale,valueOffsetInfo) => {
 	const at = calcAt(valueInfo['atInfo'], viewScale)
 	const deg = valueInfo['angle'] ? `from ${valueInfo['angle']}deg` : ''
 	return checkValue([
 		[deg, at].filter(Boolean).join(' '),
-		checkColorStepInfo(stepInfoList, viewScale)
+		checkColorStepInfo(stepInfoList, viewScale,valueOffsetInfo)
 	]).join(', ')
 }
-const checkColorStepInfo = (stepInfoList, viewScale) => {
+const checkColorStepInfo = (stepInfoList, viewScale,valueOffsetInfo) => {
 	return stepInfoList.map((target, index) => {
 		const endIndexYn = index === stepInfoList.length - 1
 		const {start, end} = target
 		const nextData = stepInfoList[index + 1] || stepInfoList[stepInfoList.length - 1]
-		const colorStop_start = start['stopUnit'] !== ConstUnitPxPercentAuto.AUTO ? `${(start['stopUnit'] === ConstUnitPxPercent.PX ? viewScale : 1) * start['stop']}${start['stopUnit']}` : ''
-		const colorStop_end = end['stopUnit'] !== ConstUnitPxPercentAuto.AUTO ? `${(end['stopUnit'] === ConstUnitPxPercent.PX ? viewScale : 1) * end['stop']}${end['stopUnit']}` : ''
+		const tS = start['stopUnit'] !== ConstUnitPxPercentAuto.AUTO ? `${(start['stopUnit'] === ConstUnitPxPercent.PX ? viewScale : 1) * start['stop']}${start['stopUnit']}` : ''
+		const tE = end['stopUnit'] !== ConstUnitPxPercentAuto.AUTO ? `${(end['stopUnit'] === ConstUnitPxPercent.PX ? viewScale : 1) * end['stop']}${end['stopUnit']}` : ''
+		const colorStop_start = valueOffsetInfo ? `calc(${valueOffsetInfo['value']}${valueOffsetInfo['unit']} + ${tS})` : tS
+		const colorStop_end = valueOffsetInfo ? `calc(${valueOffsetInfo['value']}${valueOffsetInfo['unit']} + ${tE})` : tE
 
 		const result = []
 		if (target['mode'] === ConstGradientStepMode.RANGE) {
