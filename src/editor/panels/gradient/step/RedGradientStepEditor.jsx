@@ -127,7 +127,12 @@ const RedGradientStepEditor = () => {
 			<RedPanelTitle label={'Gradient Step Editor'} icon={faPalette}/>
 			<div className={'RedGradientStepEditor_middle'}>
 				<RedGradientStepEditorPreview data={activeLayerData} time={time}/>
-				<RedGradientOffset data={activeLayerData} time={time}/>
+				<RedGradientOffset
+					data={activeLayerData}
+					time={time}
+					groupIndex={activeGroupIndex}
+					groupLayerIndex={activeGroupLayerIndex}
+				/>
 					<RedDivision/>
 					<RedItemTitle
 						label={
