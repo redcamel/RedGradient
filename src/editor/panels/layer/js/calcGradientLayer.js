@@ -11,28 +11,32 @@ const calcGradientLayer = (layerData, time = 0, offsetInfo = {
 		yUnit: ConstUnitPxPercent.PX
 	}
 }, viewScale = 1, presetMode = false, borderGradientMode) => {
-	
+
 	const targetData = layerData['timeline'][time]
 	const {stepInfoList} = targetData
 	const layerType = layerData.type
 	const {valueInfo, sizeInfo, positionInfo} = targetData
-	const valueOffsetInfo = valueInfo['offsetInfo']
-	console.log('valueOffsetInfo',layerData,valueOffsetInfo)
+	const valueOffsetInfo = valueInfo['offsetInfo'] || (valueInfo['offsetInfo'] = {
+		value: 0,
+		unit: ConstUnitPxPercent.PERCENT
+	})
+	//TODO - 데이터 로딩체크 처리를 해야함
+	console.log('valueOffsetInfo', layerData, valueOffsetInfo)
 	//
 	let result
 	let stepStr;
 	switch (layerType) {
 		case ConstGradientType.LINEAR :
 		case ConstGradientType.REPEATING_LINEAR :
-			stepStr = calcLinear(valueInfo, stepInfoList, viewScale,valueOffsetInfo)
+			stepStr = calcLinear(valueInfo, stepInfoList, viewScale, valueOffsetInfo)
 			break
 		case ConstGradientType.RADIAL :
 		case ConstGradientType.REPEATING_RADIAL :
-			stepStr = calcRadial(valueInfo, stepInfoList, viewScale,valueOffsetInfo)
+			stepStr = calcRadial(valueInfo, stepInfoList, viewScale, valueOffsetInfo)
 			break
 		case ConstGradientType.CONIC :
 		case ConstGradientType.REPEATING_CONIC :
-			stepStr = calcConic(valueInfo, stepInfoList, viewScale,valueOffsetInfo)
+			stepStr = calcConic(valueInfo, stepInfoList, viewScale, valueOffsetInfo)
 			break
 		default:
 			break
@@ -57,31 +61,31 @@ const calcAt = (atInfo, viewScale) => {
 	].join(' ')
 	return at
 }
-const calcLinear = (valueInfo, stepInfoList, viewScale,valueOffsetInfo) => {
+const calcLinear = (valueInfo, stepInfoList, viewScale, valueOffsetInfo) => {
 	const deg = valueInfo['angle'] ? `${valueInfo['angle']}deg` : ''
 	return checkValue([
 		deg,
-		checkColorStepInfo(stepInfoList, viewScale,valueOffsetInfo)
+		checkColorStepInfo(stepInfoList, viewScale, valueOffsetInfo)
 	]).join(', ')
 }
-const calcRadial = (valueInfo, stepInfoList, viewScale,valueOffsetInfo) => {
+const calcRadial = (valueInfo, stepInfoList, viewScale, valueOffsetInfo) => {
 	const at = calcAt(valueInfo['atInfo'], viewScale)
 	const sizeType = valueInfo['sizeType']
 	const endingShape = valueInfo['endingShape']
 	return checkValue([
 		[endingShape, sizeType, at].filter(Boolean).join(' '),
-		checkColorStepInfo(stepInfoList, viewScale,valueOffsetInfo)
+		checkColorStepInfo(stepInfoList, viewScale, valueOffsetInfo)
 	]).join(', ')
 }
-const calcConic = (valueInfo, stepInfoList, viewScale,valueOffsetInfo) => {
+const calcConic = (valueInfo, stepInfoList, viewScale, valueOffsetInfo) => {
 	const at = calcAt(valueInfo['atInfo'], viewScale)
 	const deg = valueInfo['angle'] ? `from ${valueInfo['angle']}deg` : ''
 	return checkValue([
 		[deg, at].filter(Boolean).join(' '),
-		checkColorStepInfo(stepInfoList, viewScale,valueOffsetInfo)
+		checkColorStepInfo(stepInfoList, viewScale, valueOffsetInfo)
 	]).join(', ')
 }
-const checkColorStepInfo = (stepInfoList, viewScale,valueOffsetInfo) => {
+const checkColorStepInfo = (stepInfoList, viewScale, valueOffsetInfo) => {
 	return stepInfoList.map((target, index) => {
 		const endIndexYn = index === stepInfoList.length - 1
 		const {start, end} = target

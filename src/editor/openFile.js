@@ -32,8 +32,9 @@ const openFile = (actions) => {
 								break
 							}
 						} else {
-							const type = typeof result[k]
+							const type = typeof testBase[k]
 							console.log(k, type)
+
 							if (type === "object") {
 								checkValidate(result[k], testBase[k])
 							}
