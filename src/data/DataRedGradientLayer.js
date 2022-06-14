@@ -32,6 +32,10 @@ function DataRedGradientLayer() {
 					})
 				],
 				valueInfo: {
+					offsetInfo: {
+						value: 0,
+						unit: ConstUnitPxPercent.PERCENT
+					},
 					// LINEAR
 					angle: 180,
 					// RADIAL

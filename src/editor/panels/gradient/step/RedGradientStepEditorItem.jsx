@@ -65,7 +65,6 @@ const RedGradientStepEditorItem = ({
 
 				if (value !== data[targetInfo]['stopUnit']) {
 					if (value !== ConstUnitPxPercentAuto.AUTO) {
-						//TODO 개선해야함
 						let newStop = data[targetInfo]['stop']
 						if (value === ConstUnitPxPercent.PERCENT) {
 							newStop = data[targetInfo]['stop'] / layerSizeW * 100

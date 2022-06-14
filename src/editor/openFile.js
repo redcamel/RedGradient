@@ -1,6 +1,5 @@
 /**
  * 파일 열기 매서드
- * TODO - 밸리체크
  * @param actions
  */
 import DataRedGradient from "../data/DataRedGradient";
