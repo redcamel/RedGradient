@@ -202,6 +202,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 				e.preventDefault()
 				e.stopPropagation()
 			}
+			const prev = JSON.stringify(redKey)
 			const KEYCODE = e.keyCode
 			const code2name = redKey.code2name[KEYCODE]
 			const downList = redKey.downList
@@ -255,7 +256,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 					}
 				}
 			}
-			// contextGradientActions.setKeyState(redKey)
+			if(prev !== JSON.stringify(redKey)) contextGradientActions.setKeyState(redKey)
 		}
 		const HD_keyUp = e => {
 			const code2name = redKey.code2name[e.keyCode]
@@ -278,7 +279,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 			document.removeEventListener('keydown', HD_keyDown);
 			document.removeEventListener('keyup', HD_keyUp);
 		}
-	}, [])
+	}, [contextGradientState])
 	return (
 		<div className={'RedFrameLayout_container'}>
 			<div className={'RedFrameLayout_top'}>{top}</div>

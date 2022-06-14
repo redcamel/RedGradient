@@ -5,6 +5,7 @@ import ContextProjectInfo from "./contexts/static/ContextProjectInfo";
  * @param data
  */
 const saveFile = (data) => {
+	console.log('저장할 데이터',data)
 	data = JSON.parse(JSON.stringify(data))
 	data['version'] = ContextProjectInfo.version
 	data['lastUpdate'] = (new Date()).getTime()

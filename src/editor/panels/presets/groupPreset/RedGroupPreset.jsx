@@ -86,6 +86,10 @@ const RedGroupPreset = () => {
 							}
 						],
 						"valueInfo": {
+							"offsetInfo": {
+								"value": 0,
+								"unit": "%"
+							},
 							"angle": 180,
 							"atInfo": {
 								"x": 50,
@@ -156,6 +160,10 @@ const RedGroupPreset = () => {
 							}
 						],
 						"valueInfo": {
+							"offsetInfo": {
+								"value": 0,
+								"unit": "%"
+							},
 							"angle": 180,
 							"atInfo": {
 								"x": 50,
@@ -226,6 +234,10 @@ const RedGroupPreset = () => {
 							}
 						],
 						"valueInfo": {
+							"offsetInfo": {
+								"value": 0,
+								"unit": "%"
+							},
 							"angle": 135,
 							"atInfo": {
 								"x": 50,
@@ -296,6 +308,10 @@ const RedGroupPreset = () => {
 							}
 						],
 						"valueInfo": {
+							"offsetInfo": {
+								"value": 0,
+								"unit": "%"
+							},
 							"angle": 45,
 							"atInfo": {
 								"x": 50,
@@ -366,6 +382,10 @@ const RedGroupPreset = () => {
 							}
 						],
 						"valueInfo": {
+							"offsetInfo": {
+								"value": 0,
+								"unit": "%"
+							},
 							"angle": 180,
 							"atInfo": {
 								"x": 50,

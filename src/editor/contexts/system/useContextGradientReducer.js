@@ -107,10 +107,10 @@ function reducer(state, action) {
 		}
 	}
 }
-let actions;
+
 const useContextGradientReducer = () => {
 	const [state, dispatch] = useReducer(reducer, null)
-	actions = actions || makeActions(useContextGradientReducer, keyList, dispatch)
+	const actions = makeActions(useContextGradientReducer, keyList, dispatch)
 	return {
 		state: state,
 		history,

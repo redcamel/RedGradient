@@ -66,6 +66,10 @@ const RedPreset = () => {
 					}
 				],
 				"valueInfo": {
+					"offsetInfo": {
+						"value": 0,
+						"unit": "%"
+					},
 					"angle": 180,
 					"atInfo": {
 						"x": 100,

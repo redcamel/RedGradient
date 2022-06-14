@@ -12,6 +12,7 @@ import ContextGradient from "../../../contexts/system/ContextGradient";
  */
 const RedGradientOffset = ({data, time, groupIndex, groupLayerIndex}) => {
 	const {state, actions: gradientActions,} = useContext(ContextGradient)
+	console.log(data,time)
 	const {offsetInfo} = data['timeline'][time]['valueInfo']
 	const HD_onChange = (value, saveHistoryYn) => {
 		gradientActions.updateLayerValueInfoByKey(
