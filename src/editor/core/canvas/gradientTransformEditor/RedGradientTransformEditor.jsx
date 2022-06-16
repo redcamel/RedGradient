@@ -20,6 +20,7 @@ const snapSize = 10
 const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD_ActiveWindow}) => {
 	const {state: gradientState, actions: gradientActions} = useContext(ContextGradient)
 	const [dummyVisible, setDummyVisible] = useState(false)
+	const [overTargetData, setOverTargetData] = useState()
 	const [resizeKey, setResizeKey] = useState({})
 	//
 
@@ -700,6 +701,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 					console.log('gradient_calcedLayoutInfo', v)
 					return v.children.map((v2, index) => {
 						const targetLayer = v2['timeline'][time]
+						const activeLayerYn = targetLayer === activeLayer
 						const gradient_calcedLayoutInfo = getCalcedGradientEditorLayoutInfo_pixel(targetView.containerInfo, targetLayer, calcedLayoutInfo, viewScale)
 						console.log('gradient_calcedLayoutInfo', gradient_calcedLayoutInfo)
 						return <div
@@ -710,14 +712,18 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 								transform: `translate(${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x)))}px,${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y)))}px)`,
 								width: gradient_calcedLayoutInfo.viewScalePixel.width,
 								height: gradient_calcedLayoutInfo.viewScalePixel.height,
-								// border: '2px dashed red',
-								border : 0,
+								border: overTargetData?.activeGroupIndex === activeGroupIndex && overTargetData?.activeGroupLayerIndex === index && !activeLayerYn ? '2px solid pink' : '2px solid transparent',
+								outline: overTargetData?.activeGroupIndex === activeGroupIndex && overTargetData?.activeGroupLayerIndex === index && !activeLayerYn ? '2px solid blue' : '2px solid transparent',
+								transition : 'border 0.1s',
 								zIndex: v.children.length + 10 - index,
 								pointerEvents:'fill'
 							}}
-							// onMouseMove={() => {
-							// 	console.log(v2.label)
-							// }}
+							onMouseOver={() => {
+								setOverTargetData({activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: index})
+							}}
+							onMouseOut={() => {
+								setOverTargetData(null)
+							}}
 							onMouseUpCapture={(e)=>{
 								// alert('test')
 								gradientActions.setActiveGroupAndLayer(
