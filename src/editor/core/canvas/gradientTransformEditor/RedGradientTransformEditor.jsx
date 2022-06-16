@@ -692,8 +692,8 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 			</div>
 		}
 		<div style={{
-			width : '100%',
-			height : '100%',
+			width: '100%',
+			height: '100%',
 			zIndex: 3
 		}}>
 			{
@@ -702,6 +702,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 					return v.children.map((v2, index) => {
 						const targetLayer = v2['timeline'][time]
 						const activeLayerYn = targetLayer === activeLayer
+						const overTargetYn = overTargetData?.activeGroupIndex === activeGroupIndex && overTargetData?.activeGroupLayerIndex === index && !activeLayerYn
 						const gradient_calcedLayoutInfo = getCalcedGradientEditorLayoutInfo_pixel(targetView.containerInfo, targetLayer, calcedLayoutInfo, viewScale)
 						console.log('gradient_calcedLayoutInfo', gradient_calcedLayoutInfo)
 						return <div
@@ -712,11 +713,13 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 								transform: `translate(${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x)))}px,${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y)))}px)`,
 								width: gradient_calcedLayoutInfo.viewScalePixel.width,
 								height: gradient_calcedLayoutInfo.viewScalePixel.height,
-								border: overTargetData?.activeGroupIndex === activeGroupIndex && overTargetData?.activeGroupLayerIndex === index && !activeLayerYn ? '2px solid pink' : '2px solid transparent',
-								outline: overTargetData?.activeGroupIndex === activeGroupIndex && overTargetData?.activeGroupLayerIndex === index && !activeLayerYn ? '2px solid blue' : '2px solid transparent',
-								transition : 'border 0.1s',
+								border: overTargetYn ? '2px solid pink' : '2px solid transparent',
+								outline: overTargetYn ? '2px solid blue' : '2px solid transparent',
+								transition: 'border 0.1s',
 								zIndex: v.children.length + 10 - index,
-								pointerEvents:'fill'
+								pointerEvents: 'fill',
+								// overflow: "hidden",
+								wordBreak: 'break-all'
 							}}
 							onMouseOver={() => {
 								setOverTargetData({activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: index})
@@ -724,14 +727,31 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 							onMouseOut={() => {
 								setOverTargetData(null)
 							}}
-							onMouseUpCapture={(e)=>{
+							onMouseUpCapture={(e) => {
 								// alert('test')
 								gradientActions.setActiveGroupAndLayer(
 									{activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: index}
 								)
 							}}
 						>
-							{/*{v2.label} {v.children.length + 10 - index}*/}
+							{
+								overTargetYn && <div style={{
+									position: 'absolute',
+									top: '-7px',
+									left: '-4px',
+									transform: 'translate(0,-100%)',
+									display: 'flex',
+									padding: '6px 6px 7px',
+									borderRadius: '6px',
+									background: 'rgba(0,0,0,0.5)',
+									lineHeight: 1,
+									fontSize: '11px',
+									boxShadow: '0 0 6px rgba(0,0,0,0.3)',
+									border: '1px solid rgba(255,255,255,0.1)'
+
+								}}>{v2.label}</div>
+							}
+							{/*{v.children.length + 10 - index}*/}
 						</div>
 					})
 				})
@@ -745,7 +765,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 				transform: `translate(${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x)))}px,${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y)))}px)`,
 				width: gradient_calcedLayoutInfo.viewScalePixel.width,
 				height: gradient_calcedLayoutInfo.viewScalePixel.height,
-				pointerEvents : 'none'
+				pointerEvents: 'none'
 			}}
 		>
 			{/*{JSON.stringify(window.RedKey.downList)}*/}
