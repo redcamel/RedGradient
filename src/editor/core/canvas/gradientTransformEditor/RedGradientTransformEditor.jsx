@@ -674,6 +674,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 					transform: `translate(${(parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x))}px,${(parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y))}px)`,
 					width: gradient_calcedLayoutInfo.viewScalePixel.width,
 					height: gradient_calcedLayoutInfo.viewScalePixel.height,
+
 				}}
 			>
 				<div
@@ -683,12 +684,53 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 						left: 0,
 						transform: `translate(${(dummyPositionX) * viewScale}px,${(dummyPositionY) * viewScale}px)`,
 						width: dummyWidth * viewScale + 'px',
-						height: dummyHeight * viewScale + 'px'
+						height: dummyHeight * viewScale + 'px',
+
 					}}
 				/>
 			</div>
 		}
-
+		<div style={{
+			width : '100%',
+			height : '100%',
+			zIndex: 3
+		}}>
+			{
+				groupList.map(v => {
+					console.log('gradient_calcedLayoutInfo', v)
+					return v.children.map((v2, index) => {
+						const targetLayer = v2['timeline'][time]
+						const gradient_calcedLayoutInfo = getCalcedGradientEditorLayoutInfo_pixel(targetView.containerInfo, targetLayer, calcedLayoutInfo, viewScale)
+						console.log('gradient_calcedLayoutInfo', gradient_calcedLayoutInfo)
+						return <div
+							className={'RedGradientTransformEditor'}
+							style={{
+								top: 0,
+								left: 0,
+								transform: `translate(${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x)))}px,${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y)))}px)`,
+								width: gradient_calcedLayoutInfo.viewScalePixel.width,
+								height: gradient_calcedLayoutInfo.viewScalePixel.height,
+								// border: '2px dashed red',
+								border : 0,
+								zIndex: v.children.length + 10 - index,
+								pointerEvents:'fill'
+							}}
+							// onMouseMove={() => {
+							// 	console.log(v2.label)
+							// }}
+							onMouseUpCapture={(e)=>{
+								// alert('test')
+								gradientActions.setActiveGroupAndLayer(
+									{activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: index}
+								)
+							}}
+						>
+							{/*{v2.label} {v.children.length + 10 - index}*/}
+						</div>
+					})
+				})
+			}
+		</div>
 		<div
 			className={'RedGradientTransformEditor'}
 			style={{
@@ -697,6 +739,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 				transform: `translate(${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x)))}px,${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y)))}px)`,
 				width: gradient_calcedLayoutInfo.viewScalePixel.width,
 				height: gradient_calcedLayoutInfo.viewScalePixel.height,
+				pointerEvents : 'none'
 			}}
 		>
 			{/*{JSON.stringify(window.RedKey.downList)}*/}

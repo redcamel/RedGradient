@@ -7,6 +7,7 @@
     bottom: 0;
     z-index: 4;
     will-change: transform;
+    pointer-events: none;
 }
 
 .RedGradientAtEditor_center {
@@ -19,6 +20,7 @@
     transform: translate(-50%, -50%);
     border: 2px dashed red;
     outline: 1px dashed #111;
+    pointer-events: fill;
 }
 
 .RedGradientAtEditor_center:before {
