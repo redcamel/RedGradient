@@ -112,7 +112,7 @@ const RedGradientAtEditor = ({calcedLayoutInfo, viewScale, targetView, HD_Active
 			style={{
 				top: 0,
 				left: 0,
-				transform: `translate(${(parseInt(parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x)))}px,${(parseInt(parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y)))}px)`,
+				transform: `translate(${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x)))}px,${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y)))}px)`,
 				width: gradient_calcedLayoutInfo.viewScalePixel.width,
 				height: gradient_calcedLayoutInfo.viewScalePixel.height,
 			}}

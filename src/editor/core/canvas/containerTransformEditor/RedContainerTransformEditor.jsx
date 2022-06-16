@@ -395,7 +395,7 @@ const RedContainerTransformEditor = ({viewKey, calcedLayoutInfo, viewScale, targ
 			style={{
 				top: 0,
 				left: 0,
-				transform: `translate(${(parseInt(parseFloat(calcedLayoutInfo.viewScalePixel.x)))}px,${parseInt(parseFloat(calcedLayoutInfo.viewScalePixel.y))}px)`,
+				transform: `translate(${((parseFloat(calcedLayoutInfo.viewScalePixel.x)))}px,${(parseFloat(calcedLayoutInfo.viewScalePixel.y))}px)`,
 				width: calcedLayoutInfo.viewScalePixel.width,
 				height: calcedLayoutInfo.viewScalePixel.height
 			}}

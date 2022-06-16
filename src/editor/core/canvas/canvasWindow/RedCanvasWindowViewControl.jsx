@@ -47,7 +47,7 @@ const RedCanvasWindowViewControl = ({viewKey, onClick}) => {
 		document.body.style.cursor = 'default';
 	}
 	const scaleKeyData = Object.assign({}, ConstCanvasScale)
-	const intViewScale = parseInt(viewScale * 100)
+	const intViewScale = (viewScale * 100)
 	if (!scaleKeyData[`SCALE_${intViewScale}`]) scaleKeyData[`SCALE_${intViewScale}`] = intViewScale
 	return (
 		<>

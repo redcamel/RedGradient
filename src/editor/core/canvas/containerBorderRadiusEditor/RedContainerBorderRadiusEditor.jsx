@@ -104,7 +104,7 @@ const RedContainerBorderRadiusEditor = ({viewKey, calcedLayoutInfo, viewScale, t
 		<div
 			className={'RedContainerBorderRadiusEditor'}
 			style={{
-				transform: `translate(${(parseInt(viewScalePixel.x))}px,${parseInt(viewScalePixel.y)}px)`,
+				transform: `translate(${((viewScalePixel.x))}px,${(viewScalePixel.y)}px)`,
 				width: viewScalePixel.width,
 				height: viewScalePixel.height
 			}}
