@@ -1,3 +1,11 @@
+/*
+ *
+ *  * RedGL - MIT License
+ *  * Copyright (c) 2021~ By RedCamel(webseon@gmail.com)
+ *  * https://github.com/redcamel/RedGradient
+ *
+ */
+
 /**
  * BoxShadow 값을 파싱함
  * @param gradientState
@@ -15,11 +23,11 @@ import calcGradientLayer from "../../panels/layer/js/calcGradientLayer";
 const makeCssText = v => {
 	const t0 = []
 	Object.entries(v).forEach(v2 => {
-		let key = v2[0]
+		let key = v2[0].replace(/([A-Z])/g,"-$1").toLowerCase()
 		const value = v2[1]
-		key = key.split('').map(v => {
-			return v === v.toUpperCase() ? `-${v.toLowerCase()}` : v
-		}).join('')
+		// key = key.split('').map(v => {
+		// 	return v === v.toUpperCase() ? `-${v.toLowerCase()}` : v
+		// }).join('')
 		t0.push(`${key} : ${value}`.trim())
 	})
 	return t0.join(';\n') + ';'
