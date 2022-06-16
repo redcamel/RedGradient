@@ -20,6 +20,7 @@ const snapSize = 10
 const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD_ActiveWindow}) => {
 	const {state: gradientState, actions: gradientActions} = useContext(ContextGradient)
 	const [dummyVisible, setDummyVisible] = useState(false)
+	const [overTargetData, setOverTargetData] = useState()
 	const [resizeKey, setResizeKey] = useState({})
 	//
 
@@ -674,6 +675,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 					transform: `translate(${(parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x))}px,${(parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y))}px)`,
 					width: gradient_calcedLayoutInfo.viewScalePixel.width,
 					height: gradient_calcedLayoutInfo.viewScalePixel.height,
+
 				}}
 			>
 				<div
@@ -683,12 +685,78 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 						left: 0,
 						transform: `translate(${(dummyPositionX) * viewScale}px,${(dummyPositionY) * viewScale}px)`,
 						width: dummyWidth * viewScale + 'px',
-						height: dummyHeight * viewScale + 'px'
+						height: dummyHeight * viewScale + 'px',
+
 					}}
 				/>
 			</div>
 		}
+		<div style={{
+			width: '100%',
+			height: '100%',
+			zIndex: 3
+		}}>
+			{
+				groupList.map(v => {
+					console.log('gradient_calcedLayoutInfo', v)
+					return v.children.map((v2, index) => {
+						const targetLayer = v2['timeline'][time]
+						const activeLayerYn = targetLayer === activeLayer
+						const overTargetYn = overTargetData?.activeGroupIndex === activeGroupIndex && overTargetData?.activeGroupLayerIndex === index && !activeLayerYn
+						const gradient_calcedLayoutInfo = getCalcedGradientEditorLayoutInfo_pixel(targetView.containerInfo, targetLayer, calcedLayoutInfo, viewScale)
+						console.log('gradient_calcedLayoutInfo', gradient_calcedLayoutInfo)
+						return <div
+							className={'RedGradientTransformEditor'}
+							style={{
+								top: 0,
+								left: 0,
+								transform: `translate(${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x)))}px,${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y)))}px)`,
+								width: gradient_calcedLayoutInfo.viewScalePixel.width,
+								height: gradient_calcedLayoutInfo.viewScalePixel.height,
+								border: overTargetYn ? '2px solid pink' : '2px solid transparent',
+								outline: overTargetYn ? '2px solid blue' : '2px solid transparent',
+								transition: 'border 0.1s',
+								zIndex: v.children.length + 10 - index,
+								pointerEvents: 'fill',
+								// overflow: "hidden",
+								wordBreak: 'break-all'
+							}}
+							onMouseOver={() => {
+								setOverTargetData({activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: index})
+							}}
+							onMouseOut={() => {
+								setOverTargetData(null)
+							}}
+							onMouseUpCapture={(e) => {
+								// alert('test')
+								gradientActions.setActiveGroupAndLayer(
+									{activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: index}
+								)
+							}}
+						>
+							{
+								overTargetYn && <div style={{
+									position: 'absolute',
+									top: '-7px',
+									left: '-4px',
+									transform: 'translate(0,-100%)',
+									display: 'flex',
+									padding: '6px 6px 7px',
+									borderRadius: '6px',
+									background: 'rgba(0,0,0,0.5)',
+									lineHeight: 1,
+									fontSize: '11px',
+									boxShadow: '0 0 6px rgba(0,0,0,0.3)',
+									border: '1px solid rgba(255,255,255,0.1)'
 
+								}}>{v2.label}</div>
+							}
+							{/*{v.children.length + 10 - index}*/}
+						</div>
+					})
+				})
+			}
+		</div>
 		<div
 			className={'RedGradientTransformEditor'}
 			style={{
@@ -697,6 +765,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 				transform: `translate(${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.x)))}px,${((parseFloat(gradient_calcedLayoutInfo.viewScalePixel.y)))}px)`,
 				width: gradient_calcedLayoutInfo.viewScalePixel.width,
 				height: gradient_calcedLayoutInfo.viewScalePixel.height,
+				pointerEvents: 'none'
 			}}
 		>
 			{/*{JSON.stringify(window.RedKey.downList)}*/}

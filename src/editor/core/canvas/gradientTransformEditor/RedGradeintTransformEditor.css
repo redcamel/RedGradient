@@ -95,6 +95,7 @@
     /*border-left: 1px solid #525252;*/
     opacity: 1;
     transition: opacity 0.2s;
+    pointer-events: painted;
 }
 
 .RedGradientTransformEditor_item.deActive {
@@ -171,6 +172,7 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     transition: opacity 0.15s;
     opacity: 1;
+    pointer-events: painted;
 }
 
 .RedGradientTransformEditor_item_move.deActive {
