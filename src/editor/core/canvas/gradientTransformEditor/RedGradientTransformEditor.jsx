@@ -697,12 +697,12 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 			zIndex: 3
 		}}>
 			{
-				groupList.map(v => {
+				groupList.map((v,index) => {
 					console.log('gradient_calcedLayoutInfo', v)
-					return v.children.map((v2, index) => {
+					return v.children.map((v2, index2) => {
 						const targetLayer = v2['timeline'][time]
 						const activeLayerYn = targetLayer === activeLayer
-						const overTargetYn = overTargetData?.activeGroupIndex === activeGroupIndex && overTargetData?.activeGroupLayerIndex === index && !activeLayerYn
+						const overTargetYn = overTargetData?.activeGroupIndex === index && overTargetData?.activeGroupLayerIndex === index2 && !activeLayerYn
 						const gradient_calcedLayoutInfo = getCalcedGradientEditorLayoutInfo_pixel(targetView.containerInfo, targetLayer, calcedLayoutInfo, viewScale)
 						console.log('gradient_calcedLayoutInfo', gradient_calcedLayoutInfo)
 						return <div
@@ -716,13 +716,13 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 								border: overTargetYn ? '2px solid pink' : '2px solid transparent',
 								outline: overTargetYn ? '2px solid blue' : '2px solid transparent',
 								transition: 'border 0.1s',
-								zIndex: v.children.length + 10 - index,
+								zIndex: v.children.length + 10 - index2,
 								pointerEvents: 'fill',
 								// overflow: "hidden",
 								wordBreak: 'break-all'
 							}}
 							onMouseOver={() => {
-								setOverTargetData({activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: index})
+								setOverTargetData({activeGroupIndex: index, activeGroupLayerIndex: index2})
 							}}
 							onMouseOut={() => {
 								setOverTargetData(null)
@@ -730,7 +730,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 							onMouseUpCapture={(e) => {
 								// alert('test')
 								gradientActions.setActiveGroupAndLayer(
-									{activeGroupIndex: activeGroupIndex, activeGroupLayerIndex: index}
+									{activeGroupIndex: index, activeGroupLayerIndex: index2}
 								)
 							}}
 						>
