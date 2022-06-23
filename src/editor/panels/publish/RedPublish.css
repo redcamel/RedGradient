@@ -7,7 +7,7 @@
     overflow: hidden;
     background: linear-gradient(rgb(94, 122, 222), rgb(44, 53, 101));
     border-radius: 4px;
-    margin-right: 4px;
+    /*margin-right: 4px;*/
     border: 1px solid #222;
     line-height: 1;
 }

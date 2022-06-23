@@ -66,6 +66,7 @@ const RedFrameTop = () => {
 					/>
 				</div>
 				<RedPublish/>
+				<a className={'RedFrameTop_help_button'} href={'https://doc.red-gradient.com/docs/intro'} target={'_blank'}>Help</a>
 			</div>
 			<div className={`RedFrameTop_history_container ${openHistoryYn ? 'active' : ''}`}>
 				<div className={'RedFrameTop_history_button'}>
