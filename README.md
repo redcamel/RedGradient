@@ -7,10 +7,10 @@ Design quickly and create your own gradients with a graphic pro-tools-grade edit
 
 ![RedGradientScreenshot](public/screenshot/Screenshot_1.png)
 
-
+## Document
+- https://doc.red-gradient.com/
 
 ## Version List
-- Version 1.0.0 - https://redcamel.github.io/RedGradient/build/
-- Beta Version - https://redcamel.github.io/RedGradient/beta_version/
-
+- Version 1.0.0 - https://red-gradient.com/build/
+- Beta Version - https://red-gradient.com/beta_version/
 [![Software License](https://img.shields.io/github/license/swisnl/build-size.svg)](LICENSE)
