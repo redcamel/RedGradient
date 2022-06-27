@@ -5,7 +5,11 @@
     <title>RedGradient - Css Gradient Editor</title>
     <link rel="icon" href="build/favicon.ico"/>
     <meta name="Description" content="Css Gradient Editor. All about CSS gradient Edit. Design quickly and create your own gradients with a graphic pro-tools-grade editing system.">
-
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"
+    />
     <meta property="og:title" content="RedGradient - Css Gradient Editor">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://redcamel.github.io/RedGradient/build/">
@@ -79,11 +83,19 @@
             /*align-items: flex-start;*/
         }
         .topBox .title {
-            font-size: 7em;
+            font-size: 5.5em;
             font-weight: 700;
             line-height: 1;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
+
+
+        @media screen and (max-width: 996px) {
+            .topBox .title  {
+                font-size: 4.1em;
+            }
+        }
+
 
         .topBox .des {
             margin: 1em 0 1.5em;
