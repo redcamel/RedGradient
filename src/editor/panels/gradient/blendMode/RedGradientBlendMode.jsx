@@ -9,14 +9,14 @@ import ConstBlendModeType from "../../../../data/const/ConstBlendModeType.js";
  */
 const RedGradientBlendMode = ({value, onChange}) => {
 	return (
-		<>
+		<div style={{display:'flex',flexDirection:'column'}}>
 			<RedItemTitle label={'Blend Mode'}/>
 			<RedSelect
 				optionData={ConstBlendModeType}
 				value={value}
 				onChange={(e) => onChange('blendMode', e.target.value, true)}
 			/>
-		</>
+		</div>
 	)
 }
 export default RedGradientBlendMode

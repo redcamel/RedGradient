@@ -9,14 +9,14 @@ import ConstGradientRadialSizeType from "../../../../data/const/ConstGradientRad
  */
 const RedGradientRadialSizeType = ({value, onChange}) => {
 	return (
-		<>
+		<div style={{display:'flex',flexDirection:'column'}}>
 			<RedItemTitle label={'Size Type'}/>
 			<RedSelect
 				optionData={ConstGradientRadialSizeType}
 				value={value}
 				onChange={e => onChange('valueInfo', 'sizeType', e.target.value, true)}
 			/>
-		</>
+		</div>
 	)
 }
 export default RedGradientRadialSizeType

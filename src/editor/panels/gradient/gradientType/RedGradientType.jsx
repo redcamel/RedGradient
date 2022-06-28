@@ -9,7 +9,7 @@ import ConstGradientType from "../../../../data/const/ConstGradientType.js";
  */
 const RedGradientType = ({value, onChange}) => {
 	return (
-		<>
+		<div style={{display:'flex',flexDirection:'column'}}>
 			<RedItemTitle label={'Gradient Type'}/>
 			<RedSelect
 				optionData={ConstGradientType}
@@ -39,7 +39,7 @@ const RedGradientType = ({value, onChange}) => {
 					})
 				}
 			</div>
-		</>
+		</div>
 	)
 }
 export default RedGradientType

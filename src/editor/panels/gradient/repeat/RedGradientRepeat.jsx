@@ -9,7 +9,7 @@ import ConstGradientRepeatType from "../../../../data/const/ConstGradientRepeatT
  */
 const RedGradientRepeat = ({value, onChange}) => {
 	return (
-		<>
+		<div style={{display:'flex',flexDirection:'column'}}>
 			<RedItemTitle label={'Repeat Type'}/>
 			<RedSelect
 				optionData={ConstGradientRepeatType}
@@ -29,7 +29,7 @@ const RedGradientRepeat = ({value, onChange}) => {
 					})
 				}
 			</div>
-		</>
+		</div>
 	)
 }
 export default RedGradientRepeat

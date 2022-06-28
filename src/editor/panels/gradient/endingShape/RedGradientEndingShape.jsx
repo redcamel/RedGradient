@@ -9,14 +9,14 @@ import ConstEndingShape from "../../../../data/const/ConstEndingShape.js";
  */
 const RedGradientEndingShape = ({value, onChange}) => {
 	return (
-		<>
+		<div style={{display:'flex',flexDirection:'column'}}>
 			<RedItemTitle label={'Ending Shape'}/>
 			<RedSelect
 				optionData={ConstEndingShape}
 				value={value}
 				onChange={e => onChange('valueInfo', 'endingShape', e.target.value, true)}
 			/>
-		</>
+		</div>
 	)
 }
 export default RedGradientEndingShape
