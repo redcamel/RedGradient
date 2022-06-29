@@ -81,7 +81,7 @@ const RedLayerGroup = () => {
 						size={'1x'}
 						fixedWidth={true}
 						toolTip={'add group'}
-						align={'top'}
+						align={groupList.length ? 'top' : 'topRight'}
 						onClick={HD_addGroup}
 					/>
 					{
@@ -92,25 +92,25 @@ const RedLayerGroup = () => {
 									size={'1x'}
 									fixedWidth={true}
 									toolTip={'add layer'}
-									align={'top'}
+									align={activeGroupChildren.length ? 'top' : 'topRight'}
 									onClick={HD_addLayer}
 								/>
-								<RedToolTipIcon
+								{!!activeGroupChildren.length && <RedToolTipIcon
 									icon={faCopy}
 									size={'1x'}
 									toolTip={'duplicate layer'}
 									align={'top'}
 									fixedWidth={true}
 									onClick={HD_duplicateLayer}
-								/>
-								<RedToolTipIcon
+								/>}
+								{!!activeGroupChildren.length && <RedToolTipIcon
 									icon={faTrashAlt}
 									toolTip={'remove layer'}
 									size={'1x'}
 									align={'topRight'}
 									fixedWidth={true}
 									onClick={HD_removeLayer}
-								/>
+								/> }
 							</>
 							: ''
 					}
