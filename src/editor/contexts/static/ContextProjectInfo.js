@@ -1,6 +1,6 @@
 import React from "react";
 
-const version = '1.0.0'
+const version = '1.1.0'
 const ContextProjectInfo = React.createContext({
 	projectName: 'RedGradient',
 	author: 'RedCamel',
