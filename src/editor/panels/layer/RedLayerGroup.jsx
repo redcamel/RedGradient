@@ -26,6 +26,7 @@ const RedLayerGroup = () => {
 	const hasGroup = groupList.length
 	const hasGroupChildren = activeGroupChildren.length
 
+	console.log('test')
 	const HD_removeLayer = () => {
 		if (!hasGroup || !hasGroupChildren) return
 		gradientActions.removeLayer({
