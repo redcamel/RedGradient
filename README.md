@@ -17,3 +17,8 @@ Design quickly and create your own gradients with a graphic pro-tools-grade edit
 
 ## Release Note
 - [V1.1.0](https://github.com/redcamel/RedGradient/releases/tag/v1.1.0)
+
+<p>
+  <a href="https://twitter.com/redcamel15"><img src="https://img.shields.io/twitter/follow/redcamel15.svg?style=social" alt="Twitter Follow" /></a>
+  <a href="LICENSE.md"><img src="https://img.shields.io/github/license/sourcerer-io/hall-of-fame.svg?colorB=ff0000"></a>
+</p>
