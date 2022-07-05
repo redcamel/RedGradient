@@ -43,6 +43,7 @@ const RedGradientEditor = () => {
 	const {valueInfo, positionInfo, sizeInfo, stepInfoList} = activeLayerData['timeline'][time]
 	const activeViewkey = HELPER_GET_DATA.getActiveViewInfo(gradientState)['viewKey']
 	const containerSizeInfo_raw = getCalcedContainerEditorLayoutInfo_pixel(gradientState)[activeViewkey]['raw']
+	const calcLayerPixelSize = HELPER_GET_DATA.calcLayerPixelSize(gradientState, activeLayerData, time)
 	//////
 	const HD_change = (key, value, saveHistoryYn) => {
 		if (key === 'type') {
@@ -96,7 +97,8 @@ const RedGradientEditor = () => {
 	const HD_changeInfo = (targetInfoKey, key, value, saveHistoryYn, label) => {
 		const updateList = []
 		if (key === 'widthUnit' || key === 'heightUnit') {
-			const {containerW,containerH,layerSizeW, layerSizeH} = HELPER_GET_DATA.calcLayerPixelSize(gradientState, activeLayerData, 0)
+
+			const {containerW,containerH,layerSizeW, layerSizeH} = calcLayerPixelSize
 			console.log('layerSizeW, layerSizeH',layerSizeW, layerSizeH)
 			if(key==='widthUnit' && sizeInfo['widthUnit'] !== value){
 				switch (value){
@@ -285,6 +287,7 @@ const RedGradientEditor = () => {
 					onChanges={HD_changeInfos}
 					positionInfo={positionInfo}
 					sizeInfo={sizeInfo}
+					calcLayerPixelSize={calcLayerPixelSize}
 					containerSizeInfo_raw={containerSizeInfo_raw}
 				/>
 				<RedDivision/>
