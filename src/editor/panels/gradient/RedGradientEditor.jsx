@@ -95,6 +95,71 @@ const RedGradientEditor = () => {
 	}
 	const HD_changeInfo = (targetInfoKey, key, value, saveHistoryYn, label) => {
 		const updateList = []
+		if (key === 'widthUnit' || key === 'heightUnit') {
+			const {containerW,containerH,layerSizeW, layerSizeH} = HELPER_GET_DATA.calcLayerPixelSize(gradientState, activeLayerData, 0)
+			console.log('layerSizeW, layerSizeH',layerSizeW, layerSizeH)
+			if(key==='widthUnit' && sizeInfo['widthUnit'] !== value){
+				switch (value){
+					case ConstUnitPxPercent.PX :
+						updateList.push(
+							{
+								targetInfoKey,
+								key: 'width',
+								time,
+								groupIndex: activeGroupIndex,
+								groupLayerIndex: activeGroupLayerIndex,
+								value: containerW * sizeInfo['width'] * 0.01,
+								saveHistoryYn : false
+							}
+						)
+						break
+					case ConstUnitPxPercent.PERCENT :
+						updateList.push(
+							{
+								targetInfoKey,
+								key: 'width',
+								time,
+								groupIndex: activeGroupIndex,
+								groupLayerIndex: activeGroupLayerIndex,
+								value: layerSizeW/containerW * 100,
+								saveHistoryYn : false
+							}
+						)
+						break
+				}
+			}
+			if(key==='heightUnit' && sizeInfo['heightUnit'] !== value){
+				switch (value){
+					case ConstUnitPxPercent.PX :
+						updateList.push(
+							{
+								targetInfoKey,
+								key: 'height',
+								time,
+								groupIndex: activeGroupIndex,
+								groupLayerIndex: activeGroupLayerIndex,
+								value: containerH * sizeInfo['height'] * 0.01,
+								saveHistoryYn : false
+							}
+						)
+						break
+					case ConstUnitPxPercent.PERCENT :
+						updateList.push(
+							{
+								targetInfoKey,
+								key: 'height',
+								time,
+								groupIndex: activeGroupIndex,
+								groupLayerIndex: activeGroupLayerIndex,
+								value: layerSizeH/containerH * 100,
+								saveHistoryYn : false
+							}
+						)
+						break
+				}
+			}
+
+		}
 		if ((key === 'width' || key === 'height') && sizeInfo['useFixedRatio']) {
 			const ratio = value / sizeInfo[key]
 			if (key === 'width') {
