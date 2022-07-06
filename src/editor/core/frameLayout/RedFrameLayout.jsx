@@ -256,6 +256,7 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 					}
 				}
 			}
+
 			if(prev !== JSON.stringify(redKey)) contextGradientActions.setKeyState(redKey)
 		}
 		const HD_keyUp = e => {
@@ -263,10 +264,27 @@ const RedFrameLayout = ({top, left, center, right, bottom, status}) => {
 			if (code2name === 'alt' && redKey.downList[code2name]) {
 				e.preventDefault()
 			}
+
+
+
 			if (code2name) {
 				redKey.downList[code2name] = 0;
 				redKey.upList[code2name] = 1
 			}
+
+			if(redKey.downList['control'] && redKey.downList['alt'] && redKey.upList['d']){
+				const t0 = HELPER_GET_DATA.getActiveLayerGroupInfo(contextGradientState)
+				if(t0){
+					e.preventDefault()
+					e.stopPropagation()
+					contextGradientActions.duplicateLayer({
+						groupIndex: t0.activeGroupIndex,
+						groupLayerIndex: t0.activeGroupLayerIndex
+					})
+				}
+
+			}
+
 			contextGradientActions.setKeyState(redKey)
 		}
 		// const HD_keyPress = e => {
