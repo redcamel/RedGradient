@@ -11,7 +11,15 @@ import {faArrowDown, faArrowLeft, faArrowRight, faArrowUp, faDotCircle} from "@f
  * @returns {JSX.Element}
  * @constructor
  */
-const RedGradientPosition = ({positionInfo, sizeInfo, onChange, onChanges, containerSizeInfo_raw}) => {
+const RedGradientPosition = ({
+															 positionInfo,
+															 sizeInfo,
+															 onChange,
+															 onChanges,
+															 containerSizeInfo_raw,
+															 calcLayerPixelSize
+														 }) => {
+	const {containerW, containerH, layerSizeW, layerSizeH} = calcLayerPixelSize
 	const renderMirrorIcon = (vertical = false) => {
 		return <svg
 			style={{
@@ -143,9 +151,10 @@ const RedGradientPosition = ({positionInfo, sizeInfo, onChange, onChanges, conta
 				break
 		}
 	}
-	const renderItem = (key, style) => {
+	const renderItem = (key, able, style) => {
 		return <div className={'RedGradientEditor_container_sizeBox'} style={style}>
 			<RedNumberField
+				able={able}
 				value={positionInfo[key]} width={'100%'} flexGrow={1}
 				onInput={(value, saveHistoryYn) => onChange('positionInfo', key, value, saveHistoryYn)}
 				onKeyDown={(value, saveHistoryYn) => onChange('positionInfo', key, value, saveHistoryYn)}
@@ -164,44 +173,50 @@ const RedGradientPosition = ({positionInfo, sizeInfo, onChange, onChanges, conta
 			style={style}/>
 		</div>
 	}
+	const ableX = (containerW !== layerSizeW) || (positionInfo['xUnit'] === ConstUnitPxPercent.PX)
+	const ableY = (containerH !== layerSizeH) || (positionInfo['yUnit'] === ConstUnitPxPercent.PX)
+	const able = ableX && ableY
 	return (
 		<div>
 			<RedItemTitle label={'Background Position'}/>
-			{renderItem('x')}
-			{renderItem('y', {marginTop: '4px'})}
-			<div style={{display: 'flex', gap: '5px', marginTop: '5px'}}>
-				<div style={{display: 'flex', flexDirection: 'column', gap: '1px', border: '1px solid #222'}}>
-					<div className={'RedGradientPosition_itemBox'}>
-						{renderLocationItem('tl', faArrowUp, {transform: 'rotate(-45deg)'})}
-						{renderLocationItem('t', faArrowUp)}
-						{renderLocationItem('tr', faArrowUp, {transform: 'rotate(45deg)'})}
+			{renderItem('x', ableX)}
+			{renderItem('y', ableY, {marginTop: '4px'})}
+			{
+				able &&
+				<div style={{display: 'flex', gap: '5px', marginTop: '5px'}}>
+					<div style={{display: 'flex', flexDirection: 'column', gap: '1px', border: '1px solid #222'}}>
+						<div className={'RedGradientPosition_itemBox'}>
+							{renderLocationItem('tl', faArrowUp, {transform: 'rotate(-45deg)'})}
+							{renderLocationItem('t', faArrowUp)}
+							{renderLocationItem('tr', faArrowUp, {transform: 'rotate(45deg)'})}
+						</div>
+						<div className={'RedGradientPosition_itemBox'}>
+							{renderLocationItem('ml', faArrowLeft)}
+							{renderLocationItem('m', faDotCircle, {fontSize: '10px'})}
+							{renderLocationItem('mr', faArrowRight)}
+						</div>
+						<div className={'RedGradientPosition_itemBox'}>
+							{renderLocationItem('bl', faArrowDown, {transform: 'rotate(45deg)'})}
+							{renderLocationItem('b', faArrowDown)}
+							{renderLocationItem('br', faArrowDown, {transform: 'rotate(-45deg)'})}
+						</div>
 					</div>
-					<div className={'RedGradientPosition_itemBox'}>
-						{renderLocationItem('ml', faArrowLeft)}
-						{renderLocationItem('m', faDotCircle, {fontSize: '10px'})}
-						{renderLocationItem('mr', faArrowRight)}
-					</div>
-					<div className={'RedGradientPosition_itemBox'}>
-						{renderLocationItem('bl', faArrowDown, {transform: 'rotate(45deg)'})}
-						{renderLocationItem('b', faArrowDown)}
-						{renderLocationItem('br', faArrowDown, {transform: 'rotate(-45deg)'})}
+					<div style={{display: 'flex', flexDirection: 'column', gap: '2px', flexGrow: 1}}>
+						<div
+							onClick={() => HD_setPosition('horizontal')}
+							className={'RedGradientPosition_itemMirror'}
+						>
+							{renderMirrorIcon()} Mirror Horizontal
+						</div>
+						<div
+							onClick={() => HD_setPosition('vertical')}
+							className={'RedGradientPosition_itemMirror'}
+						>
+							{renderMirrorIcon(true)} Mirror Vertical
+						</div>
 					</div>
 				</div>
-				<div style={{display: 'flex', flexDirection: 'column', gap: '2px', flexGrow: 1}}>
-					<div
-						onClick={() => HD_setPosition('horizontal')}
-						className={'RedGradientPosition_itemMirror'}
-					>
-						{renderMirrorIcon()} Mirror Horizontal
-					</div>
-					<div
-						onClick={() => HD_setPosition('vertical')}
-						className={'RedGradientPosition_itemMirror'}
-					>
-						{renderMirrorIcon(true)} Mirror Vertical
-					</div>
-				</div>
-			</div>
+			}
 		</div>
 	)
 }

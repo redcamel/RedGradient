@@ -14,7 +14,8 @@ const RedNumberField = (
 		min, max, toFixed = 2,
 		width, height,
 		flexGrow,
-		onInput, onDummySetting, onKeyDown
+		onInput, onDummySetting, onKeyDown,
+		able=true
 	}
 ) => {
 	let currentValue = value
@@ -63,6 +64,7 @@ const RedNumberField = (
 		window.addEventListener('mouseup', HD_up);
 	}
 	return <div className={'RedBasicUI_container'} style={{flexGrow: flexGrow}}>
+		{/*able : {able?.toString()}*/}
 		<input
 			className={'RedBasicUI_inputField'}
 			type={'number'}
@@ -74,6 +76,7 @@ const RedNumberField = (
 			onKeyDown={HD_keyDown}
 			onBlur={HD_blur || null}
 			style={{width: width, height: height}}
+			disabled={!able}
 		/>
 		<div className={'RedBasicUI_inputField_plus'}
 				 onMouseDown={() => {

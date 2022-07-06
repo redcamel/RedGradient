@@ -6,6 +6,7 @@ import ContextGradient from "../../../contexts/system/ContextGradient.js";
 import RedDivision from "../../../basicUI/RedDivision.jsx";
 import getCalcedGradientEditorLayoutInfo_pixel from "../getCalcedGradientEditorLayoutInfo_pixel";
 import ConstUnitPxPercent from "../../../../data/const/ConstUnitPxPercent";
+import HELPER_GET_DATA from "../../../contexts/system/HELPER_GET_DATA";
 
 let startMousePointX, startMousePointY
 let tX, tY
@@ -26,6 +27,9 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 
 	const time = gradientState['timelineInfo']['time']
 	const {layerGroupInfo} = targetView
+
+
+
 	const valueSnapToContainer = gradientState['snapToContainer']
 	const {
 		activeGroupIndex,
@@ -631,6 +635,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 	if (!groupList[activeGroupIndex] || !groupList[activeGroupIndex]['children'][activeGroupLayerIndex]) return null;
 
 	const activeLayer = groupList[activeGroupIndex]['children'][activeGroupLayerIndex]['timeline'][time]
+	const calcLayerPixelSize = HELPER_GET_DATA.calcLayerPixelSize(gradientState, groupList[activeGroupIndex]['children'][activeGroupLayerIndex], time)
 	//
 	const gradient_calcedLayoutInfo = getCalcedGradientEditorLayoutInfo_pixel(targetView.containerInfo, activeLayer, calcedLayoutInfo, viewScale)
 	const raw = {...gradient_calcedLayoutInfo.raw}
@@ -664,6 +669,11 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 
 	const transformPointerVisible = !resizeMode && !horizontalDirection && !verticalDirection
 	const {useFixedRatio} = sizeInfo
+
+	const {containerW, containerH, layerSizeW, layerSizeH} = calcLayerPixelSize
+	const ableX = (containerW !== layerSizeW) || (positionInfo['xUnit'] === ConstUnitPxPercent.PX)
+	const ableY = (containerH !== layerSizeH) || (positionInfo['yUnit'] === ConstUnitPxPercent.PX)
+	const ableXY = ableX && ableY
 	return <>
 		{
 			dummyVisible && <div
@@ -804,58 +814,74 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 				onMouseDownCapture={e => HD_resizeStart(e, 'R', 'B', true)}
 			/>
 			{/*  */}
-			<div
-				className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && horizontalDirection === 'L' && verticalDirection === 'T') ? '' : 'deActive'} lt`}
-				onMouseDownCapture={e => HD_resizeStart(e, 'L', 'T', false)}
-			>
-				<FontAwesomeIcon icon={faArrowsAlt} size={'1x'}/>
-			</div>
-			<div
-				className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && horizontalDirection === 'R' && verticalDirection === 'T') ? '' : 'deActive'} rt`}
-				onMouseDownCapture={e => HD_resizeStart(e, 'R', 'T', false)}
-			>
-				<FontAwesomeIcon icon={faArrowsAlt} size={'1x'}/>
-			</div>
-			<div
-				className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && horizontalDirection === 'L' && verticalDirection === 'B') ? '' : 'deActive'} lb`}
-				onMouseDownCapture={e => HD_resizeStart(e, 'L', 'B', false)}
-			>
-				<FontAwesomeIcon icon={faArrowsAlt} size={'1x'}/>
-			</div>
+			{
+				ableXY && <div
+					className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && horizontalDirection === 'L' && verticalDirection === 'T') ? '' : 'deActive'} lt`}
+					onMouseDownCapture={e => HD_resizeStart(e, 'L', 'T', false)}
+				>
+					<FontAwesomeIcon icon={faArrowsAlt} size={'1x'}/>
+				</div>
+			}
+			{
+				ableXY && <div
+					className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && horizontalDirection === 'R' && verticalDirection === 'T') ? '' : 'deActive'} rt`}
+					onMouseDownCapture={e => HD_resizeStart(e, 'R', 'T', false)}
+				>
+					<FontAwesomeIcon icon={faArrowsAlt} size={'1x'}/>
+				</div>
+			}
+			{
+				ableXY && <div
+					className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && horizontalDirection === 'L' && verticalDirection === 'B') ? '' : 'deActive'} lb`}
+					onMouseDownCapture={e => HD_resizeStart(e, 'L', 'B', false)}
+				>
+					<FontAwesomeIcon icon={faArrowsAlt} size={'1x'}/>
+				</div>
+			}
 
-			<div
-				className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && horizontalDirection === 'R' && verticalDirection === 'B') ? '' : 'deActive'} rb`}
-				onMouseDownCapture={e => HD_resizeStart(e, 'R', 'B', false)}
-			>
-				<FontAwesomeIcon icon={faArrowsAlt} size={'1x'}/>
-			</div>
+			{
+				ableXY && <div
+					className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && horizontalDirection === 'R' && verticalDirection === 'B') ? '' : 'deActive'} rb`}
+					onMouseDownCapture={e => HD_resizeStart(e, 'R', 'B', false)}
+				>
+					<FontAwesomeIcon icon={faArrowsAlt} size={'1x'}/>
+				</div>
+			}
 
-			<div
-				className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && (horizontalDirection === 'L' && !verticalDirection)) ? '' : 'deActive'} left`}
-				onMouseDownCapture={e => HD_resizeStart(e, 'L', null, false)}
-			>
-				<FontAwesomeIcon icon={faArrowLeft}/>
-			</div>
+			{
+				ableX && <div
+					className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && (horizontalDirection === 'L' && !verticalDirection)) ? '' : 'deActive'} left`}
+					onMouseDownCapture={e => HD_resizeStart(e, 'L', null, false)}
+				>
+					<FontAwesomeIcon icon={faArrowLeft}/>
+				</div>
+			}
 
-			<div
-				className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && horizontalDirection === 'R' && !verticalDirection) ? '' : 'deActive'} right`}
-				onMouseDownCapture={e => HD_resizeStart(e, 'R', null, false)}
-			>
-				<FontAwesomeIcon icon={faArrowRight}/>
-			</div>
-			<div
-				className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && !horizontalDirection && verticalDirection === 'T') ? '' : 'deActive'} top`}
-				onMouseDownCapture={e => HD_resizeStart(e, null, 'T', false)}
-			>
-				<FontAwesomeIcon icon={faArrowUp}/>
-			</div>
+			{
+				ableX && <div
+					className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && horizontalDirection === 'R' && !verticalDirection) ? '' : 'deActive'} right`}
+					onMouseDownCapture={e => HD_resizeStart(e, 'R', null, false)}
+				>
+					<FontAwesomeIcon icon={faArrowRight}/>
+				</div>
+			}
+			{
+				ableY && <div
+					className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && !horizontalDirection && verticalDirection === 'T') ? '' : 'deActive'} top`}
+					onMouseDownCapture={e => HD_resizeStart(e, null, 'T', false)}
+				>
+					<FontAwesomeIcon icon={faArrowUp}/>
+				</div>
+			}
 
-			<div
-				className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && !horizontalDirection && verticalDirection === 'B') ? '' : 'deActive'} bottom`}
-				onMouseDownCapture={e => HD_resizeStart(e, null, 'B', false)}
-			>
-				<FontAwesomeIcon icon={faArrowDown}/>
-			</div>
+			{
+				ableY && <div
+					className={`RedGradientTransformEditor_item_move ${transformPointerVisible || (!resizeMode && !horizontalDirection && verticalDirection === 'B') ? '' : 'deActive'} bottom`}
+					onMouseDownCapture={e => HD_resizeStart(e, null, 'B', false)}
+				>
+					<FontAwesomeIcon icon={faArrowDown}/>
+				</div>
+			}
 
 		</div>
 

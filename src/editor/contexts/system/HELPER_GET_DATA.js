@@ -55,7 +55,9 @@ const HELPER_GET_DATA = {
 		const layerSizeH = sizeInfo['heightUnit'] === ConstUnitPxPercent.PX ? sizeInfo['height'] : (sizeInfo['height'] * canvasSizeH * 0.01)
 		return {
 			layerSizeW,
-			layerSizeH
+			layerSizeH,
+			containerW : canvasSizeW,
+			containerH : canvasSizeH
 		}
 	},
 	makeNewState: (state) => ({...JSON.parse(JSON.stringify(state))})
