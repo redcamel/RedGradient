@@ -100,7 +100,8 @@ const RedLayerGroup = () => {
 									icon={faCopy}
 									size={'1x'}
 									toolTip={'duplicate layer'}
-									align={'top'}
+									shortcut={'Ctr + Alt + D'}
+									align={'topRight'}
 									fixedWidth={true}
 									onClick={HD_duplicateLayer}
 								/>}

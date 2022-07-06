@@ -50,7 +50,9 @@ const RedLayerPreviewBackgroundType = ({layerData, groupIdx, layerIdx}) => {
 					</div>
 				})}
 				<div className={`RedLayerPreviewBackgroundType_item`} style={{padding: '0 4px'}}>
-					<RedToolTipIcon icon={faCopy} toolTip={'Duplicate Layer'} onClick={HD_duplicateLayer}/>
+					<RedToolTipIcon icon={faCopy} toolTip={'Duplicate Layer'}
+													align={'topRight'}
+													shortcut={'Ctr + Alt + D'} onClick={HD_duplicateLayer}/>
 				</div>
 				<div className={`RedLayerPreviewBackgroundType_item`} style={{padding: '0 4px'}}>
 					<RedToolTipIcon icon={faTrashAlt} toolTip={'Remove Layer'} onClick={HD_remove}/>

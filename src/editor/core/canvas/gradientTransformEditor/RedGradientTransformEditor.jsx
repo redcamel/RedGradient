@@ -40,6 +40,7 @@ const RedGradientTransformEditor = ({calcedLayoutInfo, viewScale, targetView, HD
 		resetTempInfo(tX, tY)
 	}, [])
 	useEffect(() => {
+		if (!groupList[activeGroupIndex] || !groupList[activeGroupIndex]['children'][activeGroupLayerIndex]) return ;
 		resetTempInfo(tX, tY)
 		const updateList = []
 		updateList.push(
