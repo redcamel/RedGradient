@@ -8,7 +8,7 @@ Design quickly and create your own gradients with a graphic pro-tools-grade edit
 ![RedGradientScreenshot](public/screenshot/Screenshot_1.png)
 
 ## Document
-- https://doc.redcamel.github.io/RedGradient/
+- https://redcamel.github.io/RedGradientDoc/
 
 ## Version List
 - Version 1.1.0 - https://redcamel.github.io/RedGradient/build/
